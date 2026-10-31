@@ -330,7 +330,7 @@ closed_rule_implementations:
   p0_preserve_projection:
     version: 1
     kind: transformation
-    code_artifact_hash: sha256_lower_hex
+    code_artifact_hash: 931cbb95e67c5ee5901ab719147bfb6e7b5650d4601308abf00aab40932604b1
     input_roles:
       model_output: {cardinality: one, accepted_schema_refs: [{schema_id: P0-SCHEMA-MODEL-OUTPUT, schema_version: 1}]}
     output_schema_refs: [{schema_id: P0-SCHEMA-PRESERVE, schema_version: 1}]
@@ -343,7 +343,7 @@ closed_rule_implementations:
   p0_threshold_broad_fallback:
     version: 1
     kind: transformation
-    code_artifact_hash: sha256_lower_hex
+    code_artifact_hash: 37d1a085e28e65c6aa16ba55d00636185c9abacf3aac4092cca24bfe558d914d
     input_roles:
       model_output: {cardinality: one, accepted_schema_refs: [{schema_id: P0-SCHEMA-MODEL-OUTPUT, schema_version: 1}]}
     output_schema_refs: [{schema_id: P0-SCHEMA-FALLBACK, schema_version: 1}]
@@ -355,7 +355,7 @@ closed_rule_implementations:
   p0_visible_material_route:
     version: 1
     kind: routing
-    code_artifact_hash: sha256_lower_hex
+    code_artifact_hash: d2779133621bc3a37a78a14342590eaee1919be41ca945908d50886631c03a85
     input_roles:
       representation: {cardinality: one, accepted_schema_refs: [{schema_id: P0-SCHEMA-PRESERVE, schema_version: 1}, {schema_id: P0-SCHEMA-FALLBACK, schema_version: 1}]}
       policy: {cardinality: one, accepted_schema_refs: [{schema_id: P0-SCHEMA-POLICY, schema_version: 1}]}
@@ -370,7 +370,7 @@ closed_rule_implementations:
   p0_low_resolution_control_route:
     version: 1
     kind: routing
-    code_artifact_hash: sha256_lower_hex
+    code_artifact_hash: 0507d5f2e44a3ccef1e216901aede2f7a0e39a77258cb5f0ba7b0fe058b60dcc
     input_roles:
       representation: {cardinality: one, accepted_schema_refs: [{schema_id: P0-SCHEMA-PRESERVE, schema_version: 1}, {schema_id: P0-SCHEMA-FALLBACK, schema_version: 1}]}
       case: {cardinality: one, accepted_schema_refs: [{schema_id: P0-SCHEMA-CASE, schema_version: 1}]}
@@ -384,7 +384,7 @@ closed_rule_implementations:
   constant_true:
     version: 1
     kind: applicability
-    code_artifact_hash: sha256_lower_hex
+    code_artifact_hash: 4937a2ae6129a1cc655c066a3395597fc8e141c36358cb69f169cb2d9af7942e
     input_roles:
       representation: {cardinality: one, accepted_schema_refs: [{schema_id: P0-SCHEMA-PRESERVE, schema_version: 1}, {schema_id: P0-SCHEMA-FALLBACK, schema_version: 1}]}
     output_schema_refs: [{schema_id: formal_model.boolean_predicate, schema_version: 1}]
@@ -392,7 +392,7 @@ closed_rule_implementations:
   any_action_direction_in_disposition_set:
     version: 1
     kind: applicability
-    code_artifact_hash: sha256_lower_hex
+    code_artifact_hash: b6a68f71c0f20f0497b36a85073d428d295866f479708e39e13062cb520c5104
     input_roles:
       disposition: {cardinality: one, accepted_schema_refs: [{schema_id: formal_model.disposition, schema_version: 1}]}
       actions: {cardinality: many, accepted_schema_refs: [{schema_id: P0-SCHEMA-ACTION, schema_version: 1}]}
@@ -403,7 +403,7 @@ closed_rule_implementations:
   declared_status_aggregation:
     version: 1
     kind: aggregation
-    code_artifact_hash: sha256_lower_hex
+    code_artifact_hash: 95ec42d0cf5b7a2b1b8222be791a3b9b03fbb2e1eea0682d939d0838027a6ac4
     input_roles:
       components: {cardinality: many, accepted_schema_refs: [{schema_id: P0-SCHEMA-ASSESSMENT, schema_version: 1}]}
     output_schema_refs: [{schema_id: P0-SCHEMA-ASSESSMENT, schema_version: 1}]
@@ -413,7 +413,7 @@ closed_rule_implementations:
   material_item_applies_to_output_action:
     version: 1
     kind: applicability
-    code_artifact_hash: sha256_lower_hex
+    code_artifact_hash: ffd3f64afe224916b60081a6b3c200718dec941e6392363f1d5d0426fc90cfb2
     input_roles:
       model_output: {cardinality: one, accepted_schema_refs: [{schema_id: P0-SCHEMA-MODEL-OUTPUT, schema_version: 1}]}
       material_item: {cardinality: one, accepted_schema_refs: [{schema_id: P0-SCHEMA-MATERIAL-ITEM, schema_version: 1}]}
@@ -427,7 +427,7 @@ closed_rule_implementations:
   boolean_input_is_true:
     version: 1
     kind: applicability
-    code_artifact_hash: sha256_lower_hex
+    code_artifact_hash: 4157336e847a86c3bbcbbfd6929a95c5bb9ca71efdcfc76ffb6b594ab386d458
     input_roles:
       state: {cardinality: one, accepted_schema_refs: [{schema_id: formal_model.gate_state, schema_version: 1}]}
     output_schema_refs: [{schema_id: formal_model.boolean_predicate, schema_version: 1}]
@@ -436,7 +436,7 @@ closed_rule_implementations:
   any_boolean_input_is_true:
     version: 1
     kind: applicability
-    code_artifact_hash: sha256_lower_hex
+    code_artifact_hash: fd01d5e8a5b921fef330d1e40de5db3f737f4e5aa935099ef5f78a54b98f22d3
     input_roles:
       state: {cardinality: one, accepted_schema_refs: [{schema_id: formal_model.gate_state, schema_version: 1}]}
     output_schema_refs: [{schema_id: formal_model.boolean_predicate, schema_version: 1}]
@@ -445,7 +445,7 @@ closed_rule_implementations:
   exact_semantic_fields:
     version: 1
     kind: correspondence
-    code_artifact_hash: sha256_lower_hex
+    code_artifact_hash: 914552e04c5ff6473e9801ca3ca050100045c1ff6870d0888b60db1fa061dcf6
     input_roles:
       surfaced_claim: {cardinality: one, accepted_schema_refs: [{schema_id: P0-SCHEMA-CLAIM, schema_version: 1}]}
       material_item: {cardinality: one, accepted_schema_refs: [{schema_id: P0-SCHEMA-MATERIAL-ITEM, schema_version: 1}]}
@@ -457,7 +457,7 @@ closed_rule_implementations:
   event_strictly_before_boundary:
     version: 1
     kind: deadline
-    code_artifact_hash: sha256_lower_hex
+    code_artifact_hash: c16392887ea19a90c9b301a1626b4ea4eab6d2bb1917460a622b8e7477fc6215
     input_roles:
       events: {cardinality: many, accepted_schema_refs: [{schema_id: event, schema_version: 1}]}
       clock: {cardinality: one, accepted_schema_refs: [{schema_id: P0-SCHEMA-CLOCK, schema_version: 1}]}
@@ -470,7 +470,7 @@ closed_rule_implementations:
   source_anchored_materiality_membership:
     version: 1
     kind: materiality
-    code_artifact_hash: sha256_lower_hex
+    code_artifact_hash: 6cafcc418f1574673841599fc32382dbe0a2e8da23df59df7dcc83de7bdfc8d3
     input_roles:
       evidence_state: {cardinality: one, accepted_schema_refs: [{schema_id: formal_model.evidence_state, schema_version: 1}]}
       process_state: {cardinality: one, accepted_schema_refs: [{schema_id: P0-SCHEMA-PROCESS, schema_version: 1}]}
@@ -481,7 +481,7 @@ closed_rule_implementations:
   action_support_membership:
     version: 1
     kind: support
-    code_artifact_hash: sha256_lower_hex
+    code_artifact_hash: 2d2c35a64dedf75bfb6abc4af4e7aed246da8ca368712a404113a5ae8af69dc7
     input_roles:
       action: {cardinality: one, accepted_schema_refs: [{schema_id: P0-SCHEMA-ACTION, schema_version: 1}]}
       evidence_state: {cardinality: one, accepted_schema_refs: [{schema_id: formal_model.evidence_state, schema_version: 1}]}
@@ -494,7 +494,7 @@ closed_rule_implementations:
   execute_action_intervention:
     version: 1
     kind: intervention
-    code_artifact_hash: sha256_lower_hex
+    code_artifact_hash: fdb60bb92d7b36c473494063b4a29f84936e75e423ac91dd528204c4791f1d0f
     input_roles:
       initial_system_state: {cardinality: one, accepted_schema_refs: [{schema_id: simulation.system_state, schema_version: 1}]}
       focal_action: {cardinality: one, accepted_schema_refs: [{schema_id: P0-SCHEMA-ACTION, schema_version: 1}]}
@@ -506,7 +506,7 @@ closed_rule_implementations:
   hold_action_intervention:
     version: 1
     kind: intervention
-    code_artifact_hash: sha256_lower_hex
+    code_artifact_hash: c1ce58fad2b2892ba8799f3ecd8c3baa27eb9b7cbbfaa638ae3860574559708e
     input_roles:
       initial_system_state: {cardinality: one, accepted_schema_refs: [{schema_id: simulation.system_state, schema_version: 1}]}
       focal_action: {cardinality: one, accepted_schema_refs: [{schema_id: P0-SCHEMA-ACTION, schema_version: 1}]}

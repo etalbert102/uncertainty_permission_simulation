@@ -39,6 +39,18 @@ class SchemaRef(StrictModel):
     schema_version: int = Field(gt=0)
 
 
+class ParameterBinding(StrictModel):
+    parameter_id: str
+    value_kind: Literal["literal", "record_ref", "record_ref_set", "input_field"]
+    value: Any
+
+
+class RuleInputSpec(StrictModel):
+    role_id: str
+    accepted_schema_refs: tuple[SchemaRef, ...]
+    cardinality: Literal["one", "optional", "many"]
+
+
 class RecordMeta(StrictModel):
     object_id: str
     object_version: int = Field(gt=0)
@@ -83,6 +95,7 @@ def _annotation(spec: Any) -> Any:
         "closed_diagnostic_category": "closed_diagnostic_categories",
         "closed_diagnostic_owning_layer": "closed_diagnostic_owning_layers",
         "closed_event_type_id": "closed_event_type_ids",
+        "closed_rule_implementation_id": "closed_rule_implementations",
         "closed_run_status_id": "closed_run_status_ids",
         "closed_scenario_validity_status_id": "closed_scenario_validity_status_ids",
     }
@@ -112,6 +125,10 @@ def _annotation(spec: Any) -> Any:
         return tuple[str, ...]
     if kind == "list_schema_ref":
         return tuple[SchemaRef, ...]
+    if kind == "parameter_binding_list":
+        return tuple[ParameterBinding, ...]
+    if kind == "list_rule_input_spec":
+        return tuple[RuleInputSpec, ...]
     if kind.startswith("nullable_"):
         return Any | None
     if kind.startswith("list_"):
@@ -152,6 +169,155 @@ def validate_model_manifest_inventory() -> None:
         raise ContractError("SCHEMA_MANIFEST_DRIFT", "payload model inventory differs from manifest")
 
 
+def _rule_error(message: str) -> None:
+    raise ContractError("SCHEMA_EXECUTABLE_RULE_INVALID", message)
+
+
+def _validate_record_ref(value: Any, parameter_id: str) -> None:
+    try:
+        RecordRef.model_validate(value)
+    except (TypeError, ValueError) as exc:
+        _rule_error(f"parameter {parameter_id} is not a RecordRef: {exc}")
+
+
+def _validate_input_field(value: Any, parameter_id: str, role_ids: set[str]) -> None:
+    if not isinstance(value, dict) or set(value) != {"input_role_id", "field_path"}:
+        _rule_error(f"parameter {parameter_id} requires an InputFieldBinding")
+    if value["input_role_id"] not in role_ids:
+        _rule_error(f"parameter {parameter_id} names undeclared input role {value['input_role_id']}")
+    if not isinstance(value["field_path"], str) or not value["field_path"].startswith("/"):
+        _rule_error(f"parameter {parameter_id} requires a JSON-pointer field_path")
+
+
+def _validate_rule_parameter(
+    binding: ParameterBinding,
+    declaration: dict[str, Any],
+    role_ids: set[str],
+) -> None:
+    parameter_type = declaration["type"]
+    record_set_types = {"list_record_ref", "mapping_string_to_record_ref", "mapping_string_to_record_ref_list"}
+    input_field_types = {"input_field_binding", "list_input_field_binding"}
+    expected_kind = (
+        "record_ref" if parameter_type == "record_ref"
+        else "record_ref_set" if parameter_type in record_set_types
+        else "input_field" if parameter_type in input_field_types
+        else "literal"
+    )
+    if binding.value_kind != expected_kind:
+        _rule_error(f"parameter {binding.parameter_id} value_kind must be {expected_kind}")
+    value = binding.value
+    if parameter_type == "record_ref":
+        _validate_record_ref(value, binding.parameter_id)
+    elif parameter_type == "list_record_ref":
+        if not isinstance(value, (list, tuple)):
+            _rule_error(f"parameter {binding.parameter_id} requires a RecordRef list")
+        for item in value:
+            _validate_record_ref(item, binding.parameter_id)
+    elif parameter_type == "mapping_string_to_record_ref":
+        if not isinstance(value, dict) or not all(isinstance(key, str) for key in value):
+            _rule_error(f"parameter {binding.parameter_id} requires a string-to-RecordRef mapping")
+        for item in value.values():
+            _validate_record_ref(item, binding.parameter_id)
+    elif parameter_type == "mapping_string_to_record_ref_list":
+        if not isinstance(value, dict) or not all(isinstance(key, str) and isinstance(items, (list, tuple)) for key, items in value.items()):
+            _rule_error(f"parameter {binding.parameter_id} requires a string-to-RecordRef-list mapping")
+        for items in value.values():
+            for item in items:
+                _validate_record_ref(item, binding.parameter_id)
+    elif parameter_type == "input_field_binding":
+        _validate_input_field(value, binding.parameter_id, role_ids)
+    elif parameter_type == "list_input_field_binding":
+        if not isinstance(value, (list, tuple)):
+            _rule_error(f"parameter {binding.parameter_id} requires InputFieldBindings")
+        for item in value:
+            _validate_input_field(item, binding.parameter_id, role_ids)
+    elif parameter_type in {"enum", "enum_set"}:
+        values = declaration["values"]
+        candidates = value if parameter_type == "enum_set" else (value,)
+        if parameter_type == "enum_set" and (not isinstance(value, (list, tuple)) or len(value) != len(set(value))):
+            _rule_error(f"parameter {binding.parameter_id} requires a duplicate-free enum set")
+        if any(candidate not in values for candidate in candidates):
+            _rule_error(f"parameter {binding.parameter_id} contains a value outside its closed enum")
+    elif parameter_type == "string_set":
+        if not isinstance(value, (list, tuple)) or not all(isinstance(item, str) for item in value) or len(value) != len(set(value)):
+            _rule_error(f"parameter {binding.parameter_id} requires a duplicate-free string set")
+    elif parameter_type in {"string", "json_pointer", "closed_event_type_id"}:
+        if not isinstance(value, str):
+            _rule_error(f"parameter {binding.parameter_id} requires a string")
+        if parameter_type == "json_pointer" and not value.startswith("/"):
+            _rule_error(f"parameter {binding.parameter_id} requires a JSON pointer")
+        if parameter_type == "closed_event_type_id" and value not in MANIFEST["closed_event_type_ids"]:
+            _rule_error(f"parameter {binding.parameter_id} is not a closed event type")
+    elif parameter_type == "nullable_normalized_decimal_string":
+        if value is not None and (not isinstance(value, str) or not re.fullmatch(r"-?(0|[1-9][0-9]*)(\.[0-9]+)?", value)):
+            _rule_error(f"parameter {binding.parameter_id} requires a normalized decimal string or null")
+
+
+def validate_executable_rule(payload: BaseModel) -> None:
+    """Validate one rule record against the closed manifest signature."""
+
+    implementation_id = getattr(payload, "implementation_id", None)
+    declaration = MANIFEST["closed_rule_implementations"].get(implementation_id)
+    if declaration is None:
+        _rule_error(f"unknown implementation_id {implementation_id}")
+    if payload.rule_kind != declaration["kind"]:
+        _rule_error(f"{implementation_id} kind must be {declaration['kind']}")
+    if payload.implementation_version != declaration["version"]:
+        _rule_error(f"{implementation_id} version must be {declaration['version']}")
+
+    role_specs = {spec.role_id: spec for spec in payload.input_role_specs}
+    if len(role_specs) != len(payload.input_role_specs):
+        _rule_error("input_role_specs contains duplicate role IDs")
+    declared_roles = declaration["input_roles"]
+    if set(role_specs) != set(declared_roles):
+        _rule_error("input role IDs differ from the declared signature")
+    for role_id, role_declaration in declared_roles.items():
+        spec = role_specs[role_id]
+        if spec.cardinality != role_declaration["cardinality"]:
+            _rule_error(f"input role {role_id} cardinality drift")
+        actual_schemas = {(item.schema_id, item.schema_version) for item in spec.accepted_schema_refs}
+        expected_schemas = {(item["schema_id"], item["schema_version"]) for item in role_declaration["accepted_schema_refs"]}
+        if len(actual_schemas) != len(spec.accepted_schema_refs) or actual_schemas != expected_schemas:
+            _rule_error(f"input role {role_id} schema drift")
+
+    bindings = {binding.parameter_id: binding for binding in payload.parameters}
+    if len(bindings) != len(payload.parameters):
+        _rule_error("parameters contains duplicate parameter IDs")
+    parameter_declarations = declaration["parameters"]
+    required = {name for name, spec in parameter_declarations.items() if spec.get("required", True)}
+    if not required.issubset(bindings):
+        _rule_error(f"missing required parameters: {sorted(required - set(bindings))}")
+    if not set(bindings).issubset(parameter_declarations):
+        _rule_error(f"undeclared parameters: {sorted(set(bindings) - set(parameter_declarations))}")
+    for parameter_id, binding in bindings.items():
+        _validate_rule_parameter(binding, parameter_declarations[parameter_id], set(role_specs))
+
+    try:
+        output_ref = SchemaRef.model_validate(payload.output_schema_ref)
+    except (TypeError, ValueError) as exc:
+        _rule_error(f"{implementation_id} output schema is invalid: {exc}")
+    output = (output_ref.schema_id, output_ref.schema_version)
+    expected_outputs = {(item["schema_id"], item["schema_version"]) for item in declaration["output_schema_refs"]}
+    if output not in expected_outputs:
+        _rule_error(f"{implementation_id} output schema drift")
+
+
+def validate_rule_registry_manifest() -> None:
+    """Prove the manifest and static callable registry are a closed, hash-pinned set."""
+
+    from .rules import RULE_IMPLEMENTATIONS, implementation_code_hash
+
+    declarations = MANIFEST["closed_rule_implementations"]
+    if set(RULE_IMPLEMENTATIONS) != set(declarations):
+        raise ContractError("SCHEMA_EXECUTABLE_RULE_INVALID", "callable registry differs from manifest inventory")
+    for implementation_id, declaration in declarations.items():
+        expected_hash = declaration["code_artifact_hash"]
+        if not isinstance(expected_hash, str) or not re.fullmatch(r"[0-9a-f]{64}", expected_hash):
+            raise ContractError("SCHEMA_EXECUTABLE_RULE_INVALID", f"{implementation_id} has no immutable code hash")
+        if implementation_code_hash(implementation_id) != expected_hash:
+            raise ContractError("SCHEMA_EXECUTABLE_RULE_INVALID", f"{implementation_id} code-artifact hash drift")
+
+
 def _canonical(value: Any) -> Any:
     if isinstance(value, BaseModel):
         return _canonical(value.model_dump(mode="python", exclude_none=False))
@@ -164,15 +330,27 @@ def _canonical(value: Any) -> Any:
     return value
 
 
+def _normalize_set_path(value: Any, parts: list[str]) -> None:
+    if not parts:
+        if isinstance(value, list):
+            value.sort(key=lambda item: json.dumps(item, sort_keys=True, separators=(",", ":")))
+        return
+    head, *tail = parts
+    if head == "*" and isinstance(value, list):
+        for item in value:
+            _normalize_set_path(item, tail)
+    elif isinstance(value, dict) and head in value:
+        _normalize_set_path(value[head], tail)
+
+
 def canonical_bytes(meta: RecordMeta, payload: BaseModel) -> bytes:
     meta_value = _canonical(meta)
     meta_value["source_refs"] = sorted(meta_value["source_refs"], key=lambda item: json.dumps(item, sort_keys=True, separators=(",", ":")))
     payload_value = _canonical(payload)
     spec = MANIFEST["payload_kinds"][payload.__class__.__name__]
-    for path in spec.get("set_semantics_paths", []):
-        parts = path.strip("/").split("/")
-        if len(parts) == 1 and isinstance(payload_value.get(parts[0]), list):
-            payload_value[parts[0]] = sorted(payload_value[parts[0]], key=lambda item: json.dumps(item, sort_keys=True, separators=(",", ":")))
+    paths = sorted(spec.get("set_semantics_paths", []), key=lambda path: path.count("/"), reverse=True)
+    for path in paths:
+        _normalize_set_path(payload_value, path.strip("/").split("/"))
     value = {"meta": meta_value, "payload": payload_value}
     return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode()
 
@@ -191,6 +369,8 @@ class StoredRecord(StrictModel):
         spec = MANIFEST["payload_kinds"].get(self.payload.__class__.__name__)
         if spec is None:
             raise ValueError("payload model absent from manifest")
+        if self.payload.__class__.__name__ == "ExecutableRule":
+            validate_executable_rule(self.payload)
         domain_id = getattr(self.payload, spec["domain_id_field"])
         if domain_id != self.meta.object_id:
             raise ValueError("payload domain ID differs from envelope object ID")
@@ -279,3 +459,4 @@ class RecordStore:
 
 
 validate_model_manifest_inventory()
+validate_rule_registry_manifest()

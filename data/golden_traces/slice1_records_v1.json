@@ -46572,7 +46572,7 @@
       }
     },
     {
-      "content_hash": "c9b5dbab46a855887d07b6c455bba8fd1e100fc6a18b62d4312ac33ef2d58097",
+      "content_hash": "80d02b7f46655e9b58ae302053ed5876311a9231fad2bd4a50c96e117d1a6848",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -46596,17 +46596,12 @@
         "payload_kind": "action",
         "resource_commitment": {},
         "reversibility_window": {},
-        "source_rule_refs": [
-          {
-            "object_id": "SLICE1-RULE",
-            "object_version": 1
-          }
-        ],
+        "source_rule_refs": [],
         "target_id": "SLICE1-CASE"
       }
     },
     {
-      "content_hash": "1f589288e67b4d42c59d36d945fe8d54fa8f425ab17736f9c78682ad2201498e",
+      "content_hash": "f678df670eb25477088fae955645d73f1f652d94af302744e1c86ab77e1af034",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -46630,12 +46625,7 @@
         "payload_kind": "action",
         "resource_commitment": {},
         "reversibility_window": {},
-        "source_rule_refs": [
-          {
-            "object_id": "SLICE1-RULE",
-            "object_version": 1
-          }
-        ],
+        "source_rule_refs": [],
         "target_id": "SLICE1-CASE"
       }
     },
@@ -47908,7 +47898,7 @@
       }
     },
     {
-      "content_hash": "a242ef32abca138d5db13e3157a74344861ea291b462bd97a6a4e83012b55af5",
+      "content_hash": "831efd3209b33ed1b99b86d053eadad37216b7317712452c8b8fb3400221ce43",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -47918,18 +47908,115 @@
         "provenance_status": "hypothetical",
         "schema_id": "P0-SCHEMA-EXECUTABLE-RULE",
         "schema_version": 1,
-        "source_basis": "synthetic_no_external_source",
-        "source_refs": []
+        "source_basis": "versioned_sources",
+        "source_refs": [
+          {
+            "object_id": "SLICE1-POLICY-MAP",
+            "object_version": 1
+          },
+          {
+            "object_id": "SLICE1-ACTION-HOLD",
+            "object_version": 1
+          },
+          {
+            "object_id": "SLICE1-ACTION-PROGRESS",
+            "object_version": 1
+          }
+        ]
       },
       "payload": {
         "implementation_id": "p0_visible_material_route",
         "implementation_version": 1,
-        "input_role_specs": [],
+        "input_role_specs": [
+          {
+            "accepted_schema_refs": [
+              {
+                "schema_id": "P0-SCHEMA-PRESERVE",
+                "schema_version": 1
+              },
+              {
+                "schema_id": "P0-SCHEMA-FALLBACK",
+                "schema_version": 1
+              }
+            ],
+            "cardinality": "one",
+            "role_id": "representation"
+          },
+          {
+            "accepted_schema_refs": [
+              {
+                "schema_id": "P0-SCHEMA-POLICY",
+                "schema_version": 1
+              }
+            ],
+            "cardinality": "one",
+            "role_id": "policy"
+          },
+          {
+            "accepted_schema_refs": [
+              {
+                "schema_id": "P0-SCHEMA-PROCESS",
+                "schema_version": 1
+              }
+            ],
+            "cardinality": "one",
+            "role_id": "process_state"
+          },
+          {
+            "accepted_schema_refs": [
+              {
+                "schema_id": "P0-SCHEMA-CLOCK",
+                "schema_version": 1
+              }
+            ],
+            "cardinality": "one",
+            "role_id": "clock"
+          }
+        ],
         "output_schema_ref": {
           "schema_id": "formal_model.disposition",
           "schema_version": 1
         },
-        "parameters": [],
+        "parameters": [
+          {
+            "parameter_id": "policy_ref",
+            "value": {
+              "object_id": "SLICE1-POLICY-MAP",
+              "object_version": 1
+            },
+            "value_kind": "record_ref"
+          },
+          {
+            "parameter_id": "broad_class_id",
+            "value": "vehicle",
+            "value_kind": "literal"
+          },
+          {
+            "parameter_id": "action_refs_by_case_id",
+            "value": {
+              "SLICE1-CASE": [
+                {
+                  "object_id": "SLICE1-ACTION-HOLD",
+                  "object_version": 1
+                },
+                {
+                  "object_id": "SLICE1-ACTION-PROGRESS",
+                  "object_version": 1
+                }
+              ]
+            },
+            "value_kind": "record_ref_set"
+          },
+          {
+            "parameter_id": "constructors",
+            "value": [
+              "enhanced",
+              "routine",
+              "unassessable"
+            ],
+            "value_kind": "literal"
+          }
+        ],
         "payload_kind": "executable_rule",
         "rule_id": "SLICE1-RULE",
         "rule_kind": "routing"
@@ -47961,6 +48048,14 @@
         "start_value": null,
         "temporal_scope_id": "SLICE1-TIME"
       }
+    }
+  ],
+  "rule_implementation_receipts": [
+    {
+      "code_artifact_hash": "d2779133621bc3a37a78a14342590eaee1919be41ca945908d50886631c03a85",
+      "implementation_id": "p0_visible_material_route",
+      "implementation_version": 1,
+      "rule_record_hash": "831efd3209b33ed1b99b86d053eadad37216b7317712452c8b8fb3400221ce43"
     }
   ]
 }

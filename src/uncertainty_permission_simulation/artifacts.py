@@ -9,6 +9,7 @@ from .events import DEFAULT_PRIORITIES
 from .formal_model import p0_profile
 from .metrics import trace_metrics
 from .process_model import TraceResult, TraceSpec
+from .rules import implementation_code_hash
 from .schemas import MANIFEST, PAYLOAD_MODELS, RecordMeta, RecordRef, RecordStore, StoredRecord
 
 
@@ -80,28 +81,17 @@ def build_bundle(specs: tuple[TraceSpec, ...], results: dict[str, TraceResult]) 
         "start_precision": "not_applicable", "end_value": None, "end_precision": "not_applicable",
         "reference_as_of": None, "simultaneous_activation_claimed": False, "limitation": None,
     })
-    rule = b.add("ExecutableRule", "SLICE1-RULE", {
-        "rule_id": "SLICE1-RULE", "rule_kind": "routing", "implementation_id": "p0_visible_material_route",
-        "implementation_version": 1, "parameters": (), "input_role_specs": (),
-        "output_schema_ref": {"schema_id": "formal_model.disposition", "schema_version": 1},
-    })
     hold = b.add("Action", "SLICE1-ACTION-HOLD", {
         "action_instance_id": "SLICE1-ACTION-HOLD", "action_type_id": "hold", "actor_role_id": "SYSTEM",
         "target_id": "SLICE1-CASE", "parameter_vector": {}, "resource_commitment": {},
         "operational_or_external_consequence": {}, "reversibility_window": {}, "authorization_requirement": {},
-        "source_rule_refs": (rule,), "authority_direction": "constraint",
+        "source_rule_refs": (), "authority_direction": "constraint",
     })
     progress = b.add("Action", "SLICE1-ACTION-PROGRESS", {
         "action_instance_id": "SLICE1-ACTION-PROGRESS", "action_type_id": "progress", "actor_role_id": "SYSTEM",
         "target_id": "SLICE1-CASE", "parameter_vector": {}, "resource_commitment": {},
         "operational_or_external_consequence": {}, "reversibility_window": {}, "authorization_requirement": {},
-        "source_rule_refs": (rule,), "authority_direction": "progression",
-    })
-    process = b.add("ProcessProfile", "SLICE1-PROCESS", {
-        "process_profile_id": "SLICE1-PROCESS", "profile_kind": "canonical_synthetic", "temporal_scope_ref": temporal,
-        "role_refs": (), "stage_refs": (), "queue_refs": (), "resource_refs": (), "deadline_refs": (), "gate_refs": (),
-        "transition_rule_refs": (rule,), "action_type_ids": ("hold", "progress"),
-        "parameter_slot_ids": ("notice_delay", "response_deadline", "review_capacity", "review_service_time"),
+        "source_rule_refs": (), "authority_direction": "progression",
     })
     policy_map = b.add("PolicyMap", "SLICE1-POLICY-MAP", {
         "policy_map_id": "SLICE1-POLICY-MAP", "material_alternative_ids": ("armed_technical",),
@@ -109,6 +99,29 @@ def build_bundle(specs: tuple[TraceSpec, ...], results: dict[str, TraceResult]) 
         "required_review_action_refs": (hold,), "blocked_until_review_action_refs": (progress,),
         "authorized_action_refs": (hold, progress), "confidence_alone_is_material": False,
     }, basis="versioned_sources", sources=(model_output,))
+    rule = b.add("ExecutableRule", "SLICE1-RULE", {
+        "rule_id": "SLICE1-RULE", "rule_kind": "routing", "implementation_id": "p0_visible_material_route",
+        "implementation_version": 1,
+        "parameters": (
+            {"parameter_id": "policy_ref", "value_kind": "record_ref", "value": policy_map},
+            {"parameter_id": "broad_class_id", "value_kind": "literal", "value": "vehicle"},
+            {"parameter_id": "action_refs_by_case_id", "value_kind": "record_ref_set", "value": {"SLICE1-CASE": (hold, progress)}},
+            {"parameter_id": "constructors", "value_kind": "literal", "value": ("enhanced", "routine", "unassessable")},
+        ),
+        "input_role_specs": (
+            {"role_id": "representation", "accepted_schema_refs": ({"schema_id": "P0-SCHEMA-PRESERVE", "schema_version": 1}, {"schema_id": "P0-SCHEMA-FALLBACK", "schema_version": 1}), "cardinality": "one"},
+            {"role_id": "policy", "accepted_schema_refs": ({"schema_id": "P0-SCHEMA-POLICY", "schema_version": 1},), "cardinality": "one"},
+            {"role_id": "process_state", "accepted_schema_refs": ({"schema_id": "P0-SCHEMA-PROCESS", "schema_version": 1},), "cardinality": "one"},
+            {"role_id": "clock", "accepted_schema_refs": ({"schema_id": "P0-SCHEMA-CLOCK", "schema_version": 1},), "cardinality": "one"},
+        ),
+        "output_schema_ref": {"schema_id": "formal_model.disposition", "schema_version": 1},
+    }, basis="versioned_sources", sources=(policy_map, hold, progress))
+    process = b.add("ProcessProfile", "SLICE1-PROCESS", {
+        "process_profile_id": "SLICE1-PROCESS", "profile_kind": "canonical_synthetic", "temporal_scope_ref": temporal,
+        "role_refs": (), "stage_refs": (), "queue_refs": (), "resource_refs": (), "deadline_refs": (), "gate_refs": (),
+        "transition_rule_refs": (rule,), "action_type_ids": ("hold", "progress"),
+        "parameter_slot_ids": ("notice_delay", "response_deadline", "review_capacity", "review_service_time"),
+    })
     policy_refs: dict[str, RecordRef] = {}
     for policy_id in ("U1", "U2C", "U2O"):
         policy_refs[policy_id] = b.add("PolicyProfile", f"SLICE1-POLICY-{policy_id}", {
@@ -292,5 +305,11 @@ def build_bundle(specs: tuple[TraceSpec, ...], results: dict[str, TraceResult]) 
         "records": records,
         "comparisons": comparisons,
         "closure_status": "valid",
+        "rule_implementation_receipts": ({
+            "implementation_id": "p0_visible_material_route",
+            "implementation_version": 1,
+            "code_artifact_hash": implementation_code_hash("p0_visible_material_route"),
+            "rule_record_hash": b.store.resolve(rule).content_hash,
+        },),
         "compiled_configuration_refs": {key: value.model_dump() for key, value in compiled_refs.items()},
     }

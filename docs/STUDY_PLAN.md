@@ -953,6 +953,7 @@ The minimum Slice 1 inventory is: `RecordRef`; `SchemaRef`; `RecordMeta`; `Store
 ### Planned modules
 
 - `src/uncertainty_permission_simulation/schemas.py`: versioned contracts.
+- `src/uncertainty_permission_simulation/rules.py`: static callable registry for manifest-declared executable rules and code-artifact hashing.
 - `src/uncertainty_permission_simulation/formal_model.py`: compatible-state and permission orders, evidentiary fidelity, authority distinctions, review semantics, and F0-F5.
 - `src/uncertainty_permission_simulation/process_model.py`: stages, resources, queues, deadlines, and process transitions.
 - `src/uncertainty_permission_simulation/events.py`: event types, branch-independent causal-event keys, deterministic ordering, and causal-cut construction.
