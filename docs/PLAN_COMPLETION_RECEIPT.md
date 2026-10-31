@@ -25,7 +25,7 @@ This receipt closes planning, not the study. The repository now specifies the fo
 
 ## Decisions Left to Execution, Not to Implementer Discretion
 
-The pilot must measure and freeze cohort size, final replication bounds within the stated cap, MCSE targets, scenario validity, censoring treatment, and the confirmatory runtime ceiling. These are controlled empirical decisions with predeclared inputs and decision rules, not missing plan choices. The project lead must close the baseline commit and environment receipt before Slice 1 mutation, and must close independent reader QA, invitation verification, literature chaining, and source-byte identity at their registered pre-freeze gates.
+The pilot must measure and freeze cohort size, final replication bounds within the stated cap, MCSE targets, scenario validity, censoring treatment, and the confirmatory runtime ceiling. These are controlled empirical decisions with predeclared inputs and decision rules, not missing plan choices. The baseline commit and environment receipt are closed as `D-009`; the project lead must still close independent reader QA, invitation verification, literature chaining, and source-byte identity at their registered pre-freeze gates.
 
 An implementer may choose ordinary internal code structure only where it does not alter schemas, fact ownership, event semantics, random-stream allocation, formal properties, estimands, diagnostics, or frozen outputs. Any semantic change requires a ledger entry and rerun of the owning gate.
 
@@ -53,4 +53,4 @@ PLAN_VALID slices=8 primary_hypotheses=3 policies=5 audit_questions=39 deferred_
 
 ## Entry Decision
 
-Slice 1 may begin after both validators pass and `D-009` records the approved baseline commit and environment receipt. Independent reader QA may run in parallel, but protocol `1.0` and Slice 4 remain blocked until the required locked reader returns and all other pre-freeze dependencies are closed. Exact Robodebt population calibration is neither required nor permitted as a silent prerequisite for the generic kernel.
+Both validators pass and `D-009` records approved baseline commit `9cf836cb15edba29235abc60b4f754d311343fe3` plus the environment receipt, so Slice 1 may begin. Independent reader QA may run in parallel, but protocol `1.0` and Slice 4 remain blocked until the required locked reader returns and all other pre-freeze dependencies are closed. Exact Robodebt population calibration is neither required nor permitted as a silent prerequisite for the generic kernel.

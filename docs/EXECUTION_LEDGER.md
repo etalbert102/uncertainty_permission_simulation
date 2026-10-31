@@ -6,8 +6,8 @@ This ledger is the canonical slice-status record. Update it at the end of every 
 
 | Slice | Status | Commit | Verification | Residual risk |
 | --- | --- | --- | --- | --- |
-| 0. Source, construct, and claim contract | implementation and plan gates passed — pre-freeze reader QA pending | uncommitted | automated Slice 0 and plan gates pass | two eligible locked reader returns are not yet available; this blocks Slice 4, not Slice 1 engineering |
-| 1. Case-neutral dynamic vertical slice | ready after baseline receipt | — | Slice 0 implementation and plan gates passed; D-009 open | repository has no baseline commit; adapter seam and executable schemas remain untested |
+| 0. Source, construct, and claim contract | implementation, plan, and baseline gates passed — pre-freeze reader QA pending | `9cf836c` | automated Slice 0 and plan gates pass from declared environment | two eligible locked reader returns are not yet available; this blocks Slice 4, not Slice 1 engineering |
+| 1. Case-neutral dynamic vertical slice | ready to begin | — | Slice 0 gates passed; D-009 closed | adapter seam and executable schemas remain untested |
 | 2. Stochastic engine and validation | pending | — | — | — |
 | 3. Experiment pilot and freeze candidate | pending | — | — | — |
 | 4. Confirmatory freeze | pending | — | — | — |
@@ -66,7 +66,7 @@ Current candidate hashes after the flexible-kernel plan revision:
 - configuration compilation contract: `208c5e0dbb66e8f70dc300c7cc373a7206e5863928eb56c07f3f3b93ada30b6d`
 - Slice 0 validator: `4712611986d4f3cbc18e68ed0e49f0fc8ec13c0f243a97ecb2c7a2f31ad497b7`
 - plan validator: `66a345f418d9d2229885dfd91fac99847f05fbb68b6e573ea98ca45f56acdd95`
-- plan completion receipt: `290112938e651af85b4b682846e8c2a3532518a3c82eada2bf3af7abc72a3101`
+- plan completion receipt: `e1423b9e979c8a151c2d27048d58801c8e34a05d4898ef8e0f560516ff234379`
 
 ### Golden traces or comparisons
 
@@ -127,4 +127,4 @@ The source/profile consistency, configuration-contract inventory, generic event/
 
 ### Commit receipt
 
-No commit is recorded because the worktree began as an untracked repository and no baseline commit has been created. The automated implementation gate permits Slice 1 work, but the final Slice 0 completion receipt remains uncommitted. Independent reader receipts are tracked separately as a mandatory pre-freeze dependency.
+The reviewed 41-file Slice 0 baseline is commit `9cf836cb15edba29235abc60b4f754d311343fe3` (`Establish simulation study baseline`). The repository-local author name is `Eli`; the pre-existing configured email was retained. This follow-up ledger update closes `D-009` and records the immutable baseline SHA. Independent reader receipts remain a separate mandatory pre-freeze dependency.
