@@ -12,7 +12,7 @@ The study asks when aggregate annual income data can become apparently precise f
 
 ## Status
 
-The research and implementation plan is execution-ready; this does not mean the study is complete. Slice 0 automated source-and-specification implementation gate passes, while independent reader QA remains required before protocol `1.0` and confirmatory freeze. No simulator or confirmatory results exist. No pilot, evidence packet, or completed manuscript exists either.
+The research and implementation plan is execution-ready; this does not mean the study is complete. Slice 0 gates pass and Slice 1 implementation is in progress. A deterministic vertical-slice checkpoint now exists, but no stochastic simulator or confirmatory results exist. No pilot, evidence packet, or completed manuscript exists either. Independent reader QA remains required before protocol `1.0` and confirmatory freeze.
 
 The canonical execution plan is [docs/STUDY_PLAN.md](docs/STUDY_PLAN.md).
 
@@ -24,7 +24,7 @@ The draft formal specification is [docs/FORMAL_MODEL.md](docs/FORMAL_MODEL.md). 
 
 The draft practitioner method is [docs/PROCESS_RED_TEAM_PROTOCOL.md](docs/PROCESS_RED_TEAM_PROTOCOL.md). It defines document-audit, bounded-trace, and dynamic-simulation application levels; a five-step intake and diagnostic workflow; mandatory escalation; and a non-composite report profile. Blinded QA uses packet-only copies of [docs/P0_COLD_READER_PACKET.md](docs/P0_COLD_READER_PACKET.md) and [docs/TRANSFER_CANARY.md](docs/TRANSFER_CANARY.md), controlled through [docs/COLD_READER_QA_RECEIPT.md](docs/COLD_READER_QA_RECEIPT.md). [docs/P0_USABILITY_WALKTHROUGH.md](docs/P0_USABILITY_WALKTHROUGH.md) and [docs/TRANSFER_CANARY_EXPECTED_PROFILE.md](docs/TRANSFER_CANARY_EXPECTED_PROFILE.md) are withheld oracles and must be opened only after a reader locks their assessment. Their results remain expected projections until Slice 1 emits executable records.
 
-The draft machine-readable schema inventory is [data/model/schema_manifest_v1.yaml](data/model/schema_manifest_v1.yaml). It fixes acyclic record/reference boundaries, canonicalization, role-bound closed rule signatures, truth/completeness assessments, complete system-intervention traces, well-founded event execution, payload ownership, and set-versus-sequence paths for the first implementation slice; executable models have not yet been created.
+The machine-readable schema inventory is [data/model/schema_manifest_v1.yaml](data/model/schema_manifest_v1.yaml). Slice 1 now generates a closed Pydantic payload-model inventory from it and enforces record envelopes, schema identity, source basis, provenance, and canonical hashing. Canonical persisted event/state/assessment bundles remain incomplete, so Slice 1 is not closed.
 
 The [configuration compilation contract](docs/CONFIGURATION_COMPILATION.md) fixes the case-neutral boundary: immutable source fixture, application mapping, process capability profile, active policy profile, independent evaluation specification, stylized overlay, and complete parameter-binding receipts compile into the only configuration the simulator may execute.
 
@@ -80,4 +80,4 @@ tests/
 
 ## Next Step
 
-The validated Slice 0 baseline and environment receipt required by `D-009` are committed. Begin Slice 1 by implementing the closed schemas and deterministic configuration compiler, followed by the case-neutral vertical trace, isomorphic vocabulary canary, non-isomorphic topology canary, and R-OCI-Early adapter smoke test in that order. In parallel, complete the independent readability gate by distributing the existing oracle-free bundles, obtaining locked packet-only returns from at least two eligible readers, comparing them with the withheld profiles, and logging any revisions. Reader QA must pass before protocol `1.0` and confirmatory freeze, but exact historical calibration is not required to implement the kernel.
+Continue Slice 1 by converting the passing deterministic traces and P0 report into fully versioned stored event, pre/post-state, assessment, diagnostic, and receipt bundles, then close the remaining schema/reference and report-linkage gates. The case-neutral compiler, deterministic trace path, both generalizability canaries, and R-OCI-Early adapter smoke path already execute. Independent readability QA may proceed in parallel and remains blocking only for protocol `1.0` and confirmatory freeze.

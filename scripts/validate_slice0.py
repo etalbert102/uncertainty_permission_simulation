@@ -458,7 +458,7 @@ def main() -> int:
     agent_contract = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
     if "may not branch on `Robodebt`" not in agent_contract:
         raise ValueError("agent contract permits case-specific kernel behavior")
-    if "no simulator or confirmatory results" not in (
+    if "no stochastic simulator or confirmatory results" not in (
         ROOT / "README.md"
     ).read_text(encoding="utf-8").lower():
         raise ValueError("README must state the no-results boundary")

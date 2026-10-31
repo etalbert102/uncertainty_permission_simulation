@@ -1,0 +1,467 @@
+{
+  "compiled_configuration_ids": [
+    "SYNTH-U1",
+    "SYNTH-U2C",
+    "SYNTH-U2O"
+  ],
+  "config_id": "SLICE1-SMOKE-V1",
+  "isomorphic_canary": {
+    "artifact_identity_differs": true,
+    "semantic_projection_equal": true
+  },
+  "nonisomorphic_canary": {
+    "events": [
+      "CASE_ARRIVAL",
+      "ROUTING_COMPLETED",
+      "EVIDENCE_REQUESTED",
+      "REVIEW_QUEUED",
+      "CASE_CLOSED"
+    ],
+    "profile_id": "SYNTHETIC-NONISOMORPHIC@1"
+  },
+  "p0_report": {
+    "application_level": "bounded_deterministic_trace",
+    "assessment_profile": {
+      "fallback": {
+        "DecisionServiceEffective": {
+          "completeness": "incomplete",
+          "diagnostic_codes": [
+            "FM_REQUIRED_INPUT_MISSING"
+          ],
+          "property_id": "DecisionServiceEffective",
+          "status": "unassessable",
+          "trace_id": "P0-E-FALLBACK",
+          "value": null
+        },
+        "F0": {
+          "completeness": "complete",
+          "diagnostic_codes": [
+            "FM_EVIDENCE_TYPE_COLLAPSED",
+            "FM_LINEAGE_INCOMPLETE",
+            "FM_POLICY_NOT_INSPECTABLE"
+          ],
+          "property_id": "F0",
+          "status": "fail",
+          "trace_id": "P0-E-FALLBACK",
+          "value": null
+        },
+        "F1": {
+          "completeness": "complete",
+          "diagnostic_codes": [],
+          "property_id": "F1",
+          "status": "not_applicable",
+          "trace_id": "P0-E-FALLBACK",
+          "value": null
+        },
+        "F2": {
+          "completeness": "complete",
+          "diagnostic_codes": [],
+          "property_id": "F2",
+          "status": "not_applicable",
+          "trace_id": "P0-E-FALLBACK",
+          "value": null
+        },
+        "F3": {
+          "completeness": "complete",
+          "diagnostic_codes": [],
+          "property_id": "F3",
+          "status": "not_applicable",
+          "trace_id": "P0-E-FALLBACK",
+          "value": null
+        },
+        "F4": {
+          "completeness": "complete",
+          "diagnostic_codes": [
+            "FM_MATERIAL_ITEM_UNSURFACED"
+          ],
+          "property_id": "F4",
+          "status": "fail",
+          "trace_id": "P0-E-FALLBACK",
+          "value": null
+        },
+        "F5": {
+          "completeness": "incomplete",
+          "diagnostic_codes": [
+            "FM_APPLICABILITY_UNDETERMINED"
+          ],
+          "property_id": "F5",
+          "status": "unassessable",
+          "trace_id": "P0-E-FALLBACK",
+          "value": null
+        },
+        "GateSafe": {
+          "completeness": "complete",
+          "diagnostic_codes": [],
+          "property_id": "GateSafe",
+          "status": "not_applicable",
+          "trace_id": "P0-E-FALLBACK",
+          "value": null
+        },
+        "ReviewEffective": {
+          "completeness": "complete",
+          "diagnostic_codes": [
+            "FM_REQUIRED_GATE_MISSING",
+            "FM_REVIEW_EVIDENCE_MISSING"
+          ],
+          "property_id": "ReviewEffective",
+          "status": "fail",
+          "trace_id": "P0-E-FALLBACK",
+          "value": false
+        }
+      },
+      "preserve": {
+        "DecisionServiceEffective": {
+          "completeness": "incomplete",
+          "diagnostic_codes": [
+            "FM_REQUIRED_INPUT_MISSING"
+          ],
+          "property_id": "DecisionServiceEffective",
+          "status": "unassessable",
+          "trace_id": "P0-E-PRESERVE",
+          "value": null
+        },
+        "F0": {
+          "completeness": "complete",
+          "diagnostic_codes": [],
+          "property_id": "F0",
+          "status": "pass",
+          "trace_id": "P0-E-PRESERVE",
+          "value": null
+        },
+        "F1": {
+          "completeness": "complete",
+          "diagnostic_codes": [],
+          "property_id": "F1",
+          "status": "not_applicable",
+          "trace_id": "P0-E-PRESERVE",
+          "value": null
+        },
+        "F2": {
+          "completeness": "complete",
+          "diagnostic_codes": [],
+          "property_id": "F2",
+          "status": "not_applicable",
+          "trace_id": "P0-E-PRESERVE",
+          "value": null
+        },
+        "F3": {
+          "completeness": "incomplete",
+          "diagnostic_codes": [
+            "FM_REVIEW_UNRECORDED"
+          ],
+          "property_id": "F3",
+          "status": "unassessable",
+          "trace_id": "P0-E-PRESERVE",
+          "value": null
+        },
+        "F4": {
+          "completeness": "complete",
+          "diagnostic_codes": [],
+          "property_id": "F4",
+          "status": "pass",
+          "trace_id": "P0-E-PRESERVE",
+          "value": null
+        },
+        "F5": {
+          "completeness": "incomplete",
+          "diagnostic_codes": [
+            "FM_APPLICABILITY_UNDETERMINED"
+          ],
+          "property_id": "F5",
+          "status": "unassessable",
+          "trace_id": "P0-E-PRESERVE",
+          "value": null
+        },
+        "GateSafe": {
+          "completeness": "complete",
+          "diagnostic_codes": [],
+          "property_id": "GateSafe",
+          "status": "pass",
+          "trace_id": "P0-E-PRESERVE",
+          "value": true
+        },
+        "ReviewEffective": {
+          "completeness": "incomplete",
+          "diagnostic_codes": [
+            "FM_REVIEW_UNRECORDED"
+          ],
+          "property_id": "ReviewEffective",
+          "status": "unassessable",
+          "trace_id": "P0-E-PRESERVE",
+          "value": null
+        }
+      }
+    },
+    "claim_limit_receipts": {
+      "capacity_boundary": {
+        "evaluation_state": "omitted_by_claim_limit",
+        "required_level": "dynamic_system_simulation"
+      }
+    },
+    "comparison_id": "P0-E-PRESERVE__P0-E-FALLBACK",
+    "conclusion": {
+      "overall_score": "prohibited",
+      "strongest_supported_finding": "representation_induced_routing_and_permission_change"
+    },
+    "evaluation_unit": "controlled_pair",
+    "held_bundle_hash": "30a1f306f91aa3f37ad325999de3cf476d0889380a0a4ab50891862e066dd49d",
+    "protocol_version": "0.2",
+    "random_draw_count": 0
+  },
+  "robodebt_adapter": {
+    "configuration_id": "R-OCI-EARLY-SMOKE",
+    "kernel_case_branch": false,
+    "receipt_slots": [
+      "notice_delay",
+      "response_deadline",
+      "review_capacity",
+      "review_service_time"
+    ]
+  },
+  "schema_version": 1,
+  "traces": {
+    "GOLDEN-IMPUTE-NONRESPONSE": {
+      "action": "progress",
+      "events": [
+        "CASE_ARRIVAL",
+        "SOURCE_EVIDENCE_INGESTED",
+        "NOTICE_SENT",
+        "NOTICE_DELIVERED",
+        "SUBJECT_NONRESPONSE",
+        "REPRESENTATION_APPLIED",
+        "REPRESENTATION_SURFACED",
+        "ROUTING_COMPLETED",
+        "DEADLINE_REACHED",
+        "ACTION_COMPUTED",
+        "PROGRESSION_EXECUTED",
+        "CASE_CLOSED"
+      ],
+      "metrics": {
+        "event_count": 12,
+        "external_exposure_count": 0,
+        "functional_permission": true,
+        "progression_count": 1,
+        "restoration_complete": null,
+        "review_completed_count": 0
+      },
+      "route": "timeout_progression"
+    },
+    "GOLDEN-PARTIAL-RESTORATION": {
+      "action": "progress",
+      "events": [
+        "CASE_ARRIVAL",
+        "SOURCE_EVIDENCE_INGESTED",
+        "NOTICE_SENT",
+        "NOTICE_DELIVERED",
+        "SUBJECT_NONRESPONSE",
+        "REPRESENTATION_APPLIED",
+        "REPRESENTATION_SURFACED",
+        "ROUTING_COMPLETED",
+        "DEADLINE_REACHED",
+        "ACTION_COMPUTED",
+        "PROGRESSION_EXECUTED",
+        "EXTERNAL_CONSEQUENCE_STARTED",
+        "CORRECTION_REQUESTED",
+        "RESTORATION_EXECUTED",
+        "CASE_CLOSED"
+      ],
+      "metrics": {
+        "event_count": 15,
+        "external_exposure_count": 1,
+        "functional_permission": true,
+        "progression_count": 1,
+        "restoration_complete": false,
+        "review_completed_count": 0
+      },
+      "route": "timeout_progression"
+    },
+    "GOLDEN-SUPPORTED-PROGRESSION": {
+      "action": "progress",
+      "events": [
+        "CASE_ARRIVAL",
+        "SOURCE_EVIDENCE_INGESTED",
+        "NOTICE_SENT",
+        "NOTICE_DELIVERED",
+        "SUBJECT_RESPONDED",
+        "REPRESENTATION_APPLIED",
+        "REPRESENTATION_SURFACED",
+        "ROUTING_COMPLETED",
+        "EVIDENCE_SUBMITTED",
+        "EVIDENCE_ACCEPTED",
+        "REVIEW_QUEUED",
+        "REVIEW_STARTED",
+        "REVIEW_COMPLETED",
+        "DEADLINE_REACHED",
+        "ACTION_COMPUTED",
+        "PROGRESSION_EXECUTED",
+        "CASE_CLOSED"
+      ],
+      "metrics": {
+        "event_count": 17,
+        "external_exposure_count": 0,
+        "functional_permission": true,
+        "progression_count": 1,
+        "restoration_complete": null,
+        "review_completed_count": 1
+      },
+      "route": "supported_progression"
+    },
+    "GOLDEN-U2C-QUEUE-HOLD": {
+      "action": "hold",
+      "events": [
+        "CASE_ARRIVAL",
+        "SOURCE_EVIDENCE_INGESTED",
+        "NOTICE_SENT",
+        "NOTICE_DELIVERED",
+        "REVIEW_QUEUED",
+        "SUBJECT_NONRESPONSE",
+        "REPRESENTATION_APPLIED",
+        "REPRESENTATION_SURFACED",
+        "ROUTING_COMPLETED",
+        "DEADLINE_REACHED",
+        "ACTION_COMPUTED",
+        "CASE_CLOSED"
+      ],
+      "metrics": {
+        "event_count": 12,
+        "external_exposure_count": 0,
+        "functional_permission": false,
+        "progression_count": 0,
+        "restoration_complete": null,
+        "review_completed_count": 0
+      },
+      "route": "review_timeout"
+    },
+    "GOLDEN-U2O-TIMEOUT": {
+      "action": "progress",
+      "events": [
+        "CASE_ARRIVAL",
+        "SOURCE_EVIDENCE_INGESTED",
+        "NOTICE_SENT",
+        "NOTICE_DELIVERED",
+        "REVIEW_QUEUED",
+        "SUBJECT_NONRESPONSE",
+        "REPRESENTATION_APPLIED",
+        "REPRESENTATION_SURFACED",
+        "ROUTING_COMPLETED",
+        "DEADLINE_REACHED",
+        "ACTION_COMPUTED",
+        "PROGRESSION_EXECUTED",
+        "CASE_CLOSED"
+      ],
+      "metrics": {
+        "event_count": 13,
+        "external_exposure_count": 0,
+        "functional_permission": true,
+        "progression_count": 1,
+        "restoration_complete": null,
+        "review_completed_count": 0
+      },
+      "route": "timeout_progression"
+    },
+    "P0-E-FALLBACK": {
+      "action": "progress",
+      "events": [
+        "CASE_ARRIVAL",
+        "SOURCE_EVIDENCE_INGESTED",
+        "NOTICE_SENT",
+        "NOTICE_DELIVERED",
+        "SUBJECT_NONRESPONSE",
+        "REPRESENTATION_APPLIED",
+        "REPRESENTATION_SURFACED",
+        "ROUTING_COMPLETED",
+        "DEADLINE_REACHED",
+        "ACTION_COMPUTED",
+        "PROGRESSION_EXECUTED",
+        "CASE_CLOSED"
+      ],
+      "metrics": {
+        "event_count": 12,
+        "external_exposure_count": 0,
+        "functional_permission": true,
+        "progression_count": 1,
+        "restoration_complete": null,
+        "review_completed_count": 0
+      },
+      "route": "timeout_progression"
+    },
+    "P0-E-PRESERVE": {
+      "action": "hold",
+      "events": [
+        "CASE_ARRIVAL",
+        "SOURCE_EVIDENCE_INGESTED",
+        "NOTICE_SENT",
+        "NOTICE_DELIVERED",
+        "REVIEW_QUEUED",
+        "SUBJECT_NONRESPONSE",
+        "REPRESENTATION_APPLIED",
+        "REPRESENTATION_SURFACED",
+        "ROUTING_COMPLETED",
+        "DEADLINE_REACHED",
+        "ACTION_COMPUTED",
+        "CASE_CLOSED"
+      ],
+      "metrics": {
+        "event_count": 12,
+        "external_exposure_count": 0,
+        "functional_permission": false,
+        "progression_count": 0,
+        "restoration_complete": null,
+        "review_completed_count": 0
+      },
+      "route": "enhanced_scrutiny"
+    },
+    "P0-NO-CHANGE-FALLBACK": {
+      "action": "hold",
+      "events": [
+        "CASE_ARRIVAL",
+        "SOURCE_EVIDENCE_INGESTED",
+        "NOTICE_SENT",
+        "NOTICE_DELIVERED",
+        "REVIEW_QUEUED",
+        "SUBJECT_NONRESPONSE",
+        "REPRESENTATION_APPLIED",
+        "REPRESENTATION_SURFACED",
+        "ROUTING_COMPLETED",
+        "DEADLINE_REACHED",
+        "ACTION_COMPUTED",
+        "CASE_CLOSED"
+      ],
+      "metrics": {
+        "event_count": 12,
+        "external_exposure_count": 0,
+        "functional_permission": false,
+        "progression_count": 0,
+        "restoration_complete": null,
+        "review_completed_count": 0
+      },
+      "route": "enhanced_scrutiny"
+    },
+    "P0-NO-CHANGE-PRESERVE": {
+      "action": "hold",
+      "events": [
+        "CASE_ARRIVAL",
+        "SOURCE_EVIDENCE_INGESTED",
+        "NOTICE_SENT",
+        "NOTICE_DELIVERED",
+        "REVIEW_QUEUED",
+        "SUBJECT_NONRESPONSE",
+        "REPRESENTATION_APPLIED",
+        "REPRESENTATION_SURFACED",
+        "ROUTING_COMPLETED",
+        "DEADLINE_REACHED",
+        "ACTION_COMPUTED",
+        "CASE_CLOSED"
+      ],
+      "metrics": {
+        "event_count": 12,
+        "external_exposure_count": 0,
+        "functional_permission": false,
+        "progression_count": 0,
+        "restoration_complete": null,
+        "review_completed_count": 0
+      },
+      "route": "enhanced_scrutiny"
+    }
+  }
+}

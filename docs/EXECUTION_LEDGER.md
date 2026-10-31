@@ -7,7 +7,7 @@ This ledger is the canonical slice-status record. Update it at the end of every 
 | Slice | Status | Commit | Verification | Residual risk |
 | --- | --- | --- | --- | --- |
 | 0. Source, construct, and claim contract | implementation, plan, and baseline gates passed — pre-freeze reader QA pending | `9cf836c` | automated Slice 0 and plan gates pass from declared environment | two eligible locked reader returns are not yet available; this blocks Slice 4, not Slice 1 engineering |
-| 1. Case-neutral dynamic vertical slice | ready to begin | — | Slice 0 gates passed; D-009 closed | adapter seam and executable schemas remain untested |
+| 1. Case-neutral dynamic vertical slice | in progress — deterministic checkpoint passes | checkpoint pending | 13 focused tests and smoke CLI pass; output hash repeats | persisted event/state/assessment envelopes and full reference closure remain incomplete |
 | 2. Stochastic engine and validation | pending | — | — | — |
 | 3. Experiment pilot and freeze candidate | pending | — | — | — |
 | 4. Confirmatory freeze | pending | — | — | — |
@@ -64,7 +64,7 @@ Current candidate hashes after the flexible-kernel plan revision:
 - study plan: `91ca2216a40beb61c9d960310b0c4357866f0a553ac21a08a8ada1d003d4ac48`
 - preregistration skeleton: `d9c88cc777966e5b8d8cc8615cfe4bcf19d41d88d3a488550276cff0f8994510`
 - configuration compilation contract: `208c5e0dbb66e8f70dc300c7cc373a7206e5863928eb56c07f3f3b93ada30b6d`
-- Slice 0 validator: `4712611986d4f3cbc18e68ed0e49f0fc8ec13c0f243a97ecb2c7a2f31ad497b7`
+- Slice 0 validator: `12f656690bab510bfb03f63e7028aee224b2483794f288a530ed960da3c7d6e3`
 - plan validator: `66a345f418d9d2229885dfd91fac99847f05fbb68b6e573ea98ca45f56acdd95`
 - plan completion receipt: `e1423b9e979c8a151c2d27048d58801c8e34a05d4898ef8e0f560516ff234379`
 
@@ -128,3 +128,31 @@ The source/profile consistency, configuration-contract inventory, generic event/
 ### Commit receipt
 
 The reviewed 41-file Slice 0 baseline is commit `9cf836cb15edba29235abc60b4f754d311343fe3` (`Establish simulation study baseline`). The repository-local author name is `Eli`; the pre-existing configured email was retained. This follow-up ledger update closes `D-009` and records the immutable baseline SHA. Independent reader receipts remain a separate mandatory pre-freeze dependency.
+
+## Slice 1 In-Progress Checkpoint
+
+Status: deterministic schema/compiler/process checkpoint implemented; Slice 1 not complete
+
+### Implemented
+
+- Manifest-driven Pydantic inventory for all declared payload kinds, strict record metadata/envelopes, schema identity, source-basis and provenance checks, canonical hashing, set-order normalization, and binary-float rejection.
+- Deterministic configuration compilation with process/policy capability separation, documented-value protection, unsupported-slot handling, one receipt per runtime slot, and zero-unresolved-slot enforcement.
+- Case-neutral event queue, stable priority ordering, causal-key collision rejection, microstep bound, U1/U2C/U2O deterministic behavior, trace-derived metrics, and P0 F0–F5/helper report rendering.
+- Nine trace arms covering the seven required golden behaviors, the isomorphic vocabulary canary, non-isomorphic topology canary, and thin R-OCI-Early adapter smoke compilation.
+
+### Verification
+
+| Command | Result |
+| --- | --- |
+| `PYTHONPATH=src ./.venv/bin/python -m pytest -q` | pass: 13 tests |
+| `PYTHONPATH=src ./.venv/bin/python -m uncertainty_permission_simulation.cli trace experiments/configs/smoke_v1.yaml` | pass: 9 trace arms |
+| repeated smoke run | identical SHA-256 `4f4dcebda8f8df14db4ebd95650fd69dc750beea4b16f8006d662c8786e41ae4` |
+| `./.venv/bin/python scripts/validate_plan.py` | pass |
+| `./.venv/bin/python scripts/validate_slice0.py` | pass after status synchronization |
+
+### Remaining before Slice 1 closeout
+
+- Materialize trace events, pre/post states, dispositions, assessments, diagnostics, compiled configurations, and binding receipts as reference-closed `StoredRecord` bundles rather than only the current deterministic JSON projection.
+- Enforce full recursive reference closure and cycle rejection, complete event-state capture, total disposition records, and manifest/code/fixture drift against stored fixtures.
+- Link each rendered P0 report row to its stored assessment and diagnostic records and add exact expected-versus-actual receipts for every golden trace and canary.
+- Rerun all gates, record runtime and artifact hashes, update this ledger, and create the required Slice 1 completion commit.
