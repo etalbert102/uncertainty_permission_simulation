@@ -1,0 +1,81 @@
+specification_id: RB-WORKED-TRACE-001
+specification_version: 1
+status: preimplementation-fixed-input
+purpose: prespecified explanatory trace; not representative and not a historical reconstruction
+profile_ref: R-OCI-Early@1
+configuration_role: stylized_scenario_overlay
+profile_boundary: R-OCI-Early supplies documented structure only; all case values and unsourced timing values below are study-owned
+compilation_requirements:
+  process_profile_role: source_grounded_capability_graph
+  policy_profile_source: comparison_arm
+  evaluation_specification_required: true
+  parameter_binding_receipt_required_per_runtime_slot: true
+  unresolved_parameter_slot_count: 0
+  documented_value_overwrite_allowed: false
+  raw_source_description_executable: false
+comparison:
+  baseline_policy: U1
+  repair_policy: U3
+  held_fields:
+    - case
+    - aggregate_evidence
+    - latent_period_values
+    - notice_and_access_state
+    - potential_third_party_evidence
+    - resource_state
+    - clocks
+    - evaluation_specification
+    - keyed_exogenous_draws
+case:
+  case_id: RB-WORKED-CASE-001
+  provenance: stylized
+  periods: [P1, P2, P3]
+  aggregate_income: 3000
+  aggregate_income_unit: synthetic_currency_units
+  employer_period: [P1, P2, P3]
+  latent_period_income:
+    P1: 3000
+    P2: 0
+    P3: 0
+  note: Values are deliberately stylized to make aggregate-to-period ambiguity visible; they are not a Robodebt amount estimate.
+access_and_evidence:
+  initial_period_specific_records: missing
+  initiation_notice_received_before_deadline: false
+  later_recipient_evidence_available_day: 40
+  agency_retrievable_evidence_available_day: 10
+  agency_retrieval_success: true
+timing:
+  initiation_day: 0
+  early_profile_response_deadline_day: 21
+  baseline_progression_day: 22
+  baseline_recovery_start_day: 25
+  later_reassessment_day: 45
+  restoration_evaluation_day: 60
+  repair_information_request_day: 1
+  repair_evidence_return_day: 10
+  repair_supported_disposition_day: 15
+required_path_baseline:
+  - notice_not_received
+  - response_deadline_expires
+  - aggregate_income_evenly_imputed
+  - automatic_progression_enabled
+  - recovery_exposure_begins
+  - period_specific_evidence_arrives
+  - reassessment_reduces_or_zeros_modeled_debt
+  - residual_recovery_exposure_prevents_complete_restoration
+required_path_repair:
+  - notice_access_problem_recorded
+  - progression_held
+  - agency_information_action_enabled
+  - period_specific_evidence_retrieved
+  - supported_disposition_recorded
+  - unsupported_progression_and_recovery_exposure_avoided
+randomness:
+  mode: deterministic
+  keyed_draws: []
+claim_limits:
+  - This trace is explanatory and not statistically representative.
+  - Synthetic currency values do not reproduce a historical debt calculation.
+  - The baseline arm is a structural source-grounded comparator, not a legal conclusion.
+  - The repair arm is counterfactual and not a description of a historical deployed policy.
+  - No attackability condition is established.

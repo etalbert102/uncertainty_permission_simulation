@@ -1,0 +1,143 @@
+profile_id: R-OCI-Early
+profile_version: 1
+status: slice-0-source-fixture
+profile_kind: documented_historical_structure
+owner: robodebt-profile-audit
+temporal_scope:
+  temporal_scope_id: R-OCI-EARLY-TEMPORAL-SCOPE-1
+  mode: dated_interval
+  label: early OCI baseline
+  start: 2016-07
+  start_precision: month
+  end: 2017-01-19
+  end_precision: day
+  rationale: OCI launched during July 2016; 20 January 2017 is the first specifically dated letter change in the fixed source packet.
+  limitation: The packet does not identify the exact day of the July limited rollout, so no exact start day is asserted.
+  simultaneous_activation_claimed: false
+compilation_contract:
+  source_fixture_role: immutable_application_input
+  compile_outputs: [process_capability_profile, historical_policy_profile]
+  raw_descriptions_and_guards_executable: false
+  unsupported_parameters_supply_runtime_values: false
+source_manifest: source_manifest.yaml
+source_claim_refs:
+  - RB-CLAIM-001
+  - RB-CLAIM-002
+  - RB-CLAIM-003
+  - RB-CLAIM-004
+  - RB-CLAIM-005
+
+roles:
+  - role_id: ATO
+    function: supplies matched annual PAYG income and employer-period information
+    provenance: documented
+  - role_id: DHS_AUTOMATION
+    function: selects cases, sends notices, applies representation/calculation rules, and issues notices
+    provenance: documented
+  - role_id: RECIPIENT
+    function: receives notice and may confirm, correct, or supplement information
+    provenance: documented
+  - role_id: COMPLIANCE_OFFICER
+    function: assists by phone and handles selected errors or manual assessments
+    provenance: documented
+  - role_id: DEBT_RECOVERY
+    function: performs ordinary recovery after a debt notice
+    provenance: documented
+
+transitions:
+  - transition_id: EARLY-T01-DATA-MATCH
+    from: source_records
+    to: discrepancy_candidate
+    actor: [ATO, DHS_AUTOMATION]
+    description: Match Centrelink and PAYG data, refresh historical data, apply inclusion and risk rules.
+    source_refs: [RRC-MAP-2B-2023#MAP-2B-2, RRC-MAP-3B-2023#MAP-3B-1-4, OMB-OCI-2017#OMB17-2.14-2.24]
+    provenance: documented
+  - transition_id: EARLY-T02-NOTICE
+    from: discrepancy_candidate
+    to: response_window_open
+    actor: DHS_AUTOMATION
+    description: Send discrepancy notice through the selected channel using last-known contact information.
+    source_refs: [OMB-OCI-2017#OMB17-1.17-1.29, RRC-MAP-4B-2023#MAP-4B-1-5]
+    provenance: documented
+  - transition_id: EARLY-T03-RESPONSE-CLOCK
+    from: response_window_open
+    to: response_or_timeout
+    actor: DHS_AUTOMATION
+    description: Allow 21 days from the date of the letter; issue a reminder after 14 days.
+    source_refs: [OMB-OCI-2017#OMB17-1.17-1.29, RRC-MAP-4B-2023#MAP-4B-1-5]
+    provenance: documented
+  - transition_id: EARLY-T04-RECIPIENT-EVIDENCE
+    from: response_or_timeout
+    to: evidence_assessment
+    actor: RECIPIENT
+    guard: recipient_responds
+    description: Confirm or update employer, income amount, pay-period, and supporting evidence.
+    source_refs: [OMB-OCI-2017#OMB17-1.17-1.29, RRC-MAP-4B-2023#MAP-4B-7-17]
+    provenance: documented
+  - transition_id: EARLY-T05-MANUAL-ERROR-ROUTE
+    from: evidence_assessment
+    to: officer_assessment
+    actor: COMPLIANCE_OFFICER
+    guard: automated_assessment_error_or_unresolved_evidence
+    description: Review system errors and manually assess unresolved evidence when required.
+    source_refs: [OMB-OCI-2017#OMB17-1.17-1.29, RRC-MAP-4B-2023#MAP-4B-29-36]
+    provenance: documented
+  - transition_id: EARLY-T06-NONRESPONSE-AVERAGING
+    from: response_or_timeout
+    to: imputed_fortnightly_income
+    actor: DHS_AUTOMATION
+    guard: no_response_by_due_date
+    description: Evenly apportion annual ATO earnings across the employer-reported period.
+    source_refs: [OMB-OCI-2017#OMB17-1.17-1.29]
+    provenance: documented
+  - transition_id: EARLY-T07-CALCULATE
+    from: evidence_assessment_or_imputation
+    to: entitlement_result
+    actor: DHS_AUTOMATION
+    description: Calculate entitlement and any debt using the accepted or imputed values.
+    source_refs: [RRC-MAP-4B-2023#MAP-4B-29-36]
+    provenance: documented
+  - transition_id: EARLY-T08-DEBT-NOTICE
+    from: entitlement_result
+    to: debt_asserted
+    actor: DHS_AUTOMATION
+    guard: calculation_results_in_debt
+    description: Automatically issue a debt notice; ordinary recovery begins.
+    source_refs: [OMB-OCI-2017#OMB17-1.17-1.29, RRC-MAP-4B-2023#MAP-4B-29-36]
+    provenance: documented
+  - transition_id: EARLY-T09-REASSESS
+    from: debt_asserted
+    to: revised_or_unchanged_debt
+    actor: [RECIPIENT, COMPLIANCE_OFFICER, DHS_AUTOMATION]
+    guard: new_information_or_review_request
+    description: Reassess in light of new information or use internal-review channels.
+    source_refs: [OMB-OCI-2017#OMB17-1.17-1.29]
+    provenance: documented
+
+formal_crosswalk:
+  e_less: annual employer-income total plus broad employment period
+  e_more: fortnight-specific income and working dates supported by records
+  representation: evenly apportioned fortnightly values derived from annual aggregate
+  functional_permission: automatic debt calculation and notice after timeout under the documented workflow
+  operational_action: notice, debt assertion, recovery, reassessment, reduction, or zeroing recorded in a trace
+  formal_authority: source-attributed only; never inferred from this profile
+
+historical_parameters:
+  response_days:
+    value: 21
+    provenance: documented
+    source_refs: [RB-CLAIM-002]
+  reminder_day:
+    value: 14
+    provenance: documented
+    source_refs: [RB-CLAIM-002]
+  queue_capacity: {value: null, provenance: unsupported}
+  service_time_distribution: {value: null, provenance: unsupported}
+  engagement_probability: {value: null, provenance: unsupported}
+  evidence_retrieval_distribution: {value: null, provenance: unsupported}
+
+claim_limits:
+  - This profile fixes documented process structure, not historical frequencies or service distributions.
+  - Automatic functional permission is a workflow description, not an independent legal conclusion.
+  - Reassessment availability does not establish effective contestability, uptake, or complete restoration.
+  - No attackability condition is established.

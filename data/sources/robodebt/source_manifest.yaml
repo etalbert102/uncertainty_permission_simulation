@@ -1,0 +1,279 @@
+manifest_id: robodebt-source-manifest
+manifest_version: 1
+status: slice-0-candidate
+retrieved_through: 2026-10-31
+owner: study-source-audit
+
+provenance_levels:
+  documented:
+    meaning: Directly stated in an authoritative source or displayed in a cited process-map node.
+  attributed_agency_statement:
+    meaning: Reported by an oversight source as an agency statement; not independently verified by this study.
+  inferred:
+    meaning: A bounded relationship inferred from multiple documented anchors; must be identified as inference.
+  stylized:
+    meaning: Study-authored structure or value used for simulation; has no historical-frequency interpretation.
+  unsupported:
+    meaning: Not established by the fixed source packet and prohibited as a historical claim.
+
+sources:
+  - source_id: RRC-REPORT-2023
+    title: Report of the Royal Commission into the Robodebt Scheme
+    publisher: Royal Commission into the Robodebt Scheme
+    publication_date: 2023-07-07
+    corrected_edition_date: 2023-07-11
+    url: https://robodebt.royalcommission.gov.au/publications/report
+    authority: primary-official-inquiry
+    permitted_use:
+      - historical findings
+      - source-attributed legal findings
+      - governance recommendations
+    anchors:
+      - anchor_id: RRC-17-1
+        locator: Recommendation 17.1
+        summary: Automated government decisions should have a clear review path, plain-language disclosure, and inspectable business rules and algorithms.
+      - anchor_id: RRC-17-2
+        locator: Recommendation 17.2
+        summary: Consider a body empowered to monitor and audit automated decision-making processes.
+      - anchor_id: RRC-18-1
+        locator: Recommendation 18.1
+        summary: Recovery should be ethical, proportionate, transparent, and generally paused while a debt is reviewed or disputed.
+      - anchor_id: RRC-10-1
+        locator: Recommendation 10.1
+        summary: Service design should account for technology access, digital literacy, clear communication, and recipient stress.
+    local_copy: false
+    content_hash: null
+    hash_note: Remote authoritative landing page; URL and corrected-edition date are frozen, but source bytes are not vendored.
+
+  - source_id: RRC-MAP-1A-2023
+    title: 1A. Population Identification Process Map — Pre Robodebt to OCI
+    publisher: Deloitte for the Royal Commission into the Robodebt Scheme
+    publication_date: 2023-03-08
+    url: https://robodebt.royalcommission.gov.au/publications/deloitte-robodebt-process-maps
+    authority: commissioned-process-map
+    permitted_use: [population-identification structure]
+    anchors:
+      - anchor_id: MAP-1A-ALL
+        locator: Process map 1A, node labels and cited exhibit references
+        summary: Population-identification stages preceding OCI case selection.
+    caveat: The publication page states that the maps were prepared by Deloitte; they are not independent legal findings of the Commission.
+    local_copy: false
+    content_hash: null
+
+  - source_id: RRC-MAP-2B-2023
+    title: 2B. Identity Matching — OCI and EIC
+    publisher: Deloitte for the Royal Commission into the Robodebt Scheme
+    publication_date: 2023-03-08
+    url: https://robodebt.royalcommission.gov.au/system/files/2023-03/2B-Identity-Matching-Process-Map-OCI-and-EIC.pdf
+    authority: commissioned-process-map
+    permitted_use: [identity-matching structure]
+    anchors:
+      - anchor_id: MAP-2B-2
+        locator: Node 2B.2
+        summary: Client Identification Compliance matching occurs.
+      - anchor_id: MAP-2B-16
+        locator: Node 2B.16
+        summary: Matched record is released to the mass fraud detection strategy.
+    caveat: The map notes later changes and must not be treated as a single timeless configuration.
+    local_copy: false
+    content_hash: null
+
+  - source_id: RRC-MAP-3B-2023
+    title: 3B. Income Matching — OCI
+    publisher: Deloitte for the Royal Commission into the Robodebt Scheme
+    publication_date: 2023-03-08
+    url: https://robodebt.royalcommission.gov.au/system/files/2023-03/3B-Income-Matching-Process-Map-OCI.pdf
+    authority: commissioned-process-map
+    permitted_use: [income-matching and risk-selection structure]
+    anchors:
+      - anchor_id: MAP-3B-1-4
+        locator: Nodes 3B.1–3B.4
+        summary: Mass detection, inclusion rules, compliance-risk rating, and risk threshold.
+      - anchor_id: MAP-3B-6-9
+        locator: Nodes 3B.6–3B.9
+        summary: Data refresh/update and initiation of the online strategy.
+    local_copy: false
+    content_hash: null
+
+  - source_id: RRC-MAP-4B-2023
+    title: 4B. Debt Calculation and Notification — OCI baseline
+    publisher: Deloitte for the Royal Commission into the Robodebt Scheme
+    publication_date: 2023-03-08
+    url: https://robodebt.royalcommission.gov.au/system/files/2023-03/4B-Debt-Calculation-and-Notification-Process-Map-OCI.pdf
+    authority: commissioned-process-map
+    permitted_use: [OCI routing, calculation, review, debt, and notice structure]
+    anchors:
+      - anchor_id: MAP-4B-1-5
+        locator: Nodes 4B.1–4B.5
+        summary: Load case, vulnerability branch, notice generation, and 21-day response branch.
+      - anchor_id: MAP-4B-7-17
+        locator: Nodes 4B.7–4B.17
+        summary: Assisted/digital paths, customer updates, compliance referral, and risk rules.
+      - anchor_id: MAP-4B-19-28
+        locator: Nodes 4B.19–4B.28
+        summary: Supporting-document request, officer contact, verbal update, further evidence, and record update.
+      - anchor_id: MAP-4B-29-36
+        locator: Nodes 4B.29–4B.36
+        summary: Automatic entitlement calculation, officer handling of errors, automatic debt raising, and debt advice.
+    caveat: Nodes marked as changed between OCI and EIC cannot be assigned to both profiles without an additional period-specific anchor.
+    local_copy: false
+    content_hash: null
+
+  - source_id: OMB-OCI-2017
+    title: Centrelink's Automated Debt Raising and Recovery System
+    publisher: Commonwealth Ombudsman
+    publication_date: 2017-04-10
+    url: https://www.ombudsman.gov.au/__data/assets/pdf_file/0022/43528/Report-Centrelinks-automated-debt-raising-and-recovery-system-April-2017.pdf
+    authority: primary-official-oversight
+    permitted_use:
+      - early-OCI structure
+      - early-2017 repair structure
+      - attributed agency statements
+      - Ombudsman findings and recommendations
+    anchors:
+      - anchor_id: OMB17-1.17-1.29
+        locator: pp. 33–34, paras 1.17–1.29
+        summary: Early OCI launch, notice, 21-day clock, reminder, nonresponse averaging, response path, debt notice, recovery, reassessment, and review.
+      - anchor_id: OMB17-1.30-1.46
+        locator: pp. 35–36, paras 1.30–1.46
+        summary: January/February 2017 changes to access, notices, delivery checks, response time, extensions, manual intervention, evidence options, and provisional reassessment.
+      - anchor_id: OMB17-2.14-2.24
+        locator: pp. 39–41, paras 2.14–2.24
+        summary: ATO confidence bands, data refresh, risk selection, data-matching continuity, and discrepancy investigation.
+      - anchor_id: OMB17-APP-B
+        locator: Appendix B
+        summary: Discussion of debt calculation, averaging, variable income, and customer-supplied evidence.
+    local_copy: false
+    content_hash: null
+
+  - source_id: OMB-IMPLEMENTATION-2019
+    title: Centrelink's Automated Debt Raising and Recovery System — Implementation Report
+    publisher: Commonwealth Ombudsman
+    publication_date: 2019-04-03
+    url: https://www.ombudsman.gov.au/__data/assets/pdf_file/0027/286551/Centrelinks-Automated-Debt-Raising-and-Recovery-System.pdf
+    authority: primary-official-oversight
+    permitted_use:
+      - later implementation context
+      - evidence-assistance and communication repairs
+      - recovery-fee review context
+    anchors:
+      - anchor_id: OMB19-EXEC
+        locator: Executive summary, pp. 1–3
+        summary: Implementation progress, clearer communication, information-gathering assistance, and later EIC/CUPI boundaries.
+      - anchor_id: OMB19-P9-11
+        locator: pp. 9–11
+        summary: Recovery-fee review rights, contact attempts, and reassessment limits.
+      - anchor_id: OMB19-P15-16
+        locator: pp. 15–16
+        summary: Worked example and warnings about consequences of averaging for intermittent or fluctuating income.
+    exclusion: This source does not redefine R-OCI-Enhanced as EIC or CUPI; later systems require separate profile IDs.
+    local_copy: false
+    content_hash: null
+
+  - source_id: OMB-APPORTIONMENT-2023
+    title: Income Apportionment — Lawfulness of Income Apportionment Decisions
+    publisher: Commonwealth Ombudsman
+    publication_date: 2023-08-02
+    url: https://www.ombudsman.gov.au/__data/assets/pdf_file/0040/299947/Income-Apportionment-Lawfulness.pdf
+    authority: primary-official-oversight
+    permitted_use: [terminology boundary only]
+    anchors:
+      - anchor_id: OMB23-P1
+        locator: p. 1
+        summary: Income apportionment is expressly distinguished from the income averaging at the heart of Robodebt.
+    exclusion: Do not use this report's findings about post-2003 apportionment as findings about Robodebt income averaging.
+    local_copy: false
+    content_hash: null
+
+  - source_id: SA-ROBODEBT-INFO
+    title: Information about Robodebt
+    publisher: Services Australia
+    publication_date: null
+    retrieved_date: 2026-10-31
+    url: https://www.servicesaustralia.gov.au/information-about-robodebt?context=60271
+    authority: official-agency-current-summary
+    permitted_use: [program boundary, remediation status, agency description]
+    anchors:
+      - anchor_id: SA-RB-WHAT
+        locator: What are robodebts
+        summary: The agency describes Robodebts as debts raised from July 2015 to November 2019 using averaged ATO income information.
+      - anchor_id: SA-RB-STOP
+        locator: What are robodebts
+        summary: The agency states it stopped raising debts using averaged ATO income as the only evidence in November 2019.
+    local_copy: false
+    content_hash: null
+
+  - source_id: SA-AI-STRATEGY-2025-27
+    title: Automation and Artificial Intelligence Strategy 2025–27
+    publisher: Services Australia
+    publication_date: 2025-05
+    url: https://www.servicesaustralia.gov.au/sites/default/files/2025-05/automation-and-ai-strategy-2025-27.pdf
+    authority: official-agency-strategy
+    permitted_use: [current governance context only]
+    anchors:
+      - anchor_id: SA-AI-P14
+        locator: p. 14, Priority 3
+        summary: Governance should support consistency, contestability, accountability, and oversight; the strategy identifies an accountable official.
+    exclusion: Not evidence that any current AI system reproduces Robodebt or the simulated mechanism.
+    local_copy: false
+    content_hash: null
+
+claims:
+  - claim_id: RB-CLAIM-001
+    text: OCI launched in July 2016, with a limited rollout followed by wider rollout in September 2016.
+    source_refs: [OMB-OCI-2017#OMB17-1.17-1.29]
+    provenance: documented
+    axes: [historical_process]
+  - claim_id: RB-CLAIM-002
+    text: The early OCI initial notice used a 21-day response period and a reminder was issued after 14 days.
+    source_refs: [OMB-OCI-2017#OMB17-1.17-1.29, RRC-MAP-4B-2023#MAP-4B-1-5]
+    provenance: documented
+    axes: [historical_process]
+  - claim_id: RB-CLAIM-003
+    text: If the customer did not respond by the due date, OCI evenly apportioned ATO earnings over the employer-reported period, calculated any debt, issued a debt notice, and normal recovery commenced.
+    source_refs: [OMB-OCI-2017#OMB17-1.17-1.29, RRC-MAP-4B-2023#MAP-4B-29-36]
+    provenance: documented
+    axes: [historical_process, evidentiary_support]
+  - claim_id: RB-CLAIM-004
+    text: A responding customer could correct or add employer, amount, and pay-period information; system errors could route to a compliance officer for manual assessment.
+    source_refs: [OMB-OCI-2017#OMB17-1.17-1.29, RRC-MAP-4B-2023#MAP-4B-7-17]
+    provenance: documented
+    axes: [historical_process]
+  - claim_id: RB-CLAIM-005
+    text: New information could trigger reassessment, and internal review remained available.
+    source_refs: [OMB-OCI-2017#OMB17-1.17-1.29]
+    provenance: documented
+    axes: [historical_process, restoration]
+  - claim_id: RB-CLAIM-006
+    text: By the April 2017 report, changes included direct-code access, clearer contact routes, registered-mail and phone follow-up, a 28-day response period measured from receipt, signposted extensions, and more manual intervention.
+    source_refs: [OMB-OCI-2017#OMB17-1.30-1.46]
+    provenance: documented
+    axes: [historical_process]
+  - claim_id: RB-CLAIM-007
+    text: The enhanced bundle included manual intervention for disputes, complex circumstances, and lack of access to payslips or bank statements, plus a bank-statement option.
+    source_refs: [OMB-OCI-2017#OMB17-1.30-1.46]
+    provenance: documented
+    axes: [historical_process, evidence_access]
+  - claim_id: RB-CLAIM-008
+    text: The enhanced bundle withheld debt-collector referral after nonresponse until the agency was satisfied the person had received the notice and was ignoring it.
+    source_refs: [OMB-OCI-2017#OMB17-1.30-1.46]
+    provenance: attributed_agency_statement
+    axes: [historical_process, recovery]
+  - claim_id: RB-CLAIM-009
+    text: The Royal Commission recommended clear review paths, inspectable automated-decision rules, and stronger monitoring and audit.
+    source_refs: [RRC-REPORT-2023#RRC-17-1, RRC-REPORT-2023#RRC-17-2]
+    provenance: documented
+    axes: [governance]
+  - claim_id: RB-CLAIM-010
+    text: The historical sources do not provide empirical queue-capacity, service-time, engagement-probability, or evidence-retrieval distributions suitable for numeric reconstruction.
+    source_refs: [OMB-OCI-2017, OMB-IMPLEMENTATION-2019, RRC-MAP-4B-2023]
+    provenance: inferred
+    axes: [claim_limit]
+
+prohibited_claims:
+  - Historical queue and service parameters are measured by this packet.
+  - The simulation independently determines whether a historical debt was lawful.
+  - R-OCI-Enhanced is the same process as later EIC or CUPI.
+  - Income apportionment findings are interchangeable with Robodebt income averaging findings.
+  - Robodebt establishes strategic inducibility, observability, repeatability, benefit, or adversarial exploitation.
+  - Services Australia's current AI strategy shows that a current AI system reproduces Robodebt.

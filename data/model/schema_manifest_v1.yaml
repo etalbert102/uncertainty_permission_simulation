@@ -1,0 +1,1843 @@
+manifest_id: UPS-SCHEMA-MANIFEST
+manifest_version: 1
+status: draft_preimplementation
+owner_id: UPS-SCHEMA-OWNER-1
+
+canonicalization:
+  canonicalization_id: UPS-CANONICAL-JSON
+  canonicalization_version: 1
+  specification: docs/FORMAL_MODEL.md
+  content_hash: sha256_lower_hex
+  hash_input: [meta, payload]
+  forbidden_persisted_values: [binary_float, nan, positive_infinity, negative_infinity, negative_zero]
+
+closed_event_type_ids:
+  - CASE_ARRIVAL
+  - SOURCE_EVIDENCE_INGESTED
+  - NOTICE_SENT
+  - NOTICE_DELIVERED
+  - NOTICE_FAILED
+  - ACCESS_ATTEMPTED
+  - SUBJECT_RESPONDED
+  - SUBJECT_NONRESPONSE
+  - EXTENSION_REQUESTED
+  - EXTENSION_GRANTED
+  - REPRESENTATION_APPLIED
+  - REPRESENTATION_SURFACED
+  - ROUTING_COMPLETED
+  - EVIDENCE_REQUESTED
+  - EVIDENCE_SUBMITTED
+  - EVIDENCE_ACCEPTED
+  - EVIDENCE_REJECTED
+  - EXTERNAL_EVIDENCE_RETURNED
+  - REVIEW_QUEUED
+  - REVIEW_STARTED
+  - REVIEW_COMPLETED
+  - EXTERNAL_AUTHORIZATION_RECORDED
+  - DEADLINE_REACHED
+  - ACTION_COMPUTED
+  - PROGRESSION_EXECUTED
+  - EXTERNAL_CONSEQUENCE_STARTED
+  - EXTERNAL_CONSEQUENCE_UPDATED
+  - CORRECTION_REQUESTED
+  - RESTORATION_EXECUTED
+  - CASE_CLOSED
+
+closed_property_or_helper_ids:
+  - F0
+  - F0.1
+  - F0.2
+  - F0.3
+  - F0.4
+  - F1
+  - F2
+  - F3
+  - F4
+  - F5
+  - GateSafe
+  - ReviewEffective
+  - DecisionServiceEffective
+  - TraceSupportSafe
+  - StructurallyContestable
+  - ContestabilityProspective
+  - ContestabilityRealized
+  - CorrectionUptake
+  - F5Prospective
+  - F5Realized
+  - RestorationComplete
+
+closed_diagnostic_categories:
+  - schema_integrity
+  - applicability
+  - input_completeness
+  - specification_validity
+  - status_aggregation
+  - evidence_fidelity
+  - information_order
+  - action_semantics
+  - robust_permission
+  - causal_intervention
+  - event_execution
+  - gate_safety
+  - review_effectiveness
+  - surfacing
+  - contestability
+  - restoration
+  - process_profile
+  - scenario_validity
+  - random_stream
+  - run_integrity
+  - metric_provenance
+  - fixture_integrity
+
+closed_diagnostic_owning_layers:
+  - schemas
+  - artifact_layer
+  - evidence_model
+  - formal_evaluator
+  - action_semantics
+  - process_model
+  - simulator
+  - fixture_qa
+  - process_application
+  - scenario_generator
+  - random_streams
+  - metrics
+
+closed_run_status_ids:
+  - pending
+  - running
+  - completed
+  - invalid
+  - failed
+  - interrupted
+
+closed_scenario_validity_status_ids:
+  - valid
+  - invalid
+
+closed_protocol_application_level_ids:
+  - document_audit
+  - bounded_deterministic_trace
+  - dynamic_system_simulation
+
+closed_report_evaluation_state_ids:
+  - assessed
+  - omitted_by_claim_limit
+
+closed_diagnostic_codes:
+  - SCHEMA_MANIFEST_DRIFT
+  - SCHEMA_PARTIAL_EMBEDDED_RECORD
+  - SCHEMA_ENVELOPE_AUTHORITY_DUPLICATED
+  - SCHEMA_EXECUTABLE_RULE_INVALID
+  - SCHEMA_DIAGNOSTIC_INCOMPLETE
+  - SCHEMA_REFERENCE_UNRESOLVED
+  - SCHEMA_REFERENCE_CYCLE
+  - SCHEMA_CANONICALIZATION_INVALID
+  - FM_EVIDENCE_ORDER_CIRCULAR
+  - FM_REFINEMENT_SET_MISSING
+  - FM_REFINEMENT_COVERAGE_UNPROVEN
+  - FM_REFINEMENT_MODE_UNSOUND_FOR_CONCLUSION
+  - FM_REFINEMENT_WITNESS_INVALID
+  - FM_REFINEMENT_INCOMPARABLE
+  - FM_APPLICABILITY_UNDETERMINED
+  - FM_REQUIRED_INPUT_MISSING
+  - FM_EVALUATION_SPEC_INVALID
+  - FM_STATUS_AGGREGATION_INVALID
+  - FM_ACTION_SUPPORT_MISSING
+  - FM_CLAIM_UNSUPPORTED
+  - FM_CLAIM_SUPPORT_VACUOUS
+  - FM_LINEAGE_INCOMPLETE
+  - FM_EVIDENCE_TYPE_COLLAPSED
+  - FM_POLICY_NOT_INSPECTABLE
+  - FM_ACTION_UNTYPED
+  - FM_ACTION_IDENTITY_AMBIGUOUS
+  - FM_ACTION_SET_QUERY_UNRESOLVED
+  - FM_BASELINE_MISSING
+  - FM_BASELINE_SELECTION_UNSUPPORTED
+  - FM_RULE_NOT_TOTAL
+  - FM_ROBUST_PERMISSION_VIOLATION
+  - FM_TRACE_SUPPORT_STALE
+  - FM_UNSAFE_FALLBACK_ACTION
+  - FM_CAUSAL_HOLD_INVALID
+  - FM_CAUSAL_TRACE_MISALIGNED
+  - FM_INTERVENTION_UNIT_INVALID
+  - SIM_SYSTEM_STATE_INCOMPLETE
+  - SIM_EVENT_ORDER_INVALID
+  - SIM_EVENT_LIVELOCK
+  - SIM_EVENT_BOUND_EXCEEDED
+  - FM_REQUIRED_GATE_MISSING
+  - FM_GATE_FAIL_OPEN
+  - FM_REVIEW_EVIDENCE_MISSING
+  - FM_REVIEW_AUTHORITY_MISSING
+  - FM_REVIEW_LATE
+  - FM_REVIEW_UNRECORDED
+  - FM_REVIEW_ACTION_MISMATCH
+  - FM_REVIEW_VERSION_STALE
+  - FM_REVIEW_ACTION_NOT_POST_AT_EXECUTION
+  - FM_REVIEW_ACTION_UNSUPPORTED_AT_EXECUTION
+  - FM_MATERIALITY_SOURCE_MISSING
+  - FM_SEMANTIC_CORRESPONDENCE_INVALID
+  - FM_OPERATIONAL_MATERIALITY_OMISSION
+  - FM_MATERIAL_ITEM_UNSURFACED
+  - FM_CONTEST_PATH_UNREACHABLE
+  - FM_CONTEST_PATH_INFEASIBLE
+  - FM_CONTEST_RELIABILITY_BELOW_THRESHOLD
+  - FM_CONTEST_INTERVAL_INCONCLUSIVE
+  - FM_EVALUATION_HORIZON_PENDING
+  - FM_RESTORATION_PARTIAL
+  - FM_AUTHORITY_STATUS_UNASSESSABLE
+  - P0_HELD_INPUT_MISMATCH
+  - P0_LAYER_ACCESS_VIOLATION
+  - P0_MODEL_POLICY_CONTAMINATION
+  - P0_NONDETERMINISTIC_REPLAY
+  - P0_ORACLE_LEAK
+  - P0_TEXT_IDENTITY_LEAK
+  - P0_TRANSFORM_DERIVATION_FAILURE
+  - P0_RULE_MISMATCH
+  - P0_RULE_NOT_TOTAL
+  - P0_EXPECTED_CONTRAST_MISSING
+  - P0_SEMANTIC_NULL_CHANGED
+  - P0_ROUTING_CONTROL_CHANGED
+  - P0_SEMANTIC_CORRESPONDENCE_INVALID
+  - P0_REVIEW_OVERCLAIM
+  - P0_RANDOMNESS_USED
+  - PROCESS_DEADLINE_INVALID
+  - PROCESS_QUEUE_INVALID
+  - PROCESS_STAGE_INVALID
+  - PROFILE_PERIOD_BLEND
+  - PROFILE_TEMPORAL_SCOPE_INVALID
+  - PROFILE_APPLICATION_MAPPING_INVALID
+  - PROFILE_POLICY_PROCESS_OVERLAP
+  - PROFILE_PARAMETER_CONFLICT
+  - PROFILE_UNSUPPORTED_PARAMETER
+  - PROFILE_CASE_LEAKAGE
+  - RANDOM_DRAW_KEY_INVALID
+  - SCENARIO_INVALID
+  - SCENARIO_PARAMETER_INVALID
+  - SCENARIO_CONFIGURATION_INCOMPLETE
+  - CASE_DRAW_BINDING_INVALID
+  - RUN_INCOMPLETE
+  - METRIC_PROVENANCE_INVALID
+
+record_ref:
+  fields:
+    object_id: {type: string, required: true}
+    object_version: {type: positive_integer, required: true}
+  additional_fields: forbidden
+
+record_meta:
+  fields:
+    object_id: {type: string, required: true}
+    object_version: {type: positive_integer, required: true}
+    schema_id: {type: string, required: true, version_suffix_forbidden: true}
+    schema_version: {type: positive_integer, required: true}
+    canonicalization_id: {type: string, const: UPS-CANONICAL-JSON}
+    canonicalization_version: {type: positive_integer, const: 1}
+    owner_id: {type: string, required: true}
+    provenance_status:
+      type: enum
+      values: [documented, hypothetical, simulated, derived]
+    source_basis:
+      type: enum
+      values: [versioned_sources, synthetic_no_external_source]
+    source_refs: {type: list_record_ref, required: true}
+  additional_fields: forbidden
+  set_semantics_paths: [/source_refs]
+  invariants:
+    - versioned_sources_requires_nonempty_source_refs
+    - synthetic_no_external_source_requires_empty_source_refs
+    - documented_and_derived_require_versioned_sources
+    - object_id_and_version_resolve_to_one_content_hash
+
+stored_record:
+  fields:
+    meta: {type: record_meta, required: true}
+    payload: {type: discriminated_payload, required: true}
+    content_hash: {type: sha256_lower_hex, required: true}
+  additional_fields: forbidden
+  invariants:
+    - payload_domain_id_equals_meta_object_id
+    - payload_cannot_repeat_envelope_authority_fields
+    - payload_validates_before_hashing
+    - content_hash_excluded_from_hash_input
+
+auxiliary_schema_families:
+  formal_model.boolean_predicate:
+    schema_version: 1
+    fields:
+      value: boolean
+  formal_model.assessment_value:
+    schema_version: 1
+    discriminators: [boolean, decimal, id_set, interval]
+  formal_model.typed_value:
+    schema_version: 1
+    discriminator_field: kind
+    variants:
+      null: {fields: {}}
+      boolean: {fields: {value: boolean}}
+      integer: {fields: {value: integer}}
+      decimal: {fields: {value: normalized_decimal_string, unit_id: nullable_string}}
+      string: {fields: {value: string}}
+      id: {fields: {value: string}}
+      record_ref: {fields: {value: record_ref}}
+      list: {fields: {semantics: {enum: [ordered, set]}, values: typed_value_list}}
+      mapping: {fields: {entries: mapping_string_to_typed_value}}
+  formal_model.rule_input_spec:
+    schema_version: 1
+    fields:
+      role_id: string
+      accepted_schema_refs: list_schema_ref
+      cardinality: {enum: [one, optional, many]}
+    set_semantics_paths: [/accepted_schema_refs]
+  formal_model.input_field_binding:
+    schema_version: 1
+    fields:
+      input_role_id: string
+      field_path: json_pointer
+  formal_model.evaluation_input_binding:
+    schema_version: 1
+    fields:
+      role_id: string
+      record_ref: record_ref
+  formal_model.assessment_component_binding:
+    schema_version: 1
+    fields:
+      role_id: string
+      relation: {enum: [conjunctive_required, alternative_sufficient, contextual]}
+      assessment_ref: record_ref
+  formal_model.event_rule_execution:
+    schema_version: 1
+    fields:
+      execution_role: {enum: [transformation, decision, transition, applicability, materiality, support, intervention, aggregation]}
+      rule_ref: record_ref
+      input_bindings: list_evaluation_input_binding
+    set_semantics_paths: [/input_bindings]
+  formal_model.expected_assessment_spec:
+    schema_version: 1
+    fields:
+      property_or_helper_id: closed_property_or_helper_id
+      expected_status: {enum: [pass, fail, unassessable, not_applicable]}
+      expected_completeness: {enum: [complete, incomplete, invalid]}
+      expected_value: nullable_assessment_value
+      required_diagnostic_codes: list_closed_diagnostic_code
+      scope_declaration_ref: nullable_record_ref
+      applicability_rule_ref: nullable_record_ref
+      false_antecedent_required: boolean
+    set_semantics_paths: [/required_diagnostic_codes]
+
+closed_rule_implementations:
+  p0_preserve_projection:
+    version: 1
+    kind: transformation
+    code_artifact_hash: sha256_lower_hex
+    input_roles:
+      model_output: {cardinality: one, accepted_schema_refs: [{schema_id: P0-SCHEMA-MODEL-OUTPUT, schema_version: 1}]}
+    output_schema_refs: [{schema_id: P0-SCHEMA-PRESERVE, schema_version: 1}]
+    parameters:
+      source_field_paths: {type: list_input_field_binding, required: true}
+      projection_fact_set_by_evidence_id: {type: mapping_string_to_record_ref, required: true}
+      alternative_semantic_type: {type: string, required: true}
+      polarity: {type: string, required: true}
+      uncertainty_status: {type: string, required: true}
+  p0_threshold_broad_fallback:
+    version: 1
+    kind: transformation
+    code_artifact_hash: sha256_lower_hex
+    input_roles:
+      model_output: {cardinality: one, accepted_schema_refs: [{schema_id: P0-SCHEMA-MODEL-OUTPUT, schema_version: 1}]}
+    output_schema_refs: [{schema_id: P0-SCHEMA-FALLBACK, schema_version: 1}]
+    parameters:
+      confidence_path: {type: input_field_binding, required: true}
+      threshold_path: {type: input_field_binding, required: true}
+      comparator: {type: enum, values: [less_than], required: true}
+      output_path: {type: json_pointer, required: true}
+  p0_visible_material_route:
+    version: 1
+    kind: routing
+    code_artifact_hash: sha256_lower_hex
+    input_roles:
+      representation: {cardinality: one, accepted_schema_refs: [{schema_id: P0-SCHEMA-PRESERVE, schema_version: 1}, {schema_id: P0-SCHEMA-FALLBACK, schema_version: 1}]}
+      policy: {cardinality: one, accepted_schema_refs: [{schema_id: P0-SCHEMA-POLICY, schema_version: 1}]}
+      process_state: {cardinality: one, accepted_schema_refs: [{schema_id: P0-SCHEMA-PROCESS, schema_version: 1}]}
+      clock: {cardinality: one, accepted_schema_refs: [{schema_id: P0-SCHEMA-CLOCK, schema_version: 1}]}
+    output_schema_refs: [{schema_id: formal_model.disposition, schema_version: 1}]
+    parameters:
+      policy_ref: {type: record_ref, required: true}
+      broad_class_id: {type: string, required: true}
+      action_refs_by_case_id: {type: mapping_string_to_record_ref_list, required: true}
+      constructors: {type: enum_set, values: [enhanced, routine, unassessable], required: true}
+  p0_low_resolution_control_route:
+    version: 1
+    kind: routing
+    code_artifact_hash: sha256_lower_hex
+    input_roles:
+      representation: {cardinality: one, accepted_schema_refs: [{schema_id: P0-SCHEMA-PRESERVE, schema_version: 1}, {schema_id: P0-SCHEMA-FALLBACK, schema_version: 1}]}
+      case: {cardinality: one, accepted_schema_refs: [{schema_id: P0-SCHEMA-CASE, schema_version: 1}]}
+      process_state: {cardinality: one, accepted_schema_refs: [{schema_id: P0-SCHEMA-PROCESS, schema_version: 1}]}
+      clock: {cardinality: one, accepted_schema_refs: [{schema_id: P0-SCHEMA-CLOCK, schema_version: 1}]}
+    output_schema_refs: [{schema_id: formal_model.disposition, schema_version: 1}]
+    parameters:
+      case_field_path: {type: input_field_binding, required: true}
+      action_refs_by_case_id: {type: mapping_string_to_record_ref_list, required: true}
+      constructors: {type: enum_set, values: [enhanced, routine, unassessable], required: true}
+  constant_true:
+    version: 1
+    kind: applicability
+    code_artifact_hash: sha256_lower_hex
+    input_roles:
+      representation: {cardinality: one, accepted_schema_refs: [{schema_id: P0-SCHEMA-PRESERVE, schema_version: 1}, {schema_id: P0-SCHEMA-FALLBACK, schema_version: 1}]}
+    output_schema_refs: [{schema_id: formal_model.boolean_predicate, schema_version: 1}]
+    parameters: {}
+  any_action_direction_in_disposition_set:
+    version: 1
+    kind: applicability
+    code_artifact_hash: sha256_lower_hex
+    input_roles:
+      disposition: {cardinality: one, accepted_schema_refs: [{schema_id: formal_model.disposition, schema_version: 1}]}
+      actions: {cardinality: many, accepted_schema_refs: [{schema_id: P0-SCHEMA-ACTION, schema_version: 1}]}
+    output_schema_refs: [{schema_id: formal_model.boolean_predicate, schema_version: 1}]
+    parameters:
+      set_path: {type: input_field_binding, required: true}
+      required_direction: {type: enum, values: [progression, constraint, information, restoration], required: true}
+  declared_status_aggregation:
+    version: 1
+    kind: aggregation
+    code_artifact_hash: sha256_lower_hex
+    input_roles:
+      components: {cardinality: many, accepted_schema_refs: [{schema_id: P0-SCHEMA-ASSESSMENT, schema_version: 1}]}
+    output_schema_refs: [{schema_id: P0-SCHEMA-ASSESSMENT, schema_version: 1}]
+    parameters:
+      aggregation_mode: {type: enum, values: [any_fail_conjunctive, any_pass_disjunctive, threshold], required: true}
+      threshold: {type: nullable_normalized_decimal_string, required: true}
+  material_item_applies_to_output_action:
+    version: 1
+    kind: applicability
+    code_artifact_hash: sha256_lower_hex
+    input_roles:
+      model_output: {cardinality: one, accepted_schema_refs: [{schema_id: P0-SCHEMA-MODEL-OUTPUT, schema_version: 1}]}
+      material_item: {cardinality: one, accepted_schema_refs: [{schema_id: P0-SCHEMA-MATERIAL-ITEM, schema_version: 1}]}
+      affected_action: {cardinality: one, accepted_schema_refs: [{schema_id: P0-SCHEMA-ACTION, schema_version: 1}]}
+    output_schema_refs: [{schema_id: formal_model.boolean_predicate, schema_version: 1}]
+    parameters:
+      material_item_ref: {type: record_ref, required: true}
+      output_path: {type: input_field_binding, required: true}
+      required_id: {type: string, required: true}
+      affected_action_ref: {type: record_ref, required: true}
+  boolean_input_is_true:
+    version: 1
+    kind: applicability
+    code_artifact_hash: sha256_lower_hex
+    input_roles:
+      state: {cardinality: one, accepted_schema_refs: [{schema_id: formal_model.gate_state, schema_version: 1}]}
+    output_schema_refs: [{schema_id: formal_model.boolean_predicate, schema_version: 1}]
+    parameters:
+      input_field: {type: input_field_binding, required: true}
+  any_boolean_input_is_true:
+    version: 1
+    kind: applicability
+    code_artifact_hash: sha256_lower_hex
+    input_roles:
+      state: {cardinality: one, accepted_schema_refs: [{schema_id: formal_model.gate_state, schema_version: 1}]}
+    output_schema_refs: [{schema_id: formal_model.boolean_predicate, schema_version: 1}]
+    parameters:
+      input_fields: {type: list_input_field_binding, required: true}
+  exact_semantic_fields:
+    version: 1
+    kind: correspondence
+    code_artifact_hash: sha256_lower_hex
+    input_roles:
+      surfaced_claim: {cardinality: one, accepted_schema_refs: [{schema_id: P0-SCHEMA-CLAIM, schema_version: 1}]}
+      material_item: {cardinality: one, accepted_schema_refs: [{schema_id: P0-SCHEMA-MATERIAL-ITEM, schema_version: 1}]}
+      required_meaning: {cardinality: one, accepted_schema_refs: [{schema_id: P0-SCHEMA-REQUIRED-MEANING, schema_version: 1}]}
+    output_schema_refs: [{schema_id: formal_model.boolean_predicate, schema_version: 1}]
+    parameters:
+      compared_fields: {type: string_set, required: true}
+      required_meaning_ref: {type: record_ref, required: true}
+  event_strictly_before_boundary:
+    version: 1
+    kind: deadline
+    code_artifact_hash: sha256_lower_hex
+    input_roles:
+      events: {cardinality: many, accepted_schema_refs: [{schema_id: event, schema_version: 1}]}
+      clock: {cardinality: one, accepted_schema_refs: [{schema_id: P0-SCHEMA-CLOCK, schema_version: 1}]}
+    output_schema_refs: [{schema_id: formal_model.boolean_predicate, schema_version: 1}]
+    parameters:
+      surfaced_event_type: {type: closed_event_type_id, required: true}
+      boundary_event_type: {type: closed_event_type_id, required: true}
+      clock_ref: {type: record_ref, required: true}
+      boundary_instant_id: {type: string, required: true}
+  source_anchored_materiality_membership:
+    version: 1
+    kind: materiality
+    code_artifact_hash: sha256_lower_hex
+    input_roles:
+      evidence_state: {cardinality: one, accepted_schema_refs: [{schema_id: formal_model.evidence_state, schema_version: 1}]}
+      process_state: {cardinality: one, accepted_schema_refs: [{schema_id: P0-SCHEMA-PROCESS, schema_version: 1}]}
+      evaluation_specification: {cardinality: one, accepted_schema_refs: [{schema_id: P0-SCHEMA-EVALUATION, schema_version: 1}]}
+    output_schema_refs: [{schema_id: formal_model.boolean_predicate, schema_version: 1}]
+    parameters:
+      material_item_refs: {type: list_record_ref, required: true}
+  action_support_membership:
+    version: 1
+    kind: support
+    code_artifact_hash: sha256_lower_hex
+    input_roles:
+      action: {cardinality: one, accepted_schema_refs: [{schema_id: P0-SCHEMA-ACTION, schema_version: 1}]}
+      evidence_state: {cardinality: one, accepted_schema_refs: [{schema_id: formal_model.evidence_state, schema_version: 1}]}
+      process_state: {cardinality: one, accepted_schema_refs: [{schema_id: P0-SCHEMA-PROCESS, schema_version: 1}]}
+      clock: {cardinality: one, accepted_schema_refs: [{schema_id: P0-SCHEMA-CLOCK, schema_version: 1}]}
+      evaluation_specification: {cardinality: one, accepted_schema_refs: [{schema_id: P0-SCHEMA-EVALUATION, schema_version: 1}]}
+    output_schema_refs: [{schema_id: formal_model.boolean_predicate, schema_version: 1}]
+    parameters:
+      support_condition_refs: {type: list_record_ref, required: true}
+  execute_action_intervention:
+    version: 1
+    kind: intervention
+    code_artifact_hash: sha256_lower_hex
+    input_roles:
+      initial_system_state: {cardinality: one, accepted_schema_refs: [{schema_id: simulation.system_state, schema_version: 1}]}
+      focal_action: {cardinality: one, accepted_schema_refs: [{schema_id: P0-SCHEMA-ACTION, schema_version: 1}]}
+      scenario: {cardinality: one, accepted_schema_refs: [{schema_id: scenario, schema_version: 1}]}
+      keyed_draws: {cardinality: many, accepted_schema_refs: [{schema_id: scenario.keyed_draw, schema_version: 1}]}
+    output_schema_refs: [{schema_id: simulation.system_trace, schema_version: 1}]
+    parameters:
+      intervention_unit: {type: enum, values: [case_local, cohort_system], required: true}
+  hold_action_intervention:
+    version: 1
+    kind: intervention
+    code_artifact_hash: sha256_lower_hex
+    input_roles:
+      initial_system_state: {cardinality: one, accepted_schema_refs: [{schema_id: simulation.system_state, schema_version: 1}]}
+      focal_action: {cardinality: one, accepted_schema_refs: [{schema_id: P0-SCHEMA-ACTION, schema_version: 1}]}
+      scenario: {cardinality: one, accepted_schema_refs: [{schema_id: scenario, schema_version: 1}]}
+      keyed_draws: {cardinality: many, accepted_schema_refs: [{schema_id: scenario.keyed_draw, schema_version: 1}]}
+    output_schema_refs: [{schema_id: simulation.system_trace, schema_version: 1}]
+    parameters:
+      intervention_unit: {type: enum, values: [case_local, cohort_system], required: true}
+
+payload_kinds:
+  Claim:
+    discriminator: {field_kind: claim}
+    schema: {schema_id: P0-SCHEMA-CLAIM, schema_version: 1}
+    domain_id_field: claim_id
+    owner: transformation
+    source_basis: versioned_sources
+    fields:
+      claim_id: string
+      field_name: string
+      value: typed_value
+      evidence_type: {enum: [observed, derived, imputed, disputed, missing]}
+      transformation_ref: record_ref
+      assumption_refs: list_record_ref
+      compatible_state_ref: record_ref
+      visibility: string_list
+      semantic_id: nullable_string
+      semantic_type: nullable_string
+      semantic_scope_ref: nullable_record_ref
+      polarity: nullable_string
+      uncertainty_status: nullable_string
+    set_semantics_paths: [/assumption_refs, /visibility]
+    gate: typed_claim_and_lineage_regression
+    diagnostic: FM_LINEAGE_INCOMPLETE
+
+  UntypedField:
+    discriminator: {field_kind: untyped}
+    schema: {schema_id: P0-SCHEMA-UNTYPED-FIELD, schema_version: 1}
+    domain_id_field: field_id
+    owner: transformation
+    source_basis: versioned_sources
+    fields:
+      field_id: string
+      field_name: string
+      value: typed_value
+      visibility: string_list
+    set_semantics_paths: [/visibility]
+    gate: untyped_field_remains_diagnosable
+    diagnostic: FM_EVIDENCE_TYPE_COLLAPSED
+
+  Representation:
+    discriminator: {payload_kind: representation}
+    schema_variants:
+      - {schema_id: P0-SCHEMA-PRESERVE, schema_version: 1}
+      - {schema_id: P0-SCHEMA-FALLBACK, schema_version: 1}
+    domain_id_field: representation_id
+    owner: transformation
+    source_basis: versioned_sources
+    fields:
+      representation_id: string
+      field_refs: list_record_ref
+      provenance_visible: boolean
+    set_semantics_paths: [/field_refs]
+    reference_targets: {field_refs: [Claim, UntypedField]}
+    gate: reference_only_representation_fields
+    diagnostic: SCHEMA_PARTIAL_EMBEDDED_RECORD
+
+  CompatibleStateSet:
+    discriminator: {payload_kind: compatible_state_set}
+    schema: {schema_id: P0-SCHEMA-COMPATIBLE-STATE, schema_version: 1}
+    domain_id_field: compatible_state_set_id
+    owner: evidence_model
+    source_basis: versioned_sources
+    fields:
+      compatible_state_set_id: string
+      evidence_ref: record_ref
+      denotation_mode: {enum: [finite_exact, symbolic_exact]}
+      state_refs: list_record_ref
+      projection_fact_set_ref: record_ref
+      taxonomy_ref: nullable_record_ref
+    set_semantics_paths: [/state_refs]
+    gate: compatible_state_denotation_complete
+    diagnostic: FM_REQUIRED_INPUT_MISSING
+
+  CompatibleState:
+    discriminator: {payload_kind: compatible_state}
+    schema: {schema_id: P0-SCHEMA-STATE, schema_version: 1}
+    domain_id_field: state_id
+    owner: evidence_model
+    source_basis: versioned_sources
+    fields:
+      state_id: string
+      evidence_ref: record_ref
+      latent_object_type_id: string
+    set_semantics_paths: []
+    gate: compatible_state_evidence_binding
+    diagnostic: FM_CLAIM_SUPPORT_VACUOUS
+
+  ProjectionFactSet:
+    discriminator: {payload_kind: projection_fact_set}
+    schema: {schema_id: P0-SCHEMA-PROJECTION-FACT-SET, schema_version: 1}
+    domain_id_field: projection_fact_set_id
+    owner: evidence_model
+    source_basis: versioned_sources
+    fields:
+      projection_fact_set_id: string
+      evidence_ref: record_ref
+      facts: list_projection_fact
+    set_semantics_paths: [/facts/*/true_in_state_refs]
+    sequence_paths: [/facts]
+    gate: direct_projection_entailment
+    diagnostic: FM_CLAIM_UNSUPPORTED
+
+  ExecutableRule:
+    discriminator: {payload_kind: executable_rule}
+    schema: {schema_id: P0-SCHEMA-EXECUTABLE-RULE, schema_version: 1}
+    domain_id_field: rule_id
+    owner: rule_owner
+    source_basis_rule: provenance_dependent
+    fields:
+      rule_id: string
+      rule_kind: {enum: [transformation, routing, applicability, materiality, correspondence, deadline, support, intervention, aggregation]}
+      implementation_id: closed_rule_implementation_id
+      implementation_version: positive_integer
+      parameters: parameter_binding_list
+      input_role_specs: list_rule_input_spec
+      output_schema_ref: schema_ref
+    set_semantics_paths: [/input_role_specs, /input_role_specs/*/accepted_schema_refs]
+    sequence_paths: [/parameters]
+    gate: closed_rule_signature
+    diagnostic: SCHEMA_EXECUTABLE_RULE_INVALID
+
+  ScopeDeclaration:
+    discriminator: {payload_kind: scope_declaration}
+    schema: {schema_id: P0-SCHEMA-SCOPE-DECLARATION, schema_version: 1}
+    domain_id_field: scope_declaration_id
+    owner: evaluation_specification
+    source_basis: versioned_sources
+    fields:
+      scope_declaration_id: string
+      property_id: string
+      evaluation_unit_kind: string
+      mode: {enum: [included, included_conditional, excluded, undetermined]}
+      applicability_rule_ref: nullable_record_ref
+      exclusion_reason_code: nullable_string
+      undetermined_field_ids: string_list
+    set_semantics_paths: [/undetermined_field_ids]
+    gate: scope_mode_field_consistency
+    diagnostic: FM_APPLICABILITY_UNDETERMINED
+
+  ApplicabilitySpecification:
+    discriminator: {payload_kind: applicability_specification}
+    schema: {schema_id: P0-SCHEMA-APPLICABILITY, schema_version: 1}
+    domain_id_field: applicability_specification_id
+    owner: evaluation_specification
+    source_basis: versioned_sources
+    fields:
+      applicability_specification_id: string
+      scope_declaration_refs: list_record_ref
+    set_semantics_paths: [/scope_declaration_refs]
+    gate: one_scope_declaration_per_property_and_helper
+    diagnostic: FM_APPLICABILITY_UNDETERMINED
+
+  FalseAntecedent:
+    discriminator: {payload_kind: false_antecedent}
+    schema: {schema_id: P0-SCHEMA-FALSE-ANTECEDENT, schema_version: 1}
+    domain_id_field: false_antecedent_id
+    owner: evaluator
+    source_basis: versioned_sources
+    fields:
+      false_antecedent_id: string
+      property_or_helper_id: closed_property_or_helper_id
+      applicability_rule_ref: record_ref
+      evaluation_input_bindings: list_evaluation_input_binding
+      observed_value: assessment_value
+    set_semantics_paths: [/evaluation_input_bindings]
+    gate: false_antecedent_replay
+    diagnostic: FM_STATUS_AGGREGATION_INVALID
+
+  Assessment:
+    discriminator: {payload_kind: assessment}
+    schema: {schema_id: P0-SCHEMA-ASSESSMENT, schema_version: 1}
+    domain_id_field: assessment_id
+    owner: evaluator
+    source_basis: versioned_sources
+    fields:
+      assessment_id: string
+      property_or_helper_id: closed_property_or_helper_id
+      evaluation_unit_ref: record_ref
+      status: {enum: [pass, fail, unassessable, not_applicable]}
+      completeness: {enum: [complete, incomplete, invalid]}
+      value: nullable_assessment_value
+      scope_declaration_ref: nullable_record_ref
+      applicability_rule_ref: nullable_record_ref
+      diagnostic_refs: list_record_ref
+      component_bindings: list_assessment_component_binding
+      aggregation_rule_ref: nullable_record_ref
+      false_antecedent_ref: nullable_record_ref
+      missing_or_invalid_fields: string_list
+      evaluation_input_bindings: list_evaluation_input_binding
+    set_semantics_paths: [/diagnostic_refs, /component_bindings, /missing_or_invalid_fields, /evaluation_input_bindings]
+    gate: assessment_status_reference_closure
+    diagnostic: FM_STATUS_AGGREGATION_INVALID
+
+  Diagnostic:
+    discriminator: {payload_kind: diagnostic}
+    schema: {schema_id: P0-SCHEMA-DIAGNOSTIC, schema_version: 1}
+    domain_id_field: diagnostic_id
+    owner: evaluator
+    source_basis: versioned_sources
+    fields:
+      diagnostic_id: string
+      code: closed_diagnostic_code
+      category: closed_diagnostic_category
+      owning_layer: closed_diagnostic_owning_layer
+      severity: {enum: [warning, blocking]}
+      property_or_helper_id: closed_property_or_helper_id
+      message_template_id: string
+      case_ref: nullable_record_ref
+      trace_ref: nullable_record_ref
+      action_refs: list_record_ref
+      context_refs: list_record_ref
+      expected_value: nullable_typed_diagnostic_value
+      observed_value: nullable_typed_diagnostic_value
+      artifact_path: string
+      suggested_next_action: string
+    set_semantics_paths: [/action_refs, /context_refs]
+    gate: diagnostic_context_complete
+    diagnostic: SCHEMA_DIAGNOSTIC_INCOMPLETE
+
+  Action:
+    discriminator: {payload_kind: action}
+    schema: {schema_id: P0-SCHEMA-ACTION, schema_version: 1}
+    domain_id_field: action_instance_id
+    owner: action_semantics
+    source_basis_rule: provenance_dependent
+    fields:
+      action_instance_id: string
+      action_type_id: string
+      actor_role_id: string
+      target_id: string
+      parameter_vector: typed_value
+      resource_commitment: typed_value
+      operational_or_external_consequence: typed_value
+      reversibility_window: typed_value
+      authorization_requirement: typed_value
+      source_rule_refs: list_record_ref
+      authority_direction: {enum: [progression, constraint, information, restoration]}
+    set_semantics_paths: [/source_rule_refs]
+    gate: canonical_action_identity
+    diagnostic: FM_ACTION_IDENTITY_AMBIGUOUS
+
+  Disposition:
+    discriminator: {payload_kind: disposition}
+    schema: {schema_id: formal_model.disposition, schema_version: 1}
+    domain_id_field: disposition_id
+    owner: policy
+    source_basis: versioned_sources
+    fields:
+      disposition_id: string
+      route: string
+      routing_reasons: string_list
+      automatic_action_refs: list_record_ref
+      post_review_action_refs: list_record_ref
+      selected_action_refs: list_record_ref
+      constraint_action_refs: list_record_ref
+      information_action_refs: list_record_ref
+      restoration_action_refs: list_record_ref
+      gate_requirements: list_gate_requirement
+      review_evidence_complete: boolean
+    set_semantics_paths: [/automatic_action_refs, /post_review_action_refs, /selected_action_refs, /constraint_action_refs, /information_action_refs, /restoration_action_refs]
+    sequence_paths: [/routing_reasons, /gate_requirements]
+    gate: total_disposition
+    diagnostic: FM_RULE_NOT_TOTAL
+
+  TraceSpecification:
+    discriminator: {payload_kind: trace_specification}
+    schema: {schema_id: P0-SCHEMA-TRACE-SPEC, schema_version: 1}
+    domain_id_field: trace_specification_id
+    owner: fixture_qa
+    source_basis: versioned_sources
+    fields:
+      trace_specification_id: string
+      case_ref: record_ref
+      model_output_ref: record_ref
+      transformation_ref: record_ref
+      routing_rule_ref: record_ref
+      held_input_bindings: list_evaluation_input_binding
+      random_draw_count: nonnegative_integer
+    set_semantics_paths: [/held_input_bindings]
+    gate: trace_specification_complete
+    diagnostic: P0_HELD_INPUT_MISMATCH
+
+  Trace:
+    discriminator: {payload_kind: trace}
+    schema: {schema_id: P0-SCHEMA-TRACE, schema_version: 1}
+    domain_id_field: trace_id
+    owner: simulator
+    source_basis: versioned_sources
+    fields:
+      trace_id: string
+      trace_specification_ref: record_ref
+      event_refs: list_record_ref
+      initial_state_ref: record_ref
+      final_state_ref: record_ref
+      final_disposition_ref: record_ref
+      random_draw_count: nonnegative_integer
+      held_bundle_hash: sha256_lower_hex
+      gate_state_refs: list_record_ref
+      review_state_refs: list_record_ref
+    set_semantics_paths: [/gate_state_refs, /review_state_refs]
+    sequence_paths: [/event_refs]
+    gate: trace_event_and_disposition_closure
+    diagnostic: P0_NONDETERMINISTIC_REPLAY
+
+  PreState:
+    discriminator: {payload_kind: pre_state}
+    schema: {schema_id: formal_model.pre_state, schema_version: 1}
+    domain_id_field: state_snapshot_id
+    owner: simulator
+    source_basis: versioned_sources
+    fields:
+      state_snapshot_id: string
+      case_ref: record_ref
+      evidence_refs: list_record_ref
+      representation_ref: record_ref
+      process_state_ref: record_ref
+      clock_ref: record_ref
+      policy_ref: record_ref
+      transformation_ref: record_ref
+      decision_rule_ref: record_ref
+      evaluation_spec_ref: record_ref
+      enabled_action_refs: list_record_ref
+      selected_action_refs: list_record_ref
+    set_semantics_paths: [/evidence_refs, /enabled_action_refs, /selected_action_refs]
+    gate: complete_state_snapshot
+    diagnostic: FM_TRACE_SUPPORT_STALE
+
+  PostState:
+    discriminator: {payload_kind: post_state}
+    schema: {schema_id: formal_model.post_state, schema_version: 1}
+    domain_id_field: state_snapshot_id
+    owner: simulator
+    source_basis: versioned_sources
+    fields:
+      state_snapshot_id: string
+      case_ref: record_ref
+      evidence_refs: list_record_ref
+      representation_ref: record_ref
+      process_state_ref: record_ref
+      clock_ref: record_ref
+      policy_ref: record_ref
+      transformation_ref: record_ref
+      decision_rule_ref: record_ref
+      evaluation_spec_ref: record_ref
+      enabled_action_refs: list_record_ref
+      selected_action_refs: list_record_ref
+    set_semantics_paths: [/evidence_refs, /enabled_action_refs, /selected_action_refs]
+    gate: complete_state_snapshot
+    diagnostic: FM_TRACE_SUPPORT_STALE
+
+  Event:
+    discriminator: {payload_kind: event}
+    schema: {schema_id: event, schema_version: 1}
+    domain_id_field: event_id
+    owner: simulator
+    source_basis: versioned_sources
+    fields:
+      event_id: string
+      trace_id: string
+      trace_kind: {enum: [case_trace, system_trace]}
+      trace_specification_ref: nullable_record_ref
+      event_type_id: closed_event_type_id
+      case_ref: nullable_record_ref
+      timestamp: simulation_time_string
+      priority: integer
+      priority_registry_ref: record_ref
+      microstep_rank: nonnegative_integer
+      transition_rank: nonnegative_integer
+      causal_event_key: string
+      root_event_key: string
+      descendant_path: string_list
+      actor_ref: record_ref_or_stable_role_id
+      action_refs: list_record_ref
+      representation_ref: nullable_record_ref
+      process_state_ref: nullable_record_ref
+      rule_executions: list_event_rule_execution
+      evidence_refs: list_record_ref
+      policy_ref: record_ref
+      intervention_pair_ref: nullable_record_ref
+      intervention_arm: {enum: [none, execute, hold]}
+      keyed_draw_refs: list_record_ref
+      pre_state_ref: record_ref
+      post_state_ref: record_ref
+    set_semantics_paths: [/action_refs, /rule_executions, /evidence_refs, /keyed_draw_refs]
+    sequence_paths: [/descendant_path]
+    gate: deterministic_event_order_and_state_capture
+    diagnostic: FM_TRACE_SUPPORT_STALE
+
+  EventPriorityRegistry:
+    discriminator: {payload_kind: event_priority_registry}
+    schema: {schema_id: simulation.event_priority_registry, schema_version: 1}
+    domain_id_field: event_priority_registry_id
+    owner: simulator_design
+    source_basis: versioned_sources
+    fields:
+      event_priority_registry_id: string
+      event_type_priorities: mapping_string_to_integer
+      collision_policy: {const: reject_duplicate_causal_key}
+      simultaneous_boundary_policy: string
+    set_semantics_paths: []
+    gate: total_event_priority_order
+    diagnostic: SIM_EVENT_ORDER_INVALID
+
+  GateState:
+    discriminator: {payload_kind: gate_state}
+    schema: {schema_id: formal_model.gate_state, schema_version: 1}
+    domain_id_field: gate_state_id
+    owner: process_model
+    source_basis: versioned_sources
+    fields:
+      gate_state_id: string
+      case_ref: record_ref
+      action_ref: record_ref
+      disposition_ref: record_ref
+      policy_ref: record_ref
+      gate_config_ref: nullable_record_ref
+      gate_required: boolean
+      gate_configured: boolean
+      gate_semantics: {enum: [none, fail_closed, fail_open]}
+      prerequisite_satisfied: boolean
+      effective_time: simulation_time_string
+    set_semantics_paths: []
+    gate: gate_state_fact_ownership
+    diagnostic: FM_REQUIRED_GATE_MISSING
+
+  ReviewState:
+    discriminator: {payload_kind: review_state}
+    schema: {schema_id: formal_model.review_state, schema_version: 1}
+    domain_id_field: review_state_id
+    owner: process_model
+    source_basis: versioned_sources
+    fields:
+      review_state_id: string
+      case_ref: record_ref
+      action_ref: record_ref
+      disposition_ref: record_ref
+      representation_ref: record_ref
+      resource_ref: record_ref
+      reviewer_role_id: nullable_string
+      authority_ref: nullable_record_ref
+      reviewer_available: boolean
+      reviewer_stopping_authority: boolean
+      review_evidence_complete: boolean
+      review_dependency_enforced: boolean
+      review_completion_status: {enum: [not_required, not_started, queued, started, completed, expired]}
+      review_decision_ref: nullable_record_ref
+      effective_time: simulation_time_string
+    set_semantics_paths: []
+    gate: review_state_fact_ownership
+    diagnostic: FM_REVIEW_UNRECORDED
+
+  ReviewDecision:
+    discriminator: {payload_kind: review_decision}
+    schema: {schema_id: formal_model.review_decision, schema_version: 1}
+    domain_id_field: review_decision_id
+    owner: process_model
+    source_basis: versioned_sources
+    fields:
+      review_decision_id: string
+      case_ref: record_ref
+      reviewer_role_id: string
+      authority_ref: record_ref
+      evidence_refs: list_record_ref
+      representation_ref: record_ref
+      policy_ref: record_ref
+      rule_ref: record_ref
+      authorized_action_refs: list_record_ref
+      authorization_conditions: typed_value
+      decision_time: simulation_time_string
+      expiry_time: nullable_simulation_time_string
+      decision: {enum: [authorize, deny, hold, request_evidence]}
+      reason_refs: list_record_ref
+      revalidation_refs: list_record_ref
+    set_semantics_paths: [/evidence_refs, /authorized_action_refs, /reason_refs, /revalidation_refs]
+    gate: review_exact_action_and_version_binding
+    diagnostic: FM_REVIEW_VERSION_STALE
+
+  QueueState:
+    discriminator: {payload_kind: queue_state}
+    schema: {schema_id: simulation.queue_state, schema_version: 1}
+    domain_id_field: queue_state_id
+    owner: simulator
+    source_basis: versioned_sources
+    fields:
+      queue_state_id: string
+      queue_config_ref: record_ref
+      waiting_case_refs: list_record_ref
+      in_service_case_refs: list_record_ref
+      scheduled_completion_event_refs: list_record_ref
+      available_capacity: nonnegative_integer
+    set_semantics_paths: [/scheduled_completion_event_refs]
+    sequence_paths: [/waiting_case_refs, /in_service_case_refs]
+    gate: queue_state_complete
+    diagnostic: SIM_SYSTEM_STATE_INCOMPLETE
+
+  ResourceState:
+    discriminator: {payload_kind: resource_state}
+    schema: {schema_id: simulation.resource_state, schema_version: 1}
+    domain_id_field: resource_state_id
+    owner: simulator
+    source_basis: versioned_sources
+    fields:
+      resource_state_id: string
+      resource_config_ref: record_ref
+      available_units: nonnegative_integer
+      active_case_refs: list_record_ref
+      active_event_refs: list_record_ref
+    set_semantics_paths: [/active_case_refs, /active_event_refs]
+    gate: resource_state_complete
+    diagnostic: SIM_SYSTEM_STATE_INCOMPLETE
+
+  SystemState:
+    discriminator: {payload_kind: system_state}
+    schema: {schema_id: simulation.system_state, schema_version: 1}
+    domain_id_field: system_state_id
+    owner: simulator
+    source_basis: versioned_sources
+    fields:
+      system_state_id: string
+      case_state_refs: list_record_ref
+      queue_state_refs: list_record_ref
+      resource_state_refs: list_record_ref
+      clock_ref: record_ref
+      scenario_ref: record_ref
+      policy_ref: record_ref
+      transformation_ref: record_ref
+      decision_rule_ref: record_ref
+      evaluation_spec_ref: record_ref
+    set_semantics_paths: [/case_state_refs, /queue_state_refs, /resource_state_refs]
+    gate: intervention_unit_state_complete
+    diagnostic: SIM_SYSTEM_STATE_INCOMPLETE
+
+  SystemTrace:
+    discriminator: {payload_kind: system_trace}
+    schema: {schema_id: simulation.system_trace, schema_version: 1}
+    domain_id_field: system_trace_id
+    owner: simulator
+    source_basis: versioned_sources
+    fields:
+      system_trace_id: string
+      intervention_pair_ref: record_ref
+      initial_system_state_ref: record_ref
+      final_system_state_ref: record_ref
+      event_refs: list_record_ref
+      termination_status: {enum: [horizon_reached, terminal_state, livelock, event_bound_exceeded, invalid]}
+      termination_diagnostic_refs: list_record_ref
+    set_semantics_paths: [/termination_diagnostic_refs]
+    sequence_paths: [/event_refs]
+    gate: system_trace_well_founded
+    diagnostic: SIM_EVENT_LIVELOCK
+
+  InterventionPair:
+    discriminator: {payload_kind: intervention_pair}
+    schema: {schema_id: simulation.intervention_pair, schema_version: 1}
+    domain_id_field: intervention_pair_id
+    owner: evaluation_specification
+    source_basis: versioned_sources
+    fields:
+      intervention_pair_id: string
+      intervention_unit: {enum: [case_local, cohort_system]}
+      focal_case_ref: record_ref
+      focal_action_ref: record_ref
+      initial_system_state_ref: record_ref
+      execute_rule_ref: record_ref
+      hold_rule_ref: record_ref
+      shared_keyed_draw_refs: list_record_ref
+      noninterference_certificate_ref: nullable_record_ref
+      horizon: simulation_time_string
+    set_semantics_paths: [/shared_keyed_draw_refs]
+    gate: paired_intervention_scope_and_draw_invariance
+    diagnostic: FM_INTERVENTION_UNIT_INVALID
+
+  InterventionPairResult:
+    discriminator: {payload_kind: intervention_pair_result}
+    schema: {schema_id: simulation.intervention_pair_result, schema_version: 1}
+    domain_id_field: intervention_pair_result_id
+    owner: evaluator
+    source_basis: versioned_sources
+    fields:
+      intervention_pair_result_id: string
+      intervention_pair_ref: record_ref
+      execute_trace_ref: record_ref
+      hold_trace_ref: record_ref
+    set_semantics_paths: []
+    gate: paired_intervention_result_closure
+    diagnostic: FM_CAUSAL_TRACE_MISALIGNED
+
+  NoninterferenceCertificate:
+    discriminator: {payload_kind: noninterference_certificate}
+    schema: {schema_id: simulation.noninterference_certificate, schema_version: 1}
+    domain_id_field: noninterference_certificate_id
+    owner: evaluation_specification
+    source_basis: versioned_sources
+    fields:
+      noninterference_certificate_id: string
+      focal_action_ref: record_ref
+      initial_system_state_ref: record_ref
+      excluded_shared_queue_refs: list_record_ref
+      excluded_shared_resource_refs: list_record_ref
+      transition_rule_refs: list_record_ref
+      proof_artifact_ref: record_ref
+      valid_until_boundary_rule_ref: record_ref
+    set_semantics_paths: [/excluded_shared_queue_refs, /excluded_shared_resource_refs, /transition_rule_refs]
+    gate: case_local_noninterference_proved
+    diagnostic: FM_INTERVENTION_UNIT_INVALID
+
+  ExpectedResult:
+    discriminator: {payload_kind: expected_result}
+    schema: {schema_id: P0-SCHEMA-EXPECTED-RESULT, schema_version: 1}
+    domain_id_field: expected_result_id
+    owner: fixture_qa
+    source_basis: versioned_sources
+    fields:
+      expected_result_id: string
+      trace_specification_ref: record_ref
+      expected_disposition: expected_disposition_spec
+      expected_assessment_specs: list_expected_assessment_spec
+    set_semantics_paths: [/expected_disposition/automatic_action_refs, /expected_disposition/post_review_action_refs, /expected_disposition/selected_action_refs, /expected_disposition/constraint_action_refs, /expected_disposition/information_action_refs, /expected_disposition/restoration_action_refs, /expected_assessment_specs/*/required_diagnostic_codes]
+    sequence_paths: [/expected_disposition/routing_reasons, /expected_disposition/gate_requirements, /expected_assessment_specs]
+    gate: expected_result_oracle_isolation
+    diagnostic: P0_LAYER_ACCESS_VIOLATION
+
+  FixtureCase:
+    discriminator: {payload_kind: fixture_case}
+    schema: {schema_id: P0-SCHEMA-CASE, schema_version: 1}
+    domain_id_field: case_id
+    owner: fixture
+    source_basis: synthetic_no_external_source
+    fields:
+      case_id: string
+      case_kind: string
+      latent_object_type: string
+      sensor_resolution_px: integer_pair
+      atmospheric_distortion: boolean
+      road_track: boolean
+      low_resolution_track: boolean
+      historical_or_operational_source: {const: none}
+    set_semantics_paths: []
+    gate: oracle_access_boundary
+    diagnostic: P0_ORACLE_LEAK
+
+  ModelOutput:
+    discriminator: {payload_kind: model_output}
+    schema: {schema_id: P0-SCHEMA-MODEL-OUTPUT, schema_version: 1}
+    domain_id_field: model_output_id
+    owner: fixture
+    source_basis: synthetic_no_external_source
+    fields:
+      model_output_id: string
+      primary_estimate_id: string
+      primary_confidence_decimal: normalized_decimal_string
+      broad_class_id: string
+      fallback_threshold_decimal: normalized_decimal_string
+      alternative_ids: string_list
+      alternative_probabilities: {const: not_provided}
+      source_type: {const: synthetic_model_output}
+    set_semantics_paths: [/alternative_ids]
+    gate: model_output_has_no_policy_fields
+    diagnostic: P0_MODEL_POLICY_CONTAMINATION
+
+  ProcessState:
+    discriminator: {payload_kind: process_state}
+    schema: {schema_id: P0-SCHEMA-PROCESS, schema_version: 1}
+    domain_id_field: process_state_id
+    owner: process_model
+    source_basis_rule: provenance_dependent
+    fields:
+      process_state_id: string
+      case_ref: record_ref
+      stage: string
+      current_route: string
+      prior_escalation: boolean
+      active_review_gate: boolean
+      emergency_authorization: boolean
+    set_semantics_paths: []
+    gate: process_state_complete
+    diagnostic: FM_REQUIRED_INPUT_MISSING
+
+  ResourceConfig:
+    discriminator: {payload_kind: resource_config}
+    schema: {schema_id: P0-SCHEMA-RESOURCE, schema_version: 1}
+    domain_id_field: resource_config_id
+    owner: process_model
+    source_basis_rule: provenance_dependent
+    fields:
+      resource_config_id: string
+      reviewer_role_id: string
+      reviewer_available: boolean
+      reviewer_stopping_authority: boolean
+      additional_sensor_available: boolean
+      queue_state: string
+    set_semantics_paths: []
+    gate: resource_authority_separation
+    diagnostic: FM_REVIEW_AUTHORITY_MISSING
+
+  ClockConfig:
+    discriminator: {payload_kind: clock_config}
+    schema: {schema_id: P0-SCHEMA-CLOCK, schema_version: 1}
+    domain_id_field: clock_config_id
+    owner: process_model
+    source_basis_rule: provenance_dependent
+    fields:
+      clock_config_id: string
+      decision_time: simulation_time_string
+      observation_window: string
+      review_deadline: string
+    set_semantics_paths: []
+    gate: clock_semantics_complete
+    diagnostic: FM_REQUIRED_INPUT_MISSING
+
+  Baseline:
+    discriminator: {payload_kind: baseline}
+    schema: {schema_id: P0-SCHEMA-BASELINE, schema_version: 1}
+    domain_id_field: baseline_id
+    owner: evaluation_specification
+    source_basis_rule: provenance_dependent
+    fields:
+      baseline_id: string
+      trigger_rule_ref: record_ref
+      required_action_refs_when_triggered: list_record_ref
+      blocked_action_refs_until_review: list_record_ref
+      final_action_refs: list_record_ref
+    set_semantics_paths: [/required_action_refs_when_triggered, /blocked_action_refs_until_review, /final_action_refs]
+    gate: baseline_selection_complete
+    diagnostic: FM_BASELINE_MISSING
+
+  Taxonomy:
+    discriminator: {payload_kind: taxonomy}
+    schema: {schema_id: P0-SCHEMA-TAXONOMY, schema_version: 1}
+    domain_id_field: taxonomy_id
+    owner: action_semantics
+    source_basis: synthetic_no_external_source
+    fields:
+      taxonomy_id: string
+      broad_class_members: mapping_string_to_string_set
+    set_semantics_paths: [/broad_class_members/*]
+    gate: taxonomy_identity_not_display_text
+    diagnostic: P0_TEXT_IDENTITY_LEAK
+
+  PolicyMap:
+    discriminator: {payload_kind: policy_map}
+    schema: {schema_id: P0-SCHEMA-POLICY, schema_version: 1}
+    domain_id_field: policy_map_id
+    owner: policy
+    source_basis: versioned_sources
+    fields:
+      policy_map_id: string
+      material_alternative_ids: string_list
+      materiality_reason_id: string
+      required_information_action_refs: list_record_ref
+      required_review_action_refs: list_record_ref
+      blocked_until_review_action_refs: list_record_ref
+      authorized_action_refs: list_record_ref
+      confidence_alone_is_material: boolean
+    set_semantics_paths: [/material_alternative_ids, /required_information_action_refs, /required_review_action_refs, /blocked_until_review_action_refs, /authorized_action_refs]
+    gate: operational_policy_separate_from_model_output
+    diagnostic: P0_MODEL_POLICY_CONTAMINATION
+
+  PolicyProfile:
+    discriminator: {payload_kind: policy_profile}
+    schema: {schema_id: policy.profile, schema_version: 1}
+    domain_id_field: policy_profile_id
+    owner: policy
+    source_basis_rule: provenance_dependent
+    fields:
+      policy_profile_id: string
+      policy_kind: {enum: [canonical_synthetic, counterfactual, source_grounded_historical]}
+      operational_policy_map_ref: record_ref
+      transformation_rule_refs: list_record_ref
+      routing_rule_refs: list_record_ref
+      permission_rule_refs: list_record_ref
+      gate_policy_rule_refs: list_record_ref
+      timeout_rule_refs: list_record_ref
+      information_action_rule_refs: list_record_ref
+      correction_rule_refs: list_record_ref
+      restoration_rule_refs: list_record_ref
+      parameter_slot_ids: string_list
+      source_fixture_refs: list_record_ref
+    set_semantics_paths: [/transformation_rule_refs, /routing_rule_refs, /permission_rule_refs, /gate_policy_rule_refs, /timeout_rule_refs, /information_action_rule_refs, /correction_rule_refs, /restoration_rule_refs, /parameter_slot_ids, /source_fixture_refs]
+    gate: policy_profile_rule_closure
+    diagnostic: PROFILE_POLICY_PROCESS_OVERLAP
+
+  EvaluationSpecification:
+    discriminator: {payload_kind: evaluation_specification}
+    schema: {schema_id: P0-SCHEMA-EVALUATION, schema_version: 1}
+    domain_id_field: evaluation_spec_id
+    owner: evaluation_specification
+    source_basis: versioned_sources
+    fields:
+      evaluation_spec_id: string
+      evaluation_basis: string
+      material_alternative_ids: string_list
+      materiality_reason_id: string
+      baseline_selection_ref: record_ref
+      action_comparison_schema_ref: record_ref
+      action_set_representation_mode: string
+      applicability_spec_ref: record_ref
+      scope_declaration_refs: list_record_ref
+      semantic_correspondence_mode: string
+      required_meaning_refs: list_record_ref
+      semantic_correspondence_rule_ref: record_ref
+      required_intervention_capabilities: string_list
+      required_intervention_action_ref: record_ref
+      surfacing_deadline_rule_ref: record_ref
+      f5_undetermined_field_ids: string_list
+    set_semantics_paths: [/material_alternative_ids, /scope_declaration_refs, /required_meaning_refs, /required_intervention_capabilities, /f5_undetermined_field_ids]
+    gate: independent_evaluation_specification
+    diagnostic: FM_EVALUATION_SPEC_INVALID
+
+  ActionComparisonSchema:
+    discriminator: {payload_kind: action_comparison_schema}
+    schema: {schema_id: P0-SCHEMA-ACTION-COMPARISON, schema_version: 1}
+    domain_id_field: action_comparison_schema_id
+    owner: evaluation_specification
+    source_basis: versioned_sources
+    fields:
+      action_comparison_schema_id: string
+      material_field_names: string_list
+    set_semantics_paths: [/material_field_names]
+    gate: canonical_action_comparison
+    diagnostic: FM_ACTION_IDENTITY_AMBIGUOUS
+
+  MaterialItem:
+    discriminator: {payload_kind: material_item}
+    schema: {schema_id: P0-SCHEMA-MATERIAL-ITEM, schema_version: 1}
+    domain_id_field: material_item_id
+    owner: evaluation_specification
+    source_basis: versioned_sources
+    fields:
+      material_item_id: string
+      semantic_id: string
+      semantic_type: string
+      semantic_scope_binding: string
+      polarity: string
+      uncertainty_status: string
+      applicability_rule_ref: record_ref
+      affected_action_refs: list_record_ref
+      evaluation_basis: string
+    set_semantics_paths: [/affected_action_refs]
+    gate: evaluation_materiality_independent
+    diagnostic: FM_MATERIALITY_SOURCE_MISSING
+
+  RequiredMeaning:
+    discriminator: {payload_kind: required_meaning}
+    schema: {schema_id: P0-SCHEMA-REQUIRED-MEANING, schema_version: 1}
+    domain_id_field: required_meaning_id
+    owner: evaluation_specification
+    source_basis: versioned_sources
+    fields:
+      required_meaning_id: string
+      material_item_ref: record_ref
+      material_semantic_id: string
+      affected_action_ref: record_ref
+      evidence_scope_rule_ref: record_ref
+      process_state_ref: record_ref
+      clock_ref: record_ref
+      required_semantic_type: string
+      required_semantic_scope_binding: string
+      required_polarity: string
+      required_uncertainty_status: string
+      relevance_action_refs: list_record_ref
+      required_intervention_capabilities: string_list
+      surfacing_deadline_rule_ref: record_ref
+      evaluation_basis: string
+    set_semantics_paths: [/relevance_action_refs, /required_intervention_capabilities]
+    gate: required_meaning_correspondence
+    diagnostic: FM_SEMANTIC_CORRESPONDENCE_INVALID
+
+  TemporalScope:
+    discriminator: {payload_kind: temporal_scope}
+    schema: {schema_id: process_model.temporal_scope, schema_version: 1}
+    domain_id_field: temporal_scope_id
+    owner: process_application
+    source_basis_rule: provenance_dependent
+    fields:
+      temporal_scope_id: string
+      mode: {enum: [simulation_only, dated_interval, as_documented_bundle]}
+      start_value: nullable_string
+      start_precision: {enum: [not_applicable, day, month, year, mixed, unknown]}
+      end_value: nullable_string
+      end_precision: {enum: [not_applicable, day, month, year, mixed, unknown]}
+      reference_as_of: nullable_string
+      simultaneous_activation_claimed: boolean
+      limitation: nullable_string
+    set_semantics_paths: []
+    gate: temporal_scope_precision_and_bundle_semantics
+    diagnostic: PROFILE_TEMPORAL_SCOPE_INVALID
+
+  RoleAuthority:
+    discriminator: {payload_kind: role_authority}
+    schema: {schema_id: process_model.role_authority, schema_version: 1}
+    domain_id_field: role_authority_id
+    owner: process_application
+    source_basis_rule: provenance_dependent
+    fields:
+      role_authority_id: string
+      role_id: string
+      process_profile_ref: record_ref
+      permitted_capabilities: string_list
+      temporal_scope_ref: record_ref
+    set_semantics_paths: [/permitted_capabilities]
+    gate: role_authority_source_and_time_scope
+    diagnostic: FM_REVIEW_AUTHORITY_MISSING
+
+  ProcessStage:
+    discriminator: {payload_kind: process_stage}
+    schema: {schema_id: process_model.stage, schema_version: 1}
+    domain_id_field: stage_id
+    owner: process_application
+    source_basis_rule: provenance_dependent
+    fields:
+      stage_id: string
+      process_profile_ref: record_ref
+      terminal: boolean
+      allowed_transition_rule_refs: list_record_ref
+    set_semantics_paths: [/allowed_transition_rule_refs]
+    gate: stage_transition_closure
+    diagnostic: PROCESS_STAGE_INVALID
+
+  QueueConfig:
+    discriminator: {payload_kind: queue_config}
+    schema: {schema_id: process_model.queue, schema_version: 1}
+    domain_id_field: queue_config_id
+    owner: process_model
+    source_basis_rule: provenance_dependent
+    fields:
+      queue_config_id: string
+      process_profile_ref: record_ref
+      stage_ref: record_ref
+      resource_ref: record_ref
+      discipline: string
+      capacity_parameter_slot_id: string
+      capacity_parameter_ref: nullable_record_ref
+      service_time_parameter_slot_ids: string_list
+      service_time_parameter_refs: list_record_ref
+    set_semantics_paths: [/service_time_parameter_slot_ids, /service_time_parameter_refs]
+    gate: queue_configuration_complete
+    diagnostic: PROCESS_QUEUE_INVALID
+
+  DeadlineConfig:
+    discriminator: {payload_kind: deadline_config}
+    schema: {schema_id: process_model.deadline, schema_version: 1}
+    domain_id_field: deadline_config_id
+    owner: process_application
+    source_basis_rule: provenance_dependent
+    fields:
+      deadline_config_id: string
+      process_profile_ref: record_ref
+      start_event_type_id: string
+      duration: simulation_time_string
+      expiry_event_type_id: string
+      extension_rule_refs: list_record_ref
+    set_semantics_paths: [/extension_rule_refs]
+    gate: deadline_semantics_complete
+    diagnostic: PROCESS_DEADLINE_INVALID
+
+  GateConfig:
+    discriminator: {payload_kind: gate_config}
+    schema: {schema_id: process_model.gate, schema_version: 1}
+    domain_id_field: gate_config_id
+    owner: process_model
+    source_basis_rule: provenance_dependent
+    fields:
+      gate_config_id: string
+      process_profile_ref: record_ref
+      guarded_action_refs: list_record_ref
+      prerequisite_action_refs: list_record_ref
+      gate_semantics_slot_id: string
+      timeout_rule_slot_id: string
+      supported_semantics: string_list
+    set_semantics_paths: [/guarded_action_refs, /prerequisite_action_refs, /supported_semantics]
+    gate: gate_configuration_complete
+    diagnostic: FM_REQUIRED_GATE_MISSING
+
+  EvidenceState:
+    discriminator: {payload_kind: evidence_state}
+    schema: {schema_id: formal_model.evidence_state, schema_version: 1}
+    domain_id_field: evidence_state_id
+    owner: evidence_model
+    source_basis_rule: provenance_dependent
+    fields:
+      evidence_state_id: string
+      claim_refs: list_record_ref
+      compatible_state_set_ref: record_ref
+      measurement_rule_refs: list_record_ref
+    set_semantics_paths: [/claim_refs, /measurement_rule_refs]
+    gate: evidence_state_semantics_complete
+    diagnostic: FM_REQUIRED_INPUT_MISSING
+
+  ScenarioParameter:
+    discriminator: {payload_kind: scenario_parameter}
+    schema: {schema_id: scenario.parameter, schema_version: 1}
+    domain_id_field: scenario_parameter_id
+    owner: scenario_generator
+    source_basis_rule: provenance_dependent
+    fields:
+      scenario_parameter_id: string
+      parameter_name: string
+      target_slot_id: string
+      value: typed_value
+      unit_id: nullable_string
+      provenance_level: {enum: [documented, stylized, sensitivity]}
+      value_owner: {enum: [source_fixture, stylized_overlay, sensitivity_overlay]}
+      source_value_ref: nullable_record_ref
+      validity_rule_refs: list_record_ref
+    set_semantics_paths: [/validity_rule_refs]
+    gate: scenario_parameter_provenance
+    diagnostic: SCENARIO_PARAMETER_INVALID
+
+  ScenarioOverlay:
+    discriminator: {payload_kind: scenario_overlay}
+    schema: {schema_id: scenario.overlay, schema_version: 1}
+    domain_id_field: scenario_overlay_id
+    owner: scenario_generator
+    source_basis_rule: provenance_dependent
+    fields:
+      scenario_overlay_id: string
+      process_profile_ref: record_ref
+      policy_profile_refs: list_record_ref
+      parameter_refs: list_record_ref
+      overwrite_policy: {const: fill_declared_unbound_slots_only}
+    set_semantics_paths: [/policy_profile_refs, /parameter_refs]
+    gate: overlay_slot_and_provenance_validation
+    diagnostic: PROFILE_PARAMETER_CONFLICT
+
+  KeyedDraw:
+    discriminator: {payload_kind: keyed_draw}
+    schema: {schema_id: scenario.keyed_draw, schema_version: 1}
+    domain_id_field: keyed_draw_id
+    owner: random_stream_manager
+    source_basis: versioned_sources
+    provenance_status: simulated
+    fields:
+      keyed_draw_id: string
+      case_id: string
+      event_family_id: string
+      draw_index: nonnegative_integer
+      distribution_parameter_refs: list_record_ref
+      seed_id: string
+      value: typed_value
+    set_semantics_paths: [/distribution_parameter_refs]
+    gate: keyed_draw_order_invariance
+    diagnostic: RANDOM_DRAW_KEY_INVALID
+
+  SourceApplicationFixture:
+    discriminator: {payload_kind: source_application_fixture}
+    schema: {schema_id: application.source_fixture, schema_version: 1}
+    domain_id_field: source_application_fixture_id
+    owner: process_application
+    source_basis: versioned_sources
+    fields:
+      source_application_fixture_id: string
+      application_id: string
+      source_profile_id: string
+      source_profile_version: positive_integer
+      artifact_path: string
+      artifact_hash: sha256_lower_hex
+      temporal_scope_ref: record_ref
+      source_claim_ids: string_list
+      unsupported_parameter_slot_ids: string_list
+    set_semantics_paths: [/source_claim_ids, /unsupported_parameter_slot_ids]
+    gate: source_fixture_artifact_and_claim_closure
+    diagnostic: PROFILE_APPLICATION_MAPPING_INVALID
+
+  ApplicationBinding:
+    discriminator: {payload_kind: application_binding}
+    schema: {schema_id: application.binding, schema_version: 1}
+    domain_id_field: application_binding_id
+    owner: process_application
+    source_basis: versioned_sources
+    fields:
+      application_binding_id: string
+      source_fixture_ref: record_ref
+      source_element_id: string
+      target_kind: {enum: [role, stage, transition, deadline, gate, action, rule, parameter_slot]}
+      target_semantic_id: string
+      compiled_target_ref: nullable_record_ref
+      provenance_level: {enum: [documented, attributed_agency_statement, inferred]}
+      source_claim_ids: string_list
+      rationale: string
+    set_semantics_paths: [/source_claim_ids]
+    gate: application_binding_source_and_target_closure
+    diagnostic: PROFILE_APPLICATION_MAPPING_INVALID
+
+  ApplicationMapping:
+    discriminator: {payload_kind: application_mapping}
+    schema: {schema_id: application.mapping, schema_version: 1}
+    domain_id_field: application_mapping_id
+    owner: process_application
+    source_basis: versioned_sources
+    fields:
+      application_mapping_id: string
+      application_id: string
+      source_fixture_refs: list_record_ref
+      binding_refs: list_record_ref
+      claim_limit_ids: string_list
+      compiler_contract_version: positive_integer
+    set_semantics_paths: [/source_fixture_refs, /binding_refs, /claim_limit_ids]
+    gate: application_mapping_complete
+    diagnostic: PROFILE_APPLICATION_MAPPING_INVALID
+
+  ParameterBindingReceipt:
+    discriminator: {payload_kind: parameter_binding_receipt}
+    schema: {schema_id: scenario.parameter_binding_receipt, schema_version: 1}
+    domain_id_field: parameter_binding_receipt_id
+    owner: scenario_generator
+    source_basis: versioned_sources
+    fields:
+      parameter_binding_receipt_id: string
+      target_slot_id: string
+      target_owner_ref: record_ref
+      resolved_parameter_ref: record_ref
+      resolution_source: {enum: [documented_source, stylized_overlay, sensitivity_overlay]}
+      conflict_status: {const: no_conflict}
+    set_semantics_paths: []
+    gate: one_value_owner_per_runtime_slot
+    diagnostic: PROFILE_PARAMETER_CONFLICT
+
+  ProcessProfile:
+    discriminator: {payload_kind: process_profile}
+    schema: {schema_id: process_model, schema_version: 1}
+    domain_id_field: process_profile_id
+    owner: process_application
+    source_basis_rule: provenance_dependent
+    fields:
+      process_profile_id: string
+      profile_kind: {enum: [canonical_synthetic, source_grounded_capability_graph]}
+      temporal_scope_ref: record_ref
+      role_refs: list_record_ref
+      stage_refs: list_record_ref
+      queue_refs: list_record_ref
+      resource_refs: list_record_ref
+      deadline_refs: list_record_ref
+      gate_refs: list_record_ref
+      transition_rule_refs: list_record_ref
+      action_type_ids: string_list
+      parameter_slot_ids: string_list
+    set_semantics_paths: [/role_refs, /stage_refs, /queue_refs, /resource_refs, /deadline_refs, /gate_refs, /transition_rule_refs, /action_type_ids, /parameter_slot_ids]
+    gate: dated_profile_provenance
+    diagnostic: PROFILE_PERIOD_BLEND
+
+  CompiledConfiguration:
+    discriminator: {payload_kind: compiled_configuration}
+    schema: {schema_id: scenario.compiled_configuration, schema_version: 1}
+    domain_id_field: compiled_configuration_id
+    owner: scenario_generator
+    source_basis: versioned_sources
+    fields:
+      compiled_configuration_id: string
+      process_profile_ref: record_ref
+      policy_profile_ref: record_ref
+      evaluation_spec_ref: record_ref
+      application_mapping_ref: nullable_record_ref
+      scenario_overlay_ref: record_ref
+      parameter_binding_receipt_refs: list_record_ref
+      compiler_contract_version: positive_integer
+      compiler_code_hash: sha256_lower_hex
+      unresolved_parameter_slot_ids: string_list
+      semantic_projection_rule_ref: record_ref
+    set_semantics_paths: [/parameter_binding_receipt_refs, /unresolved_parameter_slot_ids]
+    gate: compiled_configuration_input_and_parameter_closure
+    diagnostic: SCENARIO_CONFIGURATION_INCOMPLETE
+
+  Scenario:
+    discriminator: {payload_kind: scenario}
+    schema: {schema_id: scenario, schema_version: 1}
+    domain_id_field: scenario_id
+    owner: scenario_generator
+    source_basis: versioned_sources
+    fields:
+      scenario_id: string
+      compiled_configuration_refs: list_record_ref
+      shared_parameter_refs: list_record_ref
+      horizon: simulation_time_string
+      event_priority_registry_ref: record_ref
+      max_microstep_rank: nonnegative_integer
+      max_causal_path_depth: positive_integer
+      max_event_count: positive_integer
+      seed_ids: string_list
+      validity_status: closed_scenario_validity_status_id
+      validity_reason_codes: string_list
+    set_semantics_paths: [/compiled_configuration_refs, /shared_parameter_refs, /seed_ids, /validity_reason_codes]
+    gate: scenario_validity
+    diagnostic: SCENARIO_INVALID
+
+  CaseAttribute:
+    discriminator: {payload_kind: case_attribute}
+    schema: {schema_id: case.attribute, schema_version: 1}
+    domain_id_field: case_attribute_id
+    owner: scenario_generator
+    source_basis: versioned_sources
+    provenance_status: simulated
+    fields:
+      case_attribute_id: string
+      semantic_id: string
+      value: typed_value
+      visibility: {enum: [latent, initially_observed, potentially_observable]}
+    set_semantics_paths: []
+    gate: case_attribute_semantic_and_visibility_binding
+    diagnostic: CASE_DRAW_BINDING_INVALID
+
+  SimulationCase:
+    discriminator: {payload_kind: simulation_case}
+    schema: {schema_id: case, schema_version: 1}
+    domain_id_field: case_id
+    owner: scenario_generator
+    source_basis: versioned_sources
+    provenance_status: simulated
+    fields:
+      case_id: string
+      case_kind_id: string
+      latent_state_attribute_refs: list_record_ref
+      administrative_access_attribute_refs: list_record_ref
+      evidence_state_ref: record_ref
+      potential_record_refs: list_record_ref
+      deadline_ref: record_ref
+      keyed_draw_refs: list_record_ref
+    set_semantics_paths: [/latent_state_attribute_refs, /administrative_access_attribute_refs, /potential_record_refs, /keyed_draw_refs]
+    gate: simulation_case_draw_binding
+    diagnostic: CASE_DRAW_BINDING_INVALID
+
+  Run:
+    discriminator: {payload_kind: run}
+    schema: {schema_id: run, schema_version: 1}
+    domain_id_field: run_id
+    owner: simulator
+    source_basis: versioned_sources
+    provenance_status: simulated
+    fields:
+      run_id: string
+      scenario_ref: record_ref
+      compiled_configuration_ref: record_ref
+      seed_id: string
+      status: closed_run_status_id
+      counters: typed_value
+      artifact_paths: string_list
+    set_semantics_paths: []
+    sequence_paths: [/artifact_paths]
+    gate: run_artifact_completeness
+    diagnostic: RUN_INCOMPLETE
+
+  Metric:
+    discriminator: {payload_kind: metric}
+    schema: {schema_id: metric, schema_version: 1}
+    domain_id_field: metric_id
+    owner: metrics
+    source_basis: versioned_sources
+    fields:
+      metric_id: string
+      numerator: normalized_decimal_string
+      denominator: normalized_decimal_string
+      unit_id: string
+      scope_refs: list_record_ref
+      estimate: normalized_decimal_string
+    set_semantics_paths: [/scope_refs]
+    gate: metric_numerator_denominator_traceability
+    diagnostic: METRIC_PROVENANCE_INVALID
+
+manifest_gates:
+  - id: SCHEMA_MANIFEST_DRIFT
+    owner: schemas
+    checks:
+      - every_manifest_payload_has_one_model
+      - every_persisted_model_has_one_manifest_payload
+      - every_fixture_schema_pair_is_declared
+      - every_closed_implementation_signature_is_declared
+      - every_implementation_signature_declares_code_hash_input_roles_cardinalities_and_outputs
+      - every_input_field_parameter_names_a_declared_input_role
+  - id: SCHEMA_REFERENCE_CLOSURE
+    owner: artifact_layer
+    checks:
+      - every_record_ref_resolves
+      - every_reference_target_kind_is_allowed
+      - no_partial_embedded_stored_record
+      - persisted_reference_graph_is_topologically_constructible
+      - aggregate_child_edges_have_no_versioned_back_reference
+  - id: SCHEMA_CANONICALIZATION
+    owner: artifact_layer
+    checks:
+      - key_order_invariance
+      - declared_set_order_invariance
+      - declared_sequence_order_sensitivity
+      - decimal_and_timestamp_normalization
+      - object_version_hash_uniqueness
+  - id: SCHEMA_ASSESSMENT_SEMANTICS
+    owner: formal_evaluator
+    checks:
+      - every_assessment_declares_truth_status_and_completeness
+      - every_evaluation_input_is_role_bound
+      - every_component_declares_aggregation_relation
+      - sufficient_failure_witness_not_erased_by_unknown_conjunct
+      - contextual_component_does_not_enter_truth_aggregation
+      - property_helper_and_diagnostic_ids_are_closed
+      - diagnostic_category_and_owning_layer_are_closed
+  - id: SCHEMA_EXECUTION_STATUS
+    owner: schemas
+    checks:
+      - scenario_validity_status_is_closed
+      - run_status_is_closed
+  - id: SCHEMA_EVENT_EXECUTION
+    owner: simulator
+    checks:
+      - every_event_type_is_closed
+      - event_order_key_unique_within_trace
+      - simultaneous_events_follow_priority_registry
+      - same_time_transition_rank_is_well_founded
+      - event_bound_breach_invalidates_run
+      - paired_system_traces_preserve_cohort_and_keyed_draws
+      - case_local_f2_requires_noninterference_certificate
+  - id: SCHEMA_CONFIGURATION_COMPOSITION
+    owner: scenario_generator
+    checks:
+      - source_fixture_artifacts_are_hash_bound_and_immutable
+      - application_bindings_resolve_source_elements_to_declared_semantic_targets
+      - process_profile_owns_capabilities_not_active_policy_behavior
+      - policy_profile_owns_transformation_routing_permission_gate_timeout_correction_and_restoration_behavior
+      - overlay_fills_only_declared_unbound_parameter_slots
+      - documented_parameter_value_cannot_be_overwritten
+      - every_runtime_parameter_slot_has_exactly_one_owner
+      - unsupported_historical_parameter_cannot_enter_runtime_without_stylized_or_sensitivity_owner
+      - compiled_configuration_has_zero_unresolved_parameter_slots
+      - scenario_and_run_reference_compiled_configurations
+      - core_event_registry_and_simulation_case_fields_are_application_neutral
+      - mixed_precision_application_period_uses_temporal_scope_record

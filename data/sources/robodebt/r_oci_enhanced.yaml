@@ -1,0 +1,105 @@
+profile_id: R-OCI-Enhanced
+profile_version: 1
+status: slice-0-source-fixture
+profile_kind: documented_repair_structure
+owner: robodebt-profile-audit
+temporal_scope:
+  temporal_scope_id: R-OCI-ENHANCED-TEMPORAL-SCOPE-1
+  mode: as_documented_bundle
+  label: early-2017 OCI repair bundle documented by the Ombudsman
+  reference_as_of: 2017-04-10
+  change_window_start: 2017-01-20
+  change_window_precision: mixed
+  rationale: The first letter change is dated 20 January 2017; further changes are described as beginning in February and are reported together in the 10 April 2017 report.
+  limitation: This is an as-documented repair profile, not a claim that every element switched on simultaneously or remained unchanged afterward.
+  simultaneous_activation_claimed: false
+compilation_contract:
+  source_fixture_role: immutable_application_input
+  compile_outputs: [process_capability_profile, historical_policy_profile]
+  raw_descriptions_and_guards_executable: false
+  unsupported_parameters_supply_runtime_values: false
+source_manifest: source_manifest.yaml
+source_claim_refs:
+  - RB-CLAIM-006
+  - RB-CLAIM-007
+  - RB-CLAIM-008
+
+base_profile_ref: R-OCI-Early@1
+unchanged_unless_overridden:
+  - data matching and risk selection
+  - recipient correction path
+  - entitlement calculation
+  - debt-notice generation
+  - reassessment and internal review availability
+
+repair_transitions:
+  - transition_id: ENH-T01-DIRECT-ACCESS
+    target_transition: EARLY-T02-NOTICE
+    description: Provide a confirmation code and CRN so a myGov account is not required to enter OCI.
+    source_refs: [OMB-OCI-2017#OMB17-1.30-1.46]
+    provenance: documented
+  - transition_id: ENH-T02-CONTACT-CLARITY
+    target_transition: EARLY-T02-NOTICE
+    description: Add the compliance support number and clarify that the initiation letter is not itself a debt letter.
+    source_refs: [OMB-OCI-2017#OMB17-1.30-1.46]
+    provenance: documented
+  - transition_id: ENH-T03-DELIVERY-CHECKS
+    target_transition: EARLY-T02-NOTICE
+    description: Use registered mail for the initial and first reminder letters, later phone contact, and more recent address data where authorized.
+    source_refs: [OMB-OCI-2017#OMB17-1.30-1.46]
+    provenance: documented
+  - transition_id: ENH-T04-RESPONSE-CLOCK
+    target_transition: EARLY-T03-RESPONSE-CLOCK
+    description: Allow 28 days from receipt and signpost the option to request an extension.
+    source_refs: [OMB-OCI-2017#OMB17-1.30-1.46]
+    provenance: documented
+  - transition_id: ENH-T05-COMPLEXITY-ROUTE
+    target_transition: EARLY-T04-RECIPIENT-EVIDENCE
+    description: Route complex circumstances, disputed assessment inputs, selected other-income answers, and lack of access to records to manual intervention.
+    source_refs: [OMB-OCI-2017#OMB17-1.30-1.46]
+    provenance: documented
+  - transition_id: ENH-T06-BANK-EVIDENCE
+    target_transition: EARLY-T04-RECIPIENT-EVIDENCE
+    description: Permit bank-statement input and transparently derive an estimated gross amount when payslips are unavailable.
+    source_refs: [OMB-OCI-2017#OMB17-1.30-1.46]
+    provenance: documented
+  - transition_id: ENH-T07-PROVISIONAL-REVISION
+    target_transition: EARLY-T07-CALCULATE
+    description: Allow navigation and revision before accepting a provisional result; warn that ATO data may be applied after the stated provisional-response period.
+    source_refs: [OMB-OCI-2017#OMB17-1.30-1.46]
+    provenance: documented
+  - transition_id: ENH-T08-COLLECTION-GUARD
+    target_transition: EARLY-T08-DEBT-NOTICE
+    description: After nonresponse, do not refer the debt to a collector until satisfied the person received the notice and was ignoring it.
+    source_refs: [OMB-OCI-2017#OMB17-1.30-1.46]
+    provenance: attributed_agency_statement
+
+historical_parameters:
+  initial_response_days:
+    value: 28
+    clock_basis: receipt
+    provenance: documented
+    source_refs: [RB-CLAIM-006]
+  provisional_result_response_days:
+    value: 14
+    clock_basis: warning_period_after_provisional_result
+    provenance: documented
+    source_refs: [OMB-OCI-2017#OMB17-1.30-1.46]
+  queue_capacity: {value: null, provenance: unsupported}
+  service_time_distribution: {value: null, provenance: unsupported}
+  engagement_probability: {value: null, provenance: unsupported}
+  evidence_retrieval_distribution: {value: null, provenance: unsupported}
+
+formal_crosswalk:
+  surfacing_repairs: clearer notice, access route, evidence options, and provisional-result warning
+  routing_repairs: more manual intervention for disputed, complex, or record-limited cases
+  gate_repairs: collection referral conditioned on evidence of notice receipt and nonengagement
+  information_repairs: bank-statement option and extension pathway
+  remaining_unknowns: capacity, service times, take-up, completion timing, and restoration effectiveness
+
+claim_limits:
+  - This profile is not EIC, CUPI, PAYG Manual, or a later remediation profile.
+  - The bundle supports structural comparison but not a causal estimate of the repairs' effects.
+  - A configured manual route does not establish timely or effective review under load.
+  - The collection guard does not by itself establish complete recovery pause, contestability, or restoration.
+  - No attackability condition is established.
