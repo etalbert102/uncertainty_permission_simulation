@@ -46,6 +46,17 @@ def test_manifest_model_inventory_is_bidirectional() -> None:
     assert "SimulationCase" in PAYLOAD_MODELS
 
 
+def test_manifest_rejects_unknown_reference_target_kind() -> None:
+    targets = MANIFEST["payload_kinds"]["Representation"]["reference_targets"]
+    original = targets["field_refs"]
+    targets["field_refs"] = ["MissingPayloadKind"]
+    try:
+        with pytest.raises(ContractError, match="reference targets name unknown kinds"):
+            validate_model_manifest_inventory()
+    finally:
+        targets["field_refs"] = original
+
+
 def test_record_envelope_and_hash_are_replayable() -> None:
     model = PAYLOAD_MODELS["TemporalScope"]
     payload = model(

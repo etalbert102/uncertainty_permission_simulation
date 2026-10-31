@@ -167,6 +167,15 @@ PAYLOAD_MODELS = _build_payload_models()
 def validate_model_manifest_inventory() -> None:
     if set(PAYLOAD_MODELS) != set(MANIFEST["payload_kinds"]):
         raise ContractError("SCHEMA_MANIFEST_DRIFT", "payload model inventory differs from manifest")
+    payload_kinds = set(MANIFEST["payload_kinds"])
+    for source_kind, spec in MANIFEST["payload_kinds"].items():
+        for path, allowed_kinds in spec.get("reference_targets", {}).items():
+            root_field = path.strip("/").split("/")[0]
+            if root_field not in spec["fields"]:
+                raise ContractError("SCHEMA_MANIFEST_DRIFT", f"{source_kind} reference-target path {path} is undeclared")
+            unknown = set(allowed_kinds) - payload_kinds
+            if unknown:
+                raise ContractError("SCHEMA_MANIFEST_DRIFT", f"{source_kind} reference targets name unknown kinds: {sorted(unknown)}")
 
 
 def _rule_error(message: str) -> None:
@@ -429,6 +438,54 @@ class RecordStore:
                 found.extend(RecordStore._refs(field_value))
         return tuple(found)
 
+    @staticmethod
+    def _path_values(value: Any, parts: list[str], path: str) -> tuple[Any, ...]:
+        if not parts:
+            return tuple(value) if isinstance(value, (tuple, list)) else (value,)
+        head, *tail = parts
+        if head == "*":
+            if not isinstance(value, (tuple, list)):
+                raise ContractError("SCHEMA_MANIFEST_DRIFT", f"reference-target wildcard does not select a list: {path}")
+            return tuple(item for element in value for item in RecordStore._path_values(element, tail, path))
+        if isinstance(value, BaseModel):
+            if not hasattr(value, head):
+                raise ContractError("SCHEMA_MANIFEST_DRIFT", f"reference-target path does not resolve: {path}")
+            return RecordStore._path_values(getattr(value, head), tail, path)
+        if isinstance(value, dict) and head in value:
+            return RecordStore._path_values(value[head], tail, path)
+        raise ContractError("SCHEMA_MANIFEST_DRIFT", f"reference-target path does not resolve: {path}")
+
+    def _validate_reference_targets(self, record: StoredRecord) -> None:
+        source_kind = record.payload.__class__.__name__
+        declarations = MANIFEST["payload_kinds"][source_kind].get("reference_targets", {})
+        for path, allowed_kinds in declarations.items():
+            parts = path.strip("/").split("/")
+            for value in self._path_values(record.payload, parts, path):
+                if value is None:
+                    continue
+                try:
+                    ref = RecordRef.model_validate(value)
+                except (TypeError, ValueError) as exc:
+                    raise ContractError(
+                        "SCHEMA_REFERENCE_TARGET_INVALID",
+                        f"{source_kind}.{path} contains a non-reference target",
+                    ) from exc
+                target = self.resolve(ref)
+                target_kind = target.payload.__class__.__name__
+                if target_kind not in allowed_kinds:
+                    raise ContractError(
+                        "SCHEMA_REFERENCE_TARGET_INVALID",
+                        f"{source_kind}.{path} permits {allowed_kinds}, not {target_kind} at {ref.object_id}@{ref.object_version}",
+                    )
+                target_spec = MANIFEST["payload_kinds"][target_kind]
+                schemas = target_spec.get("schema_variants", [target_spec.get("schema")])
+                allowed_schemas = {(schema["schema_id"], schema["schema_version"]) for schema in schemas if schema}
+                if (target.meta.schema_id, target.meta.schema_version) not in allowed_schemas:
+                    raise ContractError(
+                        "SCHEMA_REFERENCE_TARGET_INVALID",
+                        f"{source_kind}.{path} resolved to an invalid {target_kind} schema",
+                    )
+
     def validate_closure(self) -> None:
         edges: dict[tuple[str, int], set[tuple[str, int]]] = {}
         for key, record in self._records.items():
@@ -436,6 +493,7 @@ class RecordStore:
             edge_keys = {(ref.object_id, ref.object_version) for ref in refs}
             for ref in refs:
                 self.resolve(ref)
+            self._validate_reference_targets(record)
             edges[key] = edge_keys
         visiting: set[tuple[str, int]] = set()
         visited: set[tuple[str, int]] = set()

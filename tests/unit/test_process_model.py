@@ -90,3 +90,34 @@ def test_record_graph_rejects_unresolved_reference_and_cycle() -> None:
     })
     with pytest.raises(ContractError, match="SCHEMA_REFERENCE_CYCLE"):
         cycle.store.validate_closure()
+
+
+def test_record_graph_enforces_manifest_reference_target_kinds() -> None:
+    valid = BundleBuilder()
+    source = valid.add("ModelOutput", "SOURCE", {
+        "model_output_id": "SOURCE", "primary_estimate_id": "x",
+        "primary_confidence_decimal": "0.4", "broad_class_id": "vehicle",
+        "fallback_threshold_decimal": "0.6", "alternative_ids": (),
+        "alternative_probabilities": "not_provided", "source_type": "synthetic_model_output",
+    })
+    field = valid.add("UntypedField", "FIELD", {
+        "field_id": "FIELD", "field_name": "object_class", "value": "vehicle",
+        "visibility": ("router",),
+    }, basis="versioned_sources", sources=(source,))
+    valid.add("Representation", "REP", {
+        "representation_id": "REP", "field_refs": (field,), "provenance_visible": False,
+    }, basis="versioned_sources", sources=(field,), schema_id="P0-SCHEMA-FALLBACK")
+    valid.store.validate_closure()
+
+    invalid = BundleBuilder()
+    wrong_target = invalid.add("ModelOutput", "WRONG", {
+        "model_output_id": "WRONG", "primary_estimate_id": "x",
+        "primary_confidence_decimal": "0.4", "broad_class_id": "vehicle",
+        "fallback_threshold_decimal": "0.6", "alternative_ids": (),
+        "alternative_probabilities": "not_provided", "source_type": "synthetic_model_output",
+    })
+    invalid.add("Representation", "BAD-REP", {
+        "representation_id": "BAD-REP", "field_refs": (wrong_target,), "provenance_visible": False,
+    }, basis="versioned_sources", sources=(wrong_target,), schema_id="P0-SCHEMA-FALLBACK")
+    with pytest.raises(ContractError, match="SCHEMA_REFERENCE_TARGET_INVALID.*not ModelOutput"):
+        invalid.store.validate_closure()
