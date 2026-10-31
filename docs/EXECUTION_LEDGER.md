@@ -7,7 +7,7 @@ This ledger is the canonical slice-status record. Update it at the end of every 
 | Slice | Status | Commit | Verification | Residual risk |
 | --- | --- | --- | --- | --- |
 | 0. Source, construct, and claim contract | implementation, plan, and baseline gates passed — pre-freeze reader QA pending | `9cf836c` | automated Slice 0 and plan gates pass from declared environment | two eligible locked reader returns are not yet available; this blocks Slice 4, not Slice 1 engineering |
-| 1. Case-neutral dynamic vertical slice | in progress — typed-reference checkpoint passes | `b880f45` checkpoint | 25 tests; 707-record closed bundle; rule and reference-target closure pass; both artifact hashes repeat | stored canary/adapter receipts remain incomplete |
+| 1. Case-neutral dynamic vertical slice | in progress — complete typed-reference checkpoint passes | `c016e51` checkpoint | 26 tests; 721-record closed bundle; 4,239 typed target references validated; both artifact hashes repeat | stored canary/adapter receipts remain incomplete |
 | 2. Stochastic engine and validation | pending | — | — | — |
 | 3. Experiment pilot and freeze candidate | pending | — | — | — |
 | 4. Confirmatory freeze | pending | — | — | — |
@@ -55,10 +55,10 @@ Current candidate hashes after the flexible-kernel plan revision:
 - early profile: `248211b2b87c4372fc1eda307c4e6a81d9deb29b5b3d40e143490a24e17e720a`
 - enhanced profile: `c9e2df36c3b37e134f6a98889b28cf15abc291253a0b0ee525519230e7fd14e1`
 - case-study rendering: `72f91b2c13a012bfdc433c4dca6b2cdd9cf1ea99200850f53cad71e30f465b08`
-- formal model: `5edb0f0a1c4ff2072c0128460f8d35cbd22fd2ed5970247d8fccc2f444258a40`
+- formal model: `4326b4e97046a71a7605442bfcaa5b2f662c5aa4f1f4242a6dd4259d0da0d0e5`
 - P0 fixture: `ef9d0b8c6593e35e68b0089538bcc5503e107a005c02087c6977dedbb2938992`
 - protocol: `73fa13ad87fc98eba57fbdd34be7831bea62faa38e96fe26450a7d754e621274`
-- schema manifest: `fb6a46502efc478f4776a7243a6fcf4814cfbd4468dd4e4cd2b053e601e22d7a`
+- schema manifest: `e5de5c8ac638dc99adbecaa287affadf367ae24211452c4db093c9ef003b493e`
 - worked-trace specification: `279d3888856f434a12a6be950cbff7b19d5745054aa5a3ead2bb59a5a2fd05a2`
 - worked-trace selection rule: `4122731dbea9b3d64ba448445f43dee7e6af4c82c839f144db6f08a0eb304c92`
 - study plan: `076c1092741c3da82025167a431f847187cde39cb6ab12751d7052f77626467d`
@@ -131,7 +131,7 @@ The reviewed 41-file Slice 0 baseline is commit `9cf836cb15edba29235abc60b4f754d
 
 ## Slice 1 In-Progress Checkpoint
 
-Status: deterministic schema/compiler/process, executable-rule, and typed-reference checkpoints implemented; Slice 1 not complete
+Status: deterministic schema/compiler/process, executable-rule, and complete typed-reference checkpoints implemented; Slice 1 not complete
 
 Checkpoint commit: `33aaa0916578a8a5ce692993025a26e36e9296ec` (`Begin Slice 1 deterministic vertical slice`)
 
@@ -141,26 +141,29 @@ Executable-rule checkpoint commit: `0bb87c2b9431512e1df43d2508825e1ad7912b9e` (`
 
 Typed-reference checkpoint commit: `b880f45cb031e41f5f39490febf37e95ad1c8c60` (`Enforce typed reference targets`)
 
+Complete reference-closure commit: `c016e516479d60d757e74196c0efe281962a7e50` (`Complete typed reference closure`)
+
 ### Implemented
 
 - Manifest-driven Pydantic inventory for all declared payload kinds, strict record metadata/envelopes, schema identity, source-basis and provenance checks, canonical hashing, set-order normalization, and binary-float rejection.
 - Deterministic configuration compilation with process/policy capability separation, documented-value protection, unsupported-slot handling, one receipt per runtime slot, and zero-unresolved-slot enforcement.
 - Case-neutral event queue, stable priority ordering, causal-key collision rejection, microstep bound, U1/U2C/U2O deterministic behavior, trace-derived metrics, and P0 F0–F5/helper report rendering.
 - Nine trace arms covering the seven required golden behaviors, the isomorphic vocabulary canary, non-isomorphic topology canary, and thin R-OCI-Early adapter smoke compilation.
-- A canonical 707-record bundle containing compiled-configuration inputs, parameter receipts, trace specifications, per-event pre/post process states, events, total dispositions, traces, prespecified expected results, metrics, P0 assessments, and diagnostics.
+- A canonical 721-record bundle containing compiled-configuration inputs, parameter receipts, trace specifications, nonempty typed representations, compatible-state support, per-event pre/post process states, events, total dispositions, traces, prespecified expected results, metrics, P0 assessments, and diagnostics.
 - Recursive reference resolution and cycle rejection, nine independent expected-versus-actual trace comparisons, and 18 P0 report-row links to stored assessments and diagnostics.
 - A static 16-callable implementation registry with exact manifest inventory matching and per-implementation hashes bound to the complete code artifact; dynamic imports and narrative evaluation are absent.
 - Exact rule validation for implementation kind/version, required and unknown parameters, parameter kinds and closed values, input roles/cardinalities/schema sets, and output schema. Nested set-semantics paths now canonicalize before rule-record hashing.
 - A stored routing-rule signature with four typed parameters, four declared input roles, a matching output schema, and a top-level receipt linking its code-artifact and rule-record hashes.
-- Generic manifest-path traversal now validates every declared reference target against its allowed payload kind and that kind's schema variants after resolution. A resolved record of the wrong kind fails `SCHEMA_REFERENCE_TARGET_INVALID`; unknown target kinds or paths fail manifest validation.
+- A complete manifest role matrix covers 254 reference-bearing payload fields through 178 shared roles or payload-local overrides. Twenty-four intentionally polymorphic roles are marked `any`; omission, stale roles, nested pseudo-paths, duplicate targets, and unknown target kinds fail manifest validation.
+- The golden bundle exercises nine nonempty representation-to-field edges spanning both `Claim` and `UntypedField`, uses separate preserve/fallback transformation rules, stores three matching rule receipts, and records a reference-target receipt covering 4,239 typed and 43 polymorphic references.
 
 ### Verification
 
 | Command | Result |
 | --- | --- |
-| `PYTHONPATH=src ./.venv/bin/python -m pytest -q` | pass: 25 tests, including rule mutations, nested set ordering, valid typed targets, resolved wrong-kind targets, and unknown manifest target kinds |
+| `PYTHONPATH=src ./.venv/bin/python -m pytest -q` | pass: 26 tests, including missing role, malformed nested path, wrong local and global target kinds, nonempty union targets, rule mutations, and cycle rejection |
 | `PYTHONPATH=src ./.venv/bin/python -m uncertainty_permission_simulation.cli trace experiments/configs/smoke_v1.yaml` | pass: 9 trace arms |
-| repeated smoke run | summary SHA-256 `a5a37cc0c70099126e66d4ccf864cc6a119760cd32f74e2ab20d8ad2a9df75b2`; record bundle SHA-256 `ae44db78fb6d900c75ebfa7fa260b1c074b2a9e5ec183f297e45fedb018a7831`; both identical across reruns |
+| repeated smoke run | summary SHA-256 `a28024d4cc3133641623a5f214ef74ecb405b250fe52d6638a98a6372d273cdc`; record bundle SHA-256 `f028b45c4a93a72171055366391bcd3cf3228c8d0879908d9a30fbb51994030a`; both identical across reruns |
 | rule-registry hash closure | pass: 16 manifest declarations equal 16 static callables and every declared SHA-256 reproduces; registry artifact SHA-256 `2ca97cbecfcf511dd502da2e85ec0cd7b06fa83b43ad0423cd1fce1d2a5a9556` |
 | `./.venv/bin/python scripts/validate_plan.py` | pass |
 | `./.venv/bin/python scripts/validate_slice0.py` | pass: 10 sources, 10 claims, 2 profiles, 6 YAML files, 94 closed diagnostics |
