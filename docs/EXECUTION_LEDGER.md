@@ -7,7 +7,7 @@ This ledger is the canonical slice-status record. Update it at the end of every 
 | Slice | Status | Commit | Verification | Residual risk |
 | --- | --- | --- | --- | --- |
 | 0. Source, construct, and claim contract | implementation, plan, and baseline gates passed — pre-freeze reader QA pending | `9cf836c` | automated Slice 0 and plan gates pass from declared environment | two eligible locked reader returns are not yet available; this blocks Slice 4, not Slice 1 engineering |
-| 1. Case-neutral dynamic vertical slice | in progress — deterministic checkpoint passes | `33aaa09` checkpoint | 13 focused tests and smoke CLI pass; output hash repeats | persisted event/state/assessment envelopes and full reference closure remain incomplete |
+| 1. Case-neutral dynamic vertical slice | in progress — stored-record checkpoint passes | `33aaa09` initial checkpoint | 15 tests; 707-record closed bundle; both artifact hashes repeat | executable-rule signature/hash closure and stored canary/adapter receipts remain incomplete |
 | 2. Stochastic engine and validation | pending | — | — | — |
 | 3. Experiment pilot and freeze candidate | pending | — | — | — |
 | 4. Confirmatory freeze | pending | — | — | — |
@@ -141,20 +141,22 @@ Checkpoint commit: `33aaa0916578a8a5ce692993025a26e36e9296ec` (`Begin Slice 1 de
 - Deterministic configuration compilation with process/policy capability separation, documented-value protection, unsupported-slot handling, one receipt per runtime slot, and zero-unresolved-slot enforcement.
 - Case-neutral event queue, stable priority ordering, causal-key collision rejection, microstep bound, U1/U2C/U2O deterministic behavior, trace-derived metrics, and P0 F0–F5/helper report rendering.
 - Nine trace arms covering the seven required golden behaviors, the isomorphic vocabulary canary, non-isomorphic topology canary, and thin R-OCI-Early adapter smoke compilation.
+- A canonical 707-record bundle containing compiled-configuration inputs, parameter receipts, trace specifications, per-event pre/post process states, events, total dispositions, traces, prespecified expected results, metrics, P0 assessments, and diagnostics.
+- Recursive reference resolution and cycle rejection, nine independent expected-versus-actual trace comparisons, and 18 P0 report-row links to stored assessments and diagnostics.
 
 ### Verification
 
 | Command | Result |
 | --- | --- |
-| `PYTHONPATH=src ./.venv/bin/python -m pytest -q` | pass: 13 tests |
+| `PYTHONPATH=src ./.venv/bin/python -m pytest -q` | pass: 15 tests |
 | `PYTHONPATH=src ./.venv/bin/python -m uncertainty_permission_simulation.cli trace experiments/configs/smoke_v1.yaml` | pass: 9 trace arms |
-| repeated smoke run | identical SHA-256 `4f4dcebda8f8df14db4ebd95650fd69dc750beea4b16f8006d662c8786e41ae4` |
+| repeated smoke run | summary SHA-256 `a5a37cc0c70099126e66d4ccf864cc6a119760cd32f74e2ab20d8ad2a9df75b2`; record bundle SHA-256 `5343ac2baa9170737717b285449f1bdb45f95dbd8b23c1da618e9717ffc09842`; both identical across reruns |
 | `./.venv/bin/python scripts/validate_plan.py` | pass |
 | `./.venv/bin/python scripts/validate_slice0.py` | pass after status synchronization |
 
 ### Remaining before Slice 1 closeout
 
-- Materialize trace events, pre/post states, dispositions, assessments, diagnostics, compiled configurations, and binding receipts as reference-closed `StoredRecord` bundles rather than only the current deterministic JSON projection.
-- Enforce full recursive reference closure and cycle rejection, complete event-state capture, total disposition records, and manifest/code/fixture drift against stored fixtures.
-- Link each rendered P0 report row to its stored assessment and diagnostic records and add exact expected-versus-actual receipts for every golden trace and canary.
+- Enforce every `ExecutableRule` against its manifest-declared implementation kind, version, required parameters, role/cardinality/schema bindings, output schema, and actual immutable code-artifact hash.
+- Validate typed reference-target schemas where the manifest declares them, rather than only identity/version existence and graph acyclicity.
+- Materialize stored expected-versus-actual receipts for the isomorphic vocabulary canary, non-isomorphic topology canary, and R-OCI-Early adapter compilation; the current core golden traces already have stored expected results.
 - Rerun all gates, record runtime and artifact hashes, update this ledger, and create the required Slice 1 completion commit.

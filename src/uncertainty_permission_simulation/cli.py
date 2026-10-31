@@ -10,6 +10,7 @@ from pathlib import Path
 import yaml
 
 from .applications.robodebt import load_early_adapter
+from .artifacts import build_bundle
 from .configuration import ParameterValue, ScenarioOverlaySpec, compile_configuration
 from .formal_model import render_p0_report
 from .metrics import trace_metrics
@@ -37,7 +38,8 @@ def _specs() -> tuple[TraceSpec, ...]:
 def run_smoke(config_path: Path) -> dict[str, object]:
     config = yaml.safe_load(config_path.read_text(encoding="utf-8"))
     compiled = [compile_configuration(configuration_id=f"SYNTH-{name}", process=canonical_process(), policy=policy(name), overlay=smoke_overlay(), evaluation_spec_id="P0-SIGMA-1") for name in ("U1", "U2C", "U2O")]
-    results = {spec.trace_id: run_trace(spec) for spec in _specs()}
+    specs = _specs()
+    results = {spec.trace_id: run_trace(spec) for spec in specs}
     report = render_p0_report(results["P0-E-PRESERVE"], results["P0-E-FALLBACK"])
 
     renamed = canonical_process("RENAMED-VOCABULARY@1")
@@ -70,6 +72,25 @@ def run_smoke(config_path: Path) -> dict[str, object]:
     }
     output_path = ROOT / config["output_path"]
     output_path.parent.mkdir(parents=True, exist_ok=True)
+    record_bundle = build_bundle(specs, results)
+    if not all(comparison["match"] for comparison in record_bundle["comparisons"]):
+        raise RuntimeError("golden expected-versus-actual comparison failed")
+    report_links: dict[str, dict[str, object]] = {"preserve": {}, "fallback": {}}
+    for record in record_bundle["records"]:
+        payload = record["payload"]
+        if payload.get("payload_kind") != "assessment":
+            continue
+        assessment_id = payload["assessment_id"]
+        arm = "preserve" if assessment_id.startswith("P0-E-PRESERVE") else "fallback" if assessment_id.startswith("P0-E-FALLBACK") else None
+        if arm:
+            report_links[arm][payload["property_or_helper_id"]] = {
+                "assessment_ref": {"object_id": record["meta"]["object_id"], "object_version": record["meta"]["object_version"]},
+                "diagnostic_refs": payload["diagnostic_refs"],
+            }
+    report["artifact_refs"] = report_links
+    records_path = ROOT / config["records_output_path"]
+    records_path.write_text(json.dumps(record_bundle, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    output["record_bundle"] = {"path": config["records_output_path"], "record_count": record_bundle["record_count"], "closure_status": record_bundle["closure_status"]}
     output_path.write_text(json.dumps(output, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     return output
 

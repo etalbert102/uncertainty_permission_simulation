@@ -8,7 +8,7 @@ from pathlib import Path
 import re
 from typing import Any, Literal
 
-from pydantic import BaseModel, ConfigDict, Field, NonNegativeInt, PositiveInt, create_model, model_validator
+from pydantic import BaseModel, ConfigDict, Field, NonNegativeInt, PositiveInt, SerializeAsAny, create_model, model_validator
 import yaml
 
 
@@ -183,7 +183,7 @@ def content_hash(meta: RecordMeta, payload: BaseModel) -> str:
 
 class StoredRecord(StrictModel):
     meta: RecordMeta
-    payload: BaseModel
+    payload: SerializeAsAny[BaseModel]
     content_hash: str = Field(pattern=r"^[0-9a-f]{64}$")
 
     @model_validator(mode="after")
@@ -194,8 +194,9 @@ class StoredRecord(StrictModel):
         domain_id = getattr(self.payload, spec["domain_id_field"])
         if domain_id != self.meta.object_id:
             raise ValueError("payload domain ID differs from envelope object ID")
-        schema = spec["schema"]
-        if (self.meta.schema_id, self.meta.schema_version) != (schema["schema_id"], schema["schema_version"]):
+        schemas = spec.get("schema_variants", [spec.get("schema")])
+        valid_schemas = {(schema["schema_id"], schema["schema_version"]) for schema in schemas if schema}
+        if (self.meta.schema_id, self.meta.schema_version) not in valid_schemas:
             raise ValueError("schema identity differs from manifest")
         if self.content_hash != content_hash(self.meta, self.payload):
             raise ValueError("content hash mismatch")
@@ -228,6 +229,53 @@ class RecordStore:
             return self._records[(ref.object_id, ref.object_version)]
         except KeyError as exc:
             raise ContractError("SCHEMA_REFERENCE_UNRESOLVED", ref.object_id) from exc
+
+    @staticmethod
+    def _refs(value: Any) -> tuple[RecordRef, ...]:
+        found: list[RecordRef] = []
+        if isinstance(value, RecordRef):
+            found.append(value)
+        elif isinstance(value, BaseModel):
+            for field_value in value.__dict__.values():
+                found.extend(RecordStore._refs(field_value))
+        elif isinstance(value, dict):
+            if set(value) == {"object_id", "object_version"}:
+                found.append(RecordRef.model_validate(value))
+            else:
+                for field_value in value.values():
+                    found.extend(RecordStore._refs(field_value))
+        elif isinstance(value, (tuple, list)):
+            for field_value in value:
+                found.extend(RecordStore._refs(field_value))
+        return tuple(found)
+
+    def validate_closure(self) -> None:
+        edges: dict[tuple[str, int], set[tuple[str, int]]] = {}
+        for key, record in self._records.items():
+            refs = set(record.meta.source_refs) | set(self._refs(record.payload))
+            edge_keys = {(ref.object_id, ref.object_version) for ref in refs}
+            for ref in refs:
+                self.resolve(ref)
+            edges[key] = edge_keys
+        visiting: set[tuple[str, int]] = set()
+        visited: set[tuple[str, int]] = set()
+
+        def visit(key: tuple[str, int]) -> None:
+            if key in visiting:
+                raise ContractError("SCHEMA_REFERENCE_CYCLE", key[0])
+            if key in visited:
+                return
+            visiting.add(key)
+            for target in edges[key]:
+                visit(target)
+            visiting.remove(key)
+            visited.add(key)
+
+        for key in edges:
+            visit(key)
+
+    def records(self) -> tuple[StoredRecord, ...]:
+        return tuple(self._records[key] for key in sorted(self._records))
 
 
 validate_model_manifest_inventory()

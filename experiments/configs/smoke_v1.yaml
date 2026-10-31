@@ -2,6 +2,7 @@ config_id: SLICE1-SMOKE-V1
 mode: deterministic
 random_draw_count: 0
 output_path: data/golden_traces/slice1_actual_v1.json
+records_output_path: data/golden_traces/slice1_records_v1.json
 required_profiles: [U1, U2C, U2O]
 required_canaries: [isomorphic_vocabulary, nonisomorphic_topology]
 application_adapter: R-OCI-Early@1

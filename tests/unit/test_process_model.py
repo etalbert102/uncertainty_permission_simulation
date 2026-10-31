@@ -3,9 +3,12 @@ from pathlib import Path
 import pytest
 
 from uncertainty_permission_simulation.applications.robodebt import load_early_adapter
+from uncertainty_permission_simulation.artifacts import BundleBuilder, build_bundle, ref
+from uncertainty_permission_simulation.cli import _specs
 from uncertainty_permission_simulation.configuration import CompilationError, ParameterValue, ScenarioOverlaySpec, compile_configuration
 from uncertainty_permission_simulation.process_model import TraceSpec, execute_topology, run_trace
 from uncertainty_permission_simulation.profiles import canonical_process, nonisomorphic_process, policy, smoke_overlay
+from uncertainty_permission_simulation.schemas import ContractError
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -55,3 +58,35 @@ def test_robodebt_adapter_preserves_unsupported_slots() -> None:
     compiled = compile_configuration(configuration_id="R", process=process, policy=historical, overlay=overlay, evaluation_spec_id="E", application_mapping_id="R-MAP")
     assert compiled.application_mapping_id == "R-MAP"
     assert next(receipt for receipt in compiled.receipts if receipt.slot_id == "response_deadline").provenance == "documented"
+
+
+def test_stored_bundle_is_reference_closed_and_matches_prespecified_results() -> None:
+    specs = _specs()
+    results = {spec.trace_id: run_trace(spec) for spec in specs}
+    bundle = build_bundle(specs, results)
+    assert bundle["closure_status"] == "valid"
+    assert bundle["record_count"] == 707
+    assert all(comparison["match"] for comparison in bundle["comparisons"])
+    assert all(record["payload"] for record in bundle["records"])
+
+
+def test_record_graph_rejects_unresolved_reference_and_cycle() -> None:
+    missing = BundleBuilder()
+    missing.add("ProcessState", "A", {
+        "process_state_id": "A", "case_ref": ref("MISSING"), "stage": "x", "current_route": "x",
+        "prior_escalation": False, "active_review_gate": False, "emergency_authorization": False,
+    })
+    with pytest.raises(ContractError, match="SCHEMA_REFERENCE_UNRESOLVED"):
+        missing.store.validate_closure()
+
+    cycle = BundleBuilder()
+    cycle.add("ProcessState", "A", {
+        "process_state_id": "A", "case_ref": ref("B"), "stage": "x", "current_route": "x",
+        "prior_escalation": False, "active_review_gate": False, "emergency_authorization": False,
+    })
+    cycle.add("ProcessState", "B", {
+        "process_state_id": "B", "case_ref": ref("A"), "stage": "x", "current_route": "x",
+        "prior_escalation": False, "active_review_gate": False, "emergency_authorization": False,
+    })
+    with pytest.raises(ContractError, match="SCHEMA_REFERENCE_CYCLE"):
+        cycle.store.validate_closure()
