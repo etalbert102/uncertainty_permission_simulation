@@ -263,6 +263,189 @@ stored_record:
     - payload_validates_before_hashing
     - content_hash_excluded_from_hash_input
 
+# Every reference-bearing payload field resolves through this matrix unless its
+# payload kind supplies a narrower `reference_targets` override. `any` is an
+# explicit polymorphic exemption; an absent field is a manifest error.
+reference_target_roles:
+  action_comparison_schema_ref: [ActionComparisonSchema]
+  action_ref: [Action]
+  action_refs: [Action]
+  authorization_conditions: any
+  authorization_requirement: any
+  active_case_refs: [FixtureCase, SimulationCase]
+  active_event_refs: [Event]
+  actor_ref: any
+  administrative_access_attribute_refs: [CaseAttribute]
+  affected_action_ref: [Action]
+  affected_action_refs: [Action]
+  aggregation_rule_ref: [ExecutableRule]
+  allowed_transition_rule_refs: [ExecutableRule]
+  applicability_rule_ref: [ExecutableRule]
+  applicability_spec_ref: [ApplicabilitySpecification]
+  application_mapping_ref: [ApplicationMapping]
+  assumption_refs: any
+  authority_ref: [RoleAuthority]
+  authorized_action_refs: [Action]
+  automatic_action_refs: [Action]
+  baseline_selection_ref: [Baseline]
+  binding_refs: [ApplicationBinding]
+  blocked_action_refs_until_review: [Action]
+  blocked_until_review_action_refs: [Action]
+  capacity_parameter_ref: [ScenarioParameter]
+  case_ref: [FixtureCase, SimulationCase]
+  case_state_refs: [PreState, PostState, ProcessState]
+  claim_refs: [Claim]
+  clock_ref: [ClockConfig]
+  compatible_state_ref: [CompatibleStateSet]
+  compatible_state_set_ref: [CompatibleStateSet]
+  compiled_configuration_ref: [CompiledConfiguration]
+  compiled_configuration_refs: [CompiledConfiguration]
+  compiled_target_ref: [ProcessProfile, PolicyProfile, ScenarioParameter, TemporalScope]
+  component_bindings: [Assessment]
+  constraint_action_refs: [Action]
+  context_refs: any
+  correction_rule_refs: [ExecutableRule]
+  deadline_ref: [DeadlineConfig]
+  deadline_refs: [DeadlineConfig]
+  decision_rule_ref: [ExecutableRule]
+  diagnostic_refs: [Diagnostic]
+  disposition_ref: [Disposition]
+  distribution_parameter_refs: [ScenarioParameter]
+  enabled_action_refs: [Action]
+  evaluation_input_bindings: any
+  evaluation_spec_ref: [EvaluationSpecification]
+  evaluation_unit_ref: any
+  event_priority_registry_ref: [EventPriorityRegistry]
+  event_refs: [Event]
+  evidence_ref: [ModelOutput, EvidenceState]
+  evidence_refs: [ModelOutput, EvidenceState, Claim, UntypedField]
+  evidence_scope_rule_ref: [ExecutableRule]
+  evidence_state_ref: [EvidenceState]
+  expected_assessment_specs: any
+  expected_disposition: [Action]
+  expected_value: any
+  excluded_shared_queue_refs: [QueueConfig]
+  excluded_shared_resource_refs: [ResourceConfig]
+  execute_rule_ref: [ExecutableRule]
+  execute_trace_ref: [SystemTrace]
+  extension_rule_refs: [ExecutableRule]
+  false_antecedent_ref: [FalseAntecedent]
+  facts: [CompatibleState]
+  field_refs: any
+  final_action_refs: [Action]
+  final_disposition_ref: [Disposition]
+  final_state_ref: [PreState, PostState]
+  final_system_state_ref: [SystemState]
+  focal_action_ref: [Action]
+  focal_case_ref: [FixtureCase, SimulationCase]
+  gate_config_ref: [GateConfig]
+  gate_policy_rule_refs: [ExecutableRule]
+  gate_refs: [GateConfig]
+  gate_requirements: [Action]
+  gate_state_refs: [GateState]
+  guarded_action_refs: [Action]
+  held_input_bindings: any
+  hold_rule_ref: [ExecutableRule]
+  hold_trace_ref: [SystemTrace]
+  in_service_case_refs: [FixtureCase, SimulationCase]
+  information_action_refs: [Action]
+  information_action_rule_refs: [ExecutableRule]
+  initial_state_ref: [PreState, PostState]
+  initial_system_state_ref: [SystemState]
+  intervention_pair_ref: [InterventionPair]
+  keyed_draw_refs: [KeyedDraw]
+  latent_state_attribute_refs: [CaseAttribute]
+  material_item_ref: [MaterialItem]
+  measurement_rule_refs: [ExecutableRule]
+  model_output_ref: [ModelOutput]
+  noninterference_certificate_ref: [NoninterferenceCertificate]
+  operational_policy_map_ref: [PolicyMap]
+  operational_or_external_consequence: any
+  observed_value: any
+  parameter_vector: any
+  parameters: any
+  parameter_binding_receipt_refs: [ParameterBindingReceipt]
+  parameter_refs: [ScenarioParameter]
+  permission_rule_refs: [ExecutableRule]
+  policy_profile_ref: [PolicyProfile]
+  policy_profile_refs: [PolicyProfile]
+  policy_ref: [PolicyProfile]
+  post_review_action_refs: [Action]
+  post_state_ref: [PostState]
+  potential_record_refs: any
+  pre_state_ref: [PreState]
+  prerequisite_action_refs: [Action]
+  priority_registry_ref: [EventPriorityRegistry]
+  process_profile_ref: [ProcessProfile]
+  process_state_ref: [ProcessState]
+  projection_fact_set_ref: [ProjectionFactSet]
+  proof_artifact_ref: any
+  queue_config_ref: [QueueConfig]
+  queue_refs: [QueueConfig]
+  queue_state_refs: [QueueState]
+  reason_refs: [Claim, Diagnostic]
+  relevance_action_refs: [Action]
+  representation_ref: [Representation]
+  required_action_refs_when_triggered: [Action]
+  required_information_action_refs: [Action]
+  required_intervention_action_ref: [Action]
+  required_meaning_refs: [RequiredMeaning]
+  required_review_action_refs: [Action]
+  resolved_parameter_ref: [ScenarioParameter]
+  resource_config_ref: [ResourceConfig]
+  resource_commitment: any
+  resource_ref: [ResourceConfig]
+  resource_refs: [ResourceConfig]
+  resource_state_refs: [ResourceState]
+  restoration_action_refs: [Action]
+  restoration_rule_refs: [ExecutableRule]
+  reversibility_window: any
+  revalidation_refs: [EvidenceState, Claim, ModelOutput]
+  review_decision_ref: [ReviewDecision]
+  review_state_refs: [ReviewState]
+  role_refs: [RoleAuthority]
+  routing_rule_ref: [ExecutableRule]
+  routing_rule_refs: [ExecutableRule]
+  rule_executions: any
+  rule_ref: [ExecutableRule]
+  scenario_overlay_ref: [ScenarioOverlay]
+  scenario_ref: [Scenario]
+  scheduled_completion_event_refs: [Event]
+  scope_declaration_ref: [ScopeDeclaration]
+  scope_declaration_refs: [ScopeDeclaration]
+  scope_refs: any
+  selected_action_refs: [Action]
+  semantic_correspondence_rule_ref: [ExecutableRule]
+  semantic_projection_rule_ref: [ExecutableRule]
+  semantic_scope_ref: [ModelOutput]
+  service_time_parameter_refs: [ScenarioParameter]
+  shared_keyed_draw_refs: [KeyedDraw]
+  shared_parameter_refs: [ScenarioParameter]
+  source_fixture_ref: [SourceApplicationFixture]
+  source_fixture_refs: [SourceApplicationFixture]
+  source_rule_refs: [ExecutableRule]
+  source_value_ref: any
+  stage_ref: [ProcessStage]
+  stage_refs: [ProcessStage]
+  state_refs: [CompatibleState]
+  surfacing_deadline_rule_ref: [ExecutableRule]
+  target_owner_ref: [ProcessProfile, PolicyProfile]
+  taxonomy_ref: [Taxonomy]
+  temporal_scope_ref: [TemporalScope]
+  termination_diagnostic_refs: [Diagnostic]
+  timeout_rule_refs: [ExecutableRule]
+  trace_ref: [Trace, SystemTrace]
+  trace_specification_ref: [TraceSpecification]
+  transformation_ref: [ExecutableRule]
+  transformation_rule_refs: [ExecutableRule]
+  transition_rule_refs: [ExecutableRule]
+  trigger_rule_ref: [ExecutableRule]
+  value: any
+  counters: any
+  valid_until_boundary_rule_ref: [ExecutableRule]
+  validity_rule_refs: [ExecutableRule]
+  waiting_case_refs: [FixtureCase, SimulationCase]
+
 auxiliary_schema_families:
   formal_model.boolean_predicate:
     schema_version: 1
@@ -1790,7 +1973,10 @@ manifest_gates:
     owner: artifact_layer
     checks:
       - every_record_ref_resolves
+      - every_reference_bearing_payload_field_has_a_target_role_or_explicit_any_marker
+      - every_target_role_names_only_declared_payload_kinds
       - every_reference_target_kind_is_allowed
+      - golden_bundle_exercises_nonempty_typed_target_edges
       - no_partial_embedded_stored_record
       - persisted_reference_graph_is_topologically_constructible
       - aggregate_child_edges_have_no_versioned_back_reference

@@ -400,7 +400,7 @@
   "record_bundle": {
     "closure_status": "valid",
     "path": "data/golden_traces/slice1_records_v1.json",
-    "record_count": 707
+    "record_count": 721
   },
   "robodebt_adapter": {
     "configuration_id": "R-OCI-EARLY-SMOKE",

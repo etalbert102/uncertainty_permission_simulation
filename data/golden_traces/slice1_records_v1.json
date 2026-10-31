@@ -125,7 +125,7 @@
       "object_version": 1
     }
   },
-  "record_count": 707,
+  "record_count": 721,
   "records": [
     {
       "content_hash": "f4da1797a66fb27ddfaffc0f3d27a4ef3ef1d24ec86cc5085bd02bff861913fb",
@@ -428,7 +428,7 @@
       }
     },
     {
-      "content_hash": "d44a830ba370850765286372b87f6ddf8812caf8c29f41b9d1ad3af168809c2d",
+      "content_hash": "954f130753e4fc98f0bc88e81f6048c6bbf8212d9815c8306f3a871d8f564c54",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -523,13 +523,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-IMPUTE-NONRESPONSE-E001-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "2b753a6b87a6220fcd8e41ecf4560221e143270112239be7c67bf187de5b325e",
+      "content_hash": "65080c3b9dea6183f8fa91df36ce60d78b9fe0858891a73888e5901694e701f7",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -624,7 +624,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-IMPUTE-NONRESPONSE-E001-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -782,7 +782,7 @@
       }
     },
     {
-      "content_hash": "225fde557a3d3552c4b994bf918e58f9e2294252c513598565466f94d33f7d65",
+      "content_hash": "3f803e8bcc22dc454fde33d70b2968e004fc589b1655f2b71fd6492b95548b71",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -877,13 +877,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-IMPUTE-NONRESPONSE-E002-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "5eac919f47f0957e750af082225e5d02d174092fd09b25dc4e214f299947f772",
+      "content_hash": "b924a00dab535dba27f0c4343530fa681f2b0b2a192830bfa6a4f835313c99fc",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -978,7 +978,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-IMPUTE-NONRESPONSE-E002-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -1136,7 +1136,7 @@
       }
     },
     {
-      "content_hash": "d8ffaff3cb2f6f3263dea486c09d9e7aab9172f571ba4ab722a6ea9ab1183153",
+      "content_hash": "4bd3878e70cdf8b5eeb6ae9e4341fdb3775156dedbe30a4a4130b09c2546e671",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -1231,13 +1231,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-IMPUTE-NONRESPONSE-E003-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "8ae79b44ba7564a85770bb3b6ddbcf8a7b802633f0aa8ef33d32a8e62e5717bc",
+      "content_hash": "d5c9c19ea25fbddaebf5346f898a64ca5d898de55886dd61618f8cdbe2442033",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -1332,7 +1332,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-IMPUTE-NONRESPONSE-E003-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -1490,7 +1490,7 @@
       }
     },
     {
-      "content_hash": "74114d005fd9de0c9feaba2da72afe52c33f46eb208c8c66eec87b0c6f366010",
+      "content_hash": "b5161ce947a9240314aab8a696ba5a4dc5f3e0831ae9d3c736858e539a35112c",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -1585,13 +1585,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-IMPUTE-NONRESPONSE-E004-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "375d38f5b9569366ef139ed961b3a997cf6056d419303eb3577f15f8181882c7",
+      "content_hash": "13f0d3bc6a735660d7489366f05392cf29ea7e85cb219b328ee1bf5ee6c9fbc0",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -1686,7 +1686,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-IMPUTE-NONRESPONSE-E004-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -1844,7 +1844,7 @@
       }
     },
     {
-      "content_hash": "d1764e17291e8d015ef7c5cda3a485f881af45968d3796083ac5631b80123230",
+      "content_hash": "85ff72f85e3692b0664816bc1f3de7efa43ccecb40ecb87b57cb75406e57e734",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -1939,13 +1939,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-IMPUTE-NONRESPONSE-E005-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "820424d808b0938a12625f6bc2809f6826a4e5c38457065d732a1e4963961860",
+      "content_hash": "6be21722d3d0f8ce4e5ee5a5e8b6b72f731858f51d30eb1cc8d1edb24cc2c883",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -2040,7 +2040,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-IMPUTE-NONRESPONSE-E005-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -2198,7 +2198,7 @@
       }
     },
     {
-      "content_hash": "63322d52526469d67b114b642cf883e5d0e7c778677a05dc3e3430274dafc4fa",
+      "content_hash": "a880b05192c4d72dd24028563ae18efc52c2e555106cf2c0b4f8be87376f3126",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -2293,13 +2293,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-IMPUTE-NONRESPONSE-E006-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "8d2fb9224d30fa115a1a287e732a189f5439566d299fe6a38c4ff33f92f2e2e9",
+      "content_hash": "2bd4b6913678dc811ee220125ce518d77dd1cfb2c1e07832163a54ffa2973f87",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -2394,7 +2394,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-IMPUTE-NONRESPONSE-E006-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -2552,7 +2552,7 @@
       }
     },
     {
-      "content_hash": "ff3c9de3fe5d1acc047a6f6eb28c3ccf3a215492baab66ea6e6e5f0e1f22f6be",
+      "content_hash": "dee65c35f91db887268e8d22548d92042498f1677ba3ec0e2f133f0d56124471",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -2647,13 +2647,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-IMPUTE-NONRESPONSE-E007-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "d97aeb37d99cda58254209c4fea5f8de45e86b7614fc66826d7610e9bfdf4fa9",
+      "content_hash": "6d6b411534dfc25c081a321928fe9959772c52a9c04f2d6f981682229e307291",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -2748,7 +2748,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-IMPUTE-NONRESPONSE-E007-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -2906,7 +2906,7 @@
       }
     },
     {
-      "content_hash": "cf454aaaeba12b572be06da5095a724b8169658fe3b34df52fc2043f7c5dd8dd",
+      "content_hash": "48fcaa73b006116ed42b61a4b45577e107f4a29b1bdcfa5b5911d7eb3123cf47",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -3001,13 +3001,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-IMPUTE-NONRESPONSE-E008-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "a42b84c9c0a7d20c43d22cabd17b5612e840113a65e8dd85fd28fdd125a629a9",
+      "content_hash": "3b0bf35cf1e950f41f884e6330c31c3b137d785c23ba3ed436811357fe3d394a",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -3102,7 +3102,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-IMPUTE-NONRESPONSE-E008-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -3260,7 +3260,7 @@
       }
     },
     {
-      "content_hash": "6bd75f1bbb0977682a34dfcf63f02a13524a86a4c18a2f190591832125791f16",
+      "content_hash": "16333fb28f203f2f9ae0d264d296b335943e865e65e5a865be6a2bd0dae320b6",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -3355,13 +3355,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-IMPUTE-NONRESPONSE-E009-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "91bd07a5d58228231af3f0817ced95cbe791cc8d6245a04e91fd4840a0d09efe",
+      "content_hash": "1e6e9aceba973af9484c81df40380879d982fb6febff12b0e6387a685646a4d5",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -3456,7 +3456,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-IMPUTE-NONRESPONSE-E009-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -3614,7 +3614,7 @@
       }
     },
     {
-      "content_hash": "55ab94dbfb3b42559d16c51e88ec8a3b318e4e9e6e922c2628bae6028040bf28",
+      "content_hash": "3da478a95b5612312acd0f2ff4264135f2e00631cb703fc21795992d271faf27",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -3709,13 +3709,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-IMPUTE-NONRESPONSE-E010-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "2440a5ccd9a905e60bb3a6afd64ef4229f032d973c93e5e09605ab0b0e3658bb",
+      "content_hash": "0e969c98fb6c56f1e34d2fd58b6116f43c68dc7bb9f4a1ea64c66546d2ebfe27",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -3810,7 +3810,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-IMPUTE-NONRESPONSE-E010-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -3973,7 +3973,7 @@
       }
     },
     {
-      "content_hash": "c8c40a2933e5100b14889af152ea41d4f083c347c29262610e162de7dea28b55",
+      "content_hash": "6fa6243dd2a56a78f47122037ce7792358e6044a2fb230c676a6b05b1ad1256f",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -4073,13 +4073,13 @@
         ],
         "state_snapshot_id": "GOLDEN-IMPUTE-NONRESPONSE-E011-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "e528f9237bc1faa8f71047b121860d9b016c3f8e6673b43ac689022f1feca4ac",
+      "content_hash": "8f83e41ac7205f44c2227cafc604e592647ae75cc11e31d983d18ca89ac2116e",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -4174,7 +4174,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-IMPUTE-NONRESPONSE-E011-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -4332,7 +4332,7 @@
       }
     },
     {
-      "content_hash": "c6ddebba913f56a49f15b4a8a64569a9563df755fd81d42cd39324d8aef7e5ac",
+      "content_hash": "2d77fa76cfdc97e5ef860896f82e9c5cb360947eaa13fe80efefcec5f5231886",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -4427,13 +4427,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-IMPUTE-NONRESPONSE-E012-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "903a5bb32b8dfaf6c7e2e34e72c595274a82c8ab318a6a98bfde502f521e828f",
+      "content_hash": "26ce88a7f6f0c9a42dc2fafec2c2bd40e39858cb30b9c8bfa45b1669e8e82dc1",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -4528,7 +4528,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-IMPUTE-NONRESPONSE-E012-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -4623,6 +4623,41 @@
       }
     },
     {
+      "content_hash": "a0cd855a23b034c2dec723276276d0e8090e45372e0ec9acc1eeeb241ac71d69",
+      "meta": {
+        "canonicalization_id": "UPS-CANONICAL-JSON",
+        "canonicalization_version": 1,
+        "object_id": "GOLDEN-IMPUTE-NONRESPONSE-FIELD",
+        "object_version": 1,
+        "owner_id": "SLICE1-UNTYPEDFIELD-OWNER",
+        "provenance_status": "derived",
+        "schema_id": "P0-SCHEMA-UNTYPED-FIELD",
+        "schema_version": 1,
+        "source_basis": "versioned_sources",
+        "source_refs": [
+          {
+            "object_id": "SLICE1-MODEL-OUTPUT",
+            "object_version": 1
+          },
+          {
+            "object_id": "SLICE1-TRANSFORM-FALLBACK",
+            "object_version": 1
+          }
+        ]
+      },
+      "payload": {
+        "field_id": "GOLDEN-IMPUTE-NONRESPONSE-FIELD",
+        "field_kind": "untyped",
+        "field_name": "object_class",
+        "value": "vehicle",
+        "visibility": [
+          "policy_evaluator",
+          "router",
+          "reviewer"
+        ]
+      }
+    },
+    {
       "content_hash": "4425cbca4d419176b9d355a1baceb94c26bcadc3c28bcc7100061ea65f72945f",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
@@ -4685,7 +4720,7 @@
       }
     },
     {
-      "content_hash": "b02360bd37a7e83177335d564efcbb6aeb9464b1bc830ddb17a21c967abce167",
+      "content_hash": "b818ce1490728ba7bcc9950a0cdd07f7e9afe5dccc0a8ba8158c2b680163e42b",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -4700,18 +4735,31 @@
           {
             "object_id": "SLICE1-MODEL-OUTPUT",
             "object_version": 1
+          },
+          {
+            "object_id": "SLICE1-TRANSFORM-FALLBACK",
+            "object_version": 1
+          },
+          {
+            "object_id": "GOLDEN-IMPUTE-NONRESPONSE-FIELD",
+            "object_version": 1
           }
         ]
       },
       "payload": {
-        "field_refs": [],
+        "field_refs": [
+          {
+            "object_id": "GOLDEN-IMPUTE-NONRESPONSE-FIELD",
+            "object_version": 1
+          }
+        ],
         "payload_kind": "representation",
         "provenance_visible": false,
         "representation_id": "GOLDEN-IMPUTE-NONRESPONSE-REPRESENTATION"
       }
     },
     {
-      "content_hash": "9d81314125d063e64ed58ea7f97e01f9e12848d01a018b6e4c5f6bf0aac75df8",
+      "content_hash": "83ad77ff448243fbe62ed89e8cb33d7a1b2a8f08f05165fbb25a66d3f654de2c",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -4729,6 +4777,10 @@
           },
           {
             "object_id": "SLICE1-MODEL-OUTPUT",
+            "object_version": 1
+          },
+          {
+            "object_id": "SLICE1-TRANSFORM-FALLBACK",
             "object_version": 1
           },
           {
@@ -4755,7 +4807,7 @@
         },
         "trace_specification_id": "GOLDEN-IMPUTE-NONRESPONSE-SPEC",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -5085,7 +5137,7 @@
       }
     },
     {
-      "content_hash": "36018f54b772f8c596eaa5bed33e8afd55c9642e57418962a9fb37ab79270e7a",
+      "content_hash": "8d093aed8c97da60be91a6be7212cf3bf2371c9ce9ca5b51c9b16b62f7f55d76",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -5180,13 +5232,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-PARTIAL-RESTORATION-E001-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "1a0492a8324f04e3e8b1ebff42cc1861c9eb547d2d0615ece2615a79ed2abd57",
+      "content_hash": "34d7a39de87f95614f40d8a84d3acc5ac00b26cbe604250e1d3759d08babd5dc",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -5281,7 +5333,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-PARTIAL-RESTORATION-E001-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -5439,7 +5491,7 @@
       }
     },
     {
-      "content_hash": "31169645bc7921c03413921b8dea530252e5679ff7d29e925b5056e8bed04a19",
+      "content_hash": "0298b201e98df2b8e1374a47f0b1337598289ac170a46e4c45cf1b5e52d5242a",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -5534,13 +5586,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-PARTIAL-RESTORATION-E002-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "5b1c19cecb691117073a0478a65df1419b4dee8281304c6be5c02d47aeede84e",
+      "content_hash": "1d5decc69f84fc65dfacfb01943e28897efc2e87b27c0faa9ee987a9b5b9fd87",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -5635,7 +5687,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-PARTIAL-RESTORATION-E002-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -5793,7 +5845,7 @@
       }
     },
     {
-      "content_hash": "8eec19f89d27369c88d8a4b74ca453f6aacd1c537c05f6c5982c3bc418d52fbb",
+      "content_hash": "513ab34ad77e59fc561749300460cfb3b0b4b45dd0cb92298a89b9e524f5e62c",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -5888,13 +5940,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-PARTIAL-RESTORATION-E003-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "aec25de3294414b720977fa057d43cab730eae5392a4c7f7785122061074269d",
+      "content_hash": "b01d82c6b6b556ee72d3aefa65f270e779b2e8e0454ff9b4150c929b24b0a993",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -5989,7 +6041,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-PARTIAL-RESTORATION-E003-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -6147,7 +6199,7 @@
       }
     },
     {
-      "content_hash": "a57f73a3342e8bd7b099280f5bc54dc6ac53c15dcbb612c0e3d2bc0d17becd6b",
+      "content_hash": "3ed818600cc9fc95ce9a34fd116dd1dc92ec74d1dbec888bbc38709cb66fdf70",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -6242,13 +6294,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-PARTIAL-RESTORATION-E004-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "7c1099fbd2271e8165b072a58e12b0891b44b620c555f270bb4b200eb3de7b0a",
+      "content_hash": "7066e9d33e379427af64967165325347df0eed859d9d46b3d4bd86f68f22d77e",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -6343,7 +6395,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-PARTIAL-RESTORATION-E004-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -6501,7 +6553,7 @@
       }
     },
     {
-      "content_hash": "002c613afd47cec52f410cfe8a78d0e603d6dab14a0f12478d960339b5b7cabb",
+      "content_hash": "376cafd6c57aa40eeccb7ce793f88cda7b84f8145cd9f3540b02c96d885fed28",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -6596,13 +6648,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-PARTIAL-RESTORATION-E005-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "d6849df982ac2ffd6dcccc830293482d731a20d06886de4bfac43671556c2c98",
+      "content_hash": "7b5eb83750aab565887139077e42573f97bc58b07e1632ab509095225870bef6",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -6697,7 +6749,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-PARTIAL-RESTORATION-E005-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -6855,7 +6907,7 @@
       }
     },
     {
-      "content_hash": "07a2ff3d040512bbc7acd154e6acc04d36c8c6cbd6070bdae1a95f8ffd0bea88",
+      "content_hash": "758f5498d451638d3b8de3cb0012349ba1015fb7889f04963ad9d9f09fc75aaf",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -6950,13 +7002,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-PARTIAL-RESTORATION-E006-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "7e931025f4530d7959b78826917510560ee71d0089cb49bf7cfd09d601fbfd53",
+      "content_hash": "5e6a6aa04c820c12e4df5265024f21693c46f07e9eba8fe579d2a02abf57834e",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -7051,7 +7103,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-PARTIAL-RESTORATION-E006-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -7209,7 +7261,7 @@
       }
     },
     {
-      "content_hash": "dbc0c7773c7b38b8b9f592cfc2dc27693b6641f28f44864e109cded843cfadce",
+      "content_hash": "b95e59ae922db30c4d7d080e5897b003fc87c1fd7f38d503b0d7d6a303ff2929",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -7304,13 +7356,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-PARTIAL-RESTORATION-E007-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "b3baecbbcade3b69d985dbe9b0d950ae9bceb2e4052e5c9081d3149362113b08",
+      "content_hash": "7759226b4fed65c4bcf7de0674039538cbb1c487b48e5827371c7603ef720f9b",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -7405,7 +7457,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-PARTIAL-RESTORATION-E007-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -7563,7 +7615,7 @@
       }
     },
     {
-      "content_hash": "88d54d1d0cfc0c3f129b620e9747a5f7c8bb21e68db4a54519998a9ebd977447",
+      "content_hash": "792dfb5567de14fa19199a4400c7baab507587354577fb5d6cba795f92f2fd67",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -7658,13 +7710,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-PARTIAL-RESTORATION-E008-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "d7ed786b22982a99bdb2d08ded0da899e966fee7d2a74b5d7ca4e090eeb900e5",
+      "content_hash": "63a767b4957582d7e1adb401663e24af8817903ddac8d74fd7be252edc8e221c",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -7759,7 +7811,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-PARTIAL-RESTORATION-E008-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -7917,7 +7969,7 @@
       }
     },
     {
-      "content_hash": "b3a0a6cce9998c23670addf516e4d38c50bea0862e656401b228074336f39006",
+      "content_hash": "34e306b99174c6bae3aac1803f1594469298df122a8f1d7d9d5714f66102fade",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -8012,13 +8064,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-PARTIAL-RESTORATION-E009-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "a519b82606fdd1eb3d206225d65e1f636f589bd24d8fa34fda818c3c54f40aba",
+      "content_hash": "bc5cb78aed3c66c51c8cfcc8857db31a69b347e11288d4a2dc2e64198def67a8",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -8113,7 +8165,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-PARTIAL-RESTORATION-E009-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -8271,7 +8323,7 @@
       }
     },
     {
-      "content_hash": "759e50219ac9a5258487479d97e6eae671b5cfddda0c1848d21b552ae3e094a8",
+      "content_hash": "acd9ad69dcb452ba911f56f4368fc12c4712385e1d1864c9f6cdf94b57b7c742",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -8366,13 +8418,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-PARTIAL-RESTORATION-E010-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "2c1e1a983aa27c4414ee30d6bc74ea9cf390604a381180367e87900b030adf12",
+      "content_hash": "6ac2b8e6232d7f85f76a16df2e82f78fc20e7117f9d5780dd210b954a295f5df",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -8467,7 +8519,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-PARTIAL-RESTORATION-E010-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -8630,7 +8682,7 @@
       }
     },
     {
-      "content_hash": "9adc8ac61a17f5b30dc3ed86d8061174b7aaf6d1ae063a15a85785f6182c9518",
+      "content_hash": "f41a9a66d57c4cc7ef599a73be7fc9be70aa4409ba3dd01f89705c74e3b32961",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -8730,13 +8782,13 @@
         ],
         "state_snapshot_id": "GOLDEN-PARTIAL-RESTORATION-E011-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "6a355048f758d18fcb4465ab65a0f3c76a62843f45c98fee30d56f343086b689",
+      "content_hash": "4de576289b956ba60b872d3fb8507cf3ebbdb08b1f36ec7b33819dc915654ffb",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -8831,7 +8883,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-PARTIAL-RESTORATION-E011-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -8989,7 +9041,7 @@
       }
     },
     {
-      "content_hash": "59a832baa779e758f3023e1f8a23cdfead4016774cb476b97139a3c774ab216c",
+      "content_hash": "9d7e7225671e073ae767514f491cdd43d13e257ed1e45f51f664d54c928dc923",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -9084,13 +9136,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-PARTIAL-RESTORATION-E012-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "e86550bd8d2e626e43061857651e87cd4cff0bdfdb6061ab5f624ee1c56a56f5",
+      "content_hash": "a495cbb3e638743e92629586cd2764e1b850619a949689dc035e2e5ca14c5750",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -9185,7 +9237,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-PARTIAL-RESTORATION-E012-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -9343,7 +9395,7 @@
       }
     },
     {
-      "content_hash": "73a4af5bdf477f0f17e706a4b198e2481e132a6eb28b467501fd3dce6d211b28",
+      "content_hash": "d28794e3f4c1474aae138e28c43a84f0d7927bd9a60fd47836cdd0bacbecadb1",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -9438,13 +9490,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-PARTIAL-RESTORATION-E013-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "ff64fd6844823e3e3176f3b3bb395295f925ca355d0a320372ae9af0768e4c40",
+      "content_hash": "50f41495700959dc4c6946a7bc8e454e04ad655ab3d2baa7d81533403917a243",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -9539,7 +9591,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-PARTIAL-RESTORATION-E013-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -9697,7 +9749,7 @@
       }
     },
     {
-      "content_hash": "82319225ae723baf3cdff1a7aab39471207ab87f78f6c3d3515e51f9a46f1118",
+      "content_hash": "ba39a935f07b964e7dee8b14126be502dea65e2a172db48bbfca5eeb693d4055",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -9792,13 +9844,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-PARTIAL-RESTORATION-E014-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "24146c4753508f5beed3765ffe87af66cb8a6c711fd9093a7fab16650df4617b",
+      "content_hash": "148f287c49b2491d8ffddd99fbf217dd7268601cb9e19e0ac338743e206f7c7e",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -9893,7 +9945,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-PARTIAL-RESTORATION-E014-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -10051,7 +10103,7 @@
       }
     },
     {
-      "content_hash": "b6deed6b3ce8d8759bd6eba12d89cf46ee1e407606e647cedd21ede18100c9ab",
+      "content_hash": "11c3c7e59d6e90361276c33ba22a313e1d41a0cd44aef4cbbb5c9d13fa0f5d23",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -10146,13 +10198,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-PARTIAL-RESTORATION-E015-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "6bd2bc4c4f9968da621de9cba46ba319ecee51bbbfb9f08830dbe9b5e404dcff",
+      "content_hash": "c418e92f43d485d6ffe05616d176140925f5cba97cd486b49031a32e9779b1d8",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -10247,7 +10299,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-PARTIAL-RESTORATION-E015-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -10342,6 +10394,41 @@
       }
     },
     {
+      "content_hash": "e9916638da267ceeb0e5fed98d684fdde6e87521fd13ac5066f4f8d405a14991",
+      "meta": {
+        "canonicalization_id": "UPS-CANONICAL-JSON",
+        "canonicalization_version": 1,
+        "object_id": "GOLDEN-PARTIAL-RESTORATION-FIELD",
+        "object_version": 1,
+        "owner_id": "SLICE1-UNTYPEDFIELD-OWNER",
+        "provenance_status": "derived",
+        "schema_id": "P0-SCHEMA-UNTYPED-FIELD",
+        "schema_version": 1,
+        "source_basis": "versioned_sources",
+        "source_refs": [
+          {
+            "object_id": "SLICE1-MODEL-OUTPUT",
+            "object_version": 1
+          },
+          {
+            "object_id": "SLICE1-TRANSFORM-FALLBACK",
+            "object_version": 1
+          }
+        ]
+      },
+      "payload": {
+        "field_id": "GOLDEN-PARTIAL-RESTORATION-FIELD",
+        "field_kind": "untyped",
+        "field_name": "object_class",
+        "value": "vehicle",
+        "visibility": [
+          "policy_evaluator",
+          "router",
+          "reviewer"
+        ]
+      }
+    },
+    {
       "content_hash": "cd5af0fd884205dc409a65217cae70976e9439ef3ebdb4dc3531c3876ce3fe3f",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
@@ -10404,7 +10491,7 @@
       }
     },
     {
-      "content_hash": "60a89a745edfe0fd75e9ce188bb987d786e5a4b662da3d4453c2cf5291e0e956",
+      "content_hash": "0560aca2803740a8311398002517b49eec75af566c8134d751876f1d091f799d",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -10419,18 +10506,31 @@
           {
             "object_id": "SLICE1-MODEL-OUTPUT",
             "object_version": 1
+          },
+          {
+            "object_id": "SLICE1-TRANSFORM-FALLBACK",
+            "object_version": 1
+          },
+          {
+            "object_id": "GOLDEN-PARTIAL-RESTORATION-FIELD",
+            "object_version": 1
           }
         ]
       },
       "payload": {
-        "field_refs": [],
+        "field_refs": [
+          {
+            "object_id": "GOLDEN-PARTIAL-RESTORATION-FIELD",
+            "object_version": 1
+          }
+        ],
         "payload_kind": "representation",
         "provenance_visible": false,
         "representation_id": "GOLDEN-PARTIAL-RESTORATION-REPRESENTATION"
       }
     },
     {
-      "content_hash": "9b559c3fac20b4fcad8270b8be6e9aeec38512c82924734a6259120e9ac710ef",
+      "content_hash": "3eeb86d378ca276f50f26f42c1afc4f8d3b62f7084927d13b4f087c934d6b090",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -10448,6 +10548,10 @@
           },
           {
             "object_id": "SLICE1-MODEL-OUTPUT",
+            "object_version": 1
+          },
+          {
+            "object_id": "SLICE1-TRANSFORM-FALLBACK",
             "object_version": 1
           },
           {
@@ -10474,7 +10578,7 @@
         },
         "trace_specification_id": "GOLDEN-PARTIAL-RESTORATION-SPEC",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -10820,7 +10924,7 @@
       }
     },
     {
-      "content_hash": "b248374e399155d0295fdd7f10e2c7e26939fd88338cdee6df3481264424b92a",
+      "content_hash": "e3ef5293800feccf06c88adf8b94169eebe6145c5775511f834441384296a95f",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -10915,13 +11019,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-SUPPORTED-PROGRESSION-E001-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "5d32dbf64b68b9ad0a1b5f699921c10848d88bec646a98de3dba70cff694f454",
+      "content_hash": "9faf726475c9d4299f48d04101081e2b7cd3305e069e77edf7d3689538f5b736",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -11016,7 +11120,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-SUPPORTED-PROGRESSION-E001-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -11174,7 +11278,7 @@
       }
     },
     {
-      "content_hash": "91091650ef7e4e7aed4d279a021557517eea6bba5398b577ffe6fc81e984181a",
+      "content_hash": "8aa8ee2de30e5dcefb2df42e99f0706a1dbb29f2ba5d46277083b97ceaf6d60d",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -11269,13 +11373,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-SUPPORTED-PROGRESSION-E002-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "ab8b48e1329f5d800e8a64636710ba5324f2f9219d035790d623fee377a82f61",
+      "content_hash": "f62af5beb93167ad8f55165b426ca63d37ab7fb2586c8d2c6aae9e0f0854fff8",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -11370,7 +11474,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-SUPPORTED-PROGRESSION-E002-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -11528,7 +11632,7 @@
       }
     },
     {
-      "content_hash": "288088257dddd22847d385871ad5455add92804c1e61ba56f013fe79b9257636",
+      "content_hash": "97a900d57b93dc26a4bd42e9c09d29a57cf8937aea90a9748aa3771af04d1c74",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -11623,13 +11727,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-SUPPORTED-PROGRESSION-E003-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "0aa5833bcd7bdaf0deb8252a3cda55dd3168065d8632e261be62dc9df9e4c518",
+      "content_hash": "44636c31321ffaebd73cbe4f06f61de2503b1a7bfb1a41be792fdb2c4d6a51d5",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -11724,7 +11828,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-SUPPORTED-PROGRESSION-E003-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -11882,7 +11986,7 @@
       }
     },
     {
-      "content_hash": "a6538f6f10732bdab6d7af16f9b81728e4bdb8d638c71236699c3443bfbdb3d8",
+      "content_hash": "878611747551058bcb8a0fdcf184d9e146024b2a3d075d83207527cda737769c",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -11977,13 +12081,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-SUPPORTED-PROGRESSION-E004-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "207b24cfcd91d79d1a4d54523a47b14be3a6de0ba66a39cb35a520ed5a837f8d",
+      "content_hash": "666866fea3b155ccdb2037e88961b09ea437974934ba60b5ca413f6e74ef66b9",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -12078,7 +12182,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-SUPPORTED-PROGRESSION-E004-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -12236,7 +12340,7 @@
       }
     },
     {
-      "content_hash": "0c57ae8f3bd628bfa66c325f531cee8e0add09302e104a8e0f7283904fed02a3",
+      "content_hash": "2689e881cccbda4348bd9bbcdf129eeea59ca90ef46195ac47dc5f6f32ba830a",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -12331,13 +12435,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-SUPPORTED-PROGRESSION-E005-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "10ae8e0590feaa61a9bc84c78417aface9a1495a9a1d1bb9a3ca1d1385b2358c",
+      "content_hash": "c162dc1ba7edafd7635693ae17ed120ce2f49d381af1bf69a58b4f7d3af98d0c",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -12432,7 +12536,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-SUPPORTED-PROGRESSION-E005-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -12590,7 +12694,7 @@
       }
     },
     {
-      "content_hash": "baeb315f50f932602082d4809bf74481fe6de843cfe876ce5337f7a3ace7fb04",
+      "content_hash": "6222a873de8b8dc6d5ad4d56a006f6666d1b9cd4e7d47185091e4404111bf4de",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -12685,13 +12789,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-SUPPORTED-PROGRESSION-E006-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "9e2d524627b5f6828d24f9ee960a8c8d020b8ec5fd7287ac1ae0596fcb9f3af5",
+      "content_hash": "c0cb63b6a589947ce99cc510f79067e5ebf5029ba36d3444942620cbccb650bf",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -12786,7 +12890,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-SUPPORTED-PROGRESSION-E006-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -12944,7 +13048,7 @@
       }
     },
     {
-      "content_hash": "1233e7fc3ca2863e2d43495dae4787060e9ba94487629092c5c84db2a6ba2fa0",
+      "content_hash": "ad40c1993384147cfb3ddf8fe0c99c0748a0c285b365c08707b2f7dc5233372c",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -13039,13 +13143,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-SUPPORTED-PROGRESSION-E007-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "967b75e66302bec532c48bc06538c1cf24860ce7fc302d1a579eeea41f7094f4",
+      "content_hash": "09ccaa9e747e121dfb6891e311c37a094050358822fefaf1945c6c91cef125d8",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -13140,7 +13244,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-SUPPORTED-PROGRESSION-E007-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -13298,7 +13402,7 @@
       }
     },
     {
-      "content_hash": "27794ba62ba362bc8ccc866fcd23ca54c5c3913badd5c1ad2dfe483e7ba83d62",
+      "content_hash": "0a78eed917356bf08998dcc87b1dae1bfcdd533bf624c7cdab6cc4b818f125eb",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -13393,13 +13497,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-SUPPORTED-PROGRESSION-E008-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "78836e3637fef2a8cdbcd34e7fa050fb9522016520188220308c86254ba05d94",
+      "content_hash": "3bf0fc87a75714e5109ed2c1a422a8bd2c59c3e4462039605471404cec1739f9",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -13494,7 +13598,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-SUPPORTED-PROGRESSION-E008-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -13652,7 +13756,7 @@
       }
     },
     {
-      "content_hash": "327b5ca5f6d1a74db286b839c8464aeecf672cabfa6e8056e15459952b8818e3",
+      "content_hash": "84489ab20f1af2cae61a6b467253f2b0c1402bc9cc0b1dad881107975f92f517",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -13747,13 +13851,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-SUPPORTED-PROGRESSION-E009-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "d7ddf20bb1e6e094f90ab22c7e8a79588b75b1de0abe163432c8426bb531c0f2",
+      "content_hash": "b8697f0215ee5eb894e5c27d24ec6f9b24f5459025d6ff2eea3b02138292a1e6",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -13848,7 +13952,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-SUPPORTED-PROGRESSION-E009-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -14006,7 +14110,7 @@
       }
     },
     {
-      "content_hash": "b7ba4e5c2463c9c957e612ef59df9a9f94cce64738fa38ec40ffd658d06b0485",
+      "content_hash": "26c55788b21e73b76aca649c09ca3683859f008b51350f9d7c1246e22b809d31",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -14101,13 +14205,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-SUPPORTED-PROGRESSION-E010-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "3786b39b4581bc7a30baeacaf7a7519660ba37f2fc1908261454d56172662a65",
+      "content_hash": "1b9bac7d404431580420a0828b84c2c375a529e76496e797ae8130f9f6c467d1",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -14202,7 +14306,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-SUPPORTED-PROGRESSION-E010-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -14360,7 +14464,7 @@
       }
     },
     {
-      "content_hash": "fd9647858e01fb16b3d25d063371f0484722545f99612a67bcdb048b37d80452",
+      "content_hash": "b75e11c2df839c42761e9b83bc9798e0d2749030b59b802fed62b99b64e229a6",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -14455,13 +14559,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-SUPPORTED-PROGRESSION-E011-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "aa80a5cade5b342bdfcf16464d79f5b1c875e675f34fd9eefc6c819606fa9b78",
+      "content_hash": "a4cf1793aae9e4f7d9f5b5b5069a9e7b982d1ddc470ba3c30255182058172ab2",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -14556,7 +14660,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-SUPPORTED-PROGRESSION-E011-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -14714,7 +14818,7 @@
       }
     },
     {
-      "content_hash": "00a68cbc9ceaf03d01a12f4a9bdb6e1bb11a4ae091701cff2b8e66ff4b2af598",
+      "content_hash": "65657d17b266497dff0b6d5cb8c57c5b980bb055583a0a13d133de0011364a4c",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -14809,13 +14913,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-SUPPORTED-PROGRESSION-E012-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "9269ff4fee000861d4c631d6e24bf3a388f1e39b82d11d9c5963bc2b0cc3584f",
+      "content_hash": "ef2b93a9c98f246c1c4df87a6e5b5b7b62ab88677f248760729095d64c978220",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -14910,7 +15014,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-SUPPORTED-PROGRESSION-E012-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -15068,7 +15172,7 @@
       }
     },
     {
-      "content_hash": "31e8928dc675a142ee348a34fb7e423b3f38302e54b29fc4fb77a0f4544ae7a9",
+      "content_hash": "e20c4a1d0f4a2d28931e0503f8f2058bf6edde3345f540bc4ae5ab29106b4a71",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -15163,13 +15267,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-SUPPORTED-PROGRESSION-E013-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "937845cfffe8bb40449616470978e7d450d21bcb47b375fee0d9a5e1c362af2e",
+      "content_hash": "2b16f894e8cfacd54b21eb7da176d6a4b8ddf24732528e994234229356bd6c52",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -15264,7 +15368,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-SUPPORTED-PROGRESSION-E013-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -15422,7 +15526,7 @@
       }
     },
     {
-      "content_hash": "1bf9ff5733f1fc0c561a6b8cfcaecda9e20469a7955ef1fec713e17b903942c7",
+      "content_hash": "a21548ac05a8e186a1e4a19ea97cdd35c1e270f2ea9747884e305784e1c029a3",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -15517,13 +15621,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-SUPPORTED-PROGRESSION-E014-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "c574ef4a518ac03935534c2d4b1e07003cad93efd835e38ba84f27eb7760daf1",
+      "content_hash": "22542f4634d02a3e586da50c107675e27850798a38142f2a88289451ad6e35ae",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -15618,7 +15722,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-SUPPORTED-PROGRESSION-E014-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -15776,7 +15880,7 @@
       }
     },
     {
-      "content_hash": "a6a58076e3a4df0ee012d73c8371effdf8fbe97b33be231fffc47f36c6276d2e",
+      "content_hash": "2a0dae0a6bc4b518aeec09ab876a14b7ab965ee4a2a8e55b07100b71f5c5a3a4",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -15871,13 +15975,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-SUPPORTED-PROGRESSION-E015-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "57e8dd4abb9be949f4c48fe064882372d05859123988a0ad68661861e95542a4",
+      "content_hash": "9fea27924d81c0cfb221d3010978be639a868061fdceb009ef91fcd373cc3961",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -15972,7 +16076,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-SUPPORTED-PROGRESSION-E015-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -16135,7 +16239,7 @@
       }
     },
     {
-      "content_hash": "f6e4bffb7f5cd1ce9a626b7f81e7ffe6cfc6a7ce4d05a5ce39291b22849e964c",
+      "content_hash": "bcb1084a7004a751da523aa7ec34d6ecf347c196d6f0e78dba556e1b83b5e6eb",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -16235,13 +16339,13 @@
         ],
         "state_snapshot_id": "GOLDEN-SUPPORTED-PROGRESSION-E016-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "e2439886459ec288714c9a9bd17fc5c961b83195afa0ef42b474aefc5aa2921d",
+      "content_hash": "72b6695f9af9a55ee8edaa1c3a00ec5323339f24cedabe438d024504d14fd25e",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -16336,7 +16440,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-SUPPORTED-PROGRESSION-E016-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -16494,7 +16598,7 @@
       }
     },
     {
-      "content_hash": "1f4f4bce1432dd8994b26bd4fc7e5212d4406f5a7db5617d4ed609efdd43ed4f",
+      "content_hash": "325dca48af924d1f271293fc9b316c94e46b80d9f2bf3e99153b6c211e20d7c8",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -16589,13 +16693,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-SUPPORTED-PROGRESSION-E017-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "43c8ff08e30bc533a55048c65fb9912af05d97d336c3561c19994aceec837183",
+      "content_hash": "993e74214cc62ceb5da304265de808a6f4e8d09f2df6e457ece7eab1f6ae934d",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -16690,7 +16794,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-SUPPORTED-PROGRESSION-E017-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -16785,6 +16889,41 @@
       }
     },
     {
+      "content_hash": "c2493a54df07d95ae8d1807ea2809a896685cd72c4710da64ff01f604af61f9f",
+      "meta": {
+        "canonicalization_id": "UPS-CANONICAL-JSON",
+        "canonicalization_version": 1,
+        "object_id": "GOLDEN-SUPPORTED-PROGRESSION-FIELD",
+        "object_version": 1,
+        "owner_id": "SLICE1-UNTYPEDFIELD-OWNER",
+        "provenance_status": "derived",
+        "schema_id": "P0-SCHEMA-UNTYPED-FIELD",
+        "schema_version": 1,
+        "source_basis": "versioned_sources",
+        "source_refs": [
+          {
+            "object_id": "SLICE1-MODEL-OUTPUT",
+            "object_version": 1
+          },
+          {
+            "object_id": "SLICE1-TRANSFORM-FALLBACK",
+            "object_version": 1
+          }
+        ]
+      },
+      "payload": {
+        "field_id": "GOLDEN-SUPPORTED-PROGRESSION-FIELD",
+        "field_kind": "untyped",
+        "field_name": "object_class",
+        "value": "vehicle",
+        "visibility": [
+          "policy_evaluator",
+          "router",
+          "reviewer"
+        ]
+      }
+    },
+    {
       "content_hash": "db5e95f46e070a7904519520a7aea03dffed12611698838e6bc06be5e0ae6877",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
@@ -16847,7 +16986,7 @@
       }
     },
     {
-      "content_hash": "2e0287aa8c31eaf81970e9c3c78e1874f0e24b856ced6aa7c9adcd3116acdb8b",
+      "content_hash": "a8e58cbd0621d94f0cea063bc10ec3e276d644267311efd5ffa02d2ac293dd99",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -16862,18 +17001,31 @@
           {
             "object_id": "SLICE1-MODEL-OUTPUT",
             "object_version": 1
+          },
+          {
+            "object_id": "SLICE1-TRANSFORM-FALLBACK",
+            "object_version": 1
+          },
+          {
+            "object_id": "GOLDEN-SUPPORTED-PROGRESSION-FIELD",
+            "object_version": 1
           }
         ]
       },
       "payload": {
-        "field_refs": [],
+        "field_refs": [
+          {
+            "object_id": "GOLDEN-SUPPORTED-PROGRESSION-FIELD",
+            "object_version": 1
+          }
+        ],
         "payload_kind": "representation",
         "provenance_visible": false,
         "representation_id": "GOLDEN-SUPPORTED-PROGRESSION-REPRESENTATION"
       }
     },
     {
-      "content_hash": "92288022754efb038d74687ca26ab42407fa05ac4c2b2b5258e4892c82eb6963",
+      "content_hash": "9aa7dddd0cb5d307f55f5680dc184d5f34383ba6cd2a51ea330d312bcd4714ca",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -16891,6 +17043,10 @@
           },
           {
             "object_id": "SLICE1-MODEL-OUTPUT",
+            "object_version": 1
+          },
+          {
+            "object_id": "SLICE1-TRANSFORM-FALLBACK",
             "object_version": 1
           },
           {
@@ -16917,7 +17073,7 @@
         },
         "trace_specification_id": "GOLDEN-SUPPORTED-PROGRESSION-SPEC",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -17223,7 +17379,7 @@
       }
     },
     {
-      "content_hash": "baecc8e299411d2379ef77beeaa7983949834d4cb47329558635835861c4ecb2",
+      "content_hash": "12a2dfca85f8680f0412747bd74497897f8f27294829f1b7a29a090b36f70c2e",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -17318,13 +17474,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-U2C-QUEUE-HOLD-E001-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "618054f2a1b753c20c0f792a75ae4f17a37ef32799158507ce433789334fe16d",
+      "content_hash": "e3cb94f2a71f22f41230c7083ac67a45dd3f73d04b65f72dd0b4b8321258ed4f",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -17419,7 +17575,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-U2C-QUEUE-HOLD-E001-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -17577,7 +17733,7 @@
       }
     },
     {
-      "content_hash": "8bf127f3d249fb6f32412868a19be6682c08d39b9b47e65a1ff4d719a0b6de4a",
+      "content_hash": "09769a57d98eeec05ec5d029d411e429b63114e1fec2994734c87cac59d38ec5",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -17672,13 +17828,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-U2C-QUEUE-HOLD-E002-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "162b9ed5b4264ec570d9cec486756faed23f38eab42b09e2293d5f36e5be2c97",
+      "content_hash": "aa29e65ff788a25ece96860b616fdf522ef9be7da7989f97e1954bd569954151",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -17773,7 +17929,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-U2C-QUEUE-HOLD-E002-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -17931,7 +18087,7 @@
       }
     },
     {
-      "content_hash": "f1415a071a60381760c0e33c8cf4d7b381cc654a87951e65c5458d21858d4dcf",
+      "content_hash": "e8f60ca2b21c4a339ad48ca3a174c3655ccdfaf3941e1172b4e5a30876850350",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -18026,13 +18182,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-U2C-QUEUE-HOLD-E003-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "885d2e4cb2a5a7832b222615b3cafbbd730cac9573151e3eb398851f34be116f",
+      "content_hash": "3eb3d19acc035d52d1df2e5aecab363c1528fd79f9ab2168acf0017aad56d8e8",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -18127,7 +18283,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-U2C-QUEUE-HOLD-E003-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -18285,7 +18441,7 @@
       }
     },
     {
-      "content_hash": "e5cb3ec42e20d4f860f67e20ebf7e6c797cfabdd7bbbe05544a30f119c5ea12f",
+      "content_hash": "301c48da5a364fdea30fb68255ff94e508df6f2bcf5dd9bb0793e1ccb061ad85",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -18380,13 +18536,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-U2C-QUEUE-HOLD-E004-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "aa4b5f3f4f678fec35a2d18b365894e00ef253bd3a47d9a5e9b8533ac7e8b2e6",
+      "content_hash": "a59da33d0cc086facbec28bcc8c2a3bfadd78c4a2a1307d56a8b2516a73f7617",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -18481,7 +18637,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-U2C-QUEUE-HOLD-E004-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -18639,7 +18795,7 @@
       }
     },
     {
-      "content_hash": "f319da5e557723a848cea3229bb39f41321a9208ab810c9011355db62e24f9dc",
+      "content_hash": "aaf665f0ac710d084968502d20f685d01288c66d262907365fe5343395b384fb",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -18734,13 +18890,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-U2C-QUEUE-HOLD-E005-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "8e27750f9ca29702bd402a57c5101747a89b6986e7c62c7eb970907f5d635e83",
+      "content_hash": "78fa2768ffb323eec9b9395a1888e8520026ebd760289140117e1584d538eea8",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -18835,7 +18991,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-U2C-QUEUE-HOLD-E005-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -18993,7 +19149,7 @@
       }
     },
     {
-      "content_hash": "dd34bbd734a0914a8d68fd596e6951f6794310d29845b4e87c23ee2435746ceb",
+      "content_hash": "0e8b7257a2cd01d023a2790716b84afdf8a49dab33a572246fb739079bccf81c",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -19088,13 +19244,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-U2C-QUEUE-HOLD-E006-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "d62139965b61c99ac0d9df8d649c5cff38291c6369a612e323fe302755ccd4ee",
+      "content_hash": "4a8d89f3b2917dfbe49b68ed4a5cebe3b2ebc464ada5d5c13d5f5825b5e76f1c",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -19189,7 +19345,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-U2C-QUEUE-HOLD-E006-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -19347,7 +19503,7 @@
       }
     },
     {
-      "content_hash": "6384fdd7dcaf4628867530c8ed91d3bef3dd5980fbdc5aa32458ce61a55698b9",
+      "content_hash": "356fe9dbf808553cf807d74a9740491800c37719a86c1a91d6205860226eb6ba",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -19442,13 +19598,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-U2C-QUEUE-HOLD-E007-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "0f7ed3fc9deacb2d7fd239f0f9fa5c44b92f6fde6cfdfe66fdd824177733a39c",
+      "content_hash": "27d118da48ef176a7cea136ec065ead7ffec427eda3ef2577363bd7b873121ec",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -19543,7 +19699,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-U2C-QUEUE-HOLD-E007-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -19701,7 +19857,7 @@
       }
     },
     {
-      "content_hash": "cb0fcf24310bc924a73057e277b480104b1adb71558153bf7455be4b5f84d6ea",
+      "content_hash": "95a50a3fa0920d59d56b833fcad3efe0497689e16df1c386df400aa879e9745e",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -19796,13 +19952,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-U2C-QUEUE-HOLD-E008-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "2b863982fb9bc27342fbfc39e6c5ea74c941453df34f1880bcc4614fe5bb3156",
+      "content_hash": "20b21bb96c7b0645f90407223f2372a9d3ff82688c44db202ae281f863820828",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -19897,7 +20053,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-U2C-QUEUE-HOLD-E008-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -20055,7 +20211,7 @@
       }
     },
     {
-      "content_hash": "443d6898e72f15513b6c92afd4fa49329ec9e591bf55222c1dd485e1246cc421",
+      "content_hash": "5b99ceae91e93d294c164d300914367d0addd8eead2d9d8dff3ceee85ab68caf",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -20150,13 +20306,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-U2C-QUEUE-HOLD-E009-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "2b3cb0c380b20f22e666a3789ccf9efaf399b79ab789826368522765db615b89",
+      "content_hash": "4cefa3b2416f1ad455cb2c6d1d263bb0bfba60fb738ddc04c7910c1358a61413",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -20251,7 +20407,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-U2C-QUEUE-HOLD-E009-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -20409,7 +20565,7 @@
       }
     },
     {
-      "content_hash": "ebb4e6af14311093aafe99dc496e25ffdcf6c7c67ca731fc19d450db9ab25253",
+      "content_hash": "c46ef9ad4235cbd3103eab827c786aec6301496d4bf71badbb89caa7fee7739d",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -20504,13 +20660,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-U2C-QUEUE-HOLD-E010-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "6f786beba811b946f58a634e3806683547738b7d943c32395bf010ff53ae0019",
+      "content_hash": "72783193d46114593866e155b3d7869c062f3b8dd7367a56239d08023b4063f6",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -20605,7 +20761,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-U2C-QUEUE-HOLD-E010-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -20768,7 +20924,7 @@
       }
     },
     {
-      "content_hash": "5f65b13cc7fa20534f4cad67ecbbd55d14287296b64a62fe409c20a560bc6074",
+      "content_hash": "fdbeb438d01c5c40d85f5de0e681fce0dcc7b761b9be46a0503279ff4fd71535",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -20868,13 +21024,13 @@
         ],
         "state_snapshot_id": "GOLDEN-U2C-QUEUE-HOLD-E011-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "d01c75c4f2e3296d3c6bd8f2ea1cfb069c05fe4f32906670a506c44e6c8eb03d",
+      "content_hash": "77247c183778173320a1e219800d98667018f1b3a187291dc837256a704fafc1",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -20969,7 +21125,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-U2C-QUEUE-HOLD-E011-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -21127,7 +21283,7 @@
       }
     },
     {
-      "content_hash": "51cabc49e114b5853a86a6f7394085b0d875c02c8a2f8eedb3da798edf016dc9",
+      "content_hash": "a548e3f42a10801eb2475ed00e32e049151e89c56332ec518faac71180d5f231",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -21222,13 +21378,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-U2C-QUEUE-HOLD-E012-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "fb5bf33518a75844732fb7b2dffde8e40c26857f497e2eb5d2cd9e04bb3d52a3",
+      "content_hash": "5d47460d1ae325432231808d2bfb671491c655a0b56e914aad4f51e26098c310",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -21323,7 +21479,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-U2C-QUEUE-HOLD-E012-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -21418,6 +21574,41 @@
       }
     },
     {
+      "content_hash": "dafa0beefbc23f605ad6b3a341f99fb379a21a0b4a400b799360cbe05ea03692",
+      "meta": {
+        "canonicalization_id": "UPS-CANONICAL-JSON",
+        "canonicalization_version": 1,
+        "object_id": "GOLDEN-U2C-QUEUE-HOLD-FIELD",
+        "object_version": 1,
+        "owner_id": "SLICE1-UNTYPEDFIELD-OWNER",
+        "provenance_status": "derived",
+        "schema_id": "P0-SCHEMA-UNTYPED-FIELD",
+        "schema_version": 1,
+        "source_basis": "versioned_sources",
+        "source_refs": [
+          {
+            "object_id": "SLICE1-MODEL-OUTPUT",
+            "object_version": 1
+          },
+          {
+            "object_id": "SLICE1-TRANSFORM-FALLBACK",
+            "object_version": 1
+          }
+        ]
+      },
+      "payload": {
+        "field_id": "GOLDEN-U2C-QUEUE-HOLD-FIELD",
+        "field_kind": "untyped",
+        "field_name": "object_class",
+        "value": "vehicle",
+        "visibility": [
+          "policy_evaluator",
+          "router",
+          "reviewer"
+        ]
+      }
+    },
+    {
       "content_hash": "aee0521392bb0993c6d0e2a063c1c86f1790e6a824195c1305cb3763786da362",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
@@ -21480,7 +21671,7 @@
       }
     },
     {
-      "content_hash": "3f8723d52ec32b8dac324dcf2be09de5a9593675fc377a058a5b50b6c835ddc7",
+      "content_hash": "5254b5b6615f191b1ee34ded68f7f39f676a32b0e6c56ec4d9e98f5f5d3a1920",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -21495,18 +21686,31 @@
           {
             "object_id": "SLICE1-MODEL-OUTPUT",
             "object_version": 1
+          },
+          {
+            "object_id": "SLICE1-TRANSFORM-FALLBACK",
+            "object_version": 1
+          },
+          {
+            "object_id": "GOLDEN-U2C-QUEUE-HOLD-FIELD",
+            "object_version": 1
           }
         ]
       },
       "payload": {
-        "field_refs": [],
+        "field_refs": [
+          {
+            "object_id": "GOLDEN-U2C-QUEUE-HOLD-FIELD",
+            "object_version": 1
+          }
+        ],
         "payload_kind": "representation",
         "provenance_visible": false,
         "representation_id": "GOLDEN-U2C-QUEUE-HOLD-REPRESENTATION"
       }
     },
     {
-      "content_hash": "fa15e351d86e5a5faf2edae34f4ccd5f2f5a3cf1aa3567296edca126a100a32e",
+      "content_hash": "ca02e036120333738d126ef11eb06390d695d9f4c2878b9efe322190184b0f85",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -21524,6 +21728,10 @@
           },
           {
             "object_id": "SLICE1-MODEL-OUTPUT",
+            "object_version": 1
+          },
+          {
+            "object_id": "SLICE1-TRANSFORM-FALLBACK",
             "object_version": 1
           },
           {
@@ -21550,7 +21758,7 @@
         },
         "trace_specification_id": "GOLDEN-U2C-QUEUE-HOLD-SPEC",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -21864,7 +22072,7 @@
       }
     },
     {
-      "content_hash": "b855ad9e6b417e330f027f70df5031be334377da51f3680e0e0dea5b46d2d7fe",
+      "content_hash": "b42cc3aba72fefa9bd74d982304da7090640a9e8b77f3f99e4a8a5eda130cc5f",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -21959,13 +22167,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-U2O-TIMEOUT-E001-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "a3e888d2a3aad417de5190f0ad95648f3717ae89c9c1ec92fc0ede1daf3c0508",
+      "content_hash": "7deea25415ddae1ab87501dcf72d23620118ccf84d98c17a8d5550db19b0e0e9",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -22060,7 +22268,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-U2O-TIMEOUT-E001-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -22218,7 +22426,7 @@
       }
     },
     {
-      "content_hash": "71662779d7a11524f0a0adf169658b30d4052d78abe5d42b55c577f5a8e5612d",
+      "content_hash": "2fec9dd95f167ec262e77a4161859e91c4aab3e91fc2602279b595fda8917c71",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -22313,13 +22521,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-U2O-TIMEOUT-E002-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "bda9ee217cc995e3ddd8feca6abed05301168bc56b4a8d71fbe4349ef44c8df8",
+      "content_hash": "cc421c5ac10fed6c99061e59b5eebe6bc750f77f1fff00a914fffa22906b58cc",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -22414,7 +22622,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-U2O-TIMEOUT-E002-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -22572,7 +22780,7 @@
       }
     },
     {
-      "content_hash": "53fffc05ce510690d7803daa229381c662e77ccdc5b65ab36badc36ad0ca851a",
+      "content_hash": "de10c4587f93181626d287acd2e0ec3f48a92d54acf74c19ad2840ad5c273950",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -22667,13 +22875,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-U2O-TIMEOUT-E003-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "95822c2970dd7ad848641034ddc297a7d703c7e9adad198e86236e86386d08c0",
+      "content_hash": "14dbcf96c4fe0711ede1fda9bea5a09fbc6807a4de4e91755b4310f2ddffa5bf",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -22768,7 +22976,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-U2O-TIMEOUT-E003-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -22926,7 +23134,7 @@
       }
     },
     {
-      "content_hash": "db2014cbcd22efb08194bf947428496ed5ff663c24108742e950d4bb3fd6542d",
+      "content_hash": "0cc107c9479d8a9ec61827759bd483abfbd3611b53bcab8a5d60154d208f68b0",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -23021,13 +23229,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-U2O-TIMEOUT-E004-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "e87c9c1e35d0ec574f574e6c3ade08baf53701e9a6e99287691e0edc34e7892e",
+      "content_hash": "edfcbbaf612bb348700138aad34748e68d4d79347fe2de2a9afaa823863561df",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -23122,7 +23330,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-U2O-TIMEOUT-E004-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -23280,7 +23488,7 @@
       }
     },
     {
-      "content_hash": "0b306892aeb9a171ffaccf5bcc070e4a79a80e190e8eb0fe91fec5efbf3e1f63",
+      "content_hash": "bd30e64f8393337d728479466bf4ebe5600a42ec4c4a4c01122845b5b24c6569",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -23375,13 +23583,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-U2O-TIMEOUT-E005-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "92d9209762660026f880e1ec79f7d595189286b540eda756178d81d1b628b333",
+      "content_hash": "056b7e466922a3338a79bb918ce215c47d909e29fa0f8a803b60f1a2f80416d1",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -23476,7 +23684,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-U2O-TIMEOUT-E005-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -23634,7 +23842,7 @@
       }
     },
     {
-      "content_hash": "860744855aa990c942fc0d76900b153a73119c2ba62624716c39d521dea83459",
+      "content_hash": "70734ef6015ecd47ec9680af157cf3bafb87a7c2965c1ce2e460e3a73beef664",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -23729,13 +23937,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-U2O-TIMEOUT-E006-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "1a19eab7a49b386b8488e92ceb96d09d1a869efeaafc46b606c7931fa5c1b87a",
+      "content_hash": "e8a11d6bf9378c6552f890a8d23a7c053e858c9083d8cc843031a6aeb46623a9",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -23830,7 +24038,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-U2O-TIMEOUT-E006-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -23988,7 +24196,7 @@
       }
     },
     {
-      "content_hash": "8dc5918d08792726fcf8d2ff936d3905470ad33791aa50cdf4282901b03ba9a2",
+      "content_hash": "ae38a8893d202f03ab52bbb7296654ccd6ffcdb8c3f7beb9b6ff696a939ff1b9",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -24083,13 +24291,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-U2O-TIMEOUT-E007-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "bc9efc03c7e2ef9b98f511c0b027cdae3ca2c4df3736a054b13cf5c47be933ff",
+      "content_hash": "37cb362e6262b0e3a04f32dfd6ac6f1fc1ca0a6e74245f1654f5137c72edd2e2",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -24184,7 +24392,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-U2O-TIMEOUT-E007-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -24342,7 +24550,7 @@
       }
     },
     {
-      "content_hash": "e75e5caae9cb08e6708a1852e0690cb06c3ea11af1f4be052ba84e969de52c89",
+      "content_hash": "636c9220bf809ba97261f744ed3a9cebb7fb6a42f5b46043bb0fa1411122af7e",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -24437,13 +24645,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-U2O-TIMEOUT-E008-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "4bdc86576ab8936bb209cfb4591e2eef419eca8b62c81021bfcb7226202c8cd1",
+      "content_hash": "678675a56782840e05c0da1f64a4ebeaea1d777c085c55712c6af5e95955d0cb",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -24538,7 +24746,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-U2O-TIMEOUT-E008-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -24696,7 +24904,7 @@
       }
     },
     {
-      "content_hash": "ec7ebce2ae9987e6089bd92fdf3792ced0818d04925a06fd1314336eaf91e4c0",
+      "content_hash": "81dff24b4876e002f1864a15e7da54b72683e0a48bdeed18d0302bd92bde76a5",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -24791,13 +24999,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-U2O-TIMEOUT-E009-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "cc4017d599953ae586517f9148bee70481b9d52b369bce372fcc7261d6ce8b38",
+      "content_hash": "dca98197271eb83bba8739ac8ee2d314f41f43aa3e071eb3bd33c43261c36e5e",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -24892,7 +25100,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-U2O-TIMEOUT-E009-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -25050,7 +25258,7 @@
       }
     },
     {
-      "content_hash": "cce023d3d6cb550e90e801789e5092867e8b8f4e3b16da1d1441ffc4608374e0",
+      "content_hash": "09cf614d3be861d0e0b039ad91e75492551c0b82360bc9f3dd594896265be1a2",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -25145,13 +25353,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-U2O-TIMEOUT-E010-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "049c4597f319cacb9d66568fbf8909c8aa1f4b679c867e7076dd7fc79e912b63",
+      "content_hash": "a793669336ec528c521e3c6d9ccda7d21c9b18a110d0c3b1a8fce1bc228a950d",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -25246,7 +25454,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-U2O-TIMEOUT-E010-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -25404,7 +25612,7 @@
       }
     },
     {
-      "content_hash": "ce32570d1200d41540528af542b506a17e58d44f4cbe05375b39c72861623ccf",
+      "content_hash": "a2efe09e8d6b765fe01f45bd7e9a2455f4a1015eab14849fa441695dea76ee47",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -25499,13 +25707,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-U2O-TIMEOUT-E011-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "1fbfb45d8232155f9ccbcd1e0653c1a099bb1753b1e2b2ae53f247fd15ae5664",
+      "content_hash": "b3012f03946332de9b9085f48ef7bea23da61336cb5fe3398ee705504aed8c65",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -25600,7 +25808,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-U2O-TIMEOUT-E011-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -25763,7 +25971,7 @@
       }
     },
     {
-      "content_hash": "73975fedb06eeebc6dbe6c6e37942620846cc489fc122fd95a9fda45cc53a9c8",
+      "content_hash": "e4dc230f4c5fdf1d3a1d7e48192453dd1e19fa731684f82cf969862f8f8bd03d",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -25863,13 +26071,13 @@
         ],
         "state_snapshot_id": "GOLDEN-U2O-TIMEOUT-E012-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "528de4961d8605511d610c249a931e38ea98bc6482b0984d46b4cea54e612c3b",
+      "content_hash": "1de0ec91a1a526746fc942a8632ce7803899f8dc93d932ddb4782754690d7f2f",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -25964,7 +26172,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-U2O-TIMEOUT-E012-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -26122,7 +26330,7 @@
       }
     },
     {
-      "content_hash": "f239c90b4331a6375ea5728d27763a84c27256c730175f7eac3facd1ebe5b8b2",
+      "content_hash": "a842df2dfb1c19597a7059eb74cd476e7f03118294ee3f1a5835118b36b951bb",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -26217,13 +26425,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-U2O-TIMEOUT-E013-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "c42d0575b8dbe6bace8b3e16b1c591786129626265c00ef28c512376705391be",
+      "content_hash": "d706765668baf8fb5794956bb2a5bd890270f9100d23fb72fff892fc1072ceb5",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -26318,7 +26526,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "GOLDEN-U2O-TIMEOUT-E013-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -26413,6 +26621,41 @@
       }
     },
     {
+      "content_hash": "1c8345fb2fd57b66d58ce694c38eac20c45aefac14ea0f77e35321511f76fe0f",
+      "meta": {
+        "canonicalization_id": "UPS-CANONICAL-JSON",
+        "canonicalization_version": 1,
+        "object_id": "GOLDEN-U2O-TIMEOUT-FIELD",
+        "object_version": 1,
+        "owner_id": "SLICE1-UNTYPEDFIELD-OWNER",
+        "provenance_status": "derived",
+        "schema_id": "P0-SCHEMA-UNTYPED-FIELD",
+        "schema_version": 1,
+        "source_basis": "versioned_sources",
+        "source_refs": [
+          {
+            "object_id": "SLICE1-MODEL-OUTPUT",
+            "object_version": 1
+          },
+          {
+            "object_id": "SLICE1-TRANSFORM-FALLBACK",
+            "object_version": 1
+          }
+        ]
+      },
+      "payload": {
+        "field_id": "GOLDEN-U2O-TIMEOUT-FIELD",
+        "field_kind": "untyped",
+        "field_name": "object_class",
+        "value": "vehicle",
+        "visibility": [
+          "policy_evaluator",
+          "router",
+          "reviewer"
+        ]
+      }
+    },
+    {
       "content_hash": "258d396c2d86cf6f77373e073af340c9a19d35ce72f54bee3da8294201ab9810",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
@@ -26475,7 +26718,7 @@
       }
     },
     {
-      "content_hash": "fb01fa429581edc560a294c17ccdceb99c0e8829397a7d5873a8af5067ae603a",
+      "content_hash": "a77b1964200a375c1500467e704ef8ce7aaa3e420c01c0dc55aad098bffdda00",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -26490,18 +26733,31 @@
           {
             "object_id": "SLICE1-MODEL-OUTPUT",
             "object_version": 1
+          },
+          {
+            "object_id": "SLICE1-TRANSFORM-FALLBACK",
+            "object_version": 1
+          },
+          {
+            "object_id": "GOLDEN-U2O-TIMEOUT-FIELD",
+            "object_version": 1
           }
         ]
       },
       "payload": {
-        "field_refs": [],
+        "field_refs": [
+          {
+            "object_id": "GOLDEN-U2O-TIMEOUT-FIELD",
+            "object_version": 1
+          }
+        ],
         "payload_kind": "representation",
         "provenance_visible": false,
         "representation_id": "GOLDEN-U2O-TIMEOUT-REPRESENTATION"
       }
     },
     {
-      "content_hash": "01bb6b725c75aa292ed3d4e6a146decae3aefca7a3ca67c594cf6eab44845db6",
+      "content_hash": "84ee0abcb044938b2a573de7b6c35f5f53385b70e8225c6121b42180e1d23b94",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -26519,6 +26775,10 @@
           },
           {
             "object_id": "SLICE1-MODEL-OUTPUT",
+            "object_version": 1
+          },
+          {
+            "object_id": "SLICE1-TRANSFORM-FALLBACK",
             "object_version": 1
           },
           {
@@ -26545,7 +26805,7 @@
         },
         "trace_specification_id": "GOLDEN-U2O-TIMEOUT-SPEC",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -26953,7 +27213,7 @@
       }
     },
     {
-      "content_hash": "6d4651db7043e35771a0db841fe9cd9bcc59ad76f70b9e48423d663cbdaeec04",
+      "content_hash": "b7f4911a4f4bfefc2fefe7852bd8abdd453707094a7b2bc6626b9baf492b5644",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -27048,13 +27308,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-E-FALLBACK-E001-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "8028aca495e60b27b6ecb7fc7688ea0f042d9fca816f4202a3385b526d7945d3",
+      "content_hash": "f4dc0e3d8fcfe4682ac8dc9c0f789f02b079e2298c61ac834b487e4859272170",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -27149,7 +27409,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-E-FALLBACK-E001-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -27307,7 +27567,7 @@
       }
     },
     {
-      "content_hash": "61c843a54efc8721c4f18b00e923a593b09169a2200d1cf98903cf404ba0aa5a",
+      "content_hash": "8812b7300149e5a833810ae33bdebd1aad4f399cae61c4bc6ca3d334467a8793",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -27402,13 +27662,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-E-FALLBACK-E002-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "959e40c9638269e2fe9bca92d34b42bcad21b2481d3e388fbabed7ed341d6ddd",
+      "content_hash": "4cd2ff3e27ddf0a2234698b5beb9182f7644f6eaa79f3640a808c73dcecf3bdb",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -27503,7 +27763,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-E-FALLBACK-E002-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -27661,7 +27921,7 @@
       }
     },
     {
-      "content_hash": "860afe698ccf2ff5e65d8c78b7c11018893e245094b54a77fb47e1ae2cfdf75e",
+      "content_hash": "081b80a0c97a48206ebebe048dade92125b5197dced30a2d2096facc7453c249",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -27756,13 +28016,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-E-FALLBACK-E003-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "35e9d7141b3adea0e86c26c5b3994b5df4a7cbd0e4b9597eaa0de39eee57a937",
+      "content_hash": "5ba45bb897a76be8bcd3443befedb6ce35c5b4e796944b1ee7c64c4974607b09",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -27857,7 +28117,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-E-FALLBACK-E003-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -28015,7 +28275,7 @@
       }
     },
     {
-      "content_hash": "6c1a00c305977ac375fea7a822879638f380e48ad4c2323e97f9628aef12da29",
+      "content_hash": "6978b46edeee497cf608bc19030ba4ac6ba95291e000a4991f234b4302e76cae",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -28110,13 +28370,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-E-FALLBACK-E004-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "bb3123611907300d4111ee11462f02032233c6d14f96113039641eafc06e84f4",
+      "content_hash": "09c904607760efbacfa1e93b4b74c907898104776a10ba9d9ee65fe720f852a2",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -28211,7 +28471,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-E-FALLBACK-E004-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -28369,7 +28629,7 @@
       }
     },
     {
-      "content_hash": "a3d89363fda98a7d765619803c770918bde54f43dd80bc9a111aa41070459091",
+      "content_hash": "6166d14ab4b029e043df0a4afa0eda88054400c08262a829c447740b61336ba0",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -28464,13 +28724,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-E-FALLBACK-E005-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "3d362edd5985798a64ce84b488b096983355c8072caa3c25f30d5be35cfa6f0f",
+      "content_hash": "bf84174a285c38b9fb8ee885f1f9e36f314fb8d7e1e4a5008fe6948b1a044e80",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -28565,7 +28825,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-E-FALLBACK-E005-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -28723,7 +28983,7 @@
       }
     },
     {
-      "content_hash": "9cfdf496f993b94faf7137313dc17374d7fa0f0e242c510bcf0f9aa19ac4e29e",
+      "content_hash": "5850d2c636151f77ee885da13f981c245fd876e2c6da0d8ceb6c2acca581446e",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -28818,13 +29078,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-E-FALLBACK-E006-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "7c292b69e40fdc5938d58881d0cf91c7a832e16fe962944287a17d0c7a5791dc",
+      "content_hash": "5b6077052125fd4f0eb7b9a5c83dfc83b296c99713aa5442151cd24cd0226d3e",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -28919,7 +29179,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-E-FALLBACK-E006-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -29077,7 +29337,7 @@
       }
     },
     {
-      "content_hash": "b67f6e528b815e14094cdb7240a7315a49aec31b6bbda19d2cc085c2fc657071",
+      "content_hash": "a2dbd3be68801b025d3cdde7a3b835fc1d22c5eccf57b1b152a388fc2e5b6802",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -29172,13 +29432,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-E-FALLBACK-E007-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "f9d5bb7f38c405b8b67494ab6cd6907a719bc7c50a7699087f053de85f65a863",
+      "content_hash": "309d9aa120317ebee91ab26378219cf52d4a000f9f70a14895221f4394eddd6e",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -29273,7 +29533,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-E-FALLBACK-E007-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -29431,7 +29691,7 @@
       }
     },
     {
-      "content_hash": "05ca20288465e3e0ce1ddeb5f95c5e20769712b6f840d9e4768b7857b6129289",
+      "content_hash": "92a55441bd50c10c3c13ffae6a978f7c1351b96d3d51568d4aefbad5917b5307",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -29526,13 +29786,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-E-FALLBACK-E008-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "2df2020d6362b44f1f8151e0de911611751f7b52ae00a35b9dc1f3b893cf41b0",
+      "content_hash": "7666a6c178b9055119d3e8af25f3b31bf6faa1045c7e3052bee446a0555622a6",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -29627,7 +29887,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-E-FALLBACK-E008-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -29785,7 +30045,7 @@
       }
     },
     {
-      "content_hash": "96c1712864d876b2246b01b9fa311f54dac4e89bc7d446d0daddb072c6968dad",
+      "content_hash": "455c77310a35ecc350a2b76aadcf99e04d32df78ae95dd21dbc096a9a370ae96",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -29880,13 +30140,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-E-FALLBACK-E009-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "8cbcd75746b6baed6a45123f744001d643da717aaf5f8f3f15cfd3f0efef725d",
+      "content_hash": "d10d903928926bc48f1ba092e7eb0523a4e0760b7856f49b93b7491f85ee2b07",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -29981,7 +30241,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-E-FALLBACK-E009-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -30139,7 +30399,7 @@
       }
     },
     {
-      "content_hash": "8fffa01422f245033c3a00c3d8079cfeaa48b302f84f9aba8f3f8a9bb51f0945",
+      "content_hash": "1fabf61589bb85a0d556e26daaadfaa1f225e492c016af22650efe938d2a3ebd",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -30234,13 +30494,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-E-FALLBACK-E010-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "7aef89101e1e5e88870f1f9d2bf949cdd6fa3098baf2cdc16f07f54bc0074cad",
+      "content_hash": "09555bc8862254dbee2a64ca1c3a120fdf6b1378617e47c75ce48a892414b58d",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -30335,7 +30595,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-E-FALLBACK-E010-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -30498,7 +30758,7 @@
       }
     },
     {
-      "content_hash": "15ca31868fee977a14bebffc0cccee9e5b0526b7d3f2baa41c3499e29f820e75",
+      "content_hash": "7ae497eab2128f0f3da4d1adae1ba9f2883ff3faccd678e88aa539c0fd9b0668",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -30598,13 +30858,13 @@
         ],
         "state_snapshot_id": "P0-E-FALLBACK-E011-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "d6c862b66caec63de7bce1caeed83ce12bd0404b3d5f279c1a6073400317d137",
+      "content_hash": "73b7a07a283203959fdce3f0a94f919cecb2badf6b2dea0d3d049a0c80277aad",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -30699,7 +30959,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-E-FALLBACK-E011-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -30857,7 +31117,7 @@
       }
     },
     {
-      "content_hash": "fb141329300b0f9efde786498e01fc2ebd82eb10e7f9b4ac0fca8e62ac913726",
+      "content_hash": "ddcff8d3cced40255b9f9dd45bdd26740f9e58879c1c714f63e3e1ff7b2edcca",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -30952,13 +31212,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-E-FALLBACK-E012-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "1b8fa294f60fdbea20049c6ad4cd803c52df04bc3671124631a70e1079453a11",
+      "content_hash": "985bb8f13b29f3a7127aa0ae9df73eafb3f96f196c9a8a1dfde98dd7de0e3c4e",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -31053,7 +31313,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-E-FALLBACK-E012-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -31696,6 +31956,41 @@
       }
     },
     {
+      "content_hash": "4222175e32706e506743360ca834d6bf34be592ada17a55b7cb7614d27d6bd48",
+      "meta": {
+        "canonicalization_id": "UPS-CANONICAL-JSON",
+        "canonicalization_version": 1,
+        "object_id": "P0-E-FALLBACK-FIELD",
+        "object_version": 1,
+        "owner_id": "SLICE1-UNTYPEDFIELD-OWNER",
+        "provenance_status": "derived",
+        "schema_id": "P0-SCHEMA-UNTYPED-FIELD",
+        "schema_version": 1,
+        "source_basis": "versioned_sources",
+        "source_refs": [
+          {
+            "object_id": "SLICE1-MODEL-OUTPUT",
+            "object_version": 1
+          },
+          {
+            "object_id": "SLICE1-TRANSFORM-FALLBACK",
+            "object_version": 1
+          }
+        ]
+      },
+      "payload": {
+        "field_id": "P0-E-FALLBACK-FIELD",
+        "field_kind": "untyped",
+        "field_name": "object_class",
+        "value": "vehicle",
+        "visibility": [
+          "policy_evaluator",
+          "router",
+          "reviewer"
+        ]
+      }
+    },
+    {
       "content_hash": "ea50df39fc534216974615adaa73ce99509212094300e00ea98fb66478ac895a",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
@@ -31798,7 +32093,7 @@
       }
     },
     {
-      "content_hash": "8dc7e1ca7467daa0a44ab0f3ec8b23b8f17ad522a4f70961910dbee5816b9997",
+      "content_hash": "ac5e307dbf3befc2f46d51483f6b7e466e6745a47ca3ed9e4dfb07d8d77547a2",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -31813,11 +32108,24 @@
           {
             "object_id": "SLICE1-MODEL-OUTPUT",
             "object_version": 1
+          },
+          {
+            "object_id": "SLICE1-TRANSFORM-FALLBACK",
+            "object_version": 1
+          },
+          {
+            "object_id": "P0-E-FALLBACK-FIELD",
+            "object_version": 1
           }
         ]
       },
       "payload": {
-        "field_refs": [],
+        "field_refs": [
+          {
+            "object_id": "P0-E-FALLBACK-FIELD",
+            "object_version": 1
+          }
+        ],
         "payload_kind": "representation",
         "provenance_visible": false,
         "representation_id": "P0-E-FALLBACK-REPRESENTATION"
@@ -31987,7 +32295,7 @@
       }
     },
     {
-      "content_hash": "5538f0a207e1dede5899ccdc3ab90164f15594b15c2ef480d86f59fd977cbdd9",
+      "content_hash": "40326d209261f2790bbd345f662831884ba5b6812fc3215eaf49f1857d21447a",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -32005,6 +32313,10 @@
           },
           {
             "object_id": "SLICE1-MODEL-OUTPUT",
+            "object_version": 1
+          },
+          {
+            "object_id": "SLICE1-TRANSFORM-FALLBACK",
             "object_version": 1
           },
           {
@@ -32031,7 +32343,7 @@
         },
         "trace_specification_id": "P0-E-FALLBACK-SPEC",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -32439,7 +32751,7 @@
       }
     },
     {
-      "content_hash": "44f248d0182ff5df81d868a5c199bead05bf617cb51f186f28c9667244795271",
+      "content_hash": "6706d0f8ed4b2ce2a16c80d416353790c8e14097e85d9d3dc5687980b66237f1",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -32534,13 +32846,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-E-PRESERVE-E001-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-PRESERVE",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "70e3cf592692579c55adb2928074ebec1296c446e52deffdfdb05dcbda051dfd",
+      "content_hash": "a5635419dec7c5e5caf8fb1d973032b0543d6564fbff297afdcc761ec1eb1562",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -32635,7 +32947,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-E-PRESERVE-E001-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-PRESERVE",
           "object_version": 1
         }
       }
@@ -32793,7 +33105,7 @@
       }
     },
     {
-      "content_hash": "3a9b0dba45e5967c3587c57e14c81c4e58f19aacf8f2f912e3674805fa9a13ac",
+      "content_hash": "146775426e546c23cbfbcee116fe5c81060c7e1828f870de6b0ecdff48dbdbc8",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -32888,13 +33200,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-E-PRESERVE-E002-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-PRESERVE",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "10c287551d930fb8215ab6b037ff205a60dc239948ac026e487b2f2e75f4c4f5",
+      "content_hash": "f0a306ff580b539d0afcaa9ef7b9b913c1e4225ac805ea84d8ab68bbe2778412",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -32989,7 +33301,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-E-PRESERVE-E002-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-PRESERVE",
           "object_version": 1
         }
       }
@@ -33147,7 +33459,7 @@
       }
     },
     {
-      "content_hash": "1f49c308b655cd3751202b567ff56334588644a34a6028fccd8307818b51c959",
+      "content_hash": "289d79c1f7a87447c6fb940615eace34635bb9d1a472201f0928aaab936ecbb2",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -33242,13 +33554,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-E-PRESERVE-E003-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-PRESERVE",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "3d70957ae88171b9c99372e1318224f2e0b48415f15b6b0e00f7164caed2d7aa",
+      "content_hash": "32b5d1e91aa86d0b9fb08a94ed0b6ab49bb9d72e245f7473c5813d48a76f911f",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -33343,7 +33655,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-E-PRESERVE-E003-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-PRESERVE",
           "object_version": 1
         }
       }
@@ -33501,7 +33813,7 @@
       }
     },
     {
-      "content_hash": "cd1f19c97ae0e90c3130d90ef249bacd9065cdb1cd69922107d2c855024bea17",
+      "content_hash": "657ff60468614e8c0fedb5b46821629810a1f4e5fa0813f8731003dff779dafa",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -33596,13 +33908,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-E-PRESERVE-E004-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-PRESERVE",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "e14b347ff34670d48df200f1dc2738a9030ee3b18cdbeffb52d27235bdd040a7",
+      "content_hash": "9fed4cfb0c056b1873901216ddea24ede16bcad396fc1541b8e87a4b74255ea1",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -33697,7 +34009,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-E-PRESERVE-E004-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-PRESERVE",
           "object_version": 1
         }
       }
@@ -33855,7 +34167,7 @@
       }
     },
     {
-      "content_hash": "19aaa2eec2316ee356181a6ca2a9d045599c2755c16c778b78c5ca5e481c8ee7",
+      "content_hash": "9251ebaa1accb608f4ba2932a40cf7fa66b0079eebf7827eeae79efa65bbdefb",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -33950,13 +34262,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-E-PRESERVE-E005-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-PRESERVE",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "28018f667815695593fe3dd70024a49accfecc27ac78870f7d034bf8f15c2f11",
+      "content_hash": "e2693cbd5ab1e333f68ad5c74e6712e7dcabd8c62b656046c3b38cb421ad07af",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -34051,7 +34363,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-E-PRESERVE-E005-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-PRESERVE",
           "object_version": 1
         }
       }
@@ -34209,7 +34521,7 @@
       }
     },
     {
-      "content_hash": "11efbee7e331e28955307598254ada06eaa4cd2115475b3d84f3731624b4f060",
+      "content_hash": "151d6487d339d949975914e6625ee43e876a217df5b2525f2e8059d3e4eb1127",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -34304,13 +34616,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-E-PRESERVE-E006-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-PRESERVE",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "2b575eecc26c71e0784acab11f2cf35899ee712986ae6f3f70bb2124cb70265e",
+      "content_hash": "f699ca7b061852d34e839a2303d370067494144738ecab70f9c6cf7573b30f39",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -34405,7 +34717,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-E-PRESERVE-E006-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-PRESERVE",
           "object_version": 1
         }
       }
@@ -34563,7 +34875,7 @@
       }
     },
     {
-      "content_hash": "1fb37d0965832980039e68770bad3fb8a276bf1fbc86442f14154c81de8b74b3",
+      "content_hash": "7c97aa80cb5502371b20e79cbab3065c2803479eb616b42993d54d9816653caf",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -34658,13 +34970,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-E-PRESERVE-E007-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-PRESERVE",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "a8362a7e00e0ea333dc87337f8597a602c87449eab09fd338e1ac2024d305091",
+      "content_hash": "6da150a24ef91bd0f56446463b6ce97138ab48ec2167c474f0dab50635f97669",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -34759,7 +35071,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-E-PRESERVE-E007-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-PRESERVE",
           "object_version": 1
         }
       }
@@ -34917,7 +35229,7 @@
       }
     },
     {
-      "content_hash": "da4e4ce1803de96d524b0272c442c321a425aeda02474d86090af238aa089405",
+      "content_hash": "9e8c0aead2cd1da2a76f172049376aa5fb08a7aef4552dc855c41412ea0cf9a5",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -35012,13 +35324,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-E-PRESERVE-E008-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-PRESERVE",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "e949088de07c3b8a9b80366e691b70f4645d2825e12337e20411f6ec1b2fcb45",
+      "content_hash": "60f3b23cdc0219c7b559c0c8838fae726c7fdb4c2f0274946a00470c199bf93c",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -35113,7 +35425,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-E-PRESERVE-E008-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-PRESERVE",
           "object_version": 1
         }
       }
@@ -35271,7 +35583,7 @@
       }
     },
     {
-      "content_hash": "f025b37769ca4c0e2459f0a609618da1d25b6d757a4359e62fff5b079027b454",
+      "content_hash": "3b7bafc94465b8568057dafce39c38042ea1132cd803c27b69b3fae025ca8e7c",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -35366,13 +35678,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-E-PRESERVE-E009-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-PRESERVE",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "a1176f50fc28127168df5dc36aa2e61ab8a453d8397096154118cfc8e2a3ee39",
+      "content_hash": "8a5baae2b9843c1cdb493b67e63badd50d104a6dea3587c643136e07fdb020a2",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -35467,7 +35779,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-E-PRESERVE-E009-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-PRESERVE",
           "object_version": 1
         }
       }
@@ -35625,7 +35937,7 @@
       }
     },
     {
-      "content_hash": "673e8bad61f16dde7a52bf382d487c633fa775b165dcd096573c7d0633baebea",
+      "content_hash": "34294ff608c5c431bb088ebecccf9275e7a1ea2168d73496e500ab735e048dc4",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -35720,13 +36032,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-E-PRESERVE-E010-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-PRESERVE",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "588632ddbbf59ba7c7aec2e34bd5725091c082f4f7a408fe468ca045a581e58b",
+      "content_hash": "abb6791a7f4a09a224977b98fbe43dc621b816d78414a990e4b2e9908ae878f3",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -35821,7 +36133,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-E-PRESERVE-E010-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-PRESERVE",
           "object_version": 1
         }
       }
@@ -35984,7 +36296,7 @@
       }
     },
     {
-      "content_hash": "5965084ff57de76c956c7055c20c6f35216ba789890137087ef2b668f7dbe0b0",
+      "content_hash": "1fd5717899bebda40d5495fac74e11e030f98a8b76c1ea5c7e2ff75a183c08a9",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -36084,13 +36396,13 @@
         ],
         "state_snapshot_id": "P0-E-PRESERVE-E011-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-PRESERVE",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "c9d16dc0a39690f8433257901ea2ea7a9ff3542bd7c7cb5cfcac390ddb70c1ba",
+      "content_hash": "16a1e7d83a5e1575d17538db3028268101783f4ef11536b187a5bbb856d52a61",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -36185,7 +36497,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-E-PRESERVE-E011-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-PRESERVE",
           "object_version": 1
         }
       }
@@ -36343,7 +36655,7 @@
       }
     },
     {
-      "content_hash": "616181f65595da2ca24894430f0b4556c420b94429ec7fa1e902b365a3450427",
+      "content_hash": "f697c2fb8edd3d4e4cf83cf2a2f07f8306c8bc00e0ec44a10f3d85b8d4036967",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -36438,13 +36750,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-E-PRESERVE-E012-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-PRESERVE",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "5c10627ae2e7d74db66c530bcf3242caf867a28a50db399d9a95db831864fcaf",
+      "content_hash": "a23ccca8c90249edaba5cc9e772382baad341cb39dde42fb696329a3b677a62a",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -36539,7 +36851,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-E-PRESERVE-E012-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-PRESERVE",
           "object_version": 1
         }
       }
@@ -36998,6 +37310,63 @@
       }
     },
     {
+      "content_hash": "54feb5bb96e6aa249b7b500bf9aba2e09f1e0fbfd2bd90a3b529ad810836d354",
+      "meta": {
+        "canonicalization_id": "UPS-CANONICAL-JSON",
+        "canonicalization_version": 1,
+        "object_id": "P0-E-PRESERVE-FIELD",
+        "object_version": 1,
+        "owner_id": "SLICE1-CLAIM-OWNER",
+        "provenance_status": "derived",
+        "schema_id": "P0-SCHEMA-CLAIM",
+        "schema_version": 1,
+        "source_basis": "versioned_sources",
+        "source_refs": [
+          {
+            "object_id": "SLICE1-MODEL-OUTPUT",
+            "object_version": 1
+          },
+          {
+            "object_id": "SLICE1-TRANSFORM-PRESERVE",
+            "object_version": 1
+          },
+          {
+            "object_id": "SLICE1-COMPATIBLE-SET",
+            "object_version": 1
+          }
+        ]
+      },
+      "payload": {
+        "assumption_refs": [],
+        "claim_id": "P0-E-PRESERVE-FIELD",
+        "compatible_state_ref": {
+          "object_id": "SLICE1-COMPATIBLE-SET",
+          "object_version": 1
+        },
+        "evidence_type": "derived",
+        "field_kind": "claim",
+        "field_name": "alternative",
+        "polarity": "live",
+        "semantic_id": "armed_technical",
+        "semantic_scope_ref": {
+          "object_id": "SLICE1-MODEL-OUTPUT",
+          "object_version": 1
+        },
+        "semantic_type": "classification_alternative",
+        "transformation_ref": {
+          "object_id": "SLICE1-TRANSFORM-PRESERVE",
+          "object_version": 1
+        },
+        "uncertainty_status": "unresolved",
+        "value": "armed_technical",
+        "visibility": [
+          "policy_evaluator",
+          "router",
+          "reviewer"
+        ]
+      }
+    },
+    {
       "content_hash": "a1ea687c0bf859eb9653ee79cf00c63eda217161c3a851ef3c244f6430b6fe4f",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
@@ -37100,7 +37469,7 @@
       }
     },
     {
-      "content_hash": "5cb0bcc454eff1f2be6f10d8da4e2284fd86c10dcda3ff89beff004ecaed1696",
+      "content_hash": "f0168874a20aef62f1daa1edcdfe9da6672d7a100ff77e48e304ae58356e295a",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -37115,11 +37484,24 @@
           {
             "object_id": "SLICE1-MODEL-OUTPUT",
             "object_version": 1
+          },
+          {
+            "object_id": "SLICE1-TRANSFORM-PRESERVE",
+            "object_version": 1
+          },
+          {
+            "object_id": "P0-E-PRESERVE-FIELD",
+            "object_version": 1
           }
         ]
       },
       "payload": {
-        "field_refs": [],
+        "field_refs": [
+          {
+            "object_id": "P0-E-PRESERVE-FIELD",
+            "object_version": 1
+          }
+        ],
         "payload_kind": "representation",
         "provenance_visible": true,
         "representation_id": "P0-E-PRESERVE-REPRESENTATION"
@@ -37228,7 +37610,7 @@
       }
     },
     {
-      "content_hash": "c8e5bb273a00051ea1768f97662fe64e5c9cead6fe59d4145d947c9a93a623f1",
+      "content_hash": "91fb101ba07933bf819768393334d56598031e2638d694e2f5665e1cce49ab8b",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -37246,6 +37628,10 @@
           },
           {
             "object_id": "SLICE1-MODEL-OUTPUT",
+            "object_version": 1
+          },
+          {
+            "object_id": "SLICE1-TRANSFORM-PRESERVE",
             "object_version": 1
           },
           {
@@ -37272,7 +37658,7 @@
         },
         "trace_specification_id": "P0-E-PRESERVE-SPEC",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-PRESERVE",
           "object_version": 1
         }
       }
@@ -37578,7 +37964,7 @@
       }
     },
     {
-      "content_hash": "b792301cf415225868dcbec92122653c9079475303037591b79c8e7916975680",
+      "content_hash": "245bcad0e0f4766bf463071e9040e3bba7ca9365791d9d4487fe4e4f6b2476dc",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -37673,13 +38059,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-NO-CHANGE-FALLBACK-E001-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "7be49f9cc2b4f418beaf0e4c330398f16566fbd36828e0405d2cad12c4509cc7",
+      "content_hash": "b8567f902912d96e732bb4bb07b02c64c2d08acedc08dc3e3832c2a64edbb208",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -37774,7 +38160,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-NO-CHANGE-FALLBACK-E001-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -37932,7 +38318,7 @@
       }
     },
     {
-      "content_hash": "5386b32650184dd4411a9d9f08fb1281974cbfe7a13390cea45905a2e0986165",
+      "content_hash": "5712adac9bf9203c1e5e520304a51b9da4fd9d9800be9d431ca8b417e3b6906d",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -38027,13 +38413,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-NO-CHANGE-FALLBACK-E002-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "38478deb9866c56420d7101086670ea1d3af1a37ae48dc0779a46f40e6002395",
+      "content_hash": "181ed7500626312de0064d5a683b16836a21e3516d5dad0d15ec6f3a4ff67e4a",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -38128,7 +38514,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-NO-CHANGE-FALLBACK-E002-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -38286,7 +38672,7 @@
       }
     },
     {
-      "content_hash": "abfd97ebe433adf12da6950e722f38a099a6bcde7a6b909d3c0d9ebb6eedcc27",
+      "content_hash": "53cee9eb1f8514780f2a25891e03ba5e495cacf01fd0413e156ab088c772ac66",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -38381,13 +38767,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-NO-CHANGE-FALLBACK-E003-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "c092066b93e35b873d31d63c6ed595f2cce6729c1f2ead3ce375f790a315a679",
+      "content_hash": "3627bc021a5b7c331a1a79ce874e4d88e528f372dd1e3a1c81769e4b018d9397",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -38482,7 +38868,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-NO-CHANGE-FALLBACK-E003-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -38640,7 +39026,7 @@
       }
     },
     {
-      "content_hash": "a6fab1d690df618b65eb990ab1df8190dff47eac8fa1cc540311853efb67f5fe",
+      "content_hash": "5bc23853e5eb7b76d335494c6b4b929167d8e25a35389696e542750f0acdcdc0",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -38735,13 +39121,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-NO-CHANGE-FALLBACK-E004-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "5fe0d921c41ba3f4e8675dcedb1339d1d9e5de7eaba6feb371aa9b27646008f1",
+      "content_hash": "bd3f9eee80175a7638f3cdd69426502ec82ea825e444abb83c464cca127f7fe8",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -38836,7 +39222,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-NO-CHANGE-FALLBACK-E004-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -38994,7 +39380,7 @@
       }
     },
     {
-      "content_hash": "6d51a83a07f04071031f2b91d88ef3fe96655975265cbf2be40d7f24225bdbae",
+      "content_hash": "82a2aa6f010e7cb9a493042aef165de1a14d802ffa0bb3ad83b4f8d9b025e075",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -39089,13 +39475,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-NO-CHANGE-FALLBACK-E005-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "ea401707ee32f50142f0f5a8fb0bc958f7660d66451f5a9a0f26a1798f6f20c9",
+      "content_hash": "19bd884766ffd0f6badbfafa799a842f5c641ad97b1d1d695d41d15cb9941c64",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -39190,7 +39576,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-NO-CHANGE-FALLBACK-E005-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -39348,7 +39734,7 @@
       }
     },
     {
-      "content_hash": "80a7556f40a4dca2d8bf42bca14a9d2b024814b4ba263d3a1135acc103708a44",
+      "content_hash": "f3c27c3bc0bfc8b269da646cfbda210da8ea30eecd55f52b6a19f36120eeda2e",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -39443,13 +39829,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-NO-CHANGE-FALLBACK-E006-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "12cb67d9b22d43f303a91b0682e32c8f020859f0419d02cb1d7f6dd30757d03e",
+      "content_hash": "b5af90a644ac2e852b8d1ef2e17d2ec9f7776752069612720e5e1d95002144ac",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -39544,7 +39930,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-NO-CHANGE-FALLBACK-E006-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -39702,7 +40088,7 @@
       }
     },
     {
-      "content_hash": "6cbf368e893cd76ee697887a75c4324b89262a02e55a841d767570c3465c670a",
+      "content_hash": "51dca19d12fb839c781562db9b67f969a7664f2362c0c1217f5c17e6d3fae55c",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -39797,13 +40183,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-NO-CHANGE-FALLBACK-E007-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "487113b3bc77b4619cbd3dafc92acf12cc6d5fb1024566188d81025db2c34c07",
+      "content_hash": "9610d4094e0874aaa90f821b74b5ccfc20a363087e154f4089bb49062569a2ff",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -39898,7 +40284,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-NO-CHANGE-FALLBACK-E007-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -40056,7 +40442,7 @@
       }
     },
     {
-      "content_hash": "7a98376fd715079acfa170f19fdbcd5851688762a61f8b6d6155b31b9ab8d6b1",
+      "content_hash": "caf6301446c1e37d4d5e3df5a1801220f5d987c4f1f49a6a28ef609098637c9f",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -40151,13 +40537,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-NO-CHANGE-FALLBACK-E008-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "5e077a0d2d8c66590553ec7632a219af8c10568042209ce899c5fff27f7bb8eb",
+      "content_hash": "09d88e3578aceabebedff1edfff3ce0cd754a562e51744206c7249c5c70b9406",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -40252,7 +40638,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-NO-CHANGE-FALLBACK-E008-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -40410,7 +40796,7 @@
       }
     },
     {
-      "content_hash": "0c27f64ce0e3ec23a46c29dda93e9950e4e5433873eb1b846149b6cf63054f47",
+      "content_hash": "0731e16b7055fb363ebc8b6ee4d55d08c39e17f7a1322dfe3e50451f8ad11fc2",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -40505,13 +40891,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-NO-CHANGE-FALLBACK-E009-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "517d1e0e7092287a48b866641353140a5a534858794c457e9c762d98f490a363",
+      "content_hash": "108a69562f626608bf625df7ca3ea08fe5cfa4af8f2ac76cea5c42a867aa0297",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -40606,7 +40992,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-NO-CHANGE-FALLBACK-E009-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -40764,7 +41150,7 @@
       }
     },
     {
-      "content_hash": "5f1a1c68a97f7e73fe8992918857cdc019438edb22fa8195a60e5481277a8f34",
+      "content_hash": "2d8a8d937f97f66ba237dd555ff9a74b30c51d9c6c772456b35bd4e515f86abb",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -40859,13 +41245,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-NO-CHANGE-FALLBACK-E010-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "be599f11eeada57c97999e2476015626e634fe67dc9ea81797e0cd8549daeb78",
+      "content_hash": "646afd904ab82c27e1c1d6ff0ef986ccc725777972c0074f0311741e66d0ae44",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -40960,7 +41346,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-NO-CHANGE-FALLBACK-E010-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -41123,7 +41509,7 @@
       }
     },
     {
-      "content_hash": "088e06f502f8883e930dc4d3de9a0f7b93ef8df098eabfd64201cd94c7a3c34a",
+      "content_hash": "9c34178d89d2f9b06c24365a3d1c7ced051e7a6327769db15b1be68b352eb46f",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -41223,13 +41609,13 @@
         ],
         "state_snapshot_id": "P0-NO-CHANGE-FALLBACK-E011-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "70694fdf3ba794b2b3d6fe434bace1db1960eadf7f574ca0dfae41b00358c34b",
+      "content_hash": "14a44f16688e1115d34d41aa44d89f1e08cbfefe996766e0f913efe80bef6833",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -41324,7 +41710,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-NO-CHANGE-FALLBACK-E011-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -41482,7 +41868,7 @@
       }
     },
     {
-      "content_hash": "df38ecdc0977623d978911b733c17f35074c9a75c3f2737ca77cfa631e5d843b",
+      "content_hash": "1bc35b21f73dcbbe55a14e89c34357c2157be7158bf4b4aaeeec96a808e5610f",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -41577,13 +41963,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-NO-CHANGE-FALLBACK-E012-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "e14aa996a16207e9c86218624c5498e282b8403a59d103d561b1f9b573b248e2",
+      "content_hash": "631f4d05097a06975db77a783f6e5db8669f427aab0d73af4b98533f29092a66",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -41678,7 +42064,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-NO-CHANGE-FALLBACK-E012-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -41773,6 +42159,41 @@
       }
     },
     {
+      "content_hash": "dd70368e84ef6a3ab54d6868fd75d9aee7ff070a5fd7e8ca7fd76a30e7e545c1",
+      "meta": {
+        "canonicalization_id": "UPS-CANONICAL-JSON",
+        "canonicalization_version": 1,
+        "object_id": "P0-NO-CHANGE-FALLBACK-FIELD",
+        "object_version": 1,
+        "owner_id": "SLICE1-UNTYPEDFIELD-OWNER",
+        "provenance_status": "derived",
+        "schema_id": "P0-SCHEMA-UNTYPED-FIELD",
+        "schema_version": 1,
+        "source_basis": "versioned_sources",
+        "source_refs": [
+          {
+            "object_id": "SLICE1-MODEL-OUTPUT",
+            "object_version": 1
+          },
+          {
+            "object_id": "SLICE1-TRANSFORM-FALLBACK",
+            "object_version": 1
+          }
+        ]
+      },
+      "payload": {
+        "field_id": "P0-NO-CHANGE-FALLBACK-FIELD",
+        "field_kind": "untyped",
+        "field_name": "object_class",
+        "value": "vehicle",
+        "visibility": [
+          "policy_evaluator",
+          "router",
+          "reviewer"
+        ]
+      }
+    },
+    {
       "content_hash": "654143b5eef5e9b3c83cb84cc14aa3cb10078628f0093a0f6c3fcad6a6e14805",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
@@ -41835,7 +42256,7 @@
       }
     },
     {
-      "content_hash": "cb638c02896b2fc29bb61b799f1fbf225de8bc1031c12c408633d48ec43d04c0",
+      "content_hash": "fca0ad38c9c32a11b58b43136a764c758329cf027b4b2e057b4f569e8be65c15",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -41850,18 +42271,31 @@
           {
             "object_id": "SLICE1-MODEL-OUTPUT",
             "object_version": 1
+          },
+          {
+            "object_id": "SLICE1-TRANSFORM-FALLBACK",
+            "object_version": 1
+          },
+          {
+            "object_id": "P0-NO-CHANGE-FALLBACK-FIELD",
+            "object_version": 1
           }
         ]
       },
       "payload": {
-        "field_refs": [],
+        "field_refs": [
+          {
+            "object_id": "P0-NO-CHANGE-FALLBACK-FIELD",
+            "object_version": 1
+          }
+        ],
         "payload_kind": "representation",
         "provenance_visible": false,
         "representation_id": "P0-NO-CHANGE-FALLBACK-REPRESENTATION"
       }
     },
     {
-      "content_hash": "e5dfa5e087b707024b7b9847cf0e68311cb859cf9cfd931657572cae23934b95",
+      "content_hash": "cd75ae5c73d1652251820f83220787ad142e7a061378f8a777fae212a58484d0",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -41879,6 +42313,10 @@
           },
           {
             "object_id": "SLICE1-MODEL-OUTPUT",
+            "object_version": 1
+          },
+          {
+            "object_id": "SLICE1-TRANSFORM-FALLBACK",
             "object_version": 1
           },
           {
@@ -41905,7 +42343,7 @@
         },
         "trace_specification_id": "P0-NO-CHANGE-FALLBACK-SPEC",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-FALLBACK",
           "object_version": 1
         }
       }
@@ -42211,7 +42649,7 @@
       }
     },
     {
-      "content_hash": "f56caa7ad111e39b1c9fa3dfaf56e9b12e20cbcce285b527e5fdcc4a2aa1da98",
+      "content_hash": "6ac7e2032ccf873100748e9cf403ec9deb42ba23fa85ab367fb874a62a92321b",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -42306,13 +42744,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-NO-CHANGE-PRESERVE-E001-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-PRESERVE",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "467545bef22df5e7df0ae86d6a24a1abc670fdb5705d502dd47ae6c363c6c903",
+      "content_hash": "10012777edaa3d62a35fb540d95c7c9b74cf37ec25deb007977ee71bf12509b8",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -42407,7 +42845,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-NO-CHANGE-PRESERVE-E001-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-PRESERVE",
           "object_version": 1
         }
       }
@@ -42565,7 +43003,7 @@
       }
     },
     {
-      "content_hash": "da77b0053107bfe2431d84c27169ee523efde58bd5e2ee4172de909f937ff4a5",
+      "content_hash": "67cc149b13386832e64ce718d26c0d38f43e84a09c3dcd73903dd9e78d490493",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -42660,13 +43098,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-NO-CHANGE-PRESERVE-E002-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-PRESERVE",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "f0bbbf38a9a15303366d946f9916496feddd2fb093c1a23b24278d8451ef5b5e",
+      "content_hash": "0a676379cd08cbe23014bcb77dd1c8192a59cf4d8278fea83d36d2567b1db87b",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -42761,7 +43199,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-NO-CHANGE-PRESERVE-E002-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-PRESERVE",
           "object_version": 1
         }
       }
@@ -42919,7 +43357,7 @@
       }
     },
     {
-      "content_hash": "9d41cb9a8ddb69af9a612a78098d28f5a094a1f9a5576f16c16ba27c50eb3513",
+      "content_hash": "464e5899099498ef19d06e3a2b17d20bbab398e2d1f5b72d0d16e6a99ad661de",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -43014,13 +43452,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-NO-CHANGE-PRESERVE-E003-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-PRESERVE",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "68073823cd07867bcfa8d901cbd085173e009a365a7ba24553681d9be6d7dafe",
+      "content_hash": "4846399081d8b6b33b03487dd4324fbbb34abeb660b8b969d4387996e1f2b73e",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -43115,7 +43553,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-NO-CHANGE-PRESERVE-E003-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-PRESERVE",
           "object_version": 1
         }
       }
@@ -43273,7 +43711,7 @@
       }
     },
     {
-      "content_hash": "c6a285b401f8abbb77b88139cc5031c57b94e2267460da662758158c18bee9db",
+      "content_hash": "517ed8f929f2045fd2b8753b47fe5af89d826ed72596910ccd00f314b299dcf2",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -43368,13 +43806,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-NO-CHANGE-PRESERVE-E004-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-PRESERVE",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "e941af21b40fb07ea7ea520c901faa14525372c6651737c7b039be2e274b9486",
+      "content_hash": "fe1ab61cfc817bb78369b5d87eaee551474850892cbab758116822fc61d9031d",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -43469,7 +43907,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-NO-CHANGE-PRESERVE-E004-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-PRESERVE",
           "object_version": 1
         }
       }
@@ -43627,7 +44065,7 @@
       }
     },
     {
-      "content_hash": "35537d5490687d697e2fbb32cfb79995ef7f6a283b4e69de3c3bbe37a4a0f05c",
+      "content_hash": "c5855d5ea1a4a59a447b5c44c2470fad5d395e3c67d99ebad18eaf685aaf88e2",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -43722,13 +44160,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-NO-CHANGE-PRESERVE-E005-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-PRESERVE",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "f75cf79df6d4faae94d063babaa999045f7b96d03b059f21665ec466eb5be548",
+      "content_hash": "d6befcee3ab620a3eb1f63f63e6499b42a8ac6934963553eca482c058f00fee2",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -43823,7 +44261,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-NO-CHANGE-PRESERVE-E005-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-PRESERVE",
           "object_version": 1
         }
       }
@@ -43981,7 +44419,7 @@
       }
     },
     {
-      "content_hash": "9ff588d9b183b8080166b2c6133da4f46e5c924749e46e255b64570da80b6fde",
+      "content_hash": "a53081069ceccb04a22fff7437e674897eb0cc70fdb5242e1861556f189689dd",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -44076,13 +44514,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-NO-CHANGE-PRESERVE-E006-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-PRESERVE",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "23d1d5f70292c11d9a28641ea0c5f70d51c6b8cd882ef940393c73ca20def910",
+      "content_hash": "8ae50011c8dcbf424052f7527e1865be7e871a92e14ac0d2ef5ab980dd01c4ce",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -44177,7 +44615,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-NO-CHANGE-PRESERVE-E006-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-PRESERVE",
           "object_version": 1
         }
       }
@@ -44335,7 +44773,7 @@
       }
     },
     {
-      "content_hash": "9422f8153d1836715d0adfd9f670a0ead7fbf236e2687f5ed2bfdb1f6ac7fcbb",
+      "content_hash": "0e70af63c85abb41078615e58df517413395afc0fd241323ab5e30519095442c",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -44430,13 +44868,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-NO-CHANGE-PRESERVE-E007-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-PRESERVE",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "fe2e9cd5e69c17f072fbb0170bfa3acc90e5fdd7b6678908811904a9b8b06de0",
+      "content_hash": "0a9e04fc083b2edb45c6d7fffcb418e5b5746bcca88f8797b07b8cc6bccc930e",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -44531,7 +44969,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-NO-CHANGE-PRESERVE-E007-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-PRESERVE",
           "object_version": 1
         }
       }
@@ -44689,7 +45127,7 @@
       }
     },
     {
-      "content_hash": "955f16f3d429b6e613b8946b7bd38995f72da3ae6285a996af56e49c202665af",
+      "content_hash": "adb6893a7383b2fb0e47e3779abaa02f8e04a6e341ca2012efe66725bf13418a",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -44784,13 +45222,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-NO-CHANGE-PRESERVE-E008-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-PRESERVE",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "88d7091161474cba9df825aa0c649ce34d22234826cd3fe664797cfb1d77201d",
+      "content_hash": "5f8e3393c384f7f7b30cbae32bdad253c073e10882833fe3744dc23ceba8bd9f",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -44885,7 +45323,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-NO-CHANGE-PRESERVE-E008-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-PRESERVE",
           "object_version": 1
         }
       }
@@ -45043,7 +45481,7 @@
       }
     },
     {
-      "content_hash": "f28e78a1054301fbe33d5b098a2d475a0afe6ca99062145e890e2522c5e1cedf",
+      "content_hash": "032875be1cb861935da4bd691713e738101cf8f1e92e2feed7a82e0246e487d2",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -45138,13 +45576,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-NO-CHANGE-PRESERVE-E009-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-PRESERVE",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "e7d3e8310dfe9d93c638d5e97e3cd9f700bd564b9d191bea756b7e6a2c9f1787",
+      "content_hash": "d68a5b7ad990b16d591a36d4c61009864fe0931659e8417c124ba7f81fa7e5e8",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -45239,7 +45677,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-NO-CHANGE-PRESERVE-E009-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-PRESERVE",
           "object_version": 1
         }
       }
@@ -45397,7 +45835,7 @@
       }
     },
     {
-      "content_hash": "b30c8c49002a0e9accb61032227b6ebce374797fc5d5d68210c55219ae3ead1a",
+      "content_hash": "54536888e735f0074958d80c9989237f686e3f7524e9d19f1dfca78cfea980bc",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -45492,13 +45930,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-NO-CHANGE-PRESERVE-E010-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-PRESERVE",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "2a10cb6669edd36e188505a12d631c2614e6b8409cc274518267764157fedea8",
+      "content_hash": "fe0304c2dd51ae7454d43de7d0299dd733c7e3ba74a24c9e261dd33ded4ebc9e",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -45593,7 +46031,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-NO-CHANGE-PRESERVE-E010-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-PRESERVE",
           "object_version": 1
         }
       }
@@ -45756,7 +46194,7 @@
       }
     },
     {
-      "content_hash": "2b9a03b32c74edb60fa702c339b6b9100a679f6593aaf04de891a9251b1a7a90",
+      "content_hash": "f706efb5fd635d6a4773520c478ecd08fffe03374c7cdeb6b3c9da83bffc5ca5",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -45856,13 +46294,13 @@
         ],
         "state_snapshot_id": "P0-NO-CHANGE-PRESERVE-E011-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-PRESERVE",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "00d5cd0f3e846e3e985863d638e647ddb066dac163f244f0d720b12ca5fa153e",
+      "content_hash": "29c143b078de8134539ac25dfa4316047cae8bee64fd69318d253d61d11cf12e",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -45957,7 +46395,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-NO-CHANGE-PRESERVE-E011-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-PRESERVE",
           "object_version": 1
         }
       }
@@ -46115,7 +46553,7 @@
       }
     },
     {
-      "content_hash": "8c1d2f351e7a9252051e6da3fbb87d10831e69eff622dbcc677242a6a33de77b",
+      "content_hash": "3e97a5b64c1c00d81355372ffb501162fb016183cfd3387793ce2f0864ff39de",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -46210,13 +46648,13 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-NO-CHANGE-PRESERVE-E012-POST",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-PRESERVE",
           "object_version": 1
         }
       }
     },
     {
-      "content_hash": "90b058989715e9cea2c6d540cfacd6e870dca86125b9e7c277e9eadd4b4489ce",
+      "content_hash": "5f57eb8fa42b0d049bf43fd61e621d7140ebe58685d27d021a639af1d47657c3",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -46311,7 +46749,7 @@
         "selected_action_refs": [],
         "state_snapshot_id": "P0-NO-CHANGE-PRESERVE-E012-PRE",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-PRESERVE",
           "object_version": 1
         }
       }
@@ -46406,6 +46844,63 @@
       }
     },
     {
+      "content_hash": "b9fd520b48fd4f859991fbacefb2cc29388168976be2299fcdd96eac863f7eba",
+      "meta": {
+        "canonicalization_id": "UPS-CANONICAL-JSON",
+        "canonicalization_version": 1,
+        "object_id": "P0-NO-CHANGE-PRESERVE-FIELD",
+        "object_version": 1,
+        "owner_id": "SLICE1-CLAIM-OWNER",
+        "provenance_status": "derived",
+        "schema_id": "P0-SCHEMA-CLAIM",
+        "schema_version": 1,
+        "source_basis": "versioned_sources",
+        "source_refs": [
+          {
+            "object_id": "SLICE1-MODEL-OUTPUT",
+            "object_version": 1
+          },
+          {
+            "object_id": "SLICE1-TRANSFORM-PRESERVE",
+            "object_version": 1
+          },
+          {
+            "object_id": "SLICE1-COMPATIBLE-SET",
+            "object_version": 1
+          }
+        ]
+      },
+      "payload": {
+        "assumption_refs": [],
+        "claim_id": "P0-NO-CHANGE-PRESERVE-FIELD",
+        "compatible_state_ref": {
+          "object_id": "SLICE1-COMPATIBLE-SET",
+          "object_version": 1
+        },
+        "evidence_type": "derived",
+        "field_kind": "claim",
+        "field_name": "alternative",
+        "polarity": "live",
+        "semantic_id": "civilian_pickup",
+        "semantic_scope_ref": {
+          "object_id": "SLICE1-MODEL-OUTPUT",
+          "object_version": 1
+        },
+        "semantic_type": "classification_alternative",
+        "transformation_ref": {
+          "object_id": "SLICE1-TRANSFORM-PRESERVE",
+          "object_version": 1
+        },
+        "uncertainty_status": "unresolved",
+        "value": "civilian_pickup",
+        "visibility": [
+          "policy_evaluator",
+          "router",
+          "reviewer"
+        ]
+      }
+    },
+    {
       "content_hash": "5e5205f59602d18b4ffd170ac9446dd094eb38d16c3c0225188cfbbadd7ed154",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
@@ -46468,7 +46963,7 @@
       }
     },
     {
-      "content_hash": "975996cce4b11edb5aaf9fd48af07ffaa156514486e4ebfb1eb9b7e202cef555",
+      "content_hash": "1c4f8f8fdde4f2a7b50677820e583569aff98c975abd31c0f5f29226ae50dd17",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -46483,18 +46978,31 @@
           {
             "object_id": "SLICE1-MODEL-OUTPUT",
             "object_version": 1
+          },
+          {
+            "object_id": "SLICE1-TRANSFORM-PRESERVE",
+            "object_version": 1
+          },
+          {
+            "object_id": "P0-NO-CHANGE-PRESERVE-FIELD",
+            "object_version": 1
           }
         ]
       },
       "payload": {
-        "field_refs": [],
+        "field_refs": [
+          {
+            "object_id": "P0-NO-CHANGE-PRESERVE-FIELD",
+            "object_version": 1
+          }
+        ],
         "payload_kind": "representation",
         "provenance_visible": true,
         "representation_id": "P0-NO-CHANGE-PRESERVE-REPRESENTATION"
       }
     },
     {
-      "content_hash": "7e5f66959839c3e81ef5e660c076cd107def3747d2968de5402da5c60ca81c96",
+      "content_hash": "b951b9a1a186004ae9bd93b3197587ba22d45fd934e0612358b3dd5bff070d72",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
         "canonicalization_version": 1,
@@ -46512,6 +47020,10 @@
           },
           {
             "object_id": "SLICE1-MODEL-OUTPUT",
+            "object_version": 1
+          },
+          {
+            "object_id": "SLICE1-TRANSFORM-PRESERVE",
             "object_version": 1
           },
           {
@@ -46538,7 +47050,7 @@
         },
         "trace_specification_id": "P0-NO-CHANGE-PRESERVE-SPEC",
         "transformation_ref": {
-          "object_id": "SLICE1-RULE",
+          "object_id": "SLICE1-TRANSFORM-PRESERVE",
           "object_version": 1
         }
       }
@@ -46757,6 +47269,83 @@
         "observation_window": "0..21",
         "payload_kind": "clock_config",
         "review_deadline": "21"
+      }
+    },
+    {
+      "content_hash": "28b8579ccfd7fc05f53058eea5694e9967a39ade8ab4fff8bb87a0a8c719de5c",
+      "meta": {
+        "canonicalization_id": "UPS-CANONICAL-JSON",
+        "canonicalization_version": 1,
+        "object_id": "SLICE1-COMPATIBLE-SET",
+        "object_version": 1,
+        "owner_id": "SLICE1-COMPATIBLESTATESET-OWNER",
+        "provenance_status": "hypothetical",
+        "schema_id": "P0-SCHEMA-COMPATIBLE-STATE",
+        "schema_version": 1,
+        "source_basis": "versioned_sources",
+        "source_refs": [
+          {
+            "object_id": "SLICE1-MODEL-OUTPUT",
+            "object_version": 1
+          },
+          {
+            "object_id": "SLICE1-COMPATIBLE-STATE",
+            "object_version": 1
+          },
+          {
+            "object_id": "SLICE1-PROJECTION-FACTS",
+            "object_version": 1
+          }
+        ]
+      },
+      "payload": {
+        "compatible_state_set_id": "SLICE1-COMPATIBLE-SET",
+        "denotation_mode": "finite_exact",
+        "evidence_ref": {
+          "object_id": "SLICE1-MODEL-OUTPUT",
+          "object_version": 1
+        },
+        "payload_kind": "compatible_state_set",
+        "projection_fact_set_ref": {
+          "object_id": "SLICE1-PROJECTION-FACTS",
+          "object_version": 1
+        },
+        "state_refs": [
+          {
+            "object_id": "SLICE1-COMPATIBLE-STATE",
+            "object_version": 1
+          }
+        ],
+        "taxonomy_ref": null
+      }
+    },
+    {
+      "content_hash": "d9fbecd53925a3349d90428e805ad69026e9c579e169453c71718b020eda61d8",
+      "meta": {
+        "canonicalization_id": "UPS-CANONICAL-JSON",
+        "canonicalization_version": 1,
+        "object_id": "SLICE1-COMPATIBLE-STATE",
+        "object_version": 1,
+        "owner_id": "SLICE1-COMPATIBLESTATE-OWNER",
+        "provenance_status": "hypothetical",
+        "schema_id": "P0-SCHEMA-STATE",
+        "schema_version": 1,
+        "source_basis": "versioned_sources",
+        "source_refs": [
+          {
+            "object_id": "SLICE1-MODEL-OUTPUT",
+            "object_version": 1
+          }
+        ]
+      },
+      "payload": {
+        "evidence_ref": {
+          "object_id": "SLICE1-MODEL-OUTPUT",
+          "object_version": 1
+        },
+        "latent_object_type_id": "vehicle_with_unresolved_subtype",
+        "payload_kind": "compatible_state",
+        "state_id": "SLICE1-COMPATIBLE-STATE"
       }
     },
     {
@@ -47742,6 +48331,82 @@
       }
     },
     {
+      "content_hash": "b205f578aba4cd3c3c72665f5f1999bd7ed2884a5091c805f8135c24e5244486",
+      "meta": {
+        "canonicalization_id": "UPS-CANONICAL-JSON",
+        "canonicalization_version": 1,
+        "object_id": "SLICE1-PROJECTION-FACTS",
+        "object_version": 1,
+        "owner_id": "SLICE1-PROJECTIONFACTSET-OWNER",
+        "provenance_status": "hypothetical",
+        "schema_id": "P0-SCHEMA-PROJECTION-FACT-SET",
+        "schema_version": 1,
+        "source_basis": "versioned_sources",
+        "source_refs": [
+          {
+            "object_id": "SLICE1-MODEL-OUTPUT",
+            "object_version": 1
+          },
+          {
+            "object_id": "SLICE1-COMPATIBLE-STATE",
+            "object_version": 1
+          }
+        ]
+      },
+      "payload": {
+        "evidence_ref": {
+          "object_id": "SLICE1-MODEL-OUTPUT",
+          "object_version": 1
+        },
+        "facts": [
+          {
+            "relation": "contains",
+            "source_field_path": "/alternative_ids",
+            "true_in_state_refs": [
+              {
+                "object_id": "SLICE1-COMPATIBLE-STATE",
+                "object_version": 1
+              }
+            ],
+            "typed_value": {
+              "kind": "id",
+              "value": "armed_technical"
+            }
+          },
+          {
+            "relation": "contains",
+            "source_field_path": "/alternative_ids",
+            "true_in_state_refs": [
+              {
+                "object_id": "SLICE1-COMPATIBLE-STATE",
+                "object_version": 1
+              }
+            ],
+            "typed_value": {
+              "kind": "id",
+              "value": "civilian_pickup"
+            }
+          },
+          {
+            "relation": "contains",
+            "source_field_path": "/alternative_ids",
+            "true_in_state_refs": [
+              {
+                "object_id": "SLICE1-COMPATIBLE-STATE",
+                "object_version": 1
+              }
+            ],
+            "typed_value": {
+              "kind": "id",
+              "value": "modified_truck"
+            }
+          }
+        ],
+        "payload_kind": "projection_fact_set",
+        "projection_fact_set_id": "SLICE1-PROJECTION-FACTS"
+      }
+    },
+    {
       "content_hash": "532bfb24e8128d4bd2f89fd1d9450109f059a2947b3d1f289ca846eb4fb3d62a",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
@@ -48048,14 +48713,185 @@
         "start_value": null,
         "temporal_scope_id": "SLICE1-TIME"
       }
+    },
+    {
+      "content_hash": "2e50541435e825a59dc2d9808e28a2f18d8247c3fd1579cde5e40d53be99e016",
+      "meta": {
+        "canonicalization_id": "UPS-CANONICAL-JSON",
+        "canonicalization_version": 1,
+        "object_id": "SLICE1-TRANSFORM-FALLBACK",
+        "object_version": 1,
+        "owner_id": "SLICE1-EXECUTABLERULE-OWNER",
+        "provenance_status": "hypothetical",
+        "schema_id": "P0-SCHEMA-EXECUTABLE-RULE",
+        "schema_version": 1,
+        "source_basis": "synthetic_no_external_source",
+        "source_refs": []
+      },
+      "payload": {
+        "implementation_id": "p0_threshold_broad_fallback",
+        "implementation_version": 1,
+        "input_role_specs": [
+          {
+            "accepted_schema_refs": [
+              {
+                "schema_id": "P0-SCHEMA-MODEL-OUTPUT",
+                "schema_version": 1
+              }
+            ],
+            "cardinality": "one",
+            "role_id": "model_output"
+          }
+        ],
+        "output_schema_ref": {
+          "schema_id": "P0-SCHEMA-FALLBACK",
+          "schema_version": 1
+        },
+        "parameters": [
+          {
+            "parameter_id": "confidence_path",
+            "value": {
+              "field_path": "/primary_confidence_decimal",
+              "input_role_id": "model_output"
+            },
+            "value_kind": "input_field"
+          },
+          {
+            "parameter_id": "threshold_path",
+            "value": {
+              "field_path": "/fallback_threshold_decimal",
+              "input_role_id": "model_output"
+            },
+            "value_kind": "input_field"
+          },
+          {
+            "parameter_id": "comparator",
+            "value": "less_than",
+            "value_kind": "literal"
+          },
+          {
+            "parameter_id": "output_path",
+            "value": "/broad_class_id",
+            "value_kind": "literal"
+          }
+        ],
+        "payload_kind": "executable_rule",
+        "rule_id": "SLICE1-TRANSFORM-FALLBACK",
+        "rule_kind": "transformation"
+      }
+    },
+    {
+      "content_hash": "359cb29a2bbaf46c559ac5752a7f3feeb46fb75c412205294047ca41018020a3",
+      "meta": {
+        "canonicalization_id": "UPS-CANONICAL-JSON",
+        "canonicalization_version": 1,
+        "object_id": "SLICE1-TRANSFORM-PRESERVE",
+        "object_version": 1,
+        "owner_id": "SLICE1-EXECUTABLERULE-OWNER",
+        "provenance_status": "hypothetical",
+        "schema_id": "P0-SCHEMA-EXECUTABLE-RULE",
+        "schema_version": 1,
+        "source_basis": "versioned_sources",
+        "source_refs": [
+          {
+            "object_id": "SLICE1-PROJECTION-FACTS",
+            "object_version": 1
+          }
+        ]
+      },
+      "payload": {
+        "implementation_id": "p0_preserve_projection",
+        "implementation_version": 1,
+        "input_role_specs": [
+          {
+            "accepted_schema_refs": [
+              {
+                "schema_id": "P0-SCHEMA-MODEL-OUTPUT",
+                "schema_version": 1
+              }
+            ],
+            "cardinality": "one",
+            "role_id": "model_output"
+          }
+        ],
+        "output_schema_ref": {
+          "schema_id": "P0-SCHEMA-PRESERVE",
+          "schema_version": 1
+        },
+        "parameters": [
+          {
+            "parameter_id": "source_field_paths",
+            "value": [
+              {
+                "field_path": "/broad_class_id",
+                "input_role_id": "model_output"
+              },
+              {
+                "field_path": "/alternative_ids",
+                "input_role_id": "model_output"
+              }
+            ],
+            "value_kind": "input_field"
+          },
+          {
+            "parameter_id": "projection_fact_set_by_evidence_id",
+            "value": {
+              "SLICE1-MODEL-OUTPUT": {
+                "object_id": "SLICE1-PROJECTION-FACTS",
+                "object_version": 1
+              }
+            },
+            "value_kind": "record_ref_set"
+          },
+          {
+            "parameter_id": "alternative_semantic_type",
+            "value": "classification_alternative",
+            "value_kind": "literal"
+          },
+          {
+            "parameter_id": "polarity",
+            "value": "live",
+            "value_kind": "literal"
+          },
+          {
+            "parameter_id": "uncertainty_status",
+            "value": "unresolved",
+            "value_kind": "literal"
+          }
+        ],
+        "payload_kind": "executable_rule",
+        "rule_id": "SLICE1-TRANSFORM-PRESERVE",
+        "rule_kind": "transformation"
+      }
     }
   ],
+  "reference_target_receipt": {
+    "declared_reference_fields": 254,
+    "explicit_polymorphic_roles": 24,
+    "polymorphic_refs_resolved": 43,
+    "records_with_typed_targets": 680,
+    "reference_target_roles": 178,
+    "status": "valid",
+    "typed_target_refs_validated": 4239
+  },
   "rule_implementation_receipts": [
     {
       "code_artifact_hash": "d2779133621bc3a37a78a14342590eaee1919be41ca945908d50886631c03a85",
       "implementation_id": "p0_visible_material_route",
       "implementation_version": 1,
       "rule_record_hash": "831efd3209b33ed1b99b86d053eadad37216b7317712452c8b8fb3400221ce43"
+    },
+    {
+      "code_artifact_hash": "37d1a085e28e65c6aa16ba55d00636185c9abacf3aac4092cca24bfe558d914d",
+      "implementation_id": "p0_threshold_broad_fallback",
+      "implementation_version": 1,
+      "rule_record_hash": "2e50541435e825a59dc2d9808e28a2f18d8247c3fd1579cde5e40d53be99e016"
+    },
+    {
+      "code_artifact_hash": "931cbb95e67c5ee5901ab719147bfb6e7b5650d4601308abf00aab40932604b1",
+      "implementation_id": "p0_preserve_projection",
+      "implementation_version": 1,
+      "rule_record_hash": "359cb29a2bbaf46c559ac5752a7f3feeb46fb75c412205294047ca41018020a3"
     }
   ]
 }

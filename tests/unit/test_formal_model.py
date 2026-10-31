@@ -51,9 +51,29 @@ def test_manifest_rejects_unknown_reference_target_kind() -> None:
     original = targets["field_refs"]
     targets["field_refs"] = ["MissingPayloadKind"]
     try:
-        with pytest.raises(ContractError, match="reference targets name unknown kinds"):
+        with pytest.raises(ContractError, match="names unknown target kinds"):
             validate_model_manifest_inventory()
     finally:
+        targets["field_refs"] = original
+
+
+def test_manifest_rejects_missing_target_role_and_nested_path() -> None:
+    roles = MANIFEST["reference_target_roles"]
+    case_targets = roles.pop("case_ref")
+    try:
+        with pytest.raises(ContractError, match="reference fields lack target declarations"):
+            validate_model_manifest_inventory()
+    finally:
+        roles["case_ref"] = case_targets
+
+    targets = MANIFEST["payload_kinds"]["Representation"]["reference_targets"]
+    original = targets.pop("field_refs")
+    targets["field_refs/*/does_not_exist"] = original
+    try:
+        with pytest.raises(ContractError, match="undeclared or not reference-bearing"):
+            validate_model_manifest_inventory()
+    finally:
+        targets.pop("field_refs/*/does_not_exist")
         targets["field_refs"] = original
 
 

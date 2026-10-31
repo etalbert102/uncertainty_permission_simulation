@@ -164,18 +164,64 @@ def _build_payload_models() -> dict[str, type[StrictModel]]:
 PAYLOAD_MODELS = _build_payload_models()
 
 
+REFERENCE_CONTAINER_TYPES = {
+    "typed_value",
+    "nullable_typed_diagnostic_value",
+    "parameter_binding_list",
+    "list_projection_fact",
+    "expected_disposition_spec",
+    "list_expected_assessment_spec",
+    "list_evaluation_input_binding",
+    "list_assessment_component_binding",
+    "list_event_rule_execution",
+    "list_gate_requirement",
+}
+
+
+def _field_type(field_spec: Any) -> str:
+    return field_spec if isinstance(field_spec, str) else field_spec.get("type", "any")
+
+
+def _reference_field_names(spec: dict[str, Any]) -> set[str]:
+    return {
+        field_name
+        for field_name, field_spec in spec["fields"].items()
+        if "record_ref" in _field_type(field_spec) or _field_type(field_spec) in REFERENCE_CONTAINER_TYPES
+    }
+
+
+def _validate_target_declaration(source: str, field_name: str, declaration: Any, payload_kinds: set[str]) -> None:
+    if declaration == "any":
+        return
+    if not isinstance(declaration, list) or not declaration or len(declaration) != len(set(declaration)):
+        raise ContractError("SCHEMA_MANIFEST_DRIFT", f"{source}.{field_name} requires `any` or a nonempty unique target-kind list")
+    unknown = set(declaration) - payload_kinds
+    if unknown:
+        raise ContractError("SCHEMA_MANIFEST_DRIFT", f"{source}.{field_name} names unknown target kinds: {sorted(unknown)}")
+
+
 def validate_model_manifest_inventory() -> None:
     if set(PAYLOAD_MODELS) != set(MANIFEST["payload_kinds"]):
         raise ContractError("SCHEMA_MANIFEST_DRIFT", "payload model inventory differs from manifest")
     payload_kinds = set(MANIFEST["payload_kinds"])
+    role_declarations = MANIFEST.get("reference_target_roles", {})
+    reference_field_names: set[str] = set()
     for source_kind, spec in MANIFEST["payload_kinds"].items():
+        reference_fields = _reference_field_names(spec)
+        reference_field_names.update(reference_fields)
+        overrides = spec.get("reference_targets", {})
+        missing = reference_fields - set(role_declarations) - set(overrides)
+        if missing:
+            raise ContractError("SCHEMA_MANIFEST_DRIFT", f"{source_kind} reference fields lack target declarations: {sorted(missing)}")
         for path, allowed_kinds in spec.get("reference_targets", {}).items():
-            root_field = path.strip("/").split("/")[0]
-            if root_field not in spec["fields"]:
-                raise ContractError("SCHEMA_MANIFEST_DRIFT", f"{source_kind} reference-target path {path} is undeclared")
-            unknown = set(allowed_kinds) - payload_kinds
-            if unknown:
-                raise ContractError("SCHEMA_MANIFEST_DRIFT", f"{source_kind} reference targets name unknown kinds: {sorted(unknown)}")
+            if "/" in path.strip("/") or path not in reference_fields:
+                raise ContractError("SCHEMA_MANIFEST_DRIFT", f"{source_kind} reference-target field {path} is undeclared or not reference-bearing")
+            _validate_target_declaration(source_kind, path, allowed_kinds, payload_kinds)
+    unused_roles = set(role_declarations) - reference_field_names
+    if unused_roles:
+        raise ContractError("SCHEMA_MANIFEST_DRIFT", f"unused reference-target roles: {sorted(unused_roles)}")
+    for field_name, declaration in role_declarations.items():
+        _validate_target_declaration("reference_target_roles", field_name, declaration, payload_kinds)
 
 
 def _rule_error(message: str) -> None:
@@ -438,44 +484,23 @@ class RecordStore:
                 found.extend(RecordStore._refs(field_value))
         return tuple(found)
 
-    @staticmethod
-    def _path_values(value: Any, parts: list[str], path: str) -> tuple[Any, ...]:
-        if not parts:
-            return tuple(value) if isinstance(value, (tuple, list)) else (value,)
-        head, *tail = parts
-        if head == "*":
-            if not isinstance(value, (tuple, list)):
-                raise ContractError("SCHEMA_MANIFEST_DRIFT", f"reference-target wildcard does not select a list: {path}")
-            return tuple(item for element in value for item in RecordStore._path_values(element, tail, path))
-        if isinstance(value, BaseModel):
-            if not hasattr(value, head):
-                raise ContractError("SCHEMA_MANIFEST_DRIFT", f"reference-target path does not resolve: {path}")
-            return RecordStore._path_values(getattr(value, head), tail, path)
-        if isinstance(value, dict) and head in value:
-            return RecordStore._path_values(value[head], tail, path)
-        raise ContractError("SCHEMA_MANIFEST_DRIFT", f"reference-target path does not resolve: {path}")
-
     def _validate_reference_targets(self, record: StoredRecord) -> None:
         source_kind = record.payload.__class__.__name__
-        declarations = MANIFEST["payload_kinds"][source_kind].get("reference_targets", {})
-        for path, allowed_kinds in declarations.items():
-            parts = path.strip("/").split("/")
-            for value in self._path_values(record.payload, parts, path):
-                if value is None:
-                    continue
-                try:
-                    ref = RecordRef.model_validate(value)
-                except (TypeError, ValueError) as exc:
-                    raise ContractError(
-                        "SCHEMA_REFERENCE_TARGET_INVALID",
-                        f"{source_kind}.{path} contains a non-reference target",
-                    ) from exc
+        spec = MANIFEST["payload_kinds"][source_kind]
+        overrides = spec.get("reference_targets", {})
+        roles = MANIFEST["reference_target_roles"]
+        for field_name in _reference_field_names(spec):
+            allowed_kinds = overrides.get(field_name, roles[field_name])
+            if allowed_kinds == "any":
+                continue
+            value = getattr(record.payload, field_name)
+            for ref in self._refs(value):
                 target = self.resolve(ref)
                 target_kind = target.payload.__class__.__name__
                 if target_kind not in allowed_kinds:
                     raise ContractError(
                         "SCHEMA_REFERENCE_TARGET_INVALID",
-                        f"{source_kind}.{path} permits {allowed_kinds}, not {target_kind} at {ref.object_id}@{ref.object_version}",
+                        f"{source_kind}.{field_name} permits {allowed_kinds}, not {target_kind} at {ref.object_id}@{ref.object_version}",
                     )
                 target_spec = MANIFEST["payload_kinds"][target_kind]
                 schemas = target_spec.get("schema_variants", [target_spec.get("schema")])
@@ -483,7 +508,7 @@ class RecordStore:
                 if (target.meta.schema_id, target.meta.schema_version) not in allowed_schemas:
                     raise ContractError(
                         "SCHEMA_REFERENCE_TARGET_INVALID",
-                        f"{source_kind}.{path} resolved to an invalid {target_kind} schema",
+                        f"{source_kind}.{field_name} resolved to an invalid {target_kind} schema",
                     )
 
     def validate_closure(self) -> None:
@@ -511,6 +536,39 @@ class RecordStore:
 
         for key in edges:
             visit(key)
+
+    def reference_target_receipt(self) -> dict[str, int | str]:
+        typed_target_refs = 0
+        polymorphic_refs = 0
+        records_with_typed_targets = 0
+        for record in self._records.values():
+            source_kind = record.payload.__class__.__name__
+            spec = MANIFEST["payload_kinds"][source_kind]
+            overrides = spec.get("reference_targets", {})
+            record_typed_refs = 0
+            for field_name in _reference_field_names(spec):
+                declaration = overrides.get(field_name, MANIFEST["reference_target_roles"][field_name])
+                ref_count = len(self._refs(getattr(record.payload, field_name)))
+                if declaration == "any":
+                    polymorphic_refs += ref_count
+                else:
+                    typed_target_refs += ref_count
+                    record_typed_refs += ref_count
+            if record_typed_refs:
+                records_with_typed_targets += 1
+        return {
+            "status": "valid",
+            "declared_reference_fields": sum(
+                len(_reference_field_names(spec)) for spec in MANIFEST["payload_kinds"].values()
+            ),
+            "reference_target_roles": len(MANIFEST["reference_target_roles"]),
+            "explicit_polymorphic_roles": sum(
+                declaration == "any" for declaration in MANIFEST["reference_target_roles"].values()
+            ),
+            "typed_target_refs_validated": typed_target_refs,
+            "polymorphic_refs_resolved": polymorphic_refs,
+            "records_with_typed_targets": records_with_typed_targets,
+        }
 
     def records(self) -> tuple[StoredRecord, ...]:
         return tuple(self._records[key] for key in sorted(self._records))

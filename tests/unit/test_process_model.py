@@ -65,9 +65,22 @@ def test_stored_bundle_is_reference_closed_and_matches_prespecified_results() ->
     results = {spec.trace_id: run_trace(spec) for spec in specs}
     bundle = build_bundle(specs, results)
     assert bundle["closure_status"] == "valid"
-    assert bundle["record_count"] == 707
+    assert bundle["record_count"] == 721
     assert all(comparison["match"] for comparison in bundle["comparisons"])
     assert all(record["payload"] for record in bundle["records"])
+    records = {(record["meta"]["object_id"], record["meta"]["object_version"]): record for record in bundle["records"]}
+    representations = [record for record in bundle["records"] if record["payload"].get("payload_kind") == "representation"]
+    target_kinds = {
+        records[(ref_value["object_id"], ref_value["object_version"])]["payload"]["field_kind"]
+        for record in representations
+        for ref_value in record["payload"]["field_refs"]
+    }
+    assert len(representations) == 9
+    assert sum(len(record["payload"]["field_refs"]) for record in representations) == 9
+    assert target_kinds == {"claim", "untyped"}
+    assert len(bundle["rule_implementation_receipts"]) == 3
+    assert bundle["reference_target_receipt"]["declared_reference_fields"] >= 236
+    assert bundle["reference_target_receipt"]["typed_target_refs_validated"] > 0
 
 
 def test_record_graph_rejects_unresolved_reference_and_cycle() -> None:
@@ -80,14 +93,14 @@ def test_record_graph_rejects_unresolved_reference_and_cycle() -> None:
         missing.store.validate_closure()
 
     cycle = BundleBuilder()
-    cycle.add("ProcessState", "A", {
-        "process_state_id": "A", "case_ref": ref("B"), "stage": "x", "current_route": "x",
-        "prior_escalation": False, "active_review_gate": False, "emergency_authorization": False,
-    })
-    cycle.add("ProcessState", "B", {
-        "process_state_id": "B", "case_ref": ref("A"), "stage": "x", "current_route": "x",
-        "prior_escalation": False, "active_review_gate": False, "emergency_authorization": False,
-    })
+    cycle.add("Metric", "A", {
+        "metric_id": "A", "numerator": "1", "denominator": "1", "unit_id": "case",
+        "scope_refs": (ref("B"),), "estimate": "1",
+    }, provenance="simulated", basis="versioned_sources", sources=(ref("B"),))
+    cycle.add("Metric", "B", {
+        "metric_id": "B", "numerator": "1", "denominator": "1", "unit_id": "case",
+        "scope_refs": (ref("A"),), "estimate": "1",
+    }, provenance="simulated", basis="versioned_sources", sources=(ref("A"),))
     with pytest.raises(ContractError, match="SCHEMA_REFERENCE_CYCLE"):
         cycle.store.validate_closure()
 
@@ -121,3 +134,17 @@ def test_record_graph_enforces_manifest_reference_target_kinds() -> None:
     }, basis="versioned_sources", sources=(wrong_target,), schema_id="P0-SCHEMA-FALLBACK")
     with pytest.raises(ContractError, match="SCHEMA_REFERENCE_TARGET_INVALID.*not ModelOutput"):
         invalid.store.validate_closure()
+
+    wrong_global_role = BundleBuilder()
+    wrong_case = wrong_global_role.add("ModelOutput", "NOT-A-CASE", {
+        "model_output_id": "NOT-A-CASE", "primary_estimate_id": "x",
+        "primary_confidence_decimal": "0.4", "broad_class_id": "vehicle",
+        "fallback_threshold_decimal": "0.6", "alternative_ids": (),
+        "alternative_probabilities": "not_provided", "source_type": "synthetic_model_output",
+    })
+    wrong_global_role.add("ProcessState", "BAD-PROCESS", {
+        "process_state_id": "BAD-PROCESS", "case_ref": wrong_case, "stage": "x", "current_route": "x",
+        "prior_escalation": False, "active_review_gate": False, "emergency_authorization": False,
+    })
+    with pytest.raises(ContractError, match="ProcessState.case_ref.*not ModelOutput"):
+        wrong_global_role.store.validate_closure()

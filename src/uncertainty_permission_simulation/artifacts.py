@@ -81,6 +81,57 @@ def build_bundle(specs: tuple[TraceSpec, ...], results: dict[str, TraceResult]) 
         "start_precision": "not_applicable", "end_value": None, "end_precision": "not_applicable",
         "reference_as_of": None, "simultaneous_activation_claimed": False, "limitation": None,
     })
+    compatible_state = b.add("CompatibleState", "SLICE1-COMPATIBLE-STATE", {
+        "state_id": "SLICE1-COMPATIBLE-STATE", "evidence_ref": model_output,
+        "latent_object_type_id": "vehicle_with_unresolved_subtype",
+    }, basis="versioned_sources", sources=(model_output,))
+    projection_facts = b.add("ProjectionFactSet", "SLICE1-PROJECTION-FACTS", {
+        "projection_fact_set_id": "SLICE1-PROJECTION-FACTS", "evidence_ref": model_output,
+        "facts": tuple({
+            "source_field_path": "/alternative_ids", "relation": "contains",
+            "typed_value": {"kind": "id", "value": alternative_id},
+            "true_in_state_refs": (compatible_state,),
+        } for alternative_id in ("armed_technical", "civilian_pickup", "modified_truck")),
+    }, basis="versioned_sources", sources=(model_output, compatible_state))
+    compatible_set = b.add("CompatibleStateSet", "SLICE1-COMPATIBLE-SET", {
+        "compatible_state_set_id": "SLICE1-COMPATIBLE-SET", "evidence_ref": model_output,
+        "denotation_mode": "finite_exact", "state_refs": (compatible_state,),
+        "projection_fact_set_ref": projection_facts, "taxonomy_ref": None,
+    }, basis="versioned_sources", sources=(model_output, compatible_state, projection_facts))
+    preserve_rule = b.add("ExecutableRule", "SLICE1-TRANSFORM-PRESERVE", {
+        "rule_id": "SLICE1-TRANSFORM-PRESERVE", "rule_kind": "transformation",
+        "implementation_id": "p0_preserve_projection", "implementation_version": 1,
+        "parameters": (
+            {"parameter_id": "source_field_paths", "value_kind": "input_field", "value": (
+                {"input_role_id": "model_output", "field_path": "/broad_class_id"},
+                {"input_role_id": "model_output", "field_path": "/alternative_ids"},
+            )},
+            {"parameter_id": "projection_fact_set_by_evidence_id", "value_kind": "record_ref_set", "value": {"SLICE1-MODEL-OUTPUT": projection_facts}},
+            {"parameter_id": "alternative_semantic_type", "value_kind": "literal", "value": "classification_alternative"},
+            {"parameter_id": "polarity", "value_kind": "literal", "value": "live"},
+            {"parameter_id": "uncertainty_status", "value_kind": "literal", "value": "unresolved"},
+        ),
+        "input_role_specs": ({
+            "role_id": "model_output", "accepted_schema_refs": ({"schema_id": "P0-SCHEMA-MODEL-OUTPUT", "schema_version": 1},),
+            "cardinality": "one",
+        },),
+        "output_schema_ref": {"schema_id": "P0-SCHEMA-PRESERVE", "schema_version": 1},
+    }, basis="versioned_sources", sources=(projection_facts,))
+    fallback_rule = b.add("ExecutableRule", "SLICE1-TRANSFORM-FALLBACK", {
+        "rule_id": "SLICE1-TRANSFORM-FALLBACK", "rule_kind": "transformation",
+        "implementation_id": "p0_threshold_broad_fallback", "implementation_version": 1,
+        "parameters": (
+            {"parameter_id": "confidence_path", "value_kind": "input_field", "value": {"input_role_id": "model_output", "field_path": "/primary_confidence_decimal"}},
+            {"parameter_id": "threshold_path", "value_kind": "input_field", "value": {"input_role_id": "model_output", "field_path": "/fallback_threshold_decimal"}},
+            {"parameter_id": "comparator", "value_kind": "literal", "value": "less_than"},
+            {"parameter_id": "output_path", "value_kind": "literal", "value": "/broad_class_id"},
+        ),
+        "input_role_specs": ({
+            "role_id": "model_output", "accepted_schema_refs": ({"schema_id": "P0-SCHEMA-MODEL-OUTPUT", "schema_version": 1},),
+            "cardinality": "one",
+        },),
+        "output_schema_ref": {"schema_id": "P0-SCHEMA-FALLBACK", "schema_version": 1},
+    })
     hold = b.add("Action", "SLICE1-ACTION-HOLD", {
         "action_instance_id": "SLICE1-ACTION-HOLD", "action_type_id": "hold", "actor_role_id": "SYSTEM",
         "target_id": "SLICE1-CASE", "parameter_vector": {}, "resource_commitment": {},
@@ -186,10 +237,27 @@ def build_bundle(specs: tuple[TraceSpec, ...], results: dict[str, TraceResult]) 
     trace_refs: dict[str, RecordRef] = {}
     for spec in specs:
         result = results[spec.trace_id]
+        transformation = preserve_rule if spec.representation == "preserve" else fallback_rule
+        if spec.representation == "preserve":
+            field = b.add("Claim", f"{spec.trace_id}-FIELD", {
+                "claim_id": f"{spec.trace_id}-FIELD", "field_name": "alternative",
+                "value": "armed_technical" if spec.material_uncertainty else "civilian_pickup",
+                "evidence_type": "derived", "transformation_ref": transformation,
+                "assumption_refs": (), "compatible_state_ref": compatible_set,
+                "visibility": ("policy_evaluator", "router", "reviewer"),
+                "semantic_id": "armed_technical" if spec.material_uncertainty else "civilian_pickup",
+                "semantic_type": "classification_alternative", "semantic_scope_ref": model_output,
+                "polarity": "live", "uncertainty_status": "unresolved",
+            }, provenance="derived", basis="versioned_sources", sources=(model_output, transformation, compatible_set))
+        else:
+            field = b.add("UntypedField", f"{spec.trace_id}-FIELD", {
+                "field_id": f"{spec.trace_id}-FIELD", "field_name": "object_class",
+                "value": "vehicle", "visibility": ("policy_evaluator", "router", "reviewer"),
+            }, provenance="derived", basis="versioned_sources", sources=(model_output, transformation))
         representation = b.add("Representation", f"{spec.trace_id}-REPRESENTATION", {
-            "representation_id": f"{spec.trace_id}-REPRESENTATION", "field_refs": (),
+            "representation_id": f"{spec.trace_id}-REPRESENTATION", "field_refs": (field,),
             "provenance_visible": spec.representation == "preserve",
-        }, provenance="derived", basis="versioned_sources", sources=(model_output,), schema_id="P0-SCHEMA-PRESERVE" if spec.representation == "preserve" else "P0-SCHEMA-FALLBACK")
+        }, provenance="derived", basis="versioned_sources", sources=(model_output, transformation, field), schema_id="P0-SCHEMA-PRESERVE" if spec.representation == "preserve" else "P0-SCHEMA-FALLBACK")
         process_state = b.add("ProcessState", f"{spec.trace_id}-PROCESS", {
             "process_state_id": f"{spec.trace_id}-PROCESS", "case_ref": case, "stage": "deterministic_trace",
             "current_route": result.route, "prior_escalation": False, "active_review_gate": result.gate_state == "closed",
@@ -197,8 +265,8 @@ def build_bundle(specs: tuple[TraceSpec, ...], results: dict[str, TraceResult]) 
         })
         trace_spec = b.add("TraceSpecification", f"{spec.trace_id}-SPEC", {
             "trace_specification_id": f"{spec.trace_id}-SPEC", "case_ref": case, "model_output_ref": model_output,
-            "transformation_ref": rule, "routing_rule_ref": rule, "held_input_bindings": (), "random_draw_count": 0,
-        }, basis="versioned_sources", sources=(case, model_output, rule))
+            "transformation_ref": transformation, "routing_rule_ref": rule, "held_input_bindings": (), "random_draw_count": 0,
+        }, basis="versioned_sources", sources=(case, model_output, transformation, rule))
         event_refs: list[RecordRef] = []
         state_refs: list[tuple[RecordRef, RecordRef]] = []
         routed = False
@@ -223,7 +291,7 @@ def build_bundle(specs: tuple[TraceSpec, ...], results: dict[str, TraceResult]) 
             shared_state_values = {
                 "case_ref": case, "evidence_refs": (model_output,), "representation_ref": representation,
                 "clock_ref": clock, "policy_ref": policy_refs[spec.policy_id],
-                "transformation_ref": rule, "decision_rule_ref": rule, "evaluation_spec_ref": evaluation,
+                "transformation_ref": transformation, "decision_rule_ref": rule, "evaluation_spec_ref": evaluation,
                 "enabled_action_refs": (hold, progress),
             }
             pre = b.add("PreState", f"{event.event_id}-PRE", {"state_snapshot_id": f"{event.event_id}-PRE", **shared_state_values, "process_state_ref": pre_process, "selected_action_refs": ()}, provenance="simulated", basis="versioned_sources", sources=(case, model_output, representation, pre_process, clock, policy_refs[spec.policy_id], rule, evaluation))
@@ -298,18 +366,21 @@ def build_bundle(specs: tuple[TraceSpec, ...], results: dict[str, TraceResult]) 
             }, provenance="simulated", basis="versioned_sources", sources=(trace_ref, *diagnostic_refs))
 
     b.store.validate_closure()
-    records = [record.model_dump(mode="json") for record in b.store.records()]
+    stored_records = b.store.records()
+    records = [record.model_dump(mode="json") for record in stored_records]
+    rule_receipts = tuple({
+        "implementation_id": record.payload.implementation_id,
+        "implementation_version": record.payload.implementation_version,
+        "code_artifact_hash": implementation_code_hash(record.payload.implementation_id),
+        "rule_record_hash": record.content_hash,
+    } for record in stored_records if record.payload.__class__.__name__ == "ExecutableRule")
     return {
         "bundle_schema_version": 1,
         "record_count": len(records),
         "records": records,
         "comparisons": comparisons,
         "closure_status": "valid",
-        "rule_implementation_receipts": ({
-            "implementation_id": "p0_visible_material_route",
-            "implementation_version": 1,
-            "code_artifact_hash": implementation_code_hash("p0_visible_material_route"),
-            "rule_record_hash": b.store.resolve(rule).content_hash,
-        },),
+        "reference_target_receipt": b.store.reference_target_receipt(),
+        "rule_implementation_receipts": rule_receipts,
         "compiled_configuration_refs": {key: value.model_dump() for key, value in compiled_refs.items()},
     }
