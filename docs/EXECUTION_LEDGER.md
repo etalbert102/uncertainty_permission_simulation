@@ -7,7 +7,7 @@ This ledger is the canonical slice-status record. Update it at the end of every 
 | Slice | Status | Commit | Verification | Residual risk |
 | --- | --- | --- | --- | --- |
 | 0. Source, construct, and claim contract | implementation, plan, and baseline gates passed — pre-freeze reader QA pending | `9cf836c` | automated Slice 0 and plan gates pass from declared environment | two eligible locked reader returns are not yet available; this blocks Slice 4, not Slice 1 engineering |
-| 1. Case-neutral dynamic vertical slice | in progress — stored-record checkpoint passes | `33aaa09` initial checkpoint | 15 tests; 707-record closed bundle; both artifact hashes repeat | executable-rule signature/hash closure and stored canary/adapter receipts remain incomplete |
+| 1. Case-neutral dynamic vertical slice | in progress — stored-record checkpoint passes | `f279217` checkpoint | 15 tests; 707-record closed bundle; both artifact hashes repeat | executable-rule signature/hash closure and stored canary/adapter receipts remain incomplete |
 | 2. Stochastic engine and validation | pending | — | — | — |
 | 3. Experiment pilot and freeze candidate | pending | — | — | — |
 | 4. Confirmatory freeze | pending | — | — | — |
@@ -134,6 +134,8 @@ The reviewed 41-file Slice 0 baseline is commit `9cf836cb15edba29235abc60b4f754d
 Status: deterministic schema/compiler/process checkpoint implemented; Slice 1 not complete
 
 Checkpoint commit: `33aaa0916578a8a5ce692993025a26e36e9296ec` (`Begin Slice 1 deterministic vertical slice`)
+
+Stored-record checkpoint commit: `f27921764526dd13612fd34e11610cf4434a6ed8` (`Materialize Slice 1 stored record bundle`)
 
 ### Implemented
 
