@@ -7,7 +7,7 @@ This ledger is the canonical slice-status record. Update it at the end of every 
 | Slice | Status | Commit | Verification | Residual risk |
 | --- | --- | --- | --- | --- |
 | 0. Source, construct, and claim contract | implementation, plan, and baseline gates passed — pre-freeze reader QA pending | `9cf836c` | automated Slice 0 and plan gates pass from declared environment | two eligible locked reader returns are not yet available; this blocks Slice 4, not Slice 1 engineering |
-| 1. Case-neutral dynamic vertical slice | in progress — stored-record checkpoint passes | `f279217` checkpoint | 15 tests; 707-record closed bundle; both artifact hashes repeat | executable-rule signature/hash closure and stored canary/adapter receipts remain incomplete |
+| 1. Case-neutral dynamic vertical slice | in progress — executable-rule checkpoint passes | `0bb87c2` checkpoint | 23 tests; 707-record closed bundle; 16 hash-pinned rule implementations; both artifact hashes repeat | typed reference-target validation and stored canary/adapter receipts remain incomplete |
 | 2. Stochastic engine and validation | pending | — | — | — |
 | 3. Experiment pilot and freeze candidate | pending | — | — | — |
 | 4. Confirmatory freeze | pending | — | — | — |
@@ -58,10 +58,10 @@ Current candidate hashes after the flexible-kernel plan revision:
 - formal model: `da06b6c9896a961fcecbb87d0428d1cb7fa3703362a4c911f7a3434e8544389f`
 - P0 fixture: `ef9d0b8c6593e35e68b0089538bcc5503e107a005c02087c6977dedbb2938992`
 - protocol: `73fa13ad87fc98eba57fbdd34be7831bea62faa38e96fe26450a7d754e621274`
-- schema manifest: `fef9e760bc7eabcaffb05b4774dd7a9a55e2059a1dca6e0bd41bac966db78359`
+- schema manifest: `c6a5b0ccbf63af0ab5bafd62a616070ce576e4d2492123a6f25b091fac0f5e55`
 - worked-trace specification: `279d3888856f434a12a6be950cbff7b19d5745054aa5a3ead2bb59a5a2fd05a2`
 - worked-trace selection rule: `4122731dbea9b3d64ba448445f43dee7e6af4c82c839f144db6f08a0eb304c92`
-- study plan: `91ca2216a40beb61c9d960310b0c4357866f0a553ac21a08a8ada1d003d4ac48`
+- study plan: `076c1092741c3da82025167a431f847187cde39cb6ab12751d7052f77626467d`
 - preregistration skeleton: `d9c88cc777966e5b8d8cc8615cfe4bcf19d41d88d3a488550276cff0f8994510`
 - configuration compilation contract: `208c5e0dbb66e8f70dc300c7cc373a7206e5863928eb56c07f3f3b93ada30b6d`
 - Slice 0 validator: `12f656690bab510bfb03f63e7028aee224b2483794f288a530ed960da3c7d6e3`
@@ -131,11 +131,13 @@ The reviewed 41-file Slice 0 baseline is commit `9cf836cb15edba29235abc60b4f754d
 
 ## Slice 1 In-Progress Checkpoint
 
-Status: deterministic schema/compiler/process checkpoint implemented; Slice 1 not complete
+Status: deterministic schema/compiler/process and executable-rule checkpoints implemented; Slice 1 not complete
 
 Checkpoint commit: `33aaa0916578a8a5ce692993025a26e36e9296ec` (`Begin Slice 1 deterministic vertical slice`)
 
 Stored-record checkpoint commit: `f27921764526dd13612fd34e11610cf4434a6ed8` (`Materialize Slice 1 stored record bundle`)
+
+Executable-rule checkpoint commit: `0bb87c2b9431512e1df43d2508825e1ad7912b9e` (`Close executable rule registry`)
 
 ### Implemented
 
@@ -145,20 +147,23 @@ Stored-record checkpoint commit: `f27921764526dd13612fd34e11610cf4434a6ed8` (`Ma
 - Nine trace arms covering the seven required golden behaviors, the isomorphic vocabulary canary, non-isomorphic topology canary, and thin R-OCI-Early adapter smoke compilation.
 - A canonical 707-record bundle containing compiled-configuration inputs, parameter receipts, trace specifications, per-event pre/post process states, events, total dispositions, traces, prespecified expected results, metrics, P0 assessments, and diagnostics.
 - Recursive reference resolution and cycle rejection, nine independent expected-versus-actual trace comparisons, and 18 P0 report-row links to stored assessments and diagnostics.
+- A static 16-callable implementation registry with exact manifest inventory matching and per-implementation hashes bound to the complete code artifact; dynamic imports and narrative evaluation are absent.
+- Exact rule validation for implementation kind/version, required and unknown parameters, parameter kinds and closed values, input roles/cardinalities/schema sets, and output schema. Nested set-semantics paths now canonicalize before rule-record hashing.
+- A stored routing-rule signature with four typed parameters, four declared input roles, a matching output schema, and a top-level receipt linking its code-artifact and rule-record hashes.
 
 ### Verification
 
 | Command | Result |
 | --- | --- |
-| `PYTHONPATH=src ./.venv/bin/python -m pytest -q` | pass: 15 tests |
+| `PYTHONPATH=src ./.venv/bin/python -m pytest -q` | pass: 23 tests, including unknown implementation, missing parameter, kind/version/input/output drift, nested set ordering, and code-hash mutation rejection |
 | `PYTHONPATH=src ./.venv/bin/python -m uncertainty_permission_simulation.cli trace experiments/configs/smoke_v1.yaml` | pass: 9 trace arms |
-| repeated smoke run | summary SHA-256 `a5a37cc0c70099126e66d4ccf864cc6a119760cd32f74e2ab20d8ad2a9df75b2`; record bundle SHA-256 `5343ac2baa9170737717b285449f1bdb45f95dbd8b23c1da618e9717ffc09842`; both identical across reruns |
+| repeated smoke run | summary SHA-256 `a5a37cc0c70099126e66d4ccf864cc6a119760cd32f74e2ab20d8ad2a9df75b2`; record bundle SHA-256 `ae44db78fb6d900c75ebfa7fa260b1c074b2a9e5ec183f297e45fedb018a7831`; both identical across reruns |
+| rule-registry hash closure | pass: 16 manifest declarations equal 16 static callables and every declared SHA-256 reproduces; registry artifact SHA-256 `2ca97cbecfcf511dd502da2e85ec0cd7b06fa83b43ad0423cd1fce1d2a5a9556` |
 | `./.venv/bin/python scripts/validate_plan.py` | pass |
 | `./.venv/bin/python scripts/validate_slice0.py` | pass after status synchronization |
 
 ### Remaining before Slice 1 closeout
 
-- Enforce every `ExecutableRule` against its manifest-declared implementation kind, version, required parameters, role/cardinality/schema bindings, output schema, and actual immutable code-artifact hash.
 - Validate typed reference-target schemas where the manifest declares them, rather than only identity/version existence and graph acyclicity.
 - Materialize stored expected-versus-actual receipts for the isomorphic vocabulary canary, non-isomorphic topology canary, and R-OCI-Early adapter compilation; the current core golden traces already have stored expected results.
 - Rerun all gates, record runtime and artifact hashes, update this ledger, and create the required Slice 1 completion commit.
