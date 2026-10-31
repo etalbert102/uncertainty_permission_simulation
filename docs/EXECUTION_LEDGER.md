@@ -7,7 +7,7 @@ This ledger is the canonical slice-status record. Update it at the end of every 
 | Slice | Status | Commit | Verification | Residual risk |
 | --- | --- | --- | --- | --- |
 | 0. Source, construct, and claim contract | implementation, plan, and baseline gates passed — pre-freeze reader QA pending | `9cf836c` | automated Slice 0 and plan gates pass from declared environment | two eligible locked reader returns are not yet available; this blocks Slice 4, not Slice 1 engineering |
-| 1. Case-neutral dynamic vertical slice | in progress — executable-rule checkpoint passes | `0bb87c2` checkpoint | 23 tests; 707-record closed bundle; 16 hash-pinned rule implementations; both artifact hashes repeat | typed reference-target validation and stored canary/adapter receipts remain incomplete |
+| 1. Case-neutral dynamic vertical slice | in progress — typed-reference checkpoint passes | `b880f45` checkpoint | 25 tests; 707-record closed bundle; rule and reference-target closure pass; both artifact hashes repeat | stored canary/adapter receipts remain incomplete |
 | 2. Stochastic engine and validation | pending | — | — | — |
 | 3. Experiment pilot and freeze candidate | pending | — | — | — |
 | 4. Confirmatory freeze | pending | — | — | — |
@@ -55,10 +55,10 @@ Current candidate hashes after the flexible-kernel plan revision:
 - early profile: `248211b2b87c4372fc1eda307c4e6a81d9deb29b5b3d40e143490a24e17e720a`
 - enhanced profile: `c9e2df36c3b37e134f6a98889b28cf15abc291253a0b0ee525519230e7fd14e1`
 - case-study rendering: `72f91b2c13a012bfdc433c4dca6b2cdd9cf1ea99200850f53cad71e30f465b08`
-- formal model: `da06b6c9896a961fcecbb87d0428d1cb7fa3703362a4c911f7a3434e8544389f`
+- formal model: `5edb0f0a1c4ff2072c0128460f8d35cbd22fd2ed5970247d8fccc2f444258a40`
 - P0 fixture: `ef9d0b8c6593e35e68b0089538bcc5503e107a005c02087c6977dedbb2938992`
 - protocol: `73fa13ad87fc98eba57fbdd34be7831bea62faa38e96fe26450a7d754e621274`
-- schema manifest: `c6a5b0ccbf63af0ab5bafd62a616070ce576e4d2492123a6f25b091fac0f5e55`
+- schema manifest: `fb6a46502efc478f4776a7243a6fcf4814cfbd4468dd4e4cd2b053e601e22d7a`
 - worked-trace specification: `279d3888856f434a12a6be950cbff7b19d5745054aa5a3ead2bb59a5a2fd05a2`
 - worked-trace selection rule: `4122731dbea9b3d64ba448445f43dee7e6af4c82c839f144db6f08a0eb304c92`
 - study plan: `076c1092741c3da82025167a431f847187cde39cb6ab12751d7052f77626467d`
@@ -131,13 +131,15 @@ The reviewed 41-file Slice 0 baseline is commit `9cf836cb15edba29235abc60b4f754d
 
 ## Slice 1 In-Progress Checkpoint
 
-Status: deterministic schema/compiler/process and executable-rule checkpoints implemented; Slice 1 not complete
+Status: deterministic schema/compiler/process, executable-rule, and typed-reference checkpoints implemented; Slice 1 not complete
 
 Checkpoint commit: `33aaa0916578a8a5ce692993025a26e36e9296ec` (`Begin Slice 1 deterministic vertical slice`)
 
 Stored-record checkpoint commit: `f27921764526dd13612fd34e11610cf4434a6ed8` (`Materialize Slice 1 stored record bundle`)
 
 Executable-rule checkpoint commit: `0bb87c2b9431512e1df43d2508825e1ad7912b9e` (`Close executable rule registry`)
+
+Typed-reference checkpoint commit: `b880f45cb031e41f5f39490febf37e95ad1c8c60` (`Enforce typed reference targets`)
 
 ### Implemented
 
@@ -150,20 +152,20 @@ Executable-rule checkpoint commit: `0bb87c2b9431512e1df43d2508825e1ad7912b9e` (`
 - A static 16-callable implementation registry with exact manifest inventory matching and per-implementation hashes bound to the complete code artifact; dynamic imports and narrative evaluation are absent.
 - Exact rule validation for implementation kind/version, required and unknown parameters, parameter kinds and closed values, input roles/cardinalities/schema sets, and output schema. Nested set-semantics paths now canonicalize before rule-record hashing.
 - A stored routing-rule signature with four typed parameters, four declared input roles, a matching output schema, and a top-level receipt linking its code-artifact and rule-record hashes.
+- Generic manifest-path traversal now validates every declared reference target against its allowed payload kind and that kind's schema variants after resolution. A resolved record of the wrong kind fails `SCHEMA_REFERENCE_TARGET_INVALID`; unknown target kinds or paths fail manifest validation.
 
 ### Verification
 
 | Command | Result |
 | --- | --- |
-| `PYTHONPATH=src ./.venv/bin/python -m pytest -q` | pass: 23 tests, including unknown implementation, missing parameter, kind/version/input/output drift, nested set ordering, and code-hash mutation rejection |
+| `PYTHONPATH=src ./.venv/bin/python -m pytest -q` | pass: 25 tests, including rule mutations, nested set ordering, valid typed targets, resolved wrong-kind targets, and unknown manifest target kinds |
 | `PYTHONPATH=src ./.venv/bin/python -m uncertainty_permission_simulation.cli trace experiments/configs/smoke_v1.yaml` | pass: 9 trace arms |
 | repeated smoke run | summary SHA-256 `a5a37cc0c70099126e66d4ccf864cc6a119760cd32f74e2ab20d8ad2a9df75b2`; record bundle SHA-256 `ae44db78fb6d900c75ebfa7fa260b1c074b2a9e5ec183f297e45fedb018a7831`; both identical across reruns |
 | rule-registry hash closure | pass: 16 manifest declarations equal 16 static callables and every declared SHA-256 reproduces; registry artifact SHA-256 `2ca97cbecfcf511dd502da2e85ec0cd7b06fa83b43ad0423cd1fce1d2a5a9556` |
 | `./.venv/bin/python scripts/validate_plan.py` | pass |
-| `./.venv/bin/python scripts/validate_slice0.py` | pass after status synchronization |
+| `./.venv/bin/python scripts/validate_slice0.py` | pass: 10 sources, 10 claims, 2 profiles, 6 YAML files, 94 closed diagnostics |
 
 ### Remaining before Slice 1 closeout
 
-- Validate typed reference-target schemas where the manifest declares them, rather than only identity/version existence and graph acyclicity.
 - Materialize stored expected-versus-actual receipts for the isomorphic vocabulary canary, non-isomorphic topology canary, and R-OCI-Early adapter compilation; the current core golden traces already have stored expected results.
 - Rerun all gates, record runtime and artifact hashes, update this ledger, and create the required Slice 1 completion commit.
