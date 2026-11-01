@@ -42,6 +42,12 @@ def test_engagement_metrics_keep_dimensions_separate() -> None:
     assert Decimal(metrics["timely_review_rate"]) + Decimal(metrics["late_review_rate"]) == Decimal(1)
     assert metrics["review_started_rate"] == "1"
     assert metrics["review_completed_rate"] == "1"
+    assert metrics["action_count"] == 2
+    assert metrics["action_rate"] == "1"
+    assert metrics["progression_count"] + metrics["hold_count"] + metrics["request_evidence_action_count"] == 2
+    assert metrics["supported_progression_count"] + metrics["unsupported_progression_count"] == metrics["progression_count"]
+    assert metrics["evidentially_supported_progression_count"] + metrics["evidentially_unsupported_progression_count"] == metrics["progression_count"]
+    assert metrics["gate_safe_count"] + metrics["gate_unsafe_count"] == metrics["gate_applicable_count"]
     assert Decimal(metrics["review_max_wait_time"]) >= Decimal(0)
     assert metrics["response_rate"] == "1"
     assert metrics["notice_failure_rate"] == "0"
@@ -54,4 +60,9 @@ def test_engagement_metrics_are_policy_specific_but_share_denominator() -> None:
     assert u1["case_count"] == u2c["case_count"] == 2
     assert u1["review_queue_count"] == 0
     assert u1["review_mean_wait_time"] == "0"
+    assert u1["progression_count"] == 2
+    assert u1["supported_progression_count"] == 2
+    assert u1["gate_applicable_count"] == 0
+    assert u1["gate_safe_rate"] == "0"
     assert u2c["review_queue_count"] == 2
+    assert u2c["gate_safe_rate"] == "1"

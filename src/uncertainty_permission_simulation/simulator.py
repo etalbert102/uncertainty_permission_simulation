@@ -11,7 +11,7 @@ from typing import Literal
 
 from .configuration import CompiledConfigurationSpec, ParameterValue, ScenarioOverlaySpec
 from .events import DEFAULT_PRIORITIES, Event, EventQueue
-from .policies import EngagementDecision, EngagementInputs, map_engagement, policy_behavior
+from .policies import ActionDecision, EngagementDecision, EngagementInputs, decide_action, map_engagement, policy_behavior
 from .random_streams import DRAW_FAMILY_IDS, KeyedDraw, KeyedRandomStream, normalized_decimal
 from .schemas import ContractError
 
@@ -320,6 +320,7 @@ class EngagementTrace:
     events: tuple[Event, ...]
     exogenous_draw_hash: str
     event_hash: str
+    action_decision: ActionDecision | None = None
 
 
 @dataclass(frozen=True)
@@ -340,6 +341,21 @@ class EngagementRunTelemetry:
     review_total_wait_time: Decimal
     review_max_wait_time: Decimal
     review_schedule_hash: str
+    action_count: int
+    progression_count: int
+    hold_count: int
+    request_evidence_action_count: int
+    supported_progression_count: int
+    unsupported_progression_count: int
+    evidentially_supported_progression_count: int
+    evidentially_unsupported_progression_count: int
+    unauthorized_progression_count: int
+    gate_applicable_count: int
+    gate_safe_count: int
+    gate_unsafe_count: int
+    review_authorization_count: int
+    fail_open_timeout_progression_count: int
+    fail_closed_timeout_hold_count: int
     event_hash: str
 
 
@@ -637,6 +653,89 @@ def _add_review_events(
     return replace(trace, events=events, event_hash=_event_hash(events))
 
 
+def _add_action_events(
+    trace: EngagementTrace,
+    visit: ServiceVisit | None,
+) -> EngagementTrace:
+    review_required = visit is not None
+    review_completed_by_deadline = visit.completed_by_deadline if visit is not None else False
+    routing_events = tuple(event for event in trace.events if event.event_type_id == "ROUTING_COMPLETED")
+    if len(routing_events) != 1:
+        raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", f"expected one routing event for {trace.case_id}")
+    evidence_sufficient = (
+        trace.decision.adequate_response_evidence or trace.decision.retrieved_evidence
+    )
+    action_decision = decide_action(
+        policy_id=trace.policy_id,
+        evidence_sufficient=evidence_sufficient,
+        review_required=review_required,
+        review_completed_by_deadline=review_completed_by_deadline,
+        deadline_reached=True,
+    )
+    if visit is None:
+        action_time = routing_events[0].timestamp
+    elif visit.completed_by_deadline:
+        action_time = visit.completed_at
+    else:
+        action_time = visit.deadline
+    root_key = f"{trace.case_id}:ENGAGEMENT"
+
+    def action_event(event_type_id: str, cause_id: str, details: dict[str, object]) -> Event:
+        causal_key = f"{root_key}:{cause_id}:{event_type_id}"
+        return Event(
+            event_id=f"{trace.policy_id}:{causal_key}",
+            event_type_id=event_type_id,
+            timestamp=action_time,
+            causal_event_key=causal_key,
+            root_event_key=root_key,
+            descendant_path=(cause_id, event_type_id),
+            transition_rank=DEFAULT_PRIORITIES[event_type_id],
+            case_id=trace.case_id,
+            details={"policy_id": trace.policy_id, "keyed_draw_ids": ()} | details,
+        )
+
+    decision_details = {
+        "action": action_decision.action,
+        "reason_code": action_decision.reason_code,
+        "evidence_sufficient": action_decision.evidence_sufficient,
+        "review_required": action_decision.review_required,
+        "review_completed_by_deadline": action_decision.review_completed_by_deadline,
+        "review_authorization_recorded": action_decision.review_authorization_recorded,
+        "timeout_triggered": action_decision.timeout_triggered,
+        "gate_state": action_decision.gate_state,
+        "functional_permission": action_decision.functional_permission,
+        "progression_supported": action_decision.progression_supported,
+        "evidentially_supported_progression": action_decision.evidentially_supported_progression,
+        "unauthorized_progression": action_decision.unauthorized_progression,
+        "gate_safe": action_decision.gate_safe,
+        "unsupported_reason_codes": action_decision.unsupported_reason_codes,
+    }
+    added: list[Event] = []
+    if action_decision.review_authorization_recorded:
+        added.append(action_event(
+            "EXTERNAL_AUTHORIZATION_RECORDED", "authorization",
+            {
+                "authorization_scope": "exact_progression_action",
+                "evidence_sufficient": action_decision.evidence_sufficient,
+                "review_completed_by_deadline": True,
+            },
+        ))
+    added.append(action_event("ACTION_COMPUTED", "decision", decision_details))
+    if action_decision.action == "progress":
+        added.append(action_event("PROGRESSION_EXECUTED", "progression", decision_details))
+
+    queue = EventQueue()
+    for event in trace.events + tuple(added):
+        queue.push(event)
+    events = queue.drain()
+    return replace(
+        trace,
+        events=events,
+        event_hash=_event_hash(events),
+        action_decision=action_decision,
+    )
+
+
 def _validate_engagement_configuration(cohort: StochasticCohort, compiled: CompiledConfigurationSpec) -> str:
     policy_id = compiled.policy_profile.profile_id
     policy_behavior(policy_id)
@@ -658,7 +757,7 @@ def run_engagement_stage(cohort: StochasticCohort, compiled: CompiledConfigurati
     review_queue = _review_queue_run(cohort, engagement_traces)
     visit_by_case = {visit.case_id: visit for visit in review_queue.visits}
     case_by_id = {case.case_id: case for case in cohort.cases}
-    traces = tuple(
+    review_traces = tuple(
         _add_review_events(
             trace,
             visit_by_case.get(trace.case_id),
@@ -666,6 +765,10 @@ def run_engagement_stage(cohort: StochasticCohort, compiled: CompiledConfigurati
             review_queue.config.queue_id,
         )
         for trace in engagement_traces
+    )
+    traces = tuple(
+        _add_action_events(trace, visit_by_case.get(trace.case_id))
+        for trace in review_traces
     )
     system_queue = EventQueue()
     for trace in traces:
@@ -690,8 +793,82 @@ def run_engagement_stage(cohort: StochasticCohort, compiled: CompiledConfigurati
         review_total_wait_time=review_queue.telemetry.total_wait_time,
         review_max_wait_time=review_queue.telemetry.max_wait_time,
         review_schedule_hash=review_queue.telemetry.schedule_hash,
+        action_count=sum(trace.action_decision is not None for trace in traces),
+        progression_count=sum(
+            trace.action_decision is not None and trace.action_decision.action == "progress"
+            for trace in traces
+        ),
+        hold_count=sum(
+            trace.action_decision is not None and trace.action_decision.action == "hold"
+            for trace in traces
+        ),
+        request_evidence_action_count=sum(
+            trace.action_decision is not None and trace.action_decision.action == "request_evidence"
+            for trace in traces
+        ),
+        supported_progression_count=sum(
+            trace.action_decision is not None and trace.action_decision.progression_supported
+            for trace in traces
+        ),
+        unsupported_progression_count=sum(
+            trace.action_decision is not None
+            and trace.action_decision.action == "progress"
+            and not trace.action_decision.progression_supported
+            for trace in traces
+        ),
+        evidentially_supported_progression_count=sum(
+            trace.action_decision is not None
+            and trace.action_decision.evidentially_supported_progression
+            for trace in traces
+        ),
+        evidentially_unsupported_progression_count=sum(
+            trace.action_decision is not None
+            and trace.action_decision.action == "progress"
+            and not trace.action_decision.evidence_sufficient
+            for trace in traces
+        ),
+        unauthorized_progression_count=sum(
+            trace.action_decision is not None and trace.action_decision.unauthorized_progression
+            for trace in traces
+        ),
+        gate_applicable_count=sum(
+            trace.action_decision is not None and trace.action_decision.gate_safe is not None
+            for trace in traces
+        ),
+        gate_safe_count=sum(
+            trace.action_decision is not None and trace.action_decision.gate_safe is True
+            for trace in traces
+        ),
+        gate_unsafe_count=sum(
+            trace.action_decision is not None and trace.action_decision.gate_safe is False
+            for trace in traces
+        ),
+        review_authorization_count=sum(
+            trace.action_decision is not None and trace.action_decision.review_authorization_recorded
+            for trace in traces
+        ),
+        fail_open_timeout_progression_count=sum(
+            trace.action_decision is not None
+            and trace.action_decision.reason_code == "review_timeout_fail_open"
+            for trace in traces
+        ),
+        fail_closed_timeout_hold_count=sum(
+            trace.action_decision is not None
+            and trace.action_decision.reason_code == "review_timeout_fail_closed"
+            for trace in traces
+        ),
         event_hash=event_hash,
     )
+    if telemetry.action_count != telemetry.case_count:
+        raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "each case requires exactly one action decision")
+    if telemetry.progression_count + telemetry.hold_count + telemetry.request_evidence_action_count != telemetry.action_count:
+        raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "action dispositions do not partition the cohort")
+    if telemetry.supported_progression_count + telemetry.unsupported_progression_count != telemetry.progression_count:
+        raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "progression support does not partition progression")
+    if telemetry.evidentially_supported_progression_count + telemetry.evidentially_unsupported_progression_count != telemetry.progression_count:
+        raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "evidentiary support does not partition progression")
+    if telemetry.gate_safe_count + telemetry.gate_unsafe_count != telemetry.gate_applicable_count:
+        raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "gate safety does not partition applicable cases")
     return EngagementRun(
         cohort.scenario_id, policy_id, cohort.telemetry.cohort_hash,
         traces, system_events, review_queue, telemetry,

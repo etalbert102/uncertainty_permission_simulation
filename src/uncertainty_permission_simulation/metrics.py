@@ -46,16 +46,38 @@ def engagement_metrics(run: EngagementRun) -> dict[str, int | str]:
         "timely_review": run.telemetry.timely_review_count,
         "late_review": run.telemetry.late_review_count,
     }
+    action_counts = {
+        "action": run.telemetry.action_count,
+        "progression": run.telemetry.progression_count,
+        "hold": run.telemetry.hold_count,
+        "request_evidence_action": run.telemetry.request_evidence_action_count,
+        "supported_progression": run.telemetry.supported_progression_count,
+        "unsupported_progression": run.telemetry.unsupported_progression_count,
+        "evidentially_supported_progression": run.telemetry.evidentially_supported_progression_count,
+        "evidentially_unsupported_progression": run.telemetry.evidentially_unsupported_progression_count,
+        "unauthorized_progression": run.telemetry.unauthorized_progression_count,
+        "review_authorization": run.telemetry.review_authorization_count,
+        "fail_open_timeout_progression": run.telemetry.fail_open_timeout_progression_count,
+        "fail_closed_timeout_hold": run.telemetry.fail_closed_timeout_hold_count,
+    }
+    gate_counts = {
+        "gate_safe": run.telemetry.gate_safe_count,
+        "gate_unsafe": run.telemetry.gate_unsafe_count,
+    }
     result: dict[str, int | str] = {
         "case_count": denominator,
         "event_count": run.telemetry.event_count,
-        **{f"{name}_count": value for name, value in (case_counts | review_counts).items()},
+        **{
+            f"{name}_count": value
+            for name, value in (case_counts | review_counts | action_counts | gate_counts).items()
+        },
+        "gate_applicable_count": run.telemetry.gate_applicable_count,
     }
     with localcontext() as context:
         context.prec = 50
         result.update({
             f"{name}_rate": normalized_decimal(Decimal(value) / Decimal(denominator))
-            for name, value in case_counts.items()
+            for name, value in (case_counts | action_counts).items()
         })
         queue_denominator = run.telemetry.review_queue_count
         result.update({
@@ -64,6 +86,14 @@ def engagement_metrics(run: EngagementRun) -> dict[str, int | str]:
                 if queue_denominator else "0"
             )
             for name, value in review_counts.items()
+        })
+        gate_denominator = run.telemetry.gate_applicable_count
+        result.update({
+            f"{name}_rate": (
+                normalized_decimal(Decimal(value) / Decimal(gate_denominator))
+                if gate_denominator else "0"
+            )
+            for name, value in gate_counts.items()
         })
         result.update({
             "review_mean_wait_time": normalized_decimal(

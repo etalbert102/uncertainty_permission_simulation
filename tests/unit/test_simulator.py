@@ -143,28 +143,34 @@ def test_policy_path_divergence_preserves_common_causal_keys() -> None:
     assert "EXTERNAL_EVIDENCE_RETURNED" not in u1_keys and "EXTERNAL_EVIDENCE_RETURNED" in u3_keys
 
 
-def test_engagement_stage_replays_event_hashes_and_stops_before_actions() -> None:
+def test_action_stage_replays_event_hashes_and_stops_before_external_consequences() -> None:
     cohort = generate_stochastic_cohort(spec())
     configuration = compiled("U2C", cohort.overlay)
     first = run_engagement_stage(cohort, configuration)
     second = run_engagement_stage(cohort, configuration)
     assert first == second
     assert first.telemetry.event_hash == second.telemetry.event_hash
-    assert all(event.event_type_id not in {"ACTION_COMPUTED", "PROGRESSION_EXECUTED", "CASE_CLOSED"} for trace in first.traces for event in trace.events)
+    assert first.telemetry.action_count == len(cohort.cases)
+    assert all(trace.action_decision is not None for trace in first.traces)
+    assert all(
+        event.event_type_id not in {
+            "EXTERNAL_CONSEQUENCE_STARTED", "EXTERNAL_CONSEQUENCE_UPDATED",
+            "CORRECTION_REQUESTED", "RESTORATION_EXECUTED", "CASE_CLOSED",
+        }
+        for trace in first.traces
+        for event in trace.events
+    )
 
 
-def test_u2_fail_closed_and_fail_open_share_engagement_semantics() -> None:
+def test_u2_fail_closed_and_fail_open_share_queue_semantics_before_actions() -> None:
     cohort = generate_stochastic_cohort(spec())
     closed = run_engagement_stage(cohort, compiled("U2C", cohort.overlay))
     opened = run_engagement_stage(cohort, compiled("U2O", cohort.overlay))
-    assert [tuple(event.event_type_id for event in trace.events) for trace in closed.traces] == [
-        tuple(event.event_type_id for event in trace.events) for trace in opened.traces
-    ]
-    assert [tuple(event.causal_event_key for event in trace.events) for trace in closed.traces] == [
-        tuple(event.causal_event_key for event in trace.events) for trace in opened.traces
-    ]
+    assert closed.review_queue == opened.review_queue
     assert closed.telemetry.review_queue_count == len(cohort.cases)
     assert opened.telemetry.review_queue_count == len(cohort.cases)
+    assert closed.telemetry.fail_open_timeout_progression_count == 0
+    assert opened.telemetry.fail_closed_timeout_hold_count == 0
 
 
 def test_sufficient_evidence_is_not_labeled_as_imputation() -> None:

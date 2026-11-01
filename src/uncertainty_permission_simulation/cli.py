@@ -251,6 +251,21 @@ def run_stochastic_smoke(config_path: Path) -> dict[str, object]:
                     "review_total_wait_time": normalized_decimal(run.telemetry.review_total_wait_time),
                     "review_max_wait_time": normalized_decimal(run.telemetry.review_max_wait_time),
                     "review_schedule_hash": run.telemetry.review_schedule_hash,
+                    "action_count": run.telemetry.action_count,
+                    "progression_count": run.telemetry.progression_count,
+                    "hold_count": run.telemetry.hold_count,
+                    "request_evidence_action_count": run.telemetry.request_evidence_action_count,
+                    "supported_progression_count": run.telemetry.supported_progression_count,
+                    "unsupported_progression_count": run.telemetry.unsupported_progression_count,
+                    "evidentially_supported_progression_count": run.telemetry.evidentially_supported_progression_count,
+                    "evidentially_unsupported_progression_count": run.telemetry.evidentially_unsupported_progression_count,
+                    "unauthorized_progression_count": run.telemetry.unauthorized_progression_count,
+                    "gate_applicable_count": run.telemetry.gate_applicable_count,
+                    "gate_safe_count": run.telemetry.gate_safe_count,
+                    "gate_unsafe_count": run.telemetry.gate_unsafe_count,
+                    "review_authorization_count": run.telemetry.review_authorization_count,
+                    "fail_open_timeout_progression_count": run.telemetry.fail_open_timeout_progression_count,
+                    "fail_closed_timeout_hold_count": run.telemetry.fail_closed_timeout_hold_count,
                     "event_hash": run.telemetry.event_hash,
                 },
                 "review_queue": {
@@ -294,6 +309,22 @@ def run_stochastic_smoke(config_path: Path) -> dict[str, object]:
                             "proactive_retrieval_requested": trace.decision.proactive_retrieval_requested,
                             "retrieved_evidence": trace.decision.retrieved_evidence,
                         },
+                        "action_decision": {
+                            "action": trace.action_decision.action,
+                            "reason_code": trace.action_decision.reason_code,
+                            "evidence_sufficient": trace.action_decision.evidence_sufficient,
+                            "review_required": trace.action_decision.review_required,
+                            "review_completed_by_deadline": trace.action_decision.review_completed_by_deadline,
+                            "review_authorization_recorded": trace.action_decision.review_authorization_recorded,
+                            "timeout_triggered": trace.action_decision.timeout_triggered,
+                            "gate_state": trace.action_decision.gate_state,
+                            "functional_permission": trace.action_decision.functional_permission,
+                            "progression_supported": trace.action_decision.progression_supported,
+                            "evidentially_supported_progression": trace.action_decision.evidentially_supported_progression,
+                            "unauthorized_progression": trace.action_decision.unauthorized_progression,
+                            "gate_safe": trace.action_decision.gate_safe,
+                            "unsupported_reason_codes": trace.action_decision.unsupported_reason_codes,
+                        } if trace.action_decision is not None else None,
                         "events": [
                             {
                                 "event_type_id": event.event_type_id,
@@ -310,7 +341,7 @@ def run_stochastic_smoke(config_path: Path) -> dict[str, object]:
             }
             for policy_id, run in engagement_runs.items()
         },
-        "claim_limit": "review-queue stochastic smoke artifact; no final action, empirical, or historical outcome",
+        "claim_limit": "pre-exposure action smoke artifact; no external consequence, recovery, correction, empirical, or historical outcome",
     }
     output_path = ROOT / config["output_path"]
     output_path.parent.mkdir(parents=True, exist_ok=True)

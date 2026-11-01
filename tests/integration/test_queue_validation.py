@@ -59,6 +59,31 @@ def test_u2_policies_share_the_exact_review_schedule_before_timeout_behavior() -
     for trace in closed.traces:
         assert tuple(event for event in closed.system_events if event.case_id == trace.case_id) == trace.events
 
+    closed_by_case = {trace.case_id: trace for trace in closed.traces}
+    opened_by_case = {trace.case_id: trace for trace in opened.traces}
+    for visit in closed.review_queue.visits:
+        closed_decision = closed_by_case[visit.case_id].action_decision
+        opened_decision = opened_by_case[visit.case_id].action_decision
+        assert closed_decision is not None and opened_decision is not None
+        if visit.completed_by_deadline:
+            assert closed_decision.action == opened_decision.action == "request_evidence"
+        else:
+            assert closed_decision.action == "hold"
+            assert closed_decision.reason_code == "review_timeout_fail_closed"
+            assert opened_decision.action == "progress"
+            assert opened_decision.reason_code == "review_timeout_fail_open"
+            assert opened_decision.progression_supported is False
+            assert opened_decision.gate_safe is False
+            closed_action = next(
+                event for event in closed_by_case[visit.case_id].events
+                if event.event_type_id == "ACTION_COMPUTED"
+            )
+            opened_action = next(
+                event for event in opened_by_case[visit.case_id].events
+                if event.event_type_id == "ACTION_COMPUTED"
+            )
+            assert closed_action.causal_event_key == opened_action.causal_event_key
+
 
 def test_more_review_capacity_never_delays_a_paired_case() -> None:
     low_cohort, low = _run("U2C", _overlay(review_capacity=Decimal("1")))
@@ -85,6 +110,66 @@ def test_review_completion_and_deadline_race_uses_frozen_event_priority() -> Non
         )
         assert review_completion.timestamp < review_deadline.timestamp
         assert review_completion.details["completed_by_deadline"] is True
+        assert trace.action_decision is not None
+        assert trace.action_decision.timeout_triggered is False
+
+
+def test_timely_supported_review_records_authorization_before_progression() -> None:
+    _, run = _run(
+        "U2C",
+        _overlay(
+            record_availability_probability=Decimal("1"),
+            review_service_time=Decimal("0"),
+            review_service_window=Decimal("1"),
+        ),
+    )
+    assert run.telemetry.supported_progression_count == len(run.traces)
+    assert run.telemetry.review_authorization_count == len(run.traces)
+    assert run.telemetry.gate_safe_count == len(run.traces)
+    assert run.telemetry.gate_unsafe_count == 0
+    for trace in run.traces:
+        assert trace.action_decision is not None and trace.action_decision.progression_supported
+        types = tuple(event.event_type_id for event in trace.events)
+        assert types.index("REVIEW_COMPLETED") < types.index("EXTERNAL_AUTHORIZATION_RECORDED")
+        assert types.index("EXTERNAL_AUTHORIZATION_RECORDED") < types.index("PROGRESSION_EXECUTED")
+
+
+def test_fail_open_can_be_evidentially_supported_but_unauthorized() -> None:
+    _, run = _run(
+        "U2O",
+        _overlay(
+            record_availability_probability=Decimal("1"),
+            review_service_time=Decimal("30"),
+            review_service_window=Decimal("0.0000000001"),
+        ),
+    )
+    assert run.telemetry.late_review_count == len(run.traces)
+    assert run.telemetry.progression_count == len(run.traces)
+    assert run.telemetry.evidentially_supported_progression_count == len(run.traces)
+    assert run.telemetry.evidentially_unsupported_progression_count == 0
+    assert run.telemetry.unauthorized_progression_count == len(run.traces)
+    assert run.telemetry.supported_progression_count == 0
+    assert run.telemetry.gate_unsafe_count == len(run.traces)
+    for trace in run.traces:
+        action = next(event for event in trace.events if event.event_type_id == "ACTION_COMPUTED")
+        late_completion = next(event for event in trace.events if event.event_type_id == "REVIEW_COMPLETED")
+        assert action.timestamp < late_completion.timestamp
+
+
+def test_imputation_progression_and_evidence_hold_remain_distinct() -> None:
+    _, u0 = _run("U0", _overlay())
+    _, u1 = _run("U1", _overlay())
+    assert all(trace.action_decision is not None and trace.action_decision.action == "hold" for trace in u0.traces)
+    assert all(
+        trace.action_decision is not None
+        and trace.action_decision.reason_code == "imputation_progression"
+        and not trace.action_decision.progression_supported
+        for trace in u1.traces
+    )
+    assert u1.telemetry.unsupported_progression_count == len(u1.traces)
+    assert u1.telemetry.evidentially_unsupported_progression_count == len(u1.traces)
+    assert u1.telemetry.unauthorized_progression_count == 0
+    assert u0.telemetry.progression_count == 0
 
 
 def test_unreviewed_policy_has_a_closed_empty_queue_artifact() -> None:

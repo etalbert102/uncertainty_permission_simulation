@@ -8,6 +8,7 @@ from uncertainty_permission_simulation.policies import (
     POLICY_IDS,
     EngagementInputs,
     decide,
+    decide_action,
     map_engagement,
     policy_behavior,
 )
@@ -101,6 +102,78 @@ def test_deadline_decisions_keep_fail_closed_and_fail_open_distinct() -> None:
     assert decide(policy_id="U3", **common).action == "hold"
     assert decide(policy_id="U1", **common).action == "progress"
     assert decide(policy_id="U2O", **common).action == "progress"
+
+
+def test_final_action_matrix_separates_support_review_and_timeout() -> None:
+    supported = decide_action(
+        policy_id="U2C", evidence_sufficient=True, review_required=True,
+        review_completed_by_deadline=True, deadline_reached=True,
+    )
+    assert supported.action == "progress"
+    assert supported.review_authorization_recorded is True
+    assert supported.progression_supported is True
+
+    insufficient = decide_action(
+        policy_id="U2C", evidence_sufficient=False, review_required=True,
+        review_completed_by_deadline=True, deadline_reached=True,
+    )
+    assert insufficient.action == "request_evidence"
+    assert insufficient.progression_supported is False
+
+    closed = decide_action(
+        policy_id="U2C", evidence_sufficient=False, review_required=True,
+        review_completed_by_deadline=False, deadline_reached=True,
+    )
+    opened = decide_action(
+        policy_id="U2O", evidence_sufficient=False, review_required=True,
+        review_completed_by_deadline=False, deadline_reached=True,
+    )
+    assert (closed.action, closed.gate_state, closed.timeout_triggered) == ("hold", "closed", True)
+    assert (opened.action, opened.gate_state, opened.timeout_triggered) == ("progress", "open", True)
+    assert opened.progression_supported is False
+    assert opened.evidentially_supported_progression is False
+    assert opened.unauthorized_progression is True
+    assert opened.gate_safe is False
+    assert closed.gate_safe is True
+
+
+def test_supported_evidence_does_not_bypass_a_required_review() -> None:
+    late = decide_action(
+        policy_id="U2C", evidence_sufficient=True, review_required=True,
+        review_completed_by_deadline=False, deadline_reached=True,
+    )
+    assert late.action == "hold"
+    assert late.evidence_sufficient is True
+    assert late.review_authorization_recorded is False
+    assert late.progression_supported is False
+    assert late.gate_safe is True
+
+
+def test_no_review_policies_distinguish_evidence_from_imputation() -> None:
+    supported = decide_action(
+        policy_id="U0", evidence_sufficient=True, review_required=False,
+        review_completed_by_deadline=False, deadline_reached=True,
+    )
+    held = decide_action(
+        policy_id="U0", evidence_sufficient=False, review_required=False,
+        review_completed_by_deadline=False, deadline_reached=True,
+    )
+    imputed = decide_action(
+        policy_id="U1", evidence_sufficient=False, review_required=False,
+        review_completed_by_deadline=False, deadline_reached=True,
+    )
+    assert supported.progression_supported is True
+    assert supported.gate_safe is None
+    assert held.action == "hold"
+    assert imputed.action == "progress" and imputed.progression_supported is False
+
+
+def test_impossible_review_completion_is_rejected() -> None:
+    with pytest.raises(ContractError, match="SIM_SYSTEM_STATE_INCOMPLETE"):
+        decide_action(
+            policy_id="U1", evidence_sufficient=False, review_required=False,
+            review_completed_by_deadline=True, deadline_reached=True,
+        )
 
 
 @pytest.mark.parametrize(("field", "value"), (("response_effort", Decimal("1.1")), ("notice_delivered", "yes")))
