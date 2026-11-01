@@ -1,0 +1,160 @@
+{
+  "artifact_id": "SLICE2-STOCHASTIC-VALIDATION-V1",
+  "artifact_version": 1,
+  "claim_limit": "implementation validation only; not a pilot, historical reconstruction, or substantive result",
+  "selection_rule": "Before pilot work, select one fixed case per closed policy to cover extension/hold, correction/restoration, fail-closed timeout, fail-open exposure, and capacity-constrained assistance.",
+  "config_hashes": {
+    "experiments/configs/application_validation_v1.yaml": "b4567a67e8114cd7707cbf30fb581c4f2dce942f94ef4a0813ca04305af85b27",
+    "experiments/configs/slice2_validation_v1.yaml": "6b5781b9a6d4d2fefab668443671e9bab319a890a21733a848f046e5a0e7da92",
+    "experiments/configs/stochastic_smoke_v1.yaml": "786ce35817dd6f0bdf0d17b206e49436a52e9a8ac32af384f4794875c59d5a1c"
+  },
+  "paired_draw_receipt": {
+    "comparison_status": "match",
+    "cohort_hash": "2c4e5e076ed9bb060bf3752e6dd6d01e6be1c069c3411b495656eb5588f09b74",
+    "case_draw_hashes": {
+      "CASE-0001": "ce72ef61a37b7de10d5cb5868f7a7c8492cc2a028d1cf32eba08e956161e5779",
+      "CASE-0002": "8e6e2aa73974ab64b2bd3e9529bad227b9e24dfae13572ecdad51caa03b8b567",
+      "CASE-0003": "94ab206f446f97f6d3e16f2f07c9d877d227adb50ac696552af14f322d101000",
+      "CASE-0004": "8436692cb4355d23e298dc9a19b5267805a4785b6d405b893ffcef06c3fe946e",
+      "CASE-0005": "9b2939685d142aa52f011bf7fc0f7fecb1ac9bdc6d827026461ef90027e50a72"
+    },
+    "event_count_invariance_canary": {
+      "case_id": "CASE-0003",
+      "U1_event_count": 18,
+      "U3_event_count": 26,
+      "shared_draw_hash": "94ab206f446f97f6d3e16f2f07c9d877d227adb50ac696552af14f322d101000"
+    }
+  },
+  "replay_receipts": {
+    "U0": {
+      "comparison_status": "match",
+      "expected_event_hash": "2ba0835473282b7b45f3352d9b83576ba087b94c4b7c01bf407ad72f2092c6de",
+      "observed_event_hash": "2ba0835473282b7b45f3352d9b83576ba087b94c4b7c01bf407ad72f2092c6de",
+      "expected_metric_hash": "6b707087fcfc8234824b27fdb6802200757d943f612c1c27d46a6d079c36be71",
+      "observed_metric_hash": "6b707087fcfc8234824b27fdb6802200757d943f612c1c27d46a6d079c36be71"
+    },
+    "U1": {
+      "comparison_status": "match",
+      "expected_event_hash": "fb5047ee99982edc3d350c1d31b86c003471e3d198faa5a678d7ecba47959ae8",
+      "observed_event_hash": "fb5047ee99982edc3d350c1d31b86c003471e3d198faa5a678d7ecba47959ae8",
+      "expected_metric_hash": "15aa0c58f97ad5d2d3d45930ef1a871dd9202fc3fdec54b8083a3bb0b87d2d8f",
+      "observed_metric_hash": "15aa0c58f97ad5d2d3d45930ef1a871dd9202fc3fdec54b8083a3bb0b87d2d8f"
+    },
+    "U2C": {
+      "comparison_status": "match",
+      "expected_event_hash": "7454f5e0134ee1832e39013fe4afffb28c5124230e9c3cccd53f9ddf732852dc",
+      "observed_event_hash": "7454f5e0134ee1832e39013fe4afffb28c5124230e9c3cccd53f9ddf732852dc",
+      "expected_metric_hash": "240f5b5e20c303268d1d4d5fd0655a2e2da25bab2ce79c6672fffcffaf99d2c5",
+      "observed_metric_hash": "240f5b5e20c303268d1d4d5fd0655a2e2da25bab2ce79c6672fffcffaf99d2c5"
+    },
+    "U2O": {
+      "comparison_status": "match",
+      "expected_event_hash": "a8cfabeed67f9e5ba3b42f8d223131405ecd86d33b8fb0f76f4e313a9b4a572d",
+      "observed_event_hash": "a8cfabeed67f9e5ba3b42f8d223131405ecd86d33b8fb0f76f4e313a9b4a572d",
+      "expected_metric_hash": "43074acef9fbcc1d4e9a0a465e090234b9941045c328b03956c799f1ef30632d",
+      "observed_metric_hash": "43074acef9fbcc1d4e9a0a465e090234b9941045c328b03956c799f1ef30632d"
+    },
+    "U3": {
+      "comparison_status": "match",
+      "expected_event_hash": "08dfc96fc0ca5915c6c8a1a335728991c1946ecbf82fcf69159e0d0236892421",
+      "observed_event_hash": "08dfc96fc0ca5915c6c8a1a335728991c1946ecbf82fcf69159e0d0236892421",
+      "expected_metric_hash": "5f1015a892efc61dd911d355930a062cb989b876f25b1685769cf5a8a4a59d69",
+      "observed_metric_hash": "5f1015a892efc61dd911d355930a062cb989b876f25b1685769cf5a8a4a59d69"
+    }
+  },
+  "application_equivalence_receipts": {
+    "early": {
+      "comparison_status": "match",
+      "application_event_hash": "8fc8acf4ea7a61bda495f308677bfc7cbc5b2b7c6f06857c304ff2b417a5a8a3",
+      "synthetic_event_hash": "8fc8acf4ea7a61bda495f308677bfc7cbc5b2b7c6f06857c304ff2b417a5a8a3",
+      "application_metric_hash": "1ea48a7e780e21396acd520e6f1a00c67fe4e26e336b72bfba650fde68e6f0bc",
+      "synthetic_metric_hash": "1ea48a7e780e21396acd520e6f1a00c67fe4e26e336b72bfba650fde68e6f0bc"
+    },
+    "enhanced": {
+      "comparison_status": "match",
+      "application_event_hash": "8404dbef3483a2a6c4b20809fd15a89275bf81601579b75f6d6e2455926a3937",
+      "synthetic_event_hash": "8404dbef3483a2a6c4b20809fd15a89275bf81601579b75f6d6e2455926a3937",
+      "application_metric_hash": "8f477020dd17cfc3395c39548c249fc38b0553e3be032652b5b832b84f529578",
+      "synthetic_metric_hash": "8f477020dd17cfc3395c39548c249fc38b0553e3be032652b5b832b84f529578"
+    }
+  },
+  "queue_validation_receipts": {
+    "analytical_DD1": {
+      "comparison_status": "match",
+      "absolute_time_tolerance": "0",
+      "production_schedule_hash": "56a85934dfcbcb26139d94213bd48e7e3c3a959c9a38162a06bdd6d5196591ef"
+    },
+    "reference_FIFO_TIES_C2_V1": {
+      "comparison_status": "match",
+      "production_schedule_hash": "247c9b8f9af3c92d48471bdb5f041a58b83ba26cf52887338cd864f82ed72631"
+    },
+    "reference_FIFO_CENSOR_C1_V1": {
+      "comparison_status": "match",
+      "production_schedule_hash": "3918f6cc43dee1c0c3a1ebe6be550533ec7866a0c44cd9f09def7d02fd6aa722"
+    }
+  },
+  "golden_traces": [
+    {
+      "golden_trace_id": "STOCHASTIC-U0-EXTENSION-HOLD-V1",
+      "policy_id": "U0",
+      "case_id": "CASE-0003",
+      "expected_trace_hash": "b841821b6222fa57390440c5ed6d4f05d5e4181be3ccb0bebf03d3686b6fed9e",
+      "milestones": [
+        {"event_type_id": "EXTENSION_GRANTED", "timestamp": "14.38284865450178891940534424", "details": {}},
+        {"event_type_id": "ACTION_COMPUTED", "timestamp": "26.575383128889598629366557108705716148027406996223", "details": {"action": "hold", "reason_code": "insufficient_evidence_hold"}},
+        {"event_type_id": "CASE_CLOSED", "timestamp": "70", "details": {"right_censored": true, "censoring_reason": "post_action_path_open_at_cutoff"}}
+      ]
+    },
+    {
+      "golden_trace_id": "STOCHASTIC-U1-COMPLETE-RESTORATION-V1",
+      "policy_id": "U1",
+      "case_id": "CASE-0005",
+      "expected_trace_hash": "d66ccae8dc2dfdd0f0573254bf64170468cbf2f542924ddb1d06df5951c58209",
+      "milestones": [
+        {"event_type_id": "PROGRESSION_EXECUTED", "timestamp": "22.206476022409452316864298708782466438576109440865", "details": {"action": "progress", "reason_code": "imputation_progression"}},
+        {"event_type_id": "EXTERNAL_CONSEQUENCE_STARTED", "timestamp": "23.206476022409452316864298708782466438576109440865", "details": {"action_type_id": "progress"}},
+        {"event_type_id": "CORRECTION_REQUESTED", "timestamp": "44.206476022409452316864298708782466438576109440865", "details": {"action_type_id": "correct"}},
+        {"event_type_id": "RESTORATION_EXECUTED", "timestamp": "64.662540653003051301667766899401393093940651558609", "details": {"action_type_id": "restore", "restoration_state": "complete"}},
+        {"event_type_id": "CASE_CLOSED", "timestamp": "70", "details": {"right_censored": false, "censoring_reason": "complete_restoration_observed"}}
+      ]
+    },
+    {
+      "golden_trace_id": "STOCHASTIC-U2C-FAIL-CLOSED-V1",
+      "policy_id": "U2C",
+      "case_id": "CASE-0001",
+      "expected_trace_hash": "dfb7f87719f5cea1795207ea1a645d8a5d6afc9d5eb02044cd245ab2851875ec",
+      "milestones": [
+        {"event_type_id": "REVIEW_QUEUED", "timestamp": "26.489195809109379687562367948380745685041936137742", "details": {"review_kind": "pre_action"}},
+        {"event_type_id": "ACTION_COMPUTED", "timestamp": "40.489195809109379687562367948380745685041936137742", "details": {"action": "hold", "reason_code": "review_timeout_fail_closed"}},
+        {"event_type_id": "CASE_CLOSED", "timestamp": "70", "details": {"right_censored": true, "censoring_reason": "post_action_path_open_at_cutoff"}}
+      ]
+    },
+    {
+      "golden_trace_id": "STOCHASTIC-U2O-FAIL-OPEN-CORRECTION-OPEN-V1",
+      "policy_id": "U2O",
+      "case_id": "CASE-0003",
+      "expected_trace_hash": "95b7ee1d577d5db6468c6e21a2b615db934ee3bf2f99c88001bddd8e4ae52cf7",
+      "milestones": [
+        {"event_type_id": "ACTION_COMPUTED", "timestamp": "38.882848654501788919405344242918534119922171218197", "details": {"action": "progress", "reason_code": "review_timeout_fail_open"}},
+        {"event_type_id": "EXTERNAL_CONSEQUENCE_STARTED", "timestamp": "39.882848654501788919405344242918534119922171218197", "details": {"action_type_id": "progress"}},
+        {"event_type_id": "CORRECTION_REQUESTED", "timestamp": "60.882848654501788919405344242918534119922171218197", "details": {"action_type_id": "correct"}},
+        {"event_type_id": "CASE_CLOSED", "timestamp": "70", "details": {"right_censored": true, "censoring_reason": "reassessment_open"}}
+      ]
+    },
+    {
+      "golden_trace_id": "STOCHASTIC-U3-ASSISTANCE-RETRIEVAL-REVIEW-V1",
+      "policy_id": "U3",
+      "case_id": "CASE-0003",
+      "expected_trace_hash": "3dc1f9f59981a7db28f8832f619c3a12c534025cb1316c78e1d5629e78e596de",
+      "milestones": [
+        {"event_type_id": "REVIEW_QUEUED", "timestamp": "3.8828486545017889194053442429185341199221712181969", "details": {"review_kind": "engagement_assistance"}},
+        {"event_type_id": "REVIEW_COMPLETED", "timestamp": "6.3404661351893529540261709506525888313360495081781", "details": {"review_kind": "engagement_assistance"}},
+        {"event_type_id": "EXTENSION_GRANTED", "timestamp": "14.38284865450178891940534424", "details": {}},
+        {"event_type_id": "EXTERNAL_EVIDENCE_RETURNED", "timestamp": "25.596993130818807038511174606032313132832874622193", "details": {}},
+        {"event_type_id": "REVIEW_QUEUED", "timestamp": "26.575383128889598629366557108705716148027406996223", "details": {"review_kind": "pre_action"}},
+        {"event_type_id": "ACTION_COMPUTED", "timestamp": "40.575383128889598629366557108705716148027406996223", "details": {"action": "hold", "reason_code": "review_timeout_fail_closed"}},
+        {"event_type_id": "CASE_CLOSED", "timestamp": "70", "details": {"right_censored": true, "censoring_reason": "post_action_path_open_at_cutoff"}}
+      ]
+    }
+  ]
+}
