@@ -8,7 +8,7 @@ This ledger is the canonical slice-status record. Update it at the end of every 
 | --- | --- | --- | --- | --- |
 | 0. Source, construct, and claim contract | implementation, plan, and baseline gates passed — pre-freeze reader QA pending | `9cf836c` | automated Slice 0 and plan gates pass from declared environment | two eligible locked reader returns are not yet available; this blocks Slice 4, not Slice 1 engineering |
 | 1. Case-neutral dynamic vertical slice | complete | `93e2da6` | 27 tests; 726-record closed bundle; three stored validation receipts match; both artifact hashes repeat | stochastic execution and empirical validation remain Slice 2 work |
-| 2. Stochastic engine and validation | in progress — compiled engagement-stage policy mappings pass | `6788007` checkpoint | 69 tests; repeatable five-policy, 5-case/65-draw engagement smoke artifact; all prior gates pass | no queue service, final-action dynamics, analytical benchmark, or reference-simulator comparison yet |
+| 2. Stochastic engine and validation | in progress — shared review queue and deadline races pass | `dc4fec0` checkpoint | 82 tests; repeatable five-policy, globally ordered review-queue smoke artifact; all prior gates pass | no final-action timeout dynamics, later-stage queues, full analytical benchmark, or reference-simulator comparison yet |
 | 3. Experiment pilot and freeze candidate | pending | — | — | — |
 | 4. Confirmatory freeze | pending | — | — | — |
 | 5. Confirmatory execution and analysis | pending | — | — | — |
@@ -260,3 +260,51 @@ Checkpoint commit: `67880070bea0e346cdd20890415738e3ab476665` (`Add compiled pol
 - Execute both R-OCI adapters only through compiled profiles and stylized overlays; add semantically equivalent synthetic/application comparisons.
 - Add exact stochastic hand traces, limiting cases, analytical queue tolerances, a slower reference simulator, and stored stochastic validation receipts.
 - Do not enter pilot scenario selection or treat this engagement smoke artifact as a substantive simulation result.
+
+## Slice 2 Shared Review Queue Checkpoint
+
+Status: deterministic shared review scheduling and service-deadline competition implemented; Slice 2 not complete
+
+Checkpoint commit: `dc4fec05889778a0cd4f61779de0c8df0a10c7d0` (`Add shared review queue scheduling`)
+
+### Scope and fact ownership
+
+- The simulator owns scheduling, stable server assignment, global event order, and queue telemetry. Policy profiles continue to own whether a case enters review and what a later timeout will do.
+- The shared `review_service` keyed draw owns each case's latent service requirement. The current stylized mapping is explicit: service demand equals that shared unit-interval draw multiplied by the overlay's `review_service_time` value.
+- The separately compiled `review_service_window` begins at queue entry and supplies this checkpoint's review-service deadline. It is not a historical parameter or a complete action/correction horizon.
+- This checkpoint records whether review completed by its service deadline but deliberately stops before applying fail-closed holds, fail-open progression, or another final action.
+
+### Implemented
+
+- Added typed, immutable queue configuration, request, visit, run, and telemetry contracts with blocking diagnostics for malformed configurations, requests, duplicate identities, and unsupported disciplines.
+- Added finite-cohort, work-conserving FIFO scheduling with explicit positive integer capacity, deterministic case/request ties, stable server IDs, input-order invariance, and a canonical schedule hash.
+- Added the compiled `review_service_window` overlay slot and generated `REVIEW_STARTED`, `REVIEW_COMPLETED`, and review-specific `DEADLINE_REACHED` events from shared review draws.
+- Added one globally ordered cohort event stream per policy; each stored case trace is tested as the exact projection of that system trace.
+- Preserved identical U2C/U2O requests and schedule hashes before timeout semantics diverge. Capacity changes alter service timing without altering case draw hashes.
+- Froze exact-boundary behavior: a review completing at its deadline is timely, and `REVIEW_COMPLETED` precedes `DEADLINE_REACHED` under the closed priority registry.
+- Added separate queue counts, conditional start/completion/timeliness rates, wait-time metrics, queue visits, system events, and the review-queue-only claim boundary to the smoke artifact.
+- Added a hand-computable finite-window capacity case: four two-unit jobs exactly fill two servers over a four-unit window, while a fifth job exceeds the `W > cH` bound and finishes late.
+
+### Verification
+
+| Command | Result |
+| --- | --- |
+| `PYTHONPATH=src ./.venv/bin/python -m pytest -q tests/unit/test_simulator.py tests/unit/test_random_streams.py tests/unit/test_policies.py tests/unit/test_metrics.py` | pass: 49 focused queue, pairing, replay, configuration, policy, and metric tests |
+| `PYTHONPATH=src ./.venv/bin/python -m pytest -q tests/integration/test_queue_validation.py` | pass: 5 capacity, deadline, system-trace, policy-pairing, and hand-calculation tests |
+| `PYTHONPATH=src ./.venv/bin/python -m pytest -q tests/unit/test_events.py` | pass: 4 event-order and causal-key tests |
+| `PYTHONPATH=src ./.venv/bin/python -m pytest -q` | pass: 82 tests in 0.33 seconds; all earlier regressions retained |
+| `PYTHONPATH=src ./.venv/bin/python -m uncertainty_permission_simulation.cli cohort experiments/configs/stochastic_smoke_v1.yaml` | pass: 5 cases, 5 compiled policy runs, 65 unique keyed draws, zero duplicate keys; repeated artifact SHA-256 `ad407e556aaabb972de89378b7aa4c52d060eb800809814c1c014ac603f15414` |
+| smoke queue inspection | U2C/U2O schedule hashes identical; 5 queued, 1 timely, 4 late under the declared stylized overlay; U3 queues 2, with 1 timely and 1 late |
+| `PYTHONPATH=src ./.venv/bin/python -m uncertainty_permission_simulation.cli trace experiments/configs/smoke_v1.yaml` | pass: 9 Slice 1 deterministic traces |
+| `./.venv/bin/python scripts/validate_plan.py` | pass: 8 slices, 3 primary hypotheses, 5 policies, 39 audit questions, 9 deferred items, 10,000-word ceiling |
+| `./.venv/bin/python scripts/validate_slice0.py` | pass: 10 sources, 10 claims, 2 profiles, 7 YAML files, 95 closed diagnostics |
+| runtime-module compilation and generic-kernel case-name scan | pass |
+
+### Remaining before Slice 2 closeout
+
+- Apply policy-owned timeout semantics and evidence support to produce final hold, progress, or request-evidence decisions without conflating review completion with valid authorization.
+- Extend the globally ordered trace through action execution, external exposure, correction, censoring, and restoration.
+- Wire assistance and reassessment resources only when their owning process stages exist; do not infer staffed historical capacity.
+- Execute both R-OCI adapters only through compiled profiles and stylized overlays; add semantically equivalent synthetic/application comparisons.
+- Expand the analytical queue checks, add a slower reference simulator, exact stochastic golden traces, and stored stochastic validation receipts.
+- Do not enter pilot scenario selection or treat this review-queue smoke artifact as a substantive simulation result.

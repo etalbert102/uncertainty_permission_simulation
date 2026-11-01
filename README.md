@@ -12,7 +12,7 @@ The study asks when aggregate annual income data can become apparently precise f
 
 ## Status
 
-The research and implementation plan is execution-ready; this does not mean the study is complete. Slice 0 gates pass, the deterministic Slice 1 vertical slice is complete, and Slice 2 now has a keyed-random finite cohort plus compiled U0, U1, U2C, U2O, and U3 engagement-stage mappings. The smoke artifact emits deterministic policy-specific notice, response, assistance, extension, evidence-retrieval, representation, and review-routing events over the same exogenous cases. Queue service, final actions, correction and restoration dynamics, analytical validation, and reference-simulator comparison do not yet exist. The smoke artifact is implementation QA, not a substantive, empirical, or historical result. No pilot or confirmatory results exist; no evidence packet or completed manuscript exists. Independent reader QA remains required before protocol `1.0` and confirmatory freeze.
+The research and implementation plan is execution-ready; this does not mean the study is complete. Slice 0 gates pass, the deterministic Slice 1 vertical slice is complete, and Slice 2 now has a keyed-random finite cohort, all five compiled engagement-stage policy mappings, and a capacity-constrained shared pre-action review queue. The smoke artifact emits globally ordered system events, deterministic FIFO service visits, review starts and completions, deadline races, and separate queue-conditional metrics while preserving the same exogenous draws across policies. Final actions and timeout consequences, assistance and reassessment queue wiring, correction and restoration dynamics, full analytical validation, and reference-simulator comparison do not yet exist. The smoke artifact is implementation QA, not a substantive, empirical, or historical result. No pilot or confirmatory results exist; no evidence packet or completed manuscript exists. Independent reader QA remains required before protocol `1.0` and confirmatory freeze.
 
 The canonical execution plan is [docs/STUDY_PLAN.md](docs/STUDY_PLAN.md).
 
@@ -80,4 +80,4 @@ tests/
 
 ## Next Step
 
-Continue Slice 2 by adding capacity-constrained service queues and deadline competition to the compiled policy traces, then extend through final action and add analytical/reference validation without weakening the shared-draw or completed Slice 1 contracts. Independent readability QA may proceed in parallel and remains blocking only for protocol `1.0` and confirmatory freeze.
+Continue Slice 2 by applying fail-closed and fail-open timeout behavior to the completed review/deadline races and extending the system trace through final action. Then add the later assistance/reassessment resources and analytical/reference validation without weakening the shared-draw or completed Slice 1 contracts. Independent readability QA may proceed in parallel and remains blocking only for protocol `1.0` and confirmatory freeze.
