@@ -60,6 +60,9 @@ def test_engagement_metrics_keep_dimensions_separate() -> None:
     assert metrics["correction_eligible_count"] == 0
     assert metrics["correction_request_count"] == 0
     assert metrics["correction_uptake_rate"] == "0"
+    assert metrics["correction_executed_count"] == 0
+    assert metrics["correction_execution_rate"] == "0"
+    assert metrics["correction_mean_exposure_time"] == "0"
     assert metrics["reassessment_mean_wait_time"] == "0"
     assert metrics["gate_safe_count"] + metrics["gate_unsafe_count"] == metrics["gate_applicable_count"]
     assert Decimal(metrics["review_max_wait_time"]) >= Decimal(0)
@@ -97,5 +100,13 @@ def test_correction_and_reassessment_metrics_keep_their_own_denominators() -> No
     assert metrics["reassessment_started_count"] == 2
     assert metrics["reassessment_completed_count"] == 2
     assert metrics["timely_reassessment_count"] + metrics["late_reassessment_count"] == 2
+    assert metrics["correction_executed_count"] == 2
+    assert metrics["correction_unresolved_count"] == 0
+    assert metrics["recovery_active_after_correction_count"] == 2
+    assert metrics["correction_execution_rate"] == "1"
+    assert metrics["timely_correction_count"] + metrics["late_correction_count"] == 2
     assert Decimal(metrics["timely_reassessment_rate"]) + Decimal(metrics["late_reassessment_rate"]) == Decimal(1)
+    assert Decimal(metrics["timely_correction_rate"]) + Decimal(metrics["late_correction_rate"]) == Decimal(1)
     assert Decimal(metrics["reassessment_max_wait_time"]) >= Decimal(0)
+    assert Decimal(metrics["correction_mean_exposure_time"]) > Decimal(0)
+    assert Decimal(metrics["correction_max_exposure_time"]) >= Decimal(metrics["correction_mean_exposure_time"])

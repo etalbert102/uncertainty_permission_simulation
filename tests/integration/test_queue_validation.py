@@ -107,6 +107,8 @@ def test_fail_open_timeout_converts_queue_delay_into_unauthorized_recovery_expos
     assert opened.telemetry.external_exposure_count == len(opened.traces)
     assert opened.telemetry.recovery_started_count == len(opened.traces)
     assert opened.telemetry.unauthorized_exposure_count == len(opened.traces)
+    assert opened.telemetry.correction_executed_count == len(opened.traces)
+    assert opened.telemetry.recovery_active_after_correction_count == len(opened.traces)
 
 
 def test_reassessment_capacity_never_delays_a_paired_correction_request() -> None:
@@ -133,6 +135,8 @@ def test_reassessment_capacity_never_delays_a_paired_correction_request() -> Non
         for case_id, visit in low_visits.items()
     )
     assert high.telemetry.timely_reassessment_count >= low.telemetry.timely_reassessment_count
+    assert low.telemetry.correction_executed_count == high.telemetry.correction_executed_count
+    assert high.telemetry.timely_correction_count >= low.telemetry.timely_correction_count
 
 
 def test_supported_exposure_does_not_enter_correction_queue() -> None:
@@ -143,6 +147,7 @@ def test_supported_exposure_does_not_enter_correction_queue() -> None:
     assert run.telemetry.supported_exposure_count == len(run.traces)
     assert run.telemetry.correction_eligible_count == 0
     assert run.telemetry.correction_request_count == 0
+    assert run.telemetry.correction_executed_count == 0
     assert run.reassessment_queue.visits == ()
 
 

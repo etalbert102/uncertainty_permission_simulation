@@ -405,6 +405,13 @@ class EngagementRunTelemetry:
     reassessment_total_wait_time: Decimal
     reassessment_max_wait_time: Decimal
     reassessment_schedule_hash: str
+    correction_executed_count: int
+    timely_correction_count: int
+    late_correction_count: int
+    correction_unresolved_count: int
+    recovery_active_after_correction_count: int
+    correction_total_exposure_time: Decimal
+    correction_max_exposure_time: Decimal
     event_hash: str
 
 
@@ -1063,6 +1070,91 @@ def _add_reassessment_events(
     return replace(trace, events=events, event_hash=_event_hash(events))
 
 
+def _add_correction_outcome_event(
+    trace: EngagementTrace,
+    visit: ServiceVisit | None,
+) -> EngagementTrace:
+    """Correct the decision coordinate without implying recovery reversal or restoration."""
+
+    if visit is None:
+        return trace
+    decision = trace.action_decision
+    if decision is None or decision.action != "progress" or decision.progression_supported:
+        raise ContractError(
+            "SIM_SYSTEM_STATE_INCOMPLETE",
+            f"correction outcome lacks an unsupported progression basis for {trace.case_id}",
+        )
+    requests = tuple(
+        event for event in trace.events if event.event_type_id == "CORRECTION_REQUESTED"
+    )
+    completions = tuple(
+        event for event in trace.events
+        if event.event_type_id == "REVIEW_COMPLETED"
+        and event.details.get("review_kind") == "reassessment"
+    )
+    exposures = tuple(
+        event for event in trace.events if event.event_type_id == "EXTERNAL_CONSEQUENCE_STARTED"
+    )
+    if len(requests) != 1 or len(completions) != 1 or len(exposures) != 1:
+        raise ContractError(
+            "SIM_SYSTEM_STATE_INCOMPLETE",
+            f"correction outcome requires one exposure, request, and reassessment completion for {trace.case_id}",
+        )
+    request = requests[0]
+    completion = completions[0]
+    exposure = exposures[0]
+    if completion.timestamp != visit.completed_at:
+        raise ContractError(
+            "SIM_SYSTEM_STATE_INCOMPLETE",
+            f"reassessment completion differs from queue visit for {trace.case_id}",
+        )
+    with localcontext() as context:
+        context.prec = 50
+        exposure_duration = completion.timestamp - exposure.timestamp
+    if exposure_duration < 0:
+        raise ContractError(
+            "SIM_SYSTEM_STATE_INCOMPLETE",
+            f"correction precedes exposure for {trace.case_id}",
+        )
+
+    root_key = f"{trace.case_id}:ENGAGEMENT"
+    causal_key = f"{root_key}:correction_outcome:EXTERNAL_CONSEQUENCE_UPDATED"
+    outcome = Event(
+        event_id=f"{trace.policy_id}:{causal_key}",
+        event_type_id="EXTERNAL_CONSEQUENCE_UPDATED",
+        timestamp=completion.timestamp,
+        causal_event_key=causal_key,
+        root_event_key=root_key,
+        descendant_path=("correction", "reassessment_service", "correction_outcome"),
+        transition_rank=DEFAULT_PRIORITIES["EXTERNAL_CONSEQUENCE_UPDATED"],
+        case_id=trace.case_id,
+        details={
+            "policy_id": trace.policy_id,
+            "keyed_draw_ids": (),
+            "action_type_id": "correct",
+            "consequence_dimension_id": "decision_state",
+            "correction_outcome": "decision_corrected",
+            "correction_basis": "unsupported_progression_confirmed",
+            "unsupported_reason_codes": decision.unsupported_reason_codes,
+            "decision_state": "corrected_to_baseline",
+            "correction_timely": visit.completed_by_deadline,
+            "exposure_state": "active",
+            "recovery_state": "active",
+            "restoration_state": "incomplete",
+            "restoration_complete": False,
+            "exposure_duration_to_correction": normalized_decimal(exposure_duration),
+            "source_exposure_event_key": exposure.causal_event_key,
+            "source_correction_request_event_key": request.causal_event_key,
+            "source_reassessment_event_key": completion.causal_event_key,
+        },
+    )
+    queue = EventQueue()
+    for event in trace.events + (outcome,):
+        queue.push(event)
+    events = queue.drain()
+    return replace(trace, events=events, event_hash=_event_hash(events))
+
+
 def _validate_engagement_configuration(cohort: StochasticCohort, compiled: CompiledConfigurationSpec) -> str:
     policy_id = compiled.policy_profile.profile_id
     policy_behavior(policy_id)
@@ -1124,7 +1216,7 @@ def run_engagement_stage(cohort: StochasticCohort, compiled: CompiledConfigurati
     reassessment_visit_by_case = {
         visit.case_id: visit for visit in reassessment_queue.visits
     }
-    traces = tuple(
+    reassessment_traces = tuple(
         _add_reassessment_events(
             trace,
             reassessment_visit_by_case.get(trace.case_id),
@@ -1133,12 +1225,32 @@ def run_engagement_stage(cohort: StochasticCohort, compiled: CompiledConfigurati
         )
         for trace in correction_traces
     )
+    traces = tuple(
+        _add_correction_outcome_event(
+            trace,
+            reassessment_visit_by_case.get(trace.case_id),
+        )
+        for trace in reassessment_traces
+    )
     system_queue = EventQueue()
     for trace in traces:
         for event in trace.events:
             system_queue.push(event)
     system_events = system_queue.drain()
     event_hash = _event_hash(system_events)
+    correction_outcome_events = tuple(
+        event for event in system_events
+        if event.event_type_id == "EXTERNAL_CONSEQUENCE_UPDATED"
+        and event.details.get("correction_outcome") == "decision_corrected"
+    )
+    correction_exposure_times = tuple(
+        Decimal(str(event.details["exposure_duration_to_correction"]))
+        for event in correction_outcome_events
+    )
+    with localcontext() as context:
+        context.prec = 50
+        correction_total_exposure_time = sum(correction_exposure_times, Decimal(0))
+    correction_max_exposure_time = max(correction_exposure_times, default=Decimal(0))
     telemetry = EngagementRunTelemetry(
         case_count=len(traces),
         event_count=len(system_events),
@@ -1236,6 +1348,7 @@ def run_engagement_stage(cohort: StochasticCohort, compiled: CompiledConfigurati
         ),
         recovery_started_count=sum(
             event.event_type_id == "EXTERNAL_CONSEQUENCE_UPDATED"
+            and event.details.get("action_type_id") == "recover"
             and event.details.get("recovery_state") == "active"
             for event in system_events
         ),
@@ -1287,6 +1400,33 @@ def run_engagement_stage(cohort: StochasticCohort, compiled: CompiledConfigurati
         reassessment_total_wait_time=reassessment_queue.telemetry.total_wait_time,
         reassessment_max_wait_time=reassessment_queue.telemetry.max_wait_time,
         reassessment_schedule_hash=reassessment_queue.telemetry.schedule_hash,
+        correction_executed_count=len(correction_outcome_events),
+        timely_correction_count=sum(
+            event.details.get("correction_timely") is True
+            for event in correction_outcome_events
+        ),
+        late_correction_count=sum(
+            event.details.get("correction_timely") is False
+            for event in correction_outcome_events
+        ),
+        correction_unresolved_count=sum(
+            trace.action_decision is not None
+            and trace.action_decision.action == "progress"
+            and not trace.action_decision.progression_supported
+            and not any(
+                event.event_type_id == "EXTERNAL_CONSEQUENCE_UPDATED"
+                and event.details.get("correction_outcome") == "decision_corrected"
+                for event in trace.events
+            )
+            for trace in traces
+        ),
+        recovery_active_after_correction_count=sum(
+            event.details.get("recovery_state") == "active"
+            and event.details.get("restoration_complete") is False
+            for event in correction_outcome_events
+        ),
+        correction_total_exposure_time=correction_total_exposure_time,
+        correction_max_exposure_time=correction_max_exposure_time,
         event_hash=event_hash,
     )
     if telemetry.action_count != telemetry.case_count:
@@ -1319,6 +1459,24 @@ def run_engagement_stage(cohort: StochasticCohort, compiled: CompiledConfigurati
         raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "reassessment visits and completion events differ")
     if telemetry.timely_reassessment_count + telemetry.late_reassessment_count != telemetry.reassessment_completed_count:
         raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "reassessment timeliness does not partition completions")
+    if telemetry.correction_executed_count != telemetry.reassessment_completed_count:
+        raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "reassessment completion and correction execution differ")
+    if telemetry.timely_correction_count + telemetry.late_correction_count != telemetry.correction_executed_count:
+        raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "correction timeliness does not partition outcomes")
+    if (
+        telemetry.timely_correction_count != telemetry.timely_reassessment_count
+        or telemetry.late_correction_count != telemetry.late_reassessment_count
+    ):
+        raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "correction timing differs from reassessment completion")
+    if (
+        telemetry.correction_executed_count + telemetry.correction_unresolved_count
+        != telemetry.correction_eligible_count
+    ):
+        raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "correction outcomes do not partition eligible exposure")
+    if telemetry.recovery_active_after_correction_count != telemetry.correction_executed_count:
+        raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "decision correction silently changed recovery or restoration state")
+    if any(event.event_type_id == "RESTORATION_EXECUTED" for event in system_events):
+        raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "correction checkpoint emitted premature restoration")
     return EngagementRun(
         cohort.scenario_id, policy_id, cohort.telemetry.cohort_hash,
         traces, system_events, review_queue, reassessment_queue, telemetry,

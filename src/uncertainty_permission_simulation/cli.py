@@ -289,6 +289,13 @@ def run_stochastic_smoke(config_path: Path) -> dict[str, object]:
                     "reassessment_total_wait_time": normalized_decimal(run.telemetry.reassessment_total_wait_time),
                     "reassessment_max_wait_time": normalized_decimal(run.telemetry.reassessment_max_wait_time),
                     "reassessment_schedule_hash": run.telemetry.reassessment_schedule_hash,
+                    "correction_executed_count": run.telemetry.correction_executed_count,
+                    "timely_correction_count": run.telemetry.timely_correction_count,
+                    "late_correction_count": run.telemetry.late_correction_count,
+                    "correction_unresolved_count": run.telemetry.correction_unresolved_count,
+                    "recovery_active_after_correction_count": run.telemetry.recovery_active_after_correction_count,
+                    "correction_total_exposure_time": normalized_decimal(run.telemetry.correction_total_exposure_time),
+                    "correction_max_exposure_time": normalized_decimal(run.telemetry.correction_max_exposure_time),
                     "event_hash": run.telemetry.event_hash,
                 },
                 "review_queue": {
@@ -384,7 +391,7 @@ def run_stochastic_smoke(config_path: Path) -> dict[str, object]:
             }
             for policy_id, run in engagement_runs.items()
         },
-        "claim_limit": "stylized correction-request and reassessment-service smoke artifact; no correction outcome, restoration, empirical, or historical outcome",
+        "claim_limit": "stylized decision-correction smoke artifact; recovery remains active; no censoring, restoration, empirical, or historical outcome",
     }
     output_path = ROOT / config["output_path"]
     output_path.parent.mkdir(parents=True, exist_ok=True)

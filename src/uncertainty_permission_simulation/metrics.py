@@ -72,6 +72,11 @@ def engagement_metrics(run: EngagementRun) -> dict[str, int | str]:
         "correction_eligible": run.telemetry.correction_eligible_count,
         "correction_request": run.telemetry.correction_request_count,
         "correction_not_requested": run.telemetry.correction_not_requested_count,
+        "correction_executed": run.telemetry.correction_executed_count,
+        "timely_correction": run.telemetry.timely_correction_count,
+        "late_correction": run.telemetry.late_correction_count,
+        "correction_unresolved": run.telemetry.correction_unresolved_count,
+        "recovery_active_after_correction": run.telemetry.recovery_active_after_correction_count,
     }
     reassessment_counts = {
         "reassessment_started": run.telemetry.reassessment_started_count,
@@ -112,6 +117,29 @@ def engagement_metrics(run: EngagementRun) -> dict[str, int | str]:
             )
             if correction_denominator else "0"
         )
+        result["correction_execution_rate"] = (
+            normalized_decimal(
+                Decimal(run.telemetry.correction_executed_count) / Decimal(correction_denominator)
+            )
+            if correction_denominator else "0"
+        )
+        correction_outcome_denominator = run.telemetry.correction_executed_count
+        result.update({
+            "timely_correction_rate": (
+                normalized_decimal(
+                    Decimal(run.telemetry.timely_correction_count)
+                    / Decimal(correction_outcome_denominator)
+                )
+                if correction_outcome_denominator else "0"
+            ),
+            "late_correction_rate": (
+                normalized_decimal(
+                    Decimal(run.telemetry.late_correction_count)
+                    / Decimal(correction_outcome_denominator)
+                )
+                if correction_outcome_denominator else "0"
+            ),
+        })
         queue_denominator = run.telemetry.review_queue_count
         result.update({
             f"{name}_rate": (
@@ -145,5 +173,12 @@ def engagement_metrics(run: EngagementRun) -> dict[str, int | str]:
                 run.telemetry.reassessment_total_wait_time / Decimal(reassessment_denominator)
             ) if reassessment_denominator else "0",
             "reassessment_max_wait_time": normalized_decimal(run.telemetry.reassessment_max_wait_time),
+            "correction_mean_exposure_time": normalized_decimal(
+                run.telemetry.correction_total_exposure_time
+                / Decimal(correction_outcome_denominator)
+            ) if correction_outcome_denominator else "0",
+            "correction_max_exposure_time": normalized_decimal(
+                run.telemetry.correction_max_exposure_time
+            ),
         })
     return result

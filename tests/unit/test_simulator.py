@@ -166,7 +166,7 @@ def test_policy_path_divergence_preserves_common_causal_keys() -> None:
     assert "EXTERNAL_EVIDENCE_RETURNED" not in u1_keys and "EXTERNAL_EVIDENCE_RETURNED" in u3_keys
 
 
-def test_action_stage_replays_event_hashes_through_reassessment_service() -> None:
+def test_action_stage_replays_event_hashes_through_decision_correction() -> None:
     cohort = generate_stochastic_cohort(spec())
     configuration = compiled("U2C", cohort.overlay)
     first = run_engagement_stage(cohort, configuration)
@@ -193,7 +193,11 @@ def test_exposure_descends_only_from_executed_progression_and_preserves_support(
                 assert types.index("PROGRESSION_EXECUTED") < types.index("EXTERNAL_CONSEQUENCE_STARTED")
                 assert types.index("EXTERNAL_CONSEQUENCE_STARTED") < types.index("EXTERNAL_CONSEQUENCE_UPDATED")
                 exposure = next(event for event in trace.events if event.event_type_id == "EXTERNAL_CONSEQUENCE_STARTED")
-                recovery = next(event for event in trace.events if event.event_type_id == "EXTERNAL_CONSEQUENCE_UPDATED")
+                recovery = next(
+                    event for event in trace.events
+                    if event.event_type_id == "EXTERNAL_CONSEQUENCE_UPDATED"
+                    and event.details.get("action_type_id") == "recover"
+                )
                 progression = next(event for event in trace.events if event.event_type_id == "PROGRESSION_EXECUTED")
                 with localcontext() as context:
                     context.prec = 50
@@ -216,8 +220,12 @@ def test_zero_delays_use_frozen_progression_exposure_recovery_order() -> None:
         event.event_type_id for event in trace.events
         if event.event_type_id in {
             "ACTION_COMPUTED", "PROGRESSION_EXECUTED",
-            "EXTERNAL_CONSEQUENCE_STARTED", "EXTERNAL_CONSEQUENCE_UPDATED",
+            "EXTERNAL_CONSEQUENCE_STARTED",
         }
+        or (
+            event.event_type_id == "EXTERNAL_CONSEQUENCE_UPDATED"
+            and event.details.get("action_type_id") == "recover"
+        )
     )
     assert ordered == (
         "ACTION_COMPUTED", "PROGRESSION_EXECUTED",
@@ -237,6 +245,13 @@ def test_unsupported_exposure_can_request_correction_and_enter_reassessment() ->
     assert run.telemetry.correction_not_requested_count == 0
     assert run.telemetry.reassessment_started_count == len(cohort.cases)
     assert run.telemetry.reassessment_completed_count == len(cohort.cases)
+    assert run.telemetry.correction_executed_count == len(cohort.cases)
+    assert run.telemetry.correction_unresolved_count == 0
+    assert run.telemetry.recovery_active_after_correction_count == len(cohort.cases)
+    assert (
+        run.telemetry.timely_correction_count + run.telemetry.late_correction_count
+        == len(cohort.cases)
+    )
     assert len(run.reassessment_queue.visits) == len(cohort.cases)
     for trace in run.traces:
         recovery = next(
@@ -250,11 +265,29 @@ def test_unsupported_exposure_can_request_correction_and_enter_reassessment() ->
             if event.event_type_id == "REVIEW_COMPLETED"
             and event.details.get("review_kind") == "reassessment"
         )
+        outcome = next(
+            event for event in trace.events
+            if event.event_type_id == "EXTERNAL_CONSEQUENCE_UPDATED"
+            and event.details.get("correction_outcome") == "decision_corrected"
+        )
         assert recovery.timestamp < request.timestamp < completion.timestamp
+        assert completion.timestamp == outcome.timestamp
+        assert trace.events.index(completion) < trace.events.index(outcome)
         assert request.details["source_recovery_event_key"] == recovery.causal_event_key
         assert completion.details["source_correction_request_event_key"] == request.causal_event_key
         assert completion.details["correction_executed"] is False
         assert completion.details["restoration_executed"] is False
+        assert outcome.details["source_reassessment_event_key"] == completion.causal_event_key
+        assert outcome.details["correction_basis"] == "unsupported_progression_confirmed"
+        assert (
+            outcome.details["unsupported_reason_codes"]
+            == trace.action_decision.unsupported_reason_codes
+        )
+        assert outcome.details["decision_state"] == "corrected_to_baseline"
+        assert outcome.details["recovery_state"] == "active"
+        assert outcome.details["restoration_state"] == "incomplete"
+        assert outcome.details["restoration_complete"] is False
+        assert Decimal(outcome.details["exposure_duration_to_correction"]) > 0
         assert not any(event.event_type_id == "RESTORATION_EXECUTED" for event in trace.events)
 
 
@@ -268,6 +301,8 @@ def test_correction_uptake_zero_leaves_eligible_exposure_unrequested() -> None:
     assert run.telemetry.correction_eligible_count == len(cohort.cases)
     assert run.telemetry.correction_request_count == 0
     assert run.telemetry.correction_not_requested_count == len(cohort.cases)
+    assert run.telemetry.correction_executed_count == 0
+    assert run.telemetry.correction_unresolved_count == len(cohort.cases)
     assert run.reassessment_queue.visits == ()
     assert run.telemetry.reassessment_completed_count == 0
 
@@ -298,8 +333,16 @@ def test_reassessment_completion_at_correction_deadline_is_timely_and_ordered() 
         if event.event_type_id == "DEADLINE_REACHED"
         and event.details.get("deadline_kind") == "correction_service"
     )
+    outcome = next(
+        event for event in run.traces[0].events
+        if event.event_type_id == "EXTERNAL_CONSEQUENCE_UPDATED"
+        and event.details.get("correction_outcome") == "decision_corrected"
+    )
     assert completion.timestamp == deadline.timestamp
+    assert outcome.timestamp == deadline.timestamp
     assert run.traces[0].events.index(completion) < run.traces[0].events.index(deadline)
+    assert run.traces[0].events.index(deadline) < run.traces[0].events.index(outcome)
+    assert outcome.details["correction_timely"] is True
 
 
 def test_u2_fail_closed_and_fail_open_share_queue_semantics_before_actions() -> None:
