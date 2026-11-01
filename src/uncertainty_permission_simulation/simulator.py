@@ -178,14 +178,24 @@ class StochasticInputOverlay:
             "administrative_cutoff": normalized_decimal(self.administrative_cutoff),
         }
 
-    def to_compilation_overlay(self) -> ScenarioOverlaySpec:
+    def to_compilation_overlay(
+        self,
+        *,
+        exclude_slot_ids: frozenset[str] = frozenset(),
+    ) -> ScenarioOverlaySpec:
         values = self.canonical_value()
+        unknown = exclude_slot_ids - (set(values) - {"overlay_id", "provenance"})
+        if unknown:
+            raise ContractError(
+                "SCENARIO_PARAMETER_INVALID",
+                f"cannot exclude unknown overlay slots: {sorted(unknown)}",
+            )
         parameters = tuple(
             ParameterValue(
                 slot_id=slot_id, value=value, provenance=self.provenance, owner_id=self.overlay_id,
             )
             for slot_id, value in values.items()
-            if slot_id not in {"overlay_id", "provenance"}
+            if slot_id not in {"overlay_id", "provenance"} | exclude_slot_ids
         )
         return ScenarioOverlaySpec(overlay_id=self.overlay_id, parameters=parameters)
 
@@ -1740,8 +1750,14 @@ def _validate_engagement_configuration(cohort: StochasticCohort, compiled: Compi
     observed_values = {receipt.slot_id: str(receipt.value) for receipt in compiled.receipts}
     if observed_values != expected_values:
         raise ContractError("SCENARIO_CONFIGURATION_INCOMPLETE", "compiled parameter receipts differ from the cohort overlay")
-    if any(receipt.provenance != cohort.overlay.provenance for receipt in compiled.receipts):
-        raise ContractError("SCENARIO_CONFIGURATION_INCOMPLETE", "compiled parameter provenance differs from the cohort overlay")
+    if any(
+        receipt.provenance not in {cohort.overlay.provenance, "documented"}
+        for receipt in compiled.receipts
+    ):
+        raise ContractError(
+            "SCENARIO_CONFIGURATION_INCOMPLETE",
+            "compiled parameter provenance is neither documented nor owned by the cohort overlay",
+        )
     if not {"progression", "recovery", "correction", "reassessment", "restoration"} <= compiled.process_profile.capabilities:
         raise ContractError(
             "SCENARIO_CONFIGURATION_INCOMPLETE",

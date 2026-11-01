@@ -1,0 +1,52 @@
+config_id: SLICE2-APPLICATION-VALIDATION-V1
+purpose: structural adapter validation only; not historical calibration or a substantive result
+seed_id: SLICE2-APPLICATION-VALIDATION-SEED-001
+case_ids: [CASE-0001, CASE-0002, CASE-0003, CASE-0004, CASE-0005]
+active_policy_id: U1
+evaluation_spec_id: STOCHASTIC-ADAPTER-EQUIVALENCE@1
+applications:
+  early:
+    source_fixture: data/sources/robodebt/r_oci_early.yaml
+    application_mapping_id: R-OCI-EARLY-STOCHASTIC-MAPPING@1
+    documented_runtime_parameters:
+      response_deadline: "21"
+  enhanced:
+    source_fixture: data/sources/robodebt/r_oci_enhanced.yaml
+    application_mapping_id: R-OCI-ENHANCED-STOCHASTIC-MAPPING@1
+    documented_runtime_parameters:
+      response_deadline: "28"
+stylized_overlay:
+  overlay_id: SLICE2-APPLICATION-STYLIZED-OVERLAY-V1
+  provenance: stylized
+  initiation_window: "10"
+  notice_delay: "1"
+  review_capacity: "1"
+  review_service_time: "30"
+  review_service_window: "14"
+  extension_duration: "7"
+  notice_delivery_probability: "0.9"
+  administrative_access_probability: "0.75"
+  comprehension_probability: "0.8"
+  record_availability_probability: "0.65"
+  response_effort_limit: "0.55"
+  assistance_effort_bonus: "0.3"
+  assistance_capacity: "1"
+  assistance_service_time: "5"
+  assistance_service_window: "21"
+  extension_effort_bonus: "0.15"
+  extension_need_probability: "0.25"
+  evidence_retrieval_success_probability: "0.7"
+  evidence_retrieval_latency_scale: "10"
+  external_consequence_delay: "1"
+  recovery_start_delay: "2"
+  recovery_capacity: "1"
+  recovery_service_time: "12"
+  recovery_window: "20"
+  correction_request_delay: "7"
+  correction_uptake_probability: "0.5"
+  reassessment_capacity: "1"
+  reassessment_service_time: "30"
+  correction_window: "14"
+  restoration_delay: "5"
+  restoration_window: "50"
+  administrative_cutoff: "70"
