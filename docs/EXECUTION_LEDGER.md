@@ -11,7 +11,7 @@ This ledger is the canonical slice-status record. Update it at the end of every 
 | 2. Stochastic engine and validation | complete | `d541d03` closeout; `fa6dfc4` semantic audit | 148 tests; five exact stochastic traces; stored replay/application/queue receipts; analytical and independent-reference checks; all prior gates pass | implementation validation only; monetary and unmodeled harms remain outside the declared consequence vector; no pilot or substantive result exists |
 | 3. Experiment pilot and freeze candidate | complete; ready for Slice 4 freeze work | `e8905fa`; gate amended 2026-11-01 | pilot, Slice 0/plan/Slice 3 gates, executable worked trace and staged review materials | procedure comprehensibility will be reviewed after Slice 5; semantic findings require a new freeze and rerun |
 | 4. Confirmatory freeze | complete; immutable manifest issued | `0b8e890` frozen baseline; manifest `35f360d8…65c` | 77-file manifest, 10 source identities, exact environment, 108-family core, sensitivity, five-control receipt, and all 178 tests verify | any frozen-file, inventory, or environment drift blocks execution and requires an explicit new freeze |
-| 5. Confirmatory execution and analysis | pending; entry gate satisfied | — | Slice 4 repository verifier passes; no confirmatory output exists | execute only through the manifest-gated append-only commands |
+| 5. Confirmatory execution and analysis | active; initial core complete, sensitivity pending | — | 16,200/16,200 core attempts reconciled; deterministic replay retained all attempts; both MCSE targets met, so no extension is authorized | sensitivity run and combined Slice 5 verification remain pending |
 | 6. Evidence packet and 10,000-word article | pending | — | — | — |
 
 ## Slice 0 Closeout Receipt
@@ -877,3 +877,36 @@ Created at: `2026-11-01T19:35:05.140725+00:00`
 | no-output guard | pass: neither confirmatory output directory contains a file |
 
 The manifest is immutable and rejects file-hash, file-size, category, inventory, interpreter, platform, or dependency drift. No confirmatory scenario was executed or inspected during promotion or issuance. Slice 5 may begin only with the manifest-gated append-only runner.
+
+## Slice 5 Initial Core Run Receipt
+
+Status: complete; initial 30-replication core analyzed; extension not authorized; sensitivity not started
+
+Execution date: 2026-11-01
+
+### Execution and completeness
+
+- Executed `CONFIRMATORY-V1` through the manifest-gated append-only runner under manifest identity `35f360d81e7eebe1effeae813f4144991b0fa043001df6d920d3f8592bfee65c`.
+- Created exactly 16,200 attempt artifacts: 108 families × 30 paired replications × five policies. No attempt was retained on the first pass because the output boundary was empty.
+- The observed first-to-last attempt-file span was 656.43 seconds, below the frozen 86,400-second core ceiling.
+- Reconciliation found 16,200 expected and 16,200 observed attempts, with zero missing or unexpected IDs.
+- A full runner replay created zero artifacts and retained all 16,200 after validating their self-hashes, manifest identities, config identity, and attempt identities.
+- The append-only output tree contains 16,205 files and occupies approximately 67 MB. It remains in the repository's designed ignored `outputs/confirmatory_v1` location.
+
+### Precision decision
+
+- Maximum applicable primary-rate MCSE: `0.043316821013996636`, below target `0.05`.
+- Maximum paired-contrast MCSE: `0.043316821013996636`, below target `0.06`.
+- Both target flags are `true`.
+- The preregistered family-wide extension rule therefore returns `extension_required: false`. Replications 31–60 are not authorized and were not executed.
+
+### Artifact identities
+
+- Run-index hash: `5153ce51558ce63db314b89e4cea206c345760d904dc5c54caec219a05d6a8d6`.
+- Reconciliation hash: `89ff2c78d842459fb210dcae112ef0f725447ca8a090db8226e17cbd2b203d48`.
+- Analysis hash: `bb486ee634365e53b7de464eb8cae8fc1e9169a29e1b6ad0ed3b496a684341cc`.
+- Capacity/timeout figure hash: `d4ecc9c52ad16b758498c3e718f700a5cb225fde58dfcb05d38468aa2de018f9`.
+- Information workload/burden figure hash: `fd8b122c9ca5932217e424575ac1faf0ca26b6cc503a1b81a810bd42214fbc83`.
+- Deterministic re-analysis reproduced analysis hash `bb486ee634365e53b7de464eb8cae8fc1e9169a29e1b6ad0ed3b496a684341cc` without replacing the stored analysis or figures.
+
+This receipt records execution integrity and the preregistered precision decision, not substantive interpretation. The sensitivity run remains separate and pending; the Slice 5 repository gate cannot pass until it is complete.
