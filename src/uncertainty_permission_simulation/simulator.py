@@ -750,19 +750,17 @@ def _case_engagement_trace(
             "wait_time": normalized_decimal(assistance_visit.wait_time),
         }
         emit(
-            "REVIEW_QUEUED", assistance_visit.queued_at, "assistance_request",
-            extra_details=assistance_common | {"review_kind": "engagement_assistance"},
+            "ASSISTANCE_REQUESTED", assistance_visit.queued_at, "assistance_request",
+            extra_details=assistance_common,
         )
         emit(
-            "REVIEW_STARTED", assistance_visit.started_at, "assistance_service",
-            ("assistance_service",),
-            assistance_common | {"review_kind": "engagement_assistance"},
+            "ASSISTANCE_STARTED", assistance_visit.started_at, "assistance_service",
+            ("assistance_service",), assistance_common,
         )
         emit(
-            "REVIEW_COMPLETED", assistance_visit.completed_at, "assistance_completion",
+            "ASSISTANCE_COMPLETED", assistance_visit.completed_at, "assistance_completion",
             ("assistance_service",),
             assistance_common | {
-                "review_kind": "engagement_assistance",
                 "completed_by_deadline": assistance_visit.completed_by_deadline,
                 "engagement_effect_applied": assistance_completed,
             },
@@ -1937,8 +1935,7 @@ def run_engagement_stage(cohort: StochasticCohort, compiled: CompiledConfigurati
             for event in system_events
         ),
         assistance_count=sum(
-            event.event_type_id == "REVIEW_COMPLETED"
-            and event.details.get("review_kind") == "engagement_assistance"
+            event.event_type_id == "ASSISTANCE_COMPLETED"
             and event.details.get("engagement_effect_applied") is True
             for event in system_events
         ),

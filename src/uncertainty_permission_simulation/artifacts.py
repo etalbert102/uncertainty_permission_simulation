@@ -15,6 +15,11 @@ from .schemas import MANIFEST, PAYLOAD_MODELS, RecordMeta, RecordRef, RecordStor
 
 
 ROOT = Path(__file__).resolve().parents[2]
+SLICE1_PRIORITIES = {
+    event_type_id: priority
+    for event_type_id, priority in DEFAULT_PRIORITIES.items()
+    if priority <= DEFAULT_PRIORITIES["CASE_CLOSED"]
+}
 
 
 EXPECTED_DISPOSITIONS = {
@@ -258,7 +263,7 @@ def build_bundle(
         "surfacing_deadline_rule_ref": rule, "f5_undetermined_field_ids": ("contestability_horizon",),
     }, basis="versioned_sources", sources=(baseline, comparison, applicability, rule, hold))
     registry = b.add("EventPriorityRegistry", "SLICE1-PRIORITIES", {
-        "event_priority_registry_id": "SLICE1-PRIORITIES", "event_type_priorities": DEFAULT_PRIORITIES,
+        "event_priority_registry_id": "SLICE1-PRIORITIES", "event_type_priorities": SLICE1_PRIORITIES,
         "collision_policy": "reject_duplicate_causal_key", "simultaneous_boundary_policy": "priority_then_microstep_then_transition_then_key",
     }, basis="versioned_sources", sources=(rule,))
 

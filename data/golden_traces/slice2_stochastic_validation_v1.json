@@ -56,8 +56,8 @@
     },
     "U3": {
       "comparison_status": "match",
-      "expected_event_hash": "08dfc96fc0ca5915c6c8a1a335728991c1946ecbf82fcf69159e0d0236892421",
-      "observed_event_hash": "08dfc96fc0ca5915c6c8a1a335728991c1946ecbf82fcf69159e0d0236892421",
+      "expected_event_hash": "3557651637efd81beaa700d8cbff9f12ff01825da58ab529007cf9af6fdbffb4",
+      "observed_event_hash": "3557651637efd81beaa700d8cbff9f12ff01825da58ab529007cf9af6fdbffb4",
       "expected_metric_hash": "5f1015a892efc61dd911d355930a062cb989b876f25b1685769cf5a8a4a59d69",
       "observed_metric_hash": "5f1015a892efc61dd911d355930a062cb989b876f25b1685769cf5a8a4a59d69"
     }
@@ -145,10 +145,10 @@
       "golden_trace_id": "STOCHASTIC-U3-ASSISTANCE-RETRIEVAL-REVIEW-V1",
       "policy_id": "U3",
       "case_id": "CASE-0003",
-      "expected_trace_hash": "3dc1f9f59981a7db28f8832f619c3a12c534025cb1316c78e1d5629e78e596de",
+      "expected_trace_hash": "b9fb7c34f65cdfa2e30da609e7cd85ccfca92c3def480f006f8d69000156a93d",
       "milestones": [
-        {"event_type_id": "REVIEW_QUEUED", "timestamp": "3.8828486545017889194053442429185341199221712181969", "details": {"review_kind": "engagement_assistance"}},
-        {"event_type_id": "REVIEW_COMPLETED", "timestamp": "6.3404661351893529540261709506525888313360495081781", "details": {"review_kind": "engagement_assistance"}},
+        {"event_type_id": "ASSISTANCE_REQUESTED", "timestamp": "3.8828486545017889194053442429185341199221712181969", "details": {}},
+        {"event_type_id": "ASSISTANCE_COMPLETED", "timestamp": "6.3404661351893529540261709506525888313360495081781", "details": {}},
         {"event_type_id": "EXTENSION_GRANTED", "timestamp": "14.38284865450178891940534424", "details": {}},
         {"event_type_id": "EXTERNAL_EVIDENCE_RETURNED", "timestamp": "25.596993130818807038511174606032313132832874622193", "details": {}},
         {"event_type_id": "REVIEW_QUEUED", "timestamp": "26.575383128889598629366557108705716148027406996223", "details": {"review_kind": "pre_action"}},

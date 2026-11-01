@@ -42,6 +42,9 @@ closed_event_type_ids:
   - CORRECTION_REQUESTED
   - RESTORATION_EXECUTED
   - CASE_CLOSED
+  - ASSISTANCE_REQUESTED
+  - ASSISTANCE_STARTED
+  - ASSISTANCE_COMPLETED
 
 closed_property_or_helper_ids:
   - F0
