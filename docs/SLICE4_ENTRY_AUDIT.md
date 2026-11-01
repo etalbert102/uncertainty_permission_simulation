@@ -1,0 +1,46 @@
+# Slice 4 Entry Audit
+
+Date: 2026-11-01
+
+Status: Slice 4 active; freeze not authorized
+
+## Entry evidence
+
+- Slices 0–3 are committed and their automated gates pass.
+- The Slice 3 pilot predicts that the 108-family, 30-replication, 80-case core fits the declared 24-hour runtime ceiling.
+- The pilot's direction-blind precision projection supports the frozen candidate of 30 minimum and 60 maximum paired replications.
+- Literature, venue, source-identity, application-sufficiency, adapter-swap, and external-dependency decisions are closed.
+- No confirmatory output exists or has been inspected.
+
+## Candidate contracts created at entry
+
+`experiments/configs/confirmatory_v1.yaml` carries forward the pilot decisions without inspecting results: all 108 families, all five policies, 80 cases, 30 initial paired replications, a family-wide extension to 60 when any applicable primary metric misses its target, day-650 cutoff, stable seed derivation, separate censoring reasons, and no composite utility.
+
+`experiments/configs/sensitivity_information_latency_v1.yaml` prespecifies one non-core sensitivity in which the evidence-retrieval latency scale doubles from 10 to 20. It remains separate from the core and cannot be pooled into primary estimates.
+
+`requirements-lock.txt` records the exact development environment from which the freeze candidate is being assembled. The final freeze manifest must also record interpreter and platform identity.
+
+## Blocking gaps found before freeze
+
+### S4-B001 — numerical outcome contract
+
+The study plan and preregistration promise disposition and amount error relative to a stylized full-information oracle. The implemented simulator currently records evidentiary support, permission, progression, exposure, correction, restoration, and process metrics, but it does not own a latent numerical amount or a full-information amount oracle. Freezing now would falsely certify a promised outcome that cannot be produced.
+
+Required resolution before protocol `1.0` and the manifest:
+
+- either add a visibly stylized, independently owned numerical-oracle model with keyed latent draws, overlay-owned parameters, policy-blind scoring, tests, and stored dummy-analysis fields; or
+- narrow the preregistered numerical claims before freeze and reconcile the plan, outline, metrics, and article contribution accordingly.
+
+### S4-B002 — matched negative-control execution
+
+P0 supplies a semantic null and routing-invariance control, and the simulator has limiting-case tests. The confirmatory pipeline does not yet emit one closed, stored receipt covering the five prespecified negative-control IDs in the candidate config. A test existing somewhere in the suite is not sufficient evidence for the article's negative-control result.
+
+Required resolution: implement deterministic control execution and a stored receipt that keeps controls separate from the 108-family primary count and fails on any unexpected robust-permission violation.
+
+### S4-B003 — freeze and run machinery
+
+The repository does not yet implement `verify-freeze`, `scripts/verify_repo.py`, or the append-only confirmatory run/reconcile/analyze path named in the canonical plan. These commands must exist and be mutation-tested before their code is hashed.
+
+## Stop decision
+
+Do not promote the protocol, mark either config ready, create `docs/FREEZE_MANIFEST.json`, or execute a confirmatory case while S4-B001 through S4-B003 remain open. Candidate validation is permitted because it enumerates inputs and seed identities without executing or inspecting outcomes.

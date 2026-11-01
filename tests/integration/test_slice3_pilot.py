@@ -9,6 +9,8 @@ from uncertainty_permission_simulation.worked_trace import build_worked_trace
 
 ROOT = Path(__file__).resolve().parents[2]
 PILOT = ROOT / "experiments/configs/pilot_v1.yaml"
+CONFIRMATORY = ROOT / "experiments/configs/confirmatory_v1.yaml"
+SENSITIVITY = ROOT / "experiments/configs/sensitivity_information_latency_v1.yaml"
 
 
 def test_pilot_config_closes_development_grid_without_running_confirmatory() -> None:
@@ -25,6 +27,32 @@ def test_dummy_analysis_pipeline_exercises_cells_and_paired_estimates() -> None:
     assert result["cell_count"] == 5
     assert result["paired_estimate_count"] == 15
     assert len(result["receipt_hash"]) == 64
+
+
+def test_slice4_confirmatory_candidate_closes_grid_seeds_and_pilot_decisions() -> None:
+    result = validate_experiment_config(CONFIRMATORY)
+    assert result["status"] == "valid_candidate"
+    assert result["mode"] == "confirmatory"
+    assert result["family_count"] == 108
+    assert result["policy_count"] == 5
+    assert result["replications"] == 30
+    assert result["cohort_size"] == 80
+    assert result["seed_count"] == 108 * 30
+    assert len(result["seed_inventory_hash"]) == 64
+    assert result["freeze_readiness"]["status"] == "blocked"
+    assert set(result["freeze_readiness"]["unresolved_items"]) == {
+        "NUMERICAL_OUTCOME_CONTRACT",
+        "NEGATIVE_CONTROL_EXECUTION_RECEIPT",
+        "FREEZE_MANIFEST_IMPLEMENTATION",
+    }
+
+
+def test_slice4_information_latency_sensitivity_is_separate_and_prespecified() -> None:
+    result = validate_experiment_config(SENSITIVITY)
+    assert result["status"] == "valid_candidate"
+    assert result["mode"] == "sensitivity"
+    assert result["family_count"] == 108
+    assert result["seed_count"] == 108 * 30
 
 
 def test_prespecified_worked_trace_is_compiled_and_oracle_separated() -> None:

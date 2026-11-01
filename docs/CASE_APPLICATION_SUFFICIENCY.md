@@ -25,4 +25,4 @@ The application meets the minimum defensible threshold for structural grounding.
 - The fixed source record does not support population calibration; the paper must preserve that limitation.
 - Later EIC, CUPI, PAYG Manual, and remediation variants remain outside the primary application.
 
-Decision: **sufficient for a formal counterfactual simulation grounded in a documented case, subject to independent pre-freeze packet QA and the frozen remote-source identity rule.**
+Decision: **sufficient for a formal counterfactual simulation grounded in a documented case, subject to the automated pre-freeze artifact gates and frozen remote-source identity rule. Procedure comprehensibility is reviewed by the project lead after Slice 5 and is not evidence of case validity.**

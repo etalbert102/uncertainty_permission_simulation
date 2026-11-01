@@ -51,15 +51,21 @@ def load_experiment_config(path: Path) -> dict[str, object]:
     config = yaml.safe_load(path.read_text(encoding="utf-8"))
     if not isinstance(config, dict):
         raise ContractError("EXPERIMENT_CONFIG_INVALID", "experiment config must be a mapping")
-    required = {
+    common_required = {
         "config_id", "mode", "policy_ids", "cohort_size", "replications", "seed_prefix",
-        "development_family_count", "base_overlay", "runtime", "precision", "outputs",
+        "base_overlay", "runtime", "precision", "outputs",
     }
-    missing = required - set(config)
+    missing = common_required - set(config)
     if missing:
         raise ContractError("EXPERIMENT_CONFIG_INVALID", f"missing config fields {sorted(missing)}")
-    if config["mode"] not in {"development_pilot", "confirmatory"}:
-        raise ContractError("EXPERIMENT_CONFIG_INVALID", "mode must be development_pilot or confirmatory")
+    if config["mode"] not in {"development_pilot", "confirmatory", "sensitivity"}:
+        raise ContractError(
+            "EXPERIMENT_CONFIG_INVALID",
+            "mode must be development_pilot, confirmatory, or sensitivity",
+        )
+    for field_name in ("config_id", "seed_prefix"):
+        if not isinstance(config[field_name], str) or not config[field_name]:
+            raise ContractError("EXPERIMENT_CONFIG_INVALID", f"{field_name} must be nonempty")
     policy_ids = tuple(config["policy_ids"])
     if len(policy_ids) != len(POLICY_IDS) or set(policy_ids) != set(POLICY_IDS):
         raise ContractError("EXPERIMENT_CONFIG_INVALID", f"policy_ids must equal {POLICY_IDS}")
@@ -68,9 +74,64 @@ def load_experiment_config(path: Path) -> dict[str, object]:
         if not isinstance(value, int) or isinstance(value, bool) or value <= 0:
             raise ContractError("EXPERIMENT_CONFIG_INVALID", f"{name} must be a positive integer")
     if config["mode"] == "development_pilot":
-        count = config["development_family_count"]
+        count = config.get("development_family_count")
         if not isinstance(count, int) or isinstance(count, bool) or not 12 <= count <= 18:
             raise ContractError("EXPERIMENT_CONFIG_INVALID", "pilot requires 12-18 development families")
+    else:
+        design_role = config.get("design_role")
+        expected_role = "core_confirmatory" if config["mode"] == "confirmatory" else "prespecified_sensitivity"
+        if design_role != expected_role:
+            raise ContractError(
+                "EXPERIMENT_CONFIG_INVALID",
+                f"{config['mode']} config requires design_role={expected_role}",
+            )
+        analysis = config.get("analysis")
+        if not isinstance(analysis, dict):
+            raise ContractError("EXPERIMENT_CONFIG_INVALID", "frozen config requires an analysis mapping")
+        if tuple(analysis.get("primary_metrics", ())) != PRIMARY_METRICS:
+            raise ContractError(
+                "EXPERIMENT_CONFIG_INVALID",
+                "analysis.primary_metrics must match the closed implemented metric order",
+            )
+        if analysis.get("confidence_interval") != "normal_95_from_replication_mcse":
+            raise ContractError(
+                "EXPERIMENT_CONFIG_INVALID",
+                "frozen analysis requires the declared 95% MCSE interval rule",
+            )
+        controls = config.get("negative_controls")
+        if not isinstance(controls, list) or len(controls) != len(set(controls)) or not controls:
+            raise ContractError(
+                "EXPERIMENT_CONFIG_INVALID",
+                "frozen config requires unique negative-control IDs",
+            )
+        readiness = config.get("freeze_readiness")
+        if not isinstance(readiness, dict) or readiness.get("status") not in {"blocked", "ready"}:
+            raise ContractError(
+                "EXPERIMENT_CONFIG_INVALID",
+                "frozen config requires explicit freeze_readiness status",
+            )
+        unresolved = readiness.get("unresolved_items")
+        if not isinstance(unresolved, list) or len(unresolved) != len(set(unresolved)):
+            raise ContractError(
+                "EXPERIMENT_CONFIG_INVALID",
+                "freeze_readiness.unresolved_items must be a unique list",
+            )
+        if readiness["status"] == "ready" and unresolved:
+            raise ContractError(
+                "EXPERIMENT_CONFIG_INVALID",
+                "ready config cannot retain unresolved freeze items",
+            )
+        if config["mode"] == "sensitivity":
+            if config.get("parent_config_id") != "CONFIRMATORY-V1":
+                raise ContractError(
+                    "EXPERIMENT_CONFIG_INVALID",
+                    "sensitivity config must name CONFIRMATORY-V1 as parent",
+                )
+            if not isinstance(config.get("sensitivity_id"), str) or not config["sensitivity_id"]:
+                raise ContractError(
+                    "EXPERIMENT_CONFIG_INVALID",
+                    "sensitivity config requires a nonempty sensitivity_id",
+                )
     precision = config["precision"]
     if not isinstance(precision, dict):
         raise ContractError("EXPERIMENT_CONFIG_INVALID", "precision must be a mapping")
@@ -87,7 +148,24 @@ def load_experiment_config(path: Path) -> dict[str, object]:
             "EXPERIMENT_CONFIG_INVALID",
             "replication counts conflict with the pilot/frozen precision bounds or exceed 100",
         )
-    overlay_from_mapping(config["base_overlay"])
+    overlay = overlay_from_mapping(config["base_overlay"])
+    expected_provenance = "sensitivity" if config["mode"] == "sensitivity" else "stylized"
+    if overlay.provenance != expected_provenance:
+        raise ContractError(
+            "EXPERIMENT_CONFIG_INVALID",
+            f"{config['mode']} overlay provenance must be {expected_provenance}",
+        )
+    if config["mode"] == "confirmatory":
+        if (config["cohort_size"], config["replications"], minimum, maximum) != (80, 30, 30, 60):
+            raise ContractError(
+                "EXPERIMENT_CONFIG_INVALID",
+                "core confirmatory config must preserve the Slice 3 80/30/30/60 decision",
+            )
+        if overlay.administrative_cutoff != Decimal("650"):
+            raise ContractError(
+                "EXPERIMENT_CONFIG_INVALID",
+                "core confirmatory administrative cutoff must remain day 650",
+            )
     return config
 
 
@@ -107,8 +185,8 @@ def validate_experiment_config(path: Path) -> dict[str, object]:
     if invalid:
         detail = ", ".join(f"{item.family_id}:{item.invalid_reason}" for item in invalid)
         raise ContractError("SCENARIO_GRID_INVALID", detail)
-    return {
-        "status": "valid",
+    result = {
+        "status": "valid" if config["mode"] == "development_pilot" else "valid_candidate",
         "config_id": config["config_id"],
         "mode": config["mode"],
         "family_count": len(families),
@@ -118,6 +196,18 @@ def validate_experiment_config(path: Path) -> dict[str, object]:
         "config_hash": canonical_hash(config),
         "scenario_hash": canonical_hash([family.canonical_value() for family in families]),
     }
+    if config["mode"] != "development_pilot":
+        seed_ids = tuple(
+            f"{config['seed_prefix']}-{family.family_id}-R{replication:03d}"
+            for family in families
+            for replication in range(1, int(config["replications"]) + 1)
+        )
+        result.update({
+            "seed_count": len(seed_ids),
+            "seed_inventory_hash": canonical_hash(seed_ids),
+            "freeze_readiness": config["freeze_readiness"],
+        })
+    return result
 
 
 def _rate(numerator: int, denominator: int) -> float:

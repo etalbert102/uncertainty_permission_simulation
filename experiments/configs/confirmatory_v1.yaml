@@ -1,0 +1,88 @@
+config_id: CONFIRMATORY-V1
+mode: confirmatory
+design_role: core_confirmatory
+purpose: frozen core factorial study; execution prohibited until the Slice 4 manifest verifies
+policy_ids: [U0, U1, U2C, U2O, U3]
+cohort_size: 80
+replications: 30
+seed_prefix: CONFIRMATORY-SEED-V1
+scenario_selection_rule: complete 108-family constrained Cartesian grid in canonical scenario-ID order
+base_overlay:
+  overlay_id: CONFIRMATORY-BASE-STYLIZED-OVERLAY@1
+  provenance: stylized
+  initiation_window: "100"
+  notice_delay: "1"
+  response_deadline: "21"
+  review_capacity: "2"
+  review_service_time: "10"
+  review_service_window: "14"
+  extension_duration: "7"
+  notice_delivery_probability: "0.95"
+  administrative_access_probability: "0.8"
+  comprehension_probability: "0.85"
+  record_availability_probability: "0.7"
+  response_effort_limit: "0.55"
+  assistance_effort_bonus: "0.3"
+  assistance_capacity: "2"
+  assistance_service_time: "5"
+  assistance_service_window: "21"
+  extension_effort_bonus: "0.15"
+  extension_need_probability: "0.25"
+  evidence_retrieval_success_probability: "0.7"
+  evidence_retrieval_latency_scale: "10"
+  external_consequence_delay: "1"
+  recovery_start_delay: "2"
+  recovery_capacity: "2"
+  recovery_service_time: "8"
+  recovery_window: "20"
+  correction_request_delay: "7"
+  correction_uptake_probability: "0.5"
+  reassessment_capacity: "2"
+  reassessment_service_time: "10"
+  correction_window: "14"
+  restoration_delay: "5"
+  restoration_window: "50"
+  administrative_cutoff: "650"
+precision:
+  minimum_replications: 30
+  maximum_replications: 60
+  target_rate_mcse: 0.05
+  target_paired_mcse: 0.06
+  extension_rule: if any applicable primary metric exceeds its target after 30 replications, extend every policy in every valid family to 60 replications using the next frozen seeds
+runtime:
+  core_ceiling_seconds: 86400
+  extension_ceiling_seconds: 86400
+  pilot_predicted_core_seconds: 503.9974021638349
+analysis:
+  primary_metrics:
+    - unsupported_progression_rate
+    - gate_safe_rate
+    - review_effective_rate
+    - decision_service_effective_rate
+    - unresolved_hold_rate
+    - recovery_exposure_rate
+    - recipient_burden_rate
+    - agency_workload_rate
+    - right_censored_rate
+  primary_contrasts: [U2O-minus-U2C, U3-minus-U0, U1-minus-U0]
+  confidence_interval: normal_95_from_replication_mcse
+  scenario_generalization_unit: family
+  pooling_rule: do not pool fail-closed and fail-open policies or core and sensitivity runs
+  censoring_rule: report open evidence, review, recovery, reassessment, and restoration paths separately by reason
+negative_controls:
+  - P0-SAME-RULE-SEMANTIC-NULL
+  - P0-ROUTING-INVARIANCE
+  - VERIFIED-MATCH-PROGRESSION
+  - ORACLE-NEGATIVE-NO-PROGRESSION
+  - NO-THRESHOLD-NO-PROGRESSION
+outputs:
+  attempts_directory: outputs/confirmatory_v1/attempts
+  run_index_path: outputs/confirmatory_v1/run_index.json
+  reconciliation_path: outputs/confirmatory_v1/reconciliation.json
+  analysis_directory: outputs/confirmatory_v1/analysis
+freeze_readiness:
+  status: blocked
+  unresolved_items:
+    - NUMERICAL_OUTCOME_CONTRACT
+    - NEGATIVE_CONTROL_EXECUTION_RECEIPT
+    - FREEZE_MANIFEST_IMPLEMENTATION

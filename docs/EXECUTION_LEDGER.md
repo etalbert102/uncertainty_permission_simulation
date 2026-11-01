@@ -10,7 +10,7 @@ This ledger is the canonical slice-status record. Update it at the end of every 
 | 1. Case-neutral dynamic vertical slice | complete | `93e2da6` | 27 tests; 726-record closed bundle; three stored validation receipts match; both artifact hashes repeat | Slice 2 retained the exact artifact hashes and validated stochastic extension without weakening this contract |
 | 2. Stochastic engine and validation | complete | `d541d03` closeout; `fa6dfc4` semantic audit | 148 tests; five exact stochastic traces; stored replay/application/queue receipts; analytical and independent-reference checks; all prior gates pass | implementation validation only; monetary and unmodeled harms remain outside the declared consequence vector; no pilot or substantive result exists |
 | 3. Experiment pilot and freeze candidate | complete; ready for Slice 4 freeze work | `e8905fa`; gate amended 2026-11-01 | pilot, Slice 0/plan/Slice 3 gates, executable worked trace and staged review materials | procedure comprehensibility will be reviewed after Slice 5; semantic findings require a new freeze and rerun |
-| 4. Confirmatory freeze | pending | — | — | — |
+| 4. Confirmatory freeze | active; freeze not authorized | — | 108-family core and one sensitivity validate as blocked candidates; 164 tests and prior gates pass | numerical outcome contract, stored negative-control execution receipt, and freeze/run verification machinery remain open |
 | 5. Confirmatory execution and analysis | pending | — | — | — |
 | 6. Evidence packet and 10,000-word article | pending | — | — | — |
 
@@ -731,3 +731,36 @@ Verification after the revision:
 | `PYTHONPATH=src ./.venv/bin/python scripts/validate_slice3.py` | pass: pilot, executable trace, input/reference separation, and no-confirmatory-output gates |
 | `PYTHONPATH=src ./.venv/bin/pytest -q` | pass: 154 tests; the four retired external-QA tests are no longer part of the study |
 | `git diff --check` | pass |
+
+## Slice 4 Entry Receipt
+
+Status: active; candidate contracts validated; freeze deliberately blocked
+
+### Added or changed
+
+- Added `experiments/configs/confirmatory_v1.yaml` with all 108 families, five policies, 80 cases, 30 initial replications, stable seed derivation, day-650 cutoff, 30-to-60 family-wide precision rule, primary metric order, contrasts, censoring rule, and explicit negative-control IDs.
+- Added `experiments/configs/sensitivity_information_latency_v1.yaml`, a separately identified non-core sensitivity that doubles evidence-retrieval latency from 10 to 20 and cannot be pooled with the primary study.
+- Added `requirements-lock.txt` from the declared Python 3.14.4 environment.
+- Extended experiment-config validation to reject drift in the pilot-decided cohort, replication bounds, cutoff, overlay provenance, metric order, confidence-interval rule, sensitivity parent, and readiness state.
+- Added `docs/SLICE4_ENTRY_AUDIT.md`, which records why the freeze cannot yet be issued.
+
+### Verification
+
+| Command | Result |
+| --- | --- |
+| `PYTHONPATH=src ./.venv/bin/python -m uncertainty_permission_simulation.cli validate experiments/configs/confirmatory_v1.yaml` | pass as blocked candidate: 108 families, 3,240 seed IDs, config hash `8f2556c6e3eb1a0726e9c250c2851a3b30331e234bf28e4f690bd1384ff67cbb`, scenario hash `16bdb11bdf3dba909f4f71feaf25acefebd72d1ca21e61efe2c38265f2607506` |
+| `PYTHONPATH=src ./.venv/bin/python -m uncertainty_permission_simulation.cli validate experiments/configs/sensitivity_information_latency_v1.yaml` | pass as blocked candidate: 108 families, 3,240 seed IDs, config hash `32f2b90c5f676fdf0c585be6b407ae4a719a16686825dac249fa3709dbfa3b35` |
+| `PYTHONPATH=src ./.venv/bin/pytest -q tests/unit/test_experiment_config.py tests/integration/test_slice3_pilot.py` | pass: 13 focused tests |
+| `./.venv/bin/python scripts/validate_plan.py` | pass |
+| `./.venv/bin/python scripts/validate_slice0.py` | pass |
+| `PYTHONPATH=src ./.venv/bin/python scripts/validate_slice3.py` | pass |
+| `PYTHONPATH=src ./.venv/bin/pytest -q` | pass: 164 tests |
+| `git diff --check` | pass |
+
+### Blocking diagnostics
+
+- `S4-B001` (`NUMERICAL_OUTCOME_CONTRACT`): the plan promises a stylized full-information numerical oracle and amount-error outputs, but the current simulator has no latent amount model or amount-scoring owner. Freeze would misrepresent implemented outcomes.
+- `S4-B002` (`NEGATIVE_CONTROL_EXECUTION_RECEIPT`): individual controls and limiting tests exist, but the confirmatory path has no closed stored receipt for the five declared negative-control IDs.
+- `S4-B003` (`FREEZE_MANIFEST_IMPLEMENTATION`): `verify-freeze`, `scripts/verify_repo.py`, and append-only run/reconcile/analyze commands do not yet exist.
+
+No confirmatory case was executed and no confirmatory output was created or inspected. The protocol remains version `0.2`; no freeze manifest exists.
