@@ -41,7 +41,6 @@ def test_slice4_confirmatory_candidate_closes_grid_seeds_and_pilot_decisions() -
     assert len(result["seed_inventory_hash"]) == 64
     assert result["freeze_readiness"]["status"] == "blocked"
     assert set(result["freeze_readiness"]["unresolved_items"]) == {
-        "NUMERICAL_OUTCOME_CONTRACT",
         "NEGATIVE_CONTROL_EXECUTION_RECEIPT",
         "FREEZE_MANIFEST_IMPLEMENTATION",
     }

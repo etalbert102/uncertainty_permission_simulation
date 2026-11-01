@@ -73,7 +73,7 @@ negative_controls:
   - P0-SAME-RULE-SEMANTIC-NULL
   - P0-ROUTING-INVARIANCE
   - VERIFIED-MATCH-PROGRESSION
-  - ORACLE-NEGATIVE-NO-PROGRESSION
+  - NO-SUPPORT-NO-PROGRESSION
   - NO-THRESHOLD-NO-PROGRESSION
 outputs:
   attempts_directory: outputs/confirmatory_v1/attempts
@@ -83,6 +83,5 @@ outputs:
 freeze_readiness:
   status: blocked
   unresolved_items:
-    - NUMERICAL_OUTCOME_CONTRACT
     - NEGATIVE_CONTROL_EXECUTION_RECEIPT
     - FREEZE_MANIFEST_IMPLEMENTATION

@@ -1,6 +1,6 @@
 # Study Plan: Flexible Dynamic Uncertainty-to-Permission Kernel — Robodebt Application
 
-Status: Slices 0–3 complete; Slice 4 active and blocked from freeze by the recorded numerical-outcome, negative-control-receipt, and freeze-tooling gaps; no confirmatory results exist
+Status: Slices 0–3 complete; Slice 4 active and blocked from freeze by the recorded negative-control-receipt and freeze-tooling gaps; monetary-oracle claims were deliberately excluded before freeze; no confirmatory results exist
 
 Working article title: *When Uncertainty Expands Authority: Formalizing and Stress-Testing Automated Decision Workflows Through Robodebt*
 
@@ -212,7 +212,7 @@ When does a formally required review gate provide effective review and timely de
 
 ### RQ3: Organizational tradeoffs
 
-How do claimant-led hold, impute-and-progress, fail-closed review, fail-open review, and agency-assisted information-first policies differ in evidentiary support, numerical error, delay, agency workload, recipient burden, recovery exposure, and correction?
+How do claimant-led hold, impute-and-progress, fail-closed review, fail-open review, and agency-assisted information-first policies differ in evidentiary support, delay, agency workload, recipient burden, recovery exposure, correction, and restoration?
 
 ### RQ4: Boundary conditions
 
@@ -272,7 +272,7 @@ Keep three concepts distinct:
 - `P_auto(e, q)`: actions the workflow functionally permits to execute automatically given evidence `e`; and
 - `X(case, t)`: actions actually executed in the simulated trace.
 
-The simulator can establish a functional-permission or execution violation relative to the declared model. It does not determine historical legality. In the Robodebt application, legal conclusions and evidentiary requirements are source-attributed fields, not outputs inferred from numerical oracle error.
+The simulator can establish a functional-permission or execution violation relative to the declared model. It does not determine historical legality or monetary correctness. In the Robodebt application, legal conclusions and evidentiary requirements are source-attributed fields, not inferences from simulated progression, exposure, or correction outcomes.
 
 ### Action classes and authority order
 
@@ -436,19 +436,19 @@ The discrete-event model contains:
 
 Latent states and error rates are synthetic unless a documented source supports a parameter. They exist to compare policies under declared conditions, not to estimate deployed-system performance.
 
-### Robodebt scenario construction and oracle
+### Robodebt scenario construction and scoring boundary
 
-Within the Robodebt application, each simulated case begins with a latent fortnight-level income trajectory, benefit-entitlement history, and administrative-access profile stored as semantically identified generic case attributes. The application scenario generator derives the annual employer-income aggregate and broad employment-period evidence from that same trajectory, masks or exposes period-specific records according to the scenario, and supplies an identical initial evidence bundle and latent-access profile to every paired policy. The kernel does not require income, benefit, recipient, or debt fields.
+Within the Robodebt application, each simulated case begins with typed evidence-availability, support-status, and administrative-access attributes. The scenario generator controls whether the initial bundle contains aggregate-only, period-specific, verified, missing, or disputed evidence and supplies the identical initial evidence bundle and latent-access profile to every paired policy. The kernel does not require income, benefit, recipient, debt, or monetary-amount fields.
 
-The full-information numerical oracle recomputes an oracle-positive or oracle-negative outcome and amount from the latent fortnight-level trajectory under the declared stylized benefit rule. It is used only for simulation scoring. Policies never observe latent values unless a modeled evidence event reveals them.
+An independent evaluation specification determines whether the declared action-specific support rule holds at each action time. Policies cannot set this scoring rule, and modeled evidence events can change the available support state without creating a latent monetary entitlement.
 
-This construction makes three quantities auditable:
+This construction makes three process relations auditable:
 
-- whether the declared stylized rule is oracle-positive or oracle-negative;
-- how much a calculation based on imputed values differs from the oracle amount; and
-- whether later evidence or reassessment can correct the difference.
+- whether progression was supported under the declared action-specific evidence rule;
+- whether workload, timeout, access, or retrieval conditions changed functional permission or execution; and
+- whether later evidence, correction, and restoration paths remained available and completed within the declared horizon.
 
-Numerical oracle correctness, evidentiary sufficiency, and legal validity are separate fields. The benefit rule is a transparent stylized function unless Slice 0 identifies an authoritative, feasible specification. The simulator must not imply that its monetary outputs reproduce historical Robodebt calculations or determine whether a historical debt was lawful.
+Evidentiary support, simulated operational outcomes, and legal validity are separate fields. The study deliberately excludes a latent debt-amount oracle, amount-error estimands, and monetary recovery totals. The simulator must not imply that its event-rate or timing outputs reproduce historical Robodebt outcomes or determine whether a historical debt was lawful or correctly valued.
 
 ### Endogenous engagement model
 
@@ -604,10 +604,10 @@ The historical case is a rule-based automated administrative decision system, no
 Never use one label to collapse:
 
 1. **Evidentiary support:** whether the declared period-specific evidence rule is satisfied at the moment of action;
-2. **Numerical correctness:** whether the simulated amount agrees with the stylized full-information oracle; and
+2. **Simulated operational outcome:** what progression, delay, burden, workload, exposure, correction, or restoration occurs in the declared model; and
 3. **Legal validity:** what authoritative sources establish about the historical process and applicable law.
 
-A simulated amount can equal the oracle while remaining evidentially unsupported. Conversely, numerical disagreement with the stylized oracle is not a legal conclusion. Historical legal findings are quoted or paraphrased from the Royal Commission, Ombudsman, or other authoritative source and never generated by the simulator.
+A simulated progression or correction outcome may remain evidentially unsupported, and no simulated event rate or timing contrast is a legal conclusion. Historical legal findings are quoted or paraphrased from the Royal Commission, Ombudsman, or other authoritative source and never generated by the simulator. Monetary correctness is outside the confirmatory model.
 
 ### Formal crosswalk
 
@@ -665,14 +665,14 @@ If the authoritative record cannot support coherent, distinct early and enhanced
 
 ### Calibration rule
 
-Documented sources determine process structure wherever possible. Numerical parameters use this hierarchy:
+Documented sources determine process structure wherever possible. Quantitative simulation parameters use this hierarchy:
 
 1. directly documented value;
 2. documented plausible range;
 3. clearly labeled stylized range; or
 4. sensitivity parameter with no empirical interpretation.
 
-Never present stylized queue, error, or deadline values as measurements of the documented organization.
+Never present stylized queue, event-rate, or deadline values as measurements of the documented organization.
 
 ## Experimental Design
 
@@ -718,9 +718,9 @@ The scenario generator must apply semantic validity constraints. The final valid
 
 Add matched controls in which:
 
-- the aggregate match agrees with full-information fortnightly income;
+- complete period-specific evidence supports the action;
 - an imputed case is independently verified before debt action;
-- the case is oracle-negative under both evidence states;
+- neither evidence state supports progression;
 - only information or containment actions change;
 - review is not required because no progression threshold is crossed; or
 - representation changes but routing and permission do not.
@@ -761,14 +761,6 @@ No scenario receives additional replications because its result is surprising or
 - recovery begun before effective review or reassessment; and
 - source-attributed legal-status category reported separately from simulated metrics.
 
-#### Numerical decision outcome
-
-- oracle-positive and oracle-negative disposition rates;
-- signed and absolute amount error relative to the stylized full-information oracle;
-- false action and missed action relative to that oracle;
-- late but otherwise oracle-consistent disposition; and
-- result stratification by evidentiary-support status.
-
 #### Organizational process
 
 - queue length and waiting-time distribution;
@@ -785,19 +777,20 @@ No scenario receives additional replications because its result is surprising or
 #### Recovery exposure and restoration
 
 - days under asserted debt before correction;
-- amount recovered before correction;
 - recovery fee, collection, or payment exposure when modeled;
 - reassessment opportunity, debt reduction, and debt zeroing;
 - partial versus complete restoration; and
 - unresolved external consequences at the administrative cutoff.
 
-No single weighted utility or scalar policy-regret measure is primary. Report evidentiary support, numerical error, timeliness, agency workload, recipient burden, recovery exposure, and restoration as a vector. Any scalar loss function or Pareto ranking is a sensitivity analysis with explicit normative assumptions. U1 and U2O remain failure comparators even if a stylized throughput metric favors them.
+The model does not estimate a latent debt amount, amount error, amount recovered, or historical debt magnitude. “Reduction” and “zeroing” are modeled correction-state transitions, not monetary estimates.
+
+No single weighted utility or scalar policy-regret measure is primary. Report evidentiary support, timeliness, agency workload, recipient burden, recovery exposure, correction, and restoration as a vector. Any scalar loss function or Pareto ranking is a sensitivity analysis with explicit normative assumptions. U1 and U2O remain failure comparators even if a stylized throughput metric favors them.
 
 ### Primary estimands
 
 1. Capacity boundary at which U2C preserves `GateSafe` but loses effective review or timely decision service.
 2. U2O versus U2C difference in robust-permission violations and recovery exposure as the same queues approach overload.
-3. U3 versus U0 difference in recipient burden, agency workload, evidentiary support, time to supported disposition, and numerical error.
+3. U3 versus U0 difference in recipient burden, agency workload, evidentiary support, time to supported disposition, unresolved cases, and correction opportunity.
 4. Interaction between policy and administrative-access barriers.
 5. Interaction between policy and third-party evidence retrievability.
 6. Difference among configured review, `GateSafe`, `ReviewEffective`, and `DecisionServiceEffective`.
@@ -893,7 +886,7 @@ Required validation includes:
 
 ### Interpretation rule
 
-Simulation estimates apply to the declared model and parameter ranges. Document grounding supports structural relevance, not numeric field prediction, unless a parameter is directly sourced. Evidentiary-support and numerical-oracle metrics are simulation outputs; historical legal conclusions remain source-attributed facts.
+Simulation estimates apply to the declared model and parameter ranges. Document grounding supports structural relevance, not numeric field prediction, unless a parameter is directly sourced. Evidentiary-support and operational metrics are simulation outputs; monetary correctness is not estimated, and historical legal conclusions remain source-attributed facts.
 
 ## Schemas And Fact Ownership
 
@@ -939,7 +932,7 @@ The minimum Slice 1 inventory is: `RecordRef`; `SchemaRef`; `RecordMeta`; `Store
 - Source fixtures remain immutable artifacts. Application mappings compile their source elements into separate process capabilities and historical policy bindings; raw descriptions and guard strings never execute directly.
 - Process profiles own available topology and capabilities. Policy profiles own active transformation, routing, permission, gate, timeout, correction, and restoration behavior.
 - Scenario overlays fill declared unbound slots only. Compiled configurations and parameter-binding receipts own the exact runtime composition and reject duplicate owners or unresolved values.
-- Legal-status fields consume source-manifest labels and may not be inferred from oracle error.
+- Legal-status fields consume source-manifest labels and may not be inferred from simulated progression, exposure, correction, or restoration outcomes.
 - Scenario generator owns valid parameter combinations and stable IDs.
 - Simulation engine owns event ordering, the priority registry, well-founded termination, branch-independent causal-event keys, complete system-state capture, causal-cut alignment, and state transitions.
 - Policy module owns routing and permission behavior.
@@ -1122,7 +1115,7 @@ python3 -m py_compile scripts/validate_slice0.py scripts/validate_plan.py
 - information or authority order depends on the desired result;
 - precautionary actions cannot be distinguished from progression;
 - no defensible application can support the evidence transformation, action path, organizational roles, and claim limits needed for the institutional demonstration;
-- legal, evidentiary, and numerical claims cannot be kept separate;
+- legal, evidentiary, and simulated operational claims cannot be kept separate;
 - the article cannot explain its emerging-technology contribution without asserting field equivalence; or
 - the formal contribution cannot be distinguished from existing value-of-information, queueing, monotonicity, or human-in-the-loop governance work.
 
@@ -1343,7 +1336,7 @@ Use resume only for missing or operationally failed runs. Never replace complete
 - scenario, seed, run, and exclusion inventory;
 - primary paired estimates and MCSE;
 - queue and effective-review boundary maps;
-- evidentiary-support, numerical-error, timeliness, agency-workload, recipient-burden, recovery-exposure, and restoration results;
+- evidentiary-support, timeliness, agency-workload, recipient-burden, recovery-exposure, correction, and restoration results;
 - negative-control results;
 - the prespecified worked trace and any reproducible selection-rule outputs;
 - sensitivity results completed before the deadline;
@@ -1411,8 +1404,8 @@ PYTHONPATH=src pytest -q tests/audit
 - `P0-Precursor` no-change falsifier where routing and permission remain invariant to the representation;
 - more-to-less information coarsening with no permission change;
 - aggregate income transformed into unsupported fortnightly precision;
-- oracle-correct amount that remains evidentially unsupported;
-- numerically erroneous amount with complete provenance;
+- action supported by complete period-specific evidence without a robust-permission violation;
+- imputed action with complete provenance that still lacks action-specific support;
 - no debt raised when period-specific evidence is absent;
 - case-neutral progression withheld when action-specific evidence is absent;
 - early-OCI 21-day profile and enhanced-OCI 28-day repair profile;
@@ -1465,7 +1458,7 @@ PYTHONPATH=src pytest -q tests/audit
 - omit an evaluated input or replace a versioned assessment/diagnostic reference with a raw ID;
 - corrupt the information coarsening map;
 - relabel imputed fortnightly income as observed;
-- infer legal validity from numerical oracle agreement;
+- infer legal validity from simulated progression, exposure, correction, or restoration outcomes;
 - classify a containment action as progression;
 - remove reviewer authority while retaining the review label;
 - suppress uncertainty from the reviewer;
@@ -1511,7 +1504,7 @@ PYTHONPATH=src pytest -q tests/audit
 | Decision rule omits an enabled, post-review, selected, constraint, information, restoration, or gate-requirement field | policy module | total-disposition regression |
 | Information ordering encodes the desired permission result | formal model | independent coarsening validation |
 | Imputed detail is mislabeled as observed evidence | formal model/representation | evidentiary-fidelity golden test |
-| Legal validity inferred from oracle error | source/metrics boundary | three-axis claim-type gate |
+| Legal validity inferred from a simulated operational outcome | source/metrics boundary | three-axis claim-type gate |
 | Precautionary action scored as functional-permission expansion | action taxonomy | direction-class golden tests |
 | Configured gate mistaken for gate safety, effective review, or decision service | process model | four-way review-state regression |
 | Divergent F2 traces aligned by event index, scoped to one case despite shared resources, or using an outcome-selected hold policy | formal model/simulator | intervention-unit, noninterference, explicit-hold, and causal-cut regression |
@@ -1546,7 +1539,7 @@ Broad gates begin report-only during pilot and become blocking only after diagno
 - Information ordering must be defined independently of policy outcome.
 - Observed, imputed, missing, and disputed income values must remain distinct in schemas, events, metrics, and displays.
 - Formal authority, functional permission, and operational action must remain distinct.
-- Evidentiary support, numerical correctness, and historical legal validity must never be collapsed.
+- Evidentiary support, simulated operational outcomes, and historical legal validity must never be collapsed; monetary correctness is outside the confirmatory model.
 - Functional-permission expansion must be distinguished from precautionary constraint.
 - Structural code must not depend on domain labels.
 - Core event, policy, random-stream, formal-evaluation, and metric behavior must be testable without loading the Robodebt adapter.
@@ -1605,7 +1598,7 @@ Stop the active slice when:
 - F4 material items cannot be linked to surfaced items through an independently frozen semantic-correspondence rule;
 - the evaluator cannot distinguish unknown scope, missing required input, invalid specification, and invalid aggregation with stable diagnostics;
 - the selected application cannot meet the minimum defensible case threshold; pause the application path and narrow or version the Robodebt mapping; replacing the primary application requires a new plan and preregistration version;
-- evidentiary, numerical, and legal claim types cannot be kept distinct;
+- evidentiary, simulated operational, and legal claim types cannot be kept distinct;
 - the emerging-technology contribution depends on asserting that Robodebt was modern AI or that a current system repeats it;
 - the article equates process red-teaming or Robodebt's institutional failure with adversarial exploitation;
 - `P0-Precursor` cannot reproduce the short paper's held-output comparison and no-change falsifier without changing a declared held variable;
@@ -1657,13 +1650,13 @@ The core study is complete only when:
 - The Robodebt adapter introduces no engine or policy branch and supplies no executable default for an `unsupported` historical parameter.
 - R-OCI-Early and R-OCI-Enhanced each pass the source gate and have separate dated, source-anchored process maps.
 - Every model-to-workflow mapping distinguishes documented structure, attributed statements, inference, stylized assumptions, and unsupported fields; executable stylized values live in separate versioned overlays.
-- Every outcome and article claim distinguishes evidentiary support, numerical correctness, and legal status.
+- Every outcome and article claim distinguishes evidentiary support, simulated operational outcomes, and legal status; none implies monetary correctness.
 - The discrete-event engine produces deterministic hashes for identical seeds and configs.
 - Golden traces, conservation checks, limiting cases, and analytical queue validation pass.
 - U0, U1, U2C, U2O, and U3 are paired on identical cases and stable keyed exogenous draws within each scenario family.
 - Validity constraints determine the final scenario count; invalid configurations fail diagnostically.
 - Confirmatory sources, model, policies, parameters, seeds, metrics, exclusions, and analysis freeze before output inspection.
-- Primary outcomes report evidentiary support, numerical error, gate safety, effective review, decision service, timeliness, agency workload, recipient burden, recovery exposure, and restoration separately.
+- Primary outcomes report evidentiary support, gate safety, effective review, decision service, timeliness, agency workload, recipient burden, recovery exposure, correction, and restoration separately.
 - Results include paired estimates, Monte Carlo uncertainty, queue boundaries, and negative controls.
 - Configured review, gate safety, effective review, and decision-service effectiveness are reported separately with failure reasons.
 - Fail-closed and fail-open review outcomes remain separate.
@@ -1706,7 +1699,7 @@ Before declaring the study complete, answer with stored evidence:
 
 1. Is information ordering independent of the downstream permission result?
 2. Are observed values, imputed values, missing evidence, and disputed values distinguishable end to end?
-3. Are evidentiary support, numerical correctness, and historical legal validity reported as separate claim types?
+3. Are evidentiary support, simulated operational outcomes, and historical legal validity reported as separate claim types, with monetary correctness expressly outside scope?
 4. Does the action taxonomy distinguish formal authority, functional permission, operational action, and precautionary constraint?
 5. What is formally established, and under which assumptions and refinement set?
 6. Are R-OCI-Early and R-OCI-Enhanced separately dated and sourced without later variants leaking into either profile?
@@ -1714,7 +1707,7 @@ Before declaring the study complete, answer with stored evidence:
 8. When do gate safety, effective review, and decision service diverge, and why?
 9. Are notice delivery, administrative access, evidence retrieval, queue overload, deadline expiry, debt action, recovery exposure, and correction visible in the results?
 10. Do paired policies share identical cases and stable case/event-keyed exogenous draws even when their event paths diverge?
-11. Are evidentiary support, numerical error, delay, agency workload, recipient burden, recovery exposure, and restoration reported without a hidden utility weighting?
+11. Are evidentiary support, delay, agency workload, recipient burden, recovery exposure, correction, and restoration reported without a hidden utility weighting?
 12. Did any confirmatory source, parameter, seed, metric, or analysis change after freeze?
 13. Does every historical, legal, and organizational claim have a source anchor?
 14. Does every quantitative claim have a run artifact and uncertainty statement?

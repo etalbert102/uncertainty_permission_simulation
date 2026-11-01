@@ -20,7 +20,7 @@ Status: Slice 4 active; freeze not authorized
 
 `requirements-lock.txt` records the exact development environment from which the freeze candidate is being assembled. The final freeze manifest must also record interpreter and platform identity.
 
-## Blocking gaps found before freeze
+## Gaps found before freeze
 
 ### S4-B001 — numerical outcome contract
 
@@ -30,6 +30,8 @@ Required resolution before protocol `1.0` and the manifest:
 
 - either add a visibly stylized, independently owned numerical-oracle model with keyed latent draws, overlay-owned parameters, policy-blind scoring, tests, and stored dummy-analysis fields; or
 - narrow the preregistered numerical claims before freeze and reconcile the plan, outline, metrics, and article contribution accordingly.
+
+**Resolution — 2026-11-01:** closed by deliberate narrowing before freeze. The plan, preregistration, article outline, case-study claim table, repository instructions, candidate configs, tests, and public status now exclude latent monetary entitlement, amount-error, amount-recovered, and historical debt-magnitude claims. The existing process outcomes become the complete confirmatory outcome contract. This is a pre-result scope decision; no confirmatory output existed or was inspected.
 
 ### S4-B002 — matched negative-control execution
 
@@ -43,4 +45,4 @@ The repository does not yet implement `verify-freeze`, `scripts/verify_repo.py`,
 
 ## Stop decision
 
-Do not promote the protocol, mark either config ready, create `docs/FREEZE_MANIFEST.json`, or execute a confirmatory case while S4-B001 through S4-B003 remain open. Candidate validation is permitted because it enumerates inputs and seed identities without executing or inspecting outcomes.
+Do not promote the protocol, mark either config ready, create `docs/FREEZE_MANIFEST.json`, or execute a confirmatory case while S4-B002 and S4-B003 remain open. Candidate validation is permitted because it enumerates inputs and seed identities without executing or inspecting outcomes.

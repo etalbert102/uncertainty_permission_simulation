@@ -1,6 +1,6 @@
 # Preregistration Skeleton
 
-Status: Slice 3 design-freeze candidate; development pilot inspected; no confirmatory results generated or inspected
+Status: Slice 4 pre-freeze candidate; development pilot inspected; no confirmatory results generated or inspected
 
 Protocol version: `0.2`
 
@@ -39,7 +39,7 @@ H1–H3 are the only primary substantive hypotheses.
 - **H4:** Administrative-access barriers reduce engagement under every policy; clearer notice, extensions, and agency assistance reduce but need not eliminate the disparity.
 - **H5:** Complete staff access to evidence and provenance improves effective-review opportunity relative to partial access under otherwise identical gate and staffing conditions.
 - **V1:** U1 produces more progression through imputation than U0 in the enabling fixture. This validates implementation and is not a substantive discovery.
-- **V2:** Verified-match, oracle-negative, no-threshold, and routing-invariance controls do not exhibit robust-permission violations.
+- **V2:** Verified-match, no-support/no-progression, no-threshold, and routing-invariance controls do not exhibit robust-permission violations.
 
 ## Policies
 
@@ -97,13 +97,6 @@ No composite workflow score or primary scalar utility is permitted.
 - surfacing loss; and
 - recovery begun before effective review or reassessment.
 
-### Numerical outcomes
-
-- disposition relative to the stylized full-information oracle;
-- signed and absolute amount error;
-- false and missed progression relative to that oracle; and
-- stratification by evidentiary-support status.
-
 ### Process outcomes
 
 - queue length, waiting time, utilization, expiry, throughput, unresolved holds, information-acquisition demand and latency;
@@ -112,16 +105,20 @@ No composite workflow score or primary scalar utility is permitted.
 
 ### Recovery and restoration outcomes
 
-- days and amount under asserted debt before correction;
+- days under asserted debt before correction;
 - modeled recovery or collection exposure;
 - reassessment opportunity, reduction, and zeroing; and
 - partial versus complete restoration with residual consequences reported separately.
+
+### Deliberate outcome boundary
+
+The study does not model a latent monetary entitlement, a full-information debt-amount oracle, signed or absolute amount error, or amount recovered. It estimates quantitative event rates, timing, workload, burden, exposure, correction, and restoration outcomes under the declared process model. These simulated operational outcomes remain distinct from both evidentiary support and source-attributed legal validity.
 
 ## Primary Estimands
 
 1. The load boundary at which U2C preserves gate safety while losing effective review or timely decision service.
 2. Paired U2O-minus-U2C differences in robust-permission violations and recovery exposure near that boundary.
-3. Paired U3-minus-U0 differences in recipient burden, agency workload, evidentiary support, time to supported disposition, and numerical error.
+3. Paired U3-minus-U0 differences in recipient burden, agency workload, evidentiary support, time to supported disposition, unresolved cases, and correction opportunity.
 
 Secondary estimands cover interactions with access barriers, evidence retrievability, staff provenance access, and the distinction among configured review and the three operational helpers.
 
@@ -129,9 +126,9 @@ Secondary estimands cover interactions with access barriers, evidence retrievabi
 
 Required matched controls include:
 
-- aggregate evidence agreeing with the full-information period values;
+- complete period-specific evidence supporting progression;
 - independent verification before progression;
-- oracle-negative cases under both evidence states;
+- cases with no supported progression eligibility under either evidence state;
 - changes limited to information or constraint actions;
 - no review requirement because no progression threshold is crossed; and
 - representation change with invariant routing and permission.

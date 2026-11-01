@@ -45,7 +45,7 @@ H1–H3 provide the main quantitative narrative. H4–H5 and the remaining forma
 
 - Freeze the five steps, required inputs, `pass`/`fail`/`unassessable`/`not_applicable` outputs, diagnostic fields, held-out AI canary, and worked-trace selection rule before confirmatory results.
 - Permit semantic revisions only before confirmatory freeze; record every change and reason. After results, allow editorial clarifications only unless a new freeze and rerun is performed.
-- After freeze, numerical results and examples may populate the protocol, but its semantic tests cannot change in response to favorable or inconvenient findings.
+- After freeze, quantitative results and examples may populate the protocol, but its semantic tests cannot change in response to favorable or inconvenient findings.
 - Use a deterministic golden Robodebt trace selected before confirmatory execution. Do not claim it is statistically representative.
 
 ### Claim discipline
@@ -213,7 +213,7 @@ Appendix candidates: complete notation table, full proof sketches, exhaustive fi
 
 - Fix the early OCI period and the enhanced OCI repair profile using source-manifest dates.
 - Identify the Royal Commission and Ombudsman as owners of historical and legal claims.
-- State the evidentiary-support, numerical-correctness, and legal-validity distinction.
+- State the distinction among evidentiary support, simulated operational outcomes, and source-attributed legal validity; note that monetary correctness is outside the model.
 - Explain the provenance hierarchy: documented value, documented range, stylized range, sensitivity parameter.
 
 ### 4.3 Early OCI process profile — 280 words
@@ -257,8 +257,8 @@ Primary exhibit:
 
 ### 5.2 Synthetic cases and endogenous engagement — 160 words
 
-- Generate latent fortnight-level income, derive annual aggregates, and reveal period-specific records only through modeled evidence events.
-- Explain the full-information numerical oracle and its limited scoring role.
+- Generate typed aggregate-only, period-specific, verified, missing, and disputed evidence states, and reveal support-changing records only through modeled evidence events.
+- Explain that the independent evaluation specification scores action-specific support without a latent debt-amount oracle.
 - Model delivery, access, comprehension, records, response effort, and extensions using shared latent traits and policy-specific mappings.
 
 ### 5.3 Historical fixtures and counterfactual policies — 260 words
@@ -279,7 +279,7 @@ Primary exhibit:
 
 ### 5.5 Outcomes and analysis — 210 words
 
-- Group outcomes into evidentiary/permission, numerical, organizational, and recovery/restoration families.
+- Group outcomes into evidentiary/permission, organizational, and recovery/restoration families, with correction and censoring reported explicitly.
 - Report configured review, gate safety, effective review, and decision service separately.
 - Describe paired estimates, uncertainty intervals, Monte Carlo standard errors, interaction plots, and right-censoring reports.
 - Reject a single weighted utility as primary; retain the safety-throughput-burden vector.
@@ -296,7 +296,7 @@ Appendix candidates: event schema, scenario-validity rules, full factor grid, pa
 
 ## 6. Results: Where Safeguards Hold and Fail — 1,850 Words
 
-Do not draft numerical conclusions until the confirmatory evidence packet is complete. Preserve null, adverse, and counterintuitive results.
+Do not draft quantitative conclusions until the confirmatory evidence packet is complete. Preserve null, adverse, and counterintuitive results.
 
 ### 6.1 Validation and run integrity — 150 words
 
@@ -324,7 +324,7 @@ Use Figure 3 Panel B rather than a separate exhibit.
 ### 6.4 Information acquisition and burden transfer — 350 words
 
 - Answer H3.
-- Compare U3 and U0 on recipient evidence effort, agency workload, supported disposition, delay, numerical error, and unresolved cases.
+- Compare U3 and U0 on recipient evidence effort, agency workload, supported disposition, delay, correction opportunity, and unresolved cases.
 - Stratify by third-party retrievability and administrative-access barriers.
 - Identify the conditions under which agency assistance improves support and the conditions under which it merely relocates the bottleneck.
 

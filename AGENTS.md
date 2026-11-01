@@ -19,7 +19,7 @@ Read `docs/STUDY_PLAN.md` before implementation. Follow its slice order, stop co
 - Draft named article sections to 9,400 words and track the 600-word contingency explicitly; do not spend the reserve merely to reach the 10,000-word ceiling.
 - Treat this as a formal counterfactual simulation grounded in Robodebt, not a numeric reconstruction of the historical program or evidence of current-system prevalence.
 - Keep observed, imputed, missing, and disputed evidence distinct end to end.
-- Keep evidentiary support, simulated numerical correctness, and source-attributed legal validity distinct end to end.
+- Keep evidentiary support, simulated operational outcomes, and source-attributed legal validity distinct end to end. The confirmatory model does not score monetary amount correctness.
 - Keep formal authority, functional permission, and operational action distinct end to end.
 - Keep debt action, constraint, staff review, evidence acquisition, recovery, and restoration actions separate.
 - Preserve the distinction between decision-space erosion and behavioral compression.

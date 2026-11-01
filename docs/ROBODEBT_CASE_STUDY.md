@@ -159,10 +159,10 @@ The source profile never supplies its own support oracle. Independent `sigma` re
 | Claim type | Question | Historical owner | Simulation output? | Permitted article language |
 | --- | --- | --- | --- | --- |
 | Evidentiary support | Did the declared period-specific support rule hold at action time? | Independent evaluation specification, source-labeled | yes | “Supported/unsupported under the declared rule.” |
-| Numerical correctness | Did the simulated amount match the stylized full-information oracle? | Study oracle | yes | “Matched/differed from the stylized oracle.” |
+| Simulated operational outcome | What action, delay, burden, exposure, correction, or restoration occurred in the declared model? | Frozen simulator, config, and analysis | yes | “Occurred at the reported rate/in the reported contrast within the declared model.” |
 | Legal validity | What did authoritative sources establish about the historical process and law? | Royal Commission, court, tribunal, Ombudsman, or other authority | no | “The source found/stated…” with citation. |
 
-No single “valid/invalid” field may collapse these axes. A simulated amount may match the oracle while lacking the declared evidentiary support; numerical error does not itself establish illegality.
+No single “valid/invalid” field may collapse these axes. A simulated action or correction outcome does not establish evidentiary support, historical prevalence, monetary correctness, or legality.
 
 ## Parameter Provenance and Simulation Boundary
 
@@ -177,7 +177,7 @@ No single “valid/invalid” field may collapse these axes. A simulated amount 
 | Notice delivery and engagement probabilities | Not established as model-ready distributions | Stylized paired draws |
 | Evidence availability/retrieval probabilities | Not established as model-ready distributions | Stylized paired draws |
 | Recipient burden units | Not historically measured by this packet | Transparent study index or event counts; no field estimate claim |
-| Full-information amount oracle | Study-authored | Numerical validation tool, not legal decision rule |
+| Latent debt-amount oracle | Not included | Monetary correctness, amount error, and historical debt magnitude are outside the confirmatory study |
 
 ## Limitations and Unsupported Elements
 

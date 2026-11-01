@@ -10,7 +10,7 @@ This ledger is the canonical slice-status record. Update it at the end of every 
 | 1. Case-neutral dynamic vertical slice | complete | `93e2da6` | 27 tests; 726-record closed bundle; three stored validation receipts match; both artifact hashes repeat | Slice 2 retained the exact artifact hashes and validated stochastic extension without weakening this contract |
 | 2. Stochastic engine and validation | complete | `d541d03` closeout; `fa6dfc4` semantic audit | 148 tests; five exact stochastic traces; stored replay/application/queue receipts; analytical and independent-reference checks; all prior gates pass | implementation validation only; monetary and unmodeled harms remain outside the declared consequence vector; no pilot or substantive result exists |
 | 3. Experiment pilot and freeze candidate | complete; ready for Slice 4 freeze work | `e8905fa`; gate amended 2026-11-01 | pilot, Slice 0/plan/Slice 3 gates, executable worked trace and staged review materials | procedure comprehensibility will be reviewed after Slice 5; semantic findings require a new freeze and rerun |
-| 4. Confirmatory freeze | active; freeze not authorized | — | 108-family core and one sensitivity validate as blocked candidates; 164 tests and prior gates pass | numerical outcome contract, stored negative-control execution receipt, and freeze/run verification machinery remain open |
+| 4. Confirmatory freeze | active; freeze not authorized | — | 108-family core and one sensitivity validate as blocked candidates; pre-freeze outcome contract narrowed without inspecting confirmatory results | stored negative-control execution receipt and freeze/run verification machinery remain open |
 | 5. Confirmatory execution and analysis | pending | — | — | — |
 | 6. Evidence packet and 10,000-word article | pending | — | — | — |
 
@@ -761,8 +761,29 @@ Entry commit: `7521836` (`Begin Slice 4 freeze candidate`).
 
 ### Blocking diagnostics
 
-- `S4-B001` (`NUMERICAL_OUTCOME_CONTRACT`): the plan promises a stylized full-information numerical oracle and amount-error outputs, but the current simulator has no latent amount model or amount-scoring owner. Freeze would misrepresent implemented outcomes.
+- `S4-B001` (`NUMERICAL_OUTCOME_CONTRACT`): closed 2026-11-01 by pre-freeze narrowing. The confirmatory contract now excludes latent monetary entitlement, amount-error, amount-recovered, and historical debt-magnitude claims. The implemented evidentiary, permission, process, exposure, correction, and restoration metrics are the complete outcome contract. No confirmatory output existed or was inspected.
 - `S4-B002` (`NEGATIVE_CONTROL_EXECUTION_RECEIPT`): individual controls and limiting tests exist, but the confirmatory path has no closed stored receipt for the five declared negative-control IDs.
 - `S4-B003` (`FREEZE_MANIFEST_IMPLEMENTATION`): `verify-freeze`, `scripts/verify_repo.py`, and append-only run/reconcile/analyze commands do not yet exist.
 
 No confirmatory case was executed and no confirmatory output was created or inspected. The protocol remains version `0.2`; no freeze manifest exists.
+
+### Pre-freeze outcome-scope decision — 2026-11-01
+
+- Chose the narrow numerical-claim path for `S4-B001`: the study does not add a latent debt-amount or benefit-entitlement model merely to score monetary error.
+- Reconciled the canonical plan, preregistration, article outline, Robodebt claim table, continuity control, procedure-review checklist, repository instructions, candidate configs, and tests.
+- Renamed the planned `ORACLE-NEGATIVE-NO-PROGRESSION` control to `NO-SUPPORT-NO-PROGRESSION`; the control now tests the independent action-support rule rather than an unimplemented amount oracle.
+- Confirmatory quantitative claims remain rates, differences, timing, workload, burden, exposure, correction, restoration, and censoring within the declared parameter space. They do not imply historical prevalence, monetary correctness, or legality.
+
+Verification after narrowing:
+
+| Command | Result |
+| --- | --- |
+| `PYTHONPATH=src ./.venv/bin/python -m uncertainty_permission_simulation.cli validate experiments/configs/confirmatory_v1.yaml` | pass as blocked candidate; config hash `a43309603842b206a896373b6e962abdde87a66fdc5d6ae6bbec2629a4ad3331`; only S4-B002/S4-B003 readiness items remain |
+| `PYTHONPATH=src ./.venv/bin/python -m uncertainty_permission_simulation.cli validate experiments/configs/sensitivity_information_latency_v1.yaml` | pass as blocked candidate; config hash `6d1fecd951eaa7399e9ce1dcec7d23d8faddada696f9fa3d968d38bf55979058`; only S4-B002/S4-B003 readiness items remain |
+| `./.venv/bin/python scripts/validate_plan.py` | pass: eight slices, three primary hypotheses, five policies, 39 audit questions, nine deferred items, 10,000-word ceiling |
+| `./.venv/bin/python scripts/validate_slice0.py` | pass: 10 sources, 10 claims, two profiles, 12 YAML files, 95 diagnostics |
+| `PYTHONPATH=src ./.venv/bin/python scripts/validate_slice3.py` | pass: development pilot and staged post-Slice-5 procedure review retained |
+| `PYTHONPATH=src ./.venv/bin/pytest -q` | pass: 164 tests |
+| `git diff --check` | pass |
+
+No confirmatory output was generated or inspected during this decision.

@@ -80,6 +80,5 @@ outputs:
 freeze_readiness:
   status: blocked
   unresolved_items:
-    - NUMERICAL_OUTCOME_CONTRACT
     - NEGATIVE_CONTROL_EXECUTION_RECEIPT
     - FREEZE_MANIFEST_IMPLEMENTATION

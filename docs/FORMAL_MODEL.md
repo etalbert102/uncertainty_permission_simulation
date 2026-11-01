@@ -1532,7 +1532,7 @@ The document-grounded application may instantiate the formal model as follows:
 | operational materiality map | materiality implemented by the reconstructed workflow policy |
 | evaluation specification | independently source-anchored evidentiary distinctions, action-support rules, refinement coverage, and baseline criteria |
 
-This mapping does not itself establish historical legality, numerical correctness, actual service capacity, actual error rates, or complete restoration. Those claim types remain separately sourced or simulated.
+This mapping does not itself establish historical legality, monetary correctness, actual service capacity, actual error rates, or complete restoration. Those claim types remain outside scope, separately sourced, or simulated as explicitly declared.
 
 ## Base Vulnerability and Adversarial Exploitability
 

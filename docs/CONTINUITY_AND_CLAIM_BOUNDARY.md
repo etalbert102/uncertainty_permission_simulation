@@ -33,7 +33,7 @@ Every material statement belongs to one type:
 | Historical process | Citation-level authoritative source anchor | Numeric parameter not in the source |
 | Historical legal | Express attribution to a competent authority | Simulator-generated legality |
 | Simulated structural | Frozen code/config/trace and validation receipt | Historical frequency or causal effect |
-| Simulated numerical | Frozen run artifact, estimator, uncertainty, and provenance | Legal validity |
+| Simulated operational | Frozen run artifact, estimator, uncertainty, and provenance | Historical frequency, monetary correctness, or legal validity |
 | Governance implication | Formal result plus source/simulation evidence and named tradeoff | Universal policy superiority |
 | Transfer | Shared invariant and explicitly supported institutional similarity | Field equivalence or current-system prevalence |
 | Attackability | Separate evidence of inducibility, observability, repeatability, and benefit | Inferring strategic exploitation from susceptibility |
@@ -60,6 +60,12 @@ The base vulnerability may be present without any of these fields. A red-team mu
 | “Adversarial decision-space manipulation” | Separate base vulnerability, susceptibility, and four attackability conditions. | Avoid attributing a strategic actor where evidence does not support one. | narrowed |
 
 Any later change to these entries must be recorded in the claim-boundary memo and cannot be hidden as stylistic editing after confirmatory freeze.
+
+## Pre-Freeze Study Scope Decisions
+
+| Date | Decision | Rationale | Consequence |
+| --- | --- | --- | --- |
+| 2026-11-01 | Exclude the planned latent debt-amount oracle and narrow confirmatory claims to implemented evidentiary, permission, process, exposure, correction, and restoration outcomes. | A monetary oracle would add a second stylized substantive model without improving the paper's central uncertainty-to-permission contribution. | No claim about latent entitlement, amount error, amount recovered, or historical debt magnitude is permitted; quantitative process estimates remain in scope. |
 
 ## Standalone Safeguards
 

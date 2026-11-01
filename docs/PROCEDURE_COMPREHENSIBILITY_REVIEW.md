@@ -46,7 +46,7 @@ Record `yes`, `no`, or `unclear`, with an artifact and section reference for eve
 | Is the distinction between `assessed` and `omitted_by_claim_limit` clear? |  |  |
 | Are `pass`, `fail`, `unassessable`, and `not_applicable` distinguishable? |  |  |
 | Can the first material evidence-to-action transition be located? |  |  |
-| Can evidentiary support, numerical correctness, and legal status be kept separate? |  |  |
+| Can evidentiary support, simulated operational outcomes, and legal status be kept separate? |  |  |
 | Can formal authority, functional permission, and operational action be kept separate? |  |  |
 | Are diagnostic owner, intervention owner, and tradeoff recorded separately? |  |  |
 | Does each worked-example row trace to a stored event, assessment, or diagnostic artifact? |  |  |

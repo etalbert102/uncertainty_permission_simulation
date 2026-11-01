@@ -14,7 +14,7 @@ The study asks when aggregate annual income data can become apparently precise f
 
 The plan is execution-ready, but that does not mean the study is complete.
 
-Slices 1–3 are complete, and Slice 4 is active. The 15-family development-only pilot measured runtime and MCSE, demonstrated an operational review-capacity boundary, retained stage-aware censoring, rehearsed an alternate synthetic profile without engine changes, exercised the dummy analysis pipeline, and rendered provisional boundary/tradeoff figures. It is not confirmatory evidence. The 108-family core config, stable seed inventory, one non-core information-latency sensitivity, and exact dependency lock now validate as explicit freeze candidates. The freeze remains blocked because the planned numerical-oracle outcome is not implemented, the confirmatory path lacks one stored negative-control receipt, and the freeze/run verification commands do not yet exist. No confirmatory run has been generated or inspected; no evidence packet or completed manuscript exists.
+Slices 1–3 are complete, and Slice 4 is active. The 15-family development-only pilot measured runtime and MCSE, demonstrated an operational review-capacity boundary, retained stage-aware censoring, rehearsed an alternate synthetic profile without engine changes, exercised the dummy analysis pipeline, and rendered provisional boundary/tradeoff figures. It is not confirmatory evidence. The 108-family core config, stable seed inventory, one non-core information-latency sensitivity, and exact dependency lock now validate as explicit freeze candidates. The study has deliberately excluded a latent debt-amount oracle and monetary-error claims; its quantitative claims concern permission, process, exposure, correction, and restoration. The freeze remains blocked because the confirmatory path lacks one stored negative-control receipt and the freeze/run verification commands do not yet exist. No confirmatory run has been generated or inspected; no evidence packet or completed manuscript exists.
 
 The Slice 1/2 smoke and validation artifacts remain implementation QA, not a substantive, empirical, or historical result. Slice 3 pilot aggregates are design diagnostics only and may not be cited as confirmatory findings.
 
@@ -52,7 +52,7 @@ The repository will support:
 - deterministic configuration compilation that rejects raw narrative execution, documented-value overwrite, unsupported historical defaults, duplicate parameter owners, and unresolved runtime slots;
 - early and enhanced OCI historical validation profiles;
 - five paired counterfactual profiles, including fail-closed and fail-open review;
-- explicit separation of evidentiary support, simulated numerical error, and source-attributed legal validity;
+- explicit separation of evidentiary support, simulated operational outcomes, and source-attributed legal validity;
 - authoritative Robodebt process grounding with dated, documented-versus-stylized provenance;
 - negative controls, confirmatory freezing, and reproducible Monte Carlo analysis;
 - a pre-result-frozen five-step protocol with `pass`, `fail`, `unassessable`, and `not_applicable` outputs, exercised on a fixed Robodebt trace and transfer canary and reviewed for comprehensibility by the project lead after simulation analysis; and
@@ -86,4 +86,4 @@ tests/
 
 ## Next Step
 
-Close the three blockers in [docs/SLICE4_ENTRY_AUDIT.md](docs/SLICE4_ENTRY_AUDIT.md), then promote the protocol to `1.0` and create the immutable freeze manifest. Do not generate confirmatory output until the automated freeze gate passes. Preserve the shared-draw, typed-causal-reference, exact-boundary, compiled-provenance, and completed Slice 1–3 contracts. After Slice 5 analysis, the project lead completes the comprehensibility review before Slice 6 can close.
+Close the two remaining blockers in [docs/SLICE4_ENTRY_AUDIT.md](docs/SLICE4_ENTRY_AUDIT.md), then promote the protocol to `1.0` and create the immutable freeze manifest. Do not generate confirmatory output until the automated freeze gate passes. Preserve the shared-draw, typed-causal-reference, exact-boundary, compiled-provenance, and completed Slice 1–3 contracts. After Slice 5 analysis, the project lead completes the comprehensibility review before Slice 6 can close.
