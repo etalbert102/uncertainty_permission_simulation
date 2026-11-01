@@ -8,7 +8,7 @@ This ledger is the canonical slice-status record. Update it at the end of every 
 | --- | --- | --- | --- | --- |
 | 0. Source, construct, and claim contract | implementation, plan, and baseline gates passed — pre-freeze reader QA pending | `9cf836c` | automated Slice 0 and plan gates pass from declared environment | two eligible locked reader returns are not yet available; this blocks Slice 4, not Slice 1 engineering |
 | 1. Case-neutral dynamic vertical slice | complete | `93e2da6` | 27 tests; 726-record closed bundle; three stored validation receipts match; both artifact hashes repeat | stochastic execution and empirical validation remain Slice 2 work |
-| 2. Stochastic engine and validation | in progress — keyed-random cohort substrate passes | checkpoint commit recorded below | 51 tests; repeatable 5-case/65-draw smoke artifact; all prior gates pass | no policy mapping, queues, stochastic outcomes, analytical benchmark, or reference-simulator comparison yet |
+| 2. Stochastic engine and validation | in progress — keyed-random cohort substrate passes | `3e43494` checkpoint | 51 tests; repeatable 5-case/65-draw smoke artifact; all prior gates pass | no policy mapping, queues, stochastic outcomes, analytical benchmark, or reference-simulator comparison yet |
 | 3. Experiment pilot and freeze candidate | pending | — | — | — |
 | 4. Confirmatory freeze | pending | — | — | — |
 | 5. Confirmatory execution and analysis | pending | — | — | — |
@@ -182,7 +182,7 @@ Stored-validation-receipt completion commit: `93e2da62f5d4f4a003846c152fa4dd7811
 
 Status: keyed-random finite-cohort substrate implemented; Slice 2 not complete
 
-Checkpoint commit: pending this checkpoint commit
+Checkpoint commit: `3e43494903409af0793ba953f8dfe321f9b4dad4` (`Begin Slice 2 keyed stochastic substrate`)
 
 ### Scope and fact ownership
 
