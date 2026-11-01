@@ -16,6 +16,8 @@ def _run(policy_id: str, **updates: object):
         notice_delivery_probability=Decimal("1"), administrative_access_probability=Decimal("1"),
         comprehension_probability=Decimal("1"), record_availability_probability=Decimal("1"),
         response_effort_limit=Decimal("1"), assistance_effort_bonus=Decimal("0"),
+        assistance_capacity=Decimal("1"), assistance_service_time=Decimal("5"),
+        assistance_service_window=Decimal("21"),
         extension_effort_bonus=Decimal("0"),
         extension_need_probability=Decimal("0"), evidence_retrieval_success_probability=Decimal("1"),
         evidence_retrieval_latency_scale=Decimal("0"),

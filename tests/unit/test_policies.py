@@ -35,6 +35,7 @@ def mapped(policy_id: str, **updates: object):
         policy_id=policy_id, inputs=inputs(**updates),
         response_effort_limit=Decimal("0.5"), assistance_effort_bonus=Decimal("0.4"),
         extension_effort_bonus=Decimal("0.2"),
+        assistance_completed=True,
     )
 
 

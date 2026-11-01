@@ -40,6 +40,14 @@ def engagement_metrics(run: EngagementRun) -> dict[str, int | str]:
         "retrieved_evidence": run.telemetry.retrieved_evidence_count,
         "review_queue": run.telemetry.review_queue_count,
     }
+    assistance_counts = {
+        "assistance_request": run.telemetry.assistance_request_count,
+        "assistance_started": run.telemetry.assistance_started_count,
+        "assistance_completed": run.telemetry.assistance_completed_count,
+        "timely_assistance": run.telemetry.timely_assistance_count,
+        "late_assistance": run.telemetry.late_assistance_count,
+        "assistance_right_censored": run.telemetry.assistance_right_censored_count,
+    }
     review_counts = {
         "review_started": run.telemetry.review_started_count,
         "review_completed": run.telemetry.review_completed_count,
@@ -118,7 +126,7 @@ def engagement_metrics(run: EngagementRun) -> dict[str, int | str]:
         **{
             f"{name}_count": value
             for name, value in (
-                case_counts | review_counts | action_counts | exposure_counts
+                case_counts | assistance_counts | review_counts | action_counts | exposure_counts
                 | correction_counts | restoration_counts | reassessment_counts
                 | gate_counts | censoring_counts
             ).items()
@@ -127,6 +135,14 @@ def engagement_metrics(run: EngagementRun) -> dict[str, int | str]:
     }
     with localcontext() as context:
         context.prec = 50
+        result.update({
+            f"{name}_rate": (
+                normalized_decimal(
+                    Decimal(value) / Decimal(run.telemetry.assistance_request_count)
+                ) if run.telemetry.assistance_request_count else "0"
+            )
+            for name, value in assistance_counts.items()
+        })
         result.update({
             f"{name}_rate": normalized_decimal(Decimal(value) / Decimal(denominator))
             for name, value in (case_counts | action_counts | exposure_counts | censoring_counts).items()
@@ -215,6 +231,13 @@ def engagement_metrics(run: EngagementRun) -> dict[str, int | str]:
                 run.telemetry.review_total_wait_time / Decimal(run.telemetry.review_queue_count)
             ) if run.telemetry.review_queue_count else "0",
             "review_max_wait_time": normalized_decimal(run.telemetry.review_max_wait_time),
+            "assistance_mean_wait_time": normalized_decimal(
+                run.telemetry.assistance_total_wait_time
+                / Decimal(run.telemetry.assistance_started_count)
+            ) if run.telemetry.assistance_started_count else "0",
+            "assistance_max_wait_time": normalized_decimal(
+                run.telemetry.assistance_max_wait_time
+            ),
             "recovery_mean_wait_time": normalized_decimal(
                 run.telemetry.recovery_total_wait_time
                 / Decimal(run.telemetry.recovery_service_started_count)

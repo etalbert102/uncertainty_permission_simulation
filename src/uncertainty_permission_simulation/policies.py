@@ -105,6 +105,7 @@ def map_engagement(
     response_effort_limit: Decimal,
     assistance_effort_bonus: Decimal,
     extension_effort_bonus: Decimal,
+    assistance_completed: bool,
 ) -> EngagementDecision:
     behavior = policy_behavior(policy_id)
     for field_name, value in {
@@ -115,11 +116,14 @@ def map_engagement(
         if not isinstance(value, Decimal) or not value.is_finite() or not (Decimal(0) <= value <= Decimal(1)):
             raise ContractError("SCENARIO_PARAMETER_INVALID", f"{field_name} must lie in [0, 1]")
     extension_granted = behavior.grants_extensions and inputs.notice_delivered and inputs.extension_needed
-    assistance_used = behavior.offers_assistance and inputs.notice_delivered and (
+    if not isinstance(assistance_completed, bool):
+        raise ContractError("SCENARIO_PARAMETER_INVALID", "assistance_completed must be boolean")
+    assistance_needed = inputs.notice_delivered and (
         not inputs.administrative_access
         or not inputs.comprehension
         or inputs.response_effort > response_effort_limit
     )
+    assistance_used = behavior.offers_assistance and assistance_needed and assistance_completed
     effective_access = inputs.administrative_access or assistance_used
     effective_comprehension = inputs.comprehension or assistance_used
     effort_limit = min(

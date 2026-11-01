@@ -23,6 +23,8 @@ def _overlay(**updates: object) -> StochasticInputOverlay:
         notice_delivery_probability=Decimal("1"), administrative_access_probability=Decimal("1"),
         comprehension_probability=Decimal("1"), record_availability_probability=Decimal("0"),
         response_effort_limit=Decimal("1"), assistance_effort_bonus=Decimal("0"),
+        assistance_capacity=Decimal("1"), assistance_service_time=Decimal("5"),
+        assistance_service_window=Decimal("21"),
         extension_effort_bonus=Decimal("0"), extension_need_probability=Decimal("0"),
         evidence_retrieval_success_probability=Decimal("0"),
         evidence_retrieval_latency_scale=Decimal("0"),
@@ -95,6 +97,50 @@ def test_u2_policies_share_the_exact_review_schedule_before_timeout_behavior() -
             opened_types = {event.event_type_id for event in opened_by_case[visit.case_id].events}
             assert "EXTERNAL_CONSEQUENCE_STARTED" not in closed_types
             assert "EXTERNAL_CONSEQUENCE_STARTED" in opened_types
+
+
+def test_assistance_capacity_competes_with_engagement_deadline() -> None:
+    forced = dict(
+        administrative_access_probability=Decimal("0"),
+        comprehension_probability=Decimal("0"),
+        record_availability_probability=Decimal("1"),
+        response_effort_limit=Decimal("0"),
+        assistance_effort_bonus=Decimal("1"),
+        assistance_service_time=Decimal("1"),
+        assistance_service_window=Decimal("1"),
+    )
+    _, constrained = _run("U3", _overlay(assistance_capacity=Decimal("1"), **forced))
+    _, staffed = _run("U3", _overlay(assistance_capacity=Decimal("4"), **forced))
+    assert constrained.assistance_queue.config.queue_id.endswith(":assistance")
+    assert staffed.telemetry.assistance_count == len(staffed.traces)
+    assert constrained.telemetry.assistance_count < staffed.telemetry.assistance_count
+    assert constrained.telemetry.response_count < staffed.telemetry.response_count
+    assert constrained.telemetry.assistance_schedule_hash != constrained.telemetry.review_schedule_hash
+    constrained_visits = {visit.case_id: visit for visit in constrained.assistance_queue.visits}
+    staffed_visits = {visit.case_id: visit for visit in staffed.assistance_queue.visits}
+    assert constrained_visits.keys() == staffed_visits.keys()
+    assert all(
+        staffed_visits[case_id].completed_at <= constrained_visits[case_id].completed_at
+        for case_id in constrained_visits
+    )
+
+
+def test_completed_after_assistance_deadline_has_no_engagement_effect() -> None:
+    _, run = _run(
+        "U3",
+        _overlay(
+            administrative_access_probability=Decimal("0"),
+            comprehension_probability=Decimal("0"),
+            response_effort_limit=Decimal("0"),
+            assistance_effort_bonus=Decimal("1"),
+            assistance_service_time=Decimal("1"),
+            assistance_service_window=Decimal("0.000000000000000000000000000001"),
+        ),
+    )
+    assert run.telemetry.assistance_request_count == len(run.traces)
+    assert run.telemetry.assistance_count == 0
+    assert run.telemetry.late_assistance_count == len(run.traces)
+    assert run.telemetry.response_count == 0
 
 
 def test_fail_open_timeout_converts_queue_delay_into_unauthorized_recovery_exposure() -> None:

@@ -43,6 +43,9 @@ class StochasticInputOverlay:
     record_availability_probability: Decimal
     response_effort_limit: Decimal
     assistance_effort_bonus: Decimal
+    assistance_capacity: Decimal
+    assistance_service_time: Decimal
+    assistance_service_window: Decimal
     extension_effort_bonus: Decimal
     extension_need_probability: Decimal
     evidence_retrieval_success_probability: Decimal
@@ -72,6 +75,8 @@ class StochasticInputOverlay:
             "response_deadline": self.response_deadline,
             "review_service_time": self.review_service_time,
             "review_service_window": self.review_service_window,
+            "assistance_service_time": self.assistance_service_time,
+            "assistance_service_window": self.assistance_service_window,
             "extension_duration": self.extension_duration,
             "evidence_retrieval_latency_scale": self.evidence_retrieval_latency_scale,
             "external_consequence_delay": self.external_consequence_delay,
@@ -97,6 +102,8 @@ class StochasticInputOverlay:
             raise ContractError("SCENARIO_PARAMETER_INVALID", "response_deadline must be positive")
         if self.review_service_window == 0:
             raise ContractError("SCENARIO_PARAMETER_INVALID", "review_service_window must be positive")
+        if self.assistance_service_window == 0:
+            raise ContractError("SCENARIO_PARAMETER_INVALID", "assistance_service_window must be positive")
         if self.recovery_service_time == 0:
             raise ContractError("SCENARIO_PARAMETER_INVALID", "recovery_service_time must be positive")
         if self.recovery_window == 0:
@@ -108,6 +115,7 @@ class StochasticInputOverlay:
         if self.restoration_window == 0:
             raise ContractError("SCENARIO_PARAMETER_INVALID", "restoration_window must be positive")
         capacities = {
+            "assistance_capacity": self.assistance_capacity,
             "review_capacity": self.review_capacity,
             "recovery_capacity": self.recovery_capacity,
             "reassessment_capacity": self.reassessment_capacity,
@@ -148,6 +156,9 @@ class StochasticInputOverlay:
             "record_availability_probability": normalized_decimal(self.record_availability_probability),
             "response_effort_limit": normalized_decimal(self.response_effort_limit),
             "assistance_effort_bonus": normalized_decimal(self.assistance_effort_bonus),
+            "assistance_capacity": normalized_decimal(self.assistance_capacity),
+            "assistance_service_time": normalized_decimal(self.assistance_service_time),
+            "assistance_service_window": normalized_decimal(self.assistance_service_window),
             "extension_effort_bonus": normalized_decimal(self.extension_effort_bonus),
             "extension_need_probability": normalized_decimal(self.extension_need_probability),
             "evidence_retrieval_success_probability": normalized_decimal(self.evidence_retrieval_success_probability),
@@ -440,6 +451,15 @@ class EngagementRunTelemetry:
     response_count: int
     adequate_response_evidence_count: int
     assistance_count: int
+    assistance_request_count: int
+    assistance_started_count: int
+    assistance_completed_count: int
+    timely_assistance_count: int
+    late_assistance_count: int
+    assistance_right_censored_count: int
+    assistance_total_wait_time: Decimal
+    assistance_max_wait_time: Decimal
+    assistance_schedule_hash: str
     extension_count: int
     retrieval_request_count: int
     retrieved_evidence_count: int
@@ -524,6 +544,7 @@ class EngagementRun:
     cohort_hash: str
     traces: tuple[EngagementTrace, ...]
     system_events: tuple[Event, ...]
+    assistance_queue: ServiceQueueRun
     review_queue: ServiceQueueRun
     recovery_queue: ServiceQueueRun
     reassessment_queue: ServiceQueueRun
@@ -583,15 +604,9 @@ def _event_hash(events: tuple[Event, ...]) -> str:
     return sha256(json.dumps(value, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
 
 
-def _case_engagement_trace(case: StochasticCase, policy_id: str, overlay: StochasticInputOverlay) -> EngagementTrace:
-    behavior = policy_behavior(policy_id)
+def _engagement_inputs(case: StochasticCase, overlay: StochasticInputOverlay) -> EngagementInputs:
     draws = case.draw_map
-    draw_ids = {
-        draw.key.event_family_id: draw.keyed_draw_id
-        for draw in case.keyed_draws
-        if draw.key.draw_index == 0
-    }
-    inputs = EngagementInputs(
+    return EngagementInputs(
         notice_delivered=draws[("notice_delivery", 0)] < overlay.notice_delivery_probability,
         administrative_access=draws[("administrative_access", 0)] < overlay.administrative_access_probability,
         comprehension=draws[("comprehension", 0)] < overlay.comprehension_probability,
@@ -600,12 +615,78 @@ def _case_engagement_trace(case: StochasticCase, policy_id: str, overlay: Stocha
         extension_needed=draws[("extension_need", 0)] < overlay.extension_need_probability,
         retrieval_success=draws[("evidence_retrieval_success", 0)] < overlay.evidence_retrieval_success_probability,
     )
+
+
+def _assistance_queue_run(
+    cohort: StochasticCohort,
+    policy_id: str,
+) -> ServiceQueueRun:
+    behavior = policy_behavior(policy_id)
+    requests: list[ServiceRequest] = []
+    if behavior.offers_assistance:
+        for case in cohort.cases:
+            inputs = _engagement_inputs(case, cohort.overlay)
+            assistance_needed = inputs.notice_delivered and (
+                not inputs.administrative_access
+                or not inputs.comprehension
+                or inputs.response_effort > cohort.overlay.response_effort_limit
+            )
+            if not assistance_needed:
+                continue
+            with localcontext() as context:
+                context.prec = 50
+                queued_at = case.arrival_time + cohort.overlay.notice_delay
+                service_time = (
+                    case.draw_map[("assistance_service", 0)]
+                    * cohort.overlay.assistance_service_time
+                )
+                deadline = queued_at + cohort.overlay.assistance_service_window
+            if queued_at > cohort.overlay.administrative_cutoff:
+                continue
+            requests.append(ServiceRequest(
+                request_id=f"{case.case_id}:assistance",
+                case_id=case.case_id,
+                queued_at=queued_at,
+                service_time=service_time,
+                deadline=deadline,
+            ))
+    return schedule_service_queue(
+        ServiceQueueConfig(
+            queue_id=f"{cohort.scenario_id}:assistance",
+            capacity=int(cohort.overlay.assistance_capacity),
+        ),
+        tuple(requests),
+        cohort.overlay.administrative_cutoff,
+    )
+
+
+def _case_engagement_trace(
+    case: StochasticCase,
+    policy_id: str,
+    overlay: StochasticInputOverlay,
+    assistance_visit: ServiceVisit | None,
+    assistance_queue_id: str,
+) -> EngagementTrace:
+    behavior = policy_behavior(policy_id)
+    draws = case.draw_map
+    draw_ids = {
+        draw.key.event_family_id: draw.keyed_draw_id
+        for draw in case.keyed_draws
+        if draw.key.draw_index == 0
+    }
+    inputs = _engagement_inputs(case, overlay)
+    assistance_completed = bool(
+        assistance_visit is not None
+        and assistance_visit.completed_by_cutoff
+        and assistance_visit.completed_by_deadline
+    )
     decision = map_engagement(
         policy_id=policy_id,
         inputs=inputs,
         response_effort_limit=overlay.response_effort_limit,
         assistance_effort_bonus=overlay.assistance_effort_bonus,
         extension_effort_bonus=overlay.extension_effort_bonus,
+        assistance_completed=assistance_completed,
     )
     queue = EventQueue()
     root_key = f"{case.case_id}:ENGAGEMENT"
@@ -647,6 +728,35 @@ def _case_engagement_trace(case: StochasticCase, policy_id: str, overlay: Stocha
         emit("ACCESS_ATTEMPTED", notice_time, "access", ("administrative_access",))
     else:
         emit("NOTICE_FAILED", notice_time, "notice", ("notice_delivery",))
+
+    if assistance_visit is not None:
+        assistance_common = {
+            "service_kind": "engagement_assistance",
+            "queue_id": assistance_queue_id,
+            "service_request_id": assistance_visit.request_id,
+            "server_id": assistance_visit.server_id,
+            "service_deadline": normalized_decimal(assistance_visit.deadline),
+            "service_time": normalized_decimal(assistance_visit.service_time),
+            "wait_time": normalized_decimal(assistance_visit.wait_time),
+        }
+        emit(
+            "REVIEW_QUEUED", assistance_visit.queued_at, "assistance_request",
+            extra_details=assistance_common | {"review_kind": "engagement_assistance"},
+        )
+        emit(
+            "REVIEW_STARTED", assistance_visit.started_at, "assistance_service",
+            ("assistance_service",),
+            assistance_common | {"review_kind": "engagement_assistance"},
+        )
+        emit(
+            "REVIEW_COMPLETED", assistance_visit.completed_at, "assistance_completion",
+            ("assistance_service",),
+            assistance_common | {
+                "review_kind": "engagement_assistance",
+                "completed_by_deadline": assistance_visit.completed_by_deadline,
+                "engagement_effect_applied": assistance_completed,
+            },
+        )
 
     if decision.extension_granted:
         extension_request_time = notice_time + overlay.response_deadline / Decimal(2)
@@ -696,7 +806,10 @@ def _case_engagement_trace(case: StochasticCase, policy_id: str, overlay: Stocha
         behavior.review_scope == "unresolved_only" and not evidence_sufficient
     )
     if review_required:
-        emit("REVIEW_QUEUED", routing_time, "review")
+        emit(
+            "REVIEW_QUEUED", routing_time, "review",
+            extra_details={"review_kind": "pre_action"},
+        )
 
     events = tuple(
         replace(
@@ -716,12 +829,18 @@ def _review_queue_run(
     cases = {case.case_id: case for case in cohort.cases}
     requests: list[ServiceRequest] = []
     for trace in traces:
-        queued_events = tuple(event for event in trace.events if event.event_type_id == "REVIEW_QUEUED")
+        queued_events = tuple(
+            event for event in trace.events
+            if event.event_type_id == "REVIEW_QUEUED"
+            and event.details.get("review_kind") == "pre_action"
+        )
         if len(queued_events) > 1:
             raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", f"multiple review queue entries for {trace.case_id}")
         if not queued_events:
             continue
         queued_at = queued_events[0].timestamp
+        if queued_at > cohort.overlay.administrative_cutoff:
+            continue
         service_draw = cases[trace.case_id].draw_map[("review_service", 0)]
         with localcontext() as context:
             context.prec = 50
@@ -818,6 +937,7 @@ def _add_review_events(
 def _add_action_events(
     trace: EngagementTrace,
     visit: ServiceVisit | None,
+    administrative_cutoff: Decimal,
 ) -> EngagementTrace:
     review_required = visit is not None
     review_completed_by_deadline = visit.completed_by_deadline if visit is not None else False
@@ -840,6 +960,8 @@ def _add_action_events(
         action_time = visit.completed_at
     else:
         action_time = visit.deadline
+    if action_time > administrative_cutoff:
+        return trace
     root_key = f"{trace.case_id}:ENGAGEMENT"
 
     def action_event(event_type_id: str, cause_id: str, details: dict[str, object]) -> Event:
@@ -908,7 +1030,9 @@ def _add_exposure_event(
         event for event in trace.events if event.event_type_id == "PROGRESSION_EXECUTED"
     )
     if trace.action_decision is None:
-        raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", f"missing action decision for {trace.case_id}")
+        if progression_events:
+            raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", f"unobserved action has progression event for {trace.case_id}")
+        return trace
     if trace.action_decision.action != "progress":
         if progression_events:
             raise ContractError(
@@ -926,6 +1050,8 @@ def _add_exposure_event(
     with localcontext() as context:
         context.prec = 50
         exposure_time = progression.timestamp + overlay.external_consequence_delay
+    if exposure_time > overlay.administrative_cutoff:
+        return trace
     root_key = f"{trace.case_id}:ENGAGEMENT"
     decision = trace.action_decision
     support_details = {
@@ -1087,7 +1213,7 @@ def _add_correction_request_event(
 
     decision = trace.action_decision
     if decision is None:
-        raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", f"missing action decision for {trace.case_id}")
+        return trace
     correction_eligible = decision.action == "progress" and not decision.progression_supported
     if not correction_eligible:
         return trace
@@ -1472,10 +1598,13 @@ def _apply_administrative_cutoff(
     trace: EngagementTrace,
     overlay: StochasticInputOverlay,
 ) -> EngagementTrace:
-    """Close observation at a late-stage boundary without asserting resolution."""
+    """Close observation at any stage without inventing unobserved transitions."""
 
     cutoff = overlay.administrative_cutoff
     observed = tuple(event for event in trace.events if event.timestamp <= cutoff)
+    notice = any(event.event_type_id in {"NOTICE_DELIVERED", "NOTICE_FAILED"} for event in observed)
+    routing = any(event.event_type_id == "ROUTING_COMPLETED" for event in observed)
+    action = any(event.event_type_id == "ACTION_COMPUTED" for event in observed)
     exposure = any(
         event.event_type_id == "EXTERNAL_CONSEQUENCE_STARTED" for event in observed
     )
@@ -1500,7 +1629,8 @@ def _apply_administrative_cutoff(
         )
     restoration = restoration_events[0] if restoration_events else None
     restoration_due = (
-        trace.action_decision is not None
+        exposure
+        and trace.action_decision is not None
         and trace.action_decision.action == "progress"
         and not trace.action_decision.progression_supported
     )
@@ -1535,8 +1665,17 @@ def _apply_administrative_cutoff(
     elif correction:
         reason = "restoration_pending_at_cutoff"
         right_censored = True
+    elif not notice:
+        reason = "notice_stage_open_at_cutoff"
+        right_censored = True
+    elif not routing:
+        reason = "engagement_stage_open_at_cutoff"
+        right_censored = True
+    elif not action:
+        reason = "review_or_action_stage_open_at_cutoff"
+        right_censored = True
     elif not exposure:
-        reason = "decision_path_observation_ended"
+        reason = "post_action_path_open_at_cutoff"
         right_censored = True
     elif not recovery:
         reason = "recovery_service_open"
@@ -1591,23 +1730,6 @@ def _apply_administrative_cutoff(
     return replace(trace, events=events, event_hash=_event_hash(events))
 
 
-def _validate_late_stage_cutoff(
-    traces: tuple[EngagementTrace, ...],
-    cutoff: Decimal,
-) -> None:
-    required = tuple(
-        event
-        for trace in traces
-        for event in trace.events
-        if event.event_type_id in {"ACTION_COMPUTED", "EXTERNAL_CONSEQUENCE_STARTED"}
-    )
-    if required and max(event.timestamp for event in required) > cutoff:
-        raise ContractError(
-            "SCENARIO_CONFIGURATION_INCOMPLETE",
-            "late-stage administrative_cutoff must follow every action and external-consequence start; earlier-stage censoring is not implemented",
-        )
-
-
 def _validate_engagement_configuration(cohort: StochasticCohort, compiled: CompiledConfigurationSpec) -> str:
     policy_id = compiled.policy_profile.profile_id
     policy_behavior(policy_id)
@@ -1640,7 +1762,20 @@ def _validate_engagement_configuration(cohort: StochasticCohort, compiled: Compi
 
 def run_engagement_stage(cohort: StochasticCohort, compiled: CompiledConfigurationSpec) -> EngagementRun:
     policy_id = _validate_engagement_configuration(cohort, compiled)
-    engagement_traces = tuple(_case_engagement_trace(case, policy_id, cohort.overlay) for case in cohort.cases)
+    assistance_queue = _assistance_queue_run(cohort, policy_id)
+    assistance_visit_by_case = {
+        visit.case_id: visit for visit in assistance_queue.visits
+    }
+    engagement_traces = tuple(
+        _case_engagement_trace(
+            case,
+            policy_id,
+            cohort.overlay,
+            assistance_visit_by_case.get(case.case_id),
+            assistance_queue.config.queue_id,
+        )
+        for case in cohort.cases
+    )
     review_queue = _review_queue_run(cohort, engagement_traces)
     visit_by_case = {visit.case_id: visit for visit in review_queue.visits}
     case_by_id = {case.case_id: case for case in cohort.cases}
@@ -1654,14 +1789,17 @@ def run_engagement_stage(cohort: StochasticCohort, compiled: CompiledConfigurati
         for trace in engagement_traces
     )
     action_traces = tuple(
-        _add_action_events(trace, visit_by_case.get(trace.case_id))
+        _add_action_events(
+            trace,
+            visit_by_case.get(trace.case_id),
+            cohort.overlay.administrative_cutoff,
+        )
         for trace in review_traces
     )
     exposure_traces = tuple(
         _add_exposure_event(trace, cohort.overlay)
         for trace in action_traces
     )
-    _validate_late_stage_cutoff(exposure_traces, cohort.overlay.administrative_cutoff)
     recovery_queue, recovery_not_queued_by_cutoff = _recovery_queue_run(
         cohort, exposure_traces
     )
@@ -1747,6 +1885,11 @@ def run_engagement_stage(cohort: StochasticCohort, compiled: CompiledConfigurati
         decision = trace.action_decision
         if decision is None or decision.action != "progress" or decision.progression_supported:
             return None
+        if not any(
+            event.event_type_id == "EXTERNAL_CONSEQUENCE_STARTED"
+            for event in trace.events
+        ):
+            return None
         if any(event.event_type_id == "CORRECTION_REQUESTED" for event in trace.events):
             return "requested"
         recoveries = tuple(
@@ -1769,14 +1912,44 @@ def run_engagement_stage(cohort: StochasticCohort, compiled: CompiledConfigurati
     telemetry = EngagementRunTelemetry(
         case_count=len(traces),
         event_count=len(system_events),
-        response_count=sum(trace.decision.responded for trace in traces),
-        adequate_response_evidence_count=sum(trace.decision.adequate_response_evidence for trace in traces),
-        assistance_count=sum(trace.decision.assistance_used for trace in traces),
-        extension_count=sum(trace.decision.extension_granted for trace in traces),
-        retrieval_request_count=sum(trace.decision.proactive_retrieval_requested for trace in traces),
-        retrieved_evidence_count=sum(trace.decision.retrieved_evidence for trace in traces),
+        response_count=sum(
+            event.event_type_id == "SUBJECT_RESPONDED" for event in system_events
+        ),
+        adequate_response_evidence_count=sum(
+            event.event_type_id == "EVIDENCE_ACCEPTED"
+            and "response" in event.descendant_path
+            for event in system_events
+        ),
+        assistance_count=sum(
+            event.event_type_id == "REVIEW_COMPLETED"
+            and event.details.get("review_kind") == "engagement_assistance"
+            and event.details.get("engagement_effect_applied") is True
+            for event in system_events
+        ),
+        assistance_request_count=assistance_queue.telemetry.request_count,
+        assistance_started_count=assistance_queue.telemetry.started_by_cutoff_count,
+        assistance_completed_count=assistance_queue.telemetry.completed_by_cutoff_count,
+        timely_assistance_count=assistance_queue.telemetry.timely_completion_count,
+        late_assistance_count=assistance_queue.telemetry.late_completion_count,
+        assistance_right_censored_count=assistance_queue.telemetry.right_censored_count,
+        assistance_total_wait_time=assistance_queue.telemetry.total_wait_time,
+        assistance_max_wait_time=assistance_queue.telemetry.max_wait_time,
+        assistance_schedule_hash=assistance_queue.telemetry.schedule_hash,
+        extension_count=sum(
+            event.event_type_id == "EXTENSION_GRANTED" for event in system_events
+        ),
+        retrieval_request_count=sum(
+            event.event_type_id == "EVIDENCE_REQUESTED" for event in system_events
+        ),
+        retrieved_evidence_count=sum(
+            event.event_type_id == "EVIDENCE_ACCEPTED"
+            and "external_evidence" in event.descendant_path
+            for event in system_events
+        ),
         review_queue_count=sum(
-            event.event_type_id == "REVIEW_QUEUED" for event in system_events
+            event.event_type_id == "REVIEW_QUEUED"
+            and event.details.get("review_kind") == "pre_action"
+            for event in system_events
         ),
         review_started_count=sum(
             event.event_type_id == "REVIEW_STARTED"
@@ -1897,10 +2070,9 @@ def run_engagement_stage(cohort: StochasticCohort, compiled: CompiledConfigurati
             for event in system_events
         ),
         correction_eligible_count=sum(
-            trace.action_decision is not None
-            and trace.action_decision.action == "progress"
-            and not trace.action_decision.progression_supported
-            for trace in traces
+            event.event_type_id == "EXTERNAL_CONSEQUENCE_STARTED"
+            and event.details.get("progression_supported") is False
+            for event in system_events
         ),
         correction_request_count=sum(
             event.event_type_id == "CORRECTION_REQUESTED"
@@ -1932,10 +2104,11 @@ def run_engagement_stage(cohort: StochasticCohort, compiled: CompiledConfigurati
             for event in correction_outcome_events
         ),
         correction_unresolved_count=sum(
-            trace.action_decision is not None
-            and trace.action_decision.action == "progress"
-            and not trace.action_decision.progression_supported
-            and not any(
+            any(
+                event.event_type_id == "EXTERNAL_CONSEQUENCE_STARTED"
+                and event.details.get("progression_supported") is False
+                for event in trace.events
+            ) and not any(
                 event.event_type_id == "EXTERNAL_CONSEQUENCE_UPDATED"
                 and event.details.get("correction_outcome") == "decision_corrected"
                 for event in trace.events
@@ -1950,10 +2123,9 @@ def run_engagement_stage(cohort: StochasticCohort, compiled: CompiledConfigurati
         correction_total_exposure_time=correction_total_exposure_time,
         correction_max_exposure_time=correction_max_exposure_time,
         restoration_due_count=sum(
-            trace.action_decision is not None
-            and trace.action_decision.action == "progress"
-            and not trace.action_decision.progression_supported
-            for trace in traces
+            event.event_type_id == "EXTERNAL_CONSEQUENCE_STARTED"
+            and event.details.get("progression_supported") is False
+            for event in system_events
         ),
         restoration_executed_count=len(restoration_events),
         timely_restoration_count=sum(
@@ -1999,18 +2171,25 @@ def run_engagement_stage(cohort: StochasticCohort, compiled: CompiledConfigurati
         ),
         event_hash=event_hash,
     )
-    if telemetry.action_count != telemetry.case_count:
-        raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "each case requires exactly one action decision")
     if telemetry.progression_count + telemetry.hold_count + telemetry.request_evidence_action_count != telemetry.action_count:
         raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "action dispositions do not partition the cohort")
+    if (
+        telemetry.timely_assistance_count
+        + telemetry.late_assistance_count
+        + telemetry.assistance_right_censored_count
+        != telemetry.assistance_request_count
+    ):
+        raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "assistance outcomes do not partition requests")
+    if telemetry.assistance_count != telemetry.timely_assistance_count:
+        raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "engagement assistance differs from timely service completion")
     if telemetry.supported_progression_count + telemetry.unsupported_progression_count != telemetry.progression_count:
         raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "progression support does not partition progression")
     if telemetry.evidentially_supported_progression_count + telemetry.evidentially_unsupported_progression_count != telemetry.progression_count:
         raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "evidentiary support does not partition progression")
     if telemetry.gate_safe_count + telemetry.gate_unsafe_count != telemetry.gate_applicable_count:
         raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "gate safety does not partition applicable cases")
-    if telemetry.external_exposure_count != telemetry.progression_count:
-        raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "executed progression and exposure counts differ")
+    if telemetry.external_exposure_count > telemetry.progression_count:
+        raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "external exposure exists without observed progression")
     if (
         telemetry.recovery_started_count
         + telemetry.recovery_right_censored_count
@@ -2027,10 +2206,10 @@ def run_engagement_stage(cohort: StochasticCohort, compiled: CompiledConfigurati
         raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "recovery timeliness does not partition observed completion")
     if telemetry.supported_exposure_count + telemetry.unsupported_exposure_count != telemetry.external_exposure_count:
         raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "support does not partition exposure")
-    if telemetry.evidentially_unsupported_exposure_count != telemetry.evidentially_unsupported_progression_count:
-        raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "evidentiary status changed between progression and exposure")
-    if telemetry.unauthorized_exposure_count != telemetry.unauthorized_progression_count:
-        raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "authorization status changed between progression and exposure")
+    if telemetry.evidentially_unsupported_exposure_count > telemetry.evidentially_unsupported_progression_count:
+        raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "unsupported exposure lacks an observed progression")
+    if telemetry.unauthorized_exposure_count > telemetry.unauthorized_progression_count:
+        raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "unauthorized exposure lacks an observed progression")
     if telemetry.correction_eligible_count != telemetry.unsupported_exposure_count:
         raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "correction eligibility differs from unsupported exposure")
     if (
@@ -2126,5 +2305,6 @@ def run_engagement_stage(cohort: StochasticCohort, compiled: CompiledConfigurati
         raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "post-cutoff event survived observation closure")
     return EngagementRun(
         cohort.scenario_id, policy_id, cohort.telemetry.cohort_hash,
-        traces, system_events, review_queue, recovery_queue, reassessment_queue, telemetry,
+        traces, system_events, assistance_queue, review_queue, recovery_queue,
+        reassessment_queue, telemetry,
     )

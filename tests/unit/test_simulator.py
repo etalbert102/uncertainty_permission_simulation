@@ -27,6 +27,8 @@ def overlay(**updates: object) -> StochasticInputOverlay:
         notice_delivery_probability=Decimal("0.9"), administrative_access_probability=Decimal("0.75"),
         comprehension_probability=Decimal("0.8"), record_availability_probability=Decimal("0.65"),
         response_effort_limit=Decimal("0.55"), assistance_effort_bonus=Decimal("0.3"),
+        assistance_capacity=Decimal("1"), assistance_service_time=Decimal("5"),
+        assistance_service_window=Decimal("21"),
         extension_effort_bonus=Decimal("0.15"),
         extension_need_probability=Decimal("0.25"), evidence_retrieval_success_probability=Decimal("0.7"),
         evidence_retrieval_latency_scale=Decimal("10"),
@@ -607,11 +609,48 @@ def test_service_cutoff_partitions_completed_and_right_censored_visits() -> None
     assert run.telemetry.late_completion_count == 0
 
 
-def test_late_stage_cutoff_rejects_unobserved_action_or_exposure() -> None:
+def test_early_cutoff_censors_before_action_without_inventing_later_events() -> None:
     input_overlay = overlay(administrative_cutoff=Decimal("10"))
     cohort = generate_stochastic_cohort(spec(overlay=input_overlay))
-    with pytest.raises(ContractError, match="earlier-stage censoring is not implemented"):
-        run_engagement_stage(cohort, compiled("U1", cohort.overlay))
+    run = run_engagement_stage(cohort, compiled("U1", cohort.overlay))
+    assert run.telemetry.action_count == 0
+    assert run.telemetry.external_exposure_count == 0
+    assert run.telemetry.right_censored_case_count == len(cohort.cases)
+    assert all(
+        next(event for event in trace.events if event.event_type_id == "CASE_CLOSED")
+        .details["censoring_reason"]
+        in {"engagement_stage_open_at_cutoff", "review_or_action_stage_open_at_cutoff"}
+        for trace in run.traces
+    )
+    assert all(
+        event.timestamp <= input_overlay.administrative_cutoff
+        for event in run.system_events
+    )
+
+
+def test_cutoff_between_action_and_exposure_preserves_observed_action_only() -> None:
+    input_overlay = overlay(
+        initiation_window=Decimal("0"),
+        notice_delivery_probability=Decimal("1"),
+        administrative_access_probability=Decimal("1"),
+        comprehension_probability=Decimal("1"),
+        record_availability_probability=Decimal("0"),
+        response_effort_limit=Decimal("1"),
+        external_consequence_delay=Decimal("10"),
+        administrative_cutoff=Decimal("25"),
+    )
+    cohort = generate_stochastic_cohort(spec(overlay=input_overlay))
+    run = run_engagement_stage(cohort, compiled("U1", cohort.overlay))
+    assert run.telemetry.action_count == len(cohort.cases)
+    assert run.telemetry.progression_count == len(cohort.cases)
+    assert run.telemetry.external_exposure_count == 0
+    assert run.telemetry.correction_eligible_count == 0
+    assert run.telemetry.restoration_due_count == 0
+    assert all(
+        next(event for event in trace.events if event.event_type_id == "CASE_CLOSED")
+        .details["censoring_reason"] == "post_action_path_open_at_cutoff"
+        for trace in run.traces
+    )
 
 
 @pytest.mark.parametrize(
