@@ -8,7 +8,7 @@ This ledger is the canonical slice-status record. Update it at the end of every 
 | --- | --- | --- | --- | --- |
 | 0. Source, construct, and claim contract | implementation, plan, and baseline gates passed — pre-freeze reader QA pending | `9cf836c` | automated Slice 0 and plan gates pass from declared environment | two eligible locked reader returns are not yet available; this blocks Slice 4, not Slice 1 engineering |
 | 1. Case-neutral dynamic vertical slice | complete | `93e2da6` | 27 tests; 726-record closed bundle; three stored validation receipts match; both artifact hashes repeat | stochastic execution and empirical validation remain Slice 2 work |
-| 2. Stochastic engine and validation | in progress — policy timeout actions pass | `ade893a` checkpoint | 89 tests; repeatable five-policy pre-exposure action artifact; all prior gates pass | no external exposure, recovery/correction/restoration stages, full analytical benchmark, or reference-simulator comparison yet |
+| 2. Stochastic engine and validation | in progress — exposure and recovery initiation pass | `cc773a4` checkpoint | 96 tests; repeatable five-policy exposure/recovery smoke artifact; all prior gates pass | no recovery service, correction/reassessment/restoration stages, full analytical benchmark, or reference-simulator comparison yet |
 | 3. Experiment pilot and freeze candidate | pending | — | — | — |
 | 4. Confirmatory freeze | pending | — | — | — |
 | 5. Confirmatory execution and analysis | pending | — | — | — |
@@ -355,3 +355,46 @@ Checkpoint commit: `ade893aa7f95f7affc26a8200a0d6d1fb4fcd7c1` (`Apply policy tim
 - Execute both R-OCI adapters only through compiled profiles and stylized overlays; add semantically equivalent synthetic/application comparisons.
 - Expand analytical queue checks, add a slower reference simulator, exact stochastic golden traces, and stored stochastic validation receipts.
 - Do not enter pilot scenario selection or treat this pre-exposure action artifact as a substantive simulation result.
+
+## Slice 2 Exposure and Recovery-Initiation Checkpoint
+
+Status: executed progression extends through typed external exposure and recovery initiation; Slice 2 not complete
+
+Checkpoint commit: `cc773a4f2b7c60f17c9cc4a9123a5fe7dbe8e023` (`Add recovery exposure progression`)
+
+### Scope and fact ownership
+
+- Only `PROGRESSION_EXECUTED` may create `EXTERNAL_CONSEQUENCE_STARTED`; functional permission and `ACTION_COMPUTED` remain non-exposure states.
+- The upstream action decision owns evidentiary sufficiency, timely authorization, support, and reason codes. Consequence events carry those values and their source causal keys without re-deriving them.
+- The typed `recover` action means operational recovery or collection initiation. It is distinct from corrective reassessment and `RESTORATION_EXECUTED`.
+- `external_consequence_delay` and `recovery_start_delay` are stylized or sensitivity inputs bound through the compiled overlay. They are not historical estimates, and this checkpoint models neither recovery service competition nor exposure amount.
+
+### Implemented
+
+- Added typed stochastic-process recovery capability and action references plus nonnegative external-consequence and recovery-start timing slots.
+- Added one external-consequence start and one recovery-active update for each and only each executed progression, with stable progression-to-consequence-to-recovery causal references.
+- Preserved the frozen same-time order `ACTION_COMPUTED` -> `PROGRESSION_EXECUTED` -> `EXTERNAL_CONSEQUENCE_STARTED` -> `EXTERNAL_CONSEQUENCE_UPDATED`, including zero-delay boundary tests.
+- Added separate counts and rates for external exposure, recovery initiation, supported and unsupported exposure, evidentially unsupported exposure, and unauthorized exposure.
+- Added blocking invariants requiring progression and exposure counts to match, exposure and recovery-start counts to match, support to partition exposure, and evidentiary and authorization classifications to remain unchanged across the boundary.
+- Added a matched overload test showing that the same late-review schedule creates no exposure under U2C but creates unauthorized exposure and recovery initiation under U2O.
+
+### Verification
+
+| Command | Result |
+| --- | --- |
+| `PYTHONPATH=src ./.venv/bin/python -m pytest -q tests/unit/test_simulator.py tests/unit/test_random_streams.py tests/unit/test_policies.py tests/unit/test_metrics.py` | pass: 59 focused replay, typed-process, causal-reference, timing, support, and metric tests |
+| `PYTHONPATH=src ./.venv/bin/python -m pytest -q tests/integration/test_queue_validation.py` | pass: 9 queue/action/exposure integration tests, including matched fail-open/fail-closed recovery exposure |
+| `PYTHONPATH=src ./.venv/bin/python -m pytest -q` | pass: 96 tests in 0.36 seconds; all earlier regressions retained |
+| `PYTHONPATH=src ./.venv/bin/python -m uncertainty_permission_simulation.cli cohort experiments/configs/stochastic_smoke_v1.yaml` | pass: repeated artifact SHA-256 `66ccb35fce638ab0cf79e90f0fd5a29d61a00413a13d6c44bf42a4a506b8ff54` |
+| smoke exposure inspection | U0: 1 supported exposure; U1: 5 exposures, 4 evidentially unsupported; U2C: 0 exposures; U2O: 4 unauthorized exposures, 3 also evidentially unsupported; U3: 3 supported exposures; every exposure has one recovery-start update |
+| `PYTHONPATH=src ./.venv/bin/python -m uncertainty_permission_simulation.cli trace experiments/configs/smoke_v1.yaml` | pass: 9 Slice 1 traces; summary hash `b49ea5936727d23c3871a91555ba68d56d30f8f8c95a02e8c68ca9ae5210f739` and record hash `29ec5616135d9e94a6d8e84dbdff3879fcc63dfbacadaa4e640258dab2912db8` unchanged |
+| `./.venv/bin/python scripts/validate_plan.py` and `./.venv/bin/python scripts/validate_slice0.py` | pass |
+| runtime-module compilation and generic-kernel case-name scan | pass |
+
+### Remaining before Slice 2 closeout
+
+- Add correction requests, reassessment capacity, recovery-service and correction windows, administrative cutoff/censoring, and dimension-specific restoration.
+- Wire assistance capacity only through a declared process stage and preserve its engagement effect separately from review and reassessment capacity.
+- Execute both R-OCI adapters only through compiled profiles and stylized overlays; add semantically equivalent synthetic/application comparisons.
+- Expand analytical queue checks, add a slower reference simulator, exact stochastic golden traces, and stored stochastic validation receipts.
+- Do not enter pilot scenario selection or treat this stylized exposure/recovery smoke artifact as a substantive, empirical, legal, or historical result.
