@@ -85,6 +85,17 @@ def engagement_metrics(run: EngagementRun) -> dict[str, int | str]:
         "correction_unresolved": run.telemetry.correction_unresolved_count,
         "recovery_active_after_correction": run.telemetry.recovery_active_after_correction_count,
     }
+    restoration_counts = {
+        "restoration_due": run.telemetry.restoration_due_count,
+        "restoration_executed": run.telemetry.restoration_executed_count,
+        "timely_restoration": run.telemetry.timely_restoration_count,
+        "late_restoration": run.telemetry.late_restoration_count,
+        "complete_restoration": run.telemetry.complete_restoration_count,
+        "partial_restoration": run.telemetry.partial_restoration_count,
+        "restoration_horizon_pending": run.telemetry.restoration_horizon_pending_count,
+        "restoration_horizon_expired": run.telemetry.restoration_horizon_expired_count,
+        "unresolved_external_consequence": run.telemetry.unresolved_external_consequence_count,
+    }
     reassessment_counts = {
         "reassessment_started": run.telemetry.reassessment_started_count,
         "reassessment_completed": run.telemetry.reassessment_completed_count,
@@ -98,6 +109,7 @@ def engagement_metrics(run: EngagementRun) -> dict[str, int | str]:
     }
     censoring_counts = {
         "case_closed": run.telemetry.case_closed_count,
+        "resolved_case": run.telemetry.resolved_case_count,
         "right_censored_case": run.telemetry.right_censored_case_count,
     }
     result: dict[str, int | str] = {
@@ -107,7 +119,8 @@ def engagement_metrics(run: EngagementRun) -> dict[str, int | str]:
             f"{name}_count": value
             for name, value in (
                 case_counts | review_counts | action_counts | exposure_counts
-                | correction_counts | reassessment_counts | gate_counts | censoring_counts
+                | correction_counts | restoration_counts | reassessment_counts
+                | gate_counts | censoring_counts
             ).items()
         },
         "gate_applicable_count": run.telemetry.gate_applicable_count,
@@ -120,7 +133,7 @@ def engagement_metrics(run: EngagementRun) -> dict[str, int | str]:
         })
         result.update({
             f"{name}_case_rate": normalized_decimal(Decimal(value) / Decimal(denominator))
-            for name, value in correction_counts.items()
+            for name, value in (correction_counts | restoration_counts).items()
         })
         correction_denominator = run.telemetry.correction_eligible_count
         result["correction_uptake_rate"] = (
@@ -150,6 +163,27 @@ def engagement_metrics(run: EngagementRun) -> dict[str, int | str]:
                     / Decimal(correction_outcome_denominator)
                 )
                 if correction_outcome_denominator else "0"
+            ),
+        })
+        restoration_denominator = run.telemetry.restoration_due_count
+        result.update({
+            "restoration_execution_rate": (
+                normalized_decimal(
+                    Decimal(run.telemetry.restoration_executed_count)
+                    / Decimal(restoration_denominator)
+                ) if restoration_denominator else "0"
+            ),
+            "complete_restoration_rate": (
+                normalized_decimal(
+                    Decimal(run.telemetry.complete_restoration_count)
+                    / Decimal(restoration_denominator)
+                ) if restoration_denominator else "0"
+            ),
+            "partial_restoration_rate": (
+                normalized_decimal(
+                    Decimal(run.telemetry.partial_restoration_count)
+                    / Decimal(restoration_denominator)
+                ) if restoration_denominator else "0"
             ),
         })
         queue_denominator = run.telemetry.review_queue_count
@@ -196,6 +230,13 @@ def engagement_metrics(run: EngagementRun) -> dict[str, int | str]:
             ) if correction_outcome_denominator else "0",
             "correction_max_exposure_time": normalized_decimal(
                 run.telemetry.correction_max_exposure_time
+            ),
+            "restoration_mean_time_from_correction": normalized_decimal(
+                run.telemetry.restoration_total_time_from_correction
+                / Decimal(run.telemetry.restoration_executed_count)
+            ) if run.telemetry.restoration_executed_count else "0",
+            "restoration_max_time_from_correction": normalized_decimal(
+                run.telemetry.restoration_max_time_from_correction
             ),
         })
     return result

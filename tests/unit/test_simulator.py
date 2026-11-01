@@ -3,7 +3,7 @@ from decimal import Decimal, localcontext
 
 import pytest
 
-from uncertainty_permission_simulation.configuration import compile_configuration
+from uncertainty_permission_simulation.configuration import CompilationError, compile_configuration
 from uncertainty_permission_simulation.profiles import policy, stochastic_process
 from uncertainty_permission_simulation.random_streams import DRAW_FAMILY_IDS
 from uncertainty_permission_simulation.schemas import ContractError
@@ -36,6 +36,7 @@ def overlay(**updates: object) -> StochasticInputOverlay:
         correction_request_delay=Decimal("7"), correction_uptake_probability=Decimal("0.75"),
         reassessment_capacity=Decimal("1"), reassessment_service_time=Decimal("30"),
         correction_window=Decimal("14"),
+        restoration_delay=Decimal("1"), restoration_window=Decimal("50"),
         administrative_cutoff=Decimal("1000"),
     )
     return replace(base, **updates)
@@ -127,6 +128,8 @@ def test_invalid_cohort_specs_fail_before_draws(updates: dict[str, object]) -> N
     ("reassessment_capacity", Decimal("1.5")),
     ("reassessment_service_time", Decimal("0")),
     ("correction_window", Decimal("0")),
+    ("restoration_delay", Decimal("-1")),
+    ("restoration_window", Decimal("0")),
     ("administrative_cutoff", Decimal("-1")),
     ("administrative_cutoff", Decimal("5")),
     ("notice_delivery_probability", Decimal("1.1")),
@@ -304,7 +307,129 @@ def test_unsupported_exposure_can_request_correction_and_enter_reassessment() ->
         assert outcome.details["restoration_state"] == "incomplete"
         assert outcome.details["restoration_complete"] is False
         assert Decimal(outcome.details["exposure_duration_to_correction"]) > 0
-        assert not any(event.event_type_id == "RESTORATION_EXECUTED" for event in trace.events)
+        restoration = next(
+            event for event in trace.events
+            if event.event_type_id == "RESTORATION_EXECUTED"
+        )
+        assert outcome.timestamp < restoration.timestamp
+        assert restoration.details["source_correction_event_key"] == outcome.causal_event_key
+        assert restoration.details["modeled_consequence_dimension_ids"] == (
+            "decision_state", "recovery_state", "residual_external_consequence",
+        )
+        assert restoration.details["restoration_complete"] is True
+        assert restoration.details["unrestored_dimension_ids"] == ()
+        assert restoration.details["baseline_dimension_states"] == {
+            "decision_state": "baseline",
+            "recovery_state": "baseline",
+            "residual_external_consequence": "baseline",
+        }
+        assert restoration.details["dimension_states"] == {
+            "decision_state": "baseline",
+            "recovery_state": "baseline",
+            "residual_external_consequence": "baseline",
+        }
+
+
+def test_late_restoration_action_remains_partial_with_irreversible_residual() -> None:
+    input_overlay = overlay(
+        record_availability_probability=Decimal("0"),
+        correction_uptake_probability=Decimal("1"),
+        restoration_delay=Decimal("1"),
+        restoration_window=Decimal("1"),
+    )
+    cohort = generate_stochastic_cohort(spec(case_ids=("CASE-1",), overlay=input_overlay))
+    run = run_engagement_stage(cohort, compiled("U1", cohort.overlay))
+    restoration = next(
+        event for event in run.traces[0].events
+        if event.event_type_id == "RESTORATION_EXECUTED"
+    )
+    closure = run.traces[0].events[-1]
+    assert restoration.details["restoration_timely"] is False
+    assert restoration.details["restoration_complete"] is False
+    assert restoration.details["restored_dimension_ids"] == (
+        "decision_state", "recovery_state",
+    )
+    assert restoration.details["unrestored_dimension_ids"] == (
+        "residual_external_consequence",
+    )
+    assert restoration.details["dimension_states"]["residual_external_consequence"] == "irreversible_residual"
+    assert closure.details["right_censored"] is False
+    assert closure.details["censoring_reason"] == "partial_restoration_irreversible_residual"
+    assert run.telemetry.partial_restoration_count == 1
+    assert run.telemetry.unresolved_external_consequence_count == 1
+
+
+def test_restoration_at_exact_horizon_is_complete() -> None:
+    base = overlay(
+        record_availability_probability=Decimal("0"),
+        correction_uptake_probability=Decimal("1"),
+        restoration_delay=Decimal("1"),
+    )
+    probe_cohort = generate_stochastic_cohort(spec(case_ids=("CASE-1",), overlay=base))
+    probe = run_engagement_stage(probe_cohort, compiled("U1", probe_cohort.overlay))
+    exposure = next(
+        event for event in probe.traces[0].events
+        if event.event_type_id == "EXTERNAL_CONSEQUENCE_STARTED"
+    )
+    correction = next(
+        event for event in probe.traces[0].events
+        if event.details.get("correction_outcome") == "decision_corrected"
+    )
+    with localcontext() as context:
+        context.prec = 50
+        exact_window = correction.timestamp + base.restoration_delay - exposure.timestamp
+    exact = replace(base, restoration_window=exact_window)
+    cohort = generate_stochastic_cohort(spec(case_ids=("CASE-1",), overlay=exact))
+    run = run_engagement_stage(cohort, compiled("U1", cohort.overlay))
+    restoration = next(
+        event for event in run.traces[0].events
+        if event.event_type_id == "RESTORATION_EXECUTED"
+    )
+    assert restoration.timestamp == Decimal(restoration.details["restoration_deadline"])
+    assert restoration.details["restoration_timely"] is True
+    assert restoration.details["restoration_complete"] is True
+
+
+def test_expired_restoration_horizon_is_observed_failure_not_censoring() -> None:
+    input_overlay = overlay(
+        record_availability_probability=Decimal("0"),
+        correction_uptake_probability=Decimal("0"),
+        restoration_window=Decimal("1"),
+    )
+    cohort = generate_stochastic_cohort(spec(case_ids=("CASE-1",), overlay=input_overlay))
+    run = run_engagement_stage(cohort, compiled("U1", cohort.overlay))
+    closure = run.traces[0].events[-1]
+    assert not any(
+        event.event_type_id == "RESTORATION_EXECUTED"
+        for event in run.traces[0].events
+    )
+    assert closure.details["restoration_horizon_status"] == "expired_without_completion"
+    assert closure.details["censoring_reason"] == "restoration_horizon_expired_without_completion"
+    assert closure.details["right_censored"] is False
+    assert run.telemetry.restoration_horizon_expired_count == 1
+    assert run.telemetry.resolved_case_count == 1
+    assert run.telemetry.right_censored_case_count == 0
+
+
+def test_zero_restoration_delay_preserves_correction_before_restoration_order() -> None:
+    input_overlay = overlay(
+        record_availability_probability=Decimal("0"),
+        correction_uptake_probability=Decimal("1"),
+        restoration_delay=Decimal("0"),
+        restoration_window=Decimal("100"),
+    )
+    cohort = generate_stochastic_cohort(spec(case_ids=("CASE-1",), overlay=input_overlay))
+    trace = run_engagement_stage(cohort, compiled("U1", cohort.overlay)).traces[0]
+    correction = next(
+        event for event in trace.events
+        if event.details.get("correction_outcome") == "decision_corrected"
+    )
+    restoration = next(
+        event for event in trace.events
+        if event.event_type_id == "RESTORATION_EXECUTED"
+    )
+    assert correction.timestamp == restoration.timestamp
+    assert trace.events.index(correction) < trace.events.index(restoration)
 
 
 def test_correction_uptake_zero_leaves_eligible_exposure_unrequested() -> None:
@@ -399,10 +524,13 @@ def test_engagement_runner_rejects_configuration_overlay_drift() -> None:
     ("field_name", "missing_id"),
     (
         ("stage_ids", "reassessment"),
+        ("stage_ids", "restoration"),
         ("capabilities", "recovery"),
         ("capabilities", "reassessment"),
+        ("capabilities", "restoration"),
         ("action_type_ids", "recover"),
         ("action_type_ids", "reassess"),
+        ("action_type_ids", "restore"),
     ),
 )
 def test_engagement_runner_rejects_incomplete_consequence_process(
@@ -418,14 +546,17 @@ def test_engagement_runner_rejects_incomplete_consequence_process(
         else current - {missing_id}
     )
     process = process.model_copy(update={field_name: incomplete})
-    configuration = compile_configuration(
-        configuration_id=f"MISSING-{missing_id}",
-        process=process,
-        policy=policy("U1"),
-        overlay=cohort.overlay.to_compilation_overlay(),
-        evaluation_spec_id="TEST-EVALUATION",
-    )
-    with pytest.raises(ContractError, match="SCENARIO_CONFIGURATION_INCOMPLETE"):
+    with pytest.raises(
+        (ContractError, CompilationError),
+        match="(SCENARIO_CONFIGURATION_INCOMPLETE|PROFILE_POLICY_PROCESS_OVERLAP)",
+    ):
+        configuration = compile_configuration(
+            configuration_id=f"MISSING-{missing_id}",
+            process=process,
+            policy=policy("U1"),
+            overlay=cohort.overlay.to_compilation_overlay(),
+            evaluation_spec_id="TEST-EVALUATION",
+        )
         run_engagement_stage(cohort, configuration)
 
 

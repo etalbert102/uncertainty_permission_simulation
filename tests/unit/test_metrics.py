@@ -25,6 +25,7 @@ def _run(policy_id: str, **updates: object):
         correction_request_delay=Decimal("7"), correction_uptake_probability=Decimal("1"),
         reassessment_capacity=Decimal("1"), reassessment_service_time=Decimal("30"),
         correction_window=Decimal("14"),
+        restoration_delay=Decimal("1"), restoration_window=Decimal("50"),
         administrative_cutoff=Decimal("1000"),
     )
     overlay = replace(overlay, **updates)
@@ -70,6 +71,8 @@ def test_engagement_metrics_keep_dimensions_separate() -> None:
     assert metrics["correction_uptake_rate"] == "0"
     assert metrics["correction_executed_count"] == 0
     assert metrics["correction_execution_rate"] == "0"
+    assert metrics["restoration_due_count"] == 0
+    assert metrics["restoration_execution_rate"] == "0"
     assert metrics["correction_mean_exposure_time"] == "0"
     assert metrics["reassessment_mean_wait_time"] == "0"
     assert metrics["gate_safe_count"] + metrics["gate_unsafe_count"] == metrics["gate_applicable_count"]
@@ -113,6 +116,12 @@ def test_correction_and_reassessment_metrics_keep_their_own_denominators() -> No
     assert metrics["correction_executed_count"] == 2
     assert metrics["correction_unresolved_count"] == 0
     assert metrics["recovery_active_after_correction_count"] == 2
+    assert metrics["restoration_due_count"] == 2
+    assert metrics["restoration_executed_count"] == 2
+    assert metrics["complete_restoration_count"] == 2
+    assert metrics["partial_restoration_count"] == 0
+    assert metrics["complete_restoration_rate"] == "1"
+    assert metrics["unresolved_external_consequence_count"] == 0
     assert metrics["correction_execution_rate"] == "1"
     assert metrics["timely_correction_count"] + metrics["late_correction_count"] == 2
     assert Decimal(metrics["timely_reassessment_rate"]) + Decimal(metrics["late_reassessment_rate"]) == Decimal(1)
@@ -120,3 +129,4 @@ def test_correction_and_reassessment_metrics_keep_their_own_denominators() -> No
     assert Decimal(metrics["reassessment_max_wait_time"]) >= Decimal(0)
     assert Decimal(metrics["correction_mean_exposure_time"]) > Decimal(0)
     assert Decimal(metrics["correction_max_exposure_time"]) >= Decimal(metrics["correction_mean_exposure_time"])
+    assert Decimal(metrics["restoration_mean_time_from_correction"]) > Decimal(0)

@@ -33,5 +33,7 @@ overlay:
   reassessment_capacity: "1"
   reassessment_service_time: "30"
   correction_window: "14"
+  restoration_delay: "5"
+  restoration_window: "50"
   administrative_cutoff: "70"
 output_path: outputs/slice2/stochastic_smoke_v1.json

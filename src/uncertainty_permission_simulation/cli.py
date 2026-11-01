@@ -241,6 +241,8 @@ def run_stochastic_smoke(config_path: Path) -> dict[str, object]:
             reassessment_capacity=Decimal(str(config["overlay"]["reassessment_capacity"])),
             reassessment_service_time=Decimal(str(config["overlay"]["reassessment_service_time"])),
             correction_window=Decimal(str(config["overlay"]["correction_window"])),
+            restoration_delay=Decimal(str(config["overlay"]["restoration_delay"])),
+            restoration_window=Decimal(str(config["overlay"]["restoration_window"])),
             administrative_cutoff=Decimal(str(config["overlay"]["administrative_cutoff"])),
         ),
     )
@@ -353,7 +355,19 @@ def run_stochastic_smoke(config_path: Path) -> dict[str, object]:
                     "recovery_active_after_correction_count": run.telemetry.recovery_active_after_correction_count,
                     "correction_total_exposure_time": normalized_decimal(run.telemetry.correction_total_exposure_time),
                     "correction_max_exposure_time": normalized_decimal(run.telemetry.correction_max_exposure_time),
+                    "restoration_due_count": run.telemetry.restoration_due_count,
+                    "restoration_executed_count": run.telemetry.restoration_executed_count,
+                    "timely_restoration_count": run.telemetry.timely_restoration_count,
+                    "late_restoration_count": run.telemetry.late_restoration_count,
+                    "complete_restoration_count": run.telemetry.complete_restoration_count,
+                    "partial_restoration_count": run.telemetry.partial_restoration_count,
+                    "restoration_horizon_pending_count": run.telemetry.restoration_horizon_pending_count,
+                    "restoration_horizon_expired_count": run.telemetry.restoration_horizon_expired_count,
+                    "unresolved_external_consequence_count": run.telemetry.unresolved_external_consequence_count,
+                    "restoration_total_time_from_correction": normalized_decimal(run.telemetry.restoration_total_time_from_correction),
+                    "restoration_max_time_from_correction": normalized_decimal(run.telemetry.restoration_max_time_from_correction),
                     "case_closed_count": run.telemetry.case_closed_count,
+                    "resolved_case_count": run.telemetry.resolved_case_count,
                     "right_censored_case_count": run.telemetry.right_censored_case_count,
                     "event_hash": run.telemetry.event_hash,
                 },
@@ -413,7 +427,7 @@ def run_stochastic_smoke(config_path: Path) -> dict[str, object]:
             }
             for policy_id, run in engagement_runs.items()
         },
-        "claim_limit": "stylized recovery-resource and late-stage right-censoring smoke artifact; no restoration, empirical, or historical outcome",
+        "claim_limit": "stylized recovery, restoration-vector, and late-stage right-censoring smoke artifact; no empirical or historical outcome",
     }
     output_path = ROOT / config["output_path"]
     output_path.parent.mkdir(parents=True, exist_ok=True)

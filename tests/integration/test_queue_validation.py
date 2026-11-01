@@ -32,6 +32,7 @@ def _overlay(**updates: object) -> StochasticInputOverlay:
         correction_request_delay=Decimal("7"), correction_uptake_probability=Decimal("1"),
         reassessment_capacity=Decimal("1"), reassessment_service_time=Decimal("30"),
         correction_window=Decimal("14"),
+        restoration_delay=Decimal("1"), restoration_window=Decimal("50"),
         administrative_cutoff=Decimal("1000"),
     )
     return replace(base, **updates)
@@ -175,6 +176,9 @@ def test_recovery_and_reassessment_are_right_censored_at_observation_boundary() 
     assert run.telemetry.reassessment_right_censored_count == 1
     assert run.telemetry.reassessment_completed_count == 0
     assert run.telemetry.correction_executed_count == 0
+    assert run.telemetry.restoration_due_count == len(run.traces)
+    assert run.telemetry.restoration_executed_count == 0
+    assert run.telemetry.restoration_horizon_pending_count == len(run.traces)
     assert (
         run.telemetry.recovery_started_count
         + run.telemetry.recovery_right_censored_count

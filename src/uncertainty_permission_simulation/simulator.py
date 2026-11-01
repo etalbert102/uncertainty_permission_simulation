@@ -16,6 +16,16 @@ from .random_streams import DRAW_FAMILY_IDS, KeyedDraw, KeyedRandomStream, norma
 from .schemas import ContractError
 
 
+RESTORATION_DIMENSION_IDS = (
+    "decision_state",
+    "recovery_state",
+    "residual_external_consequence",
+)
+RESTORATION_BASELINE_STATES = {
+    dimension_id: "baseline" for dimension_id in RESTORATION_DIMENSION_IDS
+}
+
+
 @dataclass(frozen=True)
 class StochasticInputOverlay:
     overlay_id: str
@@ -47,6 +57,8 @@ class StochasticInputOverlay:
     reassessment_capacity: Decimal
     reassessment_service_time: Decimal
     correction_window: Decimal
+    restoration_delay: Decimal
+    restoration_window: Decimal
     administrative_cutoff: Decimal
 
     def __post_init__(self) -> None:
@@ -69,6 +81,8 @@ class StochasticInputOverlay:
             "correction_request_delay": self.correction_request_delay,
             "reassessment_service_time": self.reassessment_service_time,
             "correction_window": self.correction_window,
+            "restoration_delay": self.restoration_delay,
+            "restoration_window": self.restoration_window,
             "administrative_cutoff": self.administrative_cutoff,
         }
         for field_name, value in nonnegative.items():
@@ -91,6 +105,8 @@ class StochasticInputOverlay:
             raise ContractError("SCENARIO_PARAMETER_INVALID", "reassessment_service_time must be positive")
         if self.correction_window == 0:
             raise ContractError("SCENARIO_PARAMETER_INVALID", "correction_window must be positive")
+        if self.restoration_window == 0:
+            raise ContractError("SCENARIO_PARAMETER_INVALID", "restoration_window must be positive")
         capacities = {
             "review_capacity": self.review_capacity,
             "recovery_capacity": self.recovery_capacity,
@@ -146,6 +162,8 @@ class StochasticInputOverlay:
             "reassessment_capacity": normalized_decimal(self.reassessment_capacity),
             "reassessment_service_time": normalized_decimal(self.reassessment_service_time),
             "correction_window": normalized_decimal(self.correction_window),
+            "restoration_delay": normalized_decimal(self.restoration_delay),
+            "restoration_window": normalized_decimal(self.restoration_window),
             "administrative_cutoff": normalized_decimal(self.administrative_cutoff),
         }
 
@@ -482,7 +500,19 @@ class EngagementRunTelemetry:
     recovery_active_after_correction_count: int
     correction_total_exposure_time: Decimal
     correction_max_exposure_time: Decimal
+    restoration_due_count: int
+    restoration_executed_count: int
+    timely_restoration_count: int
+    late_restoration_count: int
+    complete_restoration_count: int
+    partial_restoration_count: int
+    restoration_horizon_pending_count: int
+    restoration_horizon_expired_count: int
+    unresolved_external_consequence_count: int
+    restoration_total_time_from_correction: Decimal
+    restoration_max_time_from_correction: Decimal
     case_closed_count: int
+    resolved_case_count: int
     right_censored_case_count: int
     event_hash: str
 
@@ -1321,12 +1351,130 @@ def _add_correction_outcome_event(
     return replace(trace, events=events, event_hash=_event_hash(events))
 
 
+def _restoration_deadline(
+    trace: EngagementTrace,
+    overlay: StochasticInputOverlay,
+) -> Decimal:
+    exposures = tuple(
+        event for event in trace.events
+        if event.event_type_id == "EXTERNAL_CONSEQUENCE_STARTED"
+    )
+    if len(exposures) != 1:
+        raise ContractError(
+            "SIM_SYSTEM_STATE_INCOMPLETE",
+            f"restoration obligation requires one external exposure for {trace.case_id}",
+        )
+    with localcontext() as context:
+        context.prec = 50
+        return exposures[0].timestamp + overlay.restoration_window
+
+
+def _add_restoration_event(
+    trace: EngagementTrace,
+    overlay: StochasticInputOverlay,
+) -> EngagementTrace:
+    """Repair modeled consequence dimensions without equating action with completeness."""
+
+    corrections = tuple(
+        event for event in trace.events
+        if event.event_type_id == "EXTERNAL_CONSEQUENCE_UPDATED"
+        and event.details.get("correction_outcome") == "decision_corrected"
+    )
+    if not corrections:
+        return trace
+    if len(corrections) != 1:
+        raise ContractError(
+            "SIM_SYSTEM_STATE_INCOMPLETE",
+            f"restoration requires one decision correction for {trace.case_id}",
+        )
+    correction = corrections[0]
+    if not policy_behavior(trace.policy_id).restores_after_correction:
+        return trace
+    exposures = tuple(
+        event for event in trace.events
+        if event.event_type_id == "EXTERNAL_CONSEQUENCE_STARTED"
+    )
+    recoveries = tuple(
+        event for event in trace.events
+        if event.event_type_id == "EXTERNAL_CONSEQUENCE_UPDATED"
+        and event.details.get("action_type_id") == "recover"
+    )
+    if len(exposures) != 1 or len(recoveries) != 1:
+        raise ContractError(
+            "SIM_SYSTEM_STATE_INCOMPLETE",
+            f"restoration requires one exposure and active recovery state for {trace.case_id}",
+        )
+    exposure = exposures[0]
+    recovery = recoveries[0]
+    with localcontext() as context:
+        context.prec = 50
+        restoration_time = correction.timestamp + overlay.restoration_delay
+        deadline = _restoration_deadline(trace, overlay)
+        time_from_correction = restoration_time - correction.timestamp
+        time_from_exposure = restoration_time - exposure.timestamp
+    if restoration_time > overlay.administrative_cutoff:
+        return trace
+    timely = restoration_time <= deadline
+    restored_dimensions = (
+        RESTORATION_DIMENSION_IDS
+        if timely else ("decision_state", "recovery_state")
+    )
+    unrestored_dimensions = () if timely else ("residual_external_consequence",)
+    dimension_states = {
+        "decision_state": "baseline",
+        "recovery_state": "baseline",
+        "residual_external_consequence": "baseline" if timely else "irreversible_residual",
+    }
+    root_key = f"{trace.case_id}:ENGAGEMENT"
+    causal_key = f"{root_key}:restoration:RESTORATION_EXECUTED"
+    restoration = Event(
+        event_id=f"{trace.policy_id}:{causal_key}",
+        event_type_id="RESTORATION_EXECUTED",
+        timestamp=restoration_time,
+        causal_event_key=causal_key,
+        root_event_key=root_key,
+        descendant_path=("correction", "restoration"),
+        transition_rank=DEFAULT_PRIORITIES["RESTORATION_EXECUTED"],
+        case_id=trace.case_id,
+        details={
+            "policy_id": trace.policy_id,
+            "keyed_draw_ids": (),
+            "action_type_id": "restore",
+            "modeled_consequence_dimension_ids": RESTORATION_DIMENSION_IDS,
+            "baseline_dimension_states": dict(RESTORATION_BASELINE_STATES),
+            "restored_dimension_ids": restored_dimensions,
+            "unrestored_dimension_ids": unrestored_dimensions,
+            "dimension_states": dimension_states,
+            "decision_state": "corrected_to_baseline",
+            "recovery_state": "baseline",
+            "exposure_state": "resolved" if timely else "residual",
+            "restoration_state": "complete" if timely else "partial",
+            "restoration_complete": timely,
+            "restoration_timely": timely,
+            "irreversible_residual": not timely,
+            "restoration_deadline": normalized_decimal(deadline),
+            "restoration_delay": normalized_decimal(overlay.restoration_delay),
+            "time_from_correction": normalized_decimal(time_from_correction),
+            "time_from_exposure": normalized_decimal(time_from_exposure),
+            "source_exposure_event_key": exposure.causal_event_key,
+            "source_recovery_event_key": recovery.causal_event_key,
+            "source_correction_event_key": correction.causal_event_key,
+        },
+    )
+    queue = EventQueue()
+    for event in trace.events + (restoration,):
+        queue.push(event)
+    events = queue.drain()
+    return replace(trace, events=events, event_hash=_event_hash(events))
+
+
 def _apply_administrative_cutoff(
     trace: EngagementTrace,
-    cutoff: Decimal,
+    overlay: StochasticInputOverlay,
 ) -> EngagementTrace:
     """Close observation at a late-stage boundary without asserting resolution."""
 
+    cutoff = overlay.administrative_cutoff
     observed = tuple(event for event in trace.events if event.timestamp <= cutoff)
     exposure = any(
         event.event_type_id == "EXTERNAL_CONSEQUENCE_STARTED" for event in observed
@@ -1342,18 +1490,66 @@ def _apply_administrative_cutoff(
         and event.details.get("correction_outcome") == "decision_corrected"
         for event in observed
     )
-    if not exposure:
+    restoration_events = tuple(
+        event for event in observed if event.event_type_id == "RESTORATION_EXECUTED"
+    )
+    if len(restoration_events) > 1:
+        raise ContractError(
+            "SIM_SYSTEM_STATE_INCOMPLETE",
+            f"multiple restoration actions for {trace.case_id}",
+        )
+    restoration = restoration_events[0] if restoration_events else None
+    restoration_due = (
+        trace.action_decision is not None
+        and trace.action_decision.action == "progress"
+        and not trace.action_decision.progression_supported
+    )
+    restoration_deadline = (
+        _restoration_deadline(trace, overlay) if restoration_due else None
+    )
+    restoration_complete = bool(
+        restoration and restoration.details.get("restoration_complete") is True
+    )
+    irreversible_residual = bool(
+        restoration and restoration.details.get("irreversible_residual") is True
+    )
+    restoration_horizon_status = "not_applicable"
+    if restoration_complete:
+        restoration_horizon_status = "completed_timely"
+    elif restoration is not None:
+        restoration_horizon_status = "completed_late"
+    elif restoration_due and restoration_deadline is not None:
+        restoration_horizon_status = (
+            "expired_without_completion"
+            if cutoff >= restoration_deadline else "pending"
+        )
+    if restoration_complete:
+        reason = "complete_restoration_observed"
+        right_censored = False
+    elif restoration is not None:
+        reason = "partial_restoration_irreversible_residual"
+        right_censored = False
+    elif restoration_due and restoration_deadline is not None and cutoff >= restoration_deadline:
+        reason = "restoration_horizon_expired_without_completion"
+        right_censored = False
+    elif correction:
+        reason = "restoration_pending_at_cutoff"
+        right_censored = True
+    elif not exposure:
         reason = "decision_path_observation_ended"
+        right_censored = True
     elif not recovery:
         reason = "recovery_service_open"
+        right_censored = True
     elif request and not correction:
         reason = "reassessment_open"
-    elif correction:
-        reason = "recovery_exposure_open_after_decision_correction"
+        right_censored = True
     elif trace.action_decision is not None and not trace.action_decision.progression_supported:
         reason = "correction_path_unresolved_by_cutoff"
+        right_censored = True
     else:
         reason = "recovery_exposure_open"
+        right_censored = True
     root_key = f"{trace.case_id}:ENGAGEMENT"
     causal_key = f"{root_key}:administrative_cutoff:CASE_CLOSED"
     closed = Event(
@@ -1368,12 +1564,24 @@ def _apply_administrative_cutoff(
         details={
             "policy_id": trace.policy_id,
             "keyed_draw_ids": (),
-            "closure_kind": "administrative_right_censor",
-            "right_censored": True,
+            "closure_kind": (
+                "administrative_right_censor" if right_censored else "observed_outcome"
+            ),
+            "right_censored": right_censored,
             "censoring_reason": reason,
             "decision_corrected": correction,
-            "recovery_state": "active" if recovery else "not_started",
-            "restoration_complete": False,
+            "recovery_state": (
+                restoration.details.get("recovery_state")
+                if restoration is not None else "active" if recovery else "not_started"
+            ),
+            "restoration_due": restoration_due,
+            "restoration_deadline": (
+                normalized_decimal(restoration_deadline)
+                if restoration_deadline is not None else None
+            ),
+            "restoration_complete": restoration_complete,
+            "restoration_horizon_status": restoration_horizon_status,
+            "irreversible_residual": irreversible_residual,
         },
     )
     queue = EventQueue()
@@ -1412,20 +1620,20 @@ def _validate_engagement_configuration(cohort: StochasticCohort, compiled: Compi
         raise ContractError("SCENARIO_CONFIGURATION_INCOMPLETE", "compiled parameter receipts differ from the cohort overlay")
     if any(receipt.provenance != cohort.overlay.provenance for receipt in compiled.receipts):
         raise ContractError("SCENARIO_CONFIGURATION_INCOMPLETE", "compiled parameter provenance differs from the cohort overlay")
-    if not {"progression", "recovery", "correction", "reassessment"} <= compiled.process_profile.capabilities:
+    if not {"progression", "recovery", "correction", "reassessment", "restoration"} <= compiled.process_profile.capabilities:
         raise ContractError(
             "SCENARIO_CONFIGURATION_INCOMPLETE",
-            "process lacks progression, recovery, correction, or reassessment capability",
+            "process lacks progression, recovery, correction, reassessment, or restoration capability",
         )
-    if not {"recovery", "correction", "reassessment"} <= set(compiled.process_profile.stage_ids):
+    if not {"recovery", "correction", "reassessment", "restoration"} <= set(compiled.process_profile.stage_ids):
         raise ContractError(
             "SCENARIO_CONFIGURATION_INCOMPLETE",
-            "process topology lacks a recovery, correction, or reassessment stage",
+            "process topology lacks a recovery, correction, reassessment, or restoration stage",
         )
-    if not {"progress", "recover", "correct", "reassess"} <= compiled.process_profile.action_type_ids:
+    if not {"progress", "recover", "correct", "reassess", "restore"} <= compiled.process_profile.action_type_ids:
         raise ContractError(
             "SCENARIO_CONFIGURATION_INCOMPLETE",
-            "process lacks a typed progression, recovery, correction, or reassessment action",
+            "process lacks a typed progression, recovery, correction, reassessment, or restoration action",
         )
     return policy_id
 
@@ -1492,9 +1700,13 @@ def run_engagement_stage(cohort: StochasticCohort, compiled: CompiledConfigurati
         )
         for trace in reassessment_traces
     )
-    traces = tuple(
-        _apply_administrative_cutoff(trace, cohort.overlay.administrative_cutoff)
+    restoration_traces = tuple(
+        _add_restoration_event(trace, cohort.overlay)
         for trace in outcome_traces
+    )
+    traces = tuple(
+        _apply_administrative_cutoff(trace, cohort.overlay)
+        for trace in restoration_traces
     )
     system_queue = EventQueue()
     for trace in traces:
@@ -1515,6 +1727,21 @@ def run_engagement_stage(cohort: StochasticCohort, compiled: CompiledConfigurati
         context.prec = 50
         correction_total_exposure_time = sum(correction_exposure_times, Decimal(0))
     correction_max_exposure_time = max(correction_exposure_times, default=Decimal(0))
+    restoration_events = tuple(
+        event for event in system_events
+        if event.event_type_id == "RESTORATION_EXECUTED"
+    )
+    restoration_times = tuple(
+        Decimal(str(event.details["time_from_correction"]))
+        for event in restoration_events
+    )
+    with localcontext() as context:
+        context.prec = 50
+        restoration_total_time = sum(restoration_times, Decimal(0))
+    restoration_max_time = max(restoration_times, default=Decimal(0))
+    closure_events = tuple(
+        event for event in system_events if event.event_type_id == "CASE_CLOSED"
+    )
 
     def correction_availability(trace: EngagementTrace) -> str | None:
         decision = trace.action_decision
@@ -1722,13 +1949,53 @@ def run_engagement_stage(cohort: StochasticCohort, compiled: CompiledConfigurati
         ),
         correction_total_exposure_time=correction_total_exposure_time,
         correction_max_exposure_time=correction_max_exposure_time,
-        case_closed_count=sum(
-            event.event_type_id == "CASE_CLOSED" for event in system_events
+        restoration_due_count=sum(
+            trace.action_decision is not None
+            and trace.action_decision.action == "progress"
+            and not trace.action_decision.progression_supported
+            for trace in traces
+        ),
+        restoration_executed_count=len(restoration_events),
+        timely_restoration_count=sum(
+            event.details.get("restoration_timely") is True
+            for event in restoration_events
+        ),
+        late_restoration_count=sum(
+            event.details.get("restoration_timely") is False
+            for event in restoration_events
+        ),
+        complete_restoration_count=sum(
+            event.details.get("restoration_complete") is True
+            for event in restoration_events
+        ),
+        partial_restoration_count=sum(
+            event.details.get("restoration_complete") is False
+            for event in restoration_events
+        ),
+        restoration_horizon_pending_count=sum(
+            event.details.get("restoration_horizon_status") == "pending"
+            for event in closure_events
+        ),
+        restoration_horizon_expired_count=sum(
+            event.details.get("restoration_horizon_status")
+            == "expired_without_completion"
+            for event in closure_events
+        ),
+        unresolved_external_consequence_count=sum(
+            event.details.get("restoration_due") is True
+            and event.details.get("restoration_complete") is not True
+            for event in closure_events
+        ),
+        restoration_total_time_from_correction=restoration_total_time,
+        restoration_max_time_from_correction=restoration_max_time,
+        case_closed_count=len(closure_events),
+        resolved_case_count=sum(
+            event.details.get("right_censored") is False
+            for event in closure_events
         ),
         right_censored_case_count=sum(
-            event.event_type_id == "CASE_CLOSED"
-            and event.details.get("right_censored") is True
-            for event in system_events
+            event.details.get("right_censored") is True
+            for event in closure_events
         ),
         event_hash=event_hash,
     )
@@ -1803,10 +2070,58 @@ def run_engagement_stage(cohort: StochasticCohort, compiled: CompiledConfigurati
         raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "correction outcomes do not partition eligible exposure")
     if telemetry.recovery_active_after_correction_count != telemetry.correction_executed_count:
         raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "decision correction silently changed recovery or restoration state")
-    if any(event.event_type_id == "RESTORATION_EXECUTED" for event in system_events):
-        raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "correction checkpoint emitted premature restoration")
-    if telemetry.case_closed_count != telemetry.case_count or telemetry.right_censored_case_count != telemetry.case_count:
-        raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "administrative cutoff must right-censor every case exactly once")
+    if telemetry.restoration_due_count != telemetry.correction_eligible_count:
+        raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "restoration obligations differ from unsupported exposure")
+    for event in restoration_events:
+        dimensions = tuple(event.details.get("modeled_consequence_dimension_ids", ()))
+        baselines = event.details.get("baseline_dimension_states")
+        states = event.details.get("dimension_states")
+        if (
+            dimensions != RESTORATION_DIMENSION_IDS
+            or baselines != RESTORATION_BASELINE_STATES
+            or not isinstance(states, dict)
+        ):
+            raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "restoration consequence vector is incomplete")
+        if tuple(states) != RESTORATION_DIMENSION_IDS:
+            raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "restoration dimension-state order or coverage changed")
+        vector_complete = all(
+            states[dimension] == baselines[dimension] for dimension in dimensions
+        )
+        if vector_complete != (event.details.get("restoration_complete") is True):
+            raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "restoration completeness differs from consequence vector")
+    if telemetry.restoration_executed_count > telemetry.correction_executed_count:
+        raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "restoration executed without decision correction")
+    if (
+        telemetry.timely_restoration_count + telemetry.late_restoration_count
+        != telemetry.restoration_executed_count
+    ):
+        raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "restoration timeliness does not partition execution")
+    if (
+        telemetry.complete_restoration_count + telemetry.partial_restoration_count
+        != telemetry.restoration_executed_count
+    ):
+        raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "restoration completeness does not partition execution")
+    if (
+        telemetry.complete_restoration_count != telemetry.timely_restoration_count
+        or telemetry.partial_restoration_count != telemetry.late_restoration_count
+    ):
+        raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "restoration vector completeness differs from horizon timing")
+    if (
+        telemetry.restoration_executed_count
+        + telemetry.restoration_horizon_pending_count
+        + telemetry.restoration_horizon_expired_count
+        != telemetry.restoration_due_count
+    ):
+        raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "restoration outcomes do not partition obligations")
+    if (
+        telemetry.unresolved_external_consequence_count
+        != telemetry.restoration_due_count - telemetry.complete_restoration_count
+    ):
+        raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "unresolved consequences differ from incomplete restoration")
+    if telemetry.case_closed_count != telemetry.case_count:
+        raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "administrative cutoff must close every case exactly once")
+    if telemetry.resolved_case_count + telemetry.right_censored_case_count != telemetry.case_count:
+        raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "resolved and right-censored closure do not partition cases")
     if any(event.timestamp > cohort.overlay.administrative_cutoff for event in system_events):
         raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "post-cutoff event survived observation closure")
     return EngagementRun(

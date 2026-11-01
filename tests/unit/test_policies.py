@@ -44,7 +44,9 @@ def test_policy_registry_is_closed_and_all_profiles_compile_against_core_capabil
     assert "recover" in stochastic_process().action_type_ids
     assert "reassessment" in stochastic_process().capabilities
     assert "reassess" in stochastic_process().action_type_ids
-    assert {"recovery", "correction", "reassessment"} <= set(stochastic_process().stage_ids)
+    assert "restoration" in stochastic_process().capabilities
+    assert "restore" in stochastic_process().action_type_ids
+    assert {"recovery", "correction", "reassessment", "restoration"} <= set(stochastic_process().stage_ids)
     for policy_id in POLICY_IDS:
         profile = policy(policy_id)
         assert profile.required_capabilities <= canonical_process().capabilities
@@ -98,6 +100,15 @@ def test_review_scope_distinguishes_all_progression_from_unresolved_only() -> No
     assert policy_behavior("U2O").review_scope == "all_progression"
     assert policy_behavior("U3").review_scope == "unresolved_only"
     assert policy_behavior("U0").review_scope == "none"
+
+
+def test_restoration_activation_is_owned_by_reachable_correction_policies() -> None:
+    assert policy_behavior("U1").restores_after_correction is True
+    assert policy_behavior("U2O").restores_after_correction is True
+    assert all(
+        policy_behavior(policy_id).restores_after_correction is False
+        for policy_id in ("U0", "U2C", "U3")
+    )
 
 
 def test_deadline_decisions_keep_fail_closed_and_fail_open_distinct() -> None:

@@ -22,14 +22,40 @@ class PolicyBehavior:
     offers_assistance: bool
     grants_extensions: bool
     proactive_evidence_retrieval: bool
+    restores_after_correction: bool
 
 
 POLICY_BEHAVIORS = {
-    "U0": PolicyBehavior("U0", False, True, "none", False, False, True, False),
-    "U1": PolicyBehavior("U1", True, False, "none", False, False, False, False),
-    "U2C": PolicyBehavior("U2C", True, True, "all_progression", False, False, False, False),
-    "U2O": PolicyBehavior("U2O", True, True, "all_progression", True, False, False, False),
-    "U3": PolicyBehavior("U3", False, True, "unresolved_only", False, True, True, True),
+    "U0": PolicyBehavior(
+        policy_id="U0", permits_imputation=False, preserves_evidence_status=True,
+        review_scope="none", fail_open_on_review_timeout=False,
+        offers_assistance=False, grants_extensions=True,
+        proactive_evidence_retrieval=False, restores_after_correction=False,
+    ),
+    "U1": PolicyBehavior(
+        policy_id="U1", permits_imputation=True, preserves_evidence_status=False,
+        review_scope="none", fail_open_on_review_timeout=False,
+        offers_assistance=False, grants_extensions=False,
+        proactive_evidence_retrieval=False, restores_after_correction=True,
+    ),
+    "U2C": PolicyBehavior(
+        policy_id="U2C", permits_imputation=True, preserves_evidence_status=True,
+        review_scope="all_progression", fail_open_on_review_timeout=False,
+        offers_assistance=False, grants_extensions=False,
+        proactive_evidence_retrieval=False, restores_after_correction=False,
+    ),
+    "U2O": PolicyBehavior(
+        policy_id="U2O", permits_imputation=True, preserves_evidence_status=True,
+        review_scope="all_progression", fail_open_on_review_timeout=True,
+        offers_assistance=False, grants_extensions=False,
+        proactive_evidence_retrieval=False, restores_after_correction=True,
+    ),
+    "U3": PolicyBehavior(
+        policy_id="U3", permits_imputation=False, preserves_evidence_status=True,
+        review_scope="unresolved_only", fail_open_on_review_timeout=False,
+        offers_assistance=True, grants_extensions=True,
+        proactive_evidence_retrieval=True, restores_after_correction=False,
+    ),
 }
 
 
