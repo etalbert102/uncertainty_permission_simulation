@@ -135,6 +135,7 @@ closed_diagnostic_codes:
   - SCHEMA_REFERENCE_TARGET_INVALID
   - SCHEMA_REFERENCE_CYCLE
   - SCHEMA_CANONICALIZATION_INVALID
+  - SLICE1_VALIDATION_MISMATCH
   - FM_EVIDENCE_ORDER_CIRCULAR
   - FM_REFINEMENT_SET_MISSING
   - FM_REFINEMENT_COVERAGE_UNPROVEN
@@ -424,6 +425,7 @@ reference_target_roles:
   source_fixture_ref: [SourceApplicationFixture]
   source_fixture_refs: [SourceApplicationFixture]
   source_rule_refs: [ExecutableRule]
+  subject_refs: any
   source_value_ref: any
   stage_ref: [ProcessStage]
   stage_refs: [ProcessStage]
@@ -1322,6 +1324,27 @@ payload_kinds:
     sequence_paths: [/expected_disposition/routing_reasons, /expected_disposition/gate_requirements, /expected_assessment_specs]
     gate: expected_result_oracle_isolation
     diagnostic: P0_LAYER_ACCESS_VIOLATION
+
+  ValidationReceipt:
+    discriminator: {payload_kind: validation_receipt}
+    schema: {schema_id: fixture.validation_receipt, schema_version: 1}
+    domain_id_field: validation_receipt_id
+    owner: fixture_qa
+    source_basis: versioned_sources
+    provenance_status: derived
+    fields:
+      validation_receipt_id: string
+      validation_kind: {enum: [isomorphic_vocabulary, nonisomorphic_topology, application_adapter]}
+      subject_ids: string_list
+      subject_refs: list_record_ref
+      expected_value: typed_value
+      observed_value: typed_value
+      comparison_rule: {const: exact_deep_equality}
+      comparison_status: {enum: [match, mismatch]}
+      required_for_slice_close: {const: true}
+    set_semantics_paths: [/subject_ids, /subject_refs]
+    gate: stored_expected_versus_actual_validation
+    diagnostic: SLICE1_VALIDATION_MISMATCH
 
   FixtureCase:
     discriminator: {payload_kind: fixture_case}

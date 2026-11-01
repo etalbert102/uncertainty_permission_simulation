@@ -125,7 +125,7 @@
       "object_version": 1
     }
   },
-  "record_count": 721,
+  "record_count": 726,
   "records": [
     {
       "content_hash": "f4da1797a66fb27ddfaffc0f3d27a4ef3ef1d24ec86cc5085bd02bff861913fb",
@@ -47056,6 +47056,77 @@
       }
     },
     {
+      "content_hash": "d3bb532bf6e65814e6161513008d000fde943f6d5d8321fc83d3204227db0637",
+      "meta": {
+        "canonicalization_id": "UPS-CANONICAL-JSON",
+        "canonicalization_version": 1,
+        "object_id": "R-OCI-EARLY-SOURCE-FIXTURE@1",
+        "object_version": 1,
+        "owner_id": "SLICE1-SOURCEAPPLICATIONFIXTURE-OWNER",
+        "provenance_status": "documented",
+        "schema_id": "application.source_fixture",
+        "schema_version": 1,
+        "source_basis": "versioned_sources",
+        "source_refs": [
+          {
+            "object_id": "R-OCI-EARLY-TEMPORAL-SCOPE-1",
+            "object_version": 1
+          }
+        ]
+      },
+      "payload": {
+        "application_id": "R-OCI",
+        "artifact_hash": "248211b2b87c4372fc1eda307c4e6a81d9deb29b5b3d40e143490a24e17e720a",
+        "artifact_path": "data/sources/robodebt/r_oci_early.yaml",
+        "payload_kind": "source_application_fixture",
+        "source_application_fixture_id": "R-OCI-EARLY-SOURCE-FIXTURE@1",
+        "source_claim_ids": [
+          "RB-CLAIM-001",
+          "RB-CLAIM-002",
+          "RB-CLAIM-003",
+          "RB-CLAIM-004",
+          "RB-CLAIM-005"
+        ],
+        "source_profile_id": "R-OCI-Early",
+        "source_profile_version": 1,
+        "temporal_scope_ref": {
+          "object_id": "R-OCI-EARLY-TEMPORAL-SCOPE-1",
+          "object_version": 1
+        },
+        "unsupported_parameter_slot_ids": [
+          "review_capacity",
+          "review_service_time"
+        ]
+      }
+    },
+    {
+      "content_hash": "daf083e54cd1099a5a93d40c3d921dafb86722351521ac59a387cb0f6bfe1aef",
+      "meta": {
+        "canonicalization_id": "UPS-CANONICAL-JSON",
+        "canonicalization_version": 1,
+        "object_id": "R-OCI-EARLY-TEMPORAL-SCOPE-1",
+        "object_version": 1,
+        "owner_id": "SLICE1-TEMPORALSCOPE-OWNER",
+        "provenance_status": "hypothetical",
+        "schema_id": "process_model.temporal_scope",
+        "schema_version": 1,
+        "source_basis": "synthetic_no_external_source",
+        "source_refs": []
+      },
+      "payload": {
+        "end_precision": "day",
+        "end_value": "2017-01-19",
+        "limitation": "The fixed source packet does not identify the exact day of the July limited rollout.",
+        "mode": "dated_interval",
+        "payload_kind": "temporal_scope",
+        "reference_as_of": null,
+        "simultaneous_activation_claimed": false,
+        "start_precision": "month",
+        "start_value": "2016-07",
+        "temporal_scope_id": "R-OCI-EARLY-TEMPORAL-SCOPE-1"
+      }
+    },
+    {
       "content_hash": "85ca78f9ec53dae811bb4ca5140cba61e98d3e4af242f05b09d7fc65565e4261",
       "meta": {
         "canonicalization_id": "UPS-CANONICAL-JSON",
@@ -48863,16 +48934,267 @@
         "rule_id": "SLICE1-TRANSFORM-PRESERVE",
         "rule_kind": "transformation"
       }
+    },
+    {
+      "content_hash": "72f8ca99d4cc516f305090a3a7cecfd25b5aed593a1c46703a0336ed436d3eef",
+      "meta": {
+        "canonicalization_id": "UPS-CANONICAL-JSON",
+        "canonicalization_version": 1,
+        "object_id": "SLICE1-VALIDATION-ADAPTER",
+        "object_version": 1,
+        "owner_id": "SLICE1-VALIDATIONRECEIPT-OWNER",
+        "provenance_status": "derived",
+        "schema_id": "fixture.validation_receipt",
+        "schema_version": 1,
+        "source_basis": "versioned_sources",
+        "source_refs": [
+          {
+            "object_id": "R-OCI-EARLY-SOURCE-FIXTURE@1",
+            "object_version": 1
+          },
+          {
+            "object_id": "SLICE1-COMPILED-U2C",
+            "object_version": 1
+          },
+          {
+            "object_id": "SLICE1-RULE",
+            "object_version": 1
+          }
+        ]
+      },
+      "payload": {
+        "comparison_rule": "exact_deep_equality",
+        "comparison_status": "match",
+        "expected_value": {
+          "application_mapping_id": "R-OCI-EARLY-MAPPING@1",
+          "compiler_code_hash_equal": true,
+          "configuration_id": "R-OCI-EARLY-SMOKE",
+          "kernel_case_identifiers_absent": true,
+          "receipt_provenance": {
+            "notice_delay": "stylized",
+            "response_deadline": "documented",
+            "review_capacity": "stylized",
+            "review_service_time": "stylized"
+          },
+          "receipt_slots": [
+            "notice_delay",
+            "response_deadline",
+            "review_capacity",
+            "review_service_time"
+          ],
+          "unresolved_parameter_slot_ids": [],
+          "unsupported_defaults_used": false
+        },
+        "observed_value": {
+          "application_mapping_id": "R-OCI-EARLY-MAPPING@1",
+          "compiler_code_hash_equal": true,
+          "configuration_id": "R-OCI-EARLY-SMOKE",
+          "kernel_case_identifiers_absent": true,
+          "receipt_provenance": {
+            "notice_delay": "stylized",
+            "response_deadline": "documented",
+            "review_capacity": "stylized",
+            "review_service_time": "stylized"
+          },
+          "receipt_slots": [
+            "notice_delay",
+            "response_deadline",
+            "review_capacity",
+            "review_service_time"
+          ],
+          "unresolved_parameter_slot_ids": [],
+          "unsupported_defaults_used": false
+        },
+        "payload_kind": "validation_receipt",
+        "required_for_slice_close": true,
+        "subject_ids": [
+          "R-OCI-Early@1",
+          "R-OCI-EARLY-MAPPING@1",
+          "R-OCI-EARLY-SMOKE"
+        ],
+        "subject_refs": [
+          {
+            "object_id": "R-OCI-EARLY-SOURCE-FIXTURE@1",
+            "object_version": 1
+          },
+          {
+            "object_id": "SLICE1-COMPILED-U2C",
+            "object_version": 1
+          },
+          {
+            "object_id": "SLICE1-RULE",
+            "object_version": 1
+          }
+        ],
+        "validation_kind": "application_adapter",
+        "validation_receipt_id": "SLICE1-VALIDATION-ADAPTER"
+      }
+    },
+    {
+      "content_hash": "64bad1287b584466f10dde024a9e26cde91cc49756e7487bc1b8ae38b4cc1d97",
+      "meta": {
+        "canonicalization_id": "UPS-CANONICAL-JSON",
+        "canonicalization_version": 1,
+        "object_id": "SLICE1-VALIDATION-ISOMORPHIC",
+        "object_version": 1,
+        "owner_id": "SLICE1-VALIDATIONRECEIPT-OWNER",
+        "provenance_status": "derived",
+        "schema_id": "fixture.validation_receipt",
+        "schema_version": 1,
+        "source_basis": "versioned_sources",
+        "source_refs": [
+          {
+            "object_id": "SLICE1-COMPILED-U2C",
+            "object_version": 1
+          },
+          {
+            "object_id": "SLICE1-RULE",
+            "object_version": 1
+          }
+        ]
+      },
+      "payload": {
+        "comparison_rule": "exact_deep_equality",
+        "comparison_status": "match",
+        "expected_value": {
+          "artifact_identity_differs": true,
+          "event_order_equal": true,
+          "metrics_equal": true,
+          "semantic_projection_equal": true
+        },
+        "observed_value": {
+          "artifact_identity_differs": true,
+          "event_order_equal": true,
+          "metrics_equal": true,
+          "semantic_projection_equal": true
+        },
+        "payload_kind": "validation_receipt",
+        "required_for_slice_close": true,
+        "subject_ids": [
+          "SYNTH-U2C",
+          "RENAMED-U2C",
+          "CANARY-ORIGINAL",
+          "CANARY-RENAMED"
+        ],
+        "subject_refs": [
+          {
+            "object_id": "SLICE1-COMPILED-U2C",
+            "object_version": 1
+          },
+          {
+            "object_id": "SLICE1-RULE",
+            "object_version": 1
+          }
+        ],
+        "validation_kind": "isomorphic_vocabulary",
+        "validation_receipt_id": "SLICE1-VALIDATION-ISOMORPHIC"
+      }
+    },
+    {
+      "content_hash": "b1a128a0c2d340ae89569d5c75902e0b651da024ce0088268bd2cbf2eb2d04b3",
+      "meta": {
+        "canonicalization_id": "UPS-CANONICAL-JSON",
+        "canonicalization_version": 1,
+        "object_id": "SLICE1-VALIDATION-NONISOMORPHIC",
+        "object_version": 1,
+        "owner_id": "SLICE1-VALIDATIONRECEIPT-OWNER",
+        "provenance_status": "derived",
+        "schema_id": "fixture.validation_receipt",
+        "schema_version": 1,
+        "source_basis": "versioned_sources",
+        "source_refs": [
+          {
+            "object_id": "SLICE1-COMPILED-U2C",
+            "object_version": 1
+          },
+          {
+            "object_id": "SLICE1-RULE",
+            "object_version": 1
+          },
+          {
+            "object_id": "SLICE1-PRIORITIES",
+            "object_version": 1
+          }
+        ]
+      },
+      "payload": {
+        "comparison_rule": "exact_deep_equality",
+        "comparison_status": "match",
+        "expected_value": {
+          "compiler_code_hash_equal": true,
+          "events": [
+            "CASE_ARRIVAL",
+            "ROUTING_COMPLETED",
+            "EVIDENCE_REQUESTED",
+            "REVIEW_QUEUED",
+            "CASE_CLOSED"
+          ],
+          "profile_id": "SYNTHETIC-NONISOMORPHIC@1",
+          "stage_ids": [
+            "intake",
+            "triage",
+            "optional_review",
+            "evidence",
+            "decision",
+            "closed"
+          ],
+          "topology_differs": true,
+          "unresolved_parameter_slot_ids": []
+        },
+        "observed_value": {
+          "compiler_code_hash_equal": true,
+          "events": [
+            "CASE_ARRIVAL",
+            "ROUTING_COMPLETED",
+            "EVIDENCE_REQUESTED",
+            "REVIEW_QUEUED",
+            "CASE_CLOSED"
+          ],
+          "profile_id": "SYNTHETIC-NONISOMORPHIC@1",
+          "stage_ids": [
+            "intake",
+            "triage",
+            "optional_review",
+            "evidence",
+            "decision",
+            "closed"
+          ],
+          "topology_differs": true,
+          "unresolved_parameter_slot_ids": []
+        },
+        "payload_kind": "validation_receipt",
+        "required_for_slice_close": true,
+        "subject_ids": [
+          "SYNTHETIC-NONISOMORPHIC@1",
+          "NONISO-U2C"
+        ],
+        "subject_refs": [
+          {
+            "object_id": "SLICE1-COMPILED-U2C",
+            "object_version": 1
+          },
+          {
+            "object_id": "SLICE1-RULE",
+            "object_version": 1
+          },
+          {
+            "object_id": "SLICE1-PRIORITIES",
+            "object_version": 1
+          }
+        ],
+        "validation_kind": "nonisomorphic_topology",
+        "validation_receipt_id": "SLICE1-VALIDATION-NONISOMORPHIC"
+      }
     }
   ],
   "reference_target_receipt": {
-    "declared_reference_fields": 254,
-    "explicit_polymorphic_roles": 24,
-    "polymorphic_refs_resolved": 43,
-    "records_with_typed_targets": 680,
-    "reference_target_roles": 178,
+    "declared_reference_fields": 257,
+    "explicit_polymorphic_roles": 25,
+    "polymorphic_refs_resolved": 51,
+    "records_with_typed_targets": 681,
+    "reference_target_roles": 179,
     "status": "valid",
-    "typed_target_refs_validated": 4239
+    "typed_target_refs_validated": 4240
   },
   "rule_implementation_receipts": [
     {
@@ -48893,5 +49215,24 @@
       "implementation_version": 1,
       "rule_record_hash": "359cb29a2bbaf46c559ac5752a7f3feeb46fb75c412205294047ca41018020a3"
     }
-  ]
+  ],
+  "validation_receipt_refs": {
+    "application_adapter": {
+      "object_id": "SLICE1-VALIDATION-ADAPTER",
+      "object_version": 1
+    },
+    "isomorphic_vocabulary": {
+      "object_id": "SLICE1-VALIDATION-ISOMORPHIC",
+      "object_version": 1
+    },
+    "nonisomorphic_topology": {
+      "object_id": "SLICE1-VALIDATION-NONISOMORPHIC",
+      "object_version": 1
+    }
+  },
+  "validation_receipt_status": {
+    "application_adapter": "match",
+    "isomorphic_vocabulary": "match",
+    "nonisomorphic_topology": "match"
+  }
 }

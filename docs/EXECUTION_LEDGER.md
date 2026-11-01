@@ -7,7 +7,7 @@ This ledger is the canonical slice-status record. Update it at the end of every 
 | Slice | Status | Commit | Verification | Residual risk |
 | --- | --- | --- | --- | --- |
 | 0. Source, construct, and claim contract | implementation, plan, and baseline gates passed — pre-freeze reader QA pending | `9cf836c` | automated Slice 0 and plan gates pass from declared environment | two eligible locked reader returns are not yet available; this blocks Slice 4, not Slice 1 engineering |
-| 1. Case-neutral dynamic vertical slice | in progress — complete typed-reference checkpoint passes | `c016e51` checkpoint | 26 tests; 721-record closed bundle; 4,239 typed target references validated; both artifact hashes repeat | stored canary/adapter receipts remain incomplete |
+| 1. Case-neutral dynamic vertical slice | complete | completion commit recorded below | 27 tests; 726-record closed bundle; three stored validation receipts match; both artifact hashes repeat | stochastic execution and empirical validation remain Slice 2 work |
 | 2. Stochastic engine and validation | pending | — | — | — |
 | 3. Experiment pilot and freeze candidate | pending | — | — | — |
 | 4. Confirmatory freeze | pending | — | — | — |
@@ -129,9 +129,9 @@ The source/profile consistency, configuration-contract inventory, generic event/
 
 The reviewed 41-file Slice 0 baseline is commit `9cf836cb15edba29235abc60b4f754d311343fe3` (`Establish simulation study baseline`). The repository-local author name is `Eli`; the pre-existing configured email was retained. This follow-up ledger update closes `D-009` and records the immutable baseline SHA. Independent reader receipts remain a separate mandatory pre-freeze dependency.
 
-## Slice 1 In-Progress Checkpoint
+## Slice 1 Closeout Receipt
 
-Status: deterministic schema/compiler/process, executable-rule, and complete typed-reference checkpoints implemented; Slice 1 not complete
+Status: complete
 
 Checkpoint commit: `33aaa0916578a8a5ce692993025a26e36e9296ec` (`Begin Slice 1 deterministic vertical slice`)
 
@@ -143,32 +143,37 @@ Typed-reference checkpoint commit: `b880f45cb031e41f5f39490febf37e95ad1c8c60` (`
 
 Complete reference-closure commit: `c016e516479d60d757e74196c0efe281962a7e50` (`Complete typed reference closure`)
 
+Stored-validation-receipt completion commit: pending this closeout commit
+
 ### Implemented
 
 - Manifest-driven Pydantic inventory for all declared payload kinds, strict record metadata/envelopes, schema identity, source-basis and provenance checks, canonical hashing, set-order normalization, and binary-float rejection.
 - Deterministic configuration compilation with process/policy capability separation, documented-value protection, unsupported-slot handling, one receipt per runtime slot, and zero-unresolved-slot enforcement.
 - Case-neutral event queue, stable priority ordering, causal-key collision rejection, microstep bound, U1/U2C/U2O deterministic behavior, trace-derived metrics, and P0 F0–F5/helper report rendering.
 - Nine trace arms covering the seven required golden behaviors, the isomorphic vocabulary canary, non-isomorphic topology canary, and thin R-OCI-Early adapter smoke compilation.
-- A canonical 721-record bundle containing compiled-configuration inputs, parameter receipts, trace specifications, nonempty typed representations, compatible-state support, per-event pre/post process states, events, total dispositions, traces, prespecified expected results, metrics, P0 assessments, and diagnostics.
+- A canonical 726-record bundle containing compiled-configuration inputs, parameter receipts, trace specifications, nonempty typed representations, compatible-state support, per-event pre/post process states, events, total dispositions, traces, prespecified expected results, metrics, P0 assessments, diagnostics, the R-OCI-Early source fixture, and three validation receipts.
 - Recursive reference resolution and cycle rejection, nine independent expected-versus-actual trace comparisons, and 18 P0 report-row links to stored assessments and diagnostics.
 - A static 16-callable implementation registry with exact manifest inventory matching and per-implementation hashes bound to the complete code artifact; dynamic imports and narrative evaluation are absent.
 - Exact rule validation for implementation kind/version, required and unknown parameters, parameter kinds and closed values, input roles/cardinalities/schema sets, and output schema. Nested set-semantics paths now canonicalize before rule-record hashing.
 - A stored routing-rule signature with four typed parameters, four declared input roles, a matching output schema, and a top-level receipt linking its code-artifact and rule-record hashes.
 - A complete manifest role matrix covers 254 reference-bearing payload fields through 178 shared roles or payload-local overrides. Twenty-four intentionally polymorphic roles are marked `any`; omission, stale roles, nested pseudo-paths, duplicate targets, and unknown target kinds fail manifest validation.
-- The golden bundle exercises nine nonempty representation-to-field edges spanning both `Claim` and `UntypedField`, uses separate preserve/fallback transformation rules, stores three matching rule receipts, and records a reference-target receipt covering 4,239 typed and 43 polymorphic references.
+- The golden bundle exercises nine nonempty representation-to-field edges spanning both `Claim` and `UntypedField`, uses separate preserve/fallback transformation rules, stores three matching rule receipts, and records a reference-target receipt covering 4,240 typed and 51 polymorphic references.
+- The isomorphic-vocabulary receipt stores expected and observed semantic projection, event order, metrics, and artifact-identity checks. The non-isomorphic-topology receipt stores the expected and observed stage order, event order, compiler identity, topology difference, and unresolved-slot result. The R-OCI-Early adapter receipt stores configuration and mapping identities, compiler identity, kernel case-identifier absence, exact binding slots and provenance, unresolved slots, and unsupported-default use.
+- Receipt envelopes recompute exact deep equality from the stored expected and observed values; a producer cannot label a mismatch as a match. A mutation test changes one observed canary field and verifies that the stored receipt becomes `mismatch`.
 
 ### Verification
 
 | Command | Result |
 | --- | --- |
-| `PYTHONPATH=src ./.venv/bin/python -m pytest -q` | pass: 26 tests, including missing role, malformed nested path, wrong local and global target kinds, nonempty union targets, rule mutations, and cycle rejection |
+| `PYTHONPATH=src ./.venv/bin/python -m pytest -q` | pass: 27 tests, including missing role, malformed nested path, wrong local and global target kinds, nonempty union targets, rule mutations, receipt mutation, and cycle rejection |
 | `PYTHONPATH=src ./.venv/bin/python -m uncertainty_permission_simulation.cli trace experiments/configs/smoke_v1.yaml` | pass: 9 trace arms |
-| repeated smoke run | summary SHA-256 `a28024d4cc3133641623a5f214ef74ecb405b250fe52d6638a98a6372d273cdc`; record bundle SHA-256 `f028b45c4a93a72171055366391bcd3cf3228c8d0879908d9a30fbb51994030a`; both identical across reruns |
+| repeated smoke run | pass in 0.24 seconds; summary SHA-256 `b49ea5936727d23c3871a91555ba68d56d30f8f8c95a02e8c68ca9ae5210f739`; record bundle SHA-256 `29ec5616135d9e94a6d8e84dbdff3879fcc63dfbacadaa4e640258dab2912db8`; both identical across reruns |
 | rule-registry hash closure | pass: 16 manifest declarations equal 16 static callables and every declared SHA-256 reproduces; registry artifact SHA-256 `2ca97cbecfcf511dd502da2e85ec0cd7b06fa83b43ad0423cd1fce1d2a5a9556` |
 | `./.venv/bin/python scripts/validate_plan.py` | pass |
-| `./.venv/bin/python scripts/validate_slice0.py` | pass: 10 sources, 10 claims, 2 profiles, 6 YAML files, 94 closed diagnostics |
+| `./.venv/bin/python scripts/validate_slice0.py` | pass: 10 sources, 10 claims, 2 profiles, 6 YAML files, 95 closed diagnostics |
 
-### Remaining before Slice 1 closeout
+### Closeout assessment
 
-- Materialize stored expected-versus-actual receipts for the isomorphic vocabulary canary, non-isomorphic topology canary, and R-OCI-Early adapter compilation; the current core golden traces already have stored expected results.
-- Rerun all gates, record runtime and artifact hashes, update this ledger, and create the required Slice 1 completion commit.
+- The Slice 1 done condition is satisfied: all core expected results and all three architecture/application checks are stored, reference closed, deterministic, and gate checked.
+- Slice 2 owns the stochastic engine, distributional validation, telemetry, and stochastic validation receipts. No stochastic or empirical result is claimed by this closeout.
+- Independent cold-reader QA remains an external pre-freeze requirement and does not become satisfied through simulator self-tests.

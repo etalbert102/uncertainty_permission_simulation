@@ -7,9 +7,12 @@
   "config_id": "SLICE1-SMOKE-V1",
   "isomorphic_canary": {
     "artifact_identity_differs": true,
+    "event_order_equal": true,
+    "metrics_equal": true,
     "semantic_projection_equal": true
   },
   "nonisomorphic_canary": {
+    "compiler_code_hash_equal": true,
     "events": [
       "CASE_ARRIVAL",
       "ROUTING_COMPLETED",
@@ -17,7 +20,17 @@
       "REVIEW_QUEUED",
       "CASE_CLOSED"
     ],
-    "profile_id": "SYNTHETIC-NONISOMORPHIC@1"
+    "profile_id": "SYNTHETIC-NONISOMORPHIC@1",
+    "stage_ids": [
+      "intake",
+      "triage",
+      "optional_review",
+      "evidence",
+      "decision",
+      "closed"
+    ],
+    "topology_differs": true,
+    "unresolved_parameter_slot_ids": []
   },
   "p0_report": {
     "application_level": "bounded_deterministic_trace",
@@ -400,17 +413,27 @@
   "record_bundle": {
     "closure_status": "valid",
     "path": "data/golden_traces/slice1_records_v1.json",
-    "record_count": 721
+    "record_count": 726
   },
   "robodebt_adapter": {
+    "application_mapping_id": "R-OCI-EARLY-MAPPING@1",
+    "compiler_code_hash_equal": true,
     "configuration_id": "R-OCI-EARLY-SMOKE",
-    "kernel_case_branch": false,
+    "kernel_case_identifiers_absent": true,
+    "receipt_provenance": {
+      "notice_delay": "stylized",
+      "response_deadline": "documented",
+      "review_capacity": "stylized",
+      "review_service_time": "stylized"
+    },
     "receipt_slots": [
       "notice_delay",
       "response_deadline",
       "review_capacity",
       "review_service_time"
-    ]
+    ],
+    "unresolved_parameter_slot_ids": [],
+    "unsupported_defaults_used": false
   },
   "schema_version": 1,
   "traces": {

@@ -426,6 +426,10 @@ class StoredRecord(StrictModel):
             raise ValueError("payload model absent from manifest")
         if self.payload.__class__.__name__ == "ExecutableRule":
             validate_executable_rule(self.payload)
+        if self.payload.__class__.__name__ == "ValidationReceipt":
+            observed_status = "match" if _canonical(self.payload.expected_value) == _canonical(self.payload.observed_value) else "mismatch"
+            if self.payload.comparison_status != observed_status:
+                raise ValueError("validation receipt comparison status differs from expected-versus-observed values")
         domain_id = getattr(self.payload, spec["domain_id_field"])
         if domain_id != self.meta.object_id:
             raise ValueError("payload domain ID differs from envelope object ID")

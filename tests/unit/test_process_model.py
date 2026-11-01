@@ -4,7 +4,7 @@ import pytest
 
 from uncertainty_permission_simulation.applications.robodebt import load_early_adapter
 from uncertainty_permission_simulation.artifacts import BundleBuilder, build_bundle, ref
-from uncertainty_permission_simulation.cli import _specs
+from uncertainty_permission_simulation.cli import _slice1_validation_observations, _specs
 from uncertainty_permission_simulation.configuration import CompilationError, ParameterValue, ScenarioOverlaySpec, compile_configuration
 from uncertainty_permission_simulation.process_model import TraceSpec, execute_topology, run_trace
 from uncertainty_permission_simulation.profiles import canonical_process, nonisomorphic_process, policy, smoke_overlay
@@ -63,10 +63,20 @@ def test_robodebt_adapter_preserves_unsupported_slots() -> None:
 def test_stored_bundle_is_reference_closed_and_matches_prespecified_results() -> None:
     specs = _specs()
     results = {spec.trace_id: run_trace(spec) for spec in specs}
-    bundle = build_bundle(specs, results)
+    reference_u2c = compile_configuration(
+        configuration_id="SYNTH-U2C", process=canonical_process(), policy=policy("U2C"),
+        overlay=smoke_overlay(), evaluation_spec_id="P0-SIGMA-1",
+    )
+    observations = _slice1_validation_observations(reference_u2c)
+    bundle = build_bundle(specs, results, validation_observations=observations)
     assert bundle["closure_status"] == "valid"
-    assert bundle["record_count"] == 721
+    assert bundle["record_count"] == 726
     assert all(comparison["match"] for comparison in bundle["comparisons"])
+    assert bundle["validation_receipt_status"] == {
+        "isomorphic_vocabulary": "match",
+        "nonisomorphic_topology": "match",
+        "application_adapter": "match",
+    }
     assert all(record["payload"] for record in bundle["records"])
     records = {(record["meta"]["object_id"], record["meta"]["object_version"]): record for record in bundle["records"]}
     representations = [record for record in bundle["records"] if record["payload"].get("payload_kind") == "representation"]
@@ -81,6 +91,27 @@ def test_stored_bundle_is_reference_closed_and_matches_prespecified_results() ->
     assert len(bundle["rule_implementation_receipts"]) == 3
     assert bundle["reference_target_receipt"]["declared_reference_fields"] >= 236
     assert bundle["reference_target_receipt"]["typed_target_refs_validated"] > 0
+
+
+def test_stored_validation_receipt_exposes_observation_mutation() -> None:
+    specs = _specs()
+    results = {spec.trace_id: run_trace(spec) for spec in specs}
+    reference_u2c = compile_configuration(
+        configuration_id="SYNTH-U2C", process=canonical_process(), policy=policy("U2C"),
+        overlay=smoke_overlay(), evaluation_spec_id="P0-SIGMA-1",
+    )
+    observations = _slice1_validation_observations(reference_u2c)
+    observations["isomorphic_vocabulary"]["event_order_equal"] = False
+    bundle = build_bundle(specs, results, validation_observations=observations)
+    assert bundle["validation_receipt_status"]["isomorphic_vocabulary"] == "mismatch"
+    receipt_ref = bundle["validation_receipt_refs"]["isomorphic_vocabulary"]
+    receipt = next(
+        record for record in bundle["records"]
+        if record["meta"]["object_id"] == receipt_ref["object_id"]
+    )
+    assert receipt["payload"]["expected_value"]["event_order_equal"] is True
+    assert receipt["payload"]["observed_value"]["event_order_equal"] is False
+    assert receipt["payload"]["comparison_status"] == "mismatch"
 
 
 def test_record_graph_rejects_unresolved_reference_and_cycle() -> None:

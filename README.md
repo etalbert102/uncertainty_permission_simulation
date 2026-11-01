@@ -12,7 +12,7 @@ The study asks when aggregate annual income data can become apparently precise f
 
 ## Status
 
-The research and implementation plan is execution-ready; this does not mean the study is complete. Slice 0 gates pass and Slice 1 implementation is in progress. A deterministic vertical-slice checkpoint now exists, but no stochastic simulator or confirmatory results exist. No pilot, evidence packet, or completed manuscript exists either. Independent reader QA remains required before protocol `1.0` and confirmatory freeze.
+The research and implementation plan is execution-ready; this does not mean the study is complete. Slice 0 gates pass and the deterministic Slice 1 vertical slice is complete. No stochastic simulator or confirmatory results exist. No pilot, evidence packet, or completed manuscript exists either. Independent reader QA remains required before protocol `1.0` and confirmatory freeze.
 
 The canonical execution plan is [docs/STUDY_PLAN.md](docs/STUDY_PLAN.md).
 
@@ -24,7 +24,7 @@ The draft formal specification is [docs/FORMAL_MODEL.md](docs/FORMAL_MODEL.md). 
 
 The draft practitioner method is [docs/PROCESS_RED_TEAM_PROTOCOL.md](docs/PROCESS_RED_TEAM_PROTOCOL.md). It defines document-audit, bounded-trace, and dynamic-simulation application levels; a five-step intake and diagnostic workflow; mandatory escalation; and a non-composite report profile. Blinded QA uses packet-only copies of [docs/P0_COLD_READER_PACKET.md](docs/P0_COLD_READER_PACKET.md) and [docs/TRANSFER_CANARY.md](docs/TRANSFER_CANARY.md), controlled through [docs/COLD_READER_QA_RECEIPT.md](docs/COLD_READER_QA_RECEIPT.md). [docs/P0_USABILITY_WALKTHROUGH.md](docs/P0_USABILITY_WALKTHROUGH.md) and [docs/TRANSFER_CANARY_EXPECTED_PROFILE.md](docs/TRANSFER_CANARY_EXPECTED_PROFILE.md) are withheld oracles and must be opened only after a reader locks their assessment. Their results remain expected projections until Slice 1 emits executable records.
 
-The machine-readable schema inventory is [data/model/schema_manifest_v1.yaml](data/model/schema_manifest_v1.yaml). Slice 1 now generates a closed Pydantic payload-model inventory from it and enforces record envelopes, schema identity, source basis, provenance, canonical hashing, recursive reference closure, cycle rejection, and a complete reference-target role matrix with explicit polymorphic exemptions. Executable rules are checked against a static 16-implementation callable registry, exact parameter and role signatures, and immutable code-artifact hashes. The deterministic CLI emits a closed 721-record event/state/assessment bundle with nine nonempty representation-to-field edges and a reference-target receipt; stored canary/adapter receipts remain before Slice 1 closes.
+The machine-readable schema inventory is [data/model/schema_manifest_v1.yaml](data/model/schema_manifest_v1.yaml). Slice 1 generates a closed Pydantic payload-model inventory from it and enforces record envelopes, schema identity, source basis, provenance, canonical hashing, recursive reference closure, cycle rejection, and a complete reference-target role matrix with explicit polymorphic exemptions. Executable rules are checked against a static 16-implementation callable registry, exact parameter and role signatures, and immutable code-artifact hashes. The deterministic CLI emits a closed 726-record event/state/assessment bundle with nine nonempty representation-to-field edges, a reference-target receipt, and stored expected-versus-actual receipts for the isomorphic-vocabulary canary, non-isomorphic-topology canary, and R-OCI-Early adapter compilation.
 
 The [configuration compilation contract](docs/CONFIGURATION_COMPILATION.md) fixes the case-neutral boundary: immutable source fixture, application mapping, process capability profile, active policy profile, independent evaluation specification, stylized overlay, and complete parameter-binding receipts compile into the only configuration the simulator may execute.
 
@@ -80,4 +80,4 @@ tests/
 
 ## Next Step
 
-Continue Slice 1 by materializing stored expected-versus-actual receipts for both canaries and the R-OCI-Early adapter. The case-neutral compiler, deterministic traces, 707-record closed bundle, closed executable-rule registry, typed reference-target validation, report links, both generalizability canaries, and adapter smoke path already execute. Independent readability QA may proceed in parallel and remains blocking only for protocol `1.0` and confirmatory freeze.
+Begin Slice 2 by extending the closed deterministic kernel into the stochastic finite-cohort engine and validation layer without weakening the completed Slice 1 contracts. Independent readability QA may proceed in parallel and remains blocking only for protocol `1.0` and confirmatory freeze.

@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 
-from dataclasses import asdict
+from hashlib import sha256
+from pathlib import Path
 from typing import Any
 
 from .events import DEFAULT_PRIORITIES
@@ -11,6 +12,9 @@ from .metrics import trace_metrics
 from .process_model import TraceResult, TraceSpec
 from .rules import implementation_code_hash
 from .schemas import MANIFEST, PAYLOAD_MODELS, RecordMeta, RecordRef, RecordStore, StoredRecord
+
+
+ROOT = Path(__file__).resolve().parents[2]
 
 
 EXPECTED_DISPOSITIONS = {
@@ -25,9 +29,55 @@ EXPECTED_DISPOSITIONS = {
     "GOLDEN-PARTIAL-RESTORATION": ("timeout_progression", "progress"),
 }
 
+VALIDATION_EXPECTATIONS: dict[str, dict[str, Any]] = {
+    "isomorphic_vocabulary": {
+        "artifact_identity_differs": True,
+        "event_order_equal": True,
+        "metrics_equal": True,
+        "semantic_projection_equal": True,
+    },
+    "nonisomorphic_topology": {
+        "compiler_code_hash_equal": True,
+        "events": ("CASE_ARRIVAL", "ROUTING_COMPLETED", "EVIDENCE_REQUESTED", "REVIEW_QUEUED", "CASE_CLOSED"),
+        "profile_id": "SYNTHETIC-NONISOMORPHIC@1",
+        "stage_ids": ("intake", "triage", "optional_review", "evidence", "decision", "closed"),
+        "topology_differs": True,
+        "unresolved_parameter_slot_ids": (),
+    },
+    "application_adapter": {
+        "application_mapping_id": "R-OCI-EARLY-MAPPING@1",
+        "compiler_code_hash_equal": True,
+        "configuration_id": "R-OCI-EARLY-SMOKE",
+        "kernel_case_identifiers_absent": True,
+        "receipt_provenance": {
+            "notice_delay": "stylized",
+            "response_deadline": "documented",
+            "review_capacity": "stylized",
+            "review_service_time": "stylized",
+        },
+        "receipt_slots": ("notice_delay", "response_deadline", "review_capacity", "review_service_time"),
+        "unresolved_parameter_slot_ids": (),
+        "unsupported_defaults_used": False,
+    },
+}
+
+VALIDATION_RECEIPT_IDS = {
+    "isomorphic_vocabulary": "SLICE1-VALIDATION-ISOMORPHIC",
+    "nonisomorphic_topology": "SLICE1-VALIDATION-NONISOMORPHIC",
+    "application_adapter": "SLICE1-VALIDATION-ADAPTER",
+}
+
 
 def ref(object_id: str) -> RecordRef:
     return RecordRef(object_id=object_id, object_version=1)
+
+
+def _comparison_value(value: Any) -> Any:
+    if isinstance(value, dict):
+        return {key: _comparison_value(item) for key, item in value.items()}
+    if isinstance(value, (tuple, list)):
+        return [_comparison_value(item) for item in value]
+    return value
 
 
 class BundleBuilder:
@@ -62,7 +112,15 @@ class BundleBuilder:
         return ref(object_id)
 
 
-def build_bundle(specs: tuple[TraceSpec, ...], results: dict[str, TraceResult]) -> dict[str, Any]:
+def build_bundle(
+    specs: tuple[TraceSpec, ...],
+    results: dict[str, TraceResult],
+    *,
+    validation_observations: dict[str, dict[str, Any]],
+) -> dict[str, Any]:
+    expected_keys = set(VALIDATION_EXPECTATIONS)
+    if set(validation_observations) != expected_keys:
+        raise ValueError(f"validation observations must contain exactly {sorted(expected_keys)}")
     b = BundleBuilder()
     case = b.add("FixtureCase", "SLICE1-CASE", {
         "case_id": "SLICE1-CASE", "case_kind": "synthetic_vertical_slice", "latent_object_type": "oracle_only",
@@ -365,6 +423,53 @@ def build_bundle(specs: tuple[TraceSpec, ...], results: dict[str, TraceResult]) 
                 "false_antecedent_ref": None, "missing_or_invalid_fields": (), "evaluation_input_bindings": (),
             }, provenance="simulated", basis="versioned_sources", sources=(trace_ref, *diagnostic_refs))
 
+    robodebt_temporal = b.add("TemporalScope", "R-OCI-EARLY-TEMPORAL-SCOPE-1", {
+        "temporal_scope_id": "R-OCI-EARLY-TEMPORAL-SCOPE-1", "mode": "dated_interval",
+        "start_value": "2016-07", "start_precision": "month", "end_value": "2017-01-19",
+        "end_precision": "day", "reference_as_of": None, "simultaneous_activation_claimed": False,
+        "limitation": "The fixed source packet does not identify the exact day of the July limited rollout.",
+    })
+    robodebt_fixture_path = ROOT / "data/sources/robodebt/r_oci_early.yaml"
+    robodebt_fixture = b.add("SourceApplicationFixture", "R-OCI-EARLY-SOURCE-FIXTURE@1", {
+        "source_application_fixture_id": "R-OCI-EARLY-SOURCE-FIXTURE@1", "application_id": "R-OCI",
+        "source_profile_id": "R-OCI-Early", "source_profile_version": 1,
+        "artifact_path": "data/sources/robodebt/r_oci_early.yaml",
+        "artifact_hash": sha256(robodebt_fixture_path.read_bytes()).hexdigest(),
+        "temporal_scope_ref": robodebt_temporal,
+        "source_claim_ids": ("RB-CLAIM-001", "RB-CLAIM-002", "RB-CLAIM-003", "RB-CLAIM-004", "RB-CLAIM-005"),
+        "unsupported_parameter_slot_ids": ("review_capacity", "review_service_time"),
+    }, provenance="documented", basis="versioned_sources", sources=(robodebt_temporal,))
+
+    validation_sources = {
+        "isomorphic_vocabulary": (compiled_refs["U2C"], rule),
+        "nonisomorphic_topology": (compiled_refs["U2C"], rule, registry),
+        "application_adapter": (robodebt_fixture, compiled_refs["U2C"], rule),
+    }
+    validation_subject_ids = {
+        "isomorphic_vocabulary": ("SYNTH-U2C", "RENAMED-U2C", "CANARY-ORIGINAL", "CANARY-RENAMED"),
+        "nonisomorphic_topology": ("SYNTHETIC-NONISOMORPHIC@1", "NONISO-U2C"),
+        "application_adapter": ("R-OCI-Early@1", "R-OCI-EARLY-MAPPING@1", "R-OCI-EARLY-SMOKE"),
+    }
+    validation_receipt_refs: dict[str, RecordRef] = {}
+    validation_receipt_status: dict[str, str] = {}
+    for validation_kind, expected_value in VALIDATION_EXPECTATIONS.items():
+        observed_value = validation_observations[validation_kind]
+        comparison_status = (
+            "match"
+            if _comparison_value(expected_value) == _comparison_value(observed_value)
+            else "mismatch"
+        )
+        receipt_id = VALIDATION_RECEIPT_IDS[validation_kind]
+        sources = validation_sources[validation_kind]
+        validation_receipt_refs[validation_kind] = b.add("ValidationReceipt", receipt_id, {
+            "validation_receipt_id": receipt_id, "validation_kind": validation_kind,
+            "subject_ids": validation_subject_ids[validation_kind], "subject_refs": sources,
+            "expected_value": expected_value, "observed_value": observed_value,
+            "comparison_rule": "exact_deep_equality", "comparison_status": comparison_status,
+            "required_for_slice_close": True,
+        }, provenance="derived", basis="versioned_sources", sources=sources)
+        validation_receipt_status[validation_kind] = comparison_status
+
     b.store.validate_closure()
     stored_records = b.store.records()
     records = [record.model_dump(mode="json") for record in stored_records]
@@ -383,4 +488,6 @@ def build_bundle(specs: tuple[TraceSpec, ...], results: dict[str, TraceResult]) 
         "reference_target_receipt": b.store.reference_target_receipt(),
         "rule_implementation_receipts": rule_receipts,
         "compiled_configuration_refs": {key: value.model_dump() for key, value in compiled_refs.items()},
+        "validation_receipt_refs": {key: value.model_dump() for key, value in validation_receipt_refs.items()},
+        "validation_receipt_status": validation_receipt_status,
     }
