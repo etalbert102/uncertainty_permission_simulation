@@ -712,6 +712,8 @@ Tracked pilot receipt: `data/pilot/pilot_v1_receipt.json` with self-hash recorde
 
 Project-lead decision superseding the earlier external-QA entries above:
 
+Revision implementation commit: `b7067b2` (`Replace external reader gate with post-simulation review`).
+
 - Removed external-reader returns as a pre-freeze or completion requirement. No independent-reader or inter-rater claim will be made.
 - Retired the cold-reader distribution instructions, blank receipts, handoff, bundle builders, return verifier, external-QA module, and its integration tests. The generated reader ZIPs are no longer study artifacts.
 - Recast P0, the executable Robodebt trace, and the transfer canary as staged procedure-review inputs with separate reference profiles.
