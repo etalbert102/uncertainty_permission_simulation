@@ -7,7 +7,7 @@ from hashlib import sha256
 import json
 from pathlib import Path
 import re
-from zipfile import ZIP_DEFLATED, ZipFile
+from zipfile import ZIP_DEFLATED, ZipFile, ZipInfo
 
 
 ALLOWLIST = {
@@ -69,7 +69,10 @@ def main() -> int:
     output.parent.mkdir(parents=True, exist_ok=True)
     with ZipFile(output, "w", compression=ZIP_DEFLATED) as archive:
         for name, data in sorted(payloads.items()):
-            archive.writestr(name, data)
+            info = ZipInfo(name, date_time=(2026, 11, 1, 0, 0, 0))
+            info.compress_type = ZIP_DEFLATED
+            info.external_attr = 0o100644 << 16
+            archive.writestr(info, data)
     print(json.dumps({"output": str(output), "sha256": sha256(output.read_bytes()).hexdigest()}))
     return 0
 

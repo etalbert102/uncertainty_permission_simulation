@@ -112,6 +112,7 @@ def main() -> int:
         ROOT / "docs/CASE_APPLICATION_SUFFICIENCY.md",
         ROOT / "docs/PROTOCOL_REVISION_LOG.md",
         ROOT / "docs/SLICE3_COLD_READER_QA_RECEIPT.md",
+        ROOT / "docs/SLICE3_READER_HANDOFF.md",
         ROOT / "docs/PILOT_AUDIT.md",
     ):
         if not path.exists() or not path.read_text(encoding="utf-8").strip():
