@@ -21,7 +21,7 @@ Do not use “the precursor,” `P0-Precursor`, “as argued previously,” or d
 | Prefer reversible information-seeking | Test U3 against claimant-led hold and review policies | Burden/workload/support/timeliness vector | The article assumes information-first is universally better |
 | Attackability requires inducibility, observability, repeatability, and benefit | Preserve as a separate claim layer | Explicit four-field claim receipt | Robodebt or red-team mutations are described as proof of historical attack |
 | Decision records should connect representations, rules, actions, and overrides | Make this a stored-record and replay requirement | Versioned trace, references, and hashes | A report cannot identify the rule/evidence responsible for an action |
-| Fluent summaries can suppress conflict without literal falsity | Use a synthetic vendor-access canary | Blinded packet and withheld oracle | Canary is presented as deployment evidence or tuned after oracle inspection |
+| Fluent summaries can suppress conflict without literal falsity | Use a synthetic vendor-access canary | Staged review input, reference profile, and frozen protocol application | Canary is presented as deployment evidence or tuned after reference-profile inspection |
 
 ## Claim Types
 

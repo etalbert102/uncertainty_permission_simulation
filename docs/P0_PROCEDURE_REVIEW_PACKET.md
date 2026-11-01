@@ -1,14 +1,14 @@
-# Blinded P0 Cold-Reader Packet
+# P0 Procedure-Review Input
 
-Status: draft packet version `0.1`; contains inputs only
+Status: draft review-input version `0.1`; contains inputs only
 
 Companion protocol: `docs/PROCESS_RED_TEAM_PROTOCOL.md`, version `0.2`
 
-Oracle access: prohibited until the reader submits a locked report
+Reference-profile access: complete the first-pass assessment before consulting it
 
-## Reader Instructions
+## Project-Lead Review Instructions
 
-Use only this packet and the process-red-team protocol. Do not open the formal fixture, the P0 usability walkthrough, expected-result records, or executable fixture output. If you have already seen those materials, mark the run as a practice run rather than blinded QA.
+For the first pass, use only this input and the process-red-team protocol. Record where the instructions are unclear before consulting the formal fixture, P0 usability walkthrough, expected-result records, or executable fixture output. Prior familiarity does not invalidate the review, but record it because this is a comprehensibility check rather than an independent or blinded validation exercise.
 
 Complete the protocol intake receipt, choose the application level, classify each requested property/helper or mark it `omitted_by_claim_limit`, identify the first material transition, select diagnostics from the protocol lookup, propose an intervention, distinguish diagnostic and intervention ownership, and state all non-claims. Do not produce an overall score.
 
@@ -97,7 +97,7 @@ In the fallback arm, the independent baseline still requires a gate and review f
 
 ## Frozen Property Scope
 
-| Property/helper | Scope information supplied to the reader |
+| Property/helper | Scope information supplied for review |
 | --- | --- |
 | F0 | Included for both representations. |
 | F1 | Explicitly excluded because evidence and model output do not vary. |

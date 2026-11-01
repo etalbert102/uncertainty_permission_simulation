@@ -1,8 +1,8 @@
 # P0 Usability Walkthrough and Expected Profile
 
-Status: draft post-assessment oracle and reader-facing walkthrough; expected-output projection only
+Status: draft post-assessment reference and practitioner-facing walkthrough; expected-output projection only
 
-Cold-reader access: prohibited until the reader submits a locked report using `docs/P0_COLD_READER_PACKET.md`
+Review order: complete a first pass using `docs/P0_PROCEDURE_REVIEW_PACKET.md` before consulting this walkthrough
 
 Protocol version: `0.2`
 
@@ -10,7 +10,7 @@ Formal fixture: `docs/PRECURSOR_FIDELITY_FIXTURE.md`
 
 ## Purpose and Boundary
 
-This walkthrough shows how the process-red-team protocol turns a controlled representation comparison into an inspectable diagnostic profile. It also serves as the withheld expected profile for cold-reader QA and must not be distributed with the blinded packet. It is not an executed trace, a historical Robodebt case, an F1 evidence-refinement test, an F2 system-intervention test, or evidence of prevalence or attackability.
+This walkthrough shows how the process-red-team protocol turns a controlled representation comparison into an inspectable diagnostic profile. It also serves as the reference profile for the staged project-lead comprehensibility review. It is not an executed trace, a historical Robodebt case, an F1 evidence-refinement test, an F2 system-intervention test, or evidence of prevalence or attackability.
 
 The executable stored-record bundle and canonical hashes remain Slice 1 deliverables. Until then, the IDs and expected classifications below are an oracle projection from the fixture specification, not generated results.
 
@@ -74,7 +74,7 @@ No evidence state, underlying case, model output, policy, decision rule, process
 
 There is no overall status. The profile establishes a representation-induced routing and permission change, identifies F0 and F4 failures in the fallback arm, and preserves all non-applicable and unassessable boundaries.
 
-## Reader-Facing Report Projection
+## Practitioner-Facing Report Projection
 
 The practitioner report should render the stored assessment graph approximately as follows. This projection is deliberately compact and is not a substitute for the future canonical record bundle.
 

@@ -28,7 +28,7 @@ The fixture isolates a narrow causal contrast within the declared hypothetical w
 
 The formal model then generalizes this logic to declared evidence refinements and robust automatic permission. The dynamic simulation separately examines how the generalized invariant behaves when evidence availability, administrative access, workload, gates, deadlines, and restoration vary. Those later perturbations must not be described as additional fixed-output tests.
 
-`docs/P0_COLD_READER_PACKET.md` renders only the inputs needed for blinded protocol QA. `docs/P0_USABILITY_WALKTHROUGH.md` contains the withheld expected profile and must not be distributed until a reader locks their report. The walkthrough remains an oracle projection until Slice 1 emits the same non-composite assessment profile from executable stored records; neither artifact adds or changes fixture semantics.
+`docs/P0_PROCEDURE_REVIEW_PACKET.md` renders only the inputs needed for a staged first-pass protocol application. `docs/P0_USABILITY_WALKTHROUGH.md` contains the reference profile consulted after ambiguities are recorded. The walkthrough remains an oracle projection until Slice 1 emits the same non-composite assessment profile from executable stored records; neither artifact adds or changes fixture semantics.
 
 ## Layer and Access Contract
 
@@ -948,12 +948,13 @@ Before the fixture is frozen:
 
 1. reconcile action classification and F0–F5 mappings with `docs/FORMAL_MODEL.md`;
 2. validate `data/model/schema_manifest_v1.yaml` and its bidirectional agreement with schema models and P0 fixture kinds;
-3. have two cold readers identify every held, varied, oracle-only, and prohibited field using packet-only copies of `docs/P0_COLD_READER_PACKET.md`, without consulting the precursor essay, this formal fixture, the usability walkthrough, or expected outputs;
-4. confirm that readers can distinguish the same-rule semantic null from the routing-invariance control;
-5. convert fixed records, transformations, the taxonomy, operational policy map, independent evaluation specification, total rules, and expected outputs to machine-readable fixtures;
-6. run the reference-closure, canonicalization, oracle-leak, label-renaming, semantic-correspondence, rule-totality, and no-randomness gates;
-7. record canonical hashes and fixture version in the freeze manifest; and
-8. log every semantic revision and its reason.
+3. convert fixed records, transformations, the taxonomy, operational policy map, independent evaluation specification, total rules, and expected outputs to machine-readable fixtures;
+4. verify mechanically that every held, varied, oracle-only, and prohibited field is represented and that the same-rule semantic null remains distinct from the routing-invariance control;
+5. run the reference-closure, canonicalization, oracle-leak, label-renaming, semantic-correspondence, rule-totality, and no-randomness gates;
+6. record canonical hashes and fixture version in the freeze manifest; and
+7. log every semantic revision and its reason.
+
+The project-lead comprehensibility review occurs after Slice 5 analysis and is not a fixture-freeze prerequisite. If that review identifies a semantic defect, the affected freeze and confirmatory artifacts are invalidated and rerun.
 
 After freeze, display wording may be clarified, but no held field, transformation, policy map, rule, expected comparison, property classification, or acceptance condition may change in response to simulation results without a declared protocol deviation.
 

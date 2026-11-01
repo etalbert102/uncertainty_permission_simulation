@@ -21,17 +21,16 @@ REQUIRED_FILES = {
     "data/sources/robodebt/r_oci_early.yaml",
     "data/sources/robodebt/r_oci_enhanced.yaml",
     "docs/ARTICLE_OUTLINE.md",
-    "docs/COLD_READER_DISTRIBUTION.md",
-    "docs/COLD_READER_QA_RECEIPT.md",
     "docs/CONTINUITY_AND_CLAIM_BOUNDARY.md",
     "docs/CONFIGURATION_COMPILATION.md",
     "docs/DEFERRED.md",
     "docs/EXECUTION_LEDGER.md",
     "docs/FORMAL_MODEL.md",
     "docs/LITERATURE_AND_ORIGINALITY_MAP.md",
-    "docs/P0_COLD_READER_PACKET.md",
+    "docs/P0_PROCEDURE_REVIEW_PACKET.md",
     "docs/P0_USABILITY_WALKTHROUGH.md",
     "docs/PLAN_COMPLETION_RECEIPT.md",
+    "docs/PROCEDURE_COMPREHENSIBILITY_REVIEW.md",
     "docs/PRECURSOR_FIDELITY_FIXTURE.md",
     "docs/PREREGISTRATION.md",
     "docs/PROCESS_RED_TEAM_PROTOCOL.md",
@@ -40,16 +39,15 @@ REQUIRED_FILES = {
     "docs/TRANSFER_CANARY.md",
     "docs/TRANSFER_CANARY_EXPECTED_PROFILE.md",
     "docs/WORKED_TRACE_SELECTION.md",
-    "scripts/build_cold_reader_bundle.py",
     "scripts/validate_plan.py",
 }
 
-BLINDED_PACKETS = {
-    "docs/P0_COLD_READER_PACKET.md",
+REVIEW_INPUTS = {
+    "docs/P0_PROCEDURE_REVIEW_PACKET.md",
     "docs/TRANSFER_CANARY.md",
 }
 
-FORBIDDEN_BLINDED_PATTERNS = {
+FORBIDDEN_REVIEW_INPUT_PATTERNS = {
     r"\bFM_[A-Z0-9_]+\b": "formal diagnostic code",
     r"\bP0_[A-Z0-9_]+\b": "fixture diagnostic code",
     r"\bSCHEMA_[A-Z0-9_]+\b": "schema diagnostic code",
@@ -136,12 +134,12 @@ def validate_markdown() -> None:
                 )
 
 
-def validate_blinded_packets() -> None:
-    for relative in BLINDED_PACKETS:
+def validate_review_inputs() -> None:
+    for relative in REVIEW_INPUTS:
         text = (ROOT / relative).read_text(encoding="utf-8")
-        for pattern, label in FORBIDDEN_BLINDED_PATTERNS.items():
+        for pattern, label in FORBIDDEN_REVIEW_INPUT_PATTERNS.items():
             if re.search(pattern, text, flags=re.IGNORECASE):
-                raise ValueError(f"{label} leaked into blinded packet {relative}")
+                raise ValueError(f"{label} leaked into staged review input {relative}")
         if re.search(
             r"\b(pass|fail|unassessable|not_applicable)\s*[/,:-]\s*(complete|incomplete|invalid)\b",
             text,
@@ -310,7 +308,7 @@ def main() -> int:
         re.findall(r"\b(?:FM|P0|SCHEMA|SIM)_[A-Z0-9_]+\b", specification_text)
     )
     nondiagnostic_tokens = {
-        "P0_COLD_READER_PACKET",
+        "P0_PROCEDURE_REVIEW_PACKET",
         "P0_USABILITY_WALKTHROUGH",
     }
     candidate_diagnostics = {
@@ -440,7 +438,7 @@ def main() -> int:
         raise ValueError("worked trace must remain deterministic with zero draws")
 
     validate_markdown()
-    validate_blinded_packets()
+    validate_review_inputs()
 
     study_plan = (ROOT / "docs/STUDY_PLAN.md").read_text(encoding="utf-8")
     if "P0 must not be mislabeled as a Robodebt trace" not in study_plan:
@@ -448,7 +446,7 @@ def main() -> int:
     for required_boundary in (
         "case-neutral study kernel",
         "Minimum defensible case threshold",
-        "External QA gate",
+        "Post-simulation review contract",
         "stylized scenario overlay",
     ):
         if required_boundary not in study_plan:

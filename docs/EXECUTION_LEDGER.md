@@ -6,10 +6,10 @@ This ledger is the canonical slice-status record. Update it at the end of every 
 
 | Slice | Status | Commit | Verification | Residual risk |
 | --- | --- | --- | --- | --- |
-| 0. Source, construct, and claim contract | implementation, plan, and baseline gates passed — pre-freeze reader QA pending | `9cf836c` | automated Slice 0 and plan gates pass from declared environment | two eligible locked reader returns are not yet available; this blocks Slice 4, not Slice 1 engineering |
+| 0. Source, construct, and claim contract | complete; external-reader gate retired by project-lead decision | `9cf836c`; amended 2026-11-01 | automated Slice 0 and plan gates pass from declared environment | comprehensibility remains a post-Slice-5 project-lead review, not a pre-freeze dependency |
 | 1. Case-neutral dynamic vertical slice | complete | `93e2da6` | 27 tests; 726-record closed bundle; three stored validation receipts match; both artifact hashes repeat | Slice 2 retained the exact artifact hashes and validated stochastic extension without weakening this contract |
 | 2. Stochastic engine and validation | complete | `d541d03` closeout; `fa6dfc4` semantic audit | 148 tests; five exact stochastic traces; stored replay/application/queue receipts; analytical and independent-reference checks; all prior gates pass | implementation validation only; monetary and unmodeled harms remain outside the declared consequence vector; no pilot or substantive result exists |
-| 3. Experiment pilot and freeze candidate | engineering complete; external pre-freeze QA pending | `e8905fa` | 154 tests; Slice 0/plan/Slice 3 gates; 15-family pilot; executable worked trace and reader bundle rehearsal | independent eligible-reader returns cannot be self-certified and block Slice 4 |
+| 3. Experiment pilot and freeze candidate | complete; ready for Slice 4 freeze work | `e8905fa`; gate amended 2026-11-01 | pilot, Slice 0/plan/Slice 3 gates, executable worked trace and staged review materials | procedure comprehensibility will be reviewed after Slice 5; semantic findings require a new freeze and rerun |
 | 4. Confirmatory freeze | pending | — | — | — |
 | 5. Confirmatory execution and analysis | pending | — | — | — |
 | 6. Evidence packet and 10,000-word article | pending | — | — | — |
@@ -707,3 +707,25 @@ Tracked pilot receipt: `data/pilot/pilot_v1_receipt.json` with self-hash recorde
 - Added `scripts/verify_slice3_reader_returns.py` and the `qa.py` gate implementation. The gate requires two distinct locked returns, matching protocol/packet/archive hashes, eligible packet-only controls, no oracle exposure, timezone-aware timestamps, the full row inventory, closed vocabularies, exact status/completeness/diagnostic/transition agreement, and completed conclusion fields.
 - Added regressions for exact two-reader passage, answer-free templates, mismatch failure, oracle-exposure rejection, and duplicate-reader rejection. The full suite now contains 158 tests.
 - Deterministic distribution hashes after hardening are recorded in `docs/SLICE3_READER_HANDOFF.md`. Independent returns remain external and pending; no protocol promotion or freeze receipt exists.
+
+### External-reader gate retirement — 2026-11-01
+
+Project-lead decision superseding the earlier external-QA entries above:
+
+- Removed external-reader returns as a pre-freeze or completion requirement. No independent-reader or inter-rater claim will be made.
+- Retired the cold-reader distribution instructions, blank receipts, handoff, bundle builders, return verifier, external-QA module, and its integration tests. The generated reader ZIPs are no longer study artifacts.
+- Recast P0, the executable Robodebt trace, and the transfer canary as staged procedure-review inputs with separate reference profiles.
+- Added `docs/PROCEDURE_COMPREHENSIBILITY_REVIEW.md`. The project lead performs this review after Slice 5 confirmatory analysis and before Slice 6 completion.
+- Preserved freeze integrity: editorial clarifications may follow the review, but a semantic change to a construct, status rule, required input, application mapping, scenario, metric, analysis, or supported conclusion requires a new freeze and rerun of affected confirmatory artifacts.
+- Closed D-001 by design revision. No external dependency now blocks protocol `1.0` or Slice 4; automated source, fixture, pilot, configuration, and freeze gates remain blocking.
+- No confirmatory output existed or was inspected when this dependency change was made.
+
+Verification after the revision:
+
+| Command | Result |
+| --- | --- |
+| `./.venv/bin/python scripts/validate_plan.py` | pass: eight slices, 39 audit questions, nine deferred-register rows, and 10,000-word ceiling retained |
+| `./.venv/bin/python scripts/validate_slice0.py` | pass: source, schema, staged-review-input, provenance, and Markdown gates |
+| `PYTHONPATH=src ./.venv/bin/python scripts/validate_slice3.py` | pass: pilot, executable trace, input/reference separation, and no-confirmatory-output gates |
+| `PYTHONPATH=src ./.venv/bin/pytest -q` | pass: 154 tests; the four retired external-QA tests are no longer part of the study |
+| `git diff --check` | pass |

@@ -1,8 +1,8 @@
-# Robodebt Worked-Trace Withheld Expected Profile
+# Robodebt Worked-Trace Reference Profile
 
-Oracle version: `1.0-candidate`
+Reference-profile version: `1.0-candidate`
 
-Artifact hash: `5057bf6a0836a97c849bf5a22f37c2bf79abe63b6a2040d9ad4f063537a0755d`
+Artifact hash: `79ef8f7c8ff7e9af4863a591afd80f38a563e609e3f9f0d655c2d156bd2318d1`
 
 ## Baseline arm
 

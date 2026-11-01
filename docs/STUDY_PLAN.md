@@ -113,7 +113,7 @@ Exact historical rates, staffing, service-time distributions, engagement probabi
 
 ### Case change and freeze rule
 
-Before confirmatory freeze, the Robodebt mapping may be corrected, narrowed, or versioned if the source audit or reader QA reveals a material weakness. Such a change must be logged and must not require a kernel-code change unless it exposes a genuinely general missing construct. Replacing Robodebt as the selected primary application requires an explicit new plan and preregistration version; it is not an ordinary mapping edit. Before confirmatory execution, the selected application, source manifest, adapter version, parameter-provenance table, stylized overlays, worked-trace rule, and inference limits are frozen and hashed. Post-freeze case changes invalidate the affected confirmatory run.
+Before confirmatory freeze, the Robodebt mapping may be corrected, narrowed, or versioned if the source audit, application-sufficiency review, or executable trace checks reveal a material weakness. Such a change must be logged and must not require a kernel-code change unless it exposes a genuinely general missing construct. Replacing Robodebt as the selected primary application requires an explicit new plan and preregistration version; it is not an ordinary mapping edit. Before confirmatory execution, the selected application, source manifest, adapter version, parameter-provenance table, stylized overlays, worked-trace rule, and inference limits are frozen and hashed. Post-freeze case changes invalidate the affected confirmatory run.
 
 This design permits implementation before every case detail is confirmed while preserving a strong publication boundary: the empirical demonstration is about declared mechanisms over declared parameter spaces, and the case establishes structural relevance rather than historical numerical estimation.
 
@@ -980,12 +980,13 @@ The minimum Slice 1 inventory is: `RecordRef`; `SchemaRef`; `RecordMeta`; `Store
 - `docs/FORMAL_MODEL.md`: notation, definitions, results, and assumptions.
 - `docs/CONFIGURATION_COMPILATION.md`: deterministic ownership, compilation, overlay, temporal-scope, and generalizability contract.
 - `docs/PROCESS_RED_TEAM_PROTOCOL.md`: application levels, intake worksheet, five-step method, report template, and classification rules.
-- `docs/P0_COLD_READER_PACKET.md`: blinded input-only representation-preservation packet.
-- `docs/P0_USABILITY_WALKTHROUGH.md`: withheld P0 expected profile and post-assessment walkthrough.
-- `docs/TRANSFER_CANARY.md`: blinded synthetic contemporary-AI transfer packet.
-- `docs/TRANSFER_CANARY_EXPECTED_PROFILE.md`: withheld transfer-canary oracle.
-- `docs/COLD_READER_QA_RECEIPT.md`: packet/hash control, exposure validity, row-level comparison, error classes, ambiguity, and revision receipt.
-- `docs/COLD_READER_DISTRIBUTION.md`: oracle-free packaging, eligibility, and custodian procedure.
+- `docs/P0_PROCEDURE_REVIEW_PACKET.md`: input-only representation-preservation review packet.
+- `docs/P0_USABILITY_WALKTHROUGH.md`: P0 reference profile and post-assessment walkthrough.
+- `docs/TRANSFER_CANARY.md`: synthetic contemporary-AI transfer review input.
+- `docs/PROCEDURE_COMPREHENSIBILITY_REVIEW.md`: post-Slice-5 project-lead review and semantic-change control.
+- `docs/TRANSFER_CANARY_EXPECTED_PROFILE.md`: transfer-canary reference profile.
+- `docs/ROBODEBT_WORKED_TRACE_REVIEW_PACKET.md`: staged input rendered from the prespecified executable trace.
+- `docs/ROBODEBT_WORKED_TRACE_EXPECTED_PROFILE.md`: executable-trace reference profile.
 - `docs/ROBODEBT_CASE_STUDY.md`: sourced period-specific process map, formal crosswalk, and limitations table.
 - `docs/LITERATURE_AND_ORIGINALITY_MAP.md`: structured adjacent-literature and contribution boundary.
 - `docs/CONTINUITY_AND_CLAIM_BOUNDARY.md`: internal lineage, standalone, and attackability control.
@@ -1015,7 +1016,7 @@ Two workstreams proceed independently and converge before pilot freeze:
 1. **Kernel path:** formal specification -> schema manifest -> schemas and machine-readable P0 records -> canonical synthetic process and policy profiles -> configuration compiler -> process model -> event engine -> random streams -> scenario generator -> metrics -> analysis.
 2. **Application path:** source audit -> dated Robodebt source fixtures -> application mapping -> separate process capability and historical policy profiles -> profile and provenance validation -> stylized overlay -> compiled configuration -> worked-trace rendering.
 
-The kernel path may begin once the Slice 0 automated specification gate passes. It does not wait for exact historical calibration or independent reader QA. The application path may evolve before freeze, but it must load through public profile contracts and may not add branches to core execution code. Both paths, the executable Robodebt trace, and independent cold-reader artifact QA must pass before Slice 4 confirmatory freeze.
+The kernel path may begin once the Slice 0 automated specification gate passes. It does not wait for exact historical calibration. The application path may evolve before freeze, but it must load through public profile contracts and may not add branches to core execution code. Both paths, the executable Robodebt trace, the application-sufficiency review, and all automated pre-freeze checks must pass before Slice 4 confirmatory freeze. Procedure comprehensibility is reviewed by the project lead after Slice 5 analysis and before Slice 6 completion.
 
 The simulator must not depend on reporting, optional audit, or article-writing code.
 
@@ -1049,10 +1050,10 @@ The `Owns` list in each slice defines its substantive outputs. This table fixes 
 | 0 | current source fixtures, specifications, controls, and validation scripts | simulator implementation or generated empirical results | Slice 0 source/specification validation receipt |
 | 1 | `src/.../{schemas,formal_model,configuration,profiles,process_model,events,metrics,cli}.py`, matching unit tests, smoke config, and golden traces | stochastic calibration, confirmatory configs, or application-specific kernel branches | deterministic vertical-slice receipt |
 | 2 | `src/.../{simulator,random_streams,policies}.py`, application adapter, validation tests, and telemetry | scenario selection from substantive results or changes to frozen formal meaning | stochastic validation receipt |
-| 3 | scenario generator, pilot config/output, dummy analysis, figure prototypes, and blinded executable-trace QA packet | confirmatory-result inspection or post hoc primary estimands | pilot and freeze-candidate decision receipt |
+| 3 | scenario generator, pilot config/output, dummy analysis, figure prototypes, and executable-trace review input/reference profile | confirmatory-result inspection or post hoc primary estimands | pilot and freeze-candidate decision receipt |
 | 4 | preregistration `1.0`, confirmatory/sensitivity configs, dependency lock, and freeze manifest | any confirmatory execution | immutable freeze receipt with commit and artifact hashes |
 | 5 | append-only run outputs, reconciliation, analysis, figures, and claim-boundary memo | mutation of frozen inputs or replacement of completed runs | run-completeness and analysis receipt |
-| 6 | evidence packet and manuscript artifacts | new unpreregistered primary analysis or semantic protocol changes | release and manuscript receipt |
+| 6 | evidence packet, project-lead comprehensibility review, and manuscript artifacts | new unpreregistered primary analysis or unversioned semantic protocol changes | release, review, and manuscript receipt |
 | 7 | isolated optional audit module, config, outputs, and appendix result | changes to core simulation, primary analysis, or main acceptance criteria | optional audit receipt or explicit omission |
 
 ### Runtime and escalation budget
@@ -1092,11 +1093,11 @@ Record the baseline commit, Python version, platform, dependency versions, and v
 - `data/model/schema_manifest_v1.yaml`, enumerating every Slice 1 persisted payload, reference edge, set/sequence path, source-basis rule, and closed executable-rule signature;
 - `docs/CONFIGURATION_COMPILATION.md`, fixing source-fixture immutability, process-versus-policy ownership, overlay precedence, parameter-binding receipts, temporal scopes, generic kernel boundaries, and compilation diagnostics;
 - `docs/PROCESS_RED_TEAM_PROTOCOL.md` version `0.2`, fixing the five steps, application levels, ordered status procedure, assessment-versus-claim-limit distinction, required inputs, `pass`/`fail`/`unassessable`/`not_applicable` outputs, compact diagnostic lookup, ownership fields, and report rows before confirmatory results;
-- `docs/P0_COLD_READER_PACKET.md`, containing only the representation-preservation inputs and blank receipt;
-- `docs/P0_USABILITY_WALKTHROUGH.md`, containing the withheld P0 oracle, post-assessment explanation, non-composite profile, interventions, tradeoffs, and escalation boundaries;
-- `docs/TRANSFER_CANARY.md`, defining one blinded synthetic contemporary-AI workflow packet that uses different domain vocabulary and does not affect the Robodebt simulation;
-- `docs/TRANSFER_CANARY_EXPECTED_PROFILE.md`, containing the withheld transfer-canary oracle;
-- `docs/COLD_READER_QA_RECEIPT.md`, fixing the blind-run validity, packet/hash, row-comparison, error-class, and revision-log fields;
+- `docs/P0_PROCEDURE_REVIEW_PACKET.md`, containing only the representation-preservation inputs for a staged first-pass application;
+- `docs/P0_USABILITY_WALKTHROUGH.md`, containing the P0 reference profile, post-assessment explanation, non-composite profile, interventions, tradeoffs, and escalation boundaries;
+- `docs/TRANSFER_CANARY.md`, defining one synthetic contemporary-AI workflow review input that uses different domain vocabulary and does not affect the Robodebt simulation;
+- `docs/TRANSFER_CANARY_EXPECTED_PROFILE.md`, containing the transfer-canary reference profile;
+- `docs/PROCEDURE_COMPREHENSIBILITY_REVIEW.md`, fixing the post-Slice-5 project-lead review fields, issue log, and editorial-versus-semantic change rule;
 - a deterministic worked-trace selection rule fixed before confirmatory execution;
 - the internal continuity and claim-boundary control;
 - `docs/PREREGISTRATION.md` skeleton;
@@ -1106,14 +1107,14 @@ Record the baseline commit, Python version, platform, dependency versions, and v
 
 **Must resolve:** compatible-state ordering and concrete denotations, evidentiary fidelity, formal-versus-functional authority, effective review, gate safety, decision service, the record/reference boundary, canonicalization and schema identity, executable-rule bindings, replay-complete assessment and diagnostic references, source-fixture/application-mapping/process-profile/policy-profile/overlay/compiled-configuration ownership, generic event and case records, parameter precedence and conflict rejection, mixed-precision temporal scope, the base-vulnerability-versus-attackability boundary, exact `P0-Precursor` held variables and falsifier, bounded historical profile dates and unresolved fields, three-axis validity language, U0/U1/U2C/U2O/U3 semantics, primary outcomes, three headline article propositions, protocol classification rules, worked-trace selection, and emerging-technology contribution.
 
-**Forbidden:** simulator behavior, pilot tuning, invented historical values, confirmatory outputs, protocol `1.0`, and self-certification of independent reader QA.
+**Forbidden:** simulator behavior, pilot tuning, invented historical values, confirmatory outputs, and protocol `1.0`.
 
 **Verification:**
 
 ```bash
 python3 scripts/validate_slice0.py
 python3 scripts/validate_plan.py
-python3 -m py_compile scripts/validate_slice0.py scripts/validate_plan.py scripts/build_cold_reader_bundle.py
+python3 -m py_compile scripts/validate_slice0.py scripts/validate_plan.py
 ```
 
 **Stop if:**
@@ -1125,15 +1126,13 @@ python3 -m py_compile scripts/validate_slice0.py scripts/validate_plan.py script
 - the article cannot explain its emerging-technology contribution without asserting field equivalence; or
 - the formal contribution cannot be distinguished from existing value-of-information, queueing, monotonicity, or human-in-the-loop governance work.
 
-**Implementation gate:** the source/profile consistency, complete configuration-contract inventory, generic event/case boundary, compilation ownership, overlay precedence, temporal-scope support, provenance, P0/Robodebt boundary, blinded-packet leakage, YAML uniqueness, required-file, and Markdown checks pass structurally; the minimum defensible case threshold is documented; and Slice 1 can be implemented without a historical default, raw narrative execution, case-specific engine branch, or unresolved runtime slot.
+**Implementation gate:** the source/profile consistency, complete configuration-contract inventory, generic event/case boundary, compilation ownership, overlay precedence, temporal-scope support, provenance, P0/Robodebt boundary, staged-review-input answer leakage, YAML uniqueness, required-file, and Markdown checks pass structurally; the minimum defensible case threshold is documented; and Slice 1 can be implemented without a historical default, raw narrative execution, case-specific engine branch, or unresolved runtime slot.
 
-**External QA gate:** before protocol `1.0` and Slice 4 confirmatory freeze, at least two independent readers must be able to classify a state pair, representation claim, authority type, action, gate, and historical transition from the specification and cited sources alone; distinguish the base vulnerability from the four attackability conditions and every legal, evidentiary, and numerical claim; identify exactly what `P0-Precursor` holds fixed; and cold-read the protocol candidate and canary from packet-only copies without access to either withheld oracle, fixture expected-result tables, executable expected outputs, or confirmatory results.
+**Post-simulation review contract:** after Slice 5 analysis, the project lead applies the procedure in sequence to the P0 input, executable Robodebt worked trace, and transfer canary, records ambiguities, and checks whether the complete method can be understood without hidden author knowledge. This is not independent validation and is not a pre-freeze gate. Editorial corrections may be made in Slice 6; semantic corrections require a new freeze and rerun of affected confirmatory artifacts.
 
-The external QA gate is an independent pre-freeze dependency. Its absence does not block Slice 1 or Slice 2 implementation, but it blocks protocol `1.0`, confirmatory freeze, and any claim that the application materials are reader-validated.
+P0 must not be mislabeled as a Robodebt trace. The executable prespecified Robodebt trace does not exist until later slices and receives a separate review input and reference profile during Slice 3.
 
-Slice 0 cold-read QA uses P0 and the transfer canary to test construct readability. P0 must not be mislabeled as a Robodebt trace. The executable prespecified Robodebt trace does not exist until later slices and receives a separate blinded packet and oracle during Slice 3.
-
-**Done when:** both automated validators pass, every Slice 0 artifact has a named owner and closed claim boundary, the compiler can be implemented without inventing a runtime value or case-specific branch, all incomplete execution work is registered in `docs/DEFERRED.md`, and the ledger records the independent-reader gate separately from the implementation gate.
+**Done when:** both automated validators pass, every Slice 0 artifact has a named owner and closed claim boundary, the compiler can be implemented without inventing a runtime value or case-specific branch, all incomplete execution work is registered in `docs/DEFERRED.md`, and the ledger records the post-simulation project-lead review separately from the implementation and freeze gates.
 
 **Commit required:** yes.
 
@@ -1232,7 +1231,7 @@ PYTHONPATH=src pytest -q tests/integration/test_queue_validation.py tests/integr
 - dummy-data analysis pipeline;
 - boundary and tradeoff figure prototypes;
 - pilot audit;
-- cold-reader protocol packet containing one prespecified Robodebt golden trace and the synthetic contemporary-AI canary, each separated into a blinded input packet and withheld expected profile;
+- procedure-review materials containing one prespecified Robodebt golden trace and the synthetic contemporary-AI canary, each separated into a first-pass input and reference profile;
 - protocol revision log, limited to changes made before confirmatory freeze.
 
 **Pilot questions:** runtime, stage bottlenecks, rare-event frequency, MCSE, cutoff and censoring bias, common-random-number benefit, keyed-draw stability, invalid scenarios, metric redundancy, figure interpretability, and whether core hypotheses are estimable.
@@ -1255,9 +1254,9 @@ PYTHONPATH=src pytest -q
 
 **Stop if:** the dynamic results simply restate policy definitions, the main conclusions depend on scalar utility weights, outcome differences cannot be separated from implementation bugs, queue or access dynamics never affect review and outcomes, or runtime prevents the planned precision target.
 
-**Protocol QA:** before confirmatory freeze, at least two new cold readers who did not draft the protocol apply it without coaching to packet-only copies of the executable fixed Robodebt trace selected by `RB-WORKED-TRACE-001` and the synthetic AI canary. The Slice 3 packet and withheld expected profile are rendered from stored trace and assessment artifacts; `docs/P0_COLD_READER_PACKET.md` cannot substitute for the Robodebt packet. An oracle custodian records packet versions and hashes, distributes only the generated Robodebt packet, `docs/TRANSFER_CANARY.md`, the blank receipt, and the protocol, timestamps locked returns, and then compares each row with the withheld profiles. Repository or other access to an oracle, fixture expected-result table, or executable expected output invalidates that blind run; retain it only as a practice receipt. Each reader records application level, `evaluation_state`, property status and completeness where assessed, located transition, evidence, diagnostic, missing information or claim limit, diagnostic owner, intervention owner, tradeoff, and ambiguity. Score omitted rows, unsupported certainty, diagnostic mismatch, and claim-limit errors in addition to status agreement. Disagreements trigger a logged wording or schema revision before freeze and a rerun with new readers after semantic changes, not undocumented coaching or post-result reinterpretation. Treat this as artifact QA, collect no personal data, and make no claims about human performance. If reviewer-performance data would be reported as research, obtain the appropriate ethics determination first.
+**Protocol artifact QA:** before confirmatory freeze, executable P0, Robodebt, and transfer-canary outputs must agree with their versioned reference profiles; closed vocabularies, scope rules, claim limits, reference closure, and review-input/reference separation must pass automatically. These checks establish internal consistency, not usability. After Slice 5 analysis, the project lead performs the staged comprehensibility review and records application level, `evaluation_state`, property status and completeness where assessed, located transition, evidence, diagnostic, missing information or claim limit, diagnostic owner, intervention owner, tradeoff, and ambiguity. Any post-result semantic defect triggers a new freeze and rerun; it may not be repaired through reinterpretation.
 
-**Done when:** valid scenario count, cohort and cutoff rules, keyed seeds, replications, MCSE rules, censoring treatment, exclusions, metrics, plots, and runtime ceiling are ready to freeze; the application adapter meets the minimum defensible case threshold; no historical profile supplies unsupported numeric defaults; the adapter-swap rehearsal passes; the cold-reader packet is complete; and every protocol or application-mapping change is logged.
+**Done when:** valid scenario count, cohort and cutoff rules, keyed seeds, replications, MCSE rules, censoring treatment, exclusions, metrics, plots, and runtime ceiling are ready to freeze; the application adapter meets the minimum defensible case threshold; no historical profile supplies unsupported numeric defaults; the adapter-swap rehearsal passes; the staged review inputs and reference profiles are complete and internally consistent; and every protocol or application-mapping change is logged.
 
 **Commit required:** yes.
 
@@ -1280,7 +1279,7 @@ PYTHONPATH=src pytest -q
 
 **Freeze manifest hashes:** selected application, sources, formal definitions, `P0-Precursor` fixture, attackability claim boundary, process map, application adapter, parameter-provenance table, stylized overlays, protocol semantics, canary, worked-trace selection rule, parameters, validity rules, policies, code, seeds, random-stream allocation, metrics, exclusions, analysis, environment, dependency lock, and configs.
 
-**Forbidden:** confirmatory execution, unresolved external QA, unhashed executable inputs, mutable remote-source identity without an explicit rule, and changes to primary analysis after viewing non-dummy results.
+**Forbidden:** confirmatory execution, unresolved automated pre-freeze gates, unhashed executable inputs, mutable remote-source identity without an explicit rule, and changes to primary analysis after viewing non-dummy results.
 
 **Verification:**
 
@@ -1296,7 +1295,7 @@ PYTHONPATH=src python -m uncertainty_permission_simulation.cli verify-freeze doc
 ./.venv/bin/python scripts/verify_repo.py
 ```
 
-**Done when:** every scenario is valid or diagnostically excluded, predicted runtime fits the ceiling, dummy analysis produces every planned table and figure, independent artifact QA has passed, every source and stylized parameter has a frozen provenance owner, the application can be removed without breaking kernel tests, and no confirmatory output has been inspected.
+**Done when:** every scenario is valid or diagnostically excluded, predicted runtime fits the ceiling, dummy analysis produces every planned table and figure, all automated artifact and reference-profile checks pass, every source and stylized parameter has a frozen provenance owner, the application can be removed without breaking kernel tests, and no confirmatory output has been inspected.
 
 **Commit required:** yes; record the freeze commit SHA.
 
@@ -1333,7 +1332,7 @@ Use resume only for missing or operationally failed runs. Never replace complete
 
 **Purpose:** Integrate formal, computational, and institutional evidence into a complete 10,000-word extended research paper that reports the conducted study and remains traceably continuous with the completed 1,500-word essay.
 
-**Owns:** the release evidence packet, final claim-to-artifact map, reproducibility instructions, completed article, and submission-readiness receipt.
+**Owns:** the release evidence packet, final claim-to-artifact map, reproducibility instructions, completed project-lead comprehensibility review, completed article, and submission-readiness receipt.
 
 **Required packet:**
 
@@ -1352,6 +1351,7 @@ Use resume only for missing or operationally failed runs. Never replace complete
 - limitations and claim-boundary memo;
 - claim-to-proposition, source, table, figure, trace, or limitation map;
 - precursor-to-extension continuity table showing what is retained, refined, tested, supported, bounded, or rejected;
+- completed `docs/PROCEDURE_COMPREHENSIBILITY_REVIEW.md`, including every material ambiguity and its disposition;
 - a self-contained, preregistered five-step process-red-team protocol with `pass`/`fail`/`unassessable`/`not_applicable` outputs, diagnostic/intervention table, fixed Robodebt trace, and compact held-out AI canary in the main manuscript, with extended worksheets and schemas in the repository; and
 - complete manuscript draft following the working word budget, with findings in the abstract, introduction, results, and conclusion kept mutually consistent.
 
@@ -1366,7 +1366,7 @@ PYTHONPATH=src python -m uncertainty_permission_simulation.cli evidence-packet e
 
 The release verifier must also enforce the verified venue word-count rule, claim-to-artifact coverage, consistent headline findings, exact reproduction commands, and answers with artifact references for all 39 Final Completion Audit questions.
 
-**Done when:** the evidence packet is sufficient without rerunning the study; a complete manuscript remains at or below 10,000 words and reports methods and results rather than future-work promises; every claim has a named evidence owner; every departure from the precursor essay is explicit; and post-result edits have not changed the frozen protocol semantics.
+**Done when:** the evidence packet is sufficient without rerunning the study; the project lead can follow and explain the procedure using the completed simulation and worked examples; every material comprehensibility issue is resolved; any semantic issue has triggered a new freeze and rerun; a complete manuscript remains at or below 10,000 words and reports methods and results rather than future-work promises; every claim has a named evidence owner; every departure from the precursor essay is explicit; and post-result editorial edits have not changed the frozen protocol semantics.
 
 **Commit required:** yes.
 
@@ -1620,8 +1620,8 @@ Stop the active slice when:
 - rare events cannot be estimated within the runtime ceiling;
 - a stylized parameter loses its provenance label;
 - the protocol, canary, classification rules, or worked-trace selection rule changes after confirmatory output inspection;
-- cold readers cannot apply the protocol without coaching and the ambiguity is neither resolved before freeze nor classified as `unassessable`;
-- a purported blinded cold-reader run exposes either withheld oracle, fixture expected-result table, or executable expected output before the reader's report is locked;
+- the project lead cannot follow or explain the procedure after Slice 5 and the ambiguity is neither resolved nor classified as an explicit limitation;
+- a post-result wording correction changes frozen semantics without a new freeze and rerun of affected artifacts;
 - a realized contestability or restoration result is classified before its frozen evaluation horizon;
 - confirmatory code, sources, seeds, or parameters change after freeze;
 - the deadline cannot support the primary evidence packet; or
@@ -1676,7 +1676,7 @@ The core study is complete only when:
 - Every practitioner output is a non-composite diagnostic profile that preserves property/helper statuses, completeness, diagnostics, interventions, owners, tradeoffs, and claim limits; no overall workflow pass or weighted policy score is inferred.
 - The P0 usability walkthrough is reproduced by the Slice 1 smoke CLI from versioned stored records, with every report row linked to trace, assessment, and diagnostic artifacts.
 - The protocol produces `pass`, `fail`, `unassessable`, or `not_applicable`, treats missing process documentation as an explicit limitation rather than `not_applicable`, and was frozen before confirmatory results.
-- At least two cold readers apply the protocol to blinded packet-only copies of the fixed Robodebt trace and synthetic AI canary before confirmatory freeze; packet/oracle hashes, locked returns, disagreements, invalidated blind runs, and revisions are retained as QA evidence without making human-performance claims.
+- After Slice 5 analysis, the project lead completes the staged comprehensibility review on P0, the fixed Robodebt trace, and the synthetic AI canary; ambiguities and dispositions are retained without claiming independence or human-performance evidence, and semantic corrections trigger a new freeze and rerun.
 - The worked trace follows a prespecified deterministic rule and is not selected after results for rhetorical force.
 - The drafting target is 9,400 words, the 600-word contingency is tracked explicitly, and the submitted manuscript does not exceed the verified venue ceiling.
 - Every article claim maps to a formal result, source, run artifact, table, figure, trace, or limitation.
@@ -1689,9 +1689,9 @@ The optional audit ablation is not part of core acceptance.
 - **Week 1:** Slice 0; literature map, source packet, process diagram, formal constructs, precursor-to-extension continuity table, protocol candidate, held-out AI canary, fixed trace-selection rule, and contingency-aware article outline.
 - **Week 2:** Slice 1; case-neutral dynamic vertical slice, golden traces, adapter smoke test, and formal-model draft.
 - **Week 3:** Slice 2; stochastic kernel, profile and overlay validation, policy implementations, queue validation, and methods draft.
-- **Week 4:** Slice 3 and Slice 4; pilot, application-sufficiency and adapter-swap review, cold-reader protocol QA, pre-result protocol revision, precision and runtime decisions, application/protocol/scenario freeze, and dummy analysis rehearsal.
+- **Week 4:** Slice 3 and Slice 4; pilot, application-sufficiency and adapter-swap review, executable fixture/reference checks, pre-result protocol revision, precision and runtime decisions, application/protocol/scenario freeze, and dummy analysis rehearsal.
 - **Week 5:** Slice 5; confirmatory execution, convergence checks, primary analysis, and results draft.
-- **Week 6:** Slice 6; evidence packet and complete 10,000-word article draft with executed results. Enter optional Slice 7 only if Slice 6 finishes early.
+- **Week 6:** Slice 6; project-lead procedure comprehensibility review, evidence packet, and complete 10,000-word article draft with executed results. Enter optional Slice 7 only if Slice 6 finishes early.
 - **Week 7:** Cross-persona claim red team, venue-fit review, limitations, revision, formatting, and submission preparation.
 
 If the schedule slips, cut the optional audit, nonessential sensitivity analyses, later EIC/CUPI/PAYG variants, and presentation artifacts first. Do not cut the minimum defensible application mapping, formal constructs, simulator validation, primary dynamic experiment, negative controls, freeze integrity, provenance separation, or claim-boundary memo.
@@ -1720,13 +1720,13 @@ Before declaring the study complete, answer with stored evidence:
 14. Does every quantitative claim have a run artifact and uncertainty statement?
 15. Is the emerging-technology transfer limited to the formal invariant, red-team method, and supported institutional connections?
 16. Are incomplete or optional subsystems removed or explicitly deferred?
-17. Can an independent reader reproduce the primary traces, simulation, and analysis from the repository alone?
+17. Can a repository user reproduce the primary traces, simulation, and analysis from the recorded commands alone?
 18. Does the manuscript clearly extend rather than replace the completed 1,500-word essay?
 19. Does the 10,000-word paper report conducted analysis and results rather than stop at a formal model and research design?
 20. Does the precursor-to-extension continuity table identify every retained, refined, tested, bounded, or rejected claim?
 21. Were the protocol semantics, canary, output classifications, and worked-trace rule frozen before confirmatory results?
 22. Can the protocol explicitly return `unassessable` when evidence lineage, authority, timing, or process documentation is missing?
-23. Did at least two cold readers apply the protocol to both fixed fixtures without coaching, with disagreements retained as QA evidence?
+23. Did the project lead complete the post-simulation comprehensibility review, record every material ambiguity, and avoid presenting it as independent validation?
 24. Does the held-out AI canary demonstrate vocabulary-independent use without being presented as a second empirical case?
 25. Did the manuscript stay within the verified ceiling while preserving the 9,400-word core and documenting any use of the 600-word contingency?
 26. Does `P0-Precursor` hold the uncertain model output, downstream rule, and process state fixed while varying only the interface representation?
@@ -1736,8 +1736,8 @@ Before declaring the study complete, answer with stored evidence:
 30. Are lineage comparisons confined to internal drafting controls, acknowledgments, or a concise origin statement rather than organizing the published article as a sequel?
 31. Does every protocol application declare Level A, B, or C and remain within that level's claim limits or explicitly escalate?
 32. Does the practitioner report preserve the complete assessment profile without an overall compliance score or hidden weighted ranking?
-33. Can an independent reader move from the intake worksheet through the P0 walkthrough to the executable report and trace every row to stored evidence?
-34. Were cold readers denied access to both withheld profiles, fixture expected-result tables, and executable expected outputs until their reports were locked, with any exposure invalidating the blind run?
+33. Can the project lead move from the intake worksheet through the P0 walkthrough to the executable report and trace every row to stored evidence?
+34. Were all post-simulation corrections classified as editorial or semantic, with every semantic correction receiving a new freeze and rerun of affected confirmatory artifacts?
 35. Does every unassessed higher-level claim use an `omitted_by_claim_limit` receipt rather than a fabricated fifth status or misleading `not_applicable` result?
 36. Can every kernel test run without importing or loading the Robodebt adapter?
 37. Does an isomorphic adapter with different domain vocabulary preserve semantic traces, formal assessments, and metrics?

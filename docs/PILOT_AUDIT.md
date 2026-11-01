@@ -1,6 +1,6 @@
 # Slice 3 Development Pilot Audit
 
-Status: engineering and design-freeze candidate; independent cold-reader QA pending
+Status: engineering and design-freeze candidate complete; no external pre-freeze gate remains
 
 The pilot used 15 outcome-independent, pairwise-coverage scenario families, six replications, 48 cases per replicate, and all five policies. It executed 21,600 case-policy runs. The detailed development rows remain ignored; the tracked receipt contains aggregate diagnostics and explicit development-only claim limits.
 
@@ -39,9 +39,9 @@ Common random numbers help some estimands and not others; the observed paired-to
 - A second synthetic profile identity ran through the unchanged engine with identical cohort, event, and telemetry results while keeping configuration identity distinct.
 - The dummy-data pipeline emitted every cell and paired-estimate contract without reading pilot or confirmatory output.
 - Capacity/timeout and information-workload figure prototypes render from stored aggregates and are visibly marked provisional.
-- The fixed `RB-WORKED-TRACE-001` pair compiles with complete parameter receipts and renders a separate blinded packet and withheld expected profile.
+- The fixed `RB-WORKED-TRACE-001` pair compiles with complete parameter receipts and renders a separate staged review input and reference profile.
 - The Robodebt sufficiency review keeps documented, inferred, stylized, and unsupported claims separate.
 
 ## Stop-condition decision
 
-No Slice 3 engineering stop condition fired: queue and access dynamics affect review and outcomes; the primary conclusions do not require scalar utility weights; paired outcome differences are distinguishable from replay/adapter failures; and projected runtime fits the precision rule. The design is an engineering freeze candidate, not an authorized confirmatory freeze. Venue verification, literature/citation review, and the source-identity decision are now closed; independent packet-only returns from at least two eligible readers remain the sole pre-freeze gate.
+No Slice 3 engineering stop condition fired: queue and access dynamics affect review and outcomes; the primary conclusions do not require scalar utility weights; paired outcome differences are distinguishable from replay/adapter failures; and projected runtime fits the precision rule. The design is an engineering freeze candidate, not itself an authorized confirmatory freeze. Venue verification, literature/citation review, source identity, and the retired external-reader item are closed. Slice 4 may proceed through the automated freeze gate. The project lead reviews procedure comprehensibility after Slice 5 analysis.

@@ -1,8 +1,8 @@
-# Robodebt Worked-Trace Cold-Reader Packet
+# Robodebt Worked-Trace Procedure-Review Input
 
 Packet version: `1.0-candidate`
 
-Use only this packet and the supplied protocol. The expected profile is withheld.
+On the first pass, use only this input and the supplied protocol. Consult the reference profile after recording ambiguities.
 This is a bounded explanatory trace, not a historical reconstruction or legal conclusion.
 
 Specification: `RB-WORKED-TRACE-001`

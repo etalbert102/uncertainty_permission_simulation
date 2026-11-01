@@ -44,7 +44,7 @@ H1–H3 provide the main quantitative narrative. H4–H5 and the remaining forma
 ### Protocol integrity contract
 
 - Freeze the five steps, required inputs, `pass`/`fail`/`unassessable`/`not_applicable` outputs, diagnostic fields, held-out AI canary, and worked-trace selection rule before confirmatory results.
-- Permit revisions after cold-reader QA but before confirmatory freeze; record every change and reason.
+- Permit semantic revisions only before confirmatory freeze; record every change and reason. After results, allow editorial clarifications only unless a new freeze and rerun is performed.
 - After freeze, numerical results and examples may populate the protocol, but its semantic tests cannot change in response to favorable or inconvenient findings.
 - Use a deterministic golden Robodebt trace selected before confirmatory execution. Do not claim it is statistically representative.
 
@@ -432,7 +432,7 @@ Integrate the trace into Table 3 rather than creating a separate box.
 
 Primary table: **Table 3, “Five-step diagnostic applied to one fixed trace.”** Columns: step, property/helper, required input, `pass`/`fail`/`unassessable`/`not_applicable` rule, completeness, observable signal, fixed Robodebt-trace finding, intervention, owner, tradeoff, and claim limit. Add rows rather than combining incompatible statuses. This single display supplies the reusable diagnostic and worked example without creating an overall score.
 
-Repository supplement: provide the compact F0–F5 glossary and ordered decision procedure, three-level intake and escalation worksheet, evidence-lineage worksheet, trace schema, stress-test template, blinded P0 and AI-canary packets, withheld expected profiles, executable worked trace, cold-reader QA receipts, and reproduction commands outside the article. The main text must still explain the complete five-step method.
+Repository supplement: provide the compact F0–F5 glossary and ordered decision procedure, three-level intake and escalation worksheet, evidence-lineage worksheet, trace schema, stress-test template, staged P0, Robodebt, and AI-canary review inputs, reference profiles, the completed project-lead comprehensibility review, executable worked trace, and reproduction commands outside the article. The main text must still explain the complete five-step method.
 
 ## 8. Limitations and Conclusion — 750 Words
 
@@ -498,7 +498,7 @@ The seven core exhibits are the ceiling, not a target to exceed. If the venue co
 | Stress review under load | Execute as the primary dynamic simulation | H1–H2 and queue-boundary analysis | Load adds no insight beyond static policy semantics |
 | Prefer information-seeking and reversible intervention | Test rather than assume | U3/U0 comparison and restoration metrics | Information acquisition only transfers burden or creates worse unresolved delay |
 | Decision records should join representation, rules, interventions, and overrides | Convert to trace and provenance requirements | Event schema, replay, and artifact-source audit | Trace cannot identify the rule or evidence responsible for an action |
-| LLM summaries can suppress conflicts without becoming literally false | Develop as the held-out contemporary-AI canary | Frozen protocol application in the main text and cold-reader QA | Canary is omitted, tuned to the protocol, or presented as a second empirical case |
+| LLM summaries can suppress conflicts without becoming literally false | Develop as the held-out contemporary-AI canary | Frozen protocol application in the main text and post-simulation project-lead review | Canary is omitted, tuned to the protocol, or presented as a second empirical case |
 
 This matrix is a drafting control, not a results table. Update its status only from formal checks, source artifacts, or frozen simulation results.
 
@@ -506,11 +506,11 @@ This matrix is a drafting control, not a results table. Update its status only f
 
 1. Draft and version the five-step protocol, classification rules, AI canary, and deterministic trace-selection rule during Slice 0.
 2. Draft Sections 2–4 from the internal lineage source, formal specification, and source packet, then remove any reader-facing dependence on the lineage source, internal artifact IDs, or unexplained defense context.
-3. Cold-read the protocol on packet-only copies of the fixed Robodebt trace and synthetic AI canary; withhold both oracles until reports are locked, invalidate exposed runs, and revise and log wording before confirmatory freeze.
-4. Draft Section 5 only after the scenario and analysis specifications freeze, and freeze protocol version `1.0` with them.
+3. Validate executable fixture/reference agreement and review-input/reference separation before confirmatory freeze; freeze protocol version `1.0` with the scenario and analysis specifications.
+4. Draft Section 5 only after the scenario and analysis specifications freeze.
 5. Build the seven core exhibit shells with stable IDs before confirmatory execution.
 6. Draft Section 6 directly from the evidence packet after run reconciliation and MCSE checks.
-7. Draft Section 7 around the frozen protocol; results may populate examples and interventions but may not change its tests or classifications.
+7. After Slice 5 analysis, have the project lead apply the frozen procedure to the staged P0, Robodebt, and AI-canary inputs; resolve editorial ambiguities, and require a new freeze and rerun for any semantic correction before drafting Section 7.
 8. Draft Section 1, the abstract, and Section 8 last so every summary statement matches the actual findings.
 9. Run the claim-to-evidence audit, lineage continuity audit, and standalone-reader audit before prose polish.
 
@@ -531,7 +531,7 @@ The outline has been successfully converted into an article only when:
 - the article explicitly distinguishes the fixed-output representation test, the generalized formal invariant, and the dynamic organizational stress test without presenting them as interchangeable evidence;
 - every acronym, formal-property label, hypothesis ID, and policy ID is defined before reader-facing use, and the abstract and introduction prefer plain-language contrasts;
 - the protocol was frozen before confirmatory results, every pre-freeze revision is logged, and no result-dependent semantic change is hidden as prose editing;
-- at least two cold readers can apply the protocol to packet-only copies of the fixed Robodebt trace and synthetic AI canary without coaching or oracle access, with exposed runs invalidated and disagreements recorded rather than averaged away;
+- the project lead has completed the post-simulation comprehensibility review on the staged P0, fixed Robodebt trace, and synthetic AI canary inputs; every material ambiguity has a disposition, the review is not presented as independent validation, and every semantic correction received a new freeze and rerun;
 - every protocol step yields `pass`, `fail`, `unassessable`, or `not_applicable`, and missing documentation never defaults to a pass or `not_applicable`;
 - the worked trace follows the prespecified deterministic rule and is not described as representative;
 - the main text contains no more than seven core exhibits;

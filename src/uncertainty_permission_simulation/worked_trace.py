@@ -234,11 +234,11 @@ def build_worked_trace(root: Path, pilot_config_path: Path) -> dict[str, object]
 
 def _render_packet(artifact: Mapping[str, object]) -> str:
     lines = [
-        "# Robodebt Worked-Trace Cold-Reader Packet",
+        "# Robodebt Worked-Trace Procedure-Review Input",
         "",
         "Packet version: `1.0-candidate`",
         "",
-        "Use only this packet and the supplied protocol. The expected profile is withheld.",
+        "On the first pass, use only this input and the supplied protocol. Consult the reference profile after recording ambiguities.",
         "This is a bounded explanatory trace, not a historical reconstruction or legal conclusion.",
         "",
         f"Specification: `{artifact['specification_id']}`",
@@ -263,9 +263,9 @@ def _render_packet(artifact: Mapping[str, object]) -> str:
 
 def _render_oracle(artifact: Mapping[str, object]) -> str:
     lines = [
-        "# Robodebt Worked-Trace Withheld Expected Profile",
+        "# Robodebt Worked-Trace Reference Profile",
         "",
-        "Oracle version: `1.0-candidate`",
+        "Reference-profile version: `1.0-candidate`",
         "",
         f"Artifact hash: `{artifact['artifact_hash']}`",
         "",
@@ -285,6 +285,6 @@ def write_worked_trace_artifacts(root: Path, pilot_config_path: Path) -> dict[st
     artifact = build_worked_trace(root, pilot_config_path)
     artifact_path = root / "data/golden_traces/robodebt_worked_trace_v1.json"
     artifact_path.write_text(json.dumps(artifact, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-    (root / "docs/ROBODEBT_WORKED_TRACE_PACKET.md").write_text(_render_packet(artifact), encoding="utf-8")
+    (root / "docs/ROBODEBT_WORKED_TRACE_REVIEW_PACKET.md").write_text(_render_packet(artifact), encoding="utf-8")
     (root / "docs/ROBODEBT_WORKED_TRACE_EXPECTED_PROFILE.md").write_text(_render_oracle(artifact), encoding="utf-8")
     return artifact

@@ -1,7 +1,7 @@
 """Blocking Slice 3 engineering and artifact validator.
 
-Independent cold-reader returns are deliberately outside this validator and remain a
-separate external pre-freeze gate.
+Procedure comprehensibility is reviewed by the project lead after Slice 5 analysis;
+it is not an external pre-freeze gate.
 """
 
 from __future__ import annotations
@@ -16,7 +16,6 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from uncertainty_permission_simulation.experiments import canonical_hash, validate_experiment_config  # noqa: E402
-from uncertainty_permission_simulation.qa import blank_return_template, expected_profile  # noqa: E402
 from uncertainty_permission_simulation.schemas import MANIFEST  # noqa: E402
 
 
@@ -117,31 +116,14 @@ def main() -> int:
     if not {"PROGRESSION_HELD", "EVIDENCE_REQUESTED", "EXTERNAL_EVIDENCE_RETURNED", "SUPPORTED_DISPOSITION_RECORDED"} <= repair_types:
         diagnostics.append("worked-trace repair path is incomplete")
 
-    packet = (ROOT / "docs/ROBODEBT_WORKED_TRACE_PACKET.md").read_text(encoding="utf-8")
-    oracle = (ROOT / "docs/ROBODEBT_WORKED_TRACE_EXPECTED_PROFILE.md").read_text(encoding="utf-8")
-    if "ROBUST_PERMISSION_VIOLATION" in packet or "withheld expected profile" not in oracle.lower():
-        diagnostics.append("worked-trace packet/oracle separation failed")
-    bundle_script = (ROOT / "scripts/build_slice3_reader_bundle.py").read_text(encoding="utf-8")
-    if "ROBODEBT_WORKED_TRACE_EXPECTED_PROFILE.md" not in bundle_script or "FORBIDDEN" not in bundle_script:
-        diagnostics.append("Slice 3 bundle builder does not explicitly forbid the oracle")
-    qa_expected = expected_profile(ROOT)
-    qa_template = blank_return_template(ROOT, "VALIDATOR-READER")
-    if len(qa_expected["rows"]) != 29 or len(qa_template["assessments"]) != 29:
-        diagnostics.append("structured external-QA row inventory must contain 29 rows")
-    if any(
-        row["status"] is not None
-        or row["completeness"] is not None
-        or row["diagnostics"]
-        for row in qa_template["assessments"]
-    ):
-        diagnostics.append("reader assessment template leaks oracle answers")
-    if not (ROOT / "scripts/verify_slice3_reader_returns.py").exists():
-        diagnostics.append("external-QA return verifier is missing")
+    packet = (ROOT / "docs/ROBODEBT_WORKED_TRACE_REVIEW_PACKET.md").read_text(encoding="utf-8")
+    reference = (ROOT / "docs/ROBODEBT_WORKED_TRACE_EXPECTED_PROFILE.md").read_text(encoding="utf-8")
+    if "ROBUST_PERMISSION_VIOLATION" in packet or "reference profile" not in reference.lower():
+        diagnostics.append("worked-trace review-input/reference separation failed")
     for path in (
         ROOT / "docs/CASE_APPLICATION_SUFFICIENCY.md",
         ROOT / "docs/PROTOCOL_REVISION_LOG.md",
-        ROOT / "docs/SLICE3_COLD_READER_QA_RECEIPT.md",
-        ROOT / "docs/SLICE3_READER_HANDOFF.md",
+        ROOT / "docs/PROCEDURE_COMPREHENSIBILITY_REVIEW.md",
         ROOT / "docs/PILOT_AUDIT.md",
     ):
         if not path.exists() or not path.read_text(encoding="utf-8").strip():
@@ -158,7 +140,7 @@ def main() -> int:
         "Slice 3 engineering gate passed: "
         f"{validation['family_count']} development families, "
         f"{len(receipt['cell_summaries'])} family-policy cells, "
-        f"pilot receipt {receipt['receipt_hash']}; independent reader QA remains externally pending"
+        f"pilot receipt {receipt['receipt_hash']}; post-simulation project-lead review scheduled after Slice 5"
     )
     return 0
 

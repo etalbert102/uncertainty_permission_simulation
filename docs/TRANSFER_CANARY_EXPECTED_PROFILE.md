@@ -1,10 +1,10 @@
-# Withheld Expected Profile: Vendor Production-Access Summary
+# Reference Profile: Vendor Production-Access Summary
 
-Status: draft oracle version `0.1`; post-assessment access only
+Status: draft reference-profile version `0.1`; consult after the first-pass review
 
 Protocol version: `0.2`
 
-Do not distribute this file to cold readers. Repository access that exposes it invalidates a blinded QA run.
+The project lead consults this profile only after recording the first-pass assessment and ambiguities. Prior familiarity is recorded as a limitation but does not invalidate the review.
 
 ## Expected Receipt
 

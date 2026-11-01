@@ -1,14 +1,14 @@
-# Blinded Transfer Canary: Vendor Production-Access Summary
+# Transfer-Canary Procedure-Review Input: Vendor Production-Access Summary
 
 Status: draft packet version `0.1`; synthetic hypothetical; inputs only
 
 Companion protocol: `docs/PROCESS_RED_TEAM_PROTOCOL.md`, version `0.2`
 
-Oracle access: prohibited until the reader submits a locked report
+Reference-profile access: complete the first-pass assessment before consulting it
 
-## Reader Instructions
+## Project-Lead Review Instructions
 
-Use only this packet and the process-red-team protocol. Do not open the expected transfer profile or any prior completed application. If you have already seen the oracle, mark the run as a practice run.
+For the first pass, use only this input and the process-red-team protocol. Record ambiguities before opening the transfer reference profile or a prior completed application. Prior familiarity does not invalidate the review, but record it because this is a comprehensibility check rather than an independent or blinded validation exercise.
 
 Complete the intake and assessment profile exactly as for the P0 packet. This canary uses different vocabulary and does not alter the formal model or Robodebt simulation. It is a generalizability check, not a second empirical case or evidence about deployed AI prevalence.
 
@@ -90,7 +90,7 @@ In the compressed arm, the independent baseline still requires verification and 
 
 ## Frozen Property Scope
 
-| Property/helper | Scope information supplied to the reader |
+| Property/helper | Scope information supplied for review |
 | --- | --- |
 | F0 | Included for both summaries. |
 | F1 | Explicitly excluded because the source bundle and summary-stage input do not vary. |

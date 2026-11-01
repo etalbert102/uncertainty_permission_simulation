@@ -17,7 +17,7 @@ This receipt closes planning, not the study. The repository now specifies the fo
 | Case-neutral execution architecture | `docs/CONFIGURATION_COMPILATION.md`, `data/model/schema_manifest_v1.yaml` | only a validated compiled configuration executes; every runtime slot has exactly one owner |
 | Documented institutional application | `docs/ROBODEBT_CASE_STUDY.md`, `data/sources/robodebt/` | dated early/enhanced profiles, three-axis validity, no silent historical defaults |
 | Dynamic simulation and analysis design | `docs/STUDY_PLAN.md`, `docs/PREREGISTRATION.md` | policies, factors, estimands, controls, horizon, keyed pairing, precision, and extension rule specified |
-| Practical process-red-team output | `docs/PROCESS_RED_TEAM_PROTOCOL.md`, blinded packets, withheld profiles, QA receipt | application levels, closed statuses, escalation, non-composite report, and independent QA gate specified |
+| Practical process-red-team output | `docs/PROCESS_RED_TEAM_PROTOCOL.md`, staged review inputs, reference profiles, and `docs/PROCEDURE_COMPREHENSIBILITY_REVIEW.md` | application levels, closed statuses, escalation, non-composite report, and post-simulation project-lead review specified |
 | Execution order and ownership | Work Slices 0–7 and file/mutation contract in `docs/STUDY_PLAN.md` | each slice has purpose, owned outputs, forbidden work, commands, done conditions, and commit rule |
 | Failure handling and runtime feasibility | Execution Protocol and Verification Tiers in `docs/STUDY_PLAN.md` | stable diagnostic envelope, escalation order, measured runtime ceilings, and stop rule specified |
 | External and future dependencies | `docs/DEFERRED.md` | nine items have an owner, risk, next action, and due gate |
@@ -25,7 +25,7 @@ This receipt closes planning, not the study. The repository now specifies the fo
 
 ## Decisions Left to Execution, Not to Implementer Discretion
 
-The pilot measured and fixed a design-freeze candidate for cohort size, replication bounds, MCSE targets, scenario validity, censoring treatment, and runtime ceiling. The baseline/environment (`D-009`), venue verification (`D-007`), literature chaining (`D-006`), and source identity (`D-008`) dependencies are closed. Independent reader QA (`D-001`) remains the sole pre-freeze gate.
+The pilot measured and fixed a design-freeze candidate for cohort size, replication bounds, MCSE targets, scenario validity, censoring treatment, and runtime ceiling. The baseline/environment (`D-009`), venue verification (`D-007`), literature chaining (`D-006`), source identity (`D-008`), and retired external-reader item (`D-001`) are closed. No external dependency remains before Slice 4.
 
 An implementer may choose ordinary internal code structure only where it does not alter schemas, fact ownership, event semantics, random-stream allocation, formal properties, estimands, diagnostics, or frozen outputs. Any semantic change requires a ledger entry and rerun of the owning gate.
 
@@ -53,4 +53,4 @@ PLAN_VALID slices=8 primary_hypotheses=3 policies=5 audit_questions=39 deferred_
 
 ## Entry Decision
 
-Both validators pass and `D-009` records approved baseline commit `9cf836cb15edba29235abc60b4f754d311343fe3` plus the environment receipt, so Slice 1 may begin. Independent reader QA may run in parallel, but protocol `1.0` and Slice 4 remain blocked until the required locked reader returns and all other pre-freeze dependencies are closed. Exact Robodebt population calibration is neither required nor permitted as a silent prerequisite for the generic kernel.
+Both validators pass and `D-009` records approved baseline commit `9cf836cb15edba29235abc60b4f754d311343fe3` plus the environment receipt. Slices 1–3 are now complete, and Slice 4 may begin once the automated freeze inputs reconcile. The project-lead procedure review occurs after Slice 5 analysis and blocks Slice 6 completion; it does not block protocol `1.0`, confirmatory freeze, or execution. Exact Robodebt population calibration is neither required nor permitted as a silent prerequisite for the generic kernel.

@@ -6,13 +6,13 @@ Protocol owner: process-red-team method
 
 Formal basis: `docs/FORMAL_MODEL.md`
 
-Blinded compatibility packet: `docs/P0_COLD_READER_PACKET.md`
+Compatibility review input: `docs/P0_PROCEDURE_REVIEW_PACKET.md`
 
-Post-assessment compatibility oracle: `docs/P0_USABILITY_WALKTHROUGH.md`
+Post-assessment compatibility reference: `docs/P0_USABILITY_WALKTHROUGH.md`
 
-Blinded transfer packet: `docs/TRANSFER_CANARY.md`
+Transfer review input: `docs/TRANSFER_CANARY.md`
 
-Post-assessment transfer oracle: `docs/TRANSFER_CANARY_EXPECTED_PROFILE.md`
+Post-assessment transfer reference: `docs/TRANSFER_CANARY_EXPECTED_PROFILE.md`
 
 ## Purpose
 
@@ -272,23 +272,20 @@ When multiple interventions are plausible, report each intervention's owner and 
 
 The complete closed registry remains in `data/model/schema_manifest_v1.yaml`. If no listed code accurately describes the finding, return the relevant property `unassessable/invalid` and escalate the vocabulary gap; do not invent a code in the reader packet.
 
-## Cold-Reader QA
+## Post-Simulation Comprehensibility Review
 
-Cold-reader QA occurs in two stages. During Slice 0, at least two readers who did not draft the protocol independently apply it without coaching to:
+After Slice 5 confirmatory analysis is complete, the project lead reviews whether this procedure can be followed and explained without hidden author knowledge. The staged review uses:
 
-1. the blinded fixed representation-preservation packet in `docs/P0_COLD_READER_PACKET.md`; and
-2. the blinded contemporary-AI packet in `docs/TRANSFER_CANARY.md`.
+1. `docs/P0_PROCEDURE_REVIEW_PACKET.md`;
+2. `docs/ROBODEBT_WORKED_TRACE_REVIEW_PACKET.md`; and
+3. `docs/TRANSFER_CANARY.md`.
 
-This first stage tests construct readability and continuity before implementation. P0 is synthetic and is not a Robodebt trace. Slice 3 now provides the executable prespecified Robodebt worked-trace packet rendered from `RB-WORKED-TRACE-001` and its separately withheld expected profile. Before version `1.0` is frozen, new eligible readers must apply the protocol to that packet and the transfer canary. This second stage tests the operational protocol before confirmatory freeze; the artifacts exist, but valid independent returns remain pending.
+For each input, the project lead first records application level, evaluation state, located transition, status, completeness, evidence, diagnostics, missing information, owners, intervention, tradeoff, ambiguity, and claim limits without consulting the corresponding reference profile. The project lead then compares the application with `docs/P0_USABILITY_WALKTHROUGH.md`, `docs/ROBODEBT_WORKED_TRACE_EXPECTED_PROFILE.md`, and `docs/TRANSFER_CANARY_EXPECTED_PROFILE.md` and records unclear instructions or unusable fields in `docs/PROCEDURE_COMPREHENSIBILITY_REVIEW.md`.
 
-Each reader records the application level, located transition, assessment statuses and completeness, evidence used, missing information, intervention, and ambiguity. Reconcile disagreements by revising the protocol or returning `unassessable`; do not settle them through undocumented coaching. This is artifact QA, not evidence about human performance.
+This is a project-lead comprehensibility review, not independent validation, inter-rater reliability evidence, a human-performance study, or evidence that the simulation is empirically valid. Prior familiarity with the materials is recorded as a limitation but does not invalidate the exercise.
 
-The reader receives packet-only copies and the protocol. They must not have access to the applicable withheld profiles, fixture expected-result tables, or executable expected outputs until their assessment is locked. For Slice 0 these include `docs/P0_USABILITY_WALKTHROUGH.md` and `docs/TRANSFER_CANARY_EXPECTED_PROFILE.md`; for Slice 3 they include the generated Robodebt expected profile and the transfer profile. An oracle custodian records packet version and hashes, distributes the packets, timestamps the returned reports, and only then compares each row with the withheld profiles. Repository access that exposes the oracles invalidates the blind run and must be logged as a practice run rather than QA evidence.
-
-The custodian uses `docs/COLD_READER_QA_RECEIPT.md` to record exposure validity, versions and hashes, returned artifacts, row-level differences, error classes, ambiguities, and any revision/rerun decision.
-
-Agreement is not the sole criterion. Record omitted rows, unsupported certainty, wrong application level, incorrect `not_applicable` use, diagnostic mismatch, and failure to state claim limits. Revise version `0.2` before freeze, retain the original reports and change log, and rerun the affected QA stage with new readers after any semantic change. Distribution follows `docs/COLD_READER_DISTRIBUTION.md`.
+Editorial clarifications may improve navigation, define an already-frozen term more plainly, or add cross-references without changing a classification, required input, property meaning, claim limit, or result. A semantic change requires a new protocol and freeze version, invalidation of affected confirmatory artifacts, rerunning the affected simulation or analysis, and repeating this review. No post-result semantic change may be disguised as wording cleanup.
 
 ## Version and Freeze Rule
 
-Version `0.2` may change only before confirmatory freeze. Version `1.0` freezes the five steps, application-level rules, assessment-versus-claim-limit distinction, status/completeness semantics, prohibited composite score, intake fields, diagnostic fields, blinded packets, withheld oracles, canary, and worked-trace selection rule. Results may illustrate the frozen protocol but may not redefine it.
+Version `0.2` may change only before confirmatory freeze. Version `1.0` freezes the five steps, application-level rules, assessment-versus-claim-limit distinction, status/completeness semantics, prohibited composite score, intake fields, diagnostic fields, staged review inputs, reference profiles, canary, and worked-trace selection rule. Results may illustrate the frozen protocol but may not redefine it.
