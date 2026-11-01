@@ -9,7 +9,7 @@ This ledger is the canonical slice-status record. Update it at the end of every 
 | 0. Source, construct, and claim contract | implementation, plan, and baseline gates passed — pre-freeze reader QA pending | `9cf836c` | automated Slice 0 and plan gates pass from declared environment | two eligible locked reader returns are not yet available; this blocks Slice 4, not Slice 1 engineering |
 | 1. Case-neutral dynamic vertical slice | complete | `93e2da6` | 27 tests; 726-record closed bundle; three stored validation receipts match; both artifact hashes repeat | Slice 2 retained the exact artifact hashes and validated stochastic extension without weakening this contract |
 | 2. Stochastic engine and validation | complete | `d541d03` closeout; `fa6dfc4` semantic audit | 148 tests; five exact stochastic traces; stored replay/application/queue receipts; analytical and independent-reference checks; all prior gates pass | implementation validation only; monetary and unmodeled harms remain outside the declared consequence vector; no pilot or substantive result exists |
-| 3. Experiment pilot and freeze candidate | engineering complete; external pre-freeze QA pending | pending closeout commit | 154 tests; Slice 0/plan/Slice 3 gates; 15-family pilot; executable worked trace and reader bundle rehearsal | independent eligible-reader returns cannot be self-certified and block Slice 4 |
+| 3. Experiment pilot and freeze candidate | engineering complete; external pre-freeze QA pending | `e8905fa` | 154 tests; Slice 0/plan/Slice 3 gates; 15-family pilot; executable worked trace and reader bundle rehearsal | independent eligible-reader returns cannot be self-certified and block Slice 4 |
 | 4. Confirmatory freeze | pending | — | — | — |
 | 5. Confirmatory execution and analysis | pending | — | — | — |
 | 6. Evidence packet and 10,000-word article | pending | — | — | — |
@@ -649,7 +649,7 @@ Reference environment: local `.venv`, Python 3.14, macOS arm64, 2026-11-01.
 
 Status: engineering and design-freeze candidate complete; external pre-freeze QA pending
 
-Closeout commit: pending
+Closeout commit: `e8905fa86028324493a151b13899d24967a45424` (`Complete Slice 3 pilot engineering`)
 
 ### Implemented
 
