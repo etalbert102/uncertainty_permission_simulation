@@ -8,7 +8,7 @@ This ledger is the canonical slice-status record. Update it at the end of every 
 | --- | --- | --- | --- | --- |
 | 0. Source, construct, and claim contract | implementation, plan, and baseline gates passed — pre-freeze reader QA pending | `9cf836c` | automated Slice 0 and plan gates pass from declared environment | two eligible locked reader returns are not yet available; this blocks Slice 4, not Slice 1 engineering |
 | 1. Case-neutral dynamic vertical slice | complete | `93e2da6` | 27 tests; 726-record closed bundle; three stored validation receipts match; both artifact hashes repeat | stochastic execution and empirical validation remain Slice 2 work |
-| 2. Stochastic engine and validation | in progress — recovery service and late-stage censoring pass | `392278e` checkpoint | 121 tests; repeatable five-policy recovery/censoring smoke artifact; all prior gates pass | no restoration, earlier-stage censoring, full analytical benchmark, or reference-simulator comparison yet |
+| 2. Stochastic engine and validation | in progress — consequence-vector restoration passes | `75a88ea` checkpoint | 131 tests; repeatable five-policy restoration/censoring smoke artifact; all prior gates pass | no monetary consequence coordinate, earlier-stage censoring, full analytical benchmark, or reference-simulator comparison yet |
 | 3. Experiment pilot and freeze candidate | pending | — | — | — |
 | 4. Confirmatory freeze | pending | — | — | — |
 | 5. Confirmatory execution and analysis | pending | — | — | — |
@@ -537,3 +537,51 @@ Checkpoint commit: `392278e` (`Add recovery queue and right censoring`)
 - Execute both R-OCI adapters only through compiled profiles and stylized overlays; add semantically equivalent synthetic/application comparisons.
 - Expand analytical queue checks, add a slower reference simulator, exact stochastic golden traces, and stored stochastic validation receipts.
 - Do not enter pilot scenario selection or treat this stylized recovery/censoring artifact as a substantive, empirical, legal, or historical result.
+
+## Slice 2 Consequence-Vector Restoration Checkpoint
+
+Status: correction and restoration are separate typed transitions, and restoration completeness is evaluated over a declared consequence vector; Slice 2 not complete
+
+Checkpoint commit: `75a88ea` (`Add consequence-vector restoration outcomes`)
+
+### Scope and fact ownership
+
+- Every unsupported external exposure creates a restoration obligation. This obligation is independent of whether correction is requested or completed.
+- Reassessment completion owns decision correction only. Its consequence update retains active recovery exposure and explicitly records incomplete restoration.
+- The policy profile owns whether a post-correction restoration transition is active. The generic kernel owns deterministic execution and consequence-vector evaluation.
+- The current modeled restoration dimensions are exactly `decision_state`, `recovery_state`, and `residual_external_consequence`, each with an explicit baseline. Monetary amounts, payments, fees, burden, and unmodeled harms are outside this checkpoint and cannot be declared restored.
+- The restoration horizon begins at external-consequence start. The stylized overlay owns its duration and the post-correction restoration delay. Repair at the horizon is timely; repair after it clears the decision and recovery dimensions but leaves a declared irreversible external residual.
+
+### Implemented
+
+- Added compiled restoration-delay and restoration-window slots plus an explicit restoration stage and policy-owned `restore` action requirement for U1 and U2O, the policies with reachable unsupported-progression correction paths.
+- Added `RESTORATION_EXECUTED` only after typed decision correction and only when the policy activates restoration. The event carries source references, declared dimensions, baseline states, realized states, restored and unrestored dimension IDs, horizon timing, and complete-versus-partial status.
+- Added a blocking vector invariant that recomputes completeness from every modeled state against its declared baseline. The event's `restoration_complete` flag cannot independently assert success.
+- Classified exact-horizon restoration as timely and complete. A late action is observed partial restoration with an irreversible residual, not complete restoration and not right-censoring.
+- Distinguished pre-horizon pending obligations from expired obligations. Pending work is right-censored; expiration without completion is an observed failed outcome and closes without a censoring label.
+- Revised case closure so resolved complete/partial/expired outcomes and right-censored open outcomes partition the cohort instead of forcing every administrative closure into censoring.
+- Added separate due, executed, timely, late, complete, partial, pending, expired, unresolved-consequence, restoration-time, resolved-case, and censored-case metrics and CLI fields.
+- Added exact-horizon, zero-delay ordering, late-partial, expired-unexecuted, policy-ownership, typed-profile closure, vector-baseline, metric, and censoring regressions.
+
+### Verification
+
+| Command | Result |
+| --- | --- |
+| `PYTHONPATH=src ./.venv/bin/python -m pytest -q tests/unit/test_simulator.py tests/unit/test_random_streams.py tests/unit/test_policies.py tests/unit/test_metrics.py` | pass: 90 focused restoration, replay, queue, cutoff, policy, metric, and exact-boundary tests |
+| `PYTHONPATH=src ./.venv/bin/python -m pytest -q tests/integration/test_queue_validation.py` | pass: 13 queue/action/recovery/reassessment/restoration integration tests |
+| `PYTHONPATH=src ./.venv/bin/python -m pytest -q` | pass: 131 tests in 0.47 seconds; all earlier regressions retained |
+| `PYTHONPATH=src ./.venv/bin/python -m uncertainty_permission_simulation.cli cohort experiments/configs/stochastic_smoke_v1.yaml` | pass twice with identical artifact SHA-256 `9e230c4266390554f2d95fb7c27a786b068ceead0f4c5487cd6847c1062d7cdd` |
+| smoke restoration inspection | U1: 4 obligations, 1 complete restoration, and 3 pending horizons; U2O: 4 obligations and 4 pending horizons; no smoke case is mislabeled partial or expired merely because the cutoff arrives first |
+| closure inspection | the one completely restored U1 case closes as resolved; the other 24 policy-case traces remain right-censored; focused fixtures separately prove partial and expired outcomes close as observed failures |
+| `PYTHONPATH=src ./.venv/bin/python -m uncertainty_permission_simulation.cli trace experiments/configs/smoke_v1.yaml` | pass: 9 Slice 1 traces; summary hash `b49ea5936727d23c3871a91555ba68d56d30f8f8c95a02e8c68ca9ae5210f739` and record hash `29ec5616135d9e94a6d8e84dbdff3879fcc63dfbacadaa4e640258dab2912db8` unchanged |
+| `./.venv/bin/python scripts/validate_plan.py` and `./.venv/bin/python scripts/validate_slice0.py` | pass |
+| runtime-module compilation and generic-kernel case-name scan | pass |
+
+### Remaining before Slice 2 closeout
+
+- Wire assistance capacity only through its declared stage and preserve its engagement effect separately from review, recovery, and reassessment capacity.
+- Extend the observation boundary to engagement/review/action stages with explicit state semantics before permitting an earlier cutoff.
+- Add monetary, payment, fee, or burden consequence dimensions only through a typed extension with explicit baseline and restoration rules; the current three-coordinate result must not be silently promoted.
+- Execute both R-OCI adapters only through compiled profiles and stylized overlays; add semantically equivalent synthetic/application comparisons.
+- Expand analytical queue checks, add a slower reference simulator, exact stochastic golden traces, and stored stochastic validation receipts.
+- Do not enter pilot scenario selection or treat this stylized restoration artifact as a substantive, empirical, legal, or historical result.
