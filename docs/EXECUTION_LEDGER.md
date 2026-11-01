@@ -689,5 +689,12 @@ Tracked pilot receipt: `data/pilot/pilot_v1_receipt.json` with self-hash recorde
 
 - The pilot calibrates design and implementation only. Its direction and magnitudes are not manuscript findings.
 - Independent eligible-reader returns cannot be created or certified by the drafting agent. At least two valid packet-only returns, oracle comparison, disagreement resolution, and any required new-reader rerun remain mandatory before protocol `1.0` and Slice 4.
-- Literature/citation expansion, extended-article invitation verification, and the authoritative-source identity rule also remain open pre-freeze dependencies.
-- Confirmatory configuration, freeze manifest, execution, and results interpretation remain forbidden until all pre-freeze dependencies close.
+- Literature/citation expansion, extended-article invitation verification, and the authoritative-source identity rule were open at engineering closeout and are closed in the dependency update below.
+- Confirmatory configuration, freeze manifest, execution, and results interpretation remain forbidden until the independent reader gate closes.
+
+### Pre-freeze dependency closure update — 2026-11-01
+
+- Verified the authoritative four-page call from the user-supplied share URL. The source PDF SHA-256 is `b2c1f2a0392939486cc59accd82697e5bb23d5543cf252e5c4f1d057dfd04986`. `docs/VENUE_CONTRACT.md` records the up-to-10,000-word limit including endnotes and excluding bibliography, December 18, 2026 deadline, substantially-developed-work requirement, accepted methods, selection criteria, and pending publisher style file.
+- Completed a structured keyword and backward/forward citation-chain audit across nine anchors. The closest new neighbor is Anyabolu, Dubey, and Hattab (2026) on uncertainty-to-action binding; originality language now treats that idea as prior work and narrows this paper to the evidence-refinement permission invariant, independent support, finite-capacity dynamics, restoration, and documented application.
+- Adopted `docs/SOURCE_IDENTITY_RULE.md`: the freeze hashes canonical local source records, authoritative URLs, metadata, locators, retrieval facts, and any valid byte hashes without pretending that redirect or wrapper bytes are authoritative source content.
+- Closed D-006, D-007, and D-008. D-001 independent packet-only reader QA is the sole remaining pre-freeze blocker.

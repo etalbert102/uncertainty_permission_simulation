@@ -10,7 +10,7 @@ Deliverable: a 10,000-word extended research paper reporting a completed formal,
 
 Completed precursor: the 1,500-word essay *When Uncertainty Expands Authority: How AI Workflows Can Reduce Scrutiny*, preserved in `../in_progress/uncertainty_expands_authority/when-uncertainty-expands-authority-final-revision.md`
 
-Planning date: 2026-12-18, treated as an unverified scheduling anchor rather than a venue fact. `D-007` requires the project lead to verify the extended-article invitation, word-count inclusions, and submission date before Slice 4. If the invitation differs, reschedule the same core study; do not change hypotheses, estimands, or evidence standards merely to preserve this date.
+Verified full-article deadline: 2026-12-18. `D-007` is closed; `docs/VENUE_CONTRACT.md` records the authoritative call, source hash, and word-count rule. The deadline does not alter hypotheses, estimands, or evidence standards.
 
 ## Extended-Paper Contract
 
@@ -38,7 +38,7 @@ Before generalizing to Robodebt, the formal verification layer must reproduce th
 
 ### Working article architecture and word budget
 
-Use the following 9,400-word main-text allocation as the drafting target and hold 600 words unassigned. The reserve absorbs counted abstract text, captions, transitions, qualifications, and reviewer-required clarification without displacing a core evidence section. Verify whether the invitation counts references, notes, tables, captions, and appendices before the manuscript is frozen. Do not treat the reserve as a ninth section or spend it merely to reach the ceiling.
+Use the following 9,400-word article allocation as the drafting target and hold 600 words unassigned. The verified call sets a 10,000-word ceiling including endnotes and excluding bibliography. The reserve absorbs counted abstract text, captions, transitions, qualifications, and reviewer-required clarification without displacing a core evidence section. Treat tables, captions, and appendices as counted unless the publisher later states otherwise. Do not treat the reserve as a ninth section or spend it merely to reach the ceiling.
 
 | Article function | Working words | Required job |
 | --- | ---: | --- |

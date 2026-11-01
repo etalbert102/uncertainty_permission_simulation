@@ -1,6 +1,6 @@
 # Literature and Originality Map
 
-Status: Slice 0 structured scoping map; bibliography must be normalized before manuscript submission
+Status: Slice 3 structured map updated after pre-freeze search and citation chaining; bibliography must be normalized before manuscript submission
 
 ## Purpose
 
@@ -20,10 +20,14 @@ This map prevents the paper from claiming novelty for established ideas and iden
 | System safety and control structures | Leveson, *Engineering a Safer World*, MIT Press, 2011; Leveson & Thomas, *STPA Handbook*, [MIT](https://psas.scripts.mit.edu/home/get_file.php?name=STPA_handbook.pdf) | Safety is a system/control problem involving constraints, feedback, coordination, and migration under operational conditions. | Evaluating the evidence-to-action workflow rather than component accuracy alone. | System-level safety analysis, control structures, or feedback reasoning. |
 | AI risk governance and red teaming | NIST, *AI Risk Management Framework 1.0*, 2023, [NIST AI 100-1](https://doi.org/10.6028/NIST.AI.100-1) | AI risk management requires contextual mapping, measurement, governance, monitoring, and differentiated human roles. | A repeatable process-red-team protocol with explicit ownership and claim limits. | Contextual AI risk management or red teaming generally. |
 | Public-sector algorithmic impact assessment | Reisman et al., *Algorithmic Impact Assessments*, AI Now Institute, 2018, [report](https://ainowinstitute.org/publication/algorithmic-impact-assessments-report-2); Royal Commission Recommendation 17.2 | Public agencies need structured assessment, public accountability, and independent scrutiny of automated decisions. | Linking a formal invariant to trace-level diagnostics and interventions. | Impact assessment, transparency, or independent audit as policy proposals. |
+| Uncertainty-to-action binding | Anyabolu, Dubey & Hattab, “Visualizing Uncertainty-to-Action Composition for Human Oversight,” 2026, [arXiv:2608.16428](https://arxiv.org/abs/2608.16428) | Multiple uncertainty conditions can be composed into an explicit oversight response and rendered for process transparency. | Position the evidence-refinement permission invariant as a narrower extension with independent support, capacity, contestability, and restoration conditions. | The idea of binding uncertainty conditions to oversight actions or making that composition inspectable. |
+| Effective human oversight and automation bias | Sterz et al., “On the Quest for Effectiveness in Human Oversight,” FAccT 2024, DOI [10.1145/3630106.3659051](https://doi.org/10.1145/3630106.3659051); Alon-Barkat & Busuioc, “Human–AI Interactions in Public Sector Decision Making,” *JPART* 2022, DOI [10.1093/jopart/muac007](https://doi.org/10.1093/jopart/muac007) | Nominal human presence is not effective oversight; human decision makers can show automation bias and selective adherence. | Operationalize action-binding authority, timing, evidence access, and finite capacity while keeping cognitive bias outside the numerical model. | The need for effective oversight or the existence of automation bias. |
+| Uncertainty communication in decision support | Prabhudesai et al., “Understanding Uncertainty,” IUI 2023, DOI [10.1145/3581641.3584033](https://doi.org/10.1145/3581641.3584033) | Decision makers' interpretation and use of displayed uncertainty affect reliance. | Distinguish uncertainty surfacing from the downstream action set and functional permission. | The importance of communicating uncertainty to decision makers. |
+| Automated-welfare burden | Bennett, Currie & Podoletz, “Universal Credit: administrative burdens of automated welfare,” *Journal of Social Policy* 2024, DOI [10.1017/S0047279424000175](https://doi.org/10.1017/S0047279424000175) | Automated welfare processes can create and redistribute administrative burdens. | Model recipient evidence-production burden and agency workload as separate outcome coordinates. | The claim that welfare automation can shift burden. |
 
 ## Specific Gap the Paper Tests
 
-The paper does not claim a new theory of information, abstention, queues, burden, administrative law, or system safety. Its proposed contribution is the joint specification and empirical demonstration of a narrower workflow invariant:
+The paper does not claim a new theory of information, abstention, uncertainty-to-action binding, effective human oversight, queues, burden, administrative law, or system safety. Its proposed contribution is the joint specification and empirical demonstration of a narrower workflow invariant:
 
 > A loss of decision-relevant information must not, by itself, add automatic progression actions unless each added action is independently supported across the admissible refinements or is authorized through an effective, action-binding review; weaker evidence may still add constraint, information-seeking, or restoration actions.
 
@@ -54,6 +58,7 @@ If the completed study merely shows that an explicitly permissive rule behaves p
 Use:
 
 - “We synthesize established ideas into a workflow-level permission invariant and test its operational implications under finite capacity.”
+- “We extend uncertainty-to-action and effective-oversight work by specifying when evidence loss may and may not expand automatic progression, then test that boundary in a finite-capacity process.”
 - “The contribution is the coupling of information loss to automatic action, not a new general ordering of information.”
 - “The simulation demonstrates behavior within declared process and parameter assumptions; it does not estimate Robodebt's historical rates.”
 - “Process red teaming is the evaluation method; it is not evidence of historical strategic attack.”
@@ -68,10 +73,10 @@ Avoid:
 
 ## Pre-Submission Literature Gate
 
-Before freezing the manuscript:
+Completed on 2026-11-01 and recorded in `docs/LITERATURE_SEARCH_AUDIT.md`:
 
-1. run forward and backward citation review for the core information-order, abstention, human-oversight, public-ADM, burden, contestability, and system-safety anchors;
-2. add any work that already formalizes permission monotonicity or uncertainty-conditioned authority;
-3. narrow the originality statement if an equivalent invariant is found;
-4. distinguish cited theory from sources used only for institutional context; and
-5. ensure every “unlike prior work” sentence names a specific comparison rather than an unbounded absence claim.
+1. ran forward and backward citation review for the core information-order, abstention, human-oversight, public-ADM, burden, contestability, and system-safety anchors;
+2. added work on uncertainty-to-action binding, effective oversight, automation bias, uncertainty communication, and automated-welfare burden;
+3. narrowed the originality statement around the closest neighboring formulation;
+4. distinguished cited theory from sources used only for institutional context; and
+5. retained a Slice 6 check requiring every “unlike prior work” sentence to name a specific comparison rather than an unbounded absence claim.

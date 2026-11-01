@@ -25,7 +25,7 @@ This receipt closes planning, not the study. The repository now specifies the fo
 
 ## Decisions Left to Execution, Not to Implementer Discretion
 
-The pilot must measure and freeze cohort size, final replication bounds within the stated cap, MCSE targets, scenario validity, censoring treatment, and the confirmatory runtime ceiling. These are controlled empirical decisions with predeclared inputs and decision rules, not missing plan choices. The baseline commit and environment receipt are closed as `D-009`; the project lead must still close independent reader QA, invitation verification, literature chaining, and source-byte identity at their registered pre-freeze gates.
+The pilot measured and fixed a design-freeze candidate for cohort size, replication bounds, MCSE targets, scenario validity, censoring treatment, and runtime ceiling. The baseline/environment (`D-009`), venue verification (`D-007`), literature chaining (`D-006`), and source identity (`D-008`) dependencies are closed. Independent reader QA (`D-001`) remains the sole pre-freeze gate.
 
 An implementer may choose ordinary internal code structure only where it does not alter schemas, fact ownership, event semantics, random-stream allocation, formal properties, estimands, diagnostics, or frozen outputs. Any semantic change requires a ledger entry and rerun of the owning gate.
 

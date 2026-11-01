@@ -122,7 +122,9 @@ Organize the literature into three functional clusters rather than six cursory m
 - human oversight, contestability, algorithmic administration, and administrative burden; and
 - sociotechnical assurance, process safety, and adversarial red teaming.
 
-The gap is not that these traditions ignore context. It is that the evidence-to-functional-permission mapping is rarely represented as a testable invariant whose operational review conditions can be stressed under load.
+Treat Anyabolu, Dubey, and Hattab's 2026 uncertainty-to-action binding framework as the closest neighboring formulation. Do not claim that this article originates binding uncertainty to oversight responses. Distinguish the present contribution through evidence refinement, independently supported automatic progression, finite-capacity operational review, restoration semantics, and the documented application.
+
+The gap is not that these traditions ignore context or action composition. It is that the evidence-to-functional-permission mapping is rarely represented as this specific testable invariant whose operational review conditions can be stressed under load.
 
 ### 2.3 From hypothesis to full study — 250 words
 
