@@ -8,7 +8,7 @@ This ledger is the canonical slice-status record. Update it at the end of every 
 | --- | --- | --- | --- | --- |
 | 0. Source, construct, and claim contract | implementation, plan, and baseline gates passed — pre-freeze reader QA pending | `9cf836c` | automated Slice 0 and plan gates pass from declared environment | two eligible locked reader returns are not yet available; this blocks Slice 4, not Slice 1 engineering |
 | 1. Case-neutral dynamic vertical slice | complete | `93e2da6` | 27 tests; 726-record closed bundle; three stored validation receipts match; both artifact hashes repeat | stochastic execution and empirical validation remain Slice 2 work |
-| 2. Stochastic engine and validation | in progress — shared review queue and deadline races pass | `dc4fec0` checkpoint | 82 tests; repeatable five-policy, globally ordered review-queue smoke artifact; all prior gates pass | no final-action timeout dynamics, later-stage queues, full analytical benchmark, or reference-simulator comparison yet |
+| 2. Stochastic engine and validation | in progress — policy timeout actions pass | `ade893a` checkpoint | 89 tests; repeatable five-policy pre-exposure action artifact; all prior gates pass | no external exposure, recovery/correction/restoration stages, full analytical benchmark, or reference-simulator comparison yet |
 | 3. Experiment pilot and freeze candidate | pending | — | — | — |
 | 4. Confirmatory freeze | pending | — | — | — |
 | 5. Confirmatory execution and analysis | pending | — | — | — |
@@ -308,3 +308,50 @@ Checkpoint commit: `dc4fec05889778a0cd4f61779de0c8df0a10c7d0` (`Add shared revie
 - Execute both R-OCI adapters only through compiled profiles and stylized overlays; add semantically equivalent synthetic/application comparisons.
 - Expand the analytical queue checks, add a slower reference simulator, exact stochastic golden traces, and stored stochastic validation receipts.
 - Do not enter pilot scenario selection or treat this review-queue smoke artifact as a substantive simulation result.
+
+## Slice 2 Timeout Action Checkpoint
+
+Status: policy-owned pre-exposure dispositions and fail-open/fail-closed timeout actions implemented; Slice 2 not complete
+
+Checkpoint commit: `ade893aa7f95f7affc26a8200a0d6d1fb4fcd7c1` (`Apply policy timeout actions`)
+
+### Scope and fact ownership
+
+- Policy behavior owns the action selected after routing or review timeout. The simulator owns when the decision occurs and emits the resulting authorization, computation, and progression events.
+- Evidentiary sufficiency and timely review authorization remain separate facts. Overall progression support requires both when review is mandatory, but the artifact also reports each axis independently.
+- Gate safety applies only to cases with a configured review dependency. A no-review policy is not counted as gate-safe merely because its action happened to be supported.
+- This checkpoint ends at executed progression. It does not equate functional permission, action computation, or progression with external exposure, recovery, debt, legality, or historical outcome.
+
+### Implemented
+
+- Added a closed final-disposition contract for `progress`, `hold`, and `request_evidence`, with evidence status, review requirement, timely completion, recorded authorization, timeout status, gate state, functional permission, and stable reason codes.
+- Corrected the prior generic decision seam so visible uncertainty cannot accidentally suppress U2O's declared fail-open timeout; the deterministic Slice 1 fixture continues through a compatibility wrapper and retains its stored outputs.
+- U0 progresses only with sufficient evidence and otherwise holds; U1 progresses through either sufficient evidence or declared imputation; U2C holds on review timeout; U2O progresses on the same timeout; U3 progresses with acquired evidence and otherwise requests evidence or holds.
+- Added `EXTERNAL_AUTHORIZATION_RECORDED` only for timely, evidence-sufficient reviewed progression, followed by `ACTION_COMPUTED` and, when selected, `PROGRESSION_EXECUTED` in the frozen event order.
+- Preserved branch-independent action causal keys across U2C/U2O while allowing only U2O's late cases to add progression descendants.
+- Added separate counts and rates for holds, information requests, progression, full support, evidentiary support, evidentiary failure, missing authorization, gate safety, fail-open progression, and fail-closed holds.
+- Added blocking run-integrity checks proving that dispositions partition cases, support classifications independently partition progression, and gate-safe/unsafe classifications partition only gate-applicable cases.
+
+### Verification
+
+| Command | Result |
+| --- | --- |
+| `PYTHONPATH=src ./.venv/bin/python -m pytest -q tests/unit/test_simulator.py tests/unit/test_random_streams.py tests/unit/test_policies.py tests/unit/test_metrics.py` | pass: 53 focused policy, action, pairing, replay, support, configuration, and metric tests |
+| `PYTHONPATH=src ./.venv/bin/python -m pytest -q tests/integration/test_queue_validation.py` | pass: 8 queue/action integration tests, including matched U2 timeout divergence and evidence-versus-authorization separation |
+| `PYTHONPATH=src ./.venv/bin/python -m pytest -q` | pass: 89 tests in 0.34 seconds; all earlier regressions retained |
+| `PYTHONPATH=src ./.venv/bin/python -m uncertainty_permission_simulation.cli cohort experiments/configs/stochastic_smoke_v1.yaml` | pass: repeated artifact SHA-256 `7765db0d62b09df357fdcb409de2a5790971f51495eff4d7fe20c5044d1596ae` |
+| smoke action inspection | U2C: 4 timeout holds and 1 request-evidence action; U2O: the same schedule yields 4 fail-open progressions and 1 request-evidence action; U1: 1 fully supported and 4 evidentially unsupported progressions |
+| support-axis inspection | U2O's 4 late progressions all lack timely authorization; 1 has sufficient evidence and 3 also lack sufficient evidence |
+| gate inspection | U2C: 5/5 applicable cases gate-safe; U2O: 1/5 gate-safe and 4/5 gate-unsafe; U3: 2/2 applicable cases gate-safe |
+| `PYTHONPATH=src ./.venv/bin/python -m uncertainty_permission_simulation.cli trace experiments/configs/smoke_v1.yaml` | pass: 9 Slice 1 traces; summary hash `b49ea5936727d23c3871a91555ba68d56d30f8f8c95a02e8c68ca9ae5210f739` and record hash `29ec5616135d9e94a6d8e84dbdff3879fcc63dfbacadaa4e640258dab2912db8` unchanged |
+| `./.venv/bin/python scripts/validate_plan.py` and `./.venv/bin/python scripts/validate_slice0.py` | pass |
+| runtime-module compilation and generic-kernel case-name scan | pass |
+
+### Remaining before Slice 2 closeout
+
+- Extend only executed progression into external consequence and recovery states; preserve the distinction among permission, computation, execution, and exposure.
+- Add correction requests, reassessment capacity, administrative cutoff/censoring, and dimension-specific restoration.
+- Wire assistance capacity only through a declared process stage and preserve its engagement effect separately from review capacity.
+- Execute both R-OCI adapters only through compiled profiles and stylized overlays; add semantically equivalent synthetic/application comparisons.
+- Expand analytical queue checks, add a slower reference simulator, exact stochastic golden traces, and stored stochastic validation receipts.
+- Do not enter pilot scenario selection or treat this pre-exposure action artifact as a substantive simulation result.
