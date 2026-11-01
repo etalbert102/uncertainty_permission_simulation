@@ -13,6 +13,12 @@ import yaml
 from .applications.robodebt import load_early_adapter
 from .artifacts import build_bundle
 from .configuration import ParameterValue, ScenarioOverlaySpec, compile_configuration
+from .confirmatory import (
+    analyze_frozen_experiment,
+    reconcile_frozen_experiment,
+    run_frozen_experiment,
+)
+from .freeze import verify_freeze_manifest, write_freeze_manifest
 from .formal_model import render_p0_report
 from .experiments import run_experiment, validate_experiment_config
 from .metrics import engagement_metrics, trace_metrics
@@ -466,6 +472,19 @@ def main() -> None:
     worked_trace.add_argument("config", type=Path)
     negative_controls = subparsers.add_parser("negative-controls")
     negative_controls.add_argument("config", type=Path)
+    create_freeze = subparsers.add_parser("create-freeze")
+    create_freeze.add_argument("manifest", type=Path)
+    verify_freeze = subparsers.add_parser("verify-freeze")
+    verify_freeze.add_argument("manifest", type=Path)
+    frozen_run = subparsers.add_parser("run")
+    frozen_run.add_argument("config", type=Path)
+    resume = subparsers.add_parser("resume")
+    resume.add_argument("config", type=Path)
+    resume.add_argument("--extension", action="store_true")
+    reconcile = subparsers.add_parser("reconcile")
+    reconcile.add_argument("config", type=Path)
+    analyze = subparsers.add_parser("analyze")
+    analyze.add_argument("config", type=Path)
     args = parser.parse_args()
     if args.command == "trace":
         result = run_smoke(args.config)
@@ -498,6 +517,46 @@ def main() -> None:
             "receipt_id": result["receipt_id"],
             "control_count": result["control_count"],
             "receipt_hash": result["receipt_hash"],
+        }, sort_keys=True))
+    elif args.command == "create-freeze":
+        result = write_freeze_manifest(ROOT, args.manifest)
+        print(json.dumps({
+            "status": "ok",
+            "freeze_id": result["freeze_id"],
+            "file_count": len(result["files"]),
+            "manifest_hash": result["manifest_hash"],
+        }, sort_keys=True))
+    elif args.command == "verify-freeze":
+        result = verify_freeze_manifest(ROOT, args.manifest)
+        print(json.dumps({
+            "status": "ok",
+            "freeze_id": result["freeze_id"],
+            "file_count": len(result["files"]),
+            "manifest_hash": result["manifest_hash"],
+        }, sort_keys=True))
+    elif args.command == "run":
+        result = run_frozen_experiment(ROOT, args.config)
+        print(json.dumps(result, sort_keys=True))
+    elif args.command == "resume":
+        result = run_frozen_experiment(ROOT, args.config, extension=args.extension)
+        print(json.dumps(result, sort_keys=True))
+    elif args.command == "reconcile":
+        result = reconcile_frozen_experiment(ROOT, args.config)
+        print(json.dumps({
+            "status": result["status"],
+            "config_id": result["config_id"],
+            "observed_attempt_count": result["observed_attempt_count"],
+            "expected_attempt_count": result["expected_attempt_count"],
+            "reconciliation_hash": result["reconciliation_hash"],
+        }, sort_keys=True))
+    elif args.command == "analyze":
+        result = analyze_frozen_experiment(ROOT, args.config)
+        print(json.dumps({
+            "status": "ok",
+            "config_id": result["config_id"],
+            "replications": result["replications"],
+            "extension_required": result["extension_required"],
+            "analysis_hash": result["analysis_hash"],
         }, sort_keys=True))
 
 

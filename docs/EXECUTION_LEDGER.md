@@ -10,7 +10,7 @@ This ledger is the canonical slice-status record. Update it at the end of every 
 | 1. Case-neutral dynamic vertical slice | complete | `93e2da6` | 27 tests; 726-record closed bundle; three stored validation receipts match; both artifact hashes repeat | Slice 2 retained the exact artifact hashes and validated stochastic extension without weakening this contract |
 | 2. Stochastic engine and validation | complete | `d541d03` closeout; `fa6dfc4` semantic audit | 148 tests; five exact stochastic traces; stored replay/application/queue receipts; analytical and independent-reference checks; all prior gates pass | implementation validation only; monetary and unmodeled harms remain outside the declared consequence vector; no pilot or substantive result exists |
 | 3. Experiment pilot and freeze candidate | complete; ready for Slice 4 freeze work | `e8905fa`; gate amended 2026-11-01 | pilot, Slice 0/plan/Slice 3 gates, executable worked trace and staged review materials | procedure comprehensibility will be reviewed after Slice 5; semantic findings require a new freeze and rerun |
-| 4. Confirmatory freeze | active; freeze not authorized | — | 108-family core and one sensitivity verify the stored five-control receipt and validate as blocked candidates; pre-freeze outcome contract narrowed without inspecting confirmatory results | freeze/run verification machinery remains open |
+| 4. Confirmatory freeze | active; machinery complete, freeze not yet issued | — | 108-family core and one sensitivity verify the stored five-control receipt; freeze, append-only execution, reconciliation, and analysis machinery pass the synthetic rehearsal and full regression suite | protocol/config promotion and immutable manifest issuance remain separate pre-run actions |
 | 5. Confirmatory execution and analysis | pending | — | — | — |
 | 6. Evidence packet and 10,000-word article | pending | — | — | — |
 
@@ -817,3 +817,26 @@ Verification:
 | `git diff --check` | pass |
 
 No confirmatory scenario was executed or inspected. The protocol remains version `0.2`, both configs remain `blocked`, and no freeze manifest exists.
+
+### Freeze and append-only execution machinery — 2026-11-01
+
+- Implemented immutable freeze-manifest creation and verification over the closed document, configuration, code, test, formal-data, source-identity, scenario, validation-receipt, and pilot-receipt inventory. Verification rejects self-hash, file-hash, size, category, inventory, and exact-environment drift.
+- Implemented manifest-gated `run`, `resume --extension`, `reconcile`, and `analyze` commands. Attempt and analysis artifacts use exclusive creation; a valid existing attempt is retained, while a corrupt, mismatched, or replacement artifact blocks execution.
+- Implemented the preregistered 30-to-60 family-wide extension decision, complete attempt reconciliation, cell and paired summaries, common-random-number diagnostics, MCSE reporting, and deterministic figure artifacts.
+- Added `scripts/verify_repo.py` with distinct Slice 4, Slice 5, and release gates. Its pre-freeze invocation currently fails only with `FREEZE_MANIFEST_MISSING`, as intended.
+- Rehearsed the full machinery on a miniature frozen configuration: 20 attempts were created, a rerun retained all 20 without replacement, reconciliation was complete, analysis repeated exactly, and a deliberately corrupted attempt was rejected.
+- Closed the implementation work described by `S4-B003`. The candidate state is deliberately unchanged until the next controlled action promotes the formal model, protocol, preregistration, and both configs and then creates the immutable manifest.
+
+Verification:
+
+| Command | Result |
+| --- | --- |
+| `PYTHONPATH=src ./.venv/bin/python -m uncertainty_permission_simulation.cli validate experiments/configs/confirmatory_v1.yaml` | pass as blocked candidate; config hash `df89e4d87c39ed1ca5d7454be77aa61e0371611ef8e9ee6054ef3495a30e1de8`; only `FREEZE_MANIFEST_IMPLEMENTATION` remains in the not-yet-promoted candidate state |
+| `PYTHONPATH=src ./.venv/bin/python -m uncertainty_permission_simulation.cli validate experiments/configs/sensitivity_information_latency_v1.yaml` | pass as blocked candidate; config hash `c4314bc355275289014b5ca63861cd0b7e920c2bb5b99d156f61ecd88173d97b`; only `FREEZE_MANIFEST_IMPLEMENTATION` remains in the not-yet-promoted candidate state |
+| `./.venv/bin/python scripts/validate_plan.py` | pass: eight slices, three primary hypotheses, five policies, 39 audit questions, nine deferred items, and 10,000-word ceiling |
+| `./.venv/bin/python scripts/validate_slice0.py` | pass: 10 sources, 10 claims, two profiles, 12 YAML files, and 95 diagnostics |
+| `PYTHONPATH=src ./.venv/bin/python scripts/validate_slice3.py` | pass: 15 development families, 75 family-policy cells, stored pilot receipt, and no confirmatory output |
+| `PYTHONPATH=src ./.venv/bin/python -m pytest -q` | pass: 178 tests |
+| `./.venv/bin/python -m py_compile ...` and `git diff --check` | pass |
+
+No confirmatory scenario was executed or inspected. The protocol remains version `0.2`, both configs remain `blocked`, and `docs/FREEZE_MANIFEST.json` does not exist.

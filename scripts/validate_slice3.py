@@ -6,6 +6,7 @@ it is not an external pre-freeze gate.
 
 from __future__ import annotations
 
+import argparse
 from hashlib import sha256
 import json
 from pathlib import Path
@@ -30,7 +31,7 @@ def _self_hash(value: dict[str, object], field: str) -> bool:
     return observed == canonical_hash(candidate)
 
 
-def main() -> int:
+def main(*, allow_confirmatory_output: bool = False) -> int:
     diagnostics: list[str] = []
     config_path = ROOT / "experiments/configs/pilot_v1.yaml"
     validation = validate_experiment_config(config_path)
@@ -130,7 +131,7 @@ def main() -> int:
             diagnostics.append(f"required Slice 3 artifact missing or empty: {path.relative_to(ROOT)}")
 
     confirmatory_artifacts = list((ROOT / "outputs").glob("confirmatory*/**/*"))
-    if confirmatory_artifacts:
+    if confirmatory_artifacts and not allow_confirmatory_output:
         diagnostics.append("confirmatory output exists before freeze")
     if diagnostics:
         for item in diagnostics:
@@ -146,4 +147,7 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--allow-confirmatory-output", action="store_true")
+    arguments = parser.parse_args()
+    raise SystemExit(main(allow_confirmatory_output=arguments.allow_confirmatory_output))
