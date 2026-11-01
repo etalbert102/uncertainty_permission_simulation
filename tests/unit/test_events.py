@@ -17,6 +17,13 @@ def test_simultaneous_events_use_frozen_priority_then_key() -> None:
     assert [item.event_type_id for item in queue.drain()] == ["CASE_ARRIVAL", "CASE_CLOSED"]
 
 
+def test_review_completion_wins_an_exact_deadline_tie() -> None:
+    queue = EventQueue()
+    queue.push(event("2", "DEADLINE_REACHED", "10", "DEADLINE"))
+    queue.push(event("1", "REVIEW_COMPLETED", "10", "COMPLETION"))
+    assert [item.event_type_id for item in queue.drain()] == ["REVIEW_COMPLETED", "DEADLINE_REACHED"]
+
+
 def test_duplicate_causal_key_is_blocking() -> None:
     queue = EventQueue()
     queue.push(event("1", "CASE_ARRIVAL", "0", "SAME"))

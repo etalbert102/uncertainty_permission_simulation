@@ -9,7 +9,7 @@ CORE_CAPABILITIES = frozenset({"notice", "response", "representation", "routing"
 CORE_ACTIONS = frozenset({"hold", "request_evidence", "review", "progress", "correct", "restore"})
 CORE_SLOTS = frozenset({"notice_delay", "response_deadline", "review_capacity", "review_service_time"})
 STOCHASTIC_SLOTS = frozenset({
-    "initiation_window", "extension_duration", "notice_delivery_probability",
+    "initiation_window", "extension_duration", "review_service_window", "notice_delivery_probability",
     "administrative_access_probability", "comprehension_probability",
     "record_availability_probability", "response_effort_limit", "assistance_effort_bonus",
     "extension_effort_bonus", "extension_need_probability",

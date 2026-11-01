@@ -22,7 +22,7 @@ def trace_metrics(trace: TraceResult) -> dict[str, int | bool | None]:
 
 
 def engagement_metrics(run: EngagementRun) -> dict[str, int | str]:
-    """Render separate engagement-stage counts and rates; never a composite score."""
+    """Render separate engagement and review-queue measures; never a composite score."""
 
     denominator = run.telemetry.case_count
     notice_failure_count = sum(
@@ -30,7 +30,7 @@ def engagement_metrics(run: EngagementRun) -> dict[str, int | str]:
         for trace in run.traces
         for event in trace.events
     )
-    counts = {
+    case_counts = {
         "notice_failure": notice_failure_count,
         "response": run.telemetry.response_count,
         "adequate_response_evidence": run.telemetry.adequate_response_evidence_count,
@@ -40,15 +40,35 @@ def engagement_metrics(run: EngagementRun) -> dict[str, int | str]:
         "retrieved_evidence": run.telemetry.retrieved_evidence_count,
         "review_queue": run.telemetry.review_queue_count,
     }
+    review_counts = {
+        "review_started": run.telemetry.review_started_count,
+        "review_completed": run.telemetry.review_completed_count,
+        "timely_review": run.telemetry.timely_review_count,
+        "late_review": run.telemetry.late_review_count,
+    }
     result: dict[str, int | str] = {
         "case_count": denominator,
         "event_count": run.telemetry.event_count,
-        **{f"{name}_count": value for name, value in counts.items()},
+        **{f"{name}_count": value for name, value in (case_counts | review_counts).items()},
     }
     with localcontext() as context:
         context.prec = 50
         result.update({
             f"{name}_rate": normalized_decimal(Decimal(value) / Decimal(denominator))
-            for name, value in counts.items()
+            for name, value in case_counts.items()
+        })
+        queue_denominator = run.telemetry.review_queue_count
+        result.update({
+            f"{name}_rate": (
+                normalized_decimal(Decimal(value) / Decimal(queue_denominator))
+                if queue_denominator else "0"
+            )
+            for name, value in review_counts.items()
+        })
+        result.update({
+            "review_mean_wait_time": normalized_decimal(
+                run.telemetry.review_total_wait_time / Decimal(run.telemetry.review_queue_count)
+            ) if run.telemetry.review_queue_count else "0",
+            "review_max_wait_time": normalized_decimal(run.telemetry.review_max_wait_time),
         })
     return result

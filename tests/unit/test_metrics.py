@@ -10,7 +10,8 @@ def _run(policy_id: str):
     overlay = StochasticInputOverlay(
         overlay_id="METRIC-OVERLAY", provenance="stylized", initiation_window=Decimal("0"),
         notice_delay=Decimal("1"), response_deadline=Decimal("21"),
-        review_capacity=Decimal("1"), review_service_time=Decimal("30"), extension_duration=Decimal("7"),
+        review_capacity=Decimal("1"), review_service_time=Decimal("30"), review_service_window=Decimal("14"),
+        extension_duration=Decimal("7"),
         notice_delivery_probability=Decimal("1"), administrative_access_probability=Decimal("1"),
         comprehension_probability=Decimal("1"), record_availability_probability=Decimal("1"),
         response_effort_limit=Decimal("1"), assistance_effort_bonus=Decimal("0"),
@@ -35,6 +36,13 @@ def test_engagement_metrics_keep_dimensions_separate() -> None:
     assert metrics["response_count"] == 2
     assert metrics["adequate_response_evidence_count"] == 2
     assert metrics["review_queue_count"] == 2
+    assert metrics["review_started_count"] == 2
+    assert metrics["review_completed_count"] == 2
+    assert metrics["timely_review_count"] + metrics["late_review_count"] == 2
+    assert Decimal(metrics["timely_review_rate"]) + Decimal(metrics["late_review_rate"]) == Decimal(1)
+    assert metrics["review_started_rate"] == "1"
+    assert metrics["review_completed_rate"] == "1"
+    assert Decimal(metrics["review_max_wait_time"]) >= Decimal(0)
     assert metrics["response_rate"] == "1"
     assert metrics["notice_failure_rate"] == "0"
     assert "score" not in metrics and "utility" not in metrics
@@ -45,4 +53,5 @@ def test_engagement_metrics_are_policy_specific_but_share_denominator() -> None:
     u2c = engagement_metrics(_run("U2C"))
     assert u1["case_count"] == u2c["case_count"] == 2
     assert u1["review_queue_count"] == 0
+    assert u1["review_mean_wait_time"] == "0"
     assert u2c["review_queue_count"] == 2

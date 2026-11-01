@@ -177,6 +177,7 @@ def run_stochastic_smoke(config_path: Path) -> dict[str, object]:
             response_deadline=Decimal(str(config["overlay"]["response_deadline"])),
             review_capacity=Decimal(str(config["overlay"]["review_capacity"])),
             review_service_time=Decimal(str(config["overlay"]["review_service_time"])),
+            review_service_window=Decimal(str(config["overlay"]["review_service_window"])),
             extension_duration=Decimal(str(config["overlay"]["extension_duration"])),
             notice_delivery_probability=Decimal(str(config["overlay"]["notice_delivery_probability"])),
             administrative_access_probability=Decimal(str(config["overlay"]["administrative_access_probability"])),
@@ -243,8 +244,44 @@ def run_stochastic_smoke(config_path: Path) -> dict[str, object]:
                     "retrieval_request_count": run.telemetry.retrieval_request_count,
                     "retrieved_evidence_count": run.telemetry.retrieved_evidence_count,
                     "review_queue_count": run.telemetry.review_queue_count,
+                    "review_started_count": run.telemetry.review_started_count,
+                    "review_completed_count": run.telemetry.review_completed_count,
+                    "timely_review_count": run.telemetry.timely_review_count,
+                    "late_review_count": run.telemetry.late_review_count,
+                    "review_total_wait_time": normalized_decimal(run.telemetry.review_total_wait_time),
+                    "review_max_wait_time": normalized_decimal(run.telemetry.review_max_wait_time),
+                    "review_schedule_hash": run.telemetry.review_schedule_hash,
                     "event_hash": run.telemetry.event_hash,
                 },
+                "review_queue": {
+                    "queue_id": run.review_queue.config.queue_id,
+                    "capacity": run.review_queue.config.capacity,
+                    "discipline": run.review_queue.config.discipline,
+                    "visits": [
+                        {
+                            "request_id": visit.request_id,
+                            "case_id": visit.case_id,
+                            "server_id": visit.server_id,
+                            "queued_at": normalized_decimal(visit.queued_at),
+                            "started_at": normalized_decimal(visit.started_at),
+                            "completed_at": normalized_decimal(visit.completed_at),
+                            "service_time": normalized_decimal(visit.service_time),
+                            "wait_time": normalized_decimal(visit.wait_time),
+                            "deadline": normalized_decimal(visit.deadline),
+                            "completed_by_deadline": visit.completed_by_deadline,
+                        }
+                        for visit in run.review_queue.visits
+                    ],
+                },
+                "system_events": [
+                    {
+                        "case_id": event.case_id,
+                        "event_type_id": event.event_type_id,
+                        "timestamp": normalized_decimal(event.timestamp),
+                        "causal_event_key": event.causal_event_key,
+                    }
+                    for event in run.system_events
+                ],
                 "traces": [
                     {
                         "case_id": trace.case_id,
@@ -273,7 +310,7 @@ def run_stochastic_smoke(config_path: Path) -> dict[str, object]:
             }
             for policy_id, run in engagement_runs.items()
         },
-        "claim_limit": "engagement-stage stochastic smoke artifact; no queue service, final action, empirical, or historical outcome",
+        "claim_limit": "review-queue stochastic smoke artifact; no final action, empirical, or historical outcome",
     }
     output_path = ROOT / config["output_path"]
     output_path.parent.mkdir(parents=True, exist_ok=True)

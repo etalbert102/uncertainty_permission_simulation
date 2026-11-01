@@ -7,14 +7,23 @@ from uncertainty_permission_simulation.configuration import compile_configuratio
 from uncertainty_permission_simulation.profiles import policy, stochastic_process
 from uncertainty_permission_simulation.random_streams import DRAW_FAMILY_IDS
 from uncertainty_permission_simulation.schemas import ContractError
-from uncertainty_permission_simulation.simulator import StochasticCohortSpec, StochasticInputOverlay, generate_stochastic_cohort, run_engagement_stage
+from uncertainty_permission_simulation.simulator import (
+    ServiceQueueConfig,
+    ServiceRequest,
+    StochasticCohortSpec,
+    StochasticInputOverlay,
+    generate_stochastic_cohort,
+    run_engagement_stage,
+    schedule_service_queue,
+)
 
 
 def overlay(**updates: object) -> StochasticInputOverlay:
     base = StochasticInputOverlay(
         overlay_id="STYLIZED-OVERLAY-1", provenance="stylized", initiation_window=Decimal("10"),
         notice_delay=Decimal("1"), response_deadline=Decimal("21"),
-        review_capacity=Decimal("1"), review_service_time=Decimal("30"), extension_duration=Decimal("7"),
+        review_capacity=Decimal("1"), review_service_time=Decimal("30"), review_service_window=Decimal("14"),
+        extension_duration=Decimal("7"),
         notice_delivery_probability=Decimal("0.9"), administrative_access_probability=Decimal("0.75"),
         comprehension_probability=Decimal("0.8"), record_availability_probability=Decimal("0.65"),
         response_effort_limit=Decimal("0.55"), assistance_effort_bonus=Decimal("0.3"),
@@ -98,6 +107,7 @@ def test_invalid_cohort_specs_fail_before_draws(updates: dict[str, object]) -> N
     ("initiation_window", Decimal("NaN")),
     ("initiation_window", "10"),
     ("response_deadline", Decimal("0")),
+    ("review_service_window", Decimal("0")),
     ("notice_delivery_probability", Decimal("1.1")),
 ))
 def test_invalid_stochastic_overlay_values_are_rejected(field: str, value: object) -> None:
@@ -178,3 +188,56 @@ def test_engagement_runner_rejects_configuration_overlay_drift() -> None:
     sensitivity_overlay = overlay(provenance="sensitivity")
     with pytest.raises(ContractError, match="SCENARIO_CONFIGURATION_INCOMPLETE"):
         run_engagement_stage(cohort, compiled("U1", sensitivity_overlay))
+
+
+def test_fifo_service_queue_is_input_order_invariant_and_work_conserving() -> None:
+    queue = ServiceQueueConfig("REVIEW", 1)
+    first = ServiceRequest("R-1", "CASE-1", Decimal("0"), Decimal("2"), Decimal("10"))
+    second = ServiceRequest("R-2", "CASE-2", Decimal("1"), Decimal("1"), Decimal("10"))
+    forward = schedule_service_queue(queue, (first, second))
+    reversed_input = schedule_service_queue(queue, (second, first))
+    assert forward == reversed_input
+    assert [(visit.started_at, visit.completed_at, visit.wait_time) for visit in forward.visits] == [
+        (Decimal("0"), Decimal("2"), Decimal("0")),
+        (Decimal("2"), Decimal("3"), Decimal("1")),
+    ]
+    assert forward.telemetry.immediate_start_count == 1
+    assert forward.telemetry.timely_completion_count == 2
+
+
+def test_service_capacity_and_exact_deadline_boundary_are_explicit() -> None:
+    requests = (
+        ServiceRequest("R-1", "CASE-1", Decimal("0"), Decimal("2"), Decimal("2")),
+        ServiceRequest("R-2", "CASE-2", Decimal("0"), Decimal("2"), Decimal("2")),
+    )
+    single = schedule_service_queue(ServiceQueueConfig("REVIEW", 1), requests)
+    parallel = schedule_service_queue(ServiceQueueConfig("REVIEW", 2), requests)
+    assert [visit.completed_by_deadline for visit in single.visits] == [True, False]
+    assert [visit.completed_by_deadline for visit in parallel.visits] == [True, True]
+    assert parallel.telemetry.max_wait_time == 0
+    assert single.telemetry.schedule_hash != parallel.telemetry.schedule_hash
+
+
+@pytest.mark.parametrize(
+    ("config", "requests"),
+    (
+        (ServiceQueueConfig("REVIEW", 1), [ServiceRequest("R", "C", Decimal(0), Decimal(1), Decimal(2))]),
+        (ServiceQueueConfig("REVIEW", 1), ("not-a-request",)),
+        (ServiceQueueConfig("REVIEW", 1), (
+            ServiceRequest("R", "C-1", Decimal(0), Decimal(1), Decimal(2)),
+            ServiceRequest("R", "C-2", Decimal(0), Decimal(1), Decimal(2)),
+        )),
+    ),
+)
+def test_invalid_service_request_collections_are_rejected(config: object, requests: object) -> None:
+    with pytest.raises(ContractError, match="SIM_SYSTEM_STATE_INCOMPLETE"):
+        schedule_service_queue(config, requests)  # type: ignore[arg-type]
+
+
+def test_invalid_service_queue_and_request_values_are_rejected() -> None:
+    with pytest.raises(ContractError, match="SIM_SYSTEM_STATE_INCOMPLETE"):
+        schedule_service_queue("not-a-config", ())  # type: ignore[arg-type]
+    with pytest.raises(ContractError, match="SIM_SYSTEM_STATE_INCOMPLETE"):
+        ServiceQueueConfig("REVIEW", 0)
+    with pytest.raises(ContractError, match="SIM_SYSTEM_STATE_INCOMPLETE"):
+        ServiceRequest("R", "C", Decimal("2"), Decimal("1"), Decimal("1"))
