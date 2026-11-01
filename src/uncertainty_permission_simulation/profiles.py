@@ -15,8 +15,10 @@ STOCHASTIC_SLOTS = frozenset({
     "extension_effort_bonus", "extension_need_probability",
     "evidence_retrieval_success_probability", "evidence_retrieval_latency_scale",
     "external_consequence_delay", "recovery_start_delay",
+    "recovery_capacity", "recovery_service_time", "recovery_window",
     "correction_request_delay", "correction_uptake_probability",
     "reassessment_capacity", "reassessment_service_time", "correction_window",
+    "administrative_cutoff",
 })
 
 

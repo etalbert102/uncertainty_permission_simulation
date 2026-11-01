@@ -62,7 +62,13 @@ def engagement_metrics(run: EngagementRun) -> dict[str, int | str]:
     }
     exposure_counts = {
         "external_exposure": run.telemetry.external_exposure_count,
+        "recovery_queue": run.telemetry.recovery_queue_count,
+        "recovery_service_started": run.telemetry.recovery_service_started_count,
         "recovery_started": run.telemetry.recovery_started_count,
+        "timely_recovery": run.telemetry.timely_recovery_count,
+        "late_recovery": run.telemetry.late_recovery_count,
+        "recovery_right_censored": run.telemetry.recovery_right_censored_count,
+        "recovery_not_queued_by_cutoff": run.telemetry.recovery_not_queued_by_cutoff_count,
         "supported_exposure": run.telemetry.supported_exposure_count,
         "unsupported_exposure": run.telemetry.unsupported_exposure_count,
         "evidentially_unsupported_exposure": run.telemetry.evidentially_unsupported_exposure_count,
@@ -72,6 +78,7 @@ def engagement_metrics(run: EngagementRun) -> dict[str, int | str]:
         "correction_eligible": run.telemetry.correction_eligible_count,
         "correction_request": run.telemetry.correction_request_count,
         "correction_not_requested": run.telemetry.correction_not_requested_count,
+        "correction_not_available_by_cutoff": run.telemetry.correction_not_available_by_cutoff_count,
         "correction_executed": run.telemetry.correction_executed_count,
         "timely_correction": run.telemetry.timely_correction_count,
         "late_correction": run.telemetry.late_correction_count,
@@ -83,10 +90,15 @@ def engagement_metrics(run: EngagementRun) -> dict[str, int | str]:
         "reassessment_completed": run.telemetry.reassessment_completed_count,
         "timely_reassessment": run.telemetry.timely_reassessment_count,
         "late_reassessment": run.telemetry.late_reassessment_count,
+        "reassessment_right_censored": run.telemetry.reassessment_right_censored_count,
     }
     gate_counts = {
         "gate_safe": run.telemetry.gate_safe_count,
         "gate_unsafe": run.telemetry.gate_unsafe_count,
+    }
+    censoring_counts = {
+        "case_closed": run.telemetry.case_closed_count,
+        "right_censored_case": run.telemetry.right_censored_case_count,
     }
     result: dict[str, int | str] = {
         "case_count": denominator,
@@ -95,7 +107,7 @@ def engagement_metrics(run: EngagementRun) -> dict[str, int | str]:
             f"{name}_count": value
             for name, value in (
                 case_counts | review_counts | action_counts | exposure_counts
-                | correction_counts | reassessment_counts | gate_counts
+                | correction_counts | reassessment_counts | gate_counts | censoring_counts
             ).items()
         },
         "gate_applicable_count": run.telemetry.gate_applicable_count,
@@ -104,7 +116,7 @@ def engagement_metrics(run: EngagementRun) -> dict[str, int | str]:
         context.prec = 50
         result.update({
             f"{name}_rate": normalized_decimal(Decimal(value) / Decimal(denominator))
-            for name, value in (case_counts | action_counts | exposure_counts).items()
+            for name, value in (case_counts | action_counts | exposure_counts | censoring_counts).items()
         })
         result.update({
             f"{name}_case_rate": normalized_decimal(Decimal(value) / Decimal(denominator))
@@ -169,6 +181,11 @@ def engagement_metrics(run: EngagementRun) -> dict[str, int | str]:
                 run.telemetry.review_total_wait_time / Decimal(run.telemetry.review_queue_count)
             ) if run.telemetry.review_queue_count else "0",
             "review_max_wait_time": normalized_decimal(run.telemetry.review_max_wait_time),
+            "recovery_mean_wait_time": normalized_decimal(
+                run.telemetry.recovery_total_wait_time
+                / Decimal(run.telemetry.recovery_service_started_count)
+            ) if run.telemetry.recovery_service_started_count else "0",
+            "recovery_max_wait_time": normalized_decimal(run.telemetry.recovery_max_wait_time),
             "reassessment_mean_wait_time": normalized_decimal(
                 run.telemetry.reassessment_total_wait_time / Decimal(reassessment_denominator)
             ) if reassessment_denominator else "0",

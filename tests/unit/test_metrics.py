@@ -20,9 +20,12 @@ def _run(policy_id: str, **updates: object):
         extension_need_probability=Decimal("0"), evidence_retrieval_success_probability=Decimal("1"),
         evidence_retrieval_latency_scale=Decimal("0"),
         external_consequence_delay=Decimal("1"), recovery_start_delay=Decimal("2"),
+        recovery_capacity=Decimal("1"), recovery_service_time=Decimal("1"),
+        recovery_window=Decimal("14"),
         correction_request_delay=Decimal("7"), correction_uptake_probability=Decimal("1"),
         reassessment_capacity=Decimal("1"), reassessment_service_time=Decimal("30"),
         correction_window=Decimal("14"),
+        administrative_cutoff=Decimal("1000"),
     )
     overlay = replace(overlay, **updates)
     cohort = generate_stochastic_cohort(StochasticCohortSpec(
@@ -55,9 +58,14 @@ def test_engagement_metrics_keep_dimensions_separate() -> None:
     assert metrics["evidentially_supported_progression_count"] + metrics["evidentially_unsupported_progression_count"] == metrics["progression_count"]
     assert metrics["external_exposure_count"] == metrics["progression_count"]
     assert metrics["recovery_started_count"] == metrics["external_exposure_count"]
+    assert metrics["recovery_queue_count"] == metrics["external_exposure_count"]
+    assert metrics["recovery_right_censored_count"] == 0
+    assert Decimal(metrics["recovery_max_wait_time"]) >= Decimal(0)
     assert metrics["supported_exposure_count"] + metrics["unsupported_exposure_count"] == metrics["external_exposure_count"]
     assert metrics["unauthorized_exposure_count"] == 0
     assert metrics["correction_eligible_count"] == 0
+    assert metrics["right_censored_case_count"] == metrics["case_count"]
+    assert metrics["right_censored_case_rate"] == "1"
     assert metrics["correction_request_count"] == 0
     assert metrics["correction_uptake_rate"] == "0"
     assert metrics["correction_executed_count"] == 0
@@ -96,9 +104,11 @@ def test_correction_and_reassessment_metrics_keep_their_own_denominators() -> No
     assert metrics["correction_eligible_count"] == 2
     assert metrics["correction_request_count"] == 2
     assert metrics["correction_not_requested_count"] == 0
+    assert metrics["correction_not_available_by_cutoff_count"] == 0
     assert metrics["correction_uptake_rate"] == "1"
     assert metrics["reassessment_started_count"] == 2
     assert metrics["reassessment_completed_count"] == 2
+    assert metrics["reassessment_right_censored_count"] == 0
     assert metrics["timely_reassessment_count"] + metrics["late_reassessment_count"] == 2
     assert metrics["correction_executed_count"] == 2
     assert metrics["correction_unresolved_count"] == 0

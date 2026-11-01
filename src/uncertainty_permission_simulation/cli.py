@@ -19,7 +19,13 @@ from .policies import POLICY_IDS
 from .process_model import TraceSpec, execute_topology, run_trace
 from .profiles import canonical_process, nonisomorphic_process, policy, smoke_overlay, stochastic_process
 from .random_streams import normalized_decimal
-from .simulator import StochasticCohortSpec, StochasticInputOverlay, generate_stochastic_cohort, run_engagement_stage
+from .simulator import (
+    ServiceQueueRun,
+    StochasticCohortSpec,
+    StochasticInputOverlay,
+    generate_stochastic_cohort,
+    run_engagement_stage,
+)
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -27,6 +33,42 @@ KERNEL_SOURCE_PATHS = tuple(
     ROOT / "src/uncertainty_permission_simulation" / name
     for name in ("configuration.py", "events.py", "formal_model.py", "metrics.py", "process_model.py", "rules.py", "schemas.py")
 )
+
+
+def _queue_payload(run: ServiceQueueRun) -> dict[str, object]:
+    return {
+        "queue_id": run.config.queue_id,
+        "capacity": run.config.capacity,
+        "discipline": run.config.discipline,
+        "telemetry": {
+            "request_count": run.telemetry.request_count,
+            "started_by_cutoff_count": run.telemetry.started_by_cutoff_count,
+            "completed_by_cutoff_count": run.telemetry.completed_by_cutoff_count,
+            "right_censored_count": run.telemetry.right_censored_count,
+            "timely_completion_count": run.telemetry.timely_completion_count,
+            "late_completion_count": run.telemetry.late_completion_count,
+            "schedule_hash": run.telemetry.schedule_hash,
+        },
+        "visits": [
+            {
+                "request_id": visit.request_id,
+                "case_id": visit.case_id,
+                "server_id": visit.server_id,
+                "queued_at": normalized_decimal(visit.queued_at),
+                "started_at": normalized_decimal(visit.started_at),
+                "completed_at": normalized_decimal(visit.completed_at),
+                "service_time": normalized_decimal(visit.service_time),
+                "wait_time": normalized_decimal(visit.wait_time),
+                "deadline": normalized_decimal(visit.deadline),
+                "completed_by_deadline": visit.completed_by_deadline,
+                "started_by_cutoff": visit.started_by_cutoff,
+                "completed_by_cutoff": visit.completed_by_cutoff,
+                "right_censored": visit.right_censored,
+                "censoring_reason": visit.censoring_reason,
+            }
+            for visit in run.visits
+        ],
+    }
 
 
 def _specs() -> tuple[TraceSpec, ...]:
@@ -191,11 +233,15 @@ def run_stochastic_smoke(config_path: Path) -> dict[str, object]:
             evidence_retrieval_latency_scale=Decimal(str(config["overlay"]["evidence_retrieval_latency_scale"])),
             external_consequence_delay=Decimal(str(config["overlay"]["external_consequence_delay"])),
             recovery_start_delay=Decimal(str(config["overlay"]["recovery_start_delay"])),
+            recovery_capacity=Decimal(str(config["overlay"]["recovery_capacity"])),
+            recovery_service_time=Decimal(str(config["overlay"]["recovery_service_time"])),
+            recovery_window=Decimal(str(config["overlay"]["recovery_window"])),
             correction_request_delay=Decimal(str(config["overlay"]["correction_request_delay"])),
             correction_uptake_probability=Decimal(str(config["overlay"]["correction_uptake_probability"])),
             reassessment_capacity=Decimal(str(config["overlay"]["reassessment_capacity"])),
             reassessment_service_time=Decimal(str(config["overlay"]["reassessment_service_time"])),
             correction_window=Decimal(str(config["overlay"]["correction_window"])),
+            administrative_cutoff=Decimal(str(config["overlay"]["administrative_cutoff"])),
         ),
     )
     cohort = generate_stochastic_cohort(spec)
@@ -274,7 +320,16 @@ def run_stochastic_smoke(config_path: Path) -> dict[str, object]:
                     "fail_open_timeout_progression_count": run.telemetry.fail_open_timeout_progression_count,
                     "fail_closed_timeout_hold_count": run.telemetry.fail_closed_timeout_hold_count,
                     "external_exposure_count": run.telemetry.external_exposure_count,
+                    "recovery_queue_count": run.telemetry.recovery_queue_count,
+                    "recovery_service_started_count": run.telemetry.recovery_service_started_count,
                     "recovery_started_count": run.telemetry.recovery_started_count,
+                    "timely_recovery_count": run.telemetry.timely_recovery_count,
+                    "late_recovery_count": run.telemetry.late_recovery_count,
+                    "recovery_right_censored_count": run.telemetry.recovery_right_censored_count,
+                    "recovery_not_queued_by_cutoff_count": run.telemetry.recovery_not_queued_by_cutoff_count,
+                    "recovery_total_wait_time": normalized_decimal(run.telemetry.recovery_total_wait_time),
+                    "recovery_max_wait_time": normalized_decimal(run.telemetry.recovery_max_wait_time),
+                    "recovery_schedule_hash": run.telemetry.recovery_schedule_hash,
                     "supported_exposure_count": run.telemetry.supported_exposure_count,
                     "unsupported_exposure_count": run.telemetry.unsupported_exposure_count,
                     "evidentially_unsupported_exposure_count": run.telemetry.evidentially_unsupported_exposure_count,
@@ -282,10 +337,12 @@ def run_stochastic_smoke(config_path: Path) -> dict[str, object]:
                     "correction_eligible_count": run.telemetry.correction_eligible_count,
                     "correction_request_count": run.telemetry.correction_request_count,
                     "correction_not_requested_count": run.telemetry.correction_not_requested_count,
+                    "correction_not_available_by_cutoff_count": run.telemetry.correction_not_available_by_cutoff_count,
                     "reassessment_started_count": run.telemetry.reassessment_started_count,
                     "reassessment_completed_count": run.telemetry.reassessment_completed_count,
                     "timely_reassessment_count": run.telemetry.timely_reassessment_count,
                     "late_reassessment_count": run.telemetry.late_reassessment_count,
+                    "reassessment_right_censored_count": run.telemetry.reassessment_right_censored_count,
                     "reassessment_total_wait_time": normalized_decimal(run.telemetry.reassessment_total_wait_time),
                     "reassessment_max_wait_time": normalized_decimal(run.telemetry.reassessment_max_wait_time),
                     "reassessment_schedule_hash": run.telemetry.reassessment_schedule_hash,
@@ -296,48 +353,13 @@ def run_stochastic_smoke(config_path: Path) -> dict[str, object]:
                     "recovery_active_after_correction_count": run.telemetry.recovery_active_after_correction_count,
                     "correction_total_exposure_time": normalized_decimal(run.telemetry.correction_total_exposure_time),
                     "correction_max_exposure_time": normalized_decimal(run.telemetry.correction_max_exposure_time),
+                    "case_closed_count": run.telemetry.case_closed_count,
+                    "right_censored_case_count": run.telemetry.right_censored_case_count,
                     "event_hash": run.telemetry.event_hash,
                 },
-                "review_queue": {
-                    "queue_id": run.review_queue.config.queue_id,
-                    "capacity": run.review_queue.config.capacity,
-                    "discipline": run.review_queue.config.discipline,
-                    "visits": [
-                        {
-                            "request_id": visit.request_id,
-                            "case_id": visit.case_id,
-                            "server_id": visit.server_id,
-                            "queued_at": normalized_decimal(visit.queued_at),
-                            "started_at": normalized_decimal(visit.started_at),
-                            "completed_at": normalized_decimal(visit.completed_at),
-                            "service_time": normalized_decimal(visit.service_time),
-                            "wait_time": normalized_decimal(visit.wait_time),
-                            "deadline": normalized_decimal(visit.deadline),
-                            "completed_by_deadline": visit.completed_by_deadline,
-                        }
-                        for visit in run.review_queue.visits
-                    ],
-                },
-                "reassessment_queue": {
-                    "queue_id": run.reassessment_queue.config.queue_id,
-                    "capacity": run.reassessment_queue.config.capacity,
-                    "discipline": run.reassessment_queue.config.discipline,
-                    "visits": [
-                        {
-                            "request_id": visit.request_id,
-                            "case_id": visit.case_id,
-                            "server_id": visit.server_id,
-                            "queued_at": normalized_decimal(visit.queued_at),
-                            "started_at": normalized_decimal(visit.started_at),
-                            "completed_at": normalized_decimal(visit.completed_at),
-                            "service_time": normalized_decimal(visit.service_time),
-                            "wait_time": normalized_decimal(visit.wait_time),
-                            "deadline": normalized_decimal(visit.deadline),
-                            "completed_by_deadline": visit.completed_by_deadline,
-                        }
-                        for visit in run.reassessment_queue.visits
-                    ],
-                },
+                "review_queue": _queue_payload(run.review_queue),
+                "recovery_queue": _queue_payload(run.recovery_queue),
+                "reassessment_queue": _queue_payload(run.reassessment_queue),
                 "system_events": [
                     {
                         "case_id": event.case_id,
@@ -391,7 +413,7 @@ def run_stochastic_smoke(config_path: Path) -> dict[str, object]:
             }
             for policy_id, run in engagement_runs.items()
         },
-        "claim_limit": "stylized decision-correction smoke artifact; recovery remains active; no censoring, restoration, empirical, or historical outcome",
+        "claim_limit": "stylized recovery-resource and late-stage right-censoring smoke artifact; no restoration, empirical, or historical outcome",
     }
     output_path = ROOT / config["output_path"]
     output_path.parent.mkdir(parents=True, exist_ok=True)

@@ -25,9 +25,13 @@ overlay:
   evidence_retrieval_latency_scale: "10"
   external_consequence_delay: "1"
   recovery_start_delay: "2"
+  recovery_capacity: "1"
+  recovery_service_time: "12"
+  recovery_window: "20"
   correction_request_delay: "7"
   correction_uptake_probability: "0.5"
   reassessment_capacity: "1"
   reassessment_service_time: "30"
   correction_window: "14"
+  administrative_cutoff: "70"
 output_path: outputs/slice2/stochastic_smoke_v1.json

@@ -31,9 +31,12 @@ def overlay(**updates: object) -> StochasticInputOverlay:
         extension_need_probability=Decimal("0.25"), evidence_retrieval_success_probability=Decimal("0.7"),
         evidence_retrieval_latency_scale=Decimal("10"),
         external_consequence_delay=Decimal("1"), recovery_start_delay=Decimal("2"),
+        recovery_capacity=Decimal("1"), recovery_service_time=Decimal("1"),
+        recovery_window=Decimal("14"),
         correction_request_delay=Decimal("7"), correction_uptake_probability=Decimal("0.75"),
         reassessment_capacity=Decimal("1"), reassessment_service_time=Decimal("30"),
         correction_window=Decimal("14"),
+        administrative_cutoff=Decimal("1000"),
     )
     return replace(base, **updates)
 
@@ -114,12 +117,18 @@ def test_invalid_cohort_specs_fail_before_draws(updates: dict[str, object]) -> N
     ("review_service_window", Decimal("0")),
     ("external_consequence_delay", Decimal("-1")),
     ("recovery_start_delay", Decimal("NaN")),
+    ("recovery_capacity", Decimal("0")),
+    ("recovery_capacity", Decimal("1.5")),
+    ("recovery_service_time", Decimal("0")),
+    ("recovery_window", Decimal("0")),
     ("correction_request_delay", Decimal("-1")),
     ("correction_uptake_probability", Decimal("1.1")),
     ("reassessment_capacity", Decimal("0")),
     ("reassessment_capacity", Decimal("1.5")),
     ("reassessment_service_time", Decimal("0")),
     ("correction_window", Decimal("0")),
+    ("administrative_cutoff", Decimal("-1")),
+    ("administrative_cutoff", Decimal("5")),
     ("notice_delivery_probability", Decimal("1.1")),
 ))
 def test_invalid_stochastic_overlay_values_are_rejected(field: str, value: object) -> None:
@@ -178,9 +187,11 @@ def test_action_stage_replays_event_hashes_through_decision_correction() -> None
     assert first.telemetry.external_exposure_count == first.telemetry.progression_count
     assert first.telemetry.recovery_started_count == first.telemetry.external_exposure_count
     assert all(
-        event.event_type_id not in {"RESTORATION_EXECUTED", "CASE_CLOSED"}
+        event.event_type_id != "RESTORATION_EXECUTED"
         for trace in first.traces for event in trace.events
     )
+    assert first.telemetry.case_closed_count == len(cohort.cases)
+    assert first.telemetry.right_censored_case_count == len(cohort.cases)
 
 
 def test_exposure_descends_only_from_executed_progression_and_preserves_support() -> None:
@@ -202,7 +213,12 @@ def test_exposure_descends_only_from_executed_progression_and_preserves_support(
                 with localcontext() as context:
                     context.prec = 50
                     assert exposure.timestamp == progression.timestamp + cohort.overlay.external_consequence_delay
-                    assert recovery.timestamp == exposure.timestamp + cohort.overlay.recovery_start_delay
+                    visit = next(
+                        item for item in run.recovery_queue.visits
+                        if item.case_id == trace.case_id
+                    )
+                    assert visit.queued_at == exposure.timestamp + cohort.overlay.recovery_start_delay
+                    assert recovery.timestamp == visit.completed_at
                 assert exposure.details["source_progression_event_key"] == progression.causal_event_key
                 assert recovery.details["source_external_consequence_event_key"] == exposure.causal_event_key
                 assert exposure.details["progression_supported"] is trace.action_decision.progression_supported
@@ -439,6 +455,32 @@ def test_service_capacity_and_exact_deadline_boundary_are_explicit() -> None:
     assert [visit.completed_by_deadline for visit in parallel.visits] == [True, True]
     assert parallel.telemetry.max_wait_time == 0
     assert single.telemetry.schedule_hash != parallel.telemetry.schedule_hash
+
+
+def test_service_cutoff_partitions_completed_and_right_censored_visits() -> None:
+    requests = (
+        ServiceRequest("R-1", "CASE-1", Decimal("0"), Decimal("2"), Decimal("5")),
+        ServiceRequest("R-2", "CASE-2", Decimal("0"), Decimal("2"), Decimal("5")),
+        ServiceRequest("R-3", "CASE-3", Decimal("0"), Decimal("2"), Decimal("6")),
+    )
+    run = schedule_service_queue(
+        ServiceQueueConfig("RECOVERY", 1), requests, Decimal("4")
+    )
+    assert [visit.completed_by_cutoff for visit in run.visits] == [True, True, False]
+    assert [visit.censoring_reason for visit in run.visits] == [
+        None, None, "service_in_progress_at_cutoff",
+    ]
+    assert run.telemetry.completed_by_cutoff_count == 2
+    assert run.telemetry.right_censored_count == 1
+    assert run.telemetry.timely_completion_count == 2
+    assert run.telemetry.late_completion_count == 0
+
+
+def test_late_stage_cutoff_rejects_unobserved_action_or_exposure() -> None:
+    input_overlay = overlay(administrative_cutoff=Decimal("10"))
+    cohort = generate_stochastic_cohort(spec(overlay=input_overlay))
+    with pytest.raises(ContractError, match="earlier-stage censoring is not implemented"):
+        run_engagement_stage(cohort, compiled("U1", cohort.overlay))
 
 
 @pytest.mark.parametrize(

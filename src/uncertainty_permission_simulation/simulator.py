@@ -39,11 +39,15 @@ class StochasticInputOverlay:
     evidence_retrieval_latency_scale: Decimal
     external_consequence_delay: Decimal
     recovery_start_delay: Decimal
+    recovery_capacity: Decimal
+    recovery_service_time: Decimal
+    recovery_window: Decimal
     correction_request_delay: Decimal
     correction_uptake_probability: Decimal
     reassessment_capacity: Decimal
     reassessment_service_time: Decimal
     correction_window: Decimal
+    administrative_cutoff: Decimal
 
     def __post_init__(self) -> None:
         if not isinstance(self.overlay_id, str) or not self.overlay_id:
@@ -60,23 +64,36 @@ class StochasticInputOverlay:
             "evidence_retrieval_latency_scale": self.evidence_retrieval_latency_scale,
             "external_consequence_delay": self.external_consequence_delay,
             "recovery_start_delay": self.recovery_start_delay,
+            "recovery_service_time": self.recovery_service_time,
+            "recovery_window": self.recovery_window,
             "correction_request_delay": self.correction_request_delay,
             "reassessment_service_time": self.reassessment_service_time,
             "correction_window": self.correction_window,
+            "administrative_cutoff": self.administrative_cutoff,
         }
         for field_name, value in nonnegative.items():
             if not isinstance(value, Decimal) or not value.is_finite() or value < 0:
                 raise ContractError("SCENARIO_PARAMETER_INVALID", f"{field_name} must be finite and nonnegative")
+        if self.administrative_cutoff < self.initiation_window:
+            raise ContractError(
+                "SCENARIO_PARAMETER_INVALID",
+                "administrative_cutoff must not precede the initiation window",
+            )
         if self.response_deadline == 0:
             raise ContractError("SCENARIO_PARAMETER_INVALID", "response_deadline must be positive")
         if self.review_service_window == 0:
             raise ContractError("SCENARIO_PARAMETER_INVALID", "review_service_window must be positive")
+        if self.recovery_service_time == 0:
+            raise ContractError("SCENARIO_PARAMETER_INVALID", "recovery_service_time must be positive")
+        if self.recovery_window == 0:
+            raise ContractError("SCENARIO_PARAMETER_INVALID", "recovery_window must be positive")
         if self.reassessment_service_time == 0:
             raise ContractError("SCENARIO_PARAMETER_INVALID", "reassessment_service_time must be positive")
         if self.correction_window == 0:
             raise ContractError("SCENARIO_PARAMETER_INVALID", "correction_window must be positive")
         capacities = {
             "review_capacity": self.review_capacity,
+            "recovery_capacity": self.recovery_capacity,
             "reassessment_capacity": self.reassessment_capacity,
         }
         for field_name, value in capacities.items():
@@ -121,11 +138,15 @@ class StochasticInputOverlay:
             "evidence_retrieval_latency_scale": normalized_decimal(self.evidence_retrieval_latency_scale),
             "external_consequence_delay": normalized_decimal(self.external_consequence_delay),
             "recovery_start_delay": normalized_decimal(self.recovery_start_delay),
+            "recovery_capacity": normalized_decimal(self.recovery_capacity),
+            "recovery_service_time": normalized_decimal(self.recovery_service_time),
+            "recovery_window": normalized_decimal(self.recovery_window),
             "correction_request_delay": normalized_decimal(self.correction_request_delay),
             "correction_uptake_probability": normalized_decimal(self.correction_uptake_probability),
             "reassessment_capacity": normalized_decimal(self.reassessment_capacity),
             "reassessment_service_time": normalized_decimal(self.reassessment_service_time),
             "correction_window": normalized_decimal(self.correction_window),
+            "administrative_cutoff": normalized_decimal(self.administrative_cutoff),
         }
 
     def to_compilation_overlay(self) -> ScenarioOverlaySpec:
@@ -241,6 +262,10 @@ class ServiceVisit:
     wait_time: Decimal
     deadline: Decimal
     completed_by_deadline: bool
+    started_by_cutoff: bool
+    completed_by_cutoff: bool
+    right_censored: bool
+    censoring_reason: str | None
 
 
 @dataclass(frozen=True)
@@ -249,6 +274,9 @@ class ServiceQueueTelemetry:
     immediate_start_count: int
     timely_completion_count: int
     late_completion_count: int
+    started_by_cutoff_count: int
+    completed_by_cutoff_count: int
+    right_censored_count: int
     total_wait_time: Decimal
     max_wait_time: Decimal
     total_service_time: Decimal
@@ -272,6 +300,10 @@ def _service_schedule_hash(config: ServiceQueueConfig, visits: tuple[ServiceVisi
                 "case_id": visit.case_id,
                 "completed_at": normalized_decimal(visit.completed_at),
                 "completed_by_deadline": visit.completed_by_deadline,
+                "started_by_cutoff": visit.started_by_cutoff,
+                "completed_by_cutoff": visit.completed_by_cutoff,
+                "right_censored": visit.right_censored,
+                "censoring_reason": visit.censoring_reason,
                 "deadline": normalized_decimal(visit.deadline),
                 "queued_at": normalized_decimal(visit.queued_at),
                 "request_id": visit.request_id,
@@ -289,6 +321,7 @@ def _service_schedule_hash(config: ServiceQueueConfig, visits: tuple[ServiceVisi
 def schedule_service_queue(
     config: ServiceQueueConfig,
     requests: tuple[ServiceRequest, ...],
+    administrative_cutoff: Decimal | None = None,
 ) -> ServiceQueueRun:
     """Schedule a finite, work-conserving FIFO queue with deterministic server ties."""
 
@@ -298,6 +331,12 @@ def schedule_service_queue(
         raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "service requests must be a tuple")
     if any(not isinstance(request, ServiceRequest) for request in requests):
         raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "service queue requires typed requests")
+    if administrative_cutoff is not None and (
+        not isinstance(administrative_cutoff, Decimal)
+        or not administrative_cutoff.is_finite()
+        or administrative_cutoff < 0
+    ):
+        raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "administrative cutoff must be finite and nonnegative")
     request_ids = [request.request_id for request in requests]
     if len(request_ids) != len(set(request_ids)):
         raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "duplicate service request identity")
@@ -312,6 +351,14 @@ def schedule_service_queue(
             completed_at = started_at + request.service_time
             wait_time = started_at - request.queued_at
         available_at[server_index] = completed_at
+        started_by_cutoff = administrative_cutoff is None or started_at <= administrative_cutoff
+        completed_by_cutoff = administrative_cutoff is None or completed_at <= administrative_cutoff
+        censoring_reason = None
+        if not completed_by_cutoff:
+            censoring_reason = (
+                "service_in_progress_at_cutoff"
+                if started_by_cutoff else "service_not_started_by_cutoff"
+            )
         visits.append(ServiceVisit(
             request_id=request.request_id,
             case_id=request.case_id,
@@ -323,20 +370,32 @@ def schedule_service_queue(
             wait_time=wait_time,
             deadline=request.deadline,
             completed_by_deadline=completed_at <= request.deadline,
+            started_by_cutoff=started_by_cutoff,
+            completed_by_cutoff=completed_by_cutoff,
+            right_censored=not completed_by_cutoff,
+            censoring_reason=censoring_reason,
         ))
     frozen_visits = tuple(visits)
     with localcontext() as context:
         context.prec = 50
-        total_wait = sum((visit.wait_time for visit in frozen_visits), Decimal(0))
-        total_service = sum((visit.service_time for visit in frozen_visits), Decimal(0))
-    max_wait = max((visit.wait_time for visit in frozen_visits), default=Decimal(0))
+        total_wait = sum((visit.wait_time for visit in frozen_visits if visit.started_by_cutoff), Decimal(0))
+        total_service = sum((visit.service_time for visit in frozen_visits if visit.completed_by_cutoff), Decimal(0))
+    max_wait = max((visit.wait_time for visit in frozen_visits if visit.started_by_cutoff), default=Decimal(0))
     schedule_hash = _service_schedule_hash(config, frozen_visits)
-    timely_count = sum(visit.completed_by_deadline for visit in frozen_visits)
+    timely_count = sum(
+        visit.completed_by_cutoff and visit.completed_by_deadline for visit in frozen_visits
+    )
+    late_count = sum(
+        visit.completed_by_cutoff and not visit.completed_by_deadline for visit in frozen_visits
+    )
     telemetry = ServiceQueueTelemetry(
         request_count=len(frozen_visits),
-        immediate_start_count=sum(visit.wait_time == 0 for visit in frozen_visits),
+        immediate_start_count=sum(visit.started_by_cutoff and visit.wait_time == 0 for visit in frozen_visits),
         timely_completion_count=timely_count,
-        late_completion_count=len(frozen_visits) - timely_count,
+        late_completion_count=late_count,
+        started_by_cutoff_count=sum(visit.started_by_cutoff for visit in frozen_visits),
+        completed_by_cutoff_count=sum(visit.completed_by_cutoff for visit in frozen_visits),
+        right_censored_count=sum(visit.right_censored for visit in frozen_visits),
         total_wait_time=total_wait,
         max_wait_time=max_wait,
         total_service_time=total_service,
@@ -390,7 +449,16 @@ class EngagementRunTelemetry:
     fail_open_timeout_progression_count: int
     fail_closed_timeout_hold_count: int
     external_exposure_count: int
+    recovery_queue_count: int
+    recovery_service_started_count: int
     recovery_started_count: int
+    timely_recovery_count: int
+    late_recovery_count: int
+    recovery_right_censored_count: int
+    recovery_not_queued_by_cutoff_count: int
+    recovery_total_wait_time: Decimal
+    recovery_max_wait_time: Decimal
+    recovery_schedule_hash: str
     supported_exposure_count: int
     unsupported_exposure_count: int
     evidentially_unsupported_exposure_count: int
@@ -398,10 +466,12 @@ class EngagementRunTelemetry:
     correction_eligible_count: int
     correction_request_count: int
     correction_not_requested_count: int
+    correction_not_available_by_cutoff_count: int
     reassessment_started_count: int
     reassessment_completed_count: int
     timely_reassessment_count: int
     late_reassessment_count: int
+    reassessment_right_censored_count: int
     reassessment_total_wait_time: Decimal
     reassessment_max_wait_time: Decimal
     reassessment_schedule_hash: str
@@ -412,6 +482,8 @@ class EngagementRunTelemetry:
     recovery_active_after_correction_count: int
     correction_total_exposure_time: Decimal
     correction_max_exposure_time: Decimal
+    case_closed_count: int
+    right_censored_case_count: int
     event_hash: str
 
 
@@ -423,6 +495,7 @@ class EngagementRun:
     traces: tuple[EngagementTrace, ...]
     system_events: tuple[Event, ...]
     review_queue: ServiceQueueRun
+    recovery_queue: ServiceQueueRun
     reassessment_queue: ServiceQueueRun
     telemetry: EngagementRunTelemetry
 
@@ -637,6 +710,7 @@ def _review_queue_run(
             capacity=int(cohort.overlay.review_capacity),
         ),
         tuple(requests),
+        cohort.overlay.administrative_cutoff,
     )
 
 
@@ -794,7 +868,7 @@ def _add_action_events(
     )
 
 
-def _add_exposure_and_recovery_events(
+def _add_exposure_event(
     trace: EngagementTrace,
     overlay: StochasticInputOverlay,
 ) -> EngagementTrace:
@@ -822,7 +896,6 @@ def _add_exposure_and_recovery_events(
     with localcontext() as context:
         context.prec = 50
         exposure_time = progression.timestamp + overlay.external_consequence_delay
-        recovery_time = exposure_time + overlay.recovery_start_delay
     root_key = f"{trace.case_id}:ENGAGEMENT"
     decision = trace.action_decision
     support_details = {
@@ -867,21 +940,109 @@ def _add_exposure_and_recovery_events(
             "external_consequence_delay": normalized_decimal(overlay.external_consequence_delay),
         },
     )
-    recovery_event = consequence_event(
-        "EXTERNAL_CONSEQUENCE_UPDATED",
-        recovery_time,
-        "recovery",
-        {
+    queue = EventQueue()
+    for event in trace.events + (exposure_event,):
+        queue.push(event)
+    events = queue.drain()
+    return replace(trace, events=events, event_hash=_event_hash(events))
+
+
+def _recovery_queue_run(
+    cohort: StochasticCohort,
+    traces: tuple[EngagementTrace, ...],
+) -> tuple[ServiceQueueRun, int]:
+    """Queue fixed recovery work without adding a new exogenous draw family."""
+
+    requests: list[ServiceRequest] = []
+    not_queued_by_cutoff = 0
+    for trace in traces:
+        exposure_events = tuple(
+            event for event in trace.events
+            if event.event_type_id == "EXTERNAL_CONSEQUENCE_STARTED"
+        )
+        if len(exposure_events) > 1:
+            raise ContractError(
+                "SIM_SYSTEM_STATE_INCOMPLETE",
+                f"multiple external exposures for {trace.case_id}",
+            )
+        if not exposure_events:
+            continue
+        exposure = exposure_events[0]
+        with localcontext() as context:
+            context.prec = 50
+            queued_at = exposure.timestamp + cohort.overlay.recovery_start_delay
+            deadline = queued_at + cohort.overlay.recovery_window
+        if queued_at > cohort.overlay.administrative_cutoff:
+            not_queued_by_cutoff += 1
+            continue
+        requests.append(ServiceRequest(
+            request_id=f"{trace.case_id}:recovery",
+            case_id=trace.case_id,
+            queued_at=queued_at,
+            service_time=cohort.overlay.recovery_service_time,
+            deadline=deadline,
+        ))
+    run = schedule_service_queue(
+        ServiceQueueConfig(
+            queue_id=f"{cohort.scenario_id}:recovery",
+            capacity=int(cohort.overlay.recovery_capacity),
+        ),
+        tuple(requests),
+        cohort.overlay.administrative_cutoff,
+    )
+    return run, not_queued_by_cutoff
+
+
+def _add_recovery_event(
+    trace: EngagementTrace,
+    visit: ServiceVisit | None,
+    queue_id: str,
+) -> EngagementTrace:
+    if visit is None or not visit.completed_by_cutoff:
+        return trace
+    exposures = tuple(
+        event for event in trace.events
+        if event.event_type_id == "EXTERNAL_CONSEQUENCE_STARTED"
+    )
+    if len(exposures) != 1:
+        raise ContractError(
+            "SIM_SYSTEM_STATE_INCOMPLETE",
+            f"recovery completion requires one external exposure for {trace.case_id}",
+        )
+    exposure = exposures[0]
+    root_key = f"{trace.case_id}:ENGAGEMENT"
+    causal_key = f"{root_key}:recovery:EXTERNAL_CONSEQUENCE_UPDATED"
+    recovery = Event(
+        event_id=f"{trace.policy_id}:{causal_key}",
+        event_type_id="EXTERNAL_CONSEQUENCE_UPDATED",
+        timestamp=visit.completed_at,
+        causal_event_key=causal_key,
+        root_event_key=root_key,
+        descendant_path=("progression", "external_consequence", "recovery"),
+        transition_rank=DEFAULT_PRIORITIES["EXTERNAL_CONSEQUENCE_UPDATED"],
+        case_id=trace.case_id,
+        details=exposure.details | {
+            "policy_id": trace.policy_id,
+            "keyed_draw_ids": (),
             "action_type_id": "recover",
             "consequence_dimension_id": "recovery_exposure",
             "exposure_state": "active",
             "recovery_state": "active",
-            "source_external_consequence_event_key": exposure_event.causal_event_key,
-            "recovery_start_delay": normalized_decimal(overlay.recovery_start_delay),
+            "source_external_consequence_event_key": exposure.causal_event_key,
+            "recovery_start_delay": normalized_decimal(
+                visit.queued_at - exposure.timestamp
+            ),
+            "queue_id": queue_id,
+            "service_request_id": visit.request_id,
+            "server_id": visit.server_id,
+            "service_deadline": normalized_decimal(visit.deadline),
+            "service_time": normalized_decimal(visit.service_time),
+            "wait_time": normalized_decimal(visit.wait_time),
+            "completed_by_deadline": visit.completed_by_deadline,
         },
     )
     queue = EventQueue()
-    for event in trace.events + (exposure_event, recovery_event):
+    for event in trace.events + (recovery,):
         queue.push(event)
     events = queue.drain()
     return replace(trace, events=events, event_hash=_event_hash(events))
@@ -906,10 +1067,12 @@ def _add_correction_request_event(
         if event.event_type_id == "EXTERNAL_CONSEQUENCE_UPDATED"
         and event.details.get("recovery_state") == "active"
     )
+    if not recovery_events:
+        return trace
     if len(recovery_events) != 1:
         raise ContractError(
             "SIM_SYSTEM_STATE_INCOMPLETE",
-            f"correction-eligible case requires one active recovery event for {trace.case_id}",
+            f"correction-eligible case has multiple active recovery events for {trace.case_id}",
         )
     access_draw = next(
         draw for draw in case.keyed_draws
@@ -922,6 +1085,8 @@ def _add_correction_request_event(
     with localcontext() as context:
         context.prec = 50
         request_time = recovery.timestamp + overlay.correction_request_delay
+    if request_time > overlay.administrative_cutoff:
+        return trace
     root_key = f"{trace.case_id}:ENGAGEMENT"
     causal_key = f"{root_key}:correction:CORRECTION_REQUESTED"
     request = Event(
@@ -984,6 +1149,7 @@ def _reassessment_queue_run(
             capacity=int(cohort.overlay.reassessment_capacity),
         ),
         tuple(requests),
+        cohort.overlay.administrative_cutoff,
     )
 
 
@@ -1039,8 +1205,9 @@ def _add_reassessment_events(
         "wait_time": normalized_decimal(visit.wait_time),
         "source_correction_request_event_key": request.causal_event_key,
     }
-    added = (
-        reassessment_event(
+    added: list[Event] = []
+    if visit.completed_by_cutoff:
+        added.append(reassessment_event(
             "REVIEW_COMPLETED",
             visit.completed_at,
             "reassessment_service",
@@ -1050,8 +1217,8 @@ def _add_reassessment_events(
                 "correction_executed": False,
                 "restoration_executed": False,
             },
-        ),
-        reassessment_event(
+        ))
+    added.append(reassessment_event(
             "DEADLINE_REACHED",
             visit.deadline,
             "reassessment_deadline",
@@ -1061,10 +1228,9 @@ def _add_reassessment_events(
                 "service_request_id": visit.request_id,
                 "source_correction_request_event_key": request.causal_event_key,
             },
-        ),
-    )
+        ))
     queue = EventQueue()
-    for event in trace.events + added:
+    for event in trace.events + tuple(added):
         queue.push(event)
     events = queue.drain()
     return replace(trace, events=events, event_hash=_event_hash(events))
@@ -1076,7 +1242,7 @@ def _add_correction_outcome_event(
 ) -> EngagementTrace:
     """Correct the decision coordinate without implying recovery reversal or restoration."""
 
-    if visit is None:
+    if visit is None or not visit.completed_by_cutoff:
         return trace
     decision = trace.action_decision
     if decision is None or decision.action != "progress" or decision.progression_supported:
@@ -1155,6 +1321,85 @@ def _add_correction_outcome_event(
     return replace(trace, events=events, event_hash=_event_hash(events))
 
 
+def _apply_administrative_cutoff(
+    trace: EngagementTrace,
+    cutoff: Decimal,
+) -> EngagementTrace:
+    """Close observation at a late-stage boundary without asserting resolution."""
+
+    observed = tuple(event for event in trace.events if event.timestamp <= cutoff)
+    exposure = any(
+        event.event_type_id == "EXTERNAL_CONSEQUENCE_STARTED" for event in observed
+    )
+    recovery = any(
+        event.event_type_id == "EXTERNAL_CONSEQUENCE_UPDATED"
+        and event.details.get("action_type_id") == "recover"
+        for event in observed
+    )
+    request = any(event.event_type_id == "CORRECTION_REQUESTED" for event in observed)
+    correction = any(
+        event.event_type_id == "EXTERNAL_CONSEQUENCE_UPDATED"
+        and event.details.get("correction_outcome") == "decision_corrected"
+        for event in observed
+    )
+    if not exposure:
+        reason = "decision_path_observation_ended"
+    elif not recovery:
+        reason = "recovery_service_open"
+    elif request and not correction:
+        reason = "reassessment_open"
+    elif correction:
+        reason = "recovery_exposure_open_after_decision_correction"
+    elif trace.action_decision is not None and not trace.action_decision.progression_supported:
+        reason = "correction_path_unresolved_by_cutoff"
+    else:
+        reason = "recovery_exposure_open"
+    root_key = f"{trace.case_id}:ENGAGEMENT"
+    causal_key = f"{root_key}:administrative_cutoff:CASE_CLOSED"
+    closed = Event(
+        event_id=f"{trace.policy_id}:{causal_key}",
+        event_type_id="CASE_CLOSED",
+        timestamp=cutoff,
+        causal_event_key=causal_key,
+        root_event_key=root_key,
+        descendant_path=("administrative_cutoff", "CASE_CLOSED"),
+        transition_rank=DEFAULT_PRIORITIES["CASE_CLOSED"],
+        case_id=trace.case_id,
+        details={
+            "policy_id": trace.policy_id,
+            "keyed_draw_ids": (),
+            "closure_kind": "administrative_right_censor",
+            "right_censored": True,
+            "censoring_reason": reason,
+            "decision_corrected": correction,
+            "recovery_state": "active" if recovery else "not_started",
+            "restoration_complete": False,
+        },
+    )
+    queue = EventQueue()
+    for event in observed + (closed,):
+        queue.push(event)
+    events = queue.drain()
+    return replace(trace, events=events, event_hash=_event_hash(events))
+
+
+def _validate_late_stage_cutoff(
+    traces: tuple[EngagementTrace, ...],
+    cutoff: Decimal,
+) -> None:
+    required = tuple(
+        event
+        for trace in traces
+        for event in trace.events
+        if event.event_type_id in {"ACTION_COMPUTED", "EXTERNAL_CONSEQUENCE_STARTED"}
+    )
+    if required and max(event.timestamp for event in required) > cutoff:
+        raise ContractError(
+            "SCENARIO_CONFIGURATION_INCOMPLETE",
+            "late-stage administrative_cutoff must follow every action and external-consequence start; earlier-stage censoring is not implemented",
+        )
+
+
 def _validate_engagement_configuration(cohort: StochasticCohort, compiled: CompiledConfigurationSpec) -> str:
     policy_id = compiled.policy_profile.profile_id
     policy_behavior(policy_id)
@@ -1205,12 +1450,27 @@ def run_engagement_stage(cohort: StochasticCohort, compiled: CompiledConfigurati
         for trace in review_traces
     )
     exposure_traces = tuple(
-        _add_exposure_and_recovery_events(trace, cohort.overlay)
+        _add_exposure_event(trace, cohort.overlay)
         for trace in action_traces
+    )
+    _validate_late_stage_cutoff(exposure_traces, cohort.overlay.administrative_cutoff)
+    recovery_queue, recovery_not_queued_by_cutoff = _recovery_queue_run(
+        cohort, exposure_traces
+    )
+    recovery_visit_by_case = {
+        visit.case_id: visit for visit in recovery_queue.visits
+    }
+    recovery_traces = tuple(
+        _add_recovery_event(
+            trace,
+            recovery_visit_by_case.get(trace.case_id),
+            recovery_queue.config.queue_id,
+        )
+        for trace in exposure_traces
     )
     correction_traces = tuple(
         _add_correction_request_event(trace, case_by_id[trace.case_id], cohort.overlay)
-        for trace in exposure_traces
+        for trace in recovery_traces
     )
     reassessment_queue = _reassessment_queue_run(cohort, correction_traces)
     reassessment_visit_by_case = {
@@ -1225,12 +1485,16 @@ def run_engagement_stage(cohort: StochasticCohort, compiled: CompiledConfigurati
         )
         for trace in correction_traces
     )
-    traces = tuple(
+    outcome_traces = tuple(
         _add_correction_outcome_event(
             trace,
             reassessment_visit_by_case.get(trace.case_id),
         )
         for trace in reassessment_traces
+    )
+    traces = tuple(
+        _apply_administrative_cutoff(trace, cohort.overlay.administrative_cutoff)
+        for trace in outcome_traces
     )
     system_queue = EventQueue()
     for trace in traces:
@@ -1251,6 +1515,30 @@ def run_engagement_stage(cohort: StochasticCohort, compiled: CompiledConfigurati
         context.prec = 50
         correction_total_exposure_time = sum(correction_exposure_times, Decimal(0))
     correction_max_exposure_time = max(correction_exposure_times, default=Decimal(0))
+
+    def correction_availability(trace: EngagementTrace) -> str | None:
+        decision = trace.action_decision
+        if decision is None or decision.action != "progress" or decision.progression_supported:
+            return None
+        if any(event.event_type_id == "CORRECTION_REQUESTED" for event in trace.events):
+            return "requested"
+        recoveries = tuple(
+            event for event in trace.events
+            if event.event_type_id == "EXTERNAL_CONSEQUENCE_UPDATED"
+            and event.details.get("action_type_id") == "recover"
+        )
+        if not recoveries:
+            return "not_available_by_cutoff"
+        with localcontext() as context:
+            context.prec = 50
+            available_at = recoveries[0].timestamp + cohort.overlay.correction_request_delay
+        if available_at > cohort.overlay.administrative_cutoff:
+            return "not_available_by_cutoff"
+        return "not_requested"
+
+    correction_availability_states = tuple(
+        correction_availability(trace) for trace in traces
+    )
     telemetry = EngagementRunTelemetry(
         case_count=len(traces),
         event_count=len(system_events),
@@ -1346,12 +1634,21 @@ def run_engagement_stage(cohort: StochasticCohort, compiled: CompiledConfigurati
             event.event_type_id == "EXTERNAL_CONSEQUENCE_STARTED"
             for event in system_events
         ),
+        recovery_queue_count=recovery_queue.telemetry.request_count,
+        recovery_service_started_count=recovery_queue.telemetry.started_by_cutoff_count,
         recovery_started_count=sum(
             event.event_type_id == "EXTERNAL_CONSEQUENCE_UPDATED"
             and event.details.get("action_type_id") == "recover"
             and event.details.get("recovery_state") == "active"
             for event in system_events
         ),
+        timely_recovery_count=recovery_queue.telemetry.timely_completion_count,
+        late_recovery_count=recovery_queue.telemetry.late_completion_count,
+        recovery_right_censored_count=recovery_queue.telemetry.right_censored_count,
+        recovery_not_queued_by_cutoff_count=recovery_not_queued_by_cutoff,
+        recovery_total_wait_time=recovery_queue.telemetry.total_wait_time,
+        recovery_max_wait_time=recovery_queue.telemetry.max_wait_time,
+        recovery_schedule_hash=recovery_queue.telemetry.schedule_hash,
         supported_exposure_count=sum(
             event.event_type_id == "EXTERNAL_CONSEQUENCE_STARTED"
             and event.details.get("progression_supported") is True
@@ -1382,14 +1679,11 @@ def run_engagement_stage(cohort: StochasticCohort, compiled: CompiledConfigurati
             event.event_type_id == "CORRECTION_REQUESTED"
             for event in system_events
         ),
-        correction_not_requested_count=sum(
-            trace.action_decision is not None
-            and trace.action_decision.action == "progress"
-            and not trace.action_decision.progression_supported
-            and not any(event.event_type_id == "CORRECTION_REQUESTED" for event in trace.events)
-            for trace in traces
+        correction_not_requested_count=correction_availability_states.count("not_requested"),
+        correction_not_available_by_cutoff_count=correction_availability_states.count(
+            "not_available_by_cutoff"
         ),
-        reassessment_started_count=len(reassessment_queue.visits),
+        reassessment_started_count=reassessment_queue.telemetry.started_by_cutoff_count,
         reassessment_completed_count=sum(
             event.event_type_id == "REVIEW_COMPLETED"
             and event.details.get("review_kind") == "reassessment"
@@ -1397,6 +1691,7 @@ def run_engagement_stage(cohort: StochasticCohort, compiled: CompiledConfigurati
         ),
         timely_reassessment_count=reassessment_queue.telemetry.timely_completion_count,
         late_reassessment_count=reassessment_queue.telemetry.late_completion_count,
+        reassessment_right_censored_count=reassessment_queue.telemetry.right_censored_count,
         reassessment_total_wait_time=reassessment_queue.telemetry.total_wait_time,
         reassessment_max_wait_time=reassessment_queue.telemetry.max_wait_time,
         reassessment_schedule_hash=reassessment_queue.telemetry.schedule_hash,
@@ -1427,6 +1722,14 @@ def run_engagement_stage(cohort: StochasticCohort, compiled: CompiledConfigurati
         ),
         correction_total_exposure_time=correction_total_exposure_time,
         correction_max_exposure_time=correction_max_exposure_time,
+        case_closed_count=sum(
+            event.event_type_id == "CASE_CLOSED" for event in system_events
+        ),
+        right_censored_case_count=sum(
+            event.event_type_id == "CASE_CLOSED"
+            and event.details.get("right_censored") is True
+            for event in system_events
+        ),
         event_hash=event_hash,
     )
     if telemetry.action_count != telemetry.case_count:
@@ -1441,8 +1744,20 @@ def run_engagement_stage(cohort: StochasticCohort, compiled: CompiledConfigurati
         raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "gate safety does not partition applicable cases")
     if telemetry.external_exposure_count != telemetry.progression_count:
         raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "executed progression and exposure counts differ")
-    if telemetry.recovery_started_count != telemetry.external_exposure_count:
-        raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "exposure and recovery-start counts differ")
+    if (
+        telemetry.recovery_started_count
+        + telemetry.recovery_right_censored_count
+        + telemetry.recovery_not_queued_by_cutoff_count
+        != telemetry.external_exposure_count
+    ):
+        raise ContractError(
+            "SIM_SYSTEM_STATE_INCOMPLETE",
+            "recovery completion, censoring, and unavailable queue entry do not partition exposure",
+        )
+    if telemetry.recovery_started_count != (
+        telemetry.timely_recovery_count + telemetry.late_recovery_count
+    ):
+        raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "recovery timeliness does not partition observed completion")
     if telemetry.supported_exposure_count + telemetry.unsupported_exposure_count != telemetry.external_exposure_count:
         raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "support does not partition exposure")
     if telemetry.evidentially_unsupported_exposure_count != telemetry.evidentially_unsupported_progression_count:
@@ -1451,14 +1766,27 @@ def run_engagement_stage(cohort: StochasticCohort, compiled: CompiledConfigurati
         raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "authorization status changed between progression and exposure")
     if telemetry.correction_eligible_count != telemetry.unsupported_exposure_count:
         raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "correction eligibility differs from unsupported exposure")
-    if telemetry.correction_request_count + telemetry.correction_not_requested_count != telemetry.correction_eligible_count:
+    if (
+        telemetry.correction_request_count
+        + telemetry.correction_not_requested_count
+        + telemetry.correction_not_available_by_cutoff_count
+        != telemetry.correction_eligible_count
+    ):
         raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "correction uptake does not partition eligible exposure")
-    if telemetry.reassessment_started_count != telemetry.correction_request_count:
-        raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "correction requests and reassessment starts differ")
-    if telemetry.reassessment_completed_count != telemetry.reassessment_started_count:
-        raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "reassessment visits and completion events differ")
-    if telemetry.timely_reassessment_count + telemetry.late_reassessment_count != telemetry.reassessment_completed_count:
+    if telemetry.reassessment_completed_count > telemetry.reassessment_started_count:
+        raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "reassessment completed without starting by cutoff")
+    if (
+        telemetry.timely_reassessment_count
+        + telemetry.late_reassessment_count
+        != telemetry.reassessment_completed_count
+    ):
         raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "reassessment timeliness does not partition completions")
+    if (
+        telemetry.reassessment_completed_count
+        + telemetry.reassessment_right_censored_count
+        != telemetry.correction_request_count
+    ):
+        raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "reassessment completion and censoring do not partition requests")
     if telemetry.correction_executed_count != telemetry.reassessment_completed_count:
         raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "reassessment completion and correction execution differ")
     if telemetry.timely_correction_count + telemetry.late_correction_count != telemetry.correction_executed_count:
@@ -1477,7 +1805,11 @@ def run_engagement_stage(cohort: StochasticCohort, compiled: CompiledConfigurati
         raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "decision correction silently changed recovery or restoration state")
     if any(event.event_type_id == "RESTORATION_EXECUTED" for event in system_events):
         raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "correction checkpoint emitted premature restoration")
+    if telemetry.case_closed_count != telemetry.case_count or telemetry.right_censored_case_count != telemetry.case_count:
+        raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "administrative cutoff must right-censor every case exactly once")
+    if any(event.timestamp > cohort.overlay.administrative_cutoff for event in system_events):
+        raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "post-cutoff event survived observation closure")
     return EngagementRun(
         cohort.scenario_id, policy_id, cohort.telemetry.cohort_hash,
-        traces, system_events, review_queue, reassessment_queue, telemetry,
+        traces, system_events, review_queue, recovery_queue, reassessment_queue, telemetry,
     )

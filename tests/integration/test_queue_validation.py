@@ -27,9 +27,12 @@ def _overlay(**updates: object) -> StochasticInputOverlay:
         evidence_retrieval_success_probability=Decimal("0"),
         evidence_retrieval_latency_scale=Decimal("0"),
         external_consequence_delay=Decimal("1"), recovery_start_delay=Decimal("2"),
+        recovery_capacity=Decimal("1"), recovery_service_time=Decimal("1"),
+        recovery_window=Decimal("14"),
         correction_request_delay=Decimal("7"), correction_uptake_probability=Decimal("1"),
         reassessment_capacity=Decimal("1"), reassessment_service_time=Decimal("30"),
         correction_window=Decimal("14"),
+        administrative_cutoff=Decimal("1000"),
     )
     return replace(base, **updates)
 
@@ -137,6 +140,54 @@ def test_reassessment_capacity_never_delays_a_paired_correction_request() -> Non
     assert high.telemetry.timely_reassessment_count >= low.telemetry.timely_reassessment_count
     assert low.telemetry.correction_executed_count == high.telemetry.correction_executed_count
     assert high.telemetry.timely_correction_count >= low.telemetry.timely_correction_count
+
+
+def test_recovery_capacity_never_delays_a_paired_exposure() -> None:
+    low_cohort, low = _run("U1", _overlay(recovery_capacity=Decimal("1")))
+    high_cohort, high = _run("U1", _overlay(recovery_capacity=Decimal("4")))
+    assert [case.draw_hash for case in low_cohort.cases] == [
+        case.draw_hash for case in high_cohort.cases
+    ]
+    low_visits = {visit.case_id: visit for visit in low.recovery_queue.visits}
+    high_visits = {visit.case_id: visit for visit in high.recovery_queue.visits}
+    assert low_visits.keys() == high_visits.keys()
+    assert all(
+        high_visits[case_id].started_at <= visit.started_at
+        for case_id, visit in low_visits.items()
+    )
+    assert all(
+        high_visits[case_id].completed_at <= visit.completed_at
+        for case_id, visit in low_visits.items()
+    )
+
+
+def test_recovery_and_reassessment_are_right_censored_at_observation_boundary() -> None:
+    _, run = _run(
+        "U1",
+        _overlay(
+            recovery_service_time=Decimal("20"),
+            recovery_window=Decimal("30"),
+            administrative_cutoff=Decimal("60"),
+        ),
+    )
+    assert run.telemetry.recovery_right_censored_count > 0
+    assert run.telemetry.correction_request_count == 1
+    assert run.telemetry.reassessment_right_censored_count == 1
+    assert run.telemetry.reassessment_completed_count == 0
+    assert run.telemetry.correction_executed_count == 0
+    assert (
+        run.telemetry.recovery_started_count
+        + run.telemetry.recovery_right_censored_count
+        + run.telemetry.recovery_not_queued_by_cutoff_count
+        == run.telemetry.external_exposure_count
+    )
+    assert run.telemetry.case_closed_count == len(run.traces)
+    assert run.telemetry.right_censored_case_count == len(run.traces)
+    assert all(
+        event.timestamp <= run.traces[0].events[-1].timestamp
+        for event in run.system_events
+    )
+    assert all(trace.events[-1].event_type_id == "CASE_CLOSED" for trace in run.traces)
 
 
 def test_supported_exposure_does_not_enter_correction_queue() -> None:
