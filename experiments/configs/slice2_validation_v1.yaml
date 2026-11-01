@@ -1,0 +1,30 @@
+config_id: SLICE2-VALIDATION-V1
+purpose: frozen implementation validation; not a pilot or substantive scenario
+analytical_benchmark:
+  benchmark_id: DD1-STAGGERED-V1
+  absolute_time_tolerance: "0"
+  capacity: 1
+  requests:
+    - {request_id: R1, case_id: C1, queued_at: "0", service_time: "3", deadline: "10"}
+    - {request_id: R2, case_id: C2, queued_at: "1", service_time: "2", deadline: "10"}
+    - {request_id: R3, case_id: C3, queued_at: "7", service_time: "1", deadline: "10"}
+  expected:
+    - {request_id: R1, started_at: "0", completed_at: "3"}
+    - {request_id: R2, started_at: "3", completed_at: "5"}
+    - {request_id: R3, started_at: "7", completed_at: "8"}
+reference_fixtures:
+  - fixture_id: FIFO-TIES-C2-V1
+    capacity: 2
+    administrative_cutoff: "4"
+    requests:
+      - {request_id: R1, case_id: C2, queued_at: "0", service_time: "3", deadline: "3"}
+      - {request_id: R2, case_id: C1, queued_at: "0", service_time: "2", deadline: "3"}
+      - {request_id: R3, case_id: C3, queued_at: "1", service_time: "4", deadline: "5"}
+      - {request_id: R4, case_id: C4, queued_at: "2", service_time: "0", deadline: "4"}
+  - fixture_id: FIFO-CENSOR-C1-V1
+    capacity: 1
+    administrative_cutoff: "2"
+    requests:
+      - {request_id: R1, case_id: C1, queued_at: "0", service_time: "2", deadline: "2"}
+      - {request_id: R2, case_id: C2, queued_at: "1", service_time: "2", deadline: "3"}
+      - {request_id: R3, case_id: C3, queued_at: "1", service_time: "1", deadline: "5"}
