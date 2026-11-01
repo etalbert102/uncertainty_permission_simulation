@@ -113,23 +113,30 @@ def _repair_events(spec: Mapping[str, object]) -> list[dict[str, object]]:
 def _assessments() -> dict[str, list[dict[str, object]]]:
     shared_limit = "bounded explanatory trace; not representative, historical calibration, legal conclusion, or attackability evidence"
     baseline = [
-        ("F0", "fail", "complete", "IMPUTATION_PROVENANCE_SUPPRESSED", "representation owner", "interface and policy owner", "surfacing may slow progression"),
-        ("F1", "fail", "complete", "ROBUST_PERMISSION_VIOLATION", "permission-rule owner", "gate owner", "holding action delays disposition"),
-        ("F2", "unassessable", "partial", "INTERVENTION_SCOPE_INCOMPLETE", "simulation owner", "simulation owner", "cohort spillovers are outside this one-case trace"),
-        ("F3", "fail", "complete", "EFFECTIVE_REVIEW_ABSENT", "process owner", "review and gate owner", "pre-action review consumes capacity"),
-        ("F4", "fail", "complete", "MATERIAL_UNCERTAINTY_NOT_SURFACED", "representation owner", "interface owner", "additional context may increase reviewer burden"),
-        ("F5", "fail", "complete", "RESTORATION_PARTIAL", "reassessment owner", "restoration owner", "complete restoration may require broader remediation"),
+        ("F0", "fail", "complete", ("FM_EVIDENCE_TYPE_COLLAPSED",), "B-04", "Aggregate evidence is emitted as an unflagged period value.", "", "Preserve imputation type, provenance, and alternatives in the action input.", "representation owner", "interface and policy owner", "surfacing may slow progression"),
+        ("F1", "fail", "complete", ("FM_ROBUST_PERMISSION_VIOLATION",), "B-05", "Progression is functionally permitted without period-specific support.", "", "Hold progression until independently supported or validly reviewed.", "permission-rule owner", "gate owner", "holding action delays disposition"),
+        ("F2", "unassessable", "incomplete", ("FM_REQUIRED_INPUT_MISSING",), "paired intervention boundary", "The packet supplies a one-case pair but no shared-resource intervention unit.", "Cohort spillovers and a noninterference certificate are absent.", "Evaluate the pair at Level C with complete system state.", "simulation owner", "simulation owner", "cohort spillovers are outside this one-case trace"),
+        ("F3", "fail", "complete", ("FM_REQUIRED_GATE_MISSING",), "B-05", "The modeled progression executes without an action-binding pre-action gate.", "", "Install a fail-closed gate with exact action authorization.", "process owner", "review and gate owner", "pre-action review consumes capacity"),
+        ("F4", "fail", "complete", ("FM_MATERIAL_ITEM_UNSURFACED",), "B-04", "The imputed status and aggregate-to-period ambiguity are material but unsurfaced.", "", "Surface typed uncertainty and source-linked material alternatives before routing.", "representation owner", "interface owner", "additional context may increase reviewer burden"),
+        ("F5", "fail", "complete", ("FM_RESTORATION_PARTIAL",), "B-10", "Decision and recovery coordinates are corrected but a residual consequence remains.", "", "Track and remediate every declared restoration coordinate.", "reassessment owner", "restoration owner", "complete restoration may require broader remediation"),
     ]
     repair = [
-        ("F0", "pass", "complete", "EVIDENCE_STATUS_PRESERVED", "evidence owner", "information-service owner", "evidence acquisition adds workload"),
-        ("F1", "pass", "complete", "PROGRESSION_WITHHELD_UNTIL_SUPPORTED", "permission-rule owner", "gate owner", "supported disposition takes longer"),
-        ("F2", "unassessable", "partial", "INTERVENTION_SCOPE_INCOMPLETE", "simulation owner", "simulation owner", "cohort spillovers are outside this one-case trace"),
-        ("F3", "not_applicable", "complete", "NO_PRE_ACTION_PROGRESSION_REQUIRING_REVIEW", "process owner", "policy owner", "a different progression path could require review"),
-        ("F4", "pass", "complete", "ACTION_RELEVANT_EVIDENCE_SURFACED", "representation owner", "interface owner", "surfacing requires provenance maintenance"),
-        ("F5", "not_applicable", "complete", "NO_ADVERSE_ACTION_OR_RESTORATION_DUE", "process owner", "policy owner", "avoidance is not evidence of restoration capability"),
+        ("F0", "pass", "complete", (), "R-05", "Period-specific evidence remains typed and source-linked.", "", "Retain the typed evidence contract.", "evidence owner", "information-service owner", "evidence acquisition adds workload"),
+        ("F1", "pass", "complete", (), "R-06", "Progression is held until the supported disposition is available.", "", "Retain the support-dependent permission rule.", "permission-rule owner", "gate owner", "supported disposition takes longer"),
+        ("F2", "unassessable", "incomplete", ("FM_REQUIRED_INPUT_MISSING",), "paired intervention boundary", "The packet supplies a one-case pair but no shared-resource intervention unit.", "Cohort spillovers and a noninterference certificate are absent.", "Evaluate the pair at Level C with complete system state.", "simulation owner", "simulation owner", "cohort spillovers are outside this one-case trace"),
+        ("F3", "not_applicable", "complete", (), "R-06", "No post-review progression action occurs in this bounded arm.", "", "Escalate if another progression path is introduced.", "process owner", "policy owner", "a different progression path could require review"),
+        ("F4", "pass", "complete", (), "R-05", "Action-relevant period evidence is surfaced before disposition.", "", "Retain structured evidence surfacing.", "representation owner", "interface owner", "surfacing requires provenance maintenance"),
+        ("F5", "not_applicable", "complete", (), "R-07", "No adverse progression or restoration obligation occurs in this arm.", "", "Do not infer restoration capability from avoided harm.", "process owner", "policy owner", "avoidance is not evidence of restoration capability"),
     ]
 
-    def render(rows: list[tuple[str, str, str, str, str, str, str]], arm: str) -> list[dict[str, object]]:
+    def render(
+        rows: list[
+            tuple[
+                str, str, str, tuple[str, ...], str, str, str, str, str, str, str,
+            ]
+        ],
+        arm: str,
+    ) -> list[dict[str, object]]:
         return [
             {
                 "arm": arm,
@@ -138,13 +145,21 @@ def _assessments() -> dict[str, list[dict[str, object]]]:
                 "property_id": property_id,
                 "status": status,
                 "completeness": completeness,
-                "diagnostic": diagnostic,
+                "diagnostics": diagnostics,
+                "located_transition": located_transition,
+                "evidence": evidence,
+                "missing_information": missing_information,
+                "intervention": intervention,
                 "diagnostic_owner": diagnostic_owner,
                 "intervention_owner": intervention_owner,
                 "tradeoff": tradeoff,
                 "claim_limit": shared_limit,
             }
-            for property_id, status, completeness, diagnostic, diagnostic_owner, intervention_owner, tradeoff in rows
+            for (
+                property_id, status, completeness, diagnostics, located_transition,
+                evidence, missing_information, intervention, diagnostic_owner,
+                intervention_owner, tradeoff,
+            ) in rows
         ]
 
     return {"baseline": render(baseline, "baseline"), "repair": render(repair, "repair")}
@@ -256,10 +271,10 @@ def _render_oracle(artifact: Mapping[str, object]) -> str:
         "",
     ]
     for arm_name, assessments in artifact["assessments"].items():
-        lines.extend([f"## {arm_name.title()} arm", "", "| Property | Status | Completeness | Diagnostic | Diagnostic owner | Intervention owner | Tradeoff |", "| --- | --- | --- | --- | --- | --- | --- |"])
+        lines.extend([f"## {arm_name.title()} arm", "", "| Property | Status | Completeness | Diagnostics | Located transition | Diagnostic owner | Intervention owner | Tradeoff |", "| --- | --- | --- | --- | --- | --- | --- | --- |"])
         for row in assessments:
             lines.append(
-                f"| {row['property_id']} | `{row['status']}` | `{row['completeness']}` | `{row['diagnostic']}` | {row['diagnostic_owner']} | {row['intervention_owner']} | {row['tradeoff']} |"
+                f"| {row['property_id']} | `{row['status']}` | `{row['completeness']}` | `{', '.join(row['diagnostics']) or 'none'}` | {row['located_transition']} | {row['diagnostic_owner']} | {row['intervention_owner']} | {row['tradeoff']} |"
             )
         lines.append("")
     lines.extend(["## Shared claim limit", "", artifact["assessments"]["baseline"][0]["claim_limit"], ""])

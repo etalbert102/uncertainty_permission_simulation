@@ -698,3 +698,12 @@ Tracked pilot receipt: `data/pilot/pilot_v1_receipt.json` with self-hash recorde
 - Completed a structured keyword and backward/forward citation-chain audit across nine anchors. The closest new neighbor is Anyabolu, Dubey, and Hattab (2026) on uncertainty-to-action binding; originality language now treats that idea as prior work and narrows this paper to the evidence-refinement permission invariant, independent support, finite-capacity dynamics, restoration, and documented application.
 - Adopted `docs/SOURCE_IDENTITY_RULE.md`: the freeze hashes canonical local source records, authoritative URLs, metadata, locators, retrieval facts, and any valid byte hashes without pretending that redirect or wrapper bytes are authoritative source content.
 - Closed D-006, D-007, and D-008. D-001 independent packet-only reader QA is the sole remaining pre-freeze blocker.
+
+### External-QA gate hardening — 2026-11-01
+
+- A pre-distribution audit found that the candidate Robodebt oracle used `partial`, which is not a valid completeness value, and narrative diagnostic labels outside the closed manifest registry. The oracle now uses only `complete`/`incomplete`/`invalid` and registered `FM_*` diagnostics. The revision log records the correction; no external return existed to invalidate.
+- Added complete located-transition, evidence, missing-information, intervention, diagnostic-owner, intervention-owner, and tradeoff fields to all Robodebt expected rows.
+- Added an oracle-free 29-row JSON assessment template to each deterministic reader archive. Status, completeness, and diagnostics are blank; a validator regression rejects any answer leakage.
+- Added `scripts/verify_slice3_reader_returns.py` and the `qa.py` gate implementation. The gate requires two distinct locked returns, matching protocol/packet/archive hashes, eligible packet-only controls, no oracle exposure, timezone-aware timestamps, the full row inventory, closed vocabularies, exact status/completeness/diagnostic/transition agreement, and completed conclusion fields.
+- Added regressions for exact two-reader passage, answer-free templates, mismatch failure, oracle-exposure rejection, and duplicate-reader rejection. The full suite now contains 158 tests.
+- Deterministic distribution hashes after hardening are recorded in `docs/SLICE3_READER_HANDOFF.md`. Independent returns remain external and pending; no protocol promotion or freeze receipt exists.

@@ -7,7 +7,14 @@ from hashlib import sha256
 import json
 from pathlib import Path
 import re
+import sys
 from zipfile import ZIP_DEFLATED, ZipFile, ZipInfo
+
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
+
+from uncertainty_permission_simulation.qa import blank_return_template  # noqa: E402
 
 
 ALLOWLIST = {
@@ -32,7 +39,7 @@ def main() -> int:
         raise SystemExit("reader-id must be a 1-64 character study-local token")
     if args.output.suffix.lower() != ".zip":
         raise SystemExit("output must end in .zip")
-    root = Path(__file__).resolve().parents[1]
+    root = ROOT
     payloads: dict[str, bytes] = {}
     resolved_allowlist: set[Path] = set()
     for archive_name, relative in ALLOWLIST.items():
@@ -48,6 +55,9 @@ def main() -> int:
         f"# Slice 3 Cold-Reader Distribution\n\nReader ID: `{args.reader_id}`\n\n"
         "Use only these packet files. Lock and return the completed receipt before any oracle is opened. "
         "This evaluates artifacts, not readers; record no personal data.\n"
+    ).encode()
+    payloads["assessment_template.json"] = (
+        json.dumps(blank_return_template(root, args.reader_id), indent=2, sort_keys=True) + "\n"
     ).encode()
     manifest = {
         "bundle_format": 1,

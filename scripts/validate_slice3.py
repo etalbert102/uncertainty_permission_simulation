@@ -16,6 +16,8 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from uncertainty_permission_simulation.experiments import canonical_hash, validate_experiment_config  # noqa: E402
+from uncertainty_permission_simulation.qa import blank_return_template, expected_profile  # noqa: E402
+from uncertainty_permission_simulation.schemas import MANIFEST  # noqa: E402
 
 
 def _json(path: Path) -> dict[str, object]:
@@ -94,6 +96,20 @@ def main() -> int:
             diagnostics.append(f"worked-trace {arm} arm has unresolved parameter slots")
         if len(trace["assessments"][arm]) != 6:
             diagnostics.append(f"worked-trace {arm} arm lacks six separate F0-F5 rows")
+        for assessment in trace["assessments"][arm]:
+            if assessment["status"] not in {"pass", "fail", "unassessable", "not_applicable"}:
+                diagnostics.append(f"worked-trace {arm} has invalid status {assessment['status']}")
+            if assessment["completeness"] not in {"complete", "incomplete", "invalid"}:
+                diagnostics.append(
+                    f"worked-trace {arm} has invalid completeness {assessment['completeness']}"
+                )
+            unknown_diagnostics = set(assessment["diagnostics"]) - set(
+                MANIFEST["closed_diagnostic_codes"]
+            )
+            if unknown_diagnostics:
+                diagnostics.append(
+                    f"worked-trace {arm} has non-registry diagnostics {sorted(unknown_diagnostics)}"
+                )
     baseline_types = {item["event_type"] for item in trace["arms"]["baseline"]["events"]}
     repair_types = {item["event_type"] for item in trace["arms"]["repair"]["events"]}
     if not {"REPRESENTATION_APPLIED", "PROGRESSION_EXECUTED", "EXTERNAL_CONSEQUENCE_STARTED", "CORRECTION_EXECUTED", "RESTORATION_EVALUATED"} <= baseline_types:
@@ -108,6 +124,19 @@ def main() -> int:
     bundle_script = (ROOT / "scripts/build_slice3_reader_bundle.py").read_text(encoding="utf-8")
     if "ROBODEBT_WORKED_TRACE_EXPECTED_PROFILE.md" not in bundle_script or "FORBIDDEN" not in bundle_script:
         diagnostics.append("Slice 3 bundle builder does not explicitly forbid the oracle")
+    qa_expected = expected_profile(ROOT)
+    qa_template = blank_return_template(ROOT, "VALIDATOR-READER")
+    if len(qa_expected["rows"]) != 29 or len(qa_template["assessments"]) != 29:
+        diagnostics.append("structured external-QA row inventory must contain 29 rows")
+    if any(
+        row["status"] is not None
+        or row["completeness"] is not None
+        or row["diagnostics"]
+        for row in qa_template["assessments"]
+    ):
+        diagnostics.append("reader assessment template leaks oracle answers")
+    if not (ROOT / "scripts/verify_slice3_reader_returns.py").exists():
+        diagnostics.append("external-QA return verifier is missing")
     for path in (
         ROOT / "docs/CASE_APPLICATION_SUFFICIENCY.md",
         ROOT / "docs/PROTOCOL_REVISION_LOG.md",
