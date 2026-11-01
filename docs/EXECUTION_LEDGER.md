@@ -8,7 +8,7 @@ This ledger is the canonical slice-status record. Update it at the end of every 
 | --- | --- | --- | --- | --- |
 | 0. Source, construct, and claim contract | implementation, plan, and baseline gates passed — pre-freeze reader QA pending | `9cf836c` | automated Slice 0 and plan gates pass from declared environment | two eligible locked reader returns are not yet available; this blocks Slice 4, not Slice 1 engineering |
 | 1. Case-neutral dynamic vertical slice | complete | `93e2da6` | 27 tests; 726-record closed bundle; three stored validation receipts match; both artifact hashes repeat | stochastic execution and empirical validation remain Slice 2 work |
-| 2. Stochastic engine and validation | in progress — typed decision correction passes | `0513a87` checkpoint | 111 tests; repeatable five-policy decision-correction smoke artifact; all prior gates pass | no recovery service, censoring/restoration stages, full analytical benchmark, or reference-simulator comparison yet |
+| 2. Stochastic engine and validation | in progress — recovery service and late-stage censoring pass | `392278e` checkpoint | 121 tests; repeatable five-policy recovery/censoring smoke artifact; all prior gates pass | no restoration, earlier-stage censoring, full analytical benchmark, or reference-simulator comparison yet |
 | 3. Experiment pilot and freeze candidate | pending | — | — | — |
 | 4. Confirmatory freeze | pending | — | — | — |
 | 5. Confirmatory execution and analysis | pending | — | — | — |
@@ -490,3 +490,50 @@ Checkpoint commit: `0513a872182c143e9369b7e11ceab99ab8c02ee7` (`Add typed correc
 - Execute both R-OCI adapters only through compiled profiles and stylized overlays; add semantically equivalent synthetic/application comparisons.
 - Expand analytical queue checks, add a slower reference simulator, exact stochastic golden traces, and stored stochastic validation receipts.
 - Do not enter pilot scenario selection or treat this stylized decision-correction smoke artifact as a substantive, empirical, legal, or historical result.
+
+## Slice 2 Recovery-Service and Late-Stage Censoring Checkpoint
+
+Status: recovery is capacity-constrained and unfinished recovery/correction work is right-censored at a declared observation boundary; Slice 2 not complete
+
+Checkpoint commit: `392278e` (`Add recovery queue and right censoring`)
+
+### Scope and fact ownership
+
+- Recovery is now a distinct FIFO service resource. Queue entry occurs after the compiled recovery-start delay; the current fixed service requirement is owned by the stylized overlay and intentionally adds no exogenous draw family after Slice 1 draw closure.
+- The queue preserves planned start and completion times while separately recording whether each visit started or completed by the administrative cutoff. Planned post-cutoff work is auditable but is not emitted or counted as an observed completion.
+- This is explicitly a late-stage censoring checkpoint. The cutoff must follow every action and external-consequence start. A configuration that would censor engagement, review, action, or exposure formation is rejected rather than simulated with unsupported semantics.
+- `CASE_CLOSED` records administrative observation closure, `right_censored = true`, and an open-state reason. It does not assert case resolution or complete restoration.
+- Recovery completion, decision correction, and complete restoration remain different coordinates. A corrected decision continues to record active recovery exposure and incomplete restoration.
+
+### Implemented
+
+- Added compiled recovery capacity, fixed service demand, recovery window, and administrative-cutoff slots with typed validation and overlay receipts.
+- Extended the generic service scheduler with exact-boundary cutoff status, `service_in_progress_at_cutoff` versus `service_not_started_by_cutoff` reasons, observed wait/service totals, and completion/censoring partitions included in the schedule hash.
+- Replaced immediate recovery activation with a capacity-constrained recovery queue. Only service completed by the cutoff emits the typed recovery update; every exposure is partitioned into completed recovery, right-censored service, or queue entry unavailable by the cutoff.
+- Prevented post-cutoff correction requests, reassessment completions, deadlines, and correction outcomes from entering observed traces. Requested-but-open reassessment is separate from failed uptake and from correction not yet available.
+- Added one administrative closure event per case, explicit closure reasons, no-post-cutoff-event invariants, and separate recovery, reassessment, correction-availability, and case-censoring metrics.
+- Updated the CLI artifact with all three queue schedules and cutoff statuses. The claim limit now identifies a stylized recovery-resource and late-stage right-censoring smoke artifact.
+- Added invalid-cutoff, exact-boundary, recovery-capacity monotonicity, recovery/reassessment censoring, replay, metric, and earlier-stage rejection tests.
+
+### Verification
+
+| Command | Result |
+| --- | --- |
+| `PYTHONPATH=src ./.venv/bin/python -m pytest -q tests/unit/test_simulator.py tests/unit/test_random_streams.py tests/unit/test_policies.py tests/unit/test_metrics.py` | pass: 80 focused replay, cutoff, recovery, correction, queue, metric, and exact-boundary tests |
+| `PYTHONPATH=src ./.venv/bin/python -m pytest -q tests/integration/test_queue_validation.py` | pass: 13 queue/action/recovery/reassessment integration tests |
+| `PYTHONPATH=src ./.venv/bin/python -m pytest -q` | pass: 121 tests in 0.45 seconds; all earlier regressions retained |
+| `PYTHONPATH=src ./.venv/bin/python -m uncertainty_permission_simulation.cli cohort experiments/configs/stochastic_smoke_v1.yaml` | pass twice with identical artifact SHA-256 `4fe6674e2fd3c8b648c7a121a1dde55bd21e0bd754db1f76e4fd86318aa62f7e` |
+| smoke cutoff inspection | U1: 5 exposures, 3 recovery completions, 2 censored recovery visits, and 2 observed corrections; U2O: 4 exposures, 2 recovery completions, 2 censored recovery visits, and 1 requested reassessment censored in service with no correction outcome |
+| observation-boundary inspection | all 25 policy-case traces close at time 70; no emitted event occurs after the cutoff; every planned queue visit retains explicit cutoff status and censoring reason |
+| `PYTHONPATH=src ./.venv/bin/python -m uncertainty_permission_simulation.cli trace experiments/configs/smoke_v1.yaml` | pass: 9 Slice 1 traces; summary hash `b49ea5936727d23c3871a91555ba68d56d30f8f8c95a02e8c68ca9ae5210f739` and record hash `29ec5616135d9e94a6d8e84dbdff3879fcc63dfbacadaa4e640258dab2912db8` unchanged |
+| `./.venv/bin/python scripts/validate_plan.py` and `./.venv/bin/python scripts/validate_slice0.py` | pass |
+| runtime-module compilation and generic-kernel case-name scan | pass |
+
+### Remaining before Slice 2 closeout
+
+- Add dimension-specific restoration over decision, recovery, monetary, and other modeled consequence coordinates; do not treat recovery-service completion or decision correction as complete repair.
+- Extend the observation boundary to engagement/review/action stages with explicit state semantics before permitting an earlier cutoff.
+- Wire assistance capacity only through its declared stage and preserve its engagement effect separately from review, recovery, and reassessment capacity.
+- Execute both R-OCI adapters only through compiled profiles and stylized overlays; add semantically equivalent synthetic/application comparisons.
+- Expand analytical queue checks, add a slower reference simulator, exact stochastic golden traces, and stored stochastic validation receipts.
+- Do not enter pilot scenario selection or treat this stylized recovery/censoring artifact as a substantive, empirical, legal, or historical result.
