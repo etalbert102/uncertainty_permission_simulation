@@ -12,7 +12,7 @@ The study asks when aggregate annual income data can become apparently precise f
 
 ## Status
 
-The research and implementation plan is execution-ready; this does not mean the study is complete. Slice 0 gates pass and the deterministic Slice 1 vertical slice is complete. No stochastic simulator or confirmatory results exist. No pilot, evidence packet, or completed manuscript exists either. Independent reader QA remains required before protocol `1.0` and confirmatory freeze.
+The research and implementation plan is execution-ready; this does not mean the study is complete. Slice 0 gates pass, the deterministic Slice 1 vertical slice is complete, and Slice 2 is in progress with a keyed-random finite-cohort substrate. Policy mappings, queues, stochastic outcome semantics, analytical validation, and reference-simulator comparison do not yet exist. No stochastic simulator or confirmatory results exist; the substrate smoke artifact is implementation QA, not a substantive result. No pilot, evidence packet, or completed manuscript exists either. Independent reader QA remains required before protocol `1.0` and confirmatory freeze.
 
 The canonical execution plan is [docs/STUDY_PLAN.md](docs/STUDY_PLAN.md).
 
@@ -80,4 +80,4 @@ tests/
 
 ## Next Step
 
-Begin Slice 2 by extending the closed deterministic kernel into the stochastic finite-cohort engine and validation layer without weakening the completed Slice 1 contracts. Independent readability QA may proceed in parallel and remains blocking only for protocol `1.0` and confirmatory freeze.
+Continue Slice 2 by mapping the shared exogenous cohort into policy-specific engagement and process events, then add queue resources and analytical/reference validation without weakening the completed Slice 1 contracts. Independent readability QA may proceed in parallel and remains blocking only for protocol `1.0` and confirmatory freeze.

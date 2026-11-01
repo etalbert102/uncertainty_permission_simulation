@@ -8,7 +8,7 @@ This ledger is the canonical slice-status record. Update it at the end of every 
 | --- | --- | --- | --- | --- |
 | 0. Source, construct, and claim contract | implementation, plan, and baseline gates passed — pre-freeze reader QA pending | `9cf836c` | automated Slice 0 and plan gates pass from declared environment | two eligible locked reader returns are not yet available; this blocks Slice 4, not Slice 1 engineering |
 | 1. Case-neutral dynamic vertical slice | complete | `93e2da6` | 27 tests; 726-record closed bundle; three stored validation receipts match; both artifact hashes repeat | stochastic execution and empirical validation remain Slice 2 work |
-| 2. Stochastic engine and validation | pending | — | — | — |
+| 2. Stochastic engine and validation | in progress — keyed-random cohort substrate passes | checkpoint commit recorded below | 51 tests; repeatable 5-case/65-draw smoke artifact; all prior gates pass | no policy mapping, queues, stochastic outcomes, analytical benchmark, or reference-simulator comparison yet |
 | 3. Experiment pilot and freeze candidate | pending | — | — | — |
 | 4. Confirmatory freeze | pending | — | — | — |
 | 5. Confirmatory execution and analysis | pending | — | — | — |
@@ -177,3 +177,42 @@ Stored-validation-receipt completion commit: `93e2da62f5d4f4a003846c152fa4dd7811
 - The Slice 1 done condition is satisfied: all core expected results and all three architecture/application checks are stored, reference closed, deterministic, and gate checked.
 - Slice 2 owns the stochastic engine, distributional validation, telemetry, and stochastic validation receipts. No stochastic or empirical result is claimed by this closeout.
 - Independent cold-reader QA remains an external pre-freeze requirement and does not become satisfied through simulator self-tests.
+
+## Slice 2 In-Progress Checkpoint
+
+Status: keyed-random finite-cohort substrate implemented; Slice 2 not complete
+
+Checkpoint commit: pending this checkpoint commit
+
+### Scope and fact ownership
+
+- This increment owns only shared exogenous stochastic facts: closed draw-family IDs, stable `(seed_id, case_id, event_family_id, draw_index)` identities, latent unit-interval values, finite-cohort construction, and replay telemetry.
+- Policy-specific engagement mappings, event paths, queue behavior, evidence acquisition, deadlines, actions, and outcomes remain downstream consumers. This checkpoint does not encode those semantics early.
+- Every executable value in the smoke run is synthetic or identified by the separately versioned stylized overlay ID. No historical parameter is inferred or calibrated.
+
+### Implemented
+
+- Added 13 closed draw families covering initiation, administrative access, notice and engagement traits, assistance/review/reassessment service, evidence retrieval, and deadline extension.
+- Added SHA-256 keyed uniform draws derived directly from the seed and stable draw key. Draw request order, unrelated branch draws, and case input order cannot advance or shift another draw.
+- Added strict key validation, open-interval decimal values, stable draw IDs and content hashes, draw caching/deduplication, and manifest-level rejection of duplicate draw-family IDs.
+- Added a policy-neutral finite-cohort generator with deterministic case ordering, arrival times inside the declared initiation window, per-case draw hashes, family counters, duplicate-key telemetry, and a cohort artifact hash.
+- Added `cohort` CLI execution and `experiments/configs/stochastic_smoke_v1.yaml`. Its generated artifact is explicitly labeled as a stochastic-substrate smoke output with no policy, queue, empirical, or historical outcome claim.
+
+### Verification
+
+| Command | Result |
+| --- | --- |
+| `PYTHONPATH=src ./.venv/bin/python -m pytest -q tests/unit/test_random_streams.py tests/unit/test_simulator.py` | pass: 24 focused replay, key-validation, manifest, divergent-branch, case-order, seed, overlay-provenance, cohort, and telemetry tests |
+| `PYTHONPATH=src ./.venv/bin/python -m pytest -q` | pass: 51 tests in 0.29 seconds; all Slice 1 regressions retained |
+| `PYTHONPATH=src ./.venv/bin/python -m uncertainty_permission_simulation.cli cohort experiments/configs/stochastic_smoke_v1.yaml` | pass: 5 cases, 65 unique keyed draws, zero duplicate keys; repeated artifact SHA-256 `f9f7b0faea380798d43a71c33e1450583f3818ffaf0913e738691987b0a026c4` |
+| `PYTHONPATH=src ./.venv/bin/python -m uncertainty_permission_simulation.cli trace experiments/configs/smoke_v1.yaml` | pass: Slice 1 deterministic artifact unchanged |
+| `./.venv/bin/python scripts/validate_plan.py` | pass |
+| `./.venv/bin/python scripts/validate_slice0.py` | pass: 10 sources, 10 claims, 2 profiles, 7 YAML files, 95 closed diagnostics |
+
+### Remaining before Slice 2 closeout
+
+- Implement U0, U1, U2C, U2O, and U3 mappings from shared exogenous traits to policy-specific engagement and events.
+- Implement assistance, review, and reassessment resources and queue disciplines, then evidence, deadline, action, correction, censoring, and restoration behavior.
+- Execute both R-OCI adapters only through compiled profiles and stylized overlays; add semantically equivalent synthetic/application comparisons.
+- Add exact hand traces, limiting cases, analytical queue tolerances, a slower reference simulator, stored stochastic receipts, and run-level artifacts.
+- Do not enter pilot scenario selection or treat this smoke artifact as a substantive simulation result.

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+from decimal import Decimal
 from hashlib import sha256
 import json
 from pathlib import Path
@@ -16,6 +17,8 @@ from .formal_model import render_p0_report
 from .metrics import trace_metrics
 from .process_model import TraceSpec, execute_topology, run_trace
 from .profiles import canonical_process, nonisomorphic_process, policy, smoke_overlay
+from .random_streams import normalized_decimal
+from .simulator import StochasticCohortSpec, StochasticInputOverlay, generate_stochastic_cohort
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -158,15 +161,64 @@ def run_smoke(config_path: Path) -> dict[str, object]:
     return output
 
 
+def run_stochastic_smoke(config_path: Path) -> dict[str, object]:
+    config = yaml.safe_load(config_path.read_text(encoding="utf-8"))
+    cohort_size = config["cohort_size"]
+    if not isinstance(cohort_size, int) or isinstance(cohort_size, bool) or cohort_size <= 0:
+        raise ValueError("cohort_size must be a positive integer")
+    spec = StochasticCohortSpec(
+        scenario_id=config["scenario_id"], seed_id=config["seed_id"],
+        case_ids=tuple(f"CASE-{index:04d}" for index in range(1, cohort_size + 1)),
+        overlay=StochasticInputOverlay(
+            overlay_id=config["overlay"]["overlay_id"], provenance=config["overlay"]["provenance"],
+            initiation_window=Decimal(str(config["overlay"]["initiation_window"])),
+        ),
+    )
+    cohort = generate_stochastic_cohort(spec)
+    output = {
+        "schema_version": 1,
+        "config_id": config["config_id"],
+        "scenario_id": cohort.scenario_id,
+        "overlay_id": cohort.overlay_id,
+        "seed_id": cohort.seed_id,
+        "cases": [
+            {
+                "case_id": case.case_id,
+                "arrival_time": normalized_decimal(case.arrival_time),
+                "draw_hash": case.draw_hash,
+                "keyed_draws": [draw.canonical_value() | {"content_hash": draw.content_hash} for draw in case.keyed_draws],
+            }
+            for case in cohort.cases
+        ],
+        "telemetry": {
+            "case_count": cohort.telemetry.case_count,
+            "keyed_draw_count": cohort.telemetry.keyed_draw_count,
+            "draw_family_counts": dict(cohort.telemetry.draw_family_counts),
+            "duplicate_draw_key_count": cohort.telemetry.duplicate_draw_key_count,
+            "cohort_hash": cohort.telemetry.cohort_hash,
+        },
+        "claim_limit": "stochastic substrate smoke artifact; no policy, queue, empirical, or historical outcome",
+    }
+    output_path = ROOT / config["output_path"]
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text(json.dumps(output, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    return output
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     subparsers = parser.add_subparsers(dest="command", required=True)
     trace = subparsers.add_parser("trace")
     trace.add_argument("config", type=Path)
+    cohort = subparsers.add_parser("cohort")
+    cohort.add_argument("config", type=Path)
     args = parser.parse_args()
     if args.command == "trace":
         result = run_smoke(args.config)
         print(json.dumps({"status": "ok", "traces": len(result["traces"]), "output": result["config_id"]}, sort_keys=True))
+    elif args.command == "cohort":
+        result = run_stochastic_smoke(args.config)
+        print(json.dumps({"status": "ok", "cases": len(result["cases"]), "output": result["config_id"]}, sort_keys=True))
 
 
 if __name__ == "__main__":

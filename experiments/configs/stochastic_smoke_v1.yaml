@@ -1,0 +1,9 @@
+config_id: SLICE2-STOCHASTIC-SMOKE-V1
+scenario_id: SLICE2-SYNTHETIC-COHORT-V1
+seed_id: SLICE2-SMOKE-SEED-001
+cohort_size: 5
+overlay:
+  overlay_id: SLICE2-STYLIZED-OVERLAY-V1
+  provenance: stylized
+  initiation_window: "10"
+output_path: outputs/slice2/stochastic_smoke_v1.json

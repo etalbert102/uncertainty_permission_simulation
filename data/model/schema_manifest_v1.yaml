@@ -116,6 +116,21 @@ closed_scenario_validity_status_ids:
   - valid
   - invalid
 
+closed_draw_family_ids:
+  - initiation
+  - administrative_access
+  - notice_delivery
+  - comprehension
+  - record_availability
+  - response_effort
+  - extension_need
+  - assistance_service
+  - review_service
+  - reassessment_service
+  - evidence_retrieval_latency
+  - evidence_retrieval_success
+  - deadline_extension
+
 closed_protocol_application_level_ids:
   - document_audit
   - bounded_deterministic_trace
@@ -1759,7 +1774,7 @@ payload_kinds:
     fields:
       keyed_draw_id: string
       case_id: string
-      event_family_id: string
+      event_family_id: closed_draw_family_id
       draw_index: nonnegative_integer
       distribution_parameter_refs: list_record_ref
       seed_id: string

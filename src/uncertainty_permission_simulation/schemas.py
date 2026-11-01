@@ -95,6 +95,7 @@ def _annotation(spec: Any) -> Any:
         "closed_diagnostic_category": "closed_diagnostic_categories",
         "closed_diagnostic_owning_layer": "closed_diagnostic_owning_layers",
         "closed_event_type_id": "closed_event_type_ids",
+        "closed_draw_family_id": "closed_draw_family_ids",
         "closed_rule_implementation_id": "closed_rule_implementations",
         "closed_run_status_id": "closed_run_status_ids",
         "closed_scenario_validity_status_id": "closed_scenario_validity_status_ids",
@@ -203,6 +204,9 @@ def _validate_target_declaration(source: str, field_name: str, declaration: Any,
 def validate_model_manifest_inventory() -> None:
     if set(PAYLOAD_MODELS) != set(MANIFEST["payload_kinds"]):
         raise ContractError("SCHEMA_MANIFEST_DRIFT", "payload model inventory differs from manifest")
+    draw_family_ids = MANIFEST.get("closed_draw_family_ids", [])
+    if not draw_family_ids or len(draw_family_ids) != len(set(draw_family_ids)):
+        raise ContractError("SCHEMA_MANIFEST_DRIFT", "closed draw-family inventory must be nonempty and unique")
     payload_kinds = set(MANIFEST["payload_kinds"])
     role_declarations = MANIFEST.get("reference_target_roles", {})
     reference_field_names: set[str] = set()
