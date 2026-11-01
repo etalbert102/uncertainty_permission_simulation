@@ -2,7 +2,7 @@
 
 Date: 2026-11-01
 
-Status: Slice 4 active; freeze not authorized
+Status: historical entry audit; all three blockers closed and the Slice 4 freeze was issued on 2026-11-01
 
 ## Entry evidence
 
@@ -45,6 +45,10 @@ Required resolution: implement deterministic control execution and a stored rece
 
 The repository does not yet implement `verify-freeze`, `scripts/verify_repo.py`, or the append-only confirmatory run/reconcile/analyze path named in the canonical plan. These commands must exist and be mutation-tested before their code is hashed.
 
-## Stop decision
+**Resolution — 2026-11-01:** closed by the manifest-gated freeze verifier, repository verifier, append-only run/resume path, reconciliation and analysis receipts, deterministic figures, six focused machinery regressions, and the 178-test full suite. The promoted baseline is commit `0b8e890b0ed7a773cfaf328997a3e865ded3457a`; `docs/FREEZE_MANIFEST.json` hashes 77 files and has manifest identity `35f360d81e7eebe1effeae813f4144991b0fa043001df6d920d3f8592bfee65c`.
+
+## Entry stop decision
 
 Do not promote the protocol, mark either config ready, create `docs/FREEZE_MANIFEST.json`, or execute a confirmatory case while S4-B003 remains open. Candidate validation and deterministic negative-control replay are permitted because they enumerate or test frozen inputs without executing or inspecting a confirmatory scenario outcome.
+
+This stop condition was satisfied before promotion. Protocol/formal version `1.0`, ready configs, and the immutable manifest were created only after S4-B003 closed. No confirmatory output existed at issuance.

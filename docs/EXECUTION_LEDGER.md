@@ -10,8 +10,8 @@ This ledger is the canonical slice-status record. Update it at the end of every 
 | 1. Case-neutral dynamic vertical slice | complete | `93e2da6` | 27 tests; 726-record closed bundle; three stored validation receipts match; both artifact hashes repeat | Slice 2 retained the exact artifact hashes and validated stochastic extension without weakening this contract |
 | 2. Stochastic engine and validation | complete | `d541d03` closeout; `fa6dfc4` semantic audit | 148 tests; five exact stochastic traces; stored replay/application/queue receipts; analytical and independent-reference checks; all prior gates pass | implementation validation only; monetary and unmodeled harms remain outside the declared consequence vector; no pilot or substantive result exists |
 | 3. Experiment pilot and freeze candidate | complete; ready for Slice 4 freeze work | `e8905fa`; gate amended 2026-11-01 | pilot, Slice 0/plan/Slice 3 gates, executable worked trace and staged review materials | procedure comprehensibility will be reviewed after Slice 5; semantic findings require a new freeze and rerun |
-| 4. Confirmatory freeze | active; machinery complete, freeze not yet issued | — | 108-family core and one sensitivity verify the stored five-control receipt; freeze, append-only execution, reconciliation, and analysis machinery pass the synthetic rehearsal and full regression suite | protocol/config promotion and immutable manifest issuance remain separate pre-run actions |
-| 5. Confirmatory execution and analysis | pending | — | — | — |
+| 4. Confirmatory freeze | complete; immutable manifest issued | `0b8e890` frozen baseline; manifest `35f360d8…65c` | 77-file manifest, 10 source identities, exact environment, 108-family core, sensitivity, five-control receipt, and all 178 tests verify | any frozen-file, inventory, or environment drift blocks execution and requires an explicit new freeze |
+| 5. Confirmatory execution and analysis | pending; entry gate satisfied | — | Slice 4 repository verifier passes; no confirmatory output exists | execute only through the manifest-gated append-only commands |
 | 6. Evidence packet and 10,000-word article | pending | — | — | — |
 
 ## Slice 0 Closeout Receipt
@@ -840,3 +840,40 @@ Verification:
 | `./.venv/bin/python -m py_compile ...` and `git diff --check` | pass |
 
 No confirmatory scenario was executed or inspected. The protocol remains version `0.2`, both configs remain `blocked`, and `docs/FREEZE_MANIFEST.json` does not exist.
+
+## Slice 4 Freeze Receipt
+
+Status: complete; immutable confirmatory freeze issued; Slice 5 execution not started
+
+Frozen baseline commit: `0b8e890b0ed7a773cfaf328997a3e865ded3457a`
+
+Freeze manifest: `docs/FREEZE_MANIFEST.json`
+
+Freeze ID: `UPS-CONFIRMATORY-FREEZE@1`
+
+Manifest SHA-256 identity: `35f360d81e7eebe1effeae813f4144991b0fa043001df6d920d3f8592bfee65c`
+
+Created at: `2026-11-01T19:35:05.140725+00:00`
+
+### Frozen design identities
+
+- 77 hashed files across the protocol/formal documents, configs, executable code, verification code and tests, formal data, source records, scenarios, validation receipts, and pilot receipts.
+- Protocol, preregistration, formal model, and representation-preservation fixture promoted to version `1.0` before the baseline commit and before any confirmatory output existed.
+- Core config hash: `f3e3b06d9ef76aba35e3abad60dbc6595d5a28edb63cb916a8ed52d9ea6e179b`.
+- Core scenario hash: `16bdb11bdf3dba909f4f71feaf25acefebd72d1ca21e61efe2c38265f2607506`.
+- Core seed inventory: 3,240 initial seed IDs, hash `f4967748d83393b82a5f3c05442438798e9343fa708aeb0483ddc46ece62bfcb`.
+- Sensitivity config hash: `9e2aabd38cb2306c443aa113595dfebd4dbcf73bf4ad28f839d55eb378b40ba7`.
+- Negative-control receipt hash: `ed9c0462413d96db8b14ec44c2062fc2433df448ed29f95784560fa239d7a861`.
+- Source identity: 10 selected Robodebt source records under the frozen local-record and authoritative-URL identity rule.
+- Environment: CPython 3.14.4 on macOS arm64 with the exact dependency versions recorded in the manifest.
+
+### Freeze verification
+
+| Command | Result |
+| --- | --- |
+| `PYTHONPATH=src ./.venv/bin/python -m uncertainty_permission_simulation.cli verify-freeze docs/FREEZE_MANIFEST.json` | pass: 77 files; manifest identity `35f360d81e7eebe1effeae813f4144991b0fa043001df6d920d3f8592bfee65c` |
+| `./.venv/bin/python scripts/verify_repo.py` | pass through Slice 4: manifest, core and sensitivity configs, negative controls, plan, Slice 0, Slice 3, and full tests |
+| `PYTHONPATH=src ./.venv/bin/python -m pytest -q` | pass: 178 tests |
+| no-output guard | pass: neither confirmatory output directory contains a file |
+
+The manifest is immutable and rejects file-hash, file-size, category, inventory, interpreter, platform, or dependency drift. No confirmatory scenario was executed or inspected during promotion or issuance. Slice 5 may begin only with the manifest-gated append-only runner.
