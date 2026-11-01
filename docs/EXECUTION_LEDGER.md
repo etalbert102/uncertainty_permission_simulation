@@ -8,7 +8,7 @@ This ledger is the canonical slice-status record. Update it at the end of every 
 | --- | --- | --- | --- | --- |
 | 0. Source, construct, and claim contract | implementation, plan, and baseline gates passed — pre-freeze reader QA pending | `9cf836c` | automated Slice 0 and plan gates pass from declared environment | two eligible locked reader returns are not yet available; this blocks Slice 4, not Slice 1 engineering |
 | 1. Case-neutral dynamic vertical slice | complete | `93e2da6` | 27 tests; 726-record closed bundle; three stored validation receipts match; both artifact hashes repeat | Slice 2 retained the exact artifact hashes and validated stochastic extension without weakening this contract |
-| 2. Stochastic engine and validation | complete | `a084264`, `324874b`, `5249f32`, `33257a3` | 148 tests; five exact stochastic traces; stored replay/application/queue receipts; analytical and independent-reference checks; all prior gates pass | implementation validation only; monetary and unmodeled harms remain outside the declared consequence vector; no pilot or substantive result exists |
+| 2. Stochastic engine and validation | complete | `d541d03` closeout; `fa6dfc4` semantic audit | 148 tests; five exact stochastic traces; stored replay/application/queue receipts; analytical and independent-reference checks; all prior gates pass | implementation validation only; monetary and unmodeled harms remain outside the declared consequence vector; no pilot or substantive result exists |
 | 3. Experiment pilot and freeze candidate | pending | — | — | — |
 | 4. Confirmatory freeze | pending | — | — | — |
 | 5. Confirmatory execution and analysis | pending | — | — | — |
@@ -596,6 +596,9 @@ Implementation commits:
 - `324874b` (`Validate stochastic application adapters`)
 - `5249f32` (`Add analytical and reference validation`)
 - `33257a3` (`Store stochastic validation receipts`)
+- `fa6dfc4` (`Add explicit assistance events`)
+
+Closeout documentation commit: `d541d03` (`Close Slice 2 validation`)
 
 ### Scope and claim boundary
 
@@ -628,8 +631,8 @@ Reference environment: local `.venv`, Python 3.14, macOS arm64, 2026-11-01.
 | `PYTHONPATH=src ./.venv/bin/pytest -q tests/unit/test_simulator.py tests/unit/test_random_streams.py tests/unit/test_policies.py tests/unit/test_metrics.py` | pass: 91 focused tests in 0.22 seconds |
 | `PYTHONPATH=src ./.venv/bin/pytest -q tests/integration/test_queue_validation.py tests/integration/test_reference_simulator.py tests/integration/test_application_profiles.py tests/integration/test_stochastic_receipts.py` | pass: 29 integration tests in 0.32 seconds |
 | `PYTHONPATH=src ./.venv/bin/pytest -q` | pass: 148 tests in 0.56 seconds |
-| `PYTHONPATH=src ./.venv/bin/python -m uncertainty_permission_simulation.cli cohort experiments/configs/stochastic_smoke_v1.yaml` | pass; artifact SHA-256 `a856663582075416d8041ddf9d0e3b1bb9c31720e2a8f65198afe083659f9e15` |
-| stored validation artifact | SHA-256 `890db8f8853a31c2d0e5158501293c5e5bb2e7cbc8a476a92ec41af2f7efa06e`; all expected-versus-observed comparisons match |
+| `PYTHONPATH=src ./.venv/bin/python -m uncertainty_permission_simulation.cli cohort experiments/configs/stochastic_smoke_v1.yaml` | pass; artifact SHA-256 `0490eaa26cb61b1127a0f4c46b5b27cfef40010390180c0749a73ddf181a483f` |
+| stored validation artifact | SHA-256 `7e30903f264a0c9630ebdd27b5e113cf94ec71b670c79a8105491a35a8273c66`; all expected-versus-observed comparisons match |
 | `PYTHONPATH=src ./.venv/bin/python -m uncertainty_permission_simulation.cli trace experiments/configs/smoke_v1.yaml` | pass: 9 Slice 1 traces; summary hash `b49ea5936727d23c3871a91555ba68d56d30f8f8c95a02e8c68ca9ae5210f739` and record hash `29ec5616135d9e94a6d8e84dbdff3879fcc63dfbacadaa4e640258dab2912db8` unchanged |
 | `./.venv/bin/python scripts/validate_plan.py` and `./.venv/bin/python scripts/validate_slice0.py` | pass: plan and Slice 0 gates retained |
 | generic-kernel case-name scan | pass: no Robodebt or R-OCI identifiers in simulator, policy, metric, event, random-stream, or reference-simulator modules |
