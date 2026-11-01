@@ -23,4 +23,6 @@ overlay:
   extension_need_probability: "0.25"
   evidence_retrieval_success_probability: "0.7"
   evidence_retrieval_latency_scale: "10"
+  external_consequence_delay: "1"
+  recovery_start_delay: "2"
 output_path: outputs/slice2/stochastic_smoke_v1.json

@@ -60,6 +60,14 @@ def engagement_metrics(run: EngagementRun) -> dict[str, int | str]:
         "fail_open_timeout_progression": run.telemetry.fail_open_timeout_progression_count,
         "fail_closed_timeout_hold": run.telemetry.fail_closed_timeout_hold_count,
     }
+    exposure_counts = {
+        "external_exposure": run.telemetry.external_exposure_count,
+        "recovery_started": run.telemetry.recovery_started_count,
+        "supported_exposure": run.telemetry.supported_exposure_count,
+        "unsupported_exposure": run.telemetry.unsupported_exposure_count,
+        "evidentially_unsupported_exposure": run.telemetry.evidentially_unsupported_exposure_count,
+        "unauthorized_exposure": run.telemetry.unauthorized_exposure_count,
+    }
     gate_counts = {
         "gate_safe": run.telemetry.gate_safe_count,
         "gate_unsafe": run.telemetry.gate_unsafe_count,
@@ -69,7 +77,7 @@ def engagement_metrics(run: EngagementRun) -> dict[str, int | str]:
         "event_count": run.telemetry.event_count,
         **{
             f"{name}_count": value
-            for name, value in (case_counts | review_counts | action_counts | gate_counts).items()
+            for name, value in (case_counts | review_counts | action_counts | exposure_counts | gate_counts).items()
         },
         "gate_applicable_count": run.telemetry.gate_applicable_count,
     }
@@ -77,7 +85,7 @@ def engagement_metrics(run: EngagementRun) -> dict[str, int | str]:
         context.prec = 50
         result.update({
             f"{name}_rate": normalized_decimal(Decimal(value) / Decimal(denominator))
-            for name, value in (case_counts | action_counts).items()
+            for name, value in (case_counts | action_counts | exposure_counts).items()
         })
         queue_denominator = run.telemetry.review_queue_count
         result.update({

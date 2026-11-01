@@ -1,5 +1,5 @@
 from dataclasses import replace
-from decimal import Decimal
+from decimal import Decimal, localcontext
 
 import pytest
 
@@ -30,6 +30,7 @@ def overlay(**updates: object) -> StochasticInputOverlay:
         extension_effort_bonus=Decimal("0.15"),
         extension_need_probability=Decimal("0.25"), evidence_retrieval_success_probability=Decimal("0.7"),
         evidence_retrieval_latency_scale=Decimal("10"),
+        external_consequence_delay=Decimal("1"), recovery_start_delay=Decimal("2"),
     )
     return replace(base, **updates)
 
@@ -108,6 +109,8 @@ def test_invalid_cohort_specs_fail_before_draws(updates: dict[str, object]) -> N
     ("initiation_window", "10"),
     ("response_deadline", Decimal("0")),
     ("review_service_window", Decimal("0")),
+    ("external_consequence_delay", Decimal("-1")),
+    ("recovery_start_delay", Decimal("NaN")),
     ("notice_delivery_probability", Decimal("1.1")),
 ))
 def test_invalid_stochastic_overlay_values_are_rejected(field: str, value: object) -> None:
@@ -143,7 +146,7 @@ def test_policy_path_divergence_preserves_common_causal_keys() -> None:
     assert "EXTERNAL_EVIDENCE_RETURNED" not in u1_keys and "EXTERNAL_EVIDENCE_RETURNED" in u3_keys
 
 
-def test_action_stage_replays_event_hashes_and_stops_before_external_consequences() -> None:
+def test_action_stage_replays_event_hashes_through_recovery_start() -> None:
     cohort = generate_stochastic_cohort(spec())
     configuration = compiled("U2C", cohort.overlay)
     first = run_engagement_stage(cohort, configuration)
@@ -152,13 +155,53 @@ def test_action_stage_replays_event_hashes_and_stops_before_external_consequence
     assert first.telemetry.event_hash == second.telemetry.event_hash
     assert first.telemetry.action_count == len(cohort.cases)
     assert all(trace.action_decision is not None for trace in first.traces)
+    assert first.telemetry.external_exposure_count == first.telemetry.progression_count
+    assert first.telemetry.recovery_started_count == first.telemetry.external_exposure_count
     assert all(
-        event.event_type_id not in {
+        event.event_type_id not in {"CORRECTION_REQUESTED", "RESTORATION_EXECUTED", "CASE_CLOSED"}
+        for trace in first.traces for event in trace.events
+    )
+
+
+def test_exposure_descends_only_from_executed_progression_and_preserves_support() -> None:
+    cohort = generate_stochastic_cohort(spec())
+    for policy_id in ("U0", "U1", "U2C", "U2O", "U3"):
+        run = run_engagement_stage(cohort, compiled(policy_id, cohort.overlay))
+        for trace in run.traces:
+            types = tuple(event.event_type_id for event in trace.events)
+            if trace.action_decision is not None and trace.action_decision.action == "progress":
+                assert types.index("PROGRESSION_EXECUTED") < types.index("EXTERNAL_CONSEQUENCE_STARTED")
+                assert types.index("EXTERNAL_CONSEQUENCE_STARTED") < types.index("EXTERNAL_CONSEQUENCE_UPDATED")
+                exposure = next(event for event in trace.events if event.event_type_id == "EXTERNAL_CONSEQUENCE_STARTED")
+                recovery = next(event for event in trace.events if event.event_type_id == "EXTERNAL_CONSEQUENCE_UPDATED")
+                progression = next(event for event in trace.events if event.event_type_id == "PROGRESSION_EXECUTED")
+                with localcontext() as context:
+                    context.prec = 50
+                    assert exposure.timestamp == progression.timestamp + cohort.overlay.external_consequence_delay
+                    assert recovery.timestamp == exposure.timestamp + cohort.overlay.recovery_start_delay
+                assert exposure.details["source_progression_event_key"] == progression.causal_event_key
+                assert recovery.details["source_external_consequence_event_key"] == exposure.causal_event_key
+                assert exposure.details["progression_supported"] is trace.action_decision.progression_supported
+                assert recovery.details["unsupported_reason_codes"] == trace.action_decision.unsupported_reason_codes
+            else:
+                assert "EXTERNAL_CONSEQUENCE_STARTED" not in types
+                assert "EXTERNAL_CONSEQUENCE_UPDATED" not in types
+
+
+def test_zero_delays_use_frozen_progression_exposure_recovery_order() -> None:
+    zero_delay = overlay(external_consequence_delay=Decimal("0"), recovery_start_delay=Decimal("0"))
+    cohort = generate_stochastic_cohort(spec(case_ids=("CASE-1",), overlay=zero_delay))
+    trace = run_engagement_stage(cohort, compiled("U1", cohort.overlay)).traces[0]
+    ordered = tuple(
+        event.event_type_id for event in trace.events
+        if event.event_type_id in {
+            "ACTION_COMPUTED", "PROGRESSION_EXECUTED",
             "EXTERNAL_CONSEQUENCE_STARTED", "EXTERNAL_CONSEQUENCE_UPDATED",
-            "CORRECTION_REQUESTED", "RESTORATION_EXECUTED", "CASE_CLOSED",
         }
-        for trace in first.traces
-        for event in trace.events
+    )
+    assert ordered == (
+        "ACTION_COMPUTED", "PROGRESSION_EXECUTED",
+        "EXTERNAL_CONSEQUENCE_STARTED", "EXTERNAL_CONSEQUENCE_UPDATED",
     )
 
 
@@ -194,6 +237,30 @@ def test_engagement_runner_rejects_configuration_overlay_drift() -> None:
     sensitivity_overlay = overlay(provenance="sensitivity")
     with pytest.raises(ContractError, match="SCENARIO_CONFIGURATION_INCOMPLETE"):
         run_engagement_stage(cohort, compiled("U1", sensitivity_overlay))
+
+
+@pytest.mark.parametrize(
+    ("field_name", "missing_id"),
+    (("capabilities", "recovery"), ("action_type_ids", "recover")),
+)
+def test_engagement_runner_rejects_untyped_recovery_process(
+    field_name: str,
+    missing_id: str,
+) -> None:
+    cohort = generate_stochastic_cohort(spec())
+    process = stochastic_process()
+    process = process.model_copy(update={
+        field_name: getattr(process, field_name) - {missing_id},
+    })
+    configuration = compile_configuration(
+        configuration_id=f"MISSING-{missing_id}",
+        process=process,
+        policy=policy("U1"),
+        overlay=cohort.overlay.to_compilation_overlay(),
+        evaluation_spec_id="TEST-EVALUATION",
+    )
+    with pytest.raises(ContractError, match="SCENARIO_CONFIGURATION_INCOMPLETE"):
+        run_engagement_stage(cohort, configuration)
 
 
 def test_fifo_service_queue_is_input_order_invariant_and_work_conserving() -> None:

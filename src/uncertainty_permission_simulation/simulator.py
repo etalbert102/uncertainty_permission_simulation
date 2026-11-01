@@ -37,6 +37,8 @@ class StochasticInputOverlay:
     extension_need_probability: Decimal
     evidence_retrieval_success_probability: Decimal
     evidence_retrieval_latency_scale: Decimal
+    external_consequence_delay: Decimal
+    recovery_start_delay: Decimal
 
     def __post_init__(self) -> None:
         if not isinstance(self.overlay_id, str) or not self.overlay_id:
@@ -51,6 +53,8 @@ class StochasticInputOverlay:
             "review_service_window": self.review_service_window,
             "extension_duration": self.extension_duration,
             "evidence_retrieval_latency_scale": self.evidence_retrieval_latency_scale,
+            "external_consequence_delay": self.external_consequence_delay,
+            "recovery_start_delay": self.recovery_start_delay,
         }
         for field_name, value in nonnegative.items():
             if not isinstance(value, Decimal) or not value.is_finite() or value < 0:
@@ -97,6 +101,8 @@ class StochasticInputOverlay:
             "extension_need_probability": normalized_decimal(self.extension_need_probability),
             "evidence_retrieval_success_probability": normalized_decimal(self.evidence_retrieval_success_probability),
             "evidence_retrieval_latency_scale": normalized_decimal(self.evidence_retrieval_latency_scale),
+            "external_consequence_delay": normalized_decimal(self.external_consequence_delay),
+            "recovery_start_delay": normalized_decimal(self.recovery_start_delay),
         }
 
     def to_compilation_overlay(self) -> ScenarioOverlaySpec:
@@ -356,6 +362,12 @@ class EngagementRunTelemetry:
     review_authorization_count: int
     fail_open_timeout_progression_count: int
     fail_closed_timeout_hold_count: int
+    external_exposure_count: int
+    recovery_started_count: int
+    supported_exposure_count: int
+    unsupported_exposure_count: int
+    evidentially_unsupported_exposure_count: int
+    unauthorized_exposure_count: int
     event_hash: str
 
 
@@ -736,6 +748,99 @@ def _add_action_events(
     )
 
 
+def _add_exposure_and_recovery_events(
+    trace: EngagementTrace,
+    overlay: StochasticInputOverlay,
+) -> EngagementTrace:
+    """Extend executed progression only; permission and computation never imply exposure."""
+
+    progression_events = tuple(
+        event for event in trace.events if event.event_type_id == "PROGRESSION_EXECUTED"
+    )
+    if trace.action_decision is None:
+        raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", f"missing action decision for {trace.case_id}")
+    if trace.action_decision.action != "progress":
+        if progression_events:
+            raise ContractError(
+                "SIM_SYSTEM_STATE_INCOMPLETE",
+                f"non-progression action has progression event for {trace.case_id}",
+            )
+        return trace
+    if len(progression_events) != 1:
+        raise ContractError(
+            "SIM_SYSTEM_STATE_INCOMPLETE",
+            f"progression action requires exactly one execution event for {trace.case_id}",
+        )
+
+    progression = progression_events[0]
+    with localcontext() as context:
+        context.prec = 50
+        exposure_time = progression.timestamp + overlay.external_consequence_delay
+        recovery_time = exposure_time + overlay.recovery_start_delay
+    root_key = f"{trace.case_id}:ENGAGEMENT"
+    decision = trace.action_decision
+    support_details = {
+        "evidence_sufficient": decision.evidence_sufficient,
+        "review_required": decision.review_required,
+        "review_authorization_recorded": decision.review_authorization_recorded,
+        "progression_supported": decision.progression_supported,
+        "evidentially_supported_progression": decision.evidentially_supported_progression,
+        "unauthorized_progression": decision.unauthorized_progression,
+        "unsupported_reason_codes": decision.unsupported_reason_codes,
+        "source_progression_event_key": progression.causal_event_key,
+    }
+
+    def consequence_event(
+        event_type_id: str,
+        timestamp: Decimal,
+        cause_id: str,
+        details: dict[str, object],
+    ) -> Event:
+        causal_key = f"{root_key}:{cause_id}:{event_type_id}"
+        return Event(
+            event_id=f"{trace.policy_id}:{causal_key}",
+            event_type_id=event_type_id,
+            timestamp=timestamp,
+            causal_event_key=causal_key,
+            root_event_key=root_key,
+            descendant_path=("progression", cause_id, event_type_id),
+            transition_rank=DEFAULT_PRIORITIES[event_type_id],
+            case_id=trace.case_id,
+            details={"policy_id": trace.policy_id, "keyed_draw_ids": ()} | support_details | details,
+        )
+
+    exposure_event = consequence_event(
+        "EXTERNAL_CONSEQUENCE_STARTED",
+        exposure_time,
+        "external_consequence",
+        {
+            "action_type_id": "progress",
+            "consequence_dimension_id": "recovery_exposure",
+            "exposure_state": "active",
+            "recovery_state": "not_started",
+            "external_consequence_delay": normalized_decimal(overlay.external_consequence_delay),
+        },
+    )
+    recovery_event = consequence_event(
+        "EXTERNAL_CONSEQUENCE_UPDATED",
+        recovery_time,
+        "recovery",
+        {
+            "action_type_id": "recover",
+            "consequence_dimension_id": "recovery_exposure",
+            "exposure_state": "active",
+            "recovery_state": "active",
+            "source_external_consequence_event_key": exposure_event.causal_event_key,
+            "recovery_start_delay": normalized_decimal(overlay.recovery_start_delay),
+        },
+    )
+    queue = EventQueue()
+    for event in trace.events + (exposure_event, recovery_event):
+        queue.push(event)
+    events = queue.drain()
+    return replace(trace, events=events, event_hash=_event_hash(events))
+
+
 def _validate_engagement_configuration(cohort: StochasticCohort, compiled: CompiledConfigurationSpec) -> str:
     policy_id = compiled.policy_profile.profile_id
     policy_behavior(policy_id)
@@ -748,6 +853,10 @@ def _validate_engagement_configuration(cohort: StochasticCohort, compiled: Compi
         raise ContractError("SCENARIO_CONFIGURATION_INCOMPLETE", "compiled parameter receipts differ from the cohort overlay")
     if any(receipt.provenance != cohort.overlay.provenance for receipt in compiled.receipts):
         raise ContractError("SCENARIO_CONFIGURATION_INCOMPLETE", "compiled parameter provenance differs from the cohort overlay")
+    if not {"progression", "recovery"} <= compiled.process_profile.capabilities:
+        raise ContractError("SCENARIO_CONFIGURATION_INCOMPLETE", "process lacks progression or recovery capability")
+    if not {"progress", "recover"} <= compiled.process_profile.action_type_ids:
+        raise ContractError("SCENARIO_CONFIGURATION_INCOMPLETE", "process lacks typed progression or recovery action")
     return policy_id
 
 
@@ -766,9 +875,13 @@ def run_engagement_stage(cohort: StochasticCohort, compiled: CompiledConfigurati
         )
         for trace in engagement_traces
     )
-    traces = tuple(
+    action_traces = tuple(
         _add_action_events(trace, visit_by_case.get(trace.case_id))
         for trace in review_traces
+    )
+    traces = tuple(
+        _add_exposure_and_recovery_events(trace, cohort.overlay)
+        for trace in action_traces
     )
     system_queue = EventQueue()
     for trace in traces:
@@ -857,6 +970,35 @@ def run_engagement_stage(cohort: StochasticCohort, compiled: CompiledConfigurati
             and trace.action_decision.reason_code == "review_timeout_fail_closed"
             for trace in traces
         ),
+        external_exposure_count=sum(
+            event.event_type_id == "EXTERNAL_CONSEQUENCE_STARTED"
+            for event in system_events
+        ),
+        recovery_started_count=sum(
+            event.event_type_id == "EXTERNAL_CONSEQUENCE_UPDATED"
+            and event.details.get("recovery_state") == "active"
+            for event in system_events
+        ),
+        supported_exposure_count=sum(
+            event.event_type_id == "EXTERNAL_CONSEQUENCE_STARTED"
+            and event.details.get("progression_supported") is True
+            for event in system_events
+        ),
+        unsupported_exposure_count=sum(
+            event.event_type_id == "EXTERNAL_CONSEQUENCE_STARTED"
+            and event.details.get("progression_supported") is False
+            for event in system_events
+        ),
+        evidentially_unsupported_exposure_count=sum(
+            event.event_type_id == "EXTERNAL_CONSEQUENCE_STARTED"
+            and event.details.get("evidence_sufficient") is False
+            for event in system_events
+        ),
+        unauthorized_exposure_count=sum(
+            event.event_type_id == "EXTERNAL_CONSEQUENCE_STARTED"
+            and event.details.get("unauthorized_progression") is True
+            for event in system_events
+        ),
         event_hash=event_hash,
     )
     if telemetry.action_count != telemetry.case_count:
@@ -869,6 +1011,16 @@ def run_engagement_stage(cohort: StochasticCohort, compiled: CompiledConfigurati
         raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "evidentiary support does not partition progression")
     if telemetry.gate_safe_count + telemetry.gate_unsafe_count != telemetry.gate_applicable_count:
         raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "gate safety does not partition applicable cases")
+    if telemetry.external_exposure_count != telemetry.progression_count:
+        raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "executed progression and exposure counts differ")
+    if telemetry.recovery_started_count != telemetry.external_exposure_count:
+        raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "exposure and recovery-start counts differ")
+    if telemetry.supported_exposure_count + telemetry.unsupported_exposure_count != telemetry.external_exposure_count:
+        raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "support does not partition exposure")
+    if telemetry.evidentially_unsupported_exposure_count != telemetry.evidentially_unsupported_progression_count:
+        raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "evidentiary status changed between progression and exposure")
+    if telemetry.unauthorized_exposure_count != telemetry.unauthorized_progression_count:
+        raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", "authorization status changed between progression and exposure")
     return EngagementRun(
         cohort.scenario_id, policy_id, cohort.telemetry.cohort_hash,
         traces, system_events, review_queue, telemetry,

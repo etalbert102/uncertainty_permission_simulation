@@ -189,6 +189,8 @@ def run_stochastic_smoke(config_path: Path) -> dict[str, object]:
             extension_need_probability=Decimal(str(config["overlay"]["extension_need_probability"])),
             evidence_retrieval_success_probability=Decimal(str(config["overlay"]["evidence_retrieval_success_probability"])),
             evidence_retrieval_latency_scale=Decimal(str(config["overlay"]["evidence_retrieval_latency_scale"])),
+            external_consequence_delay=Decimal(str(config["overlay"]["external_consequence_delay"])),
+            recovery_start_delay=Decimal(str(config["overlay"]["recovery_start_delay"])),
         ),
     )
     cohort = generate_stochastic_cohort(spec)
@@ -266,6 +268,12 @@ def run_stochastic_smoke(config_path: Path) -> dict[str, object]:
                     "review_authorization_count": run.telemetry.review_authorization_count,
                     "fail_open_timeout_progression_count": run.telemetry.fail_open_timeout_progression_count,
                     "fail_closed_timeout_hold_count": run.telemetry.fail_closed_timeout_hold_count,
+                    "external_exposure_count": run.telemetry.external_exposure_count,
+                    "recovery_started_count": run.telemetry.recovery_started_count,
+                    "supported_exposure_count": run.telemetry.supported_exposure_count,
+                    "unsupported_exposure_count": run.telemetry.unsupported_exposure_count,
+                    "evidentially_unsupported_exposure_count": run.telemetry.evidentially_unsupported_exposure_count,
+                    "unauthorized_exposure_count": run.telemetry.unauthorized_exposure_count,
                     "event_hash": run.telemetry.event_hash,
                 },
                 "review_queue": {
@@ -341,7 +349,7 @@ def run_stochastic_smoke(config_path: Path) -> dict[str, object]:
             }
             for policy_id, run in engagement_runs.items()
         },
-        "claim_limit": "pre-exposure action smoke artifact; no external consequence, recovery, correction, empirical, or historical outcome",
+        "claim_limit": "stylized exposure-and-recovery smoke artifact; no correction, reassessment, restoration, empirical, or historical outcome",
     }
     output_path = ROOT / config["output_path"]
     output_path.parent.mkdir(parents=True, exist_ok=True)

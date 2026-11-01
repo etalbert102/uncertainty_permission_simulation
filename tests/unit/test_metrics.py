@@ -18,6 +18,7 @@ def _run(policy_id: str):
         extension_effort_bonus=Decimal("0"),
         extension_need_probability=Decimal("0"), evidence_retrieval_success_probability=Decimal("1"),
         evidence_retrieval_latency_scale=Decimal("0"),
+        external_consequence_delay=Decimal("1"), recovery_start_delay=Decimal("2"),
     )
     cohort = generate_stochastic_cohort(StochasticCohortSpec(
         scenario_id="METRIC-SCENARIO", seed_id="METRIC-SEED",
@@ -47,6 +48,10 @@ def test_engagement_metrics_keep_dimensions_separate() -> None:
     assert metrics["progression_count"] + metrics["hold_count"] + metrics["request_evidence_action_count"] == 2
     assert metrics["supported_progression_count"] + metrics["unsupported_progression_count"] == metrics["progression_count"]
     assert metrics["evidentially_supported_progression_count"] + metrics["evidentially_unsupported_progression_count"] == metrics["progression_count"]
+    assert metrics["external_exposure_count"] == metrics["progression_count"]
+    assert metrics["recovery_started_count"] == metrics["external_exposure_count"]
+    assert metrics["supported_exposure_count"] + metrics["unsupported_exposure_count"] == metrics["external_exposure_count"]
+    assert metrics["unauthorized_exposure_count"] == 0
     assert metrics["gate_safe_count"] + metrics["gate_unsafe_count"] == metrics["gate_applicable_count"]
     assert Decimal(metrics["review_max_wait_time"]) >= Decimal(0)
     assert metrics["response_rate"] == "1"
@@ -62,6 +67,8 @@ def test_engagement_metrics_are_policy_specific_but_share_denominator() -> None:
     assert u1["review_mean_wait_time"] == "0"
     assert u1["progression_count"] == 2
     assert u1["supported_progression_count"] == 2
+    assert u1["external_exposure_count"] == 2
+    assert u1["recovery_started_count"] == 2
     assert u1["gate_applicable_count"] == 0
     assert u1["gate_safe_rate"] == "0"
     assert u2c["review_queue_count"] == 2

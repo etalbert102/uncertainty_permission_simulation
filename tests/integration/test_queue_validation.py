@@ -26,6 +26,7 @@ def _overlay(**updates: object) -> StochasticInputOverlay:
         extension_effort_bonus=Decimal("0"), extension_need_probability=Decimal("0"),
         evidence_retrieval_success_probability=Decimal("0"),
         evidence_retrieval_latency_scale=Decimal("0"),
+        external_consequence_delay=Decimal("1"), recovery_start_delay=Decimal("2"),
     )
     return replace(base, **updates)
 
@@ -83,6 +84,26 @@ def test_u2_policies_share_the_exact_review_schedule_before_timeout_behavior() -
                 if event.event_type_id == "ACTION_COMPUTED"
             )
             assert closed_action.causal_event_key == opened_action.causal_event_key
+            closed_types = {event.event_type_id for event in closed_by_case[visit.case_id].events}
+            opened_types = {event.event_type_id for event in opened_by_case[visit.case_id].events}
+            assert "EXTERNAL_CONSEQUENCE_STARTED" not in closed_types
+            assert "EXTERNAL_CONSEQUENCE_STARTED" in opened_types
+
+
+def test_fail_open_timeout_converts_queue_delay_into_unauthorized_recovery_exposure() -> None:
+    _, closed = _run(
+        "U2C",
+        _overlay(review_service_time=Decimal("30"), review_service_window=Decimal("0.0000000001")),
+    )
+    _, opened = _run(
+        "U2O",
+        _overlay(review_service_time=Decimal("30"), review_service_window=Decimal("0.0000000001")),
+    )
+    assert closed.telemetry.external_exposure_count == 0
+    assert closed.telemetry.recovery_started_count == 0
+    assert opened.telemetry.external_exposure_count == len(opened.traces)
+    assert opened.telemetry.recovery_started_count == len(opened.traces)
+    assert opened.telemetry.unauthorized_exposure_count == len(opened.traces)
 
 
 def test_more_review_capacity_never_delays_a_paired_case() -> None:

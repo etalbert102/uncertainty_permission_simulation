@@ -40,6 +40,8 @@ def mapped(policy_id: str, **updates: object):
 
 def test_policy_registry_is_closed_and_all_profiles_compile_against_core_capabilities() -> None:
     assert tuple(POLICY_BEHAVIORS) == POLICY_IDS
+    assert "recovery" in stochastic_process().capabilities
+    assert "recover" in stochastic_process().action_type_ids
     for policy_id in POLICY_IDS:
         profile = policy(policy_id)
         assert profile.required_capabilities <= canonical_process().capabilities
