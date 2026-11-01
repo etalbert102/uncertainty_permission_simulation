@@ -8,7 +8,7 @@ This ledger is the canonical slice-status record. Update it at the end of every 
 | --- | --- | --- | --- | --- |
 | 0. Source, construct, and claim contract | implementation, plan, and baseline gates passed — pre-freeze reader QA pending | `9cf836c` | automated Slice 0 and plan gates pass from declared environment | two eligible locked reader returns are not yet available; this blocks Slice 4, not Slice 1 engineering |
 | 1. Case-neutral dynamic vertical slice | complete | `93e2da6` | 27 tests; 726-record closed bundle; three stored validation receipts match; both artifact hashes repeat | stochastic execution and empirical validation remain Slice 2 work |
-| 2. Stochastic engine and validation | in progress — exposure and recovery initiation pass | `cc773a4` checkpoint | 96 tests; repeatable five-policy exposure/recovery smoke artifact; all prior gates pass | no recovery service, correction/reassessment/restoration stages, full analytical benchmark, or reference-simulator comparison yet |
+| 2. Stochastic engine and validation | in progress — correction request and reassessment service pass | `c307c7f` checkpoint | 111 tests; repeatable five-policy correction/reassessment smoke artifact; all prior gates pass | no correction outcome, censoring/restoration stages, full analytical benchmark, or reference-simulator comparison yet |
 | 3. Experiment pilot and freeze candidate | pending | — | — | — |
 | 4. Confirmatory freeze | pending | — | — | — |
 | 5. Confirmatory execution and analysis | pending | — | — | — |
@@ -398,3 +398,48 @@ Checkpoint commit: `cc773a4f2b7c60f17c9cc4a9123a5fe7dbe8e023` (`Add recovery exp
 - Execute both R-OCI adapters only through compiled profiles and stylized overlays; add semantically equivalent synthetic/application comparisons.
 - Expand analytical queue checks, add a slower reference simulator, exact stochastic golden traces, and stored stochastic validation receipts.
 - Do not enter pilot scenario selection or treat this stylized exposure/recovery smoke artifact as a substantive, empirical, legal, or historical result.
+
+## Slice 2 Correction Request and Reassessment-Service Checkpoint
+
+Status: unsupported exposure can enter a typed, capacity-constrained reassessment queue; Slice 2 not complete
+
+Checkpoint commit: `c307c7f17a5544c136b401b67a8f4d22d85492cc` (`Add correction reassessment queue`)
+
+### Scope and fact ownership
+
+- The upstream action decision owns progression support. Unsupported exposure is correction-eligible; the correction stage consumes that classification without re-deriving it.
+- Correction uptake is separate from eligibility. This stylized checkpoint compares the shared `administrative_access` draw with a compiled `correction_uptake_probability`, making the induced cross-stage correlation explicit rather than adding an unregistered random family.
+- `CORRECTION_REQUESTED` records uptake and queue entry. A reassessment queue visit records service start, and `REVIEW_COMPLETED` with `review_kind = reassessment` records completion. Reassessment completion explicitly records `correction_executed = false` and `restoration_executed = false`.
+- The queue visit, rather than a same-time `REVIEW_STARTED` event, owns reassessment start because the frozen event-priority registry would otherwise place an immediate post-action review start before its `CORRECTION_REQUESTED` cause.
+- The queue drains without an administrative cutoff in this checkpoint. Late reassessment is measured, but no open case is yet right-censored.
+
+### Implemented
+
+- Added declared recovery, correction, and reassessment process stages; typed reassessment capability and action; and compiled correction-request delay, uptake, reassessment capacity/service, and correction-window slots.
+- Added correction requests only for unsupported exposure with a successful uptake draw. Supported exposure never enters the correction queue.
+- Added a separate work-conserving FIFO reassessment resource using the existing keyed `reassessment_service` draw, stable request/server identities, correction deadlines, and causal links from recovery through request to service completion.
+- Added separate counts, rates, wait-time metrics, schedule hash, and blocking partitions for correction eligibility, requested versus unrequested correction, reassessment starts/completions, and timely versus late completion.
+- Fixed the generic service scheduler to perform time arithmetic and totals at 50-digit Decimal precision. The exact-boundary regression proves reassessment completion at its correction deadline is timely and precedes the deadline event.
+- Added capacity monotonicity, zero/one uptake, supported-exposure exclusion, typed-profile closure, replay, causal-reference, and no-premature-restoration tests.
+
+### Verification
+
+| Command | Result |
+| --- | --- |
+| `PYTHONPATH=src ./.venv/bin/python -m pytest -q tests/unit/test_simulator.py tests/unit/test_random_streams.py tests/unit/test_policies.py tests/unit/test_metrics.py` | pass: 72 focused replay, correction-uptake, queue, exact-boundary, typed-profile, causal-reference, and metric tests |
+| `PYTHONPATH=src ./.venv/bin/python -m pytest -q tests/integration/test_queue_validation.py` | pass: 11 queue/action/exposure/reassessment integration tests, including capacity monotonicity and supported-exposure exclusion |
+| `PYTHONPATH=src ./.venv/bin/python -m pytest -q` | pass: 111 tests in 0.42 seconds; all earlier regressions retained |
+| `PYTHONPATH=src ./.venv/bin/python -m uncertainty_permission_simulation.cli cohort experiments/configs/stochastic_smoke_v1.yaml` | pass: repeated artifact SHA-256 `ba834ea7e98d8d207a6c1acdcf2be5da72b1974d536a19ced7391c3b31d9f586` |
+| smoke correction inspection | U1: 4 eligible exposures, 3 requests, 1 unrequested, all 3 reassessments late; U2O: 4 eligible, 3 requests, 1 unrequested, 2 timely and 1 late; U0, U2C, and U3 have no unsupported exposure or correction request |
+| `PYTHONPATH=src ./.venv/bin/python -m uncertainty_permission_simulation.cli trace experiments/configs/smoke_v1.yaml` | pass: 9 Slice 1 traces; summary hash `b49ea5936727d23c3871a91555ba68d56d30f8f8c95a02e8c68ca9ae5210f739` and record hash `29ec5616135d9e94a6d8e84dbdff3879fcc63dfbacadaa4e640258dab2912db8` unchanged |
+| `./.venv/bin/python scripts/validate_plan.py` and `./.venv/bin/python scripts/validate_slice0.py` | pass |
+| runtime-module compilation and generic-kernel case-name scan | pass |
+
+### Remaining before Slice 2 closeout
+
+- Add typed correction outcomes without equating decision correction with complete restoration.
+- Add recovery-service dynamics, administrative cutoff/right-censoring, and dimension-specific restoration over decision, recovery, and other modeled consequence coordinates.
+- Wire assistance capacity only through its declared stage and preserve its engagement effect separately from review and reassessment capacity.
+- Execute both R-OCI adapters only through compiled profiles and stylized overlays; add semantically equivalent synthetic/application comparisons.
+- Expand analytical queue checks, add a slower reference simulator, exact stochastic golden traces, and stored stochastic validation receipts.
+- Do not enter pilot scenario selection or treat this stylized correction/reassessment smoke artifact as a substantive, empirical, legal, or historical result.
