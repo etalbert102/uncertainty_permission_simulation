@@ -7,8 +7,8 @@ This ledger is the canonical slice-status record. Update it at the end of every 
 | Slice | Status | Commit | Verification | Residual risk |
 | --- | --- | --- | --- | --- |
 | 0. Source, construct, and claim contract | implementation, plan, and baseline gates passed — pre-freeze reader QA pending | `9cf836c` | automated Slice 0 and plan gates pass from declared environment | two eligible locked reader returns are not yet available; this blocks Slice 4, not Slice 1 engineering |
-| 1. Case-neutral dynamic vertical slice | complete | `93e2da6` | 27 tests; 726-record closed bundle; three stored validation receipts match; both artifact hashes repeat | stochastic execution and empirical validation remain Slice 2 work |
-| 2. Stochastic engine and validation | in progress — consequence-vector restoration passes | `75a88ea` checkpoint | 131 tests; repeatable five-policy restoration/censoring smoke artifact; all prior gates pass | no monetary consequence coordinate, earlier-stage censoring, full analytical benchmark, or reference-simulator comparison yet |
+| 1. Case-neutral dynamic vertical slice | complete | `93e2da6` | 27 tests; 726-record closed bundle; three stored validation receipts match; both artifact hashes repeat | Slice 2 retained the exact artifact hashes and validated stochastic extension without weakening this contract |
+| 2. Stochastic engine and validation | complete | `a084264`, `324874b`, `5249f32`, `33257a3` | 148 tests; five exact stochastic traces; stored replay/application/queue receipts; analytical and independent-reference checks; all prior gates pass | implementation validation only; monetary and unmodeled harms remain outside the declared consequence vector; no pilot or substantive result exists |
 | 3. Experiment pilot and freeze candidate | pending | — | — | — |
 | 4. Confirmatory freeze | pending | — | — | — |
 | 5. Confirmatory execution and analysis | pending | — | — | — |
@@ -585,3 +585,59 @@ Checkpoint commit: `75a88ea` (`Add consequence-vector restoration outcomes`)
 - Execute both R-OCI adapters only through compiled profiles and stylized overlays; add semantically equivalent synthetic/application comparisons.
 - Expand analytical queue checks, add a slower reference simulator, exact stochastic golden traces, and stored stochastic validation receipts.
 - Do not enter pilot scenario selection or treat this stylized restoration artifact as a substantive, empirical, legal, or historical result.
+
+## Slice 2 Closeout Receipt
+
+Status: complete — stochastic engine correctness gates pass; no pilot or substantive result has been produced
+
+Implementation commits:
+
+- `a084264` (`Add assistance queue and stage-aware censoring`)
+- `324874b` (`Validate stochastic application adapters`)
+- `5249f32` (`Add analytical and reference validation`)
+- `33257a3` (`Store stochastic validation receipts`)
+
+### Scope and claim boundary
+
+- The closeout establishes correctness of the declared finite-cohort model and its configuration boundary before substantive scenario selection. It does not establish historical Robodebt rates, legal conclusions, field prevalence, policy superiority, or confirmatory findings.
+- Assistance, pre-action review, recovery, and reassessment are separate FIFO resources with separate capacities, service requirements, deadlines, schedules, telemetry, and hashes. Assistance affects engagement only after timely service completion.
+- The administrative cutoff may occur during notice, engagement, review, action, external-consequence, recovery, reassessment, or restoration stages. Only observed transitions enter traces and outcome denominators; later work is right-censored or, where a declared restoration horizon has expired, classified as an observed failure.
+- The modeled restoration vector remains exactly `decision_state`, `recovery_state`, and `residual_external_consequence`. Monetary amounts, payments, fees, burden, and unmodeled harms remain outside the model and cannot be claimed restored.
+- R-OCI-Early and R-OCI-Enhanced supply documented structure and the documented 21/28-day response clocks. Every other executable application-validation value is owned by the separate versioned stylized overlay. Neither source fixture silently supplies an unsupported number.
+
+### Done-condition receipt
+
+| Slice 2 condition | Evidence |
+| --- | --- |
+| Exact hand traces | `data/golden_traces/slice2_stochastic_validation_v1.json` fixes one inspectable trace per policy, exact event hashes, and path-specific milestone timestamps/details; all five replay exactly. |
+| Analytical queue agreement | `DD1-STAGGERED-V1` matches the frozen closed recurrence and production scheduler at absolute tolerance `0`; production schedule hash `56a85934dfcbcb26139d94213bd48e7e3c3a959c9a38162a06bdd6d5196591ef`. |
+| Paired cases and keyed draws | All five policies consume cohort hash `2c4e5e076ed9bb060bf3752e6dd6d01e6be1c069c3411b495656eb5588f09b74` and the same stored case draw hashes. |
+| Event-count invariance | U1 and U3 produce 18 versus 26 events for `CASE-0003` while retaining the identical draw hash `94ab206f446f97f6d3e16f2f07c9d877d227adb50ac696552af14f322d101000`. |
+| Repeated-seed event and metric replay | Stored expected and observed event/metric hashes match for U0, U1, U2C, U2O, and U3; an independent second construction in the receipt test reproduces the same pairs. |
+| Synthetic/application semantic equivalence | Early and Enhanced compiled application profiles equal their synthetic semantic twins exactly at run level; documented response clocks retain source ownership and all other receipts retain stylized-overlay ownership. |
+| Every non-documented executable value comes from a versioned overlay | `experiments/configs/application_validation_v1.yaml` is complete for all runtime slots except the source-owned response clock; compiler conflict tests reject attempted documented-value override. |
+| Independent implementation comparison | The production scheduler matches the slower event-jump reference implementation on frozen tie/censoring fixtures and on every nonempty assistance, review, recovery, and reassessment schedule in the stochastic smoke run. |
+| Limiting cases | Empty request set, request-count capacity, zero service time, nonbinding deadlines, complete evidence, universal response, and zero review service all meet exact expected behavior. |
+
+### Verification
+
+Reference environment: local `.venv`, Python 3.14, macOS arm64, 2026-11-01.
+
+| Command | Result |
+| --- | --- |
+| `PYTHONPATH=src ./.venv/bin/pytest -q tests/unit/test_simulator.py tests/unit/test_random_streams.py tests/unit/test_policies.py tests/unit/test_metrics.py` | pass: 91 focused tests in 0.22 seconds |
+| `PYTHONPATH=src ./.venv/bin/pytest -q tests/integration/test_queue_validation.py tests/integration/test_reference_simulator.py tests/integration/test_application_profiles.py tests/integration/test_stochastic_receipts.py` | pass: 29 integration tests in 0.32 seconds |
+| `PYTHONPATH=src ./.venv/bin/pytest -q` | pass: 148 tests in 0.56 seconds |
+| `PYTHONPATH=src ./.venv/bin/python -m uncertainty_permission_simulation.cli cohort experiments/configs/stochastic_smoke_v1.yaml` | pass; artifact SHA-256 `a856663582075416d8041ddf9d0e3b1bb9c31720e2a8f65198afe083659f9e15` |
+| stored validation artifact | SHA-256 `890db8f8853a31c2d0e5158501293c5e5bb2e7cbc8a476a92ec41af2f7efa06e`; all expected-versus-observed comparisons match |
+| `PYTHONPATH=src ./.venv/bin/python -m uncertainty_permission_simulation.cli trace experiments/configs/smoke_v1.yaml` | pass: 9 Slice 1 traces; summary hash `b49ea5936727d23c3871a91555ba68d56d30f8f8c95a02e8c68ca9ae5210f739` and record hash `29ec5616135d9e94a6d8e84dbdff3879fcc63dfbacadaa4e640258dab2912db8` unchanged |
+| `./.venv/bin/python scripts/validate_plan.py` and `./.venv/bin/python scripts/validate_slice0.py` | pass: plan and Slice 0 gates retained |
+| generic-kernel case-name scan | pass: no Robodebt or R-OCI identifiers in simulator, policy, metric, event, random-stream, or reference-simulator modules |
+
+### Residual risks and next gate
+
+- The independent reference implementation validates the shared service-resource scheduler, while exact golden traces and conservation invariants validate the surrounding policy/event engine. It is not a second full research codebase.
+- The application validation proves semantic portability and provenance separation, not historical numerical fit.
+- The five-case smoke cohort is deliberately an implementation fixture. Its frequencies and policy comparisons are not evidence for the article's substantive claims.
+- Independent packet-only reader QA, source-byte identity, invitation verification, and systematic citation expansion remain open at their declared pre-freeze gates.
+- Slice 3 may now begin as a development-only pilot and design-freeze candidate. Confirmatory configuration, execution, and interpretation remain forbidden until their later gates pass.
