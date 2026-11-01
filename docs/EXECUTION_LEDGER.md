@@ -7,7 +7,7 @@ This ledger is the canonical slice-status record. Update it at the end of every 
 | Slice | Status | Commit | Verification | Residual risk |
 | --- | --- | --- | --- | --- |
 | 0. Source, construct, and claim contract | implementation, plan, and baseline gates passed — pre-freeze reader QA pending | `9cf836c` | automated Slice 0 and plan gates pass from declared environment | two eligible locked reader returns are not yet available; this blocks Slice 4, not Slice 1 engineering |
-| 1. Case-neutral dynamic vertical slice | complete | completion commit recorded below | 27 tests; 726-record closed bundle; three stored validation receipts match; both artifact hashes repeat | stochastic execution and empirical validation remain Slice 2 work |
+| 1. Case-neutral dynamic vertical slice | complete | `93e2da6` | 27 tests; 726-record closed bundle; three stored validation receipts match; both artifact hashes repeat | stochastic execution and empirical validation remain Slice 2 work |
 | 2. Stochastic engine and validation | pending | — | — | — |
 | 3. Experiment pilot and freeze candidate | pending | — | — | — |
 | 4. Confirmatory freeze | pending | — | — | — |
@@ -143,7 +143,7 @@ Typed-reference checkpoint commit: `b880f45cb031e41f5f39490febf37e95ad1c8c60` (`
 
 Complete reference-closure commit: `c016e516479d60d757e74196c0efe281962a7e50` (`Complete typed reference closure`)
 
-Stored-validation-receipt completion commit: pending this closeout commit
+Stored-validation-receipt completion commit: `93e2da62f5d4f4a003846c152fa4dd7811d7b38d` (`Close Slice 1 with stored validation receipts`)
 
 ### Implemented
 
