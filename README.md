@@ -12,7 +12,7 @@ The study asks when aggregate annual income data can become apparently precise f
 
 ## Status
 
-The research and implementation plan is execution-ready; this does not mean the study is complete. Slice 0 gates pass, the deterministic Slice 1 vertical slice is complete, and Slice 2 is in progress with a keyed-random finite-cohort substrate. Policy mappings, queues, stochastic outcome semantics, analytical validation, and reference-simulator comparison do not yet exist. No stochastic simulator or confirmatory results exist; the substrate smoke artifact is implementation QA, not a substantive result. No pilot, evidence packet, or completed manuscript exists either. Independent reader QA remains required before protocol `1.0` and confirmatory freeze.
+The research and implementation plan is execution-ready; this does not mean the study is complete. Slice 0 gates pass, the deterministic Slice 1 vertical slice is complete, and Slice 2 now has a keyed-random finite cohort plus compiled U0, U1, U2C, U2O, and U3 engagement-stage mappings. The smoke artifact emits deterministic policy-specific notice, response, assistance, extension, evidence-retrieval, representation, and review-routing events over the same exogenous cases. Queue service, final actions, correction and restoration dynamics, analytical validation, and reference-simulator comparison do not yet exist. The smoke artifact is implementation QA, not a substantive, empirical, or historical result. No pilot or confirmatory results exist; no evidence packet or completed manuscript exists. Independent reader QA remains required before protocol `1.0` and confirmatory freeze.
 
 The canonical execution plan is [docs/STUDY_PLAN.md](docs/STUDY_PLAN.md).
 
@@ -80,4 +80,4 @@ tests/
 
 ## Next Step
 
-Continue Slice 2 by mapping the shared exogenous cohort into policy-specific engagement and process events, then add queue resources and analytical/reference validation without weakening the completed Slice 1 contracts. Independent readability QA may proceed in parallel and remains blocking only for protocol `1.0` and confirmatory freeze.
+Continue Slice 2 by adding capacity-constrained service queues and deadline competition to the compiled policy traces, then extend through final action and add analytical/reference validation without weakening the shared-draw or completed Slice 1 contracts. Independent readability QA may proceed in parallel and remains blocking only for protocol `1.0` and confirmatory freeze.

@@ -8,7 +8,7 @@ This ledger is the canonical slice-status record. Update it at the end of every 
 | --- | --- | --- | --- | --- |
 | 0. Source, construct, and claim contract | implementation, plan, and baseline gates passed — pre-freeze reader QA pending | `9cf836c` | automated Slice 0 and plan gates pass from declared environment | two eligible locked reader returns are not yet available; this blocks Slice 4, not Slice 1 engineering |
 | 1. Case-neutral dynamic vertical slice | complete | `93e2da6` | 27 tests; 726-record closed bundle; three stored validation receipts match; both artifact hashes repeat | stochastic execution and empirical validation remain Slice 2 work |
-| 2. Stochastic engine and validation | in progress — keyed-random cohort substrate passes | `3e43494` checkpoint | 51 tests; repeatable 5-case/65-draw smoke artifact; all prior gates pass | no policy mapping, queues, stochastic outcomes, analytical benchmark, or reference-simulator comparison yet |
+| 2. Stochastic engine and validation | in progress — compiled engagement-stage policy mappings pass | `6788007` checkpoint | 69 tests; repeatable five-policy, 5-case/65-draw engagement smoke artifact; all prior gates pass | no queue service, final-action dynamics, analytical benchmark, or reference-simulator comparison yet |
 | 3. Experiment pilot and freeze candidate | pending | — | — | — |
 | 4. Confirmatory freeze | pending | — | — | — |
 | 5. Confirmatory execution and analysis | pending | — | — | — |
@@ -209,10 +209,54 @@ Checkpoint commit: `3e43494903409af0793ba953f8dfe321f9b4dad4` (`Begin Slice 2 ke
 | `./.venv/bin/python scripts/validate_plan.py` | pass |
 | `./.venv/bin/python scripts/validate_slice0.py` | pass: 10 sources, 10 claims, 2 profiles, 7 YAML files, 95 closed diagnostics |
 
-### Remaining before Slice 2 closeout
+### Remaining after the keyed-random substrate checkpoint
 
 - Implement U0, U1, U2C, U2O, and U3 mappings from shared exogenous traits to policy-specific engagement and events.
 - Implement assistance, review, and reassessment resources and queue disciplines, then evidence, deadline, action, correction, censoring, and restoration behavior.
 - Execute both R-OCI adapters only through compiled profiles and stylized overlays; add semantically equivalent synthetic/application comparisons.
 - Add exact hand traces, limiting cases, analytical queue tolerances, a slower reference simulator, stored stochastic receipts, and run-level artifacts.
 - Do not enter pilot scenario selection or treat this smoke artifact as a substantive simulation result.
+
+## Slice 2 Policy and Engagement Checkpoint
+
+Status: all five engagement-stage mappings implemented through compiled configurations; Slice 2 not complete
+
+Checkpoint commit: `67880070bea0e346cdd20890415738e3ab476665` (`Add compiled policy engagement traces`)
+
+### Scope and fact ownership
+
+- The shared cohort continues to own exogenous case facts. Each policy consumes the same stable keyed draws and may diverge only through declared policy behavior and overlay-owned parameters.
+- The compiler remains the execution boundary. Engagement execution rejects an uncompiled configuration, unresolved parameter slots, an overlay identity mismatch, receipt-value drift, or provenance drift.
+- This checkpoint ends at review routing. It does not simulate queue service, review completion, final action, correction, restoration, or a historical outcome.
+
+### Implemented
+
+- Closed U0, U1, U2C, U2O, and U3 behavior ownership for imputation, evidence-status preservation, review scope, fail-open semantics, assistance, extensions, and proactive evidence retrieval.
+- Added a stochastic process profile and stylized overlay bindings for notice and engagement probabilities, effort thresholds and bonuses, extension timing, evidence retrieval, and the already declared review inputs.
+- Mapped each shared case into deterministic, case-neutral engagement traces with stable causal keys for notice, access, response, evidence, representation, retrieval, and review-routing events.
+- Preserved adequate evidence as period-specific evidence; restricted imputation labels to imputed representations; routed U2C and U2O through review for every progressing case and U3 through review only while unresolved.
+- Added separate, non-composite counts and rates for notice failure, response, adequate response evidence, assistance, extension, retrieval, and review routing.
+- Expanded the smoke CLI to compile and execute each policy, emit configuration identities and per-policy telemetry, and state the artifact's engagement-only claim limit.
+- Updated the README results-boundary gate to recognize the implemented engineering simulator while still requiring explicit no-pilot, no-confirmatory-result, and non-empirical claim limits.
+
+### Verification
+
+| Command | Result |
+| --- | --- |
+| `PYTHONPATH=src ./.venv/bin/python -m pytest -q tests/unit/test_simulator.py tests/unit/test_random_streams.py tests/unit/test_policies.py tests/unit/test_metrics.py` | pass: 42 focused policy, pairing, replay, causal-key, configuration-boundary, and metric tests |
+| `PYTHONPATH=src ./.venv/bin/python -m pytest -q` | pass: 69 tests in 0.31 seconds; all Slice 1 regressions retained |
+| `PYTHONPATH=src ./.venv/bin/python -m uncertainty_permission_simulation.cli cohort experiments/configs/stochastic_smoke_v1.yaml` | pass: 5 cases, 5 compiled policy runs, 65 unique keyed draws, zero duplicate keys; repeated artifact SHA-256 `ae0ae23a6aac154e65cfaf37154f140ec45bbb35efd149e0ce051b4738145c57` |
+| `PYTHONPATH=src ./.venv/bin/python -m uncertainty_permission_simulation.cli trace experiments/configs/smoke_v1.yaml` | pass: 9 Slice 1 deterministic traces |
+| `./.venv/bin/python scripts/validate_plan.py` | pass: 8 slices, 3 primary hypotheses, 5 policies, 39 audit questions, 9 deferred items, 10,000-word ceiling |
+| `./.venv/bin/python scripts/validate_slice0.py` | pass: 10 sources, 10 claims, 2 profiles, 7 YAML files, 95 closed diagnostics |
+| `python -m py_compile` over the five modified runtime modules | pass |
+| `./.venv/bin/python -m py_compile scripts/validate_slice0.py` | pass |
+| Case-name scan over generic policy, simulator, and metric modules | pass: no Robodebt or R-OCI identifiers |
+
+### Remaining before Slice 2 closeout
+
+- Implement assistance, review, and reassessment service resources with explicit capacity and queue disciplines; make completion compete with deadlines.
+- Extend routed traces through final action, recovery, correction, censoring, and restoration while preserving shared exogenous draw identity across divergent paths.
+- Execute both R-OCI adapters only through compiled profiles and stylized overlays; add semantically equivalent synthetic/application comparisons.
+- Add exact stochastic hand traces, limiting cases, analytical queue tolerances, a slower reference simulator, and stored stochastic validation receipts.
+- Do not enter pilot scenario selection or treat this engagement smoke artifact as a substantive simulation result.

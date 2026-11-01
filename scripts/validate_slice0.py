@@ -458,10 +458,15 @@ def main() -> int:
     agent_contract = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
     if "may not branch on `Robodebt`" not in agent_contract:
         raise ValueError("agent contract permits case-specific kernel behavior")
-    if "no stochastic simulator or confirmatory results" not in (
-        ROOT / "README.md"
-    ).read_text(encoding="utf-8").lower():
-        raise ValueError("README must state the no-results boundary")
+    readme = (ROOT / "README.md").read_text(encoding="utf-8").lower()
+    for required_results_boundary in (
+        "no pilot or confirmatory results",
+        "implementation qa, not a substantive, empirical, or historical result",
+    ):
+        if required_results_boundary not in readme:
+            raise ValueError(
+                f"README must state the current results boundary: {required_results_boundary}"
+            )
 
     print(
         f"SLICE0_VALID sources={len(source_ids)} claims={len(claim_ids)} "
