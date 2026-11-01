@@ -31,6 +31,9 @@ def overlay(**updates: object) -> StochasticInputOverlay:
         extension_need_probability=Decimal("0.25"), evidence_retrieval_success_probability=Decimal("0.7"),
         evidence_retrieval_latency_scale=Decimal("10"),
         external_consequence_delay=Decimal("1"), recovery_start_delay=Decimal("2"),
+        correction_request_delay=Decimal("7"), correction_uptake_probability=Decimal("0.75"),
+        reassessment_capacity=Decimal("1"), reassessment_service_time=Decimal("30"),
+        correction_window=Decimal("14"),
     )
     return replace(base, **updates)
 
@@ -111,6 +114,12 @@ def test_invalid_cohort_specs_fail_before_draws(updates: dict[str, object]) -> N
     ("review_service_window", Decimal("0")),
     ("external_consequence_delay", Decimal("-1")),
     ("recovery_start_delay", Decimal("NaN")),
+    ("correction_request_delay", Decimal("-1")),
+    ("correction_uptake_probability", Decimal("1.1")),
+    ("reassessment_capacity", Decimal("0")),
+    ("reassessment_capacity", Decimal("1.5")),
+    ("reassessment_service_time", Decimal("0")),
+    ("correction_window", Decimal("0")),
     ("notice_delivery_probability", Decimal("1.1")),
 ))
 def test_invalid_stochastic_overlay_values_are_rejected(field: str, value: object) -> None:
@@ -140,13 +149,24 @@ def test_policy_path_divergence_preserves_common_causal_keys() -> None:
     assert u1.exogenous_draw_hash == u3.exogenous_draw_hash
     u1_keys = {event.event_type_id: event.causal_event_key for event in u1.events}
     u3_keys = {event.event_type_id: event.causal_event_key for event in u3.events}
-    for event_type in {"CASE_ARRIVAL", "SOURCE_EVIDENCE_INGESTED", "NOTICE_SENT", "NOTICE_DELIVERED", "ACCESS_ATTEMPTED", "DEADLINE_REACHED", "REPRESENTATION_APPLIED", "REPRESENTATION_SURFACED", "ROUTING_COMPLETED"}:
+    for event_type in {"CASE_ARRIVAL", "SOURCE_EVIDENCE_INGESTED", "NOTICE_SENT", "NOTICE_DELIVERED", "ACCESS_ATTEMPTED", "REPRESENTATION_APPLIED", "REPRESENTATION_SURFACED", "ROUTING_COMPLETED"}:
         assert u1_keys[event_type] == u3_keys[event_type]
+    u1_response_deadline = next(
+        event for event in u1.events
+        if event.event_type_id == "DEADLINE_REACHED"
+        and event.details.get("deadline_kind") == "response"
+    )
+    u3_response_deadline = next(
+        event for event in u3.events
+        if event.event_type_id == "DEADLINE_REACHED"
+        and event.details.get("deadline_kind") == "response"
+    )
+    assert u1_response_deadline.causal_event_key == u3_response_deadline.causal_event_key
     assert "EXTENSION_GRANTED" not in u1_keys and "EXTENSION_GRANTED" in u3_keys
     assert "EXTERNAL_EVIDENCE_RETURNED" not in u1_keys and "EXTERNAL_EVIDENCE_RETURNED" in u3_keys
 
 
-def test_action_stage_replays_event_hashes_through_recovery_start() -> None:
+def test_action_stage_replays_event_hashes_through_reassessment_service() -> None:
     cohort = generate_stochastic_cohort(spec())
     configuration = compiled("U2C", cohort.overlay)
     first = run_engagement_stage(cohort, configuration)
@@ -158,7 +178,7 @@ def test_action_stage_replays_event_hashes_through_recovery_start() -> None:
     assert first.telemetry.external_exposure_count == first.telemetry.progression_count
     assert first.telemetry.recovery_started_count == first.telemetry.external_exposure_count
     assert all(
-        event.event_type_id not in {"CORRECTION_REQUESTED", "RESTORATION_EXECUTED", "CASE_CLOSED"}
+        event.event_type_id not in {"RESTORATION_EXECUTED", "CASE_CLOSED"}
         for trace in first.traces for event in trace.events
     )
 
@@ -205,6 +225,83 @@ def test_zero_delays_use_frozen_progression_exposure_recovery_order() -> None:
     )
 
 
+def test_unsupported_exposure_can_request_correction_and_enter_reassessment() -> None:
+    correction_overlay = overlay(
+        record_availability_probability=Decimal("0"),
+        correction_uptake_probability=Decimal("1"),
+    )
+    cohort = generate_stochastic_cohort(spec(overlay=correction_overlay))
+    run = run_engagement_stage(cohort, compiled("U1", cohort.overlay))
+    assert run.telemetry.correction_eligible_count == len(cohort.cases)
+    assert run.telemetry.correction_request_count == len(cohort.cases)
+    assert run.telemetry.correction_not_requested_count == 0
+    assert run.telemetry.reassessment_started_count == len(cohort.cases)
+    assert run.telemetry.reassessment_completed_count == len(cohort.cases)
+    assert len(run.reassessment_queue.visits) == len(cohort.cases)
+    for trace in run.traces:
+        recovery = next(
+            event for event in trace.events
+            if event.event_type_id == "EXTERNAL_CONSEQUENCE_UPDATED"
+            and event.details.get("recovery_state") == "active"
+        )
+        request = next(event for event in trace.events if event.event_type_id == "CORRECTION_REQUESTED")
+        completion = next(
+            event for event in trace.events
+            if event.event_type_id == "REVIEW_COMPLETED"
+            and event.details.get("review_kind") == "reassessment"
+        )
+        assert recovery.timestamp < request.timestamp < completion.timestamp
+        assert request.details["source_recovery_event_key"] == recovery.causal_event_key
+        assert completion.details["source_correction_request_event_key"] == request.causal_event_key
+        assert completion.details["correction_executed"] is False
+        assert completion.details["restoration_executed"] is False
+        assert not any(event.event_type_id == "RESTORATION_EXECUTED" for event in trace.events)
+
+
+def test_correction_uptake_zero_leaves_eligible_exposure_unrequested() -> None:
+    no_uptake = overlay(
+        record_availability_probability=Decimal("0"),
+        correction_uptake_probability=Decimal("0"),
+    )
+    cohort = generate_stochastic_cohort(spec(overlay=no_uptake))
+    run = run_engagement_stage(cohort, compiled("U1", cohort.overlay))
+    assert run.telemetry.correction_eligible_count == len(cohort.cases)
+    assert run.telemetry.correction_request_count == 0
+    assert run.telemetry.correction_not_requested_count == len(cohort.cases)
+    assert run.reassessment_queue.visits == ()
+    assert run.telemetry.reassessment_completed_count == 0
+
+
+def test_reassessment_completion_at_correction_deadline_is_timely_and_ordered() -> None:
+    base = overlay(
+        record_availability_probability=Decimal("0"),
+        correction_uptake_probability=Decimal("1"),
+    )
+    probe = generate_stochastic_cohort(spec(case_ids=("CASE-1",), overlay=base))
+    service_draw = probe.cases[0].draw_map[("reassessment_service", 0)]
+    with localcontext() as context:
+        context.prec = 50
+        exact_window = service_draw * base.reassessment_service_time
+    exact = replace(base, correction_window=exact_window)
+    cohort = generate_stochastic_cohort(spec(case_ids=("CASE-1",), overlay=exact))
+    run = run_engagement_stage(cohort, compiled("U1", cohort.overlay))
+    visit = run.reassessment_queue.visits[0]
+    assert visit.completed_at == visit.deadline
+    assert visit.completed_by_deadline is True
+    completion = next(
+        event for event in run.traces[0].events
+        if event.event_type_id == "REVIEW_COMPLETED"
+        and event.details.get("review_kind") == "reassessment"
+    )
+    deadline = next(
+        event for event in run.traces[0].events
+        if event.event_type_id == "DEADLINE_REACHED"
+        and event.details.get("deadline_kind") == "correction_service"
+    )
+    assert completion.timestamp == deadline.timestamp
+    assert run.traces[0].events.index(completion) < run.traces[0].events.index(deadline)
+
+
 def test_u2_fail_closed_and_fail_open_share_queue_semantics_before_actions() -> None:
     cohort = generate_stochastic_cohort(spec())
     closed = run_engagement_stage(cohort, compiled("U2C", cohort.overlay))
@@ -241,17 +338,27 @@ def test_engagement_runner_rejects_configuration_overlay_drift() -> None:
 
 @pytest.mark.parametrize(
     ("field_name", "missing_id"),
-    (("capabilities", "recovery"), ("action_type_ids", "recover")),
+    (
+        ("stage_ids", "reassessment"),
+        ("capabilities", "recovery"),
+        ("capabilities", "reassessment"),
+        ("action_type_ids", "recover"),
+        ("action_type_ids", "reassess"),
+    ),
 )
-def test_engagement_runner_rejects_untyped_recovery_process(
+def test_engagement_runner_rejects_incomplete_consequence_process(
     field_name: str,
     missing_id: str,
 ) -> None:
     cohort = generate_stochastic_cohort(spec())
     process = stochastic_process()
-    process = process.model_copy(update={
-        field_name: getattr(process, field_name) - {missing_id},
-    })
+    current = getattr(process, field_name)
+    incomplete = (
+        tuple(value for value in current if value != missing_id)
+        if isinstance(current, tuple)
+        else current - {missing_id}
+    )
+    process = process.model_copy(update={field_name: incomplete})
     configuration = compile_configuration(
         configuration_id=f"MISSING-{missing_id}",
         process=process,

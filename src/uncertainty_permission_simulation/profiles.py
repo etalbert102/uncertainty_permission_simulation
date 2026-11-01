@@ -15,6 +15,8 @@ STOCHASTIC_SLOTS = frozenset({
     "extension_effort_bonus", "extension_need_probability",
     "evidence_retrieval_success_probability", "evidence_retrieval_latency_scale",
     "external_consequence_delay", "recovery_start_delay",
+    "correction_request_delay", "correction_uptake_probability",
+    "reassessment_capacity", "reassessment_service_time", "correction_window",
 })
 
 
@@ -40,8 +42,12 @@ def nonisomorphic_process() -> ProcessProfileSpec:
 
 def stochastic_process(profile_id: str = "SYNTHETIC-STOCHASTIC@1") -> ProcessProfileSpec:
     return canonical_process(profile_id).model_copy(update={
-        "capabilities": CORE_CAPABILITIES | {"recovery"},
-        "action_type_ids": CORE_ACTIONS | {"recover"},
+        "stage_ids": (
+            "arrival", "notice", "response", "routing", "review", "action",
+            "recovery", "correction", "reassessment", "closed",
+        ),
+        "capabilities": CORE_CAPABILITIES | {"recovery", "reassessment"},
+        "action_type_ids": CORE_ACTIONS | {"recover", "reassess"},
         "parameter_slot_ids": CORE_SLOTS | STOCHASTIC_SLOTS,
     })
 

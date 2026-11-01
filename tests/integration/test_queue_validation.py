@@ -27,6 +27,9 @@ def _overlay(**updates: object) -> StochasticInputOverlay:
         evidence_retrieval_success_probability=Decimal("0"),
         evidence_retrieval_latency_scale=Decimal("0"),
         external_consequence_delay=Decimal("1"), recovery_start_delay=Decimal("2"),
+        correction_request_delay=Decimal("7"), correction_uptake_probability=Decimal("1"),
+        reassessment_capacity=Decimal("1"), reassessment_service_time=Decimal("30"),
+        correction_window=Decimal("14"),
     )
     return replace(base, **updates)
 
@@ -106,6 +109,43 @@ def test_fail_open_timeout_converts_queue_delay_into_unauthorized_recovery_expos
     assert opened.telemetry.unauthorized_exposure_count == len(opened.traces)
 
 
+def test_reassessment_capacity_never_delays_a_paired_correction_request() -> None:
+    low_cohort, low = _run(
+        "U1",
+        _overlay(reassessment_capacity=Decimal("1")),
+    )
+    high_cohort, high = _run(
+        "U1",
+        _overlay(reassessment_capacity=Decimal("4")),
+    )
+    assert [case.draw_hash for case in low_cohort.cases] == [
+        case.draw_hash for case in high_cohort.cases
+    ]
+    low_visits = {visit.case_id: visit for visit in low.reassessment_queue.visits}
+    high_visits = {visit.case_id: visit for visit in high.reassessment_queue.visits}
+    assert low_visits.keys() == high_visits.keys()
+    assert all(
+        high_visits[case_id].started_at <= visit.started_at
+        for case_id, visit in low_visits.items()
+    )
+    assert all(
+        high_visits[case_id].completed_at <= visit.completed_at
+        for case_id, visit in low_visits.items()
+    )
+    assert high.telemetry.timely_reassessment_count >= low.telemetry.timely_reassessment_count
+
+
+def test_supported_exposure_does_not_enter_correction_queue() -> None:
+    _, run = _run(
+        "U1",
+        _overlay(record_availability_probability=Decimal("1")),
+    )
+    assert run.telemetry.supported_exposure_count == len(run.traces)
+    assert run.telemetry.correction_eligible_count == 0
+    assert run.telemetry.correction_request_count == 0
+    assert run.reassessment_queue.visits == ()
+
+
 def test_more_review_capacity_never_delays_a_paired_case() -> None:
     low_cohort, low = _run("U2C", _overlay(review_capacity=Decimal("1")))
     high_cohort, high = _run("U2C", _overlay(review_capacity=Decimal("4")))
@@ -123,7 +163,11 @@ def test_review_completion_and_deadline_race_uses_frozen_event_priority() -> Non
         _overlay(review_service_time=Decimal("0"), review_service_window=Decimal("1")),
     )
     for trace in run.traces:
-        review_completion = next(event for event in trace.events if event.event_type_id == "REVIEW_COMPLETED")
+        review_completion = next(
+            event for event in trace.events
+            if event.event_type_id == "REVIEW_COMPLETED"
+            and event.details.get("review_kind") == "pre_action"
+        )
         review_deadline = next(
             event for event in trace.events
             if event.event_type_id == "DEADLINE_REACHED"
@@ -173,7 +217,11 @@ def test_fail_open_can_be_evidentially_supported_but_unauthorized() -> None:
     assert run.telemetry.gate_unsafe_count == len(run.traces)
     for trace in run.traces:
         action = next(event for event in trace.events if event.event_type_id == "ACTION_COMPUTED")
-        late_completion = next(event for event in trace.events if event.event_type_id == "REVIEW_COMPLETED")
+        late_completion = next(
+            event for event in trace.events
+            if event.event_type_id == "REVIEW_COMPLETED"
+            and event.details.get("review_kind") == "pre_action"
+        )
         assert action.timestamp < late_completion.timestamp
 
 

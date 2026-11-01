@@ -68,6 +68,17 @@ def engagement_metrics(run: EngagementRun) -> dict[str, int | str]:
         "evidentially_unsupported_exposure": run.telemetry.evidentially_unsupported_exposure_count,
         "unauthorized_exposure": run.telemetry.unauthorized_exposure_count,
     }
+    correction_counts = {
+        "correction_eligible": run.telemetry.correction_eligible_count,
+        "correction_request": run.telemetry.correction_request_count,
+        "correction_not_requested": run.telemetry.correction_not_requested_count,
+    }
+    reassessment_counts = {
+        "reassessment_started": run.telemetry.reassessment_started_count,
+        "reassessment_completed": run.telemetry.reassessment_completed_count,
+        "timely_reassessment": run.telemetry.timely_reassessment_count,
+        "late_reassessment": run.telemetry.late_reassessment_count,
+    }
     gate_counts = {
         "gate_safe": run.telemetry.gate_safe_count,
         "gate_unsafe": run.telemetry.gate_unsafe_count,
@@ -77,7 +88,10 @@ def engagement_metrics(run: EngagementRun) -> dict[str, int | str]:
         "event_count": run.telemetry.event_count,
         **{
             f"{name}_count": value
-            for name, value in (case_counts | review_counts | action_counts | exposure_counts | gate_counts).items()
+            for name, value in (
+                case_counts | review_counts | action_counts | exposure_counts
+                | correction_counts | reassessment_counts | gate_counts
+            ).items()
         },
         "gate_applicable_count": run.telemetry.gate_applicable_count,
     }
@@ -87,6 +101,17 @@ def engagement_metrics(run: EngagementRun) -> dict[str, int | str]:
             f"{name}_rate": normalized_decimal(Decimal(value) / Decimal(denominator))
             for name, value in (case_counts | action_counts | exposure_counts).items()
         })
+        result.update({
+            f"{name}_case_rate": normalized_decimal(Decimal(value) / Decimal(denominator))
+            for name, value in correction_counts.items()
+        })
+        correction_denominator = run.telemetry.correction_eligible_count
+        result["correction_uptake_rate"] = (
+            normalized_decimal(
+                Decimal(run.telemetry.correction_request_count) / Decimal(correction_denominator)
+            )
+            if correction_denominator else "0"
+        )
         queue_denominator = run.telemetry.review_queue_count
         result.update({
             f"{name}_rate": (
@@ -94,6 +119,14 @@ def engagement_metrics(run: EngagementRun) -> dict[str, int | str]:
                 if queue_denominator else "0"
             )
             for name, value in review_counts.items()
+        })
+        reassessment_denominator = run.telemetry.correction_request_count
+        result.update({
+            f"{name}_rate": (
+                normalized_decimal(Decimal(value) / Decimal(reassessment_denominator))
+                if reassessment_denominator else "0"
+            )
+            for name, value in reassessment_counts.items()
         })
         gate_denominator = run.telemetry.gate_applicable_count
         result.update({
@@ -108,5 +141,9 @@ def engagement_metrics(run: EngagementRun) -> dict[str, int | str]:
                 run.telemetry.review_total_wait_time / Decimal(run.telemetry.review_queue_count)
             ) if run.telemetry.review_queue_count else "0",
             "review_max_wait_time": normalized_decimal(run.telemetry.review_max_wait_time),
+            "reassessment_mean_wait_time": normalized_decimal(
+                run.telemetry.reassessment_total_wait_time / Decimal(reassessment_denominator)
+            ) if reassessment_denominator else "0",
+            "reassessment_max_wait_time": normalized_decimal(run.telemetry.reassessment_max_wait_time),
         })
     return result

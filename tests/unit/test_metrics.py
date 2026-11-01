@@ -1,3 +1,4 @@
+from dataclasses import replace
 from decimal import Decimal
 
 from uncertainty_permission_simulation.configuration import compile_configuration
@@ -6,7 +7,7 @@ from uncertainty_permission_simulation.profiles import policy, stochastic_proces
 from uncertainty_permission_simulation.simulator import StochasticCohortSpec, StochasticInputOverlay, generate_stochastic_cohort, run_engagement_stage
 
 
-def _run(policy_id: str):
+def _run(policy_id: str, **updates: object):
     overlay = StochasticInputOverlay(
         overlay_id="METRIC-OVERLAY", provenance="stylized", initiation_window=Decimal("0"),
         notice_delay=Decimal("1"), response_deadline=Decimal("21"),
@@ -19,7 +20,11 @@ def _run(policy_id: str):
         extension_need_probability=Decimal("0"), evidence_retrieval_success_probability=Decimal("1"),
         evidence_retrieval_latency_scale=Decimal("0"),
         external_consequence_delay=Decimal("1"), recovery_start_delay=Decimal("2"),
+        correction_request_delay=Decimal("7"), correction_uptake_probability=Decimal("1"),
+        reassessment_capacity=Decimal("1"), reassessment_service_time=Decimal("30"),
+        correction_window=Decimal("14"),
     )
+    overlay = replace(overlay, **updates)
     cohort = generate_stochastic_cohort(StochasticCohortSpec(
         scenario_id="METRIC-SCENARIO", seed_id="METRIC-SEED",
         case_ids=("CASE-1", "CASE-2"), overlay=overlay,
@@ -52,6 +57,10 @@ def test_engagement_metrics_keep_dimensions_separate() -> None:
     assert metrics["recovery_started_count"] == metrics["external_exposure_count"]
     assert metrics["supported_exposure_count"] + metrics["unsupported_exposure_count"] == metrics["external_exposure_count"]
     assert metrics["unauthorized_exposure_count"] == 0
+    assert metrics["correction_eligible_count"] == 0
+    assert metrics["correction_request_count"] == 0
+    assert metrics["correction_uptake_rate"] == "0"
+    assert metrics["reassessment_mean_wait_time"] == "0"
     assert metrics["gate_safe_count"] + metrics["gate_unsafe_count"] == metrics["gate_applicable_count"]
     assert Decimal(metrics["review_max_wait_time"]) >= Decimal(0)
     assert metrics["response_rate"] == "1"
@@ -73,3 +82,20 @@ def test_engagement_metrics_are_policy_specific_but_share_denominator() -> None:
     assert u1["gate_safe_rate"] == "0"
     assert u2c["review_queue_count"] == 2
     assert u2c["gate_safe_rate"] == "1"
+
+
+def test_correction_and_reassessment_metrics_keep_their_own_denominators() -> None:
+    metrics = engagement_metrics(_run(
+        "U1",
+        record_availability_probability=Decimal("0"),
+        correction_uptake_probability=Decimal("1"),
+    ))
+    assert metrics["correction_eligible_count"] == 2
+    assert metrics["correction_request_count"] == 2
+    assert metrics["correction_not_requested_count"] == 0
+    assert metrics["correction_uptake_rate"] == "1"
+    assert metrics["reassessment_started_count"] == 2
+    assert metrics["reassessment_completed_count"] == 2
+    assert metrics["timely_reassessment_count"] + metrics["late_reassessment_count"] == 2
+    assert Decimal(metrics["timely_reassessment_rate"]) + Decimal(metrics["late_reassessment_rate"]) == Decimal(1)
+    assert Decimal(metrics["reassessment_max_wait_time"]) >= Decimal(0)

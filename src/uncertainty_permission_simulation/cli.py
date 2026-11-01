@@ -191,6 +191,11 @@ def run_stochastic_smoke(config_path: Path) -> dict[str, object]:
             evidence_retrieval_latency_scale=Decimal(str(config["overlay"]["evidence_retrieval_latency_scale"])),
             external_consequence_delay=Decimal(str(config["overlay"]["external_consequence_delay"])),
             recovery_start_delay=Decimal(str(config["overlay"]["recovery_start_delay"])),
+            correction_request_delay=Decimal(str(config["overlay"]["correction_request_delay"])),
+            correction_uptake_probability=Decimal(str(config["overlay"]["correction_uptake_probability"])),
+            reassessment_capacity=Decimal(str(config["overlay"]["reassessment_capacity"])),
+            reassessment_service_time=Decimal(str(config["overlay"]["reassessment_service_time"])),
+            correction_window=Decimal(str(config["overlay"]["correction_window"])),
         ),
     )
     cohort = generate_stochastic_cohort(spec)
@@ -274,6 +279,16 @@ def run_stochastic_smoke(config_path: Path) -> dict[str, object]:
                     "unsupported_exposure_count": run.telemetry.unsupported_exposure_count,
                     "evidentially_unsupported_exposure_count": run.telemetry.evidentially_unsupported_exposure_count,
                     "unauthorized_exposure_count": run.telemetry.unauthorized_exposure_count,
+                    "correction_eligible_count": run.telemetry.correction_eligible_count,
+                    "correction_request_count": run.telemetry.correction_request_count,
+                    "correction_not_requested_count": run.telemetry.correction_not_requested_count,
+                    "reassessment_started_count": run.telemetry.reassessment_started_count,
+                    "reassessment_completed_count": run.telemetry.reassessment_completed_count,
+                    "timely_reassessment_count": run.telemetry.timely_reassessment_count,
+                    "late_reassessment_count": run.telemetry.late_reassessment_count,
+                    "reassessment_total_wait_time": normalized_decimal(run.telemetry.reassessment_total_wait_time),
+                    "reassessment_max_wait_time": normalized_decimal(run.telemetry.reassessment_max_wait_time),
+                    "reassessment_schedule_hash": run.telemetry.reassessment_schedule_hash,
                     "event_hash": run.telemetry.event_hash,
                 },
                 "review_queue": {
@@ -294,6 +309,26 @@ def run_stochastic_smoke(config_path: Path) -> dict[str, object]:
                             "completed_by_deadline": visit.completed_by_deadline,
                         }
                         for visit in run.review_queue.visits
+                    ],
+                },
+                "reassessment_queue": {
+                    "queue_id": run.reassessment_queue.config.queue_id,
+                    "capacity": run.reassessment_queue.config.capacity,
+                    "discipline": run.reassessment_queue.config.discipline,
+                    "visits": [
+                        {
+                            "request_id": visit.request_id,
+                            "case_id": visit.case_id,
+                            "server_id": visit.server_id,
+                            "queued_at": normalized_decimal(visit.queued_at),
+                            "started_at": normalized_decimal(visit.started_at),
+                            "completed_at": normalized_decimal(visit.completed_at),
+                            "service_time": normalized_decimal(visit.service_time),
+                            "wait_time": normalized_decimal(visit.wait_time),
+                            "deadline": normalized_decimal(visit.deadline),
+                            "completed_by_deadline": visit.completed_by_deadline,
+                        }
+                        for visit in run.reassessment_queue.visits
                     ],
                 },
                 "system_events": [
@@ -349,7 +384,7 @@ def run_stochastic_smoke(config_path: Path) -> dict[str, object]:
             }
             for policy_id, run in engagement_runs.items()
         },
-        "claim_limit": "stylized exposure-and-recovery smoke artifact; no correction, reassessment, restoration, empirical, or historical outcome",
+        "claim_limit": "stylized correction-request and reassessment-service smoke artifact; no correction outcome, restoration, empirical, or historical outcome",
     }
     output_path = ROOT / config["output_path"]
     output_path.parent.mkdir(parents=True, exist_ok=True)
