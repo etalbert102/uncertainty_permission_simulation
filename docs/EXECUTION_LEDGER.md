@@ -10,7 +10,7 @@ This ledger is the canonical slice-status record. Update it at the end of every 
 | 1. Case-neutral dynamic vertical slice | complete | `93e2da6` | 27 tests; 726-record closed bundle; three stored validation receipts match; both artifact hashes repeat | Slice 2 retained the exact artifact hashes and validated stochastic extension without weakening this contract |
 | 2. Stochastic engine and validation | complete | `d541d03` closeout; `fa6dfc4` semantic audit | 148 tests; five exact stochastic traces; stored replay/application/queue receipts; analytical and independent-reference checks; all prior gates pass | implementation validation only; monetary and unmodeled harms remain outside the declared consequence vector; no pilot or substantive result exists |
 | 3. Experiment pilot and freeze candidate | complete; ready for Slice 4 freeze work | `e8905fa`; gate amended 2026-11-01 | pilot, Slice 0/plan/Slice 3 gates, executable worked trace and staged review materials | procedure comprehensibility will be reviewed after Slice 5; semantic findings require a new freeze and rerun |
-| 4. Confirmatory freeze | active; freeze not authorized | — | 108-family core and one sensitivity validate as blocked candidates; pre-freeze outcome contract narrowed without inspecting confirmatory results | stored negative-control execution receipt and freeze/run verification machinery remain open |
+| 4. Confirmatory freeze | active; freeze not authorized | — | 108-family core and one sensitivity verify the stored five-control receipt and validate as blocked candidates; pre-freeze outcome contract narrowed without inspecting confirmatory results | freeze/run verification machinery remains open |
 | 5. Confirmatory execution and analysis | pending | — | — | — |
 | 6. Evidence packet and 10,000-word article | pending | — | — | — |
 
@@ -762,7 +762,7 @@ Entry commit: `7521836` (`Begin Slice 4 freeze candidate`).
 ### Blocking diagnostics
 
 - `S4-B001` (`NUMERICAL_OUTCOME_CONTRACT`): closed 2026-11-01 by pre-freeze narrowing. The confirmatory contract now excludes latent monetary entitlement, amount-error, amount-recovered, and historical debt-magnitude claims. The implemented evidentiary, permission, process, exposure, correction, and restoration metrics are the complete outcome contract. No confirmatory output existed or was inspected.
-- `S4-B002` (`NEGATIVE_CONTROL_EXECUTION_RECEIPT`): individual controls and limiting tests exist, but the confirmatory path has no closed stored receipt for the five declared negative-control IDs.
+- `S4-B002` (`NEGATIVE_CONTROL_EXECUTION_RECEIPT`): closed 2026-11-01 by the deterministic five-control receipt recorded below. The controls remain separate from the primary family count and candidate validation requires exact replay.
 - `S4-B003` (`FREEZE_MANIFEST_IMPLEMENTATION`): `verify-freeze`, `scripts/verify_repo.py`, and append-only run/reconcile/analyze commands do not yet exist.
 
 No confirmatory case was executed and no confirmatory output was created or inspected. The protocol remains version `0.2`; no freeze manifest exists.
@@ -787,3 +787,33 @@ Verification after narrowing:
 | `git diff --check` | pass |
 
 No confirmatory output was generated or inspected during this decision.
+
+### Stored matched negative-control receipt — 2026-11-01
+
+- Added a deterministic five-control harness and CLI command. The two P0 controls evaluate representation-induced permission change; the verified-match, no-support, and false-threshold controls evaluate their declared action-support or false-antecedent rule.
+- Stored `data/golden_traces/slice4_negative_control_receipt_v1.json` with receipt hash `ed9c0462413d96db8b14ec44c2062fc2433df448ed29f95784560fa239d7a861`, zero robust-permission violations, and `primary_family_count: 0`.
+- Candidate validation now requires the closed control IDs and order, the fixed receipt path, a valid self-hash, and exact deterministic replay. Missing, mutated, reordered, or unexpectedly failing controls block validation.
+- Removed `NEGATIVE_CONTROL_EXECUTION_RECEIPT` from both readiness lists. `FREEZE_MANIFEST_IMPLEMENTATION` is the sole remaining Slice 4 blocker.
+
+Candidate identities after closing S4-B002:
+
+- core config hash: `df89e4d87c39ed1ca5d7454be77aa61e0371611ef8e9ee6054ef3495a30e1de8`;
+- core scenario hash: `16bdb11bdf3dba909f4f71feaf25acefebd72d1ca21e61efe2c38265f2607506`;
+- core seed inventory hash: `f4967748d83393b82a5f3c05442438798e9343fa708aeb0483ddc46ece62bfcb`;
+- sensitivity config hash: `c4314bc355275289014b5ca63861cd0b7e920c2bb5b99d156f61ecd88173d97b`; and
+- shared negative-control receipt hash: `ed9c0462413d96db8b14ec44c2062fc2433df448ed29f95784560fa239d7a861`.
+
+Verification:
+
+| Command | Result |
+| --- | --- |
+| `PYTHONPATH=src ./.venv/bin/python -m uncertainty_permission_simulation.cli negative-controls experiments/configs/confirmatory_v1.yaml` | pass: five controls; receipt hash `ed9c0462413d96db8b14ec44c2062fc2433df448ed29f95784560fa239d7a861` |
+| `PYTHONPATH=src ./.venv/bin/python -m uncertainty_permission_simulation.cli validate experiments/configs/confirmatory_v1.yaml` | pass as blocked candidate; stored receipt replays exactly; only `FREEZE_MANIFEST_IMPLEMENTATION` remains |
+| `PYTHONPATH=src ./.venv/bin/python -m uncertainty_permission_simulation.cli validate experiments/configs/sensitivity_information_latency_v1.yaml` | pass as blocked candidate; shared receipt replays exactly; only `FREEZE_MANIFEST_IMPLEMENTATION` remains |
+| `PYTHONPATH=src ./.venv/bin/pytest -q` | pass: 172 tests, including unexpected-violation, stored-mutation, and readiness-promotion stability checks |
+| `./.venv/bin/python scripts/validate_plan.py` | pass |
+| `./.venv/bin/python scripts/validate_slice0.py` | pass |
+| `PYTHONPATH=src ./.venv/bin/python scripts/validate_slice3.py` | pass |
+| `git diff --check` | pass |
+
+No confirmatory scenario was executed or inspected. The protocol remains version `0.2`, both configs remain `blocked`, and no freeze manifest exists.

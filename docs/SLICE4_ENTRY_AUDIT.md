@@ -39,10 +39,12 @@ P0 supplies a semantic null and routing-invariance control, and the simulator ha
 
 Required resolution: implement deterministic control execution and a stored receipt that keeps controls separate from the 108-family primary count and fails on any unexpected robust-permission violation.
 
+**Resolution — 2026-11-01:** closed by `data/golden_traces/slice4_negative_control_receipt_v1.json`. The deterministic harness executes all five controls in the candidate config, records the applicable pairwise-permission or action-support rule, keeps `primary_family_count` at zero, rejects an unexpected robust-permission violation, and replays byte-equivalently. Both candidate configs verify the stored receipt hash before validating.
+
 ### S4-B003 — freeze and run machinery
 
 The repository does not yet implement `verify-freeze`, `scripts/verify_repo.py`, or the append-only confirmatory run/reconcile/analyze path named in the canonical plan. These commands must exist and be mutation-tested before their code is hashed.
 
 ## Stop decision
 
-Do not promote the protocol, mark either config ready, create `docs/FREEZE_MANIFEST.json`, or execute a confirmatory case while S4-B002 and S4-B003 remain open. Candidate validation is permitted because it enumerates inputs and seed identities without executing or inspecting outcomes.
+Do not promote the protocol, mark either config ready, create `docs/FREEZE_MANIFEST.json`, or execute a confirmatory case while S4-B003 remains open. Candidate validation and deterministic negative-control replay are permitted because they enumerate or test frozen inputs without executing or inspecting a confirmatory scenario outcome.

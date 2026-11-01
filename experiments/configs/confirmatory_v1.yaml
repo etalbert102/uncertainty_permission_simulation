@@ -80,8 +80,8 @@ outputs:
   run_index_path: outputs/confirmatory_v1/run_index.json
   reconciliation_path: outputs/confirmatory_v1/reconciliation.json
   analysis_directory: outputs/confirmatory_v1/analysis
+  negative_control_receipt_path: data/golden_traces/slice4_negative_control_receipt_v1.json
 freeze_readiness:
   status: blocked
   unresolved_items:
-    - NEGATIVE_CONTROL_EXECUTION_RECEIPT
     - FREEZE_MANIFEST_IMPLEMENTATION

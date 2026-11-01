@@ -16,6 +16,7 @@ from .configuration import ParameterValue, ScenarioOverlaySpec, compile_configur
 from .formal_model import render_p0_report
 from .experiments import run_experiment, validate_experiment_config
 from .metrics import engagement_metrics, trace_metrics
+from .negative_controls import write_negative_control_receipt
 from .policies import POLICY_IDS
 from .process_model import TraceSpec, execute_topology, run_trace
 from .profiles import canonical_process, nonisomorphic_process, policy, smoke_overlay, stochastic_process
@@ -463,6 +464,8 @@ def main() -> None:
     pilot.add_argument("config", type=Path)
     worked_trace = subparsers.add_parser("worked-trace")
     worked_trace.add_argument("config", type=Path)
+    negative_controls = subparsers.add_parser("negative-controls")
+    negative_controls.add_argument("config", type=Path)
     args = parser.parse_args()
     if args.command == "trace":
         result = run_smoke(args.config)
@@ -487,6 +490,14 @@ def main() -> None:
             "status": "ok",
             "specification_id": result["specification_id"],
             "artifact_hash": result["artifact_hash"],
+        }, sort_keys=True))
+    elif args.command == "negative-controls":
+        result = write_negative_control_receipt(ROOT, args.config)
+        print(json.dumps({
+            "status": "ok",
+            "receipt_id": result["receipt_id"],
+            "control_count": result["control_count"],
+            "receipt_hash": result["receipt_hash"],
         }, sort_keys=True))
 
 

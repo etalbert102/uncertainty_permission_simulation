@@ -55,3 +55,21 @@ def test_confirmatory_candidate_rejects_metric_reordering(tmp_path: Path) -> Non
     candidate = _write_config(tmp_path, {"analysis.primary_metrics": metrics})
     with pytest.raises(ContractError, match="closed implemented metric order"):
         load_experiment_config(candidate)
+
+
+def test_confirmatory_candidate_rejects_negative_control_drift(tmp_path: Path) -> None:
+    value = yaml.safe_load(CONFIRMATORY.read_text(encoding="utf-8"))
+    controls = deepcopy(value["negative_controls"])
+    controls.reverse()
+    candidate = _write_config(tmp_path, {"negative_controls": controls})
+    with pytest.raises(ContractError, match="negative-control IDs or order"):
+        load_experiment_config(candidate)
+
+
+def test_confirmatory_candidate_requires_stored_control_receipt_path(tmp_path: Path) -> None:
+    candidate = _write_config(
+        tmp_path,
+        {"outputs.negative_control_receipt_path": "data/golden_traces/other.json"},
+    )
+    with pytest.raises(ContractError, match="closed stored negative-control receipt path"):
+        load_experiment_config(candidate)

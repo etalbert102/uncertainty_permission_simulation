@@ -15,6 +15,12 @@ from typing import Iterable, Mapping
 import yaml
 
 from .configuration import compile_configuration
+from .negative_controls import (
+    CONFIRMATORY_NEGATIVE_CONTROL_IDS,
+    NEGATIVE_CONTROL_RECEIPT_PATH,
+    SENSITIVITY_NEGATIVE_CONTROL_IDS,
+    verify_stored_negative_control_receipt,
+)
 from .policies import POLICY_IDS
 from .profiles import policy, stochastic_process
 from .scenarios import (
@@ -104,6 +110,22 @@ def load_experiment_config(path: Path) -> dict[str, object]:
                 "EXPERIMENT_CONFIG_INVALID",
                 "frozen config requires unique negative-control IDs",
             )
+        expected_controls = (
+            CONFIRMATORY_NEGATIVE_CONTROL_IDS
+            if config["mode"] == "confirmatory"
+            else SENSITIVITY_NEGATIVE_CONTROL_IDS
+        )
+        if tuple(controls) != expected_controls:
+            raise ContractError(
+                "EXPERIMENT_CONFIG_INVALID",
+                f"{config['mode']} negative-control IDs or order differ from the closed contract",
+            )
+        outputs = config["outputs"]
+        if not isinstance(outputs, dict) or outputs.get("negative_control_receipt_path") != str(NEGATIVE_CONTROL_RECEIPT_PATH):
+            raise ContractError(
+                "EXPERIMENT_CONFIG_INVALID",
+                "frozen config must reference the closed stored negative-control receipt path",
+            )
         readiness = config.get("freeze_readiness")
         if not isinstance(readiness, dict) or readiness.get("status") not in {"blocked", "ready"}:
             raise ContractError(
@@ -171,6 +193,22 @@ def load_experiment_config(path: Path) -> dict[str, object]:
 
 def validate_experiment_config(path: Path) -> dict[str, object]:
     config = load_experiment_config(path)
+    negative_control_receipt: dict[str, object] | None = None
+    if (
+        config["mode"] != "development_pilot"
+        and "NEGATIVE_CONTROL_EXECUTION_RECEIPT"
+        not in config["freeze_readiness"]["unresolved_items"]
+    ):
+        root = path.resolve().parents[2]
+        confirmatory_path = (
+            path.resolve()
+            if config["mode"] == "confirmatory"
+            else path.resolve().parent / "confirmatory_v1.yaml"
+        )
+        negative_control_receipt = verify_stored_negative_control_receipt(
+            root,
+            confirmatory_path,
+        )
     factors = (
         development_factor_subset(int(config["development_family_count"]))
         if config["mode"] == "development_pilot"
@@ -206,6 +244,10 @@ def validate_experiment_config(path: Path) -> dict[str, object]:
             "seed_count": len(seed_ids),
             "seed_inventory_hash": canonical_hash(seed_ids),
             "freeze_readiness": config["freeze_readiness"],
+            "negative_control_receipt_hash": (
+                negative_control_receipt["receipt_hash"]
+                if negative_control_receipt is not None else None
+            ),
         })
     return result
 

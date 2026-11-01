@@ -1,6 +1,6 @@
 # Study Plan: Flexible Dynamic Uncertainty-to-Permission Kernel — Robodebt Application
 
-Status: Slices 0–3 complete; Slice 4 active and blocked from freeze by the recorded negative-control-receipt and freeze-tooling gaps; monetary-oracle claims were deliberately excluded before freeze; no confirmatory results exist
+Status: Slices 0–3 complete; Slice 4 active and blocked from freeze only by the recorded freeze-tooling gap; monetary-oracle claims were deliberately excluded and the matched negative-control receipt was closed before freeze; no confirmatory results exist
 
 Working article title: *When Uncertainty Expands Authority: Formalizing and Stress-Testing Automated Decision Workflows Through Robodebt*
 

@@ -39,9 +39,9 @@ def test_slice4_confirmatory_candidate_closes_grid_seeds_and_pilot_decisions() -
     assert result["cohort_size"] == 80
     assert result["seed_count"] == 108 * 30
     assert len(result["seed_inventory_hash"]) == 64
+    assert result["negative_control_receipt_hash"] == "ed9c0462413d96db8b14ec44c2062fc2433df448ed29f95784560fa239d7a861"
     assert result["freeze_readiness"]["status"] == "blocked"
     assert set(result["freeze_readiness"]["unresolved_items"]) == {
-        "NEGATIVE_CONTROL_EXECUTION_RECEIPT",
         "FREEZE_MANIFEST_IMPLEMENTATION",
     }
 
