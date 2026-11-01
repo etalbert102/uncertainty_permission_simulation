@@ -2,9 +2,9 @@
 
 Repository ID: `P0-Precursor`
 
-Status: draft Slice 0 specification; not frozen and not yet implemented
+Status: version `1.0` implemented fixture; included in the confirmatory freeze inventory
 
-Fixture specification version: `draft-0.10`
+Fixture specification version: `1.0`
 
 Reader-facing name: **representation-preservation fixture**
 

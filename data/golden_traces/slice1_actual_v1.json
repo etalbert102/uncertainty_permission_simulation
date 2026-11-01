@@ -407,7 +407,7 @@
     },
     "evaluation_unit": "controlled_pair",
     "held_bundle_hash": "30a1f306f91aa3f37ad325999de3cf476d0889380a0a4ab50891862e066dd49d",
-    "protocol_version": "0.2",
+    "protocol_version": "1.0",
     "random_draw_count": 0
   },
   "record_bundle": {

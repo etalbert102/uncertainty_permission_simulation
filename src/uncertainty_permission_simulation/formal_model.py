@@ -37,7 +37,7 @@ def render_p0_report(preserve: TraceResult, fallback: TraceResult) -> dict[str, 
     if preserve.held_bundle_hash != fallback.held_bundle_hash:
         raise ValueError("P0_HELD_INPUT_MISMATCH")
     return {
-        "protocol_version": "0.2",
+        "protocol_version": "1.0",
         "application_level": "bounded_deterministic_trace",
         "evaluation_unit": "controlled_pair",
         "comparison_id": "P0-E-PRESERVE__P0-E-FALLBACK",

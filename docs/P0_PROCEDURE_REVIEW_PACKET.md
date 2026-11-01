@@ -2,7 +2,7 @@
 
 Status: draft review-input version `0.1`; contains inputs only
 
-Companion protocol: `docs/PROCESS_RED_TEAM_PROTOCOL.md`, version `0.2`
+Companion protocol: `docs/PROCESS_RED_TEAM_PROTOCOL.md`, version `1.0`
 
 Reference-profile access: complete the first-pass assessment before consulting it
 

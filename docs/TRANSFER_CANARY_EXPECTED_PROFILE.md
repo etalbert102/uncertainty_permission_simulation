@@ -2,7 +2,7 @@
 
 Status: draft reference-profile version `0.1`; consult after the first-pass review
 
-Protocol version: `0.2`
+Protocol version: `1.0`
 
 The project lead consults this profile only after recording the first-pass assessment and ambiguities. Prior familiarity is recorded as a limitation but does not invalidate the review.
 

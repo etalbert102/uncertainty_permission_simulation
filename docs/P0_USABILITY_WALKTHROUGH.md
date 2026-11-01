@@ -4,7 +4,7 @@ Status: draft post-assessment reference and practitioner-facing walkthrough; exp
 
 Review order: complete a first pass using `docs/P0_PROCEDURE_REVIEW_PACKET.md` before consulting this walkthrough
 
-Protocol version: `0.2`
+Protocol version: `1.0`
 
 Formal fixture: `docs/PRECURSOR_FIDELITY_FIXTURE.md`
 
@@ -79,7 +79,7 @@ There is no overall status. The profile establishes a representation-induced rou
 The practitioner report should render the stored assessment graph approximately as follows. This projection is deliberately compact and is not a substitute for the future canonical record bundle.
 
 ```yaml
-protocol_version: "0.1"
+protocol_version: "1.0"
 application_level: bounded_deterministic_trace
 evaluation_unit: controlled_pair
 comparison_id: P0-E-PRESERVE__P0-E-FALLBACK

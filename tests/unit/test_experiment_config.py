@@ -34,10 +34,14 @@ def _write_config(tmp_path: Path, updates: dict[str, object]) -> Path:
         ("base_overlay.administrative_cutoff", "649", "day 650"),
         ("base_overlay.provenance", "sensitivity", "must be stylized"),
         ("analysis.confidence_interval", "bootstrap", "95% MCSE"),
-        ("freeze_readiness.status", "ready", "cannot retain unresolved"),
+        (
+            "freeze_readiness.unresolved_items",
+            ["FREEZE_MANIFEST_IMPLEMENTATION"],
+            "cannot retain unresolved",
+        ),
     ),
 )
-def test_confirmatory_candidate_rejects_post_pilot_drift(
+def test_confirmatory_config_rejects_post_pilot_drift(
     tmp_path: Path,
     path: str,
     replacement: object,

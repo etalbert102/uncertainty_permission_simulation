@@ -1,6 +1,6 @@
 # Process Red-Team Protocol
 
-Status: draft version `0.2`; pre-freeze and pre-confirmatory
+Status: version `1.0` confirmatory contract; execution requires a verified freeze manifest
 
 Protocol owner: process-red-team method
 
@@ -288,4 +288,4 @@ Editorial clarifications may improve navigation, define an already-frozen term m
 
 ## Version and Freeze Rule
 
-Version `0.2` may change only before confirmatory freeze. Version `1.0` freezes the five steps, application-level rules, assessment-versus-claim-limit distinction, status/completeness semantics, prohibited composite score, intake fields, diagnostic fields, staged review inputs, reference profiles, canary, and worked-trace selection rule. Results may illustrate the frozen protocol but may not redefine it.
+Version `1.0` fixes the five steps, application-level rules, assessment-versus-claim-limit distinction, status/completeness semantics, prohibited composite score, intake fields, diagnostic fields, staged review inputs, reference profiles, canary, and worked-trace selection rule. Results may illustrate the frozen protocol but may not redefine it. Any later semantic change requires a new protocol and freeze version and invalidates affected confirmatory artifacts.

@@ -1,10 +1,10 @@
 # Preregistration Skeleton
 
-Status: Slice 4 pre-freeze candidate; development pilot inspected; no confirmatory results generated or inspected
+Status: version `1.0` confirmatory contract; development pilot inspected; no confirmatory results generated or inspected
 
-Protocol version: `0.2`
+Protocol version: `1.0`
 
-Formal specification: `docs/FORMAL_MODEL.md`, draft `0.10`
+Formal specification: `docs/FORMAL_MODEL.md`, version `1.0`
 
 Candidate source-grounded application profiles: `R-OCI-Early@1` and `R-OCI-Enhanced@1`; neither is an engine dependency or population calibration
 

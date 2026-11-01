@@ -29,7 +29,7 @@ def test_dummy_analysis_pipeline_exercises_cells_and_paired_estimates() -> None:
     assert len(result["receipt_hash"]) == 64
 
 
-def test_slice4_confirmatory_candidate_closes_grid_seeds_and_pilot_decisions() -> None:
+def test_slice4_confirmatory_freeze_ready_config_closes_grid_seeds_and_pilot_decisions() -> None:
     result = validate_experiment_config(CONFIRMATORY)
     assert result["status"] == "valid_candidate"
     assert result["mode"] == "confirmatory"
@@ -40,10 +40,7 @@ def test_slice4_confirmatory_candidate_closes_grid_seeds_and_pilot_decisions() -
     assert result["seed_count"] == 108 * 30
     assert len(result["seed_inventory_hash"]) == 64
     assert result["negative_control_receipt_hash"] == "ed9c0462413d96db8b14ec44c2062fc2433df448ed29f95784560fa239d7a861"
-    assert result["freeze_readiness"]["status"] == "blocked"
-    assert set(result["freeze_readiness"]["unresolved_items"]) == {
-        "FREEZE_MANIFEST_IMPLEMENTATION",
-    }
+    assert result["freeze_readiness"] == {"status": "ready", "unresolved_items": []}
 
 
 def test_slice4_information_latency_sensitivity_is_separate_and_prespecified() -> None:

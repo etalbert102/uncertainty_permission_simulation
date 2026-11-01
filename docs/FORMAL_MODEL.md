@@ -1,8 +1,8 @@
 # Formal Model of Uncertainty, Functional Permission, and Operational Review
 
-Status: draft Slice 0 specification; not frozen and not yet implemented
+Status: version `1.0` confirmatory specification; implemented; execution requires a verified freeze manifest
 
-Formal-model version: `draft-0.10`
+Formal-model version: `1.0`
 
 ## Purpose
 

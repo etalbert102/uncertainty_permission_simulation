@@ -79,6 +79,5 @@ outputs:
   analysis_directory: outputs/sensitivity_information_latency_v1/analysis
   negative_control_receipt_path: data/golden_traces/slice4_negative_control_receipt_v1.json
 freeze_readiness:
-  status: blocked
-  unresolved_items:
-    - FREEZE_MANIFEST_IMPLEMENTATION
+  status: ready
+  unresolved_items: []
