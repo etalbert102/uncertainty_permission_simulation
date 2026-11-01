@@ -2,8 +2,24 @@ config_id: SLICE2-STOCHASTIC-SMOKE-V1
 scenario_id: SLICE2-SYNTHETIC-COHORT-V1
 seed_id: SLICE2-SMOKE-SEED-001
 cohort_size: 5
+policy_ids: [U0, U1, U2C, U2O, U3]
 overlay:
   overlay_id: SLICE2-STYLIZED-OVERLAY-V1
   provenance: stylized
   initiation_window: "10"
+  notice_delay: "1"
+  response_deadline: "21"
+  review_capacity: "1"
+  review_service_time: "30"
+  extension_duration: "7"
+  notice_delivery_probability: "0.9"
+  administrative_access_probability: "0.75"
+  comprehension_probability: "0.8"
+  record_availability_probability: "0.65"
+  response_effort_limit: "0.55"
+  assistance_effort_bonus: "0.3"
+  extension_effort_bonus: "0.15"
+  extension_need_probability: "0.25"
+  evidence_retrieval_success_probability: "0.7"
+  evidence_retrieval_latency_scale: "10"
 output_path: outputs/slice2/stochastic_smoke_v1.json

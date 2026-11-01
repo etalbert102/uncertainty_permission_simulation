@@ -14,11 +14,12 @@ from .applications.robodebt import load_early_adapter
 from .artifacts import build_bundle
 from .configuration import ParameterValue, ScenarioOverlaySpec, compile_configuration
 from .formal_model import render_p0_report
-from .metrics import trace_metrics
+from .metrics import engagement_metrics, trace_metrics
+from .policies import POLICY_IDS
 from .process_model import TraceSpec, execute_topology, run_trace
-from .profiles import canonical_process, nonisomorphic_process, policy, smoke_overlay
+from .profiles import canonical_process, nonisomorphic_process, policy, smoke_overlay, stochastic_process
 from .random_streams import normalized_decimal
-from .simulator import StochasticCohortSpec, StochasticInputOverlay, generate_stochastic_cohort
+from .simulator import StochasticCohortSpec, StochasticInputOverlay, generate_stochastic_cohort, run_engagement_stage
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -172,14 +173,44 @@ def run_stochastic_smoke(config_path: Path) -> dict[str, object]:
         overlay=StochasticInputOverlay(
             overlay_id=config["overlay"]["overlay_id"], provenance=config["overlay"]["provenance"],
             initiation_window=Decimal(str(config["overlay"]["initiation_window"])),
+            notice_delay=Decimal(str(config["overlay"]["notice_delay"])),
+            response_deadline=Decimal(str(config["overlay"]["response_deadline"])),
+            review_capacity=Decimal(str(config["overlay"]["review_capacity"])),
+            review_service_time=Decimal(str(config["overlay"]["review_service_time"])),
+            extension_duration=Decimal(str(config["overlay"]["extension_duration"])),
+            notice_delivery_probability=Decimal(str(config["overlay"]["notice_delivery_probability"])),
+            administrative_access_probability=Decimal(str(config["overlay"]["administrative_access_probability"])),
+            comprehension_probability=Decimal(str(config["overlay"]["comprehension_probability"])),
+            record_availability_probability=Decimal(str(config["overlay"]["record_availability_probability"])),
+            response_effort_limit=Decimal(str(config["overlay"]["response_effort_limit"])),
+            assistance_effort_bonus=Decimal(str(config["overlay"]["assistance_effort_bonus"])),
+            extension_effort_bonus=Decimal(str(config["overlay"]["extension_effort_bonus"])),
+            extension_need_probability=Decimal(str(config["overlay"]["extension_need_probability"])),
+            evidence_retrieval_success_probability=Decimal(str(config["overlay"]["evidence_retrieval_success_probability"])),
+            evidence_retrieval_latency_scale=Decimal(str(config["overlay"]["evidence_retrieval_latency_scale"])),
         ),
     )
     cohort = generate_stochastic_cohort(spec)
+    configured_policy_ids = tuple(config["policy_ids"])
+    if len(configured_policy_ids) != len(POLICY_IDS) or set(configured_policy_ids) != set(POLICY_IDS):
+        raise ValueError(f"policy_ids must contain each closed policy exactly once: {POLICY_IDS}")
+    compiled_engagement = {
+        policy_id: compile_configuration(
+            configuration_id=f"{config['config_id']}-{policy_id}", process=stochastic_process(),
+            policy=policy(policy_id), overlay=spec.overlay.to_compilation_overlay(),
+            evaluation_spec_id="STOCHASTIC-ENGAGEMENT-QA@1",
+        )
+        for policy_id in POLICY_IDS
+    }
+    engagement_runs = {
+        policy_id: run_engagement_stage(cohort, compiled_engagement[policy_id])
+        for policy_id in POLICY_IDS
+    }
     output = {
         "schema_version": 1,
         "config_id": config["config_id"],
         "scenario_id": cohort.scenario_id,
-        "overlay_id": cohort.overlay_id,
+        "overlay": cohort.overlay.canonical_value(),
         "seed_id": cohort.seed_id,
         "cases": [
             {
@@ -197,7 +228,52 @@ def run_stochastic_smoke(config_path: Path) -> dict[str, object]:
             "duplicate_draw_key_count": cohort.telemetry.duplicate_draw_key_count,
             "cohort_hash": cohort.telemetry.cohort_hash,
         },
-        "claim_limit": "stochastic substrate smoke artifact; no policy, queue, empirical, or historical outcome",
+        "engagement_runs": {
+            policy_id: {
+                "compiled_configuration_id": compiled_engagement[policy_id].configuration_id,
+                "cohort_hash": run.cohort_hash,
+                "metrics": engagement_metrics(run),
+                "telemetry": {
+                    "case_count": run.telemetry.case_count,
+                    "event_count": run.telemetry.event_count,
+                    "response_count": run.telemetry.response_count,
+                    "adequate_response_evidence_count": run.telemetry.adequate_response_evidence_count,
+                    "assistance_count": run.telemetry.assistance_count,
+                    "extension_count": run.telemetry.extension_count,
+                    "retrieval_request_count": run.telemetry.retrieval_request_count,
+                    "retrieved_evidence_count": run.telemetry.retrieved_evidence_count,
+                    "review_queue_count": run.telemetry.review_queue_count,
+                    "event_hash": run.telemetry.event_hash,
+                },
+                "traces": [
+                    {
+                        "case_id": trace.case_id,
+                        "exogenous_draw_hash": trace.exogenous_draw_hash,
+                        "decision": {
+                            "assistance_used": trace.decision.assistance_used,
+                            "extension_granted": trace.decision.extension_granted,
+                            "responded": trace.decision.responded,
+                            "adequate_response_evidence": trace.decision.adequate_response_evidence,
+                            "proactive_retrieval_requested": trace.decision.proactive_retrieval_requested,
+                            "retrieved_evidence": trace.decision.retrieved_evidence,
+                        },
+                        "events": [
+                            {
+                                "event_type_id": event.event_type_id,
+                                "timestamp": normalized_decimal(event.timestamp),
+                                "causal_event_key": event.causal_event_key,
+                                "details": event.details,
+                            }
+                            for event in trace.events
+                        ],
+                        "event_hash": trace.event_hash,
+                    }
+                    for trace in run.traces
+                ],
+            }
+            for policy_id, run in engagement_runs.items()
+        },
+        "claim_limit": "engagement-stage stochastic smoke artifact; no queue service, final action, empirical, or historical outcome",
     }
     output_path = ROOT / config["output_path"]
     output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -218,7 +294,7 @@ def main() -> None:
         print(json.dumps({"status": "ok", "traces": len(result["traces"]), "output": result["config_id"]}, sort_keys=True))
     elif args.command == "cohort":
         result = run_stochastic_smoke(args.config)
-        print(json.dumps({"status": "ok", "cases": len(result["cases"]), "output": result["config_id"]}, sort_keys=True))
+        print(json.dumps({"status": "ok", "cases": len(result["cases"]), "policies": len(result["engagement_runs"]), "output": result["config_id"]}, sort_keys=True))
 
 
 if __name__ == "__main__":

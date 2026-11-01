@@ -3,15 +3,39 @@ from decimal import Decimal
 
 import pytest
 
+from uncertainty_permission_simulation.configuration import compile_configuration
+from uncertainty_permission_simulation.profiles import policy, stochastic_process
 from uncertainty_permission_simulation.random_streams import DRAW_FAMILY_IDS
 from uncertainty_permission_simulation.schemas import ContractError
-from uncertainty_permission_simulation.simulator import StochasticCohortSpec, StochasticInputOverlay, generate_stochastic_cohort
+from uncertainty_permission_simulation.simulator import StochasticCohortSpec, StochasticInputOverlay, generate_stochastic_cohort, run_engagement_stage
+
+
+def overlay(**updates: object) -> StochasticInputOverlay:
+    base = StochasticInputOverlay(
+        overlay_id="STYLIZED-OVERLAY-1", provenance="stylized", initiation_window=Decimal("10"),
+        notice_delay=Decimal("1"), response_deadline=Decimal("21"),
+        review_capacity=Decimal("1"), review_service_time=Decimal("30"), extension_duration=Decimal("7"),
+        notice_delivery_probability=Decimal("0.9"), administrative_access_probability=Decimal("0.75"),
+        comprehension_probability=Decimal("0.8"), record_availability_probability=Decimal("0.65"),
+        response_effort_limit=Decimal("0.55"), assistance_effort_bonus=Decimal("0.3"),
+        extension_effort_bonus=Decimal("0.15"),
+        extension_need_probability=Decimal("0.25"), evidence_retrieval_success_probability=Decimal("0.7"),
+        evidence_retrieval_latency_scale=Decimal("10"),
+    )
+    return replace(base, **updates)
+
+
+def compiled(policy_id: str, input_overlay: StochasticInputOverlay):
+    return compile_configuration(
+        configuration_id=f"TEST-{policy_id}", process=stochastic_process(), policy=policy(policy_id),
+        overlay=input_overlay.to_compilation_overlay(), evaluation_spec_id="TEST-EVALUATION",
+    )
 
 
 def spec(**updates: object) -> StochasticCohortSpec:
     base = StochasticCohortSpec(
         scenario_id="SCENARIO-1", seed_id="SEED-1", case_ids=("CASE-3", "CASE-1", "CASE-2"),
-        overlay=StochasticInputOverlay("STYLIZED-OVERLAY-1", "stylized", Decimal("10")),
+        overlay=overlay(),
     )
     return replace(base, **updates)
 
@@ -50,8 +74,7 @@ def test_seed_change_changes_draws_but_not_case_membership() -> None:
 
 
 def test_arrivals_stay_inside_closed_initiation_window() -> None:
-    overlay = StochasticInputOverlay("STYLIZED-OVERLAY-2", "stylized", Decimal("12.5"))
-    cohort = generate_stochastic_cohort(spec(overlay=overlay))
+    cohort = generate_stochastic_cohort(spec(overlay=overlay(overlay_id="STYLIZED-OVERLAY-2", initiation_window=Decimal("12.5"))))
     assert all(Decimal(0) < case.arrival_time < Decimal("12.5") for case in cohort.cases)
 
 
@@ -69,15 +92,89 @@ def test_invalid_cohort_specs_fail_before_draws(updates: dict[str, object]) -> N
         spec(**updates)
 
 
-@pytest.mark.parametrize(
-    "overlay",
-    (
-        ("OVERLAY", "documented", Decimal("10")),
-        ("OVERLAY", "stylized", Decimal("-1")),
-        ("OVERLAY", "stylized", Decimal("NaN")),
-        ("OVERLAY", "stylized", "10"),
-    ),
-)
-def test_invalid_stochastic_overlay_values_are_rejected(overlay: tuple[object, object, object]) -> None:
+@pytest.mark.parametrize(("field", "value"), (
+    ("provenance", "documented"),
+    ("initiation_window", Decimal("-1")),
+    ("initiation_window", Decimal("NaN")),
+    ("initiation_window", "10"),
+    ("response_deadline", Decimal("0")),
+    ("notice_delivery_probability", Decimal("1.1")),
+))
+def test_invalid_stochastic_overlay_values_are_rejected(field: str, value: object) -> None:
     with pytest.raises(ContractError, match="SCENARIO_PARAMETER_INVALID"):
-        StochasticInputOverlay(*overlay)
+        overlay(**{field: value})
+
+
+def test_all_policy_runs_share_cases_and_exogenous_draws() -> None:
+    cohort = generate_stochastic_cohort(spec())
+    runs = {policy_id: run_engagement_stage(cohort, compiled(policy_id, cohort.overlay)) for policy_id in ("U0", "U1", "U2C", "U2O", "U3")}
+    expected = {case.case_id: case.draw_hash for case in cohort.cases}
+    assert all(run.cohort_hash == cohort.telemetry.cohort_hash for run in runs.values())
+    assert all({trace.case_id: trace.exogenous_draw_hash for trace in run.traces} == expected for run in runs.values())
+
+
+def test_policy_path_divergence_preserves_common_causal_keys() -> None:
+    forced = overlay(
+        notice_delivery_probability=Decimal("1"), administrative_access_probability=Decimal("0"),
+        comprehension_probability=Decimal("0"), record_availability_probability=Decimal("0"),
+        response_effort_limit=Decimal("0"), assistance_effort_bonus=Decimal("1"),
+        extension_need_probability=Decimal("1"), evidence_retrieval_success_probability=Decimal("1"),
+    )
+    cohort = generate_stochastic_cohort(spec(case_ids=("CASE-1",), overlay=forced))
+    u1 = run_engagement_stage(cohort, compiled("U1", cohort.overlay)).traces[0]
+    u3 = run_engagement_stage(cohort, compiled("U3", cohort.overlay)).traces[0]
+    assert len(u1.events) != len(u3.events)
+    assert u1.exogenous_draw_hash == u3.exogenous_draw_hash
+    u1_keys = {event.event_type_id: event.causal_event_key for event in u1.events}
+    u3_keys = {event.event_type_id: event.causal_event_key for event in u3.events}
+    for event_type in {"CASE_ARRIVAL", "SOURCE_EVIDENCE_INGESTED", "NOTICE_SENT", "NOTICE_DELIVERED", "ACCESS_ATTEMPTED", "DEADLINE_REACHED", "REPRESENTATION_APPLIED", "REPRESENTATION_SURFACED", "ROUTING_COMPLETED"}:
+        assert u1_keys[event_type] == u3_keys[event_type]
+    assert "EXTENSION_GRANTED" not in u1_keys and "EXTENSION_GRANTED" in u3_keys
+    assert "EXTERNAL_EVIDENCE_RETURNED" not in u1_keys and "EXTERNAL_EVIDENCE_RETURNED" in u3_keys
+
+
+def test_engagement_stage_replays_event_hashes_and_stops_before_actions() -> None:
+    cohort = generate_stochastic_cohort(spec())
+    configuration = compiled("U2C", cohort.overlay)
+    first = run_engagement_stage(cohort, configuration)
+    second = run_engagement_stage(cohort, configuration)
+    assert first == second
+    assert first.telemetry.event_hash == second.telemetry.event_hash
+    assert all(event.event_type_id not in {"ACTION_COMPUTED", "PROGRESSION_EXECUTED", "CASE_CLOSED"} for trace in first.traces for event in trace.events)
+
+
+def test_u2_fail_closed_and_fail_open_share_engagement_semantics() -> None:
+    cohort = generate_stochastic_cohort(spec())
+    closed = run_engagement_stage(cohort, compiled("U2C", cohort.overlay))
+    opened = run_engagement_stage(cohort, compiled("U2O", cohort.overlay))
+    assert [tuple(event.event_type_id for event in trace.events) for trace in closed.traces] == [
+        tuple(event.event_type_id for event in trace.events) for trace in opened.traces
+    ]
+    assert [tuple(event.causal_event_key for event in trace.events) for trace in closed.traces] == [
+        tuple(event.causal_event_key for event in trace.events) for trace in opened.traces
+    ]
+    assert closed.telemetry.review_queue_count == len(cohort.cases)
+    assert opened.telemetry.review_queue_count == len(cohort.cases)
+
+
+def test_sufficient_evidence_is_not_labeled_as_imputation() -> None:
+    forced = overlay(
+        notice_delivery_probability=Decimal("1"), administrative_access_probability=Decimal("1"),
+        comprehension_probability=Decimal("1"), record_availability_probability=Decimal("1"),
+        response_effort_limit=Decimal("1"),
+    )
+    cohort = generate_stochastic_cohort(spec(case_ids=("CASE-1",), overlay=forced))
+    trace = run_engagement_stage(cohort, compiled("U2C", cohort.overlay)).traces[0]
+    representation = next(event for event in trace.events if event.event_type_id == "REPRESENTATION_APPLIED")
+    assert representation.details["representation_mode"] == "period_specific_evidence"
+
+
+def test_engagement_runner_rejects_configuration_overlay_drift() -> None:
+    cohort = generate_stochastic_cohort(spec())
+    drifted_overlay = overlay(response_effort_limit=Decimal("0.2"))
+    with pytest.raises(ContractError, match="SCENARIO_CONFIGURATION_INCOMPLETE"):
+        run_engagement_stage(cohort, compiled("U1", drifted_overlay))
+
+    sensitivity_overlay = overlay(provenance="sensitivity")
+    with pytest.raises(ContractError, match="SCENARIO_CONFIGURATION_INCOMPLETE"):
+        run_engagement_stage(cohort, compiled("U1", sensitivity_overlay))

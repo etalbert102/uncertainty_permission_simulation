@@ -5,9 +5,16 @@ from __future__ import annotations
 from .configuration import ParameterValue, PolicyProfileSpec, ProcessProfileSpec, ScenarioOverlaySpec
 
 
-CORE_CAPABILITIES = frozenset({"notice", "response", "representation", "routing", "review", "progression", "correction", "restoration"})
+CORE_CAPABILITIES = frozenset({"notice", "response", "representation", "routing", "review", "progression", "correction", "restoration", "assistance", "extension", "evidence_acquisition"})
 CORE_ACTIONS = frozenset({"hold", "request_evidence", "review", "progress", "correct", "restore"})
 CORE_SLOTS = frozenset({"notice_delay", "response_deadline", "review_capacity", "review_service_time"})
+STOCHASTIC_SLOTS = frozenset({
+    "initiation_window", "extension_duration", "notice_delivery_probability",
+    "administrative_access_probability", "comprehension_probability",
+    "record_availability_probability", "response_effort_limit", "assistance_effort_bonus",
+    "extension_effort_bonus", "extension_need_probability",
+    "evidence_retrieval_success_probability", "evidence_retrieval_latency_scale",
+})
 
 
 def canonical_process(profile_id: str = "SYNTHETIC-CORE@1") -> ProcessProfileSpec:
@@ -30,15 +37,26 @@ def nonisomorphic_process() -> ProcessProfileSpec:
     )
 
 
+def stochastic_process(profile_id: str = "SYNTHETIC-STOCHASTIC@1") -> ProcessProfileSpec:
+    return canonical_process(profile_id).model_copy(update={"parameter_slot_ids": CORE_SLOTS | STOCHASTIC_SLOTS})
+
+
 def policy(profile_id: str) -> PolicyProfileSpec:
-    semantics = {"U1": "none", "U2C": "fail_closed", "U2O": "fail_open"}[profile_id]
+    semantics = {"U0": "none", "U1": "none", "U2C": "fail_closed", "U2O": "fail_open", "U3": "fail_closed"}[profile_id]
     required = frozenset({"notice", "response", "representation", "routing", "progression"})
-    if profile_id != "U1":
+    if profile_id in {"U2C", "U2O", "U3"}:
         required |= {"review"}
+    if profile_id == "U0":
+        required |= {"extension"}
+    if profile_id == "U3":
+        required |= {"assistance", "extension", "evidence_acquisition"}
+    required_actions = {"progress", "hold"}
+    if profile_id == "U3":
+        required_actions.add("request_evidence")
     return PolicyProfileSpec(
         profile_id=profile_id,
         required_capabilities=required,
-        required_action_type_ids=frozenset({"progress", "hold"}),
+        required_action_type_ids=frozenset(required_actions),
         parameter_slot_ids=CORE_SLOTS,
         gate_semantics=semantics,
     )
