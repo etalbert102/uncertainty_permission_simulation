@@ -11,7 +11,7 @@ This ledger is the canonical slice-status record. Update it at the end of every 
 | 2. Stochastic engine and validation | complete | `d541d03` closeout; `fa6dfc4` semantic audit | 148 tests; five exact stochastic traces; stored replay/application/queue receipts; analytical and independent-reference checks; all prior gates pass | implementation validation only; monetary and unmodeled harms remain outside the declared consequence vector; no pilot or substantive result exists |
 | 3. Experiment pilot and freeze candidate | complete; ready for Slice 4 freeze work | `e8905fa`; gate amended 2026-11-01 | pilot, Slice 0/plan/Slice 3 gates, executable worked trace and staged review materials | procedure comprehensibility will be reviewed after Slice 5; semantic findings require a new freeze and rerun |
 | 4. Confirmatory freeze | complete; immutable manifest issued | `0b8e890` frozen baseline; manifest `35f360d8…65c` | 77-file manifest, 10 source identities, exact environment, 108-family core, sensitivity, five-control receipt, and all 178 tests verify | any frozen-file, inventory, or environment drift blocks execution and requires an explicit new freeze |
-| 5. Confirmatory execution and analysis | active; initial core complete, sensitivity pending | — | 16,200/16,200 core attempts reconciled; deterministic replay retained all attempts; both MCSE targets met, so no extension is authorized | sensitivity run and combined Slice 5 verification remain pending |
+| 5. Confirmatory execution and analysis | complete; core and sensitivity reconciled and analyzed | core receipt `b544ded`; sensitivity receipt recorded below | 32,400/32,400 attempts across separate core and sensitivity inventories; deterministic replays retained all attempts; complete Slice 5 repository gate and 178 tests pass | project-lead comprehensibility review is now due; narrative claims must retain the frozen model and case-study boundaries |
 | 6. Evidence packet and 10,000-word article | pending | — | — | — |
 
 ## Slice 0 Closeout Receipt
@@ -910,3 +910,40 @@ Execution date: 2026-11-01
 - Deterministic re-analysis reproduced analysis hash `bb486ee634365e53b7de464eb8cae8fc1e9169a29e1b6ad0ed3b496a684341cc` without replacing the stored analysis or figures.
 
 This receipt records execution integrity and the preregistered precision decision, not substantive interpretation. The sensitivity run remains separate and pending; the Slice 5 repository gate cannot pass until it is complete.
+
+## Slice 5 Information-Latency Sensitivity Receipt
+
+Status: complete; separately analyzed; not pooled with the core
+
+Execution date: 2026-11-01
+
+### Execution and completeness
+
+- Executed `SENSITIVITY-INFORMATION-LATENCY-V1` through the manifest-gated append-only runner under manifest identity `35f360d81e7eebe1effeae813f4144991b0fa043001df6d920d3f8592bfee65c`.
+- The sensitivity changes only the prespecified evidence-retrieval latency scale from 10 to 20 and uses its distinct frozen seed inventory. It is not part of the core family estimates.
+- Created exactly 16,200 attempt artifacts: 108 families × 30 replications × five policies. The empty-boundary first pass retained zero prior attempts.
+- The observed first-to-last attempt-file span was 658.64 seconds, below the frozen 86,400-second sensitivity ceiling.
+- Reconciliation found 16,200 expected and 16,200 observed attempts, with zero missing or unexpected IDs.
+- A full runner replay created zero artifacts and retained all 16,200 after validation. Deterministic re-analysis reproduced the stored analysis without replacing it or its figures.
+- The sensitivity output tree contains 16,205 files and occupies approximately 67 MB. Combined core and sensitivity outputs contain 32,410 files and occupy approximately 134 MB in the designed ignored output locations.
+
+### Precision report
+
+- Maximum applicable primary-rate MCSE: `0.040510984272704297`, below the descriptive target `0.05`.
+- Maximum paired-contrast MCSE: `0.040510984272704297`, below the descriptive target `0.06`.
+- Both target flags are `true`.
+- The sensitivity config prespecifies no extension. `extension_required` is `false`, and no additional sensitivity replication was executed.
+
+### Artifact identities
+
+- Run-index hash: `b4e2bd26a04b0390a9a206fb983f7e78b869a30e616a72aa36dbbbd656719ce7`.
+- Reconciliation hash: `db8ccf476a4815f276cd5b3dc233d5c9fe37a7de296c687e1e031b0af23c5493`.
+- Analysis hash: `0abaab09c09c94eb797d46ade1dbe5d7dd46c1ce85d515ba769ed4d1b5bc82db`.
+- Capacity/timeout figure hash: `22f52e37eec54f33fa56e791ea0ed85f47a2afdc14370a77dd220b6e059d6a5c`.
+- Information workload/burden figure hash: `76f25bfd8f4ac4f104ae61951c01cdbf4a8ff57405f3c633c8f11dcc67429062`.
+
+### Slice 5 gate
+
+`./.venv/bin/python scripts/verify_repo.py --through-slice 5` passes with the frozen manifest, core and sensitivity config identities, stored negative-control receipt, complete reconciliations and analyses, plan gate, Slice 0 gate, Slice 3 gate, and all 178 tests.
+
+This receipt closes the prespecified simulation execution stage. It does not pool the sensitivity with the core, treat either run as a historical reconstruction, or add an unregistered primary claim. The staged project-lead comprehensibility review is now due before Slice 6 completion.
