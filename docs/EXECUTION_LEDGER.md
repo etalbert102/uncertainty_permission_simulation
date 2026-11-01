@@ -9,7 +9,7 @@ This ledger is the canonical slice-status record. Update it at the end of every 
 | 0. Source, construct, and claim contract | implementation, plan, and baseline gates passed — pre-freeze reader QA pending | `9cf836c` | automated Slice 0 and plan gates pass from declared environment | two eligible locked reader returns are not yet available; this blocks Slice 4, not Slice 1 engineering |
 | 1. Case-neutral dynamic vertical slice | complete | `93e2da6` | 27 tests; 726-record closed bundle; three stored validation receipts match; both artifact hashes repeat | Slice 2 retained the exact artifact hashes and validated stochastic extension without weakening this contract |
 | 2. Stochastic engine and validation | complete | `d541d03` closeout; `fa6dfc4` semantic audit | 148 tests; five exact stochastic traces; stored replay/application/queue receipts; analytical and independent-reference checks; all prior gates pass | implementation validation only; monetary and unmodeled harms remain outside the declared consequence vector; no pilot or substantive result exists |
-| 3. Experiment pilot and freeze candidate | pending | — | — | — |
+| 3. Experiment pilot and freeze candidate | engineering complete; external pre-freeze QA pending | pending closeout commit | 154 tests; Slice 0/plan/Slice 3 gates; 15-family pilot; executable worked trace and reader bundle rehearsal | independent eligible-reader returns cannot be self-certified and block Slice 4 |
 | 4. Confirmatory freeze | pending | — | — | — |
 | 5. Confirmatory execution and analysis | pending | — | — | — |
 | 6. Evidence packet and 10,000-word article | pending | — | — | — |
@@ -644,3 +644,50 @@ Reference environment: local `.venv`, Python 3.14, macOS arm64, 2026-11-01.
 - The five-case smoke cohort is deliberately an implementation fixture. Its frequencies and policy comparisons are not evidence for the article's substantive claims.
 - Independent packet-only reader QA, source-byte identity, invitation verification, and systematic citation expansion remain open at their declared pre-freeze gates.
 - Slice 3 may now begin as a development-only pilot and design-freeze candidate. Confirmatory configuration, execution, and interpretation remain forbidden until their later gates pass.
+
+## Slice 3 Engineering Closeout Receipt
+
+Status: engineering and design-freeze candidate complete; external pre-freeze QA pending
+
+Closeout commit: pending
+
+### Implemented
+
+- A case-neutral constrained generator materializes the full 108-family Cartesian design and a deterministic, outcome-independent 15-family development subset selected for factor-level and pairwise coverage.
+- The pilot runs all five policies on identical case membership and keyed exogenous inputs within each family-seed pair. It stores aggregate cell summaries, applicable paired contrasts, MCSE, common-random-number diagnostics, runtime prediction, stage-aware censoring, and a development-only claim boundary.
+- The candidate design fixes an 80-case cohort, finite load-derived initiation windows, day-650 administrative cutoff, 30 minimum and 60 maximum paired replications, 0.05 rate MCSE target, 0.06 paired-difference target, direction-blind family-wide extension rule, and 24-hour core plus separate 24-hour extension ceilings.
+- The dummy analysis pipeline exercises all aggregate cell and paired-estimate contracts without reading study output. Two deterministic SVG prototypes rehearse the capacity/timeout and information/workload displays.
+- An alternate synthetic profile identity compiles and executes through the unchanged engine with distinct configuration identity but identical cohort, event, and telemetry results.
+- `RB-WORKED-TRACE-001` now compiles both arms with complete parameter receipts, executes as a deterministic stored trace, and renders a separate blinded packet and withheld expected profile. Its U3 capability extension is explicitly study-owned and makes no historical early-OCI capability claim.
+- A closed-allowlist Slice 3 bundle builder distributes only the protocol, Robodebt packet, transfer canary, blank receipt, instructions, and byte manifest. Both oracles and the executable trace artifact are forbidden.
+- The application sufficiency review, pilot audit, protocol/application revision log, and pre-freeze QA receipt are stored. No confirmatory output was generated or inspected.
+
+### Pilot diagnostics and decisions
+
+- 15 families x 6 replications x 48 cases x 5 policies produced 21,600 case-policy runs in approximately 8.4 seconds on the development environment.
+- Measured throughput predicted approximately 8.4 minutes for the candidate 108-family, 30-replication, 80-case core, below the 24-hour ceiling.
+- Maximum applicable pilot cell and paired MCSE was approximately 0.110. The prespecified square-root projection to 30 replications was approximately 0.049, meeting both candidate targets; the six-replication pilot itself deliberately did not.
+- Mean U2C timely-review effectiveness changed from approximately 0.922 at load 0.6 to 0.601 at 0.95 and 0.324 at 1.2. This is a development diagnostic showing that queue dynamics are active, not a confirmatory estimate.
+- Timely decision service and terminal restoration are now reported separately. Ongoing recovery exposure and unresolved holds remain right-censored by reason rather than being relabeled resolved.
+
+### Verification
+
+| Command | Result |
+| --- | --- |
+| `PYTHONPATH=src ./.venv/bin/python -m uncertainty_permission_simulation.cli validate experiments/configs/pilot_v1.yaml` | pass: 15 development families, five policies, six pilot replications, stable config and scenario hashes |
+| `PYTHONPATH=src ./.venv/bin/python -m uncertainty_permission_simulation.cli pilot experiments/configs/pilot_v1.yaml` | pass: stored aggregate receipt and ignored detailed development rows; no confirmatory path invoked |
+| `PYTHONPATH=src ./.venv/bin/python -m uncertainty_permission_simulation.cli worked-trace experiments/configs/pilot_v1.yaml` | pass: deterministic `RB-WORKED-TRACE-001` artifact plus separated packet/oracle renderings |
+| `./.venv/bin/python scripts/build_slice3_reader_bundle.py --reader-id CR-S3-TEST --output outputs/cold_reader/CR-S3-TEST.zip` | pass: six-file oracle-free archive with byte manifest |
+| `PYTHONPATH=src ./.venv/bin/python scripts/validate_slice3.py` | pass: pilot, precision/runtime, dynamic audit, adapter swap, dummy analysis, figures, trace, packet separation, and no-confirmatory-output gates |
+| `PYTHONPATH=src ./.venv/bin/python -m pytest -q` | pass: 154 tests |
+| `./.venv/bin/python scripts/validate_plan.py` and `./.venv/bin/python scripts/validate_slice0.py` | pass before closeout documentation update; rerun required after this control-artifact change |
+| Slice 1/2 smoke CLIs | pass; prior deterministic and stochastic paths retained |
+
+Tracked pilot receipt: `data/pilot/pilot_v1_receipt.json` with self-hash recorded inside the artifact. Tracked worked-trace receipt: `data/golden_traces/robodebt_worked_trace_v1.json` with self-hash recorded inside the artifact.
+
+### Residual risk and next gate
+
+- The pilot calibrates design and implementation only. Its direction and magnitudes are not manuscript findings.
+- Independent eligible-reader returns cannot be created or certified by the drafting agent. At least two valid packet-only returns, oracle comparison, disagreement resolution, and any required new-reader rerun remain mandatory before protocol `1.0` and Slice 4.
+- Literature/citation expansion, extended-article invitation verification, and the authoritative-source identity rule also remain open pre-freeze dependencies.
+- Confirmatory configuration, freeze manifest, execution, and results interpretation remain forbidden until all pre-freeze dependencies close.

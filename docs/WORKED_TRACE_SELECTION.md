@@ -1,6 +1,6 @@
 # Prespecified Worked-Trace Rule
 
-Status: Slice 0 fixed selection semantics; executable trace pending Slice 1/2
+Status: fixed selection semantics; executable Slice 3 trace and blinded/oracle renderings available; independent QA pending
 
 Specification: `data/scenarios/worked_trace_spec_v1.yaml`
 

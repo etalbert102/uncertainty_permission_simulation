@@ -134,7 +134,7 @@ def validate_preregistration(prereg: str) -> None:
             "U3",
             "maximum no greater than 100 per family",
             "family-wide extension rule",
-            "no pilot or confirmatory results inspected",
+            "development pilot inspected; no confirmatory results generated or inspected",
         ),
         "preregistration",
     )

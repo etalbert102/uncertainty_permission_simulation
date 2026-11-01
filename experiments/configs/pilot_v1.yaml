@@ -1,0 +1,60 @@
+config_id: SLICE3-DEVELOPMENT-PILOT-V1
+mode: development_pilot
+purpose: development-only runtime, precision, censoring, and interpretability calibration; not confirmatory evidence
+policy_ids: [U0, U1, U2C, U2O, U3]
+cohort_size: 48
+replications: 6
+seed_prefix: SLICE3-PILOT-SEED-V1
+development_family_count: 15
+scenario_selection_rule: deterministic greedy pairwise factor-level coverage without outcome inspection
+base_overlay:
+  overlay_id: SLICE3-BASE-STYLIZED-OVERLAY@1
+  provenance: stylized
+  initiation_window: "100"
+  notice_delay: "1"
+  response_deadline: "21"
+  review_capacity: "2"
+  review_service_time: "10"
+  review_service_window: "14"
+  extension_duration: "7"
+  notice_delivery_probability: "0.95"
+  administrative_access_probability: "0.8"
+  comprehension_probability: "0.85"
+  record_availability_probability: "0.7"
+  response_effort_limit: "0.55"
+  assistance_effort_bonus: "0.3"
+  assistance_capacity: "2"
+  assistance_service_time: "5"
+  assistance_service_window: "21"
+  extension_effort_bonus: "0.15"
+  extension_need_probability: "0.25"
+  evidence_retrieval_success_probability: "0.7"
+  evidence_retrieval_latency_scale: "10"
+  external_consequence_delay: "1"
+  recovery_start_delay: "2"
+  recovery_capacity: "2"
+  recovery_service_time: "8"
+  recovery_window: "20"
+  correction_request_delay: "7"
+  correction_uptake_probability: "0.5"
+  reassessment_capacity: "2"
+  reassessment_service_time: "10"
+  correction_window: "14"
+  restoration_delay: "5"
+  restoration_window: "50"
+  administrative_cutoff: "650"
+precision:
+  minimum_replications: 30
+  maximum_replications: 60
+  target_rate_mcse: 0.05
+  target_paired_mcse: 0.06
+  extension_rule: if any primary metric exceeds its target after 30 replications, extend every policy in every valid family to 60 replications using the next frozen seeds
+runtime:
+  pilot_ceiling_seconds: 7200
+  confirmatory_cohort_size: 80
+  confirmatory_replications: 30
+  confirmatory_ceiling_seconds: 86400
+  extension_ceiling_seconds: 86400
+outputs:
+  development_output_path: outputs/slice3/pilot_v1_detailed.json
+  stored_receipt_path: data/pilot/pilot_v1_receipt.json

@@ -1,6 +1,6 @@
 # Study Plan: Flexible Dynamic Uncertainty-to-Permission Kernel — Robodebt Application
 
-Status: execution-ready research and implementation plan; no simulator, pilot, or confirmatory results exist
+Status: Slices 0-2 complete; Slice 3 engineering/design-freeze candidate complete; external pre-freeze gates pending; no confirmatory results exist
 
 Working article title: *When Uncertainty Expands Authority: Formalizing and Stress-Testing Automated Decision Workflows Through Robodebt*
 

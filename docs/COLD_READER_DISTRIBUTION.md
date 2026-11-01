@@ -7,9 +7,19 @@ Status: Slice 0 distribution control; no valid reader returns recorded
 The repository uses two distinct artifact-QA stages:
 
 1. **Slice 0 construct-readability QA:** eligible readers receive the representation-preservation packet and transfer canary. This checks whether the protocol and construct boundaries can be applied before simulator implementation.
-2. **Slice 3 pre-freeze protocol QA:** new eligible readers receive the executable, prespecified Robodebt worked-trace packet and the transfer canary. This checks the Level C/trace-facing protocol before version `1.0` freezes.
+2. **Slice 3 pre-freeze protocol QA:** new eligible readers receive the executable, prespecified Robodebt worked-trace packet and the transfer canary. This checks the trace-facing protocol before version `1.0` freezes.
 
-The P0 packet is not a Robodebt trace. It tests continuity with the short essay. The future Robodebt packet must be rendered from `RB-WORKED-TRACE-001` after the executable trace exists; it must not be substituted with P0 in a receipt labeled “Robodebt.”
+The P0 packet is not a Robodebt trace. It tests continuity with the short essay. The Slice 3 Robodebt packet is rendered from executable artifact `RB-WORKED-TRACE-001`; P0 must not substitute for it in a receipt labeled “Robodebt.”
+
+## Build a Slice 3 bundle
+
+```bash
+python3 scripts/build_slice3_reader_bundle.py \
+  --reader-id CR-S3-001 \
+  --output outputs/cold_reader/CR-S3-001.zip
+```
+
+The Slice 3 builder distributes only the protocol, generated Robodebt packet, transfer canary, blank Slice 3 receipt, instructions, and byte-hash manifest. It explicitly forbids both withheld expected profiles and the executable trace artifact.
 
 ## Eligibility
 
@@ -56,4 +66,4 @@ Agreement is not the only outcome. Unsupported certainty, owner conflation, omit
 
 ## Current Boundary
 
-No completed receipt is stored as of 2026-10-31. The drafting agent cannot certify independence. Slice 0 may be marked source-and-specification complete only after the project lead decides whether the preliminary independent-reader gate is satisfied; protocol version `1.0` and confirmatory freeze remain blocked until valid pre-freeze QA is complete.
+No completed eligible-reader receipt is stored as of 2026-11-01. The drafting agent cannot certify independence. The Slice 3 packets and oracle-free builder are ready, but protocol version `1.0` and confirmatory freeze remain blocked until at least two valid pre-freeze returns are locked, compared, and resolved under the stated rules.

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="440" viewBox="0 0 760 440">
+<rect width="100%" height="100%" fill="white"/>
+<text x="30" y="34" font-family="sans-serif" font-size="20">Information-first workload/burden tradeoff</text>
+<text x="30" y="58" font-family="sans-serif" font-size="12" fill="#444">U3-minus-U0 paired development estimates; centered axes are provisional</text>
+<line x1="70" y1="370" x2="710" y2="370" stroke="#222"/>
+<line x1="70" y1="80" x2="70" y2="370" stroke="#222"/>
+<polyline points="549.67,124.03 664.00,80.00 641.66,106.57 587.13,90.63 591.72,103.15 673.20,123.27 535.22,129.35 556.90,138.46 556.90,105.05 587.13,99.74 565.44,133.14 602.90,127.45 633.12,111.51 650.21,88.73 710.00,82.66" fill="none" stroke="#2E8B57" stroke-width="3"/>
+<circle cx="549.67" cy="124.03" r="4" fill="#2E8B57"/>
+<circle cx="664.00" cy="80.00" r="4" fill="#2E8B57"/>
+<circle cx="641.66" cy="106.57" r="4" fill="#2E8B57"/>
+<circle cx="587.13" cy="90.63" r="4" fill="#2E8B57"/>
+<circle cx="591.72" cy="103.15" r="4" fill="#2E8B57"/>
+<circle cx="673.20" cy="123.27" r="4" fill="#2E8B57"/>
+<circle cx="535.22" cy="129.35" r="4" fill="#2E8B57"/>
+<circle cx="556.90" cy="138.46" r="4" fill="#2E8B57"/>
+<circle cx="556.90" cy="105.05" r="4" fill="#2E8B57"/>
+<circle cx="587.13" cy="99.74" r="4" fill="#2E8B57"/>
+<circle cx="565.44" cy="133.14" r="4" fill="#2E8B57"/>
+<circle cx="602.90" cy="127.45" r="4" fill="#2E8B57"/>
+<circle cx="633.12" cy="111.51" r="4" fill="#2E8B57"/>
+<circle cx="650.21" cy="88.73" r="4" fill="#2E8B57"/>
+<circle cx="710.00" cy="82.66" r="4" fill="#2E8B57"/>
+<line x1="530" y1="92" x2="550" y2="92" stroke="#2E8B57" stroke-width="3"/>
+<text x="558" y="96" font-family="sans-serif" font-size="11">scenario families</text>
+<text x="380" y="425" text-anchor="middle" font-family="sans-serif" font-size="11">Prototype only — axes and labels freeze before confirmatory execution</text>
+</svg>

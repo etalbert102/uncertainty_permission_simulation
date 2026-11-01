@@ -1,0 +1,1032 @@
+{
+  "arms": {
+    "baseline": {
+      "events": [
+        {
+          "day": 0,
+          "details": {
+            "amount": 3000,
+            "evidence_type": "annual_aggregate",
+            "provenance": "observed_aggregate"
+          },
+          "event_id": "B-01",
+          "event_type": "SOURCE_EVIDENCE_INGESTED"
+        },
+        {
+          "day": 0,
+          "details": {
+            "status": "not_received_before_deadline"
+          },
+          "event_id": "B-02",
+          "event_type": "NOTICE_FAILED"
+        },
+        {
+          "day": 21,
+          "details": {
+            "deadline_basis": "documented_early_profile_21_day_clock"
+          },
+          "event_id": "B-03",
+          "event_type": "DEADLINE_REACHED"
+        },
+        {
+          "day": 22,
+          "details": {
+            "inferential_status": "imputed",
+            "transformation": "aggregate_evenly_apportioned_across_periods",
+            "uncertainty_surfaced": false
+          },
+          "event_id": "B-04",
+          "event_type": "REPRESENTATION_APPLIED"
+        },
+        {
+          "day": 22,
+          "details": {
+            "action": "modeled_debt_assertion",
+            "formal_authority_claim": "source_attributed_only_not_decided_by_simulation",
+            "functional_permission": true,
+            "period_specific_support": false
+          },
+          "event_id": "B-05",
+          "event_type": "PROGRESSION_EXECUTED"
+        },
+        {
+          "day": 25,
+          "details": {
+            "action": "modeled_recovery_exposure"
+          },
+          "event_id": "B-06",
+          "event_type": "EXTERNAL_CONSEQUENCE_STARTED"
+        },
+        {
+          "day": 40,
+          "details": {
+            "evidence_type": "period_specific_records",
+            "provenance": "stylized_later_recipient_evidence"
+          },
+          "event_id": "B-07",
+          "event_type": "EVIDENCE_SUBMITTED"
+        },
+        {
+          "day": 45,
+          "details": {
+            "decision": "modeled_debt_reduced_or_zeroed"
+          },
+          "event_id": "B-08",
+          "event_type": "REASSESSMENT_COMPLETED"
+        },
+        {
+          "day": 45,
+          "details": {
+            "decision_state": "baseline",
+            "recovery_state": "baseline"
+          },
+          "event_id": "B-09",
+          "event_type": "CORRECTION_EXECUTED"
+        },
+        {
+          "day": 60,
+          "details": {
+            "residual_external_consequence": true,
+            "restoration_status": "partial"
+          },
+          "event_id": "B-10",
+          "event_type": "RESTORATION_EVALUATED"
+        }
+      ],
+      "policy_id": "U1"
+    },
+    "repair": {
+      "events": [
+        {
+          "day": 0,
+          "details": {
+            "amount": 3000,
+            "evidence_type": "annual_aggregate",
+            "provenance": "observed_aggregate"
+          },
+          "event_id": "R-01",
+          "event_type": "SOURCE_EVIDENCE_INGESTED"
+        },
+        {
+          "day": 0,
+          "details": {
+            "notice_received_before_deadline": false
+          },
+          "event_id": "R-02",
+          "event_type": "ACCESS_PROBLEM_RECORDED"
+        },
+        {
+          "day": 1,
+          "details": {
+            "reason": "period_specific_support_missing"
+          },
+          "event_id": "R-03",
+          "event_type": "PROGRESSION_HELD"
+        },
+        {
+          "day": 1,
+          "details": {
+            "evidence_type": "period_specific_records",
+            "owner": "agency"
+          },
+          "event_id": "R-04",
+          "event_type": "EVIDENCE_REQUESTED"
+        },
+        {
+          "day": 10,
+          "details": {
+            "provenance": "stylized_third_party_record",
+            "retrieval_success": true
+          },
+          "event_id": "R-05",
+          "event_type": "EXTERNAL_EVIDENCE_RETURNED"
+        },
+        {
+          "day": 15,
+          "details": {
+            "action": "no_unsupported_progression",
+            "period_specific_support": true
+          },
+          "event_id": "R-06",
+          "event_type": "SUPPORTED_DISPOSITION_RECORDED"
+        },
+        {
+          "day": 15,
+          "details": {
+            "external_consequence_started": false
+          },
+          "event_id": "R-07",
+          "event_type": "CASE_CLOSED"
+        }
+      ],
+      "policy_id": "U3"
+    }
+  },
+  "artifact_hash": "8a37755cd17cbfccd38a51d266599cf38d9975a8d6a89b2302b69c2b6216ef43",
+  "artifact_kind": "prespecified_worked_trace",
+  "assessments": {
+    "baseline": [
+      {
+        "application_level": "bounded_deterministic_trace",
+        "arm": "baseline",
+        "claim_limit": "bounded explanatory trace; not representative, historical calibration, legal conclusion, or attackability evidence",
+        "completeness": "complete",
+        "diagnostic": "IMPUTATION_PROVENANCE_SUPPRESSED",
+        "diagnostic_owner": "representation owner",
+        "evaluation_state": "assessed",
+        "intervention_owner": "interface and policy owner",
+        "property_id": "F0",
+        "status": "fail",
+        "tradeoff": "surfacing may slow progression"
+      },
+      {
+        "application_level": "bounded_deterministic_trace",
+        "arm": "baseline",
+        "claim_limit": "bounded explanatory trace; not representative, historical calibration, legal conclusion, or attackability evidence",
+        "completeness": "complete",
+        "diagnostic": "ROBUST_PERMISSION_VIOLATION",
+        "diagnostic_owner": "permission-rule owner",
+        "evaluation_state": "assessed",
+        "intervention_owner": "gate owner",
+        "property_id": "F1",
+        "status": "fail",
+        "tradeoff": "holding action delays disposition"
+      },
+      {
+        "application_level": "bounded_deterministic_trace",
+        "arm": "baseline",
+        "claim_limit": "bounded explanatory trace; not representative, historical calibration, legal conclusion, or attackability evidence",
+        "completeness": "partial",
+        "diagnostic": "INTERVENTION_SCOPE_INCOMPLETE",
+        "diagnostic_owner": "simulation owner",
+        "evaluation_state": "assessed",
+        "intervention_owner": "simulation owner",
+        "property_id": "F2",
+        "status": "unassessable",
+        "tradeoff": "cohort spillovers are outside this one-case trace"
+      },
+      {
+        "application_level": "bounded_deterministic_trace",
+        "arm": "baseline",
+        "claim_limit": "bounded explanatory trace; not representative, historical calibration, legal conclusion, or attackability evidence",
+        "completeness": "complete",
+        "diagnostic": "EFFECTIVE_REVIEW_ABSENT",
+        "diagnostic_owner": "process owner",
+        "evaluation_state": "assessed",
+        "intervention_owner": "review and gate owner",
+        "property_id": "F3",
+        "status": "fail",
+        "tradeoff": "pre-action review consumes capacity"
+      },
+      {
+        "application_level": "bounded_deterministic_trace",
+        "arm": "baseline",
+        "claim_limit": "bounded explanatory trace; not representative, historical calibration, legal conclusion, or attackability evidence",
+        "completeness": "complete",
+        "diagnostic": "MATERIAL_UNCERTAINTY_NOT_SURFACED",
+        "diagnostic_owner": "representation owner",
+        "evaluation_state": "assessed",
+        "intervention_owner": "interface owner",
+        "property_id": "F4",
+        "status": "fail",
+        "tradeoff": "additional context may increase reviewer burden"
+      },
+      {
+        "application_level": "bounded_deterministic_trace",
+        "arm": "baseline",
+        "claim_limit": "bounded explanatory trace; not representative, historical calibration, legal conclusion, or attackability evidence",
+        "completeness": "complete",
+        "diagnostic": "RESTORATION_PARTIAL",
+        "diagnostic_owner": "reassessment owner",
+        "evaluation_state": "assessed",
+        "intervention_owner": "restoration owner",
+        "property_id": "F5",
+        "status": "fail",
+        "tradeoff": "complete restoration may require broader remediation"
+      }
+    ],
+    "repair": [
+      {
+        "application_level": "bounded_deterministic_trace",
+        "arm": "repair",
+        "claim_limit": "bounded explanatory trace; not representative, historical calibration, legal conclusion, or attackability evidence",
+        "completeness": "complete",
+        "diagnostic": "EVIDENCE_STATUS_PRESERVED",
+        "diagnostic_owner": "evidence owner",
+        "evaluation_state": "assessed",
+        "intervention_owner": "information-service owner",
+        "property_id": "F0",
+        "status": "pass",
+        "tradeoff": "evidence acquisition adds workload"
+      },
+      {
+        "application_level": "bounded_deterministic_trace",
+        "arm": "repair",
+        "claim_limit": "bounded explanatory trace; not representative, historical calibration, legal conclusion, or attackability evidence",
+        "completeness": "complete",
+        "diagnostic": "PROGRESSION_WITHHELD_UNTIL_SUPPORTED",
+        "diagnostic_owner": "permission-rule owner",
+        "evaluation_state": "assessed",
+        "intervention_owner": "gate owner",
+        "property_id": "F1",
+        "status": "pass",
+        "tradeoff": "supported disposition takes longer"
+      },
+      {
+        "application_level": "bounded_deterministic_trace",
+        "arm": "repair",
+        "claim_limit": "bounded explanatory trace; not representative, historical calibration, legal conclusion, or attackability evidence",
+        "completeness": "partial",
+        "diagnostic": "INTERVENTION_SCOPE_INCOMPLETE",
+        "diagnostic_owner": "simulation owner",
+        "evaluation_state": "assessed",
+        "intervention_owner": "simulation owner",
+        "property_id": "F2",
+        "status": "unassessable",
+        "tradeoff": "cohort spillovers are outside this one-case trace"
+      },
+      {
+        "application_level": "bounded_deterministic_trace",
+        "arm": "repair",
+        "claim_limit": "bounded explanatory trace; not representative, historical calibration, legal conclusion, or attackability evidence",
+        "completeness": "complete",
+        "diagnostic": "NO_PRE_ACTION_PROGRESSION_REQUIRING_REVIEW",
+        "diagnostic_owner": "process owner",
+        "evaluation_state": "assessed",
+        "intervention_owner": "policy owner",
+        "property_id": "F3",
+        "status": "not_applicable",
+        "tradeoff": "a different progression path could require review"
+      },
+      {
+        "application_level": "bounded_deterministic_trace",
+        "arm": "repair",
+        "claim_limit": "bounded explanatory trace; not representative, historical calibration, legal conclusion, or attackability evidence",
+        "completeness": "complete",
+        "diagnostic": "ACTION_RELEVANT_EVIDENCE_SURFACED",
+        "diagnostic_owner": "representation owner",
+        "evaluation_state": "assessed",
+        "intervention_owner": "interface owner",
+        "property_id": "F4",
+        "status": "pass",
+        "tradeoff": "surfacing requires provenance maintenance"
+      },
+      {
+        "application_level": "bounded_deterministic_trace",
+        "arm": "repair",
+        "claim_limit": "bounded explanatory trace; not representative, historical calibration, legal conclusion, or attackability evidence",
+        "completeness": "complete",
+        "diagnostic": "NO_ADVERSE_ACTION_OR_RESTORATION_DUE",
+        "diagnostic_owner": "process owner",
+        "evaluation_state": "assessed",
+        "intervention_owner": "policy owner",
+        "property_id": "F5",
+        "status": "not_applicable",
+        "tradeoff": "avoidance is not evidence of restoration capability"
+      }
+    ]
+  },
+  "claim_limits": [
+    "This trace is explanatory and not statistically representative.",
+    "Synthetic currency values do not reproduce a historical debt calculation.",
+    "The baseline arm is a structural source-grounded comparator, not a legal conclusion.",
+    "The repair arm is counterfactual and not a description of a historical deployed policy.",
+    "No attackability condition is established."
+  ],
+  "compilation": {
+    "baseline": {
+      "application_mapping_id": "R-OCI-EARLY-WORKED-TRACE-MAPPING@1",
+      "compiler_code_hash": "f515064a78ad53b4b94d5aea7fab92db2a5659a5e126da60634e5f2a1c63eec2",
+      "configuration_id": "RB-WORKED-TRACE-001-U1",
+      "evaluation_spec_id": "RB-WORKED-TRACE-EVALUATION@1",
+      "overlay_id": "RB-WORKED-TRACE-STYLIZED-OVERLAY@1",
+      "policy_profile": {
+        "gate_semantics": "none",
+        "parameter_slot_ids": [
+          "review_service_time",
+          "response_deadline",
+          "review_capacity",
+          "notice_delay"
+        ],
+        "profile_id": "U1",
+        "required_action_type_ids": [
+          "hold",
+          "progress",
+          "correct",
+          "restore"
+        ],
+        "required_capabilities": [
+          "response",
+          "progression",
+          "routing",
+          "notice",
+          "representation"
+        ]
+      },
+      "process_profile": {
+        "action_type_ids": [
+          "hold",
+          "restore",
+          "correct",
+          "reassess",
+          "review",
+          "recover",
+          "request_evidence",
+          "progress"
+        ],
+        "capabilities": [
+          "response",
+          "progression",
+          "routing",
+          "review",
+          "notice",
+          "restoration",
+          "representation",
+          "correction",
+          "recovery",
+          "reassessment"
+        ],
+        "documented_parameters": [
+          {
+            "owner_id": "R-OCI-Early@1",
+            "provenance": "documented",
+            "slot_id": "response_deadline",
+            "value": 21
+          },
+          {
+            "owner_id": "R-OCI-Early@1",
+            "provenance": "unsupported",
+            "slot_id": "review_capacity",
+            "value": null
+          },
+          {
+            "owner_id": "R-OCI-Early@1",
+            "provenance": "unsupported",
+            "slot_id": "review_service_time",
+            "value": null
+          }
+        ],
+        "parameter_slot_ids": [
+          "response_effort_limit",
+          "initiation_window",
+          "review_service_window",
+          "assistance_service_window",
+          "response_deadline",
+          "notice_delivery_probability",
+          "reassessment_capacity",
+          "correction_uptake_probability",
+          "correction_window",
+          "evidence_retrieval_latency_scale",
+          "reassessment_service_time",
+          "notice_delay",
+          "record_availability_probability",
+          "extension_duration",
+          "administrative_cutoff",
+          "restoration_delay",
+          "review_service_time",
+          "external_consequence_delay",
+          "evidence_retrieval_success_probability",
+          "recovery_start_delay",
+          "recovery_capacity",
+          "recovery_service_time",
+          "comprehension_probability",
+          "assistance_capacity",
+          "recovery_window",
+          "correction_request_delay",
+          "assistance_effort_bonus",
+          "assistance_service_time",
+          "restoration_window",
+          "review_capacity",
+          "extension_need_probability",
+          "extension_effort_bonus",
+          "administrative_access_probability"
+        ],
+        "profile_id": "R-OCI-Early-STOCHASTIC-CAPABILITIES@1",
+        "stage_ids": [
+          "source_records",
+          "discrepancy_candidate",
+          "response_window_open",
+          "response_or_timeout",
+          "evidence_assessment",
+          "evidence_assessment_or_imputation",
+          "entitlement_result",
+          "debt_asserted",
+          "officer_assessment",
+          "imputed_fortnightly_income",
+          "revised_or_unchanged_debt",
+          "arrival",
+          "notice",
+          "response",
+          "routing",
+          "review",
+          "action",
+          "recovery",
+          "correction",
+          "reassessment",
+          "restoration",
+          "closed"
+        ]
+      },
+      "receipts": [
+        {
+          "owner_id": "RB-WORKED-TRACE-STYLIZED-OVERLAY@1",
+          "provenance": "stylized",
+          "slot_id": "administrative_access_probability",
+          "value": "0.8"
+        },
+        {
+          "owner_id": "RB-WORKED-TRACE-STYLIZED-OVERLAY@1",
+          "provenance": "stylized",
+          "slot_id": "administrative_cutoff",
+          "value": "60"
+        },
+        {
+          "owner_id": "RB-WORKED-TRACE-STYLIZED-OVERLAY@1",
+          "provenance": "stylized",
+          "slot_id": "assistance_capacity",
+          "value": "2"
+        },
+        {
+          "owner_id": "RB-WORKED-TRACE-STYLIZED-OVERLAY@1",
+          "provenance": "stylized",
+          "slot_id": "assistance_effort_bonus",
+          "value": "0.3"
+        },
+        {
+          "owner_id": "RB-WORKED-TRACE-STYLIZED-OVERLAY@1",
+          "provenance": "stylized",
+          "slot_id": "assistance_service_time",
+          "value": "5"
+        },
+        {
+          "owner_id": "RB-WORKED-TRACE-STYLIZED-OVERLAY@1",
+          "provenance": "stylized",
+          "slot_id": "assistance_service_window",
+          "value": "21"
+        },
+        {
+          "owner_id": "RB-WORKED-TRACE-STYLIZED-OVERLAY@1",
+          "provenance": "stylized",
+          "slot_id": "comprehension_probability",
+          "value": "0.85"
+        },
+        {
+          "owner_id": "RB-WORKED-TRACE-STYLIZED-OVERLAY@1",
+          "provenance": "stylized",
+          "slot_id": "correction_request_delay",
+          "value": "7"
+        },
+        {
+          "owner_id": "RB-WORKED-TRACE-STYLIZED-OVERLAY@1",
+          "provenance": "stylized",
+          "slot_id": "correction_uptake_probability",
+          "value": "0.5"
+        },
+        {
+          "owner_id": "RB-WORKED-TRACE-STYLIZED-OVERLAY@1",
+          "provenance": "stylized",
+          "slot_id": "correction_window",
+          "value": "14"
+        },
+        {
+          "owner_id": "RB-WORKED-TRACE-STYLIZED-OVERLAY@1",
+          "provenance": "stylized",
+          "slot_id": "evidence_retrieval_latency_scale",
+          "value": "10"
+        },
+        {
+          "owner_id": "RB-WORKED-TRACE-STYLIZED-OVERLAY@1",
+          "provenance": "stylized",
+          "slot_id": "evidence_retrieval_success_probability",
+          "value": "0.7"
+        },
+        {
+          "owner_id": "RB-WORKED-TRACE-STYLIZED-OVERLAY@1",
+          "provenance": "stylized",
+          "slot_id": "extension_duration",
+          "value": "7"
+        },
+        {
+          "owner_id": "RB-WORKED-TRACE-STYLIZED-OVERLAY@1",
+          "provenance": "stylized",
+          "slot_id": "extension_effort_bonus",
+          "value": "0.15"
+        },
+        {
+          "owner_id": "RB-WORKED-TRACE-STYLIZED-OVERLAY@1",
+          "provenance": "stylized",
+          "slot_id": "extension_need_probability",
+          "value": "0.25"
+        },
+        {
+          "owner_id": "RB-WORKED-TRACE-STYLIZED-OVERLAY@1",
+          "provenance": "stylized",
+          "slot_id": "external_consequence_delay",
+          "value": "1"
+        },
+        {
+          "owner_id": "RB-WORKED-TRACE-STYLIZED-OVERLAY@1",
+          "provenance": "stylized",
+          "slot_id": "initiation_window",
+          "value": "1"
+        },
+        {
+          "owner_id": "RB-WORKED-TRACE-STYLIZED-OVERLAY@1",
+          "provenance": "stylized",
+          "slot_id": "notice_delay",
+          "value": "1"
+        },
+        {
+          "owner_id": "RB-WORKED-TRACE-STYLIZED-OVERLAY@1",
+          "provenance": "stylized",
+          "slot_id": "notice_delivery_probability",
+          "value": "0.95"
+        },
+        {
+          "owner_id": "RB-WORKED-TRACE-STYLIZED-OVERLAY@1",
+          "provenance": "stylized",
+          "slot_id": "reassessment_capacity",
+          "value": "2"
+        },
+        {
+          "owner_id": "RB-WORKED-TRACE-STYLIZED-OVERLAY@1",
+          "provenance": "stylized",
+          "slot_id": "reassessment_service_time",
+          "value": "10"
+        },
+        {
+          "owner_id": "RB-WORKED-TRACE-STYLIZED-OVERLAY@1",
+          "provenance": "stylized",
+          "slot_id": "record_availability_probability",
+          "value": "0.7"
+        },
+        {
+          "owner_id": "RB-WORKED-TRACE-STYLIZED-OVERLAY@1",
+          "provenance": "stylized",
+          "slot_id": "recovery_capacity",
+          "value": "2"
+        },
+        {
+          "owner_id": "RB-WORKED-TRACE-STYLIZED-OVERLAY@1",
+          "provenance": "stylized",
+          "slot_id": "recovery_service_time",
+          "value": "8"
+        },
+        {
+          "owner_id": "RB-WORKED-TRACE-STYLIZED-OVERLAY@1",
+          "provenance": "stylized",
+          "slot_id": "recovery_start_delay",
+          "value": "2"
+        },
+        {
+          "owner_id": "RB-WORKED-TRACE-STYLIZED-OVERLAY@1",
+          "provenance": "stylized",
+          "slot_id": "recovery_window",
+          "value": "20"
+        },
+        {
+          "owner_id": "R-OCI-Early@1",
+          "provenance": "documented",
+          "slot_id": "response_deadline",
+          "value": 21
+        },
+        {
+          "owner_id": "RB-WORKED-TRACE-STYLIZED-OVERLAY@1",
+          "provenance": "stylized",
+          "slot_id": "response_effort_limit",
+          "value": "0.55"
+        },
+        {
+          "owner_id": "RB-WORKED-TRACE-STYLIZED-OVERLAY@1",
+          "provenance": "stylized",
+          "slot_id": "restoration_delay",
+          "value": "5"
+        },
+        {
+          "owner_id": "RB-WORKED-TRACE-STYLIZED-OVERLAY@1",
+          "provenance": "stylized",
+          "slot_id": "restoration_window",
+          "value": "50"
+        },
+        {
+          "owner_id": "RB-WORKED-TRACE-STYLIZED-OVERLAY@1",
+          "provenance": "stylized",
+          "slot_id": "review_capacity",
+          "value": "2"
+        },
+        {
+          "owner_id": "RB-WORKED-TRACE-STYLIZED-OVERLAY@1",
+          "provenance": "stylized",
+          "slot_id": "review_service_time",
+          "value": "10"
+        },
+        {
+          "owner_id": "RB-WORKED-TRACE-STYLIZED-OVERLAY@1",
+          "provenance": "stylized",
+          "slot_id": "review_service_window",
+          "value": "14"
+        }
+      ],
+      "unresolved_parameter_slot_ids": []
+    },
+    "counterfactual_process_extension": {
+      "capabilities": [
+        "assistance",
+        "evidence_acquisition",
+        "extension"
+      ],
+      "historical_claim": false,
+      "provenance": "stylized_counterfactual"
+    },
+    "repair": {
+      "application_mapping_id": "R-OCI-EARLY-WORKED-TRACE-MAPPING@1",
+      "compiler_code_hash": "f515064a78ad53b4b94d5aea7fab92db2a5659a5e126da60634e5f2a1c63eec2",
+      "configuration_id": "RB-WORKED-TRACE-001-U3",
+      "evaluation_spec_id": "RB-WORKED-TRACE-EVALUATION@1",
+      "overlay_id": "RB-WORKED-TRACE-STYLIZED-OVERLAY@1",
+      "policy_profile": {
+        "gate_semantics": "fail_closed",
+        "parameter_slot_ids": [
+          "review_service_time",
+          "response_deadline",
+          "review_capacity",
+          "notice_delay"
+        ],
+        "profile_id": "U3",
+        "required_action_type_ids": [
+          "hold",
+          "progress",
+          "request_evidence"
+        ],
+        "required_capabilities": [
+          "response",
+          "progression",
+          "routing",
+          "review",
+          "notice",
+          "extension",
+          "assistance",
+          "representation",
+          "evidence_acquisition"
+        ]
+      },
+      "process_profile": {
+        "action_type_ids": [
+          "hold",
+          "restore",
+          "correct",
+          "reassess",
+          "review",
+          "recover",
+          "request_evidence",
+          "progress"
+        ],
+        "capabilities": [
+          "response",
+          "progression",
+          "routing",
+          "review",
+          "notice",
+          "restoration",
+          "extension",
+          "assistance",
+          "representation",
+          "correction",
+          "recovery",
+          "evidence_acquisition",
+          "reassessment"
+        ],
+        "documented_parameters": [
+          {
+            "owner_id": "R-OCI-Early@1",
+            "provenance": "documented",
+            "slot_id": "response_deadline",
+            "value": 21
+          },
+          {
+            "owner_id": "R-OCI-Early@1",
+            "provenance": "unsupported",
+            "slot_id": "review_capacity",
+            "value": null
+          },
+          {
+            "owner_id": "R-OCI-Early@1",
+            "provenance": "unsupported",
+            "slot_id": "review_service_time",
+            "value": null
+          }
+        ],
+        "parameter_slot_ids": [
+          "response_effort_limit",
+          "initiation_window",
+          "review_service_window",
+          "assistance_service_window",
+          "response_deadline",
+          "notice_delivery_probability",
+          "reassessment_capacity",
+          "correction_uptake_probability",
+          "correction_window",
+          "evidence_retrieval_latency_scale",
+          "reassessment_service_time",
+          "notice_delay",
+          "record_availability_probability",
+          "extension_duration",
+          "administrative_cutoff",
+          "restoration_delay",
+          "review_service_time",
+          "external_consequence_delay",
+          "evidence_retrieval_success_probability",
+          "recovery_start_delay",
+          "recovery_capacity",
+          "recovery_service_time",
+          "comprehension_probability",
+          "assistance_capacity",
+          "recovery_window",
+          "correction_request_delay",
+          "assistance_effort_bonus",
+          "assistance_service_time",
+          "restoration_window",
+          "review_capacity",
+          "extension_need_probability",
+          "extension_effort_bonus",
+          "administrative_access_probability"
+        ],
+        "profile_id": "R-OCI-EARLY-COUNTERFACTUAL-CAPABILITIES@1",
+        "stage_ids": [
+          "source_records",
+          "discrepancy_candidate",
+          "response_window_open",
+          "response_or_timeout",
+          "evidence_assessment",
+          "evidence_assessment_or_imputation",
+          "entitlement_result",
+          "debt_asserted",
+          "officer_assessment",
+          "imputed_fortnightly_income",
+          "revised_or_unchanged_debt",
+          "arrival",
+          "notice",
+          "response",
+          "routing",
+          "review",
+          "action",
+          "recovery",
+          "correction",
+          "reassessment",
+          "restoration",
+          "closed"
+        ]
+      },
+      "receipts": [
+        {
+          "owner_id": "RB-WORKED-TRACE-STYLIZED-OVERLAY@1",
+          "provenance": "stylized",
+          "slot_id": "administrative_access_probability",
+          "value": "0.8"
+        },
+        {
+          "owner_id": "RB-WORKED-TRACE-STYLIZED-OVERLAY@1",
+          "provenance": "stylized",
+          "slot_id": "administrative_cutoff",
+          "value": "60"
+        },
+        {
+          "owner_id": "RB-WORKED-TRACE-STYLIZED-OVERLAY@1",
+          "provenance": "stylized",
+          "slot_id": "assistance_capacity",
+          "value": "2"
+        },
+        {
+          "owner_id": "RB-WORKED-TRACE-STYLIZED-OVERLAY@1",
+          "provenance": "stylized",
+          "slot_id": "assistance_effort_bonus",
+          "value": "0.3"
+        },
+        {
+          "owner_id": "RB-WORKED-TRACE-STYLIZED-OVERLAY@1",
+          "provenance": "stylized",
+          "slot_id": "assistance_service_time",
+          "value": "5"
+        },
+        {
+          "owner_id": "RB-WORKED-TRACE-STYLIZED-OVERLAY@1",
+          "provenance": "stylized",
+          "slot_id": "assistance_service_window",
+          "value": "21"
+        },
+        {
+          "owner_id": "RB-WORKED-TRACE-STYLIZED-OVERLAY@1",
+          "provenance": "stylized",
+          "slot_id": "comprehension_probability",
+          "value": "0.85"
+        },
+        {
+          "owner_id": "RB-WORKED-TRACE-STYLIZED-OVERLAY@1",
+          "provenance": "stylized",
+          "slot_id": "correction_request_delay",
+          "value": "7"
+        },
+        {
+          "owner_id": "RB-WORKED-TRACE-STYLIZED-OVERLAY@1",
+          "provenance": "stylized",
+          "slot_id": "correction_uptake_probability",
+          "value": "0.5"
+        },
+        {
+          "owner_id": "RB-WORKED-TRACE-STYLIZED-OVERLAY@1",
+          "provenance": "stylized",
+          "slot_id": "correction_window",
+          "value": "14"
+        },
+        {
+          "owner_id": "RB-WORKED-TRACE-STYLIZED-OVERLAY@1",
+          "provenance": "stylized",
+          "slot_id": "evidence_retrieval_latency_scale",
+          "value": "10"
+        },
+        {
+          "owner_id": "RB-WORKED-TRACE-STYLIZED-OVERLAY@1",
+          "provenance": "stylized",
+          "slot_id": "evidence_retrieval_success_probability",
+          "value": "0.7"
+        },
+        {
+          "owner_id": "RB-WORKED-TRACE-STYLIZED-OVERLAY@1",
+          "provenance": "stylized",
+          "slot_id": "extension_duration",
+          "value": "7"
+        },
+        {
+          "owner_id": "RB-WORKED-TRACE-STYLIZED-OVERLAY@1",
+          "provenance": "stylized",
+          "slot_id": "extension_effort_bonus",
+          "value": "0.15"
+        },
+        {
+          "owner_id": "RB-WORKED-TRACE-STYLIZED-OVERLAY@1",
+          "provenance": "stylized",
+          "slot_id": "extension_need_probability",
+          "value": "0.25"
+        },
+        {
+          "owner_id": "RB-WORKED-TRACE-STYLIZED-OVERLAY@1",
+          "provenance": "stylized",
+          "slot_id": "external_consequence_delay",
+          "value": "1"
+        },
+        {
+          "owner_id": "RB-WORKED-TRACE-STYLIZED-OVERLAY@1",
+          "provenance": "stylized",
+          "slot_id": "initiation_window",
+          "value": "1"
+        },
+        {
+          "owner_id": "RB-WORKED-TRACE-STYLIZED-OVERLAY@1",
+          "provenance": "stylized",
+          "slot_id": "notice_delay",
+          "value": "1"
+        },
+        {
+          "owner_id": "RB-WORKED-TRACE-STYLIZED-OVERLAY@1",
+          "provenance": "stylized",
+          "slot_id": "notice_delivery_probability",
+          "value": "0.95"
+        },
+        {
+          "owner_id": "RB-WORKED-TRACE-STYLIZED-OVERLAY@1",
+          "provenance": "stylized",
+          "slot_id": "reassessment_capacity",
+          "value": "2"
+        },
+        {
+          "owner_id": "RB-WORKED-TRACE-STYLIZED-OVERLAY@1",
+          "provenance": "stylized",
+          "slot_id": "reassessment_service_time",
+          "value": "10"
+        },
+        {
+          "owner_id": "RB-WORKED-TRACE-STYLIZED-OVERLAY@1",
+          "provenance": "stylized",
+          "slot_id": "record_availability_probability",
+          "value": "0.7"
+        },
+        {
+          "owner_id": "RB-WORKED-TRACE-STYLIZED-OVERLAY@1",
+          "provenance": "stylized",
+          "slot_id": "recovery_capacity",
+          "value": "2"
+        },
+        {
+          "owner_id": "RB-WORKED-TRACE-STYLIZED-OVERLAY@1",
+          "provenance": "stylized",
+          "slot_id": "recovery_service_time",
+          "value": "8"
+        },
+        {
+          "owner_id": "RB-WORKED-TRACE-STYLIZED-OVERLAY@1",
+          "provenance": "stylized",
+          "slot_id": "recovery_start_delay",
+          "value": "2"
+        },
+        {
+          "owner_id": "RB-WORKED-TRACE-STYLIZED-OVERLAY@1",
+          "provenance": "stylized",
+          "slot_id": "recovery_window",
+          "value": "20"
+        },
+        {
+          "owner_id": "R-OCI-Early@1",
+          "provenance": "documented",
+          "slot_id": "response_deadline",
+          "value": 21
+        },
+        {
+          "owner_id": "RB-WORKED-TRACE-STYLIZED-OVERLAY@1",
+          "provenance": "stylized",
+          "slot_id": "response_effort_limit",
+          "value": "0.55"
+        },
+        {
+          "owner_id": "RB-WORKED-TRACE-STYLIZED-OVERLAY@1",
+          "provenance": "stylized",
+          "slot_id": "restoration_delay",
+          "value": "5"
+        },
+        {
+          "owner_id": "RB-WORKED-TRACE-STYLIZED-OVERLAY@1",
+          "provenance": "stylized",
+          "slot_id": "restoration_window",
+          "value": "50"
+        },
+        {
+          "owner_id": "RB-WORKED-TRACE-STYLIZED-OVERLAY@1",
+          "provenance": "stylized",
+          "slot_id": "review_capacity",
+          "value": "2"
+        },
+        {
+          "owner_id": "RB-WORKED-TRACE-STYLIZED-OVERLAY@1",
+          "provenance": "stylized",
+          "slot_id": "review_service_time",
+          "value": "10"
+        },
+        {
+          "owner_id": "RB-WORKED-TRACE-STYLIZED-OVERLAY@1",
+          "provenance": "stylized",
+          "slot_id": "review_service_window",
+          "value": "14"
+        }
+      ],
+      "unresolved_parameter_slot_ids": []
+    }
+  },
+  "held_input_hash": "48bc136d227538bc3ed1e932f7f8047b136a2abb5affe49b0e29fecf52282f37",
+  "randomness": {
+    "keyed_draws": [],
+    "mode": "deterministic"
+  },
+  "schema_version": 1,
+  "specification_hash": "279d3888856f434a12a6be950cbff7b19d5745054aa5a3ead2bb59a5a2fd05a2",
+  "specification_id": "RB-WORKED-TRACE-001",
+  "specification_version": 1
+}

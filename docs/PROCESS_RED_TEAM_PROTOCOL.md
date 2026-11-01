@@ -279,7 +279,7 @@ Cold-reader QA occurs in two stages. During Slice 0, at least two readers who di
 1. the blinded fixed representation-preservation packet in `docs/P0_COLD_READER_PACKET.md`; and
 2. the blinded contemporary-AI packet in `docs/TRANSFER_CANARY.md`.
 
-This first stage tests construct readability and continuity before implementation. P0 is synthetic and is not a Robodebt trace. During Slice 3, before version `1.0` is frozen, new eligible readers apply the protocol to the executable prespecified Robodebt worked-trace packet rendered from `RB-WORKED-TRACE-001` and to the transfer canary. That second stage tests the operational protocol before confirmatory freeze. It cannot occur until the executable trace and withheld expected profile exist.
+This first stage tests construct readability and continuity before implementation. P0 is synthetic and is not a Robodebt trace. Slice 3 now provides the executable prespecified Robodebt worked-trace packet rendered from `RB-WORKED-TRACE-001` and its separately withheld expected profile. Before version `1.0` is frozen, new eligible readers must apply the protocol to that packet and the transfer canary. This second stage tests the operational protocol before confirmatory freeze; the artifacts exist, but valid independent returns remain pending.
 
 Each reader records the application level, located transition, assessment statuses and completeness, evidence used, missing information, intervention, and ambiguity. Reconcile disagreements by revising the protocol or returning `unassessable`; do not settle them through undocumented coaching. This is artifact QA, not evidence about human performance.
 

@@ -1,0 +1,21 @@
+{
+  "artifact_kind": "dummy_analysis_receipt",
+  "cell_count": 5,
+  "cell_hash": "a39a72c57917faf7f40efd082d64d62ab48744a36d93ff7bb20aab8a217a4df4",
+  "paired_estimate_count": 15,
+  "paired_hash": "503bab34ae992f966e9b6487276031e835e9a1527dcef3f779086e48c9a03b49",
+  "primary_metrics": [
+    "unsupported_progression_rate",
+    "gate_safe_rate",
+    "review_effective_rate",
+    "decision_service_effective_rate",
+    "unresolved_hold_rate",
+    "recovery_exposure_rate",
+    "recipient_burden_rate",
+    "agency_workload_rate",
+    "right_censored_rate"
+  ],
+  "receipt_hash": "99e06774ca254da5431bc01492f3223c8662a1dd111e6f135a94be38f69263af",
+  "schema_version": 1,
+  "source": "synthetic dummy rows generated independently of pilot and confirmatory output"
+}

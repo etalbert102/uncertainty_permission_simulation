@@ -1,6 +1,6 @@
 # Preregistration Skeleton
 
-Status: Slice 0 candidate; not frozen; no pilot or confirmatory results inspected
+Status: Slice 3 design-freeze candidate; development pilot inspected; no confirmatory results generated or inspected
 
 Protocol version: `0.2`
 
@@ -152,13 +152,9 @@ Open cases remain visible by reason and policy. A realized contestability or res
 
 ## Replications and Precision
 
-Candidate starting rule: 30 paired replications per valid family. Before confirmatory freeze, the pilot must set:
+The Slice 3 freeze candidate uses 80 cases per family-replication. The finite initiation window is derived from cohort size, review-service scale, review capacity, and the declared load factor; the administrative cutoff is day 650. Open evidence, review, recovery, reassessment, or restoration paths remain right-censored by stage-specific reason. A timely decision is scored separately from terminal restoration.
 
-- cohort size and initiation window;
-- minimum and maximum replications, with maximum no greater than 100 per family;
-- Monte Carlo standard-error targets for primary rates and paired differences;
-- a family-wide extension rule that extends all paired policies together; and
-- runtime ceiling and convergence diagnostics.
+The minimum is 30 paired replications per valid family and the maximum is 60, with the maximum no greater than 100 per family under any candidate revision. The MCSE targets are 0.05 for primary rates and 0.06 for paired policy differences. The family-wide extension rule is: if any applicable primary metric misses its target at 30 replications, every policy in every valid family extends to 60 using the next frozen seeds. The core confirmatory runtime ceiling is 24 wall-clock hours on the frozen environment; the extension has one separate 24-hour ceiling.
 
 No family receives extra replications because a result is surprising, favorable, or publication-worthy.
 
@@ -211,4 +207,4 @@ The article trace is fixed by `docs/WORKED_TRACE_SELECTION.md` and `data/scenari
 
 Before freeze, every semantic, application-mapping, compilation-contract, or overlay change records date, owner, reason, affected hypothesis/property/artifact, and whether cold-reader rerun is required. After freeze, any change to the selected application, sources, adapter, compiled configuration, stylized overlays, definitions, policies, parameters, seeds, metrics, exclusions, code, or analysis invalidates the affected confirmatory run and requires a new versioned freeze.
 
-The protocol reaches version `1.0` only in Slice 4 after pilot validation and cold-reader artifact QA. This Slice 0 skeleton does not freeze numeric precision targets or confirmatory seeds.
+The protocol reaches version `1.0` only in Slice 4 after pilot validation and valid independent cold-reader artifact QA. Slice 3 fixes the design-freeze candidate values above but does not freeze confirmatory seeds or authorize confirmatory execution.

@@ -14,6 +14,7 @@ from .applications.robodebt import load_early_adapter
 from .artifacts import build_bundle
 from .configuration import ParameterValue, ScenarioOverlaySpec, compile_configuration
 from .formal_model import render_p0_report
+from .experiments import run_experiment, validate_experiment_config
 from .metrics import engagement_metrics, trace_metrics
 from .policies import POLICY_IDS
 from .process_model import TraceSpec, execute_topology, run_trace
@@ -26,6 +27,7 @@ from .simulator import (
     generate_stochastic_cohort,
     run_engagement_stage,
 )
+from .worked_trace import write_worked_trace_artifacts
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -455,6 +457,12 @@ def main() -> None:
     trace.add_argument("config", type=Path)
     cohort = subparsers.add_parser("cohort")
     cohort.add_argument("config", type=Path)
+    validate = subparsers.add_parser("validate")
+    validate.add_argument("config", type=Path)
+    pilot = subparsers.add_parser("pilot")
+    pilot.add_argument("config", type=Path)
+    worked_trace = subparsers.add_parser("worked-trace")
+    worked_trace.add_argument("config", type=Path)
     args = parser.parse_args()
     if args.command == "trace":
         result = run_smoke(args.config)
@@ -462,6 +470,24 @@ def main() -> None:
     elif args.command == "cohort":
         result = run_stochastic_smoke(args.config)
         print(json.dumps({"status": "ok", "cases": len(result["cases"]), "policies": len(result["engagement_runs"]), "output": result["config_id"]}, sort_keys=True))
+    elif args.command == "validate":
+        result = validate_experiment_config(args.config)
+        print(json.dumps(result, sort_keys=True))
+    elif args.command == "pilot":
+        result = run_experiment(args.config)
+        print(json.dumps({
+            "status": "ok",
+            "config_id": result["validation"]["config_id"],
+            "families": result["validation"]["family_count"],
+            "receipt_hash": result["receipt_hash"],
+        }, sort_keys=True))
+    elif args.command == "worked-trace":
+        result = write_worked_trace_artifacts(ROOT, args.config)
+        print(json.dumps({
+            "status": "ok",
+            "specification_id": result["specification_id"],
+            "artifact_hash": result["artifact_hash"],
+        }, sort_keys=True))
 
 
 if __name__ == "__main__":

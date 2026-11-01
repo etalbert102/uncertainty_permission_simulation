@@ -460,7 +460,8 @@ def main() -> int:
         raise ValueError("agent contract permits case-specific kernel behavior")
     readme = (ROOT / "README.md").read_text(encoding="utf-8").lower()
     for required_results_boundary in (
-        "no pilot or confirmatory results",
+        "no confirmatory run has been generated or inspected",
+        "development-only pilot",
         "implementation qa, not a substantive, empirical, or historical result",
     ):
         if required_results_boundary not in readme:
