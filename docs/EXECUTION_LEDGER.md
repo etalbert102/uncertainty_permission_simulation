@@ -736,6 +736,8 @@ Verification after the revision:
 
 Status: active; candidate contracts validated; freeze deliberately blocked
 
+Entry commit: `7521836` (`Begin Slice 4 freeze candidate`).
+
 ### Added or changed
 
 - Added `experiments/configs/confirmatory_v1.yaml` with all 108 families, five policies, 80 cases, 30 initial replications, stable seed derivation, day-650 cutoff, 30-to-60 family-wide precision rule, primary metric order, contrasts, censoring rule, and explicit negative-control IDs.
