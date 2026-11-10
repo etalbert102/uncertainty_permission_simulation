@@ -1,539 +1,474 @@
-# Article Outline: When Uncertainty Expands Authority
+# Article Outline: From Incomplete Evidence to Automated Action
 
-Status: drafting blueprint; result statements remain placeholders until confirmatory analysis is complete
+Status: results-informed drafting outline; design-frozen simulation complete; one prespecified service metric excluded after semantic audit; project-lead comprehensibility review and evidence packet still pending
 
-Working title: *When Uncertainty Expands Authority: Formalizing and Stress-Testing Automated Decision Workflows Through Robodebt*
+Working title: *From Incomplete Evidence to Automated Action: A Formal Model and Dynamic Simulation of Review Capacity and Timeout Rules, with a Robodebt Application*
 
-Target: 10,000-word extended research paper for the Stanford CISAC/GTG volume *Emerging Technologies and the Future of Decision-Making*
+Target: a standalone article of no more than 10,000 words for the Stanford CISAC/GTG volume *Emerging Technologies and the Future of Decision-Making*
 
-Internal lineage source, not required reading: *When Uncertainty Expands Authority: How AI Workflows Can Reduce Scrutiny*
+## Paper Promise
 
-Drafting control: allocate 9,400 words to named sections and hold 600 words unassigned for counted abstract text, captions, transitions, qualifications, and reviewer-required clarification. The reserve is not an additional section and should not be spent merely to reach 10,000 words.
+The paper explains and demonstrates a process-level failure mode: weaker or coarsened evidence can expand what an organization is functionally permitted to do when representation, routing, review, or timeout rules relax safeguards. It contributes:
 
-## Paper-Level Argument
+1. a formal model separating evidence, representation, formal authority, functional permission, action, review, contestability, and restoration;
+2. a deterministic controlled pair showing how representation alone can change routing and automatic permission;
+3. a documented Robodebt process application that establishes institutional relevance without pretending to numerically reconstruct historical Robodebt;
+4. a frozen finite-cohort dynamic simulation showing how review capacity and timeout semantics change organizational outcomes; and
+5. a five-step process-red-team protocol designed for practical application.
 
-### Central thesis
+The article stands alone. The 1,500-word precursor essay is lineage evidence, not required reading, and its title or argument must not be used as an unexplained premise.
 
-Uncertainty does not itself expand authority. Authority expands when a workflow converts weaker evidence into a representation, route, or timeout rule that permits consequential action with fewer effective safeguards. Preventing that failure requires more than accurate components or a nominal human-review step: the whole evidence-to-action process must preserve provenance, restrict automatic progression to actions robust across compatible refinements, surface material uncertainty to an authorized reviewer, and remain effective under realistic workload and timing constraints.
+## Results-Led Thesis
 
-### Empirical-demonstration claim
+Uncertainty does not expand authority by itself. Authority expands when a workflow turns incomplete evidence into a representation, route, or timeout rule that permits progression without the safeguards the evidence state requires. In the design-frozen simulation, fail-closed review remained gate-safe as load rose but accumulated unresolved holds, while the matched fail-open design converted the same review shortfall into unsupported progression and recovery exposure. The information-first policy avoided unsupported progression, but its prespecified interaction-event proxy moved opposite the expected burden direction and agency-workload events increased; because that proxy does not measure effort or welfare, the substantive evidence-production-burden question remains unresolved. Effective governance therefore requires explicit choices among safety, timeliness, burden, workload, exposure, and restoration rather than a nominal reviewer or a single “best policy.”
 
-Robodebt supplies a documented institutional process in which aggregate evidence, evidentiary transformation, notice and access, deadlines, automation, review, recovery, and later correction can be mapped onto the formal model. The simulation does not numerically reconstruct Robodebt. It uses source-anchored early and enhanced OCI process structures to test declared counterfactual governance designs across stylized conditions.
+## Claim Hierarchy
 
-The Robodebt application provides a documented setting in which to examine the base uncertainty-to-permission mechanism and its organizational consequences. It does not establish that a strategic actor induced or exploited that mechanism, and the paper must not use process red-teaming as evidence of a historical adversarial attack.
+- **Historical claims:** source-attributed facts about early and enhanced Online Compliance Intervention processes.
+- **Formal claims:** propositions that follow from the declared definitions, assumptions, and counterexamples.
+- **Simulation claims:** estimates within the frozen 108-family stylized parameter space.
+- **Application-oriented contribution:** a complete five-step protocol, worked example, and worksheets intended to make the method easier to apply. The paper does not claim validated usability, practitioner performance, or reproducible classifications by new users.
 
-### Expected contribution
+Never convert a simulation estimate into historical Robodebt prevalence, capacity, monetary error, legality, or causation. Never treat process red-teaming as evidence of historical strategic attack.
 
-The paper makes four contributions:
+### Design-freeze interpretation and measurement-audit decision
 
-1. It replaces an intuitive “weaker evidence should not expand authority” rule with an explicit information order, action taxonomy, and robust-permission condition.
-2. It uses a representation-preservation fixture to isolate how interface abstraction changes routing and permission while the underlying uncertain output remains fixed.
-3. It distinguishes a configured review gate from gate safety, effective review, and timely decision service.
-4. It combines counterfactual tracing with a validated finite-cohort discrete-event simulation of workload, access, evidence retrieval, timeout semantics, and restoration.
+The repository artifact named `PREREGISTRATION.md` is an internal prospective design-freeze record, not a claim that this computational demonstration was externally preregistered or that it tests population-level empirical hypotheses. It documents that scenarios, policies, seeds, metrics, stopping rules, and planned contrasts were fixed before core-output inspection. The reader-facing article should call this a **prespecified simulation protocol**, **prospective analysis plan**, or **design freeze**.
 
-### Main-text argument contract
+The prespecified `DecisionServiceEffective` concept remains part of the formal and practical framework, but its core simulation output is excluded from substantive interpretation. The implementation counted every case without a review request as successful service rather than verifying a supported disposition by the service deadline. This makes cross-policy values—especially U3−U0—semantically invalid and makes the label unsafe even where a policy-specific value happens to track effective review.
 
-The article has three headline questions and three corresponding propositions. Full RQ1–RQ6 and F0–F5 mappings remain in the evidence packet, but they do not become separate competing narratives in the manuscript.
+The article must report this exclusion as a post-run construct-validation finding, omit the numerical service estimates from substantive tables and figures, and avoid substituting another outcome after results were seen. This is a limitation of the computational demonstration, not evidence about an empirical population. Repairing the metric would require a new version, freeze, and affected rerun; this outline does not retrofit the frozen study.
 
-1. **Robust permission:** What may weaker evidence newly permit? Evidentiary fidelity, robust automatic-permission monotonicity, and safe fallbacks form one headline proposition.
-2. **Operational review:** When does configured review remain gate-safe, effective, and timely under access and capacity constraints? Review, surfacing, and queue behavior form the second proposition.
-3. **Contestability and restoration:** Which safeguards prevent or repair unsupported action without hiding delay, burden, exposure, or unresolved cases? Contestability and restoration form the third proposition.
+## Word Budget
 
-H1–H3 provide the main quantitative narrative. H4–H5 and the remaining formal results are secondary evidence and move to the appendix unless one changes a headline conclusion.
+| Section | Words | Required job |
+| --- | ---: | --- |
+| 1. Introduction | 700 | State the problem, completed design, findings, contribution, and boundaries. |
+| 2. Mechanism, literature, and research questions | 800 | Establish the mechanism from first principles and locate the contribution. |
+| 3. Formal model | 1,150 | Present only the constructs and propositions needed to understand and use the method. |
+| 4. Robodebt process application | 1,100 | Establish the documented case mapping and its inference limits. |
+| 5. Dynamic simulation methods | 1,200 | Make the executed design, estimands, validation, and claim boundary reproducible. |
+| 6. Results | 1,800 | Report the three prespecified expectations, measurement exclusion, controls, sensitivity, censoring, uncertainty, and tradeoffs. |
+| 7. Process-red-team protocol and governance implications | 1,600 | Deliver the five-step method, fixed worked example, interventions, and bounded transfer. |
+| 8. Limitations and conclusion | 750 | Bound interpretation and state the transferable result. |
+| **Named-section subtotal** | **9,100** |  |
+| **Reserve** | **900** | Abstract, captions, transitions, endnotes, and necessary qualifications. |
+| **Maximum** | **10,000** | Bibliography excluded under the verified call. |
 
-### Protocol integrity contract
+Draft a 200–250-word abstract from the reserve after the main text is stable.
 
-- Freeze the five steps, required inputs, `pass`/`fail`/`unassessable`/`not_applicable` outputs, diagnostic fields, held-out AI canary, and worked-trace selection rule before confirmatory results.
-- Permit semantic revisions only before confirmatory freeze; record every change and reason. After results, allow editorial clarifications only unless a new freeze and rerun is performed.
-- After freeze, quantitative results and examples may populate the protocol, but its semantic tests cannot change in response to favorable or inconvenient findings.
-- Use a deterministic golden Robodebt trace selected before confirmatory execution. Do not claim it is statistically representative.
+This results-informed 9,100-word core and 900-word reserve supersede the pre-results 9,400-word core and 600-word reserve in `docs/STUDY_PLAN.md`; they do not alter the 10,000-word submission ceiling or any simulation contract.
 
-### Claim discipline
+## Abstract — Draft Last
 
-Until confirmatory results are frozen, use “the study tests,” “the model predicts,” or “the analysis will estimate,” never “the study shows.” Replace result placeholders only from stored analysis artifacts. Keep three claim types separate throughout:
+Use six moves:
 
-- historical and legal claims come from authoritative sources;
-- formal claims follow from declared definitions and assumptions; and
-- quantitative claims come from the simulation and apply only to its declared parameter space.
+1. Problem: automated workflows can convert incomplete evidence into consequential action even when each component follows its local rule.
+2. Gap: component accuracy, transparency, and nominal human review do not show that uncertainty remains operationally constraining.
+3. Method: formal model, deterministic representation pair, documented Robodebt mapping, and prospectively design-frozen dynamic simulation.
+4. Findings: fail-closed safety/backlog tradeoff; fail-open conversion of delay into unsupported progression; adverse prespecified interaction-event result with substantive burden unresolved.
+5. Boundary: stylized designed-parameter-space findings, extensive terminal censoring, and exclusion of the semantically invalid service metric—not a numerical reconstruction or legal judgment about Robodebt.
+6. Contribution: an application-oriented process-red-team protocol for tracing evidence into functional permission.
 
-## Abstract — 200–250 Words
+Do not open with Robodebt, use policy IDs, or claim a universally preferred policy.
 
-Draft the abstract against the 600-word reserve until the venue confirms whether it counts toward the ceiling.
+## 1. Introduction — 700 Words
 
-Draft last. Use six moves:
+### 1.1 The organizational failure mode — 180 words
 
-1. **Problem:** automated workflows can turn incomplete evidence into consequential action even when each component follows its local rule.
-2. **Gap:** accuracy, calibration, transparency, and nominal human review do not establish that uncertainty remains operationally constraining.
-3. **Method:** introduce the formal invariant, map it to early and enhanced Online Compliance Intervention (OCI) process profiles, and run a paired finite-cohort discrete-event simulation across evidence, access, workload, provenance, and review conditions.
-4. **Primary findings:** insert one sentence each for the capacity boundary, fail-open/fail-closed contrast, and information-acquisition tradeoff after analysis.
-5. **Interpretation:** state what the results establish for the declared model and what they do not establish about historical Robodebt outcomes.
-6. **Contribution:** process red-teaming evaluates how evidence quality changes functional permission across an organization, not only how a component predicts.
+- Open with the standalone puzzle: a defensible abstraction can remove the distinction that would trigger caution.
+- Follow the full chain: evidence → representation → routing → review → action → correction/restoration.
+- Define functional permission in plain language: what the operating workflow allows to proceed, whether or not formal authority changed.
+- State the paper's central question: when evidence becomes less decision-relevant, what may the workflow now do automatically?
 
-Do not open the abstract with Robodebt, call the simulation empirical measurement of Robodebt, or report a weighted “best policy.”
+### 1.2 Why nominal review is insufficient — 130 words
 
-## 1. Introduction: From Uncertainty to Functional Permission — 700 Words
+- Distinguish a configured gate, a gate that remains fail-closed, effective review, and timely supported decision service.
+- Explain why a review field, notice, or appeal right can coexist with ineffective intervention.
+- Introduce capacity and timeout semantics as organizational design choices, not implementation details.
+- Preserve timely supported service as a concept while flagging that the core simulation did not validly operationalize it.
 
-### 1.1 The organizational failure mode — 170 words
+### 1.3 Completed research design — 170 words
 
-- Open with the complete puzzle in standalone form: a defensible abstraction can remove the very distinction that would trigger caution.
-- Move immediately from model output to the complete chain: evidence → representation → routing → review → action → restoration.
-- State that local correctness can coexist with an unsafe process-level authority shift.
-- Define “functional permission” in plain language before introducing notation later.
+- Name the four evidence layers: deterministic representation pair, formal model, documented Robodebt process mapping, and dynamic simulation.
+- Explain why Robodebt is analytically useful while stating that it was not a modern generative-AI system.
+- State that the simulation uses source-anchored process structure plus visibly stylized parameters and counterfactual policies.
 
-### 1.2 Why nominal safeguards are insufficient — 130 words
+### 1.4 Findings and contributions — 220 words
 
-- Explain that provenance visibility, a review field, or a formal right to contest does not guarantee timely intervention.
-- Introduce the key operational distinction: a gate may be configured, remain fail-closed, receive effective review, and deliver a timely supported decision—or fail at any one of those levels.
+- Preview expectation 1: fail-closed review preserved gate safety at every tested load while effective review fell and unresolved holds rose; describe this as a capacity response across three prespecified loads, not an estimated threshold.
+- Preview expectation 2: fail-open timeouts converted the same capacity shortfall into unsupported progression and recovery exposure.
+- Preview expectation 3 honestly: the conditional evidence-production-burden expectation was not answerable as framed. In the prespecified unconditional U3−U0 contrast, the interaction-event proxy increased along with agency workload; substantive recipient burden remains unresolved.
+- State that the invalid `DecisionServiceEffective` simulation output is excluded and that extensive terminal censoring prevents complete-restoration claims.
+- State the formal, computational, institutional, and practical contributions.
+- End with the roadmap and the historical/formal/simulation claim boundary.
 
-### 1.3 Research strategy and case selection — 160 words
+Core exhibit: **Figure 1, evidence-to-action chain with the five protocol steps.**
 
-- Describe the three connected layers: formal model, document-grounded Robodebt application, and dynamic simulation.
-- Justify Robodebt as a documented rule-based administrative workflow with scaled evidence transformation, burden shifting, automation, review, and correction.
-- State explicitly that Robodebt was not a modern generative-AI system and that the simulation is not a numerical reconstruction.
-- Explain the contemporary emerging-technology connection in one sentence: AI-generated summaries, confidence abstractions, and cross-system routing can similarly determine whether material uncertainty reaches an authorized reviewer.
+## 2. Mechanism, Literature, and Research Questions — 800 Words
 
-### 1.4 Contributions, questions, and results preview — 240 words
+### 2.1 Representation-preservation controlled pair — 210 words
 
-- State the theoretical, computational, and institutional contributions in one sentence each.
-- Compress RQ1–RQ6 into three reader-facing questions:
-  1. When may weaker evidence safely support automatic progression?
-  2. When does a formal safeguard remain effective under access and capacity constraints?
-  3. What governance interventions prevent unsupported action without hiding burden, delay, or unresolved cases?
-- Insert a three-sentence findings preview after confirmatory analysis using plain language: the review-capacity boundary; fail-closed versus fail-open timeout behavior; and agency-assisted versus claimant-led evidence acquisition. Introduce policy IDs only in Section 5.
-- End with the article roadmap.
+- Define “controlled pair” explicitly: two deterministic traces of the same synthetic case and model output, with the policy, downstream rule, reviewer resource, clock, and zero random draws held fixed.
+- Preserve arm: typed alternatives, confidence, uncertainty, and provenance remain visible.
+- Fallback arm: the same output becomes the broad untyped label `vehicle`.
+- Explain how this sole representation change alters routing, scrutiny, gate configuration, and automatic permission.
+- State what the pair does not test: model accuracy, latent truth, frequency, queues, or historical behavior.
 
-Primary exhibit: **Figure 1, “The evidence-to-action chain and five-step process-red-team protocol.”** Show evidence, representation, routing, review, action, and restoration, with the five practitioner steps and plain-language diagnostic questions mapped to the relevant transitions. Define F0–F5 in Section 3 rather than requiring readers to decode formal IDs in the introduction.
+This definition incorporates the first project-lead comprehensibility issue (`PCR-001`) and must appear before any formal notation.
 
-## 2. From Workflow Uncertainty to a Testable Research Program — 800 Words
+### 2.2 Mechanism and bounded expectation — 170 words
 
-### 2.1 The mechanism and bounded hypothesis — 200 words
+- State the three conditions: a defensible representation, a hidden policy-relevant distinction, and downstream relaxation of a safeguard.
+- Separate progression actions from constraints, information acquisition, and restoration.
+- Separate base vulnerability from attackability; attackability additionally requires inducibility, observability, repeatability, and benefit.
 
-- State the full bounded hypothesis directly: holding underlying evidence or model output fixed, suppressing a policy-relevant alternative can reduce scrutiny and expand de facto permission.
-- Preserve the three necessary conditions: defensible representation, hidden policy-relevant distinction, and downstream relaxation of a safeguard.
-- Clarify that uncertainty may instead justify constraint, containment, or information-seeking action.
-- Separate the base vulnerability from attackability: a strategic attack additionally requires inducibility, observability, repeatability, and benefit.
-- State that Robodebt grounds the base vulnerability, not historical strategic exploitation.
+### 2.3 Literature and originality — 270 words
 
-### 2.2 Where existing assurance stops — 220 words
+Organize prior work into three functional clusters:
 
-Organize the literature into three functional clusters rather than six cursory mini-reviews:
+- uncertainty, calibration, abstention, and uncertainty communication;
+- human oversight, contestability, administrative burden, and algorithmic administration; and
+- sociotechnical assurance, process safety, and red teaming.
 
-- prediction uncertainty, calibration, abstention, and uncertainty communication;
-- human oversight, contestability, algorithmic administration, and administrative burden; and
-- sociotechnical assurance, process safety, and adversarial red teaming.
+Treat uncertainty-to-action binding as prior work. Locate the paper's narrower contribution in its information-refinement invariant, independently supported automatic progression, finite-capacity review, restoration semantics, executable controls, and documented process application. Avoid exhaustive-absence or “first paper” claims.
 
-Treat Anyabolu, Dubey, and Hattab's 2026 uncertainty-to-action binding framework as the closest neighboring formulation. Do not claim that this article originates binding uncertainty to oversight responses. Distinguish the present contribution through evidence refinement, independently supported automatic progression, finite-capacity operational review, restoration semantics, and the documented application.
+### 2.4 Three research questions and falsifiability — 150 words
 
-The gap is not that these traditions ignore context or action composition. It is that the evidence-to-functional-permission mapping is rarely represented as this specific testable invariant whose operational review conditions can be stressed under load.
+1. When may weaker evidence safely support automatic progression?
+2. When does a configured safeguard remain safe, effective, and timely under access and capacity constraints?
+3. Which interventions avoid unsupported progression without hiding delay, burden, workload, exposure, or unresolved cases?
 
-### 2.3 From hypothesis to full study — 250 words
+Name the falsifiers: no representation-to-permission change in an enabling controlled pair; no capacity/timeout effect across the frozen range; or no diagnostic value beyond component-local checks.
 
-- Identify what the bounded hypothesis alone cannot establish: a formal information relation, typed action model, operational review criteria, institutional application, and dynamic evidence under load.
-- Devote 100–120 words to a self-contained hypothetical operations-center vignette: the same uncertain pickup-versus-armed-vehicle estimate is sent through either an uncertainty-preserving interface or a broad `vehicle` fallback while the underlying case, output, downstream rule, and process state remain fixed. Compare routing, scrutiny, review, and automatic permission, and include a no-change negative-control rule. Call this the **representation-preservation fixture**; keep repository ID `P0-Precursor` in internal artifacts and the supplement, not the manuscript.
-- Explain the move from this fully stated defense vignette to a public-administration case without claiming domain equivalence.
-- State the three-layer research logic explicitly: the fixture isolates the representation-induced causal mechanism; the formal invariant generalizes it to evidence refinement and automatic permission; and the dynamic simulation tests its operational consequences when evidence, access, workload, gates, and restoration vary.
-- Define the general class: workflows in which incomplete or coarsened evidence can alter consequential permission.
+## 3. Formal Model — 1,150 Words
 
-### 2.4 Research questions and falsifiability — 130 words
+### 3.1 Evidence, compatible states, and refinement — 200 words
 
-- State only the three headline questions in the main text; map RQ1–RQ6 to them in the appendix or evidence packet.
-- Separate three kinds of disconfirmation:
-  - **mechanism:** representation or coarsening produces no permission or scrutiny change in an enabling case, or weaker evidence reliably increases safeguards;
-  - **operational:** no review-capacity or timeout effect appears over a prespecified range demonstrably spanning the relevant service boundary; a null over an inadequate range is inconclusive rather than falsifying; and
-  - **practical value:** the protocol detects or localizes no failure beyond component-local checks on prespecified positive and negative controls.
+- Define evidence state, compatible-state set, and independently specified refinement/coarsening.
+- Explain why confidence alone is not an information order.
+- Distinguish exact finite, symbolic exact, conservative outer, and witness-search certificates; search cannot establish universal pass.
 
-Internal drafting control: maintain the **lineage continuity matrix** at the end of this outline. It supports the claim audit and must not appear as a published exhibit or become required reading.
+### 3.2 Representation and evidentiary fidelity — 160 words
 
-## 3. Formalizing Uncertainty, Authority, and Review — 1,250 Words
+- Define the representation map and typed evidence states: observed, derived, imputed, disputed, and missing.
+- Present F0 evidentiary fidelity and F4 material surfacing.
+- Explain uncertainty laundering: an aggregate can remain numerically consistent while losing the distinctions needed for policy or review.
 
-### 3.1 Evidence states and compatible refinements — 220 words
+### 3.3 Authority, permission, and action — 170 words
 
-- Define latent state space `Theta`, evidence states `E`, compatible-state set `Gamma(e)`, and refinement relation.
-- Require coarsening to be specified independently of the downstream permission result.
-- Require a constructive refinement-coverage certificate and distinguish exact finite, symbolic exact, conservative-outer, and witness-search conclusions; witness search cannot establish universal pass.
-- Use the annual-total versus fortnight-specific-income example as the running illustration.
-- Explain why confidence scores alone do not define the information order.
+- Separate formal authority, automatic functional permission, and executed action.
+- Define fully instantiated actions and the progression/constraint/information/restoration taxonomy.
+- Separate operational policy from the independently owned evaluation specification.
+- Require support to be reevaluated after material changes in evidence, representation, time, policy, or rule version.
 
-### 3.2 Representation and evidentiary fidelity — 180 words
+### 3.4 Robust permission and safe fallbacks — 210 words
 
-- Define `rho(e)` and the required types: observed, derived, imputed, disputed, and missing.
-- State that `observed` means supplied by an identified source record, while entailment under assumptions is the test for a `derived` claim.
-- State F0 and explain uncertainty laundering: unsupported detail may look precise even when its numeric aggregate remains consistent.
-- Separate transformation fidelity from the downstream action it enables.
+- State F1: a progression action automatically permitted under weaker evidence must be independently supported under every certified admissible refinement.
+- State F2: a new constraint or information fallback is safe only under a valid execute-versus-hold intervention over the complete unit, including spillovers when resources are shared.
+- Give one minimal satisfying example and one counterexample.
+- Make clear that uncertainty may safely expand information-seeking or reversible constraint without expanding progression authority.
 
-### 3.3 Formal authority, functional permission, and action — 180 words
+### 3.5 Review, service, contestability, and restoration — 210 words
 
-- Distinguish formal authority `L(q)`, automatic functional permission `P_auto(e,q)`, and executed action `X(case,t)`.
-- Distinguish the workflow's operational policy from the independently owned evaluation specification `sigma`, including its action-support, materiality, required-meaning and directional-correspondence, required intervention capability, F2 intervention/alignment, baseline, refinement-coverage, and action-comparison rules. Actual roles, authority possession, and event timing remain process facts.
-- Introduce progression, constraint, information, and restoration actions.
-- Define permission over fully instantiated action instances so changes in amount, target, scope, or timing cannot hide behind one action-type ID.
-- Allow finite-explicit, symbolic-constraint, and ordered-family action sets, with no inferred closure rule.
-- Define complete pre-event state and explain that support is reevaluated after every material evidence, process, time, policy, rule, or version change.
-- Explain why consequential containment is not automatically an expansion of progression authority.
+- State F3 review-preserved progression and distinguish `GateSafe`, `ReviewEffective`, and `DecisionServiceEffective`.
+- Require review authorization to bind the exact action, evidence and rule versions, conditions, and expiry.
+- State F5 and distinguish structural correction, prospective reliability, realized correction, and complete restoration.
+- Explain that correction of a decision coordinate does not prove restoration of every consequence.
 
-### 3.4 Robust permission and safe fallbacks — 220 words
+### 3.6 Two formal propositions and one simulation implication — 200 words
 
-- State F1: an automatic progression action allowed under weaker evidence must be independently supported under every certified admissible refinement; universal workflow permissiveness cannot self-certify.
-- State F2: weaker evidence may introduce safe constraint or information-seeking actions only when a frozen execute-versus-explicit-hold pair over the complete intervention unit, aligned by branch-independent causal cuts under identical cohort membership and keyed exogenous inputs, shows it cannot release focal or spillover progression outside the envelope recomputed at the later action's pre-state. A case-local pair supports only a local claim unless a frozen noninterference certificate excludes shared-resource effects.
-- Provide one satisfying example and one minimal counterexample.
-- Make clear that the rule concerns automatic progression, not every action with an external effect.
-
-### 3.5 Effective review, surfacing, and restoration — 220 words
-
-- State F3–F5.
-- Define configured gate, `GateSafe`, `ReviewEffective`, and `DecisionServiceEffective` separately.
-- Explain why notification, nonblocking review, fail-open timeout, or post-action correction does not establish effective prior review.
-- Require review authorization to bind the exact action instance, evidence and rule versions, conditions, and expiry.
-- Require the action to remain in the current post-review set and retain independent support at the execution pre-state, including any explicitly modeled discretionary override.
-- Define F4 from independently evaluated materiality and require exact semantic identity, an independently justified versioned mapping, or forward entailment from surfaced semantics to required action-relevant meaning; reverse implication, overlap, workflow materiality, and display-text similarity are insufficient. Separate the capability and deadline required by `sigma` from the process evidence that an actual role possesses that capability in time.
-- Separate structural path existence, prospective reliability, realized path availability, correction uptake, and restoration; apply frozen thresholds and horizons and do not fail unresolved pre-horizon cases.
-- Define complete versus partial restoration.
-
-### 3.6 Three headline propositions and simulation implications — 230 words
-
-- Report the representation-preservation fixture first in plain language, without its internal repository ID and without treating its authored permissive route as an empirical discovery.
-- Group the eight formal-result targets under three headline propositions: robust permission, operational review, and contestability/restoration.
-- In the main text, state each proposition, its governing assumptions, its intuition, and one diagnostic example or counterexample. Give a proof sketch only where it is necessary to understand the result.
-- Move complete proof sketches, additional satisfying cases and counterexamples, subordinate lemmas, and exhaustive boundary cases to Appendix A.
-- End with observable implications: which event-trace patterns constitute F0–F5 failures.
-
-Appendix table: **Table A1, “Formal properties and observable diagnostics.”** Columns: property, formal requirement, passing trace, failure trace, and primary metric. Summarize the usable diagnostic in Section 7 rather than repeating the full table in the main text.
-
-Appendix candidates: complete notation table, full proof sketches, exhaustive finite counterexamples, and executable formal fixtures.
+- Proposition 1: weaker evidence cannot justify new automatic progression outside the independent support envelope.
+- Proposition 2: fail-closed and fail-open review may have identical review completion but opposite permission consequences under overload.
+- Give a compact proof sketch or constructive argument for each proposition in the main article, including its load-bearing assumptions. Full notation and proofs remain in the repository supplement.
+- Simulation implication, not a formal proposition: under the frozen U3 implementation and parameter space, information acquisition exchanged unresolved holds for more interaction events, agency workload, and downstream exposure; this is contingent on the modeled process and cannot be proved from the formal definitions alone.
+- Move full notation, proofs, subordinate lemmas, and exhaustive counterexamples to repository supplement Module A.
 
 ## 4. Robodebt as a Documented Process Application — 1,100 Words
 
-### 4.1 Why this case is analytically useful — 120 words
+### 4.1 Why this case — 140 words
 
-- Define Online Compliance Intervention (OCI) on first use before using the acronym for the early and enhanced profiles.
-- Justify selection by mechanism visibility, not notoriety alone.
-- Name the documented links: aggregate income matching, request for period-specific evidence, response deadline, averaging, debt action, recovery, and later reassessment.
+- Explain the analytical fit: aggregate evidence, evidentiary transformation, notice and access, deadlines, automation, review, recovery, correction, and restoration.
+- Explain why the case is useful for process analysis without presenting it as contemporary AI equivalence.
 
-### 4.2 Scope, sources, and three-axis validity — 200 words
+### 4.2 Sources and application validity — 180 words
 
-- Fix the early OCI period and the enhanced OCI repair profile using source-manifest dates.
-- Identify the Royal Commission and Ombudsman as owners of historical and legal claims.
-- State the distinction among evidentiary support, simulated operational outcomes, and source-attributed legal validity; note that monetary correctness is outside the model.
-- Explain the provenance hierarchy: documented value, documented range, stylized range, sensitivity parameter.
+- Identify the Royal Commission and other authoritative process sources and the source cutoff.
+- Separate documentary validity, structural mapping validity, and numerical calibration validity.
+- State that the first two are supported within the mapped scope; the third is deliberately not claimed.
 
-### 4.3 Early OCI process profile — 280 words
+### 4.3 Early OCI process profile — 300 words
 
-- Trace roles, evidence, transitions, 21-day response rule, nonresponse path, income averaging, automatic debt action, recovery, and possible later correction.
-- Identify exactly where aggregate evidence becomes apparent fortnightly precision.
-- Map functional permission separately from source-attributed formal authority.
-- Label every unresolved ambiguity instead of filling it with simulation assumptions.
+- Trace annual income matching, transformation into fortnightly values, notice, recipient evidence burden, deadlines, automated debt progression, review opportunity, and recovery.
+- Mark which facts are documented and which executable quantities remain unsupported historically.
+- Locate the representation-to-permission transition without inferring strategic exploitation.
 
-### 4.4 Enhanced OCI repair profile — 180 words
+### 4.4 Enhanced OCI and repair mechanisms — 180 words
 
-- Describe the documented 28-day-from-receipt rule, strengthened delivery and contact, clearer averaging notice, assistance, and manual-intervention changes.
-- Treat this as a distinct dated profile, not as proof that all defects were cured.
-- Identify which F0–F5 conditions each repair plausibly addresses and which remain dependent on implementation or workload.
+- Describe documented changes in evidentiary handling, review, and correction while keeping dates and process variants separate.
+- Treat enhanced OCI as a bounded repair profile, not proof that every failure was eliminated.
 
-### 4.5 Formal crosswalk and inference limits — 220 words
+### 4.5 Formal crosswalk and inference limits — 200 words
 
-- Map annual aggregate to `e_less`, period-specific records to `e_more`, income averaging to `rho(e_less)`, and debt/recovery to progression actions.
-- Map hold, record acquisition, review, and reassessment to constraint, information, post-review, and restoration actions.
-- Separate documented workflow structure from stylized service times, prevalence, and behavioral parameters.
-- State why the case supports structural relevance but not simulation calibration to historical outcome rates.
+- Map source records to evidence states, transformations, actions, gates, review, contestability, and restoration.
+- Explain why unsupported historical parameters cannot become executable defaults.
+- State the legal, monetary, prevalence, causation, and behavioral non-claims.
 
-### 4.6 Transition to experiment — 100 words
+### 4.6 Transition to simulation — 100 words
 
-- Explain that the source record supplies the process skeleton; the simulation asks how alternative safeguards behave across declared conditions that the historical record does not numerically estimate.
+- Explain that Robodebt establishes structural relevance; the simulation tests counterfactual governance mechanisms over a stylized parameter space.
+- Introduce the policies as study-owned interventions, not descriptions of historical alternatives.
 
-Primary exhibit:
+Core exhibit: **Figure 2, early and enhanced OCI process maps with source/stylized boundaries.**
 
-- **Figure 2, “Early and enhanced OCI evidence-to-action process maps.”** Use aligned lanes so repairs and unchanged transitions are visible.
-- **Appendix Table B1, “Formal-model-to-Robodebt crosswalk and provenance.”** Include construct, process instantiation, source anchor, and documented/stylized status. Keep only the essential mappings in the main-text process map.
+## 5. Dynamic Simulation Methods — 1,200 Words
 
-## 5. Dynamic Process-Red-Team Simulation — 1,200 Words
+### 5.1 Kernel and unit of analysis — 170 words
 
-### 5.1 Design overview — 120 words
+- Describe the case-neutral discrete-event kernel, finite cohorts, queues, deadlines, keyed exogenous draws, complete state snapshots, and administrative cutoff.
+- Explain common-random-number pairing and branch-independent causal keys.
+- State that Robodebt identifiers do not enter generic kernel logic.
 
-- Describe a paired, finite-cohort discrete-event simulation with a frozen initiation window and administrative cutoff.
-- State that process mutations, not prose judgments, implement the red team.
-- Begin with the representation-preservation fixture, then name the six dynamic perturbation families: evidence degradation, provenance laundering, administrative-access failure, load stress, gate mutation, and restoration mutation.
-- Reiterate the inferential sequence: the fixed-output fixture identifies the representation mechanism, while the dynamic perturbations estimate how the generalized invariant behaves under organizational conditions; do not present every perturbation as another direct test of the fixed-output hypothesis.
-- Clarify that red-team mutations establish structural susceptibility under declared conditions, not an actor's historical inducement, observation, repetition, or benefit.
+### 5.2 Five policy designs — 250 words
 
-### 5.2 Synthetic cases and endogenous engagement — 160 words
+| Policy | Operational role | Central tradeoff |
+| --- | --- | --- |
+| U0 | Claimant-led evidence and hold | avoids unsupported progression but can retain unresolved cases and recipient effort |
+| U1 | Impute and progress | failure benchmark, not a recommendation |
+| U2C | Impute, review, fail closed | preserves gate safety but can accumulate unresolved holds |
+| U2O | Impute, review, fail open | resolves timeouts through progression at the risk of unsupported action |
+| U3 | Agency-assisted information first | seeks support but consumes agency resources and may add interactions or exposure |
 
-- Generate typed aggregate-only, period-specific, verified, missing, and disputed evidence states, and reveal support-changing records only through modeled evidence events.
-- Explain that the independent evaluation specification scores action-specific support without a latent debt-amount oracle.
-- Model delivery, access, comprehension, records, response effort, and extensions using shared latent traits and policy-specific mappings.
+Define these as counterfactual study policies. Do not label any as historical Robodebt policy.
 
-### 5.3 Historical fixtures and counterfactual policies — 260 words
+### 5.3 Design-frozen scenario and execution — 260 words
 
-- Identify R-OCI-Early and R-OCI-Enhanced as source-validation fixtures, not population estimators.
-- Define U0, U1, U2C, U2O, and U3 in one compact paragraph or table.
-- Emphasize the paired contrasts:
-  - U2C versus U2O isolates timeout semantics under the same review system.
-  - U3 versus U0 isolates agency-assisted evidence acquisition.
-  - U1 is a failure benchmark, not a recommended policy.
+- Report five factors: load, missing evidence, administrative-access barrier, evidence retrievability, and staff access.
+- Report 108 valid families, 80 cases per family-replication, five paired policies, and 30 replications.
+- Core: 16,200 family-policy-replication runs, representing 1,296,000 simulated case-policy trajectories. Sensitivity: the same number of runs and trajectories in a separate suite with evidence-retrieval latency doubled from 10 to 20.
+- Report the frozen seed inventories, day-650 cutoff, no precision extension, manifest identity, and complete reconciliation.
+- Explain the role of the design freeze in one concise methods paragraph: protection against result-driven tuning and support for exact reproduction, not conversion of a constructed simulation into population-level empirical inference.
+- Map reader-facing expectations 1–3 to internal freeze labels H1–H3 once in Table 1 or a methods note; do not repeat the internal labels in headings.
 
-### 5.4 Scenario design and estimands — 250 words
+### 5.4 Outcomes and estimands — 260 words
 
-- Describe the five core factors and the nominal 108 validatable scenario families.
-- State the common-random-number and keyed-draw design, including complete initial system-state capture, fixed cohort membership, branch-independent causal-event keys used to align divergent F2 traces without event-index matching, and finite event/microstep/depth bounds that turn livelock into an invalid run rather than favorable censoring.
-- Identify H1–H3 as the complete main-text quantitative narrative, H4–H5 as secondary appendix results, and V1–V2 as validation expectations.
-- Define primary estimands as paired policy differences and capacity-boundary surfaces, not global policy rankings.
+- Interpretable primary safety/process rates: unsupported progression, gate safety, effective review, unresolved hold, external/recovery-process exposure, and right-censoring.
+- The prespecified recipient interaction-event rate equals responses plus assistance requests per initiated case. Preserve its frozen field name, `recipient_burden_rate`, in reproducibility materials, but do not call it a direct measure of evidence-production burden, subjective burden, effort, welfare, or monetary cost.
+- Agency-workload event rate equals completed assistance, retrieval, review, and reassessment events per case.
+- Prespecified substantive contrasts: U2O−U2C and U3−U0. Report U1−U0 separately as an implementation-validation contrast, not a substantive result.
+- Report family-specific paired estimates, 95% MCSE intervals, cross-family variation, and load-stratified descriptive summaries. Explain that MCSE intervals quantify finite-run simulation noise, not population sampling uncertainty, historical uncertainty, or model uncertainty.
+- Label cross-family and load-stratified means as unweighted summaries over the deliberately designed scenario families. Do not present them as estimates for a real-world scenario distribution.
+- Exclude numerical `DecisionServiceEffective` simulation results: the implemented numerator treated every no-review case as successful service instead of checking for a supported disposition by the deadline.
 
-### 5.5 Outcomes and analysis — 210 words
+### 5.5 Validation, controls, and claim boundary — 260 words
 
-- Group outcomes into evidentiary/permission, organizational, and recovery/restoration families, with correction and censoring reported explicitly.
-- Report configured review, gate safety, effective review, and decision service separately.
-- Describe paired estimates, uncertainty intervals, Monte Carlo standard errors, interaction plots, and right-censoring reports.
-- Reject a single weighted utility as primary; retain the safety-throughput-burden vector.
+- Summarize hand traces, queue checks, deterministic replay, configuration closure, adapter swap, negative controls, and append-only receipts.
+- Report 32,400 reconciled family-policy-replication runs across both suites, representing 2,592,000 simulated case-policy trajectories. Describe the 178 tests as automated validation checks, then report maximum core MCSE `0.04332` and maximum sensitivity MCSE `0.04051`.
+- Distinguish execution integrity from measurement validity: all runs reconciled and passed their design-frozen checks, but the post-run semantic audit invalidated the service interpretation.
+- State that the simulation estimates only the declared model and parameter space; do not use successful execution to rehabilitate an invalid construct.
+- Explain stage-specific censoring and why an open path at day 650 cannot be treated as completed restoration or failure.
 
-### 5.6 Validation, freezing, and interpretation — 200 words
+Core exhibit: **Table 1, policy definitions, frozen contrasts, and claim limits.**
 
-- Summarize golden traces, limiting cases, analytical queue comparison, reference-simulator differential tests, conservation, deterministic replay, and keyed-draw invariance.
-- State the pilot/freeze/confirmatory sequence and family-wide replication-extension rule.
-- Reiterate that estimates apply to the declared model and ranges.
+## 6. Results — 1,800 Words
 
-Primary table: **Table 1, “Policies, process mutations, and primary contrasts.”**
+### 6.1 Integrity, measurement audit, and precision — 220 words
 
-Appendix candidates: event schema, scenario-validity rules, full factor grid, parameter provenance, preregistration, seed manifest, validation receipts, and sensitivity specifications.
+- Report complete reconciliation: 16,200 core and 16,200 sensitivity family-policy-replication runs, zero missing or unexpected IDs.
+- Report MCSE compliance, negative controls, deterministic replay, and the absence of execution changes after the design freeze.
+- Report the `DecisionServiceEffective` semantic mismatch as a post-run construct-validation failure, not an execution failure or an empirical-population finding. Show the intended definition, implemented numerator, reason for exclusion, and rerun requirement for any future repair.
+- State the unit of every number before interpretation.
+- State at the outset that U0, U2C, and U3 are terminally right-censored in every family-level cell, so the study cannot estimate their complete-restoration rates.
 
-## 6. Results: Where Safeguards Hold and Fail — 1,850 Words
+### 6.2 Prespecified expectation 1: fail-closed safety across tested load regimes — 320 words
 
-Do not draft quantitative conclusions until the confirmatory evidence packet is complete. Preserve null, adverse, and counterintuitive results.
+- Report that U2C gate safety remained `1.000` at low, middle, and high load in the descriptive load summaries.
+- Report that mean effective review across the other factors fell from `0.857` to `0.502` to `0.212` as load rose from `0.6` to `0.95` to `1.2`.
+- Report that unresolved holds rose from `0.143` to `0.498` to `0.788` over the same load levels.
+- State that the gate-safety, effective-review, and unresolved-hold pattern matches the prespecified expectation within the designed parameter space; its service component was not evaluable because that measure failed semantic audit. Three prespecified load levels show a capacity response but do not locate a threshold or estimate a continuous boundary.
+- Do not describe unresolved holds as harmless or historical frequencies.
 
-### 6.1 Validation and run integrity — 150 words
+### 6.3 Prespecified expectation 2: fail-open timeouts convert delay into progression — 330 words
 
-- Report scenario/run completeness, excluded invalid configurations, replication counts, MCSE compliance, censoring, and all validation gates.
-- State any deviations from the freeze before substantive results.
+- Compare U2O with U2C on paired families.
+- Report the family-level U2O−U2C unsupported-progression differences: cross-family descriptive mean `+0.476`, range `+0.042` to `+0.881`; every family-specific 95% MCSE interval excludes zero.
+- External/recovery-process-exposure differences match that direction and magnitude; unresolved holds and gate safety move in the opposite direction.
+- Report that effective-review rates are identical between U2O and U2C within each matched family: timeout semantics change what happens after review failure, not whether review completed.
+- State that the direction of the fail-open/fail-closed contrast follows from the declared policy semantics. The simulation contribution is its magnitude, family variation, and queue-dependent tradeoff—not the discovery that fail-open permits progression.
+- Explain that exposure is structurally downstream of progression in this kernel and therefore is not an independent replication of the unsupported-progression result.
+- State that the paired estimates exhibit the prespecified modeled pattern and quantify its operating consequences without presenting fail closed as costless or treating the result as evidence about a real-world population.
 
-### 6.2 The review-capacity boundary — 400 words
+### 6.4 Prespecified expectation 3: information-first tradeoff — 390 words
 
-- Answer H1 and RQ2.
-- Show where U2C remains `GateSafe` while `ReviewEffective` or `DecisionServiceEffective` declines.
-- Report unresolved holds, queue delay, and deadline expiry alongside unsupported-action rates.
-- Interpret a null threshold or gradual boundary honestly if no sharp transition appears.
+- Lead with the disposition: the conditional evidence-production-burden expectation was not answerable as framed. The executed contrast is unconditional across designed families, the interaction-count proxy does not measure evidence-production effort or welfare, and the service measure failed semantic audit.
+- U3 and U0 both produced zero unsupported progression, so U3 could not improve that safety outcome relative to an already conservative hold policy.
+- In the separately prespecified unconditional comparison across families, U3−U0 increased the recipient interaction-event proxy per case by a descriptive mean of `1.096` (range `0.860` to `1.312`) and agency-workload events by `1.209` (range `0.749` to `1.728`); all family-specific MCSE intervals exclude zero.
+- U3 sharply reduced unresolved holds but increased external/recovery-process exposure. Explain that exposure can follow supported progression and is not itself proof of unsupported action or harm. Do not report the invalid decision-service contrast.
+- Interpret the finding as a tradeoff: information acquisition can resolve cases, but this implementation adds interactions and organizational work rather than simply transferring effort away from recipients.
+- State the construct-validity result precisely: the prespecified proxy moved opposite the expected direction, but it cannot establish whether U3 increased or reduced evidence-production effort, subjective burden, or welfare. The conditional substantive-burden expectation remains unresolved rather than rejected.
 
-Primary exhibit: **Figure 3, “Capacity and timeout semantics.”** Use aligned panels: Panel A shows gate safety, effective review, and decision service across load; Panel B shows how the same queue pressure becomes holds under U2C and unsupported action under U2O.
+### 6.5 Censoring, controls, and sensitivity — 300 words
 
-### 6.3 Fail closed versus fail open — 350 words
+- Lead with policy-specific right-censoring. U0, U2C, and U3 remained open at the declared terminal horizon in every family-level cell, while U1 and U2O had lower but material censoring.
+- Break censoring out by reason in repository supplement Module D and prohibit claims of complete restoration from open paths.
+- Explain that administrative observation closure is not case resolution and that stage-level event findings remain interpretable only within their declared horizons.
+- Report the U1 failure-benchmark contrast and the five negative controls without treating implementation validation as a substantive discovery.
+- Report that doubling evidence-retrieval latency left the principal qualitative patterns intact; keep sensitivity estimates separate from the core.
 
-- Answer H2.
-- Compare U2C and U2O on identical cases, service requirements, evidence access, and staffing.
-- Report robust-permission violations, action without period-specific support, and recovery exposure together with throughput and delay.
-- Do not pool the policies or describe fail-closed delay as harmless.
+### 6.6 Synthesis — 240 words
 
-Use Figure 3 Panel B rather than a separate exhibit.
+Answer the three questions directly:
 
-### 6.4 Information acquisition and burden transfer — 350 words
+1. weaker evidence may not automatically expand progression beyond independently supported actions;
+2. fail-closed review can preserve gate safety while effective review deteriorates, whereas fail-open timeouts convert the same review shortfall into permission and exposure; and
+3. information acquisition must be evaluated on interaction events, workload, timing, exposure, and restoration rather than assumed to dominate conservative holding; its effect on substantive recipient burden remains unmeasured here.
 
-- Answer H3.
-- Compare U3 and U0 on recipient evidence effort, agency workload, supported disposition, delay, correction opportunity, and unresolved cases.
-- Stratify by third-party retrievability and administrative-access barriers.
-- Identify the conditions under which agency assistance improves support and the conditions under which it merely relocates the bottleneck.
+Separate formal, simulated, and historical evidence in a compact matrix. State the strongest finding, most important tradeoff, and largest unresolved uncertainty. Repeat that the service metric is excluded and that terminal censoring prevents complete-restoration comparisons.
 
-Primary exhibit: **Figure 4, “U3–U0 tradeoffs across evidence retrievability and access barriers.”**
+Core exhibits:
 
-### 6.5 Secondary access and provenance results — 200 words
+- **Figure 3, multi-panel capacity, timeout, and information-first tradeoffs.**
+- **Table 2, prespecified paired estimates, MCSE, scenario range, and claim boundary.**
 
-- Summarize only whether H4–H5 qualify a headline conclusion; move their full estimates and plots to the appendix.
-- Distinguish nonresponse causes rather than treating all nonresponse as equivalent.
-- Show whether complete provenance access changes reviewer opportunity even when formal gate and staffing are fixed.
+## 7. Process-Red-Team Protocol and Governance Implications — 1,600 Words
 
-### 6.6 Negative controls and sensitivity — 200 words
+### 7.1 What the protocol produces — 200 words
 
-- Report V1–V2, matched negative controls, and only prespecified sensitivities.
-- State whether representation changes without permission changes correctly avoid F1 violations.
-- Identify which conclusions survive alternative queue disciplines, timing, retrieval, or reviewer assumptions.
+- State the boundary first: usability is a design objective, not an evaluated outcome of this study.
+- Define the unit: one evidence-to-action path through representation, routing, review, action, and restoration.
+- Present Levels A, B, and C with their minimum inputs, claim limits, and escalation rules.
+- Explain `assessed` versus `omitted_by_claim_limit`.
+- Define `pass`, `fail`, `unassessable`, and `not_applicable`, with completeness reported separately.
+- Prohibit an aggregate compliance score or weighted policy ranking.
 
-### 6.7 Results synthesis — 200 words
+### 7.2 Step 1: map transformations and ownership — 160 words
 
-- Answer the three headline questions in a compact claim/evidence matrix; retain the RQ1–RQ6 mapping in the evidence packet.
-- Separate formal findings, simulated findings, and historical observations.
-- State the strongest supported conclusion, the most important tradeoff, and the largest unresolved uncertainty.
+- Inventory evidence types, transformations, assumptions, visibility, provenance, and ownership.
+- Locate the first transition where a policy-relevant distinction disappears.
+- Apply F0 and F4.
 
-Primary table: **Table 2, “Primary paired estimates, uncertainty, and claim boundaries.”** Each row must include estimand, contrast, estimate, interval, MCSE, scenario scope, and interpretation limit.
+### 7.3 Step 2: test what weaker evidence permits — 160 words
 
-Appendix candidates: full scenario-family results, secondary outcomes, detailed censoring, all sensitivity plots, prespecified or reproducibly selected traces, and negative-control tables.
+- Inventory exact progression, constraint, information, and restoration actions.
+- Test automatic progression against an independent support rule and valid refinement certificate.
+- Treat defaults and fail-open timeouts as permission rules.
 
-## 7. A Practical Process-Red-Team Protocol — 1,750 Words
+### 7.4 Step 3: test operational review — 160 words
 
-This section is the paper's practical deliverable. It must be usable without the appendices or code while remaining traceable to the formal model and simulation results. Present the protocol as a repeatable diagnostic, not a universal compliance standard or a promise that every organization can run the full simulation. Its semantic steps and output classes are frozen before confirmatory results; result-dependent prose may illustrate but not redefine them.
+- Separate gate configuration, gate safety, effective review, and timely supported service conceptually; do not use the excluded simulation output as an example of valid service measurement.
+- Check evidence visibility, stopping authority, dependency, timing, exact authorization, and execution-state support.
 
-### 7.1 What the protocol diagnoses — 220 words
+### 7.5 Step 4: stress access, workload, and deadlines — 160 words
 
-- Define the target class: workflows that transform incomplete, uncertain, disputed, or aggregated evidence before permitting consequential action.
-- Explain why a correct component output, compliant calculation, visible provenance field, or configured reviewer may still coexist with a process failure.
-- State the protocol's unit of analysis: one evidence-to-action path, including representation, routing, review, action, and restoration.
-- Introduce the three application levels: document audit for structural claims, bounded deterministic trace for case-specific temporal claims through a declared horizon, and dynamic system simulation for shared-resource, feedback, and capacity claims. State each level's minimum inputs, claim limits, and escalation trigger.
-- Specify the common minimum inputs: process map, evidence types, permission rules, review dependencies, deadlines, roles, timeout behavior, and correction path.
-- Require one typed assessment envelope at every step, with exactly one status—`pass`, `fail`, `unassessable`, or `not_applicable`—and separate `complete`, `incomplete`, or `invalid` completeness, plus any optional value, stable diagnostics, role-bound component results, and role-bound evaluated inputs. Apply the frozen scope declaration, validate what is needed to resolve a conditional antecedent, and then evaluate independently decidable conditions. Distinguish unknown scope, missing required input, invalid evaluation specification, and invalid aggregation. `not_applicable` requires an explicit scope exclusion or demonstrably false fully resolved antecedent; a sufficient known failure takes conjunctive truth precedence over an unknown component, while completeness preserves the unresolved material.
-- Distinguish a formal assessment from `evaluation_state = omitted_by_claim_limit`: the latter records that the selected level cannot support an unattempted conclusion, receives no status, and names the required escalation.
-- State the complete output: a non-composite profile of property/helper classifications, located transitions, evidence used, observable traces, stress tests, interventions, owners, tradeoffs, unresolved information, application level, and claim limits. Prohibit an overall workflow pass, compliance score, or weighted policy ranking.
+- Select the simplest adequate level: document audit, bounded trace, or system simulation.
+- Report safety, delay, recipient burden, agency workload, exposure, and unresolved cases separately.
 
-Figure 1 overlays the five protocol steps on the evidence-to-action chain; do not add a separate protocol box.
+### 7.6 Step 5: test contestability and restoration — 160 words
 
-### 7.2 Step 1: Map evidence transformations and ownership — 190 words
+- Separate structural correction, prospective reliability, realized opportunity, uptake, correction, and restoration.
+- Require a consequence vector and baseline before claiming complete restoration.
 
-- Inventory what is observed, derived, imputed, disputed, or missing at every handoff; verify that observed claims are supplied by identified source records rather than merely inferable from other claims.
-- Record which source, assumption, team, interface, and rule owns each transformation.
-- Identify policy-relevant alternatives or missing distinctions that can disappear before routing.
-- Test F0 and F4 using one ordinary case, one degraded-evidence case, and one provenance-suppressed case.
-- Output: an evidence lineage and the first transition at which relevant uncertainty becomes unavailable.
+### 7.7 Fixed Robodebt worked example — 300 words
 
-### 7.3 Step 2: Test what weaker evidence newly permits — 190 words
+- Apply all five steps to the prespecified deterministic early-OCI-style trace and its repair arm.
+- Show what component-local checks see, then locate the process-level transition and operational consequence.
+- Record status, completeness, diagnostic, owner, intervention, tradeoff, and claim limit for each row.
+- Do not call the trace representative or statistically typical.
 
-- List automatic progression, constraint, information, and restoration actions separately.
-- For every fully instantiated progression action permitted under a coarse state, ask whether the independent support rule permits it under every refinement denoted by a conclusion-valid certificate.
-- Give the operational version in plain language: specify the support rule and exact, symbolic, conservative, or witness-search method before examining the workflow outcome; a validated counterexample can establish failure, but failure to find one through search cannot establish pass.
-- Treat a fail-open timeout, default value, or missing-as-zero rule as an authority rule rather than a neutral implementation detail.
-- Test F1 with a paired evidence counterfactual and F2 with fallback-versus-explicit-hold system traces under identical cohort membership and keyed exogenous inputs, aligned by branch-independent causal cuts rather than event index and recomputing support for focal and spillover cases at each material state.
-- Output: the exact evidence-to-permission edge that is safe, unsupported, or unresolved.
+### 7.8 Governance interventions and bounded transfer — 300 words
 
-### 7.4 Step 3: Verify that review is operationally effective — 240 words
+- Connect each failure mechanism to a specific intervention and empowered owner.
+- Report the tradeoff for provenance preservation, evidence acquisition, fail-closed review, capacity reservation, deadline change, recovery pause, and restoration.
+- Apply the protocol briefly to the held-out LLM-summary canary as a transfer check, not a second empirical case.
+- Use the completed project-lead comprehensibility review as editorial QA. At minimum, define “controlled pair” in plain language, resolve every material clarity issue, and report unresolved ambiguities without converting the walkthrough into usability validation.
 
-- Identify who sees the case, what evidence and uncertainty they receive, what authority they hold, and whether the workflow actually waits for them.
-- Measure configured review, gate safety, effective review, and timely decision service separately.
-- Test missing evidence, missing authority, process suppression, deadline expiry, and fail-open timeout as distinct failure reasons.
-- Require recorded decisions and overrides that bind the exact action instance, evidence and rule versions, conditions, and expiry; immediately before execution, verify both current post-review eligibility and independent support.
-- Output: whether review prevents unsupported progression, merely labels it, or preserves safety while leaving cases unresolved.
+Core exhibit: **Table 3, five-step diagnostic applied to the fixed Robodebt trace.**
 
-### 7.5 Step 4: Stress access, workload, and deadlines — 240 words
-
-- Vary evidence availability, notice delivery, administrative access, comprehension, initiation load, service capacity, and deadline rules.
-- Use the simplest adequate method: hand traces for deterministic failures, queue calculations for simple capacity questions, and simulation when feedback, multiple queues, or endogenous response make static analysis insufficient.
-- Require escalation from document audit to bounded deterministic trace when event order or realized completion matters, and from bounded trace to system simulation when shared queues, capacity, timeouts, or spillovers can change another case.
-- Identify the boundary at which the declared control loses effective review or decision service.
-- Report safety, delay, recipient burden, agency workload, and unresolved cases separately.
-- Output: the operating region in which the safeguard remains effective and the overload behavior outside it.
-
-### 7.6 Step 5: Test contestability and restoration — 190 words
-
-- Follow the trace beyond the initial action through notice, appeal, reassessment, recovery, repayment, and correction where applicable.
-- Ask separately whether a structural correction path exists, whether its prospective operational probability meets the frozen reliability threshold, whether it was available in the realized trace, whether it was invoked, and whether correction completed.
-- Distinguish corrected decision state from complete restoration of monetary and other modeled consequences.
-- Test delayed evidence, expired correction windows, reliability intervals that straddle the threshold, pre-horizon unresolved cases, and residual exposure after reversal.
-- Output: whether the process is meaningfully contestable and what harm remains after correction.
-
-### 7.7 Worked application: one fixed Robodebt trace — 240 words
-
-- Walk one early-OCI-style case from annual income match through missing period-specific evidence, averaging, deadline, debt action, recovery exposure, and later reassessment.
-- First show what component-local checks observe: aggregate consistency, execution of the programmed calculation, and presence of a notice or review field.
-- Then apply the five steps to locate evidentiary laundering, permission expansion, ineffective review, deadline/load exposure, and incomplete restoration.
-- Use the deterministic golden trace and paired repair path selected in Slice 0, before confirmatory output inspection. Do not substitute a more visually persuasive trace later.
-- Do not call the example representative, present it as a typical historical case, or use invented historical frequencies.
-
-Integrate the trace into Table 3 rather than creating a separate box.
-
-### 7.8 From diagnosis to intervention and bounded transfer — 240 words
-
-- Connect each failure to a mechanism-specific intervention: preserve provenance, restrict automatic progression, acquire evidence, enforce fail-closed dependency, add capacity or admission control, change deadlines, pause recovery, or strengthen restoration.
-- Show the associated tradeoff rather than presenting interventions as costless.
-- Assign an owner able to change representation, routing, gates, and timeout behavior together.
-- Apply the frozen protocol in 100–150 main-text words to one held-out contemporary-AI canary: an LLM case summary that suppresses a conflicting record and changes routing. Introduce the case and its causal relevance from first principles. In the internal lineage audit, map it to the source essay's LLM-summary example; do not require the reader to consult that essay. The canary uses different vocabulary and is not used to tune the formal model or simulation.
-- Treat the canary as a generalizability check, not a second empirical case or evidence of prevalence.
-- Transfer the protocol only when consequential action, evidence transformation, cross-team routing, review dependency, and restoration have close analogues; do not imply current Services Australia systems reproduce Robodebt.
-
-Primary table: **Table 3, “Five-step diagnostic applied to one fixed trace.”** Columns: step, property/helper, required input, `pass`/`fail`/`unassessable`/`not_applicable` rule, completeness, observable signal, fixed Robodebt-trace finding, intervention, owner, tradeoff, and claim limit. Add rows rather than combining incompatible statuses. This single display supplies the reusable diagnostic and worked example without creating an overall score.
-
-Repository supplement: provide the compact F0–F5 glossary and ordered decision procedure, three-level intake and escalation worksheet, evidence-lineage worksheet, trace schema, stress-test template, staged P0, Robodebt, and AI-canary review inputs, reference profiles, the completed project-lead comprehensibility review, executable worked trace, and reproduction commands outside the article. The main text must still explain the complete five-step method.
+Section 7 makes no formal usability claim. The staged P0, Robodebt, and canary walkthroughs plus the evidence-packet traceability check are used to improve instructions, examples, and worksheets and to expose residual ambiguity.
 
 ## 8. Limitations and Conclusion — 750 Words
 
 ### 8.1 Limitations — 450 words
 
-Address each boundary directly:
+Address each limit and say whether it narrows interpretation or requires new evidence:
 
-- **Formal scope:** results depend on the declared refinement set, action order, and review definition.
-- **Case scope:** early and enhanced OCI profiles are bounded by source coverage and must not be blended with later variants.
-- **Simulation scope:** synthetic cases and stylized parameters do not estimate historical frequencies, capacity, errors, debts, or harms.
-- **Behavioral scope:** the model represents structural opportunity and endogenous engagement, not reviewer psychology, deference, or behavioral compression.
-- **Legal scope:** the simulator does not determine lawfulness; legal conclusions remain source-attributed.
-- **Normative scope:** separate outcome vectors expose but do not resolve value choices among safety, timeliness, burden, workload, and restoration.
-- **External validity:** transfer to AI-enabled or national-security workflows requires evidence of the same institutional mechanism.
-- **Adversarial scope:** the study tests a base vulnerability and structural susceptibility; it does not establish inducibility, observability, repeatability, benefit, or historical exploitation in Robodebt.
-- **Research-design scope:** state any unresolved model sensitivity, censoring, source ambiguity, or precision failure.
-
-For each limitation, say whether it narrows interpretation, motivates a sensitivity analysis, or requires future empirical work.
+- formal dependence on the declared refinement set, action order, and support rule;
+- documentary boundaries around early and enhanced OCI profiles;
+- stylized parameters and lack of historical numerical calibration;
+- exclusion of the semantically invalid core `DecisionServiceEffective` output and the absence of a valid simulated timely-supported-disposition comparison;
+- an interaction-event proxy that cannot establish evidence-production effort, subjective burden, or welfare;
+- extensive policy-specific terminal censoring;
+- no modeled reviewer psychology, discretion, deference, or strategic behavior;
+- no legal adjudication or monetary-entitlement oracle;
+- no scalar normative ranking across safety, service, burden, workload, exposure, and restoration;
+- no practitioner study, usability validation, or evidence that new users will reproduce the protocol's classifications;
+- bounded transfer to contemporary AI workflows; and
+- no evidence of historical adversarial exploitation.
 
 ### 8.2 Conclusion — 300 words
 
-- Return to the article's opening question: can weaker evidence relax safeguards before an authorized person can act?
+- Return to the opening question about what weaker evidence newly permits.
 - State the formal answer under the declared assumptions.
-- State the simulation answer using only supported results and tradeoffs.
-- Reaffirm that the study establishes a bounded vulnerability test while leaving actor-specific attackability as a separate evidentiary claim.
-- Reiterate the institutional lesson: meaningful control is a property of the evidence-to-action process under load, not the presence of a model explanation or reviewer label.
-- Close with the transferable test: when evidence becomes less decision-relevant, what may the system now do, who can still stop it, and can they do so before the consequence becomes difficult to restore?
+- State the simulation answer: timeout semantics determine whether review shortfall becomes unresolved holding or unsupported progression; the modeled information-first policy created additional interaction and workload events, while its effect on substantive recipient burden remains unresolved.
+- State that the study does not estimate a capacity threshold, complete restoration for heavily censored policies, or timely supported service across policies.
+- Reaffirm that meaningful control is a property of the full evidence-to-action process under load.
+- Close with the transferable diagnostic: what may the system now do, who can still stop it, and can they do so before the consequence becomes difficult to restore?
 
-## Exhibit Plan
+## Core Exhibit Plan
 
-| ID | Exhibit | Section | Evidence owner | Core or appendix |
-| --- | --- | --- | --- | --- |
-| Figure 1 | Evidence-to-action chain with plain-language diagnostics and five-step protocol overlay | 1 and 7 | formal specification and frozen protocol | core |
-| Figure 2 | Early and enhanced OCI process maps | 4 | source manifest and process profiles | core |
-| Table 1 | Policies, mutations, and primary contrasts | 5 | frozen policy and scenario specs | core |
-| Figure 3 | Multipanel review-capacity boundary and fail-closed/fail-open contrast | 6 | confirmatory analysis artifacts | core |
-| Figure 4 | Information-acquisition tradeoffs | 6 | confirmatory analysis artifacts | core |
-| Table 2 | Primary paired estimates and boundaries | 6 | confirmatory analysis artifacts | core |
-| Table 3 | Five-step diagnostic, fixed trace, intervention, and tradeoff | 7 | frozen protocol and prespecified golden trace | core |
-| Drafting matrix | Lineage continuity audit | drafting audit | claim-boundary memo | repository only |
-| Appendix Table A1 | Formal properties and observable diagnostics | appendix | formal specification and executable checks | appendix |
-| Appendix Table B1 | Formal-to-Robodebt crosswalk and provenance | appendix | case-study crosswalk | appendix |
-| Appendix A | Notation, propositions, proof sketches, and counterexamples | appendix | formal evidence packet | appendix |
-| Appendix B | Source manifest, dated profiles, and inference limits | appendix | Robodebt source packet | appendix |
-| Appendix C | Simulation schemas, parameters, validation, and freeze receipts | appendix | simulation evidence packet | appendix |
-| Appendix D | Full results, controls, sensitivities, and prespecified or reproducibly selected traces | appendix | analysis evidence packet | appendix |
-| Repository protocol | Worksheets, trace schema, checklist, and stress-test template | supplement | evidence packet | repository |
-| Transfer canary | Held-out contemporary-AI workflow application | supplement | frozen protocol QA packet | repository |
-
-The seven core exhibits are the ceiling, not a target to exceed. If the venue counts substantial table text against the word limit, move Table 1 to the appendix and retain its policy definitions in concise prose. Do not cut the process map, primary estimates, capacity/timeout visualization, protocol overlay, or fixed worked trace.
-
-## Internal Lineage Continuity Matrix
-
-| Source-essay element | Treatment in standalone paper | New test or evidence | Failure condition |
+| ID | Exhibit | Section | Evidence owner |
 | --- | --- | --- | --- |
-| Hold the uncertain model output fixed and vary only the interface representation | Preserve exactly in `P0-Precursor` before the Robodebt generalization | Paired uncertainty-preserving and broad-fallback traces plus no-change control | Fixture changes the underlying output, rule, or process state, or cannot represent the falsifier |
-| Uncertainty can expand de facto authority through representation and routing | Retain but narrow to declared evidence orders and automatic progression | F0–F2, policy traces, permission metrics | Coarsening never changes permission in enabling cases |
-| Workflow, not model output alone, allocates authority | Formalize across representation, routing, review, action, and restoration | F0–F5 diagnostics and perturbation families | Component checks detect every induced process failure |
-| Broad fallback can remove a safeguard | Generalize to uncertainty-laundering representations | Evidentiary-fidelity fixtures and provenance mutations | Typed and untyped representations behave identically where routing can inspect type |
-| Weaker evidence should not reduce scrutiny or expand consequential action | Refine into robust automatic-permission monotonicity plus safe-fallback allowance | Propositions, counterexamples, U-policy comparisons | Rule cannot distinguish progression from safe constraint/information action |
-| Human review matters only when uncertainty is visible and intervention is possible | Extend with timing, authority, evidence, dependency, and recording requirements | U2C/U2O comparison and review-state metrics | Configured review remains effective across all tested overload and access conditions |
-| The vulnerability becomes adversarial when an actor can induce, observe, repeat, and benefit | Preserve as a separate attackability layer, not an assumed property of Robodebt | Four claim-boundary fields and explicit non-claim | Paper equates red-team mutation or institutional failure with historical adversarial exploitation |
-| Stress review under load | Execute as the primary dynamic simulation | H1–H2 and queue-boundary analysis | Load adds no insight beyond static policy semantics |
-| Prefer information-seeking and reversible intervention | Test rather than assume | U3/U0 comparison and restoration metrics | Information acquisition only transfers burden or creates worse unresolved delay |
-| Decision records should join representation, rules, interventions, and overrides | Convert to trace and provenance requirements | Event schema, replay, and artifact-source audit | Trace cannot identify the rule or evidence responsible for an action |
-| LLM summaries can suppress conflicts without becoming literally false | Develop as the held-out contemporary-AI canary | Frozen protocol application in the main text and post-simulation project-lead review | Canary is omitted, tuned to the protocol, or presented as a second empirical case |
+| Figure 1 | Evidence-to-action chain and five protocol steps | 1, 7 | formal model and protocol 1.0 |
+| Figure 2 | Early and enhanced OCI process maps | 4 | source manifest and process profiles |
+| Table 1 | Policies, contrasts, metrics, and claim limits | 5 | frozen configs and prospective design-freeze record |
+| Figure 3 | Multi-panel capacity, timeout, and information-first tradeoffs | 6 | core and sensitivity analysis receipts |
+| Table 2 | Prespecified paired estimates and computational precision | 6 | analysis receipts |
+| Table 3 | Five-step protocol applied to the fixed trace | 7 | frozen protocol and worked-trace receipt |
 
-This matrix is a drafting control, not a results table. Update its status only from formal checks, source artifacts, or frozen simulation results.
+Six core exhibits are a ceiling. Move exhaustive formal results, full scenario tables, censoring reasons, controls, sensitivity details, and source crosswalks to the repository supplement modules.
 
-## Drafting Sequence
+## Repository Supplement Modules
 
-1. Draft and version the five-step protocol, classification rules, AI canary, and deterministic trace-selection rule during Slice 0.
-2. Draft Sections 2–4 from the internal lineage source, formal specification, and source packet, then remove any reader-facing dependence on the lineage source, internal artifact IDs, or unexplained defense context.
-3. Validate executable fixture/reference agreement and review-input/reference separation before confirmatory freeze; freeze protocol version `1.0` with the scenario and analysis specifications.
-4. Draft Section 5 only after the scenario and analysis specifications freeze.
-5. Build the seven core exhibit shells with stable IDs before confirmatory execution.
-6. Draft Section 6 directly from the evidence packet after run reconciliation and MCSE checks.
-7. After Slice 5 analysis, have the project lead apply the frozen procedure to the staged P0, Robodebt, and AI-canary inputs; resolve editorial ambiguities, and require a new freeze and rerun for any semantic correction before drafting Section 7.
-8. Draft Section 1, the abstract, and Section 8 last so every summary statement matches the actual findings.
-9. Run the claim-to-evidence audit, lineage continuity audit, and standalone-reader audit before prose polish.
+- **Module A:** notation, propositions, proof sketches, and counterexamples.
+- **Module B:** source manifest, dated Robodebt profiles, crosswalk, and inference limits.
+- **Module C:** simulation schemas, parameters, validation, design-freeze record, and reproducibility receipts.
+- **Module D:** full family-level results, controls, censoring reasons, sensitivity, and trace-selection receipt.
+- **Repository supplement:** protocol worksheets, staged review inputs/reference profiles, completed comprehensibility review, executable traces, evidence packet, and commands.
 
-## Completion Check
+These modules are repository supplements, not submitted appendices outside the word budget. Any material moved into the submitted article or a submitted appendix counts toward the 10,000-word ceiling. The main article must remain understandable without the repository.
 
-The outline has been successfully converted into an article only when:
+## Drafting Order
 
-- the named sections remain near the 9,400-word drafting target, use of the 600-word contingency is recorded, and the complete manuscript remains below the verified venue ceiling without deleting formal assumptions, case boundaries, methods, primary results, or limitations;
-- every historical and legal statement has a source-manifest anchor;
-- every formal claim has assumptions and a proof, counterexample, or executable check;
-- every quantitative claim points to a frozen run artifact and uncertainty statement;
-- the results section reports nulls, tradeoffs, censoring, and negative controls;
-- the introduction, abstract, results, and conclusion state the same findings at the same level of confidence;
-- Robodebt is described as structural grounding rather than numeric reconstruction or modern-AI equivalence;
-- the internal lineage audit records which source-essay claims are retained, refined, bounded, or rejected without appearing as reader-facing scaffolding;
-- every section defines its problem, construct, fixture, and evidentiary boundary without requiring access to the short essay;
-- the manuscript defines the representation-preservation fixture entirely in plain language; `P0-Precursor` remains an internal or supplementary artifact ID and does not appear in reader-facing prose;
-- the article explicitly distinguishes the fixed-output representation test, the generalized formal invariant, and the dynamic organizational stress test without presenting them as interchangeable evidence;
-- every acronym, formal-property label, hypothesis ID, and policy ID is defined before reader-facing use, and the abstract and introduction prefer plain-language contrasts;
-- the protocol was frozen before confirmatory results, every pre-freeze revision is logged, and no result-dependent semantic change is hidden as prose editing;
-- the project lead has completed the post-simulation comprehensibility review on the staged P0, fixed Robodebt trace, and synthetic AI canary inputs; every material ambiguity has a disposition, the review is not presented as independent validation, and every semantic correction received a new freeze and rerun;
-- every protocol step yields `pass`, `fail`, `unassessable`, or `not_applicable`, and missing documentation never defaults to a pass or `not_applicable`;
-- the worked trace follows the prespecified deterministic rule and is not described as representative;
-- the main text contains no more than seven core exhibits;
-- a reader can apply the five-step protocol and diagnostic table without opening the repository, while repository artifacts support deeper implementation; and
-- no proposed analysis is written as a completed finding.
+1. Build Table 2 and Figure 3 directly from the stored analysis receipts; exclude the invalid service metric and lock the result language and units.
+2. Draft Sections 5 and 6 from the frozen configs, manifest, reconciliation, and analysis artifacts.
+3. Draft Sections 3 and 4 from the formal model and source packet, retaining only notation used later.
+4. Complete the staged project-lead comprehensibility review and resolve editorial issues; any semantic defect triggers a new freeze and affected rerun.
+5. Draft Section 7 and Table 3 from the frozen protocol, fixed Robodebt trace, canary, and completed review.
+6. Draft Section 2 so the mechanism and literature lead naturally into the formal and simulation contributions.
+7. Draft Section 1, Section 8, and the abstract last from the locked claim/evidence matrix.
+8. Run the word-count, claim-to-evidence, standalone-reader, source, and reproduction audits before prose polish.
+
+## Completion Gates
+
+- Total counted words do not exceed 10,000; the 900-word reserve and 9,100-word named-section target are tracked rather than silently consumed.
+- Every quantitative statement names its unit and points to a stored analysis artifact.
+- The reader-facing paper describes the prospective analysis record as a simulation design freeze, not an empirical preregistration; internal H1–H3 labels are mapped once to prespecified expectations and omitted from section headings.
+- The invalid `DecisionServiceEffective` simulation output is omitted from substantive tables, figures, and conclusions; the construct-validation exclusion is disclosed in methods and results. Any repair requires a new version, freeze, and affected rerun.
+- Expectation 1 is described as a capacity response across three tested loads, not a located threshold or continuous boundary.
+- Expectation 2 distinguishes policy-semantic direction from simulated magnitude and scenario variation; exposure is not presented as independent confirmation of progression.
+- Expectation 3 is classified as not answerable as framed; the unconditional adverse proxy result and unresolved conditional substantive-burden claim are visible in the abstract, introduction, results, and conclusion rather than buried.
+- MCSE intervals are identified as computational-precision intervals, and unweighted scenario-family summaries are not presented as population estimates.
+- Every historical or legal statement has a source-manifest anchor.
+- Every formal proposition states its assumptions and receives a compact proof sketch or constructive argument in the main article, with full proofs or executable checks in the repository; contingent simulation implications are not labeled formal propositions.
+- Core and sensitivity results remain separate.
+- Censoring and unresolved cases are reported by policy and reason; extensive terminal censoring appears in the abstract boundary and results synthesis.
+- Robodebt remains structural grounding, not numerical calibration or contemporary-AI equivalence.
+- The controlled pair is defined without repository jargon or reliance on the precursor essay.
+- The main text contains the protocol's complete steps, required inputs, output fields, escalation rules, and claim limits; this completeness is not presented as evidence of usability.
+- The project-lead review is completed and accurately described as editorial comprehensibility QA, not independent validation, a practitioner study, or evidence of human performance.
+- No formal usability, adoption, efficiency, inter-rater reliability, or reproducible-classification claim appears.
+- Any semantic post-result change receives a new freeze and affected rerun.
+- The final literature-update search recorded in `docs/DEFERRED.md` is completed before submission.
+- No overall workflow score, weighted policy winner, historical prevalence estimate, legality inference, or attackability claim appears.
+
+Internal continuity and claim-lineage controls remain in `docs/CONTINUITY_AND_CLAIM_BOUNDARY.md`; they are not reader-facing exhibits.
