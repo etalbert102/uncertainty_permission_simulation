@@ -1,0 +1,128 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1390" viewBox="0 0 1000 1390" role="img" aria-labelledby="title desc">
+<title id="title">Figure 3. Capacity, timeout, and information-first results</title>
+<desc id="desc">Three panels show the U2C load response, U2O minus U2C paired differences, and U3 minus U0 paired differences over 108 designed scenario families.</desc>
+<rect x="0" y="0" width="1000" height="1390" fill="white"/>
+<text x="45.0" y="45.0" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700" text-anchor="start" fill="#17212B">Figure 3. Capacity, timeout, and information-first tradeoffs</text>
+<text x="45.0" y="76.0" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" text-anchor="start" fill="#52606D">Frozen core simulation; 108 designed families, 30 paired replications per family</text>
+<rect x="45" y="100.0" width="910" height="380.0" rx="10" fill="#F8FAFC" stroke="#D8DEE6"/>
+<text x="70.0" y="138.0" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="700" text-anchor="start" fill="#17212B">A  Fail-closed load response</text>
+<text x="70.0" y="168.0" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" text-anchor="start" fill="#52606D">U2C; unweighted means over other designed factors</text>
+<line x1="130.0" y1="400.0" x2="930.0" y2="400.0" stroke="#D8DEE6" stroke-width="1.0"/>
+<text x="115.0" y="406.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" text-anchor="end" fill="#52606D">0.00</text>
+<line x1="130.0" y1="361.2" x2="930.0" y2="361.2" stroke="#D8DEE6" stroke-width="1.0"/>
+<text x="115.0" y="367.2" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" text-anchor="end" fill="#52606D">0.25</text>
+<line x1="130.0" y1="322.5" x2="930.0" y2="322.5" stroke="#D8DEE6" stroke-width="1.0"/>
+<text x="115.0" y="328.5" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" text-anchor="end" fill="#52606D">0.50</text>
+<line x1="130.0" y1="283.8" x2="930.0" y2="283.8" stroke="#D8DEE6" stroke-width="1.0"/>
+<text x="115.0" y="289.8" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" text-anchor="end" fill="#52606D">0.75</text>
+<line x1="130.0" y1="245.0" x2="930.0" y2="245.0" stroke="#D8DEE6" stroke-width="1.0"/>
+<text x="115.0" y="251.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" text-anchor="end" fill="#52606D">1.00</text>
+<line x1="130.0" y1="245.0" x2="130.0" y2="400.0" stroke="#17212B" stroke-width="1.5"/>
+<line x1="130.0" y1="400.0" x2="930.0" y2="400.0" stroke="#17212B" stroke-width="1.5"/>
+<text x="130.0" y="427.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" text-anchor="middle" fill="#17212B">0.6</text>
+<text x="530.0" y="427.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" text-anchor="middle" fill="#17212B">0.95</text>
+<text x="930.0" y="427.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" text-anchor="middle" fill="#17212B">1.2</text>
+<text x="530.0" y="457.0" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" text-anchor="middle" fill="#17212B">Nominal initiation load</text>
+<text x="67" y="322.5" font-family="Arial, Helvetica, sans-serif" font-size="17" text-anchor="middle" fill="#17212B" transform="rotate(-90 67 322.5)">Rate</text>
+<polyline points="130.0,245.0 530.0,245.0 930.0,245.0" fill="none" stroke="#2E7D5B" stroke-width="3"/>
+<circle cx="130.0" cy="245.0" r="6.0" fill="#2E7D5B"/>
+<circle cx="530.0" cy="245.0" r="6.0" fill="#2E7D5B"/>
+<circle cx="930.0" cy="245.0" r="6.0" fill="#2E7D5B"/>
+<line x1="110.0" y1="210.0" x2="140.0" y2="210.0" stroke="#2E7D5B" stroke-width="3.0"/>
+<circle cx="125.0" cy="210.0" r="6.0" fill="#2E7D5B"/>
+<text x="152.0" y="216.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" text-anchor="start" fill="#17212B">Gate safety</text>
+<polyline points="130.0,267.2 530.0,322.1 930.0,367.1" fill="none" stroke="#2563A6" stroke-width="3"/>
+<rect x="124.0" y="261.2" width="12.0" height="12.0" fill="#2563A6"/>
+<rect x="524.0" y="316.1" width="12.0" height="12.0" fill="#2563A6"/>
+<rect x="924.0" y="361.1" width="12.0" height="12.0" fill="#2563A6"/>
+<line x1="390.0" y1="210.0" x2="420.0" y2="210.0" stroke="#2563A6" stroke-width="3.0"/>
+<rect x="399.0" y="204.0" width="12.0" height="12.0" fill="#2563A6"/>
+<text x="432.0" y="216.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" text-anchor="start" fill="#17212B">Timely review completion</text>
+<polyline points="130.0,377.8 530.0,322.9 930.0,277.9" fill="none" stroke="#C56A11" stroke-width="3"/>
+<polygon points="130.0,370.8 123.0,384.8 137.0,384.8" fill="#C56A11"/>
+<polygon points="530.0,315.9 523.0,329.9 537.0,329.9" fill="#C56A11"/>
+<polygon points="930.0,270.9 923.0,284.9 937.0,284.9" fill="#C56A11"/>
+<line x1="725.0" y1="210.0" x2="755.0" y2="210.0" stroke="#C56A11" stroke-width="3.0"/>
+<polygon points="740.0,198.0 728.0,222.0 752.0,222.0" fill="#C56A11"/>
+<text x="767.0" y="216.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" text-anchor="start" fill="#17212B">Unresolved hold</text>
+<rect x="45" y="505.0" width="910" height="330.0" rx="10" fill="#F8FAFC" stroke="#D8DEE6"/>
+<text x="70.0" y="543.0" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="700" text-anchor="start" fill="#17212B">B  Timeout semantics</text>
+<text x="70.0" y="573.0" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" text-anchor="start" fill="#52606D">U2O − U2C; point = unweighted mean, line = family min–max range</text>
+<line x1="430.0" y1="600.0" x2="430.0" y2="755.0" stroke="#D8DEE6" stroke-width="1.0"/>
+<text x="430.0" y="782.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" text-anchor="middle" fill="#17212B">-1.0</text>
+<line x1="555.0" y1="600.0" x2="555.0" y2="755.0" stroke="#D8DEE6" stroke-width="1.0"/>
+<text x="555.0" y="782.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" text-anchor="middle" fill="#17212B">-0.5</text>
+<line x1="680.0" y1="600.0" x2="680.0" y2="755.0" stroke="#17212B" stroke-width="1.5"/>
+<text x="680.0" y="782.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" text-anchor="middle" fill="#17212B">+0.0</text>
+<line x1="805.0" y1="600.0" x2="805.0" y2="755.0" stroke="#D8DEE6" stroke-width="1.0"/>
+<text x="805.0" y="782.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" text-anchor="middle" fill="#17212B">+0.5</text>
+<line x1="930.0" y1="600.0" x2="930.0" y2="755.0" stroke="#D8DEE6" stroke-width="1.0"/>
+<text x="930.0" y="782.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" text-anchor="middle" fill="#17212B">+1.0</text>
+<text x="680.0" y="810.0" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" text-anchor="middle" fill="#17212B">Paired rate difference</text>
+<text x="70.0" y="621.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" text-anchor="start" fill="#17212B">Unsupported progression</text>
+<line x1="690.4" y1="615.0" x2="900.3" y2="615.0" stroke="#B3382C" stroke-width="4.0"/>
+<line x1="690.4" y1="607.0" x2="690.4" y2="623.0" stroke="#B3382C" stroke-width="2.0"/>
+<line x1="900.3" y1="607.0" x2="900.3" y2="623.0" stroke="#B3382C" stroke-width="2.0"/>
+<circle cx="799.1" cy="615.0" r="7.5" fill="#B3382C"/>
+<text x="70.0" y="651.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" text-anchor="start" fill="#17212B">Exposure</text>
+<line x1="690.4" y1="645.0" x2="900.3" y2="645.0" stroke="#C56A11" stroke-width="4.0"/>
+<line x1="690.4" y1="637.0" x2="690.4" y2="653.0" stroke="#C56A11" stroke-width="2.0"/>
+<line x1="900.3" y1="637.0" x2="900.3" y2="653.0" stroke="#C56A11" stroke-width="2.0"/>
+<circle cx="799.1" cy="645.0" r="7.5" fill="#C56A11"/>
+<text x="70.0" y="681.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" text-anchor="start" fill="#17212B">Gate safety</text>
+<line x1="459.7" y1="675.0" x2="669.6" y2="675.0" stroke="#2E7D5B" stroke-width="4.0"/>
+<line x1="459.7" y1="667.0" x2="459.7" y2="683.0" stroke="#2E7D5B" stroke-width="2.0"/>
+<line x1="669.6" y1="667.0" x2="669.6" y2="683.0" stroke="#2E7D5B" stroke-width="2.0"/>
+<circle cx="560.9" cy="675.0" r="7.5" fill="#2E7D5B"/>
+<text x="70.0" y="711.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" text-anchor="start" fill="#17212B">Unresolved hold</text>
+<line x1="459.7" y1="705.0" x2="669.6" y2="705.0" stroke="#2563A6" stroke-width="4.0"/>
+<line x1="459.7" y1="697.0" x2="459.7" y2="713.0" stroke="#2563A6" stroke-width="2.0"/>
+<line x1="669.6" y1="697.0" x2="669.6" y2="713.0" stroke="#2563A6" stroke-width="2.0"/>
+<circle cx="560.9" cy="705.0" r="7.5" fill="#2563A6"/>
+<text x="70.0" y="741.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" text-anchor="start" fill="#17212B">Timely review completion</text>
+<line x1="680.0" y1="735.0" x2="680.0" y2="735.0" stroke="#7252A3" stroke-width="4.0"/>
+<line x1="680.0" y1="727.0" x2="680.0" y2="743.0" stroke="#7252A3" stroke-width="2.0"/>
+<line x1="680.0" y1="727.0" x2="680.0" y2="743.0" stroke="#7252A3" stroke-width="2.0"/>
+<circle cx="680.0" cy="735.0" r="7.5" fill="#7252A3"/>
+<rect x="45" y="860.0" width="910" height="330.0" rx="10" fill="#F8FAFC" stroke="#D8DEE6"/>
+<text x="70.0" y="898.0" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="700" text-anchor="start" fill="#17212B">C  Information-first tradeoff</text>
+<text x="70.0" y="928.0" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" text-anchor="start" fill="#52606D">U3 − U0; outcome rows have different units</text>
+<line x1="430.0" y1="950.0" x2="430.0" y2="1110.0" stroke="#17212B" stroke-width="1.5"/>
+<text x="430.0" y="1137.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" text-anchor="middle" fill="#17212B">0.0</text>
+<line x1="596.7" y1="950.0" x2="596.7" y2="1110.0" stroke="#D8DEE6" stroke-width="1.0"/>
+<text x="596.7" y="1137.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" text-anchor="middle" fill="#17212B">0.6</text>
+<line x1="763.3" y1="950.0" x2="763.3" y2="1110.0" stroke="#D8DEE6" stroke-width="1.0"/>
+<text x="763.3" y="1137.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" text-anchor="middle" fill="#17212B">1.2</text>
+<line x1="930.0" y1="950.0" x2="930.0" y2="1110.0" stroke="#D8DEE6" stroke-width="1.0"/>
+<text x="930.0" y="1137.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" text-anchor="middle" fill="#17212B">1.8</text>
+<text x="680.0" y="1167.0" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" text-anchor="middle" fill="#17212B">Paired difference per initiated case</text>
+<text x="70.0" y="970.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" text-anchor="start" fill="#17212B">Unsupported progression</text>
+<text x="70.0" y="989.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" text-anchor="start" fill="#52606D">rate</text>
+<line x1="430.0" y1="970.0" x2="430.0" y2="970.0" stroke="#B3382C" stroke-width="4.0"/>
+<line x1="430.0" y1="962.0" x2="430.0" y2="978.0" stroke="#B3382C" stroke-width="2.0"/>
+<line x1="430.0" y1="962.0" x2="430.0" y2="978.0" stroke="#B3382C" stroke-width="2.0"/>
+<circle cx="430.0" cy="970.0" r="7.5" fill="#B3382C"/>
+<text x="70.0" y="1010.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" text-anchor="start" fill="#17212B">Exposure</text>
+<text x="70.0" y="1029.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" text-anchor="start" fill="#52606D">rate</text>
+<line x1="532.5" y1="1010.0" x2="656.5" y2="1010.0" stroke="#C56A11" stroke-width="4.0"/>
+<line x1="532.5" y1="1002.0" x2="532.5" y2="1018.0" stroke="#C56A11" stroke-width="2.0"/>
+<line x1="656.5" y1="1002.0" x2="656.5" y2="1018.0" stroke="#C56A11" stroke-width="2.0"/>
+<circle cx="595.1" cy="1010.0" r="7.5" fill="#C56A11"/>
+<text x="70.0" y="1050.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" text-anchor="start" fill="#17212B">Interaction events</text>
+<text x="70.0" y="1069.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" text-anchor="start" fill="#52606D">events/case</text>
+<line x1="668.8" y1="1050.0" x2="794.5" y2="1050.0" stroke="#7252A3" stroke-width="4.0"/>
+<line x1="668.8" y1="1042.0" x2="668.8" y2="1058.0" stroke="#7252A3" stroke-width="2.0"/>
+<line x1="794.5" y1="1042.0" x2="794.5" y2="1058.0" stroke="#7252A3" stroke-width="2.0"/>
+<circle cx="734.4" cy="1050.0" r="7.5" fill="#7252A3"/>
+<text x="70.0" y="1090.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" text-anchor="start" fill="#17212B">Agency workload</text>
+<text x="70.0" y="1109.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" text-anchor="start" fill="#52606D">events/case</text>
+<line x1="638.1" y1="1090.0" x2="910.0" y2="1090.0" stroke="#2563A6" stroke-width="4.0"/>
+<line x1="638.1" y1="1082.0" x2="638.1" y2="1098.0" stroke="#2563A6" stroke-width="2.0"/>
+<line x1="910.0" y1="1082.0" x2="910.0" y2="1098.0" stroke="#2563A6" stroke-width="2.0"/>
+<circle cx="765.8" cy="1090.0" r="7.5" fill="#2563A6"/>
+<text x="45.0" y="1225.0" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700" text-anchor="start" fill="#17212B">Reading the figure</text>
+<text x="45.0" y="1258.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" text-anchor="start" fill="#52606D">Panel A shows unweighted means over other designed factors; Panels B and C show means and family min–max ranges.</text>
+<text x="45.0" y="1288.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" text-anchor="start" fill="#52606D">Family ranges show scenario variation, not uncertainty. Panel C rows use different units and are not a common scale.</text>
+<text x="45.0" y="1318.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" text-anchor="start" fill="#52606D">MCSE intervals appear in Table 2. Timely review completion is timing only; exposure is downstream and not proof of harm.</text>
+<text x="45.0" y="1358.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700" text-anchor="start" fill="#17212B">Scope: frozen stylized parameter space; no historical, legal, population, or complete-restoration estimate.</text>
+</svg>
