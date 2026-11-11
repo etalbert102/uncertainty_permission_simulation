@@ -155,10 +155,10 @@ The Robodebt record shows that aggregate evidence, transformation, access, deadl
 | Draft component | Evidence owner |
 | --- | --- |
 | Paper promise, word roles, findings, and claim hierarchy | `docs/ARTICLE_OUTLINE.md`; `docs/EVIDENCE_PACKET.md` |
-| Controlled representation pair and controls | `docs/PRECURSOR_FIDELITY_FIXTURE.md`; `docs/P0_USABILITY_WALKTHROUGH.md`; stored P0 records |
+| Controlled representation pair and controls | `docs/PRECURSOR_FIDELITY_FIXTURE.md`; `docs/P0_USABILITY_WALKTHROUGH.md`; stored P0 records; [Figure 1](figures/figure1_evidence_to_action_protocol.svg) |
 | Literature positioning and bounded originality | `docs/LITERATURE_AND_ORIGINALITY_MAP.md`; `docs/LITERATURE_SEARCH_AUDIT.md` |
 | Evidence, refinement, representation, actions, F0–F5, and propositions | `docs/FORMAL_MODEL.md`, version `1.0` |
-| Early and enhanced OCI profiles | `docs/ROBODEBT_CASE_STUDY.md`; `data/sources/robodebt/r_oci_early.yaml`; `data/sources/robodebt/r_oci_enhanced.yaml` |
+| Early and enhanced OCI profiles | `docs/ROBODEBT_CASE_STUDY.md`; `data/sources/robodebt/r_oci_early.yaml`; `data/sources/robodebt/r_oci_enhanced.yaml`; [Figure 2](figures/figure2_robodebt_process_profiles.svg) |
 | Historical source anchors and cutoff | `data/sources/robodebt/source_manifest.yaml`, retrieved through `2026-10-31` |
 | Case-application validity and prohibited inferences | `docs/CASE_APPLICATION_SUFFICIENCY.md`; `docs/CONTINUITY_AND_CLAIM_BOUNDARY.md` |
 | Simulation previews and measurement exclusions | `docs/ARTICLE_METHODS_RESULTS_DRAFT.md`; core and sensitivity analysis receipts |

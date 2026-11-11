@@ -1,0 +1,169 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1500" viewBox="0 0 1200 1500" role="img" aria-labelledby="title desc">
+  <title id="title">Figure 2. Early and enhanced OCI process profiles with source and simulation boundaries</title>
+  <desc id="desc">Side-by-side process maps compare the early Online Compliance Intervention baseline with an enhanced early-2017 repair bundle. The enhanced profile separates response and nonresponse paths and distinguishes the collector-referral gate from later reassessment or review. A lower dashed panel separates source-grounded process structure from stylized simulation parameters and counterfactual study policies.</desc>
+  <defs>
+    <marker id="arrowBlue" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="strokeWidth">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#2563A6"/>
+    </marker>
+    <marker id="arrowGreen" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="strokeWidth">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#2E7D5B"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="1200" height="1500" fill="#FFFFFF"/>
+
+  <text x="45" y="48" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700" fill="#17212B">Figure 2. Early and enhanced OCI process profiles</text>
+  <text x="45" y="79" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#52606D">Documented structure establishes analytical relevance; stylized inputs below do not reconstruct historical Robodebt</text>
+
+  <g font-family="Arial, Helvetica, sans-serif" font-size="15">
+    <rect x="45" y="99" width="18" height="18" rx="3" fill="#EAF1F8" stroke="#2563A6" stroke-width="2"/>
+    <text x="72" y="114" fill="#17212B">documented early structure</text>
+    <rect x="285" y="99" width="18" height="18" rx="3" fill="#EAF5F0" stroke="#2E7D5B" stroke-width="2"/>
+    <text x="312" y="114" fill="#17212B">enhanced profile structure</text>
+    <rect x="545" y="99" width="18" height="18" rx="3" fill="#FFF8EF" stroke="#C56A11" stroke-width="2" stroke-dasharray="7 5"/>
+    <text x="572" y="114" fill="#17212B">study-owned stylized layer</text>
+    <text x="900" y="114" fill="#52606D">solid arrows = source-grounded paths</text>
+  </g>
+
+  <rect x="40" y="140" width="540" height="1015" rx="12" fill="#F8FAFC" stroke="#D8DEE6"/>
+  <rect x="620" y="140" width="540" height="1015" rx="12" fill="#F8FAFC" stroke="#D8DEE6"/>
+
+  <text x="65" y="180" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" fill="#17212B">A  Early OCI baseline</text>
+  <text x="65" y="207" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#52606D">July 2016–19 January 2017 profile</text>
+  <text x="645" y="180" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" fill="#17212B">B  Enhanced OCI repair bundle</text>
+  <text x="645" y="207" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#52606D">Changes documented by April 2017; mixed activation dates</text>
+
+  <g font-family="Arial, Helvetica, sans-serif">
+    <g fill="#EAF1F8" stroke="#2563A6" stroke-width="2">
+      <rect x="95" y="235" width="430" height="62" rx="8"/>
+      <rect x="95" y="325" width="430" height="72" rx="8"/>
+      <rect x="95" y="425" width="430" height="72" rx="8"/>
+      <rect x="65" y="575" width="220" height="92" rx="8"/>
+      <rect x="335" y="575" width="220" height="92" rx="8"/>
+      <rect x="65" y="700" width="220" height="80" rx="8"/>
+      <rect x="95" y="820" width="430" height="65" rx="8"/>
+      <rect x="95" y="920" width="430" height="65" rx="8"/>
+      <rect x="95" y="1020" width="430" height="65" rx="8"/>
+    </g>
+    <text x="310" y="261" font-size="16" font-weight="700" text-anchor="middle" fill="#17212B">Match ATO PAYG and Centrelink records</text>
+    <text x="310" y="283" font-size="14" text-anchor="middle" fill="#52606D">refresh, inclusion, discrepancy, and risk rules</text>
+    <text x="310" y="351" font-size="16" font-weight="700" text-anchor="middle" fill="#17212B">Send discrepancy notice</text>
+    <text x="310" y="374" font-size="14" text-anchor="middle" fill="#52606D">selected digital channel or last-known address</text>
+    <text x="310" y="451" font-size="16" font-weight="700" text-anchor="middle" fill="#17212B">21 days from letter date</text>
+    <text x="310" y="474" font-size="14" text-anchor="middle" fill="#52606D">reminder after 14 days</text>
+    <polygon points="310,505 390,545 310,585 230,545" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+    <text x="310" y="540" font-size="16" font-weight="700" text-anchor="middle" fill="#17212B">Response by</text>
+    <text x="310" y="561" font-size="16" font-weight="700" text-anchor="middle" fill="#17212B">due date?</text>
+    <text x="175" y="603" font-size="16" font-weight="700" text-anchor="middle" fill="#17212B">Recipient confirms or</text>
+    <text x="175" y="625" font-size="16" font-weight="700" text-anchor="middle" fill="#17212B">corrects employer, amount,</text>
+    <text x="175" y="647" font-size="16" font-weight="700" text-anchor="middle" fill="#17212B">pay periods, and evidence</text>
+    <text x="445" y="603" font-size="16" font-weight="700" text-anchor="middle" fill="#17212B">Evenly apportion ATO</text>
+    <text x="445" y="625" font-size="16" font-weight="700" text-anchor="middle" fill="#17212B">earnings over employer-</text>
+    <text x="445" y="647" font-size="16" font-weight="700" text-anchor="middle" fill="#17212B">reported employment period</text>
+    <text x="175" y="723" font-size="16" font-weight="700" text-anchor="middle" fill="#17212B">Officer handles</text>
+    <text x="175" y="746" font-size="16" font-weight="700" text-anchor="middle" fill="#17212B">specified errors or</text>
+    <text x="175" y="769" font-size="16" font-weight="700" text-anchor="middle" fill="#17212B">unresolved evidence</text>
+    <text x="310" y="847" font-size="16" font-weight="700" text-anchor="middle" fill="#17212B">Calculate entitlement and any debt</text>
+    <text x="310" y="870" font-size="14" text-anchor="middle" fill="#52606D">transformed period values enter calculation</text>
+    <text x="310" y="947" font-size="16" font-weight="700" text-anchor="middle" fill="#17212B">Debt notice; normal recovery begins</text>
+    <text x="310" y="970" font-size="14" text-anchor="middle" fill="#52606D">when the calculation produces a debt</text>
+    <text x="310" y="1047" font-size="16" font-weight="700" text-anchor="middle" fill="#17212B">Later information: reassessment or review</text>
+    <text x="310" y="1070" font-size="14" text-anchor="middle" fill="#52606D">path existence does not prove complete restoration</text>
+
+    <g stroke="#2563A6" stroke-width="2.5" fill="none" marker-end="url(#arrowBlue)">
+      <line x1="310" y1="297" x2="310" y2="321"/>
+      <line x1="310" y1="397" x2="310" y2="421"/>
+      <line x1="310" y1="497" x2="310" y2="505"/>
+      <path d="M 230 545 H 175 V 571"/>
+      <path d="M 390 545 H 445 V 571"/>
+      <line x1="175" y1="667" x2="175" y2="696"/>
+      <path d="M 175 780 V 800 H 310 V 816"/>
+      <path d="M 445 667 V 800 H 310 V 816"/>
+      <line x1="310" y1="885" x2="310" y2="916"/>
+      <line x1="310" y1="985" x2="310" y2="1016"/>
+    </g>
+    <text x="190" y="533" font-size="14" font-weight="700" fill="#2563A6">yes</text>
+    <text x="414" y="533" font-size="14" font-weight="700" fill="#2563A6">no</text>
+  </g>
+
+  <g font-family="Arial, Helvetica, sans-serif">
+    <g fill="#EAF5F0" stroke="#2E7D5B" stroke-width="2">
+      <rect x="675" y="235" width="430" height="62" rx="8"/>
+      <rect x="675" y="325" width="430" height="82" rx="8"/>
+      <rect x="645" y="625" width="220" height="72" rx="8"/>
+      <rect x="915" y="625" width="220" height="72" rx="8"/>
+      <rect x="675" y="725" width="430" height="65" rx="8"/>
+      <rect x="675" y="820" width="430" height="65" rx="8"/>
+      <rect x="675" y="925" width="430" height="65" rx="8"/>
+      <rect x="675" y="1010" width="430" height="55" rx="8"/>
+      <rect x="675" y="1080" width="430" height="55" rx="8"/>
+    </g>
+    <text x="890" y="261" font-size="16" font-weight="700" text-anchor="middle" fill="#17212B">Matched discrepancy candidate</text>
+    <text x="890" y="283" font-size="14" text-anchor="middle" fill="#52606D">early matching and calculation backbone retained</text>
+    <text x="890" y="351" font-size="16" font-weight="700" text-anchor="middle" fill="#17212B">Clearer notice and direct-code access</text>
+    <text x="890" y="374" font-size="14" text-anchor="middle" fill="#52606D">registered delivery, phone follow-up, newer address data</text>
+    <text x="890" y="397" font-size="14" text-anchor="middle" fill="#52606D">where authorized; extension route signposted</text>
+    <polygon points="890,425 985,465 890,505 795,465" fill="#FFFFFF" stroke="#2E7D5B" stroke-width="2"/>
+    <text x="890" y="460" font-size="15" font-weight="700" text-anchor="middle" fill="#17212B">Response within</text>
+    <text x="890" y="481" font-size="15" font-weight="700" text-anchor="middle" fill="#17212B">28 days of receipt?</text>
+    <polygon points="890,535 985,575 890,615 795,575" fill="#FFFFFF" stroke="#2E7D5B" stroke-width="2"/>
+    <text x="890" y="570" font-size="15" font-weight="700" text-anchor="middle" fill="#17212B">Dispute, complexity, or</text>
+    <text x="890" y="591" font-size="15" font-weight="700" text-anchor="middle" fill="#17212B">record-access problem?</text>
+    <text x="755" y="650" font-size="16" font-weight="700" text-anchor="middle" fill="#17212B">Configured manual-</text>
+    <text x="755" y="671" font-size="16" font-weight="700" text-anchor="middle" fill="#17212B">intervention route</text>
+    <text x="755" y="690" font-size="13" text-anchor="middle" fill="#52606D">not proof of effective review</text>
+    <text x="1025" y="653" font-size="16" font-weight="700" text-anchor="middle" fill="#17212B">Continue through evidence</text>
+    <text x="1025" y="676" font-size="16" font-weight="700" text-anchor="middle" fill="#17212B">entry path</text>
+    <text x="890" y="750" font-size="16" font-weight="700" text-anchor="middle" fill="#17212B">Payslip or bank-statement route</text>
+    <text x="890" y="773" font-size="14" text-anchor="middle" fill="#52606D">estimated gross amount made visible</text>
+    <text x="890" y="846" font-size="16" font-weight="700" text-anchor="middle" fill="#17212B">Provisional result and revision opportunity</text>
+    <text x="890" y="869" font-size="14" text-anchor="middle" fill="#52606D">more opportunity to revise before acceptance</text>
+    <text x="890" y="952" font-size="16" font-weight="700" text-anchor="middle" fill="#17212B">Entitlement calculation and any debt notice</text>
+    <text x="890" y="975" font-size="14" text-anchor="middle" fill="#52606D">early backbone retained</text>
+    <text x="890" y="1032" font-size="16" font-weight="700" text-anchor="middle" fill="#17212B">Collector-referral gate</text>
+    <text x="890" y="1053" font-size="13" text-anchor="middle" fill="#52606D">receipt-and-ignoring condition: attributed agency statement</text>
+    <text x="890" y="1102" font-size="16" font-weight="700" text-anchor="middle" fill="#17212B">Reassessment or review</text>
+    <text x="890" y="1123" font-size="13" text-anchor="middle" fill="#52606D">path existence does not prove complete restoration</text>
+
+    <g stroke="#2E7D5B" stroke-width="2.5" fill="none" marker-end="url(#arrowGreen)">
+      <line x1="890" y1="297" x2="890" y2="321"/>
+      <line x1="890" y1="407" x2="890" y2="425"/>
+      <line x1="890" y1="505" x2="890" y2="535"/>
+      <path d="M 985 465 H 1138 V 957 H 1109"/>
+      <path d="M 795 575 H 755 V 621"/>
+      <path d="M 985 575 H 1025 V 621"/>
+      <path d="M 755 697 V 710 H 890 V 721"/>
+      <path d="M 1025 697 V 710 H 890 V 721"/>
+      <line x1="890" y1="790" x2="890" y2="816"/>
+      <line x1="890" y1="885" x2="890" y2="921"/>
+      <line x1="890" y1="990" x2="890" y2="1006"/>
+      <line x1="890" y1="1065" x2="890" y2="1076"/>
+    </g>
+    <text x="902" y="524" font-size="14" font-weight="700" fill="#2E7D5B">yes</text>
+    <text x="1003" y="451" font-size="14" font-weight="700" fill="#2E7D5B">no</text>
+    <text x="753" y="562" font-size="14" font-weight="700" fill="#2E7D5B">yes</text>
+    <text x="1000" y="562" font-size="14" font-weight="700" fill="#2E7D5B">no</text>
+  </g>
+
+  <rect x="45" y="1185" width="1110" height="230" rx="12" fill="#FFF8EF" stroke="#C56A11" stroke-width="2" stroke-dasharray="8 6"/>
+  <text x="70" y="1225" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" fill="#17212B">C  Simulation layer: study-owned, stylized, and separate from the historical profiles</text>
+  <text x="70" y="1255" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#52606D">The source packet does not provide model-ready distributions for these executable quantities:</text>
+  <g font-family="Arial, Helvetica, sans-serif" font-size="15" text-anchor="middle">
+    <rect x="70" y="1280" width="180" height="42" rx="20" fill="#FFFFFF" stroke="#C56A11"/>
+    <text x="160" y="1306" fill="#17212B">arrival and load</text>
+    <rect x="270" y="1280" width="180" height="42" rx="20" fill="#FFFFFF" stroke="#C56A11"/>
+    <text x="360" y="1306" fill="#17212B">access and engagement</text>
+    <rect x="470" y="1280" width="180" height="42" rx="20" fill="#FFFFFF" stroke="#C56A11"/>
+    <text x="560" y="1306" fill="#17212B">evidence retrieval</text>
+    <rect x="670" y="1280" width="180" height="42" rx="20" fill="#FFFFFF" stroke="#C56A11"/>
+    <text x="760" y="1306" fill="#17212B">staffing and service</text>
+    <rect x="870" y="1280" width="240" height="42" rx="20" fill="#FFFFFF" stroke="#C56A11"/>
+    <text x="990" y="1306" fill="#17212B">correction and restoration delay</text>
+  </g>
+  <text x="70" y="1354" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700" fill="#17212B">Counterfactual study policies:</text>
+  <text x="305" y="1354" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#52606D">conservative hold; impute and progress; fail-closed review; fail-open review; information first</text>
+  <text x="70" y="1386" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700" fill="#B3382C">Claim boundary:</text>
+  <text x="220" y="1386" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#52606D">simulation rates are designed-parameter-space results—not historical prevalence, capacity, debt error, legality, or causal effects.</text>
+
+  <text x="45" y="1450" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#52606D">Sources: Commonwealth Ombudsman (2017), paras. 1.17–1.46 and app. B; Royal Commission Deloitte maps 2B, 3B, and 4B.</text>
+  <text x="45" y="1477" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#52606D">Profile boundary: early OCI and the enhanced repair bundle remain dated separately; later EIC, CUPI, PAYG Manual, and remediation are outside scope.</text>
+</svg>

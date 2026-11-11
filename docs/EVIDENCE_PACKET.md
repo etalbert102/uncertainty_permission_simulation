@@ -199,13 +199,13 @@ This is a three-point capacity response, not a located continuous boundary. A co
 
 | Claim family | Formal proposition or construct | Source/run owner | Article exhibit or trace | Required limitation |
 | --- | --- | --- | --- | --- |
-| Representation can change permission while held facts remain fixed | F0, F4, P0 fixture | Slice 1 record bundle and P0 receipt | representation-preservation fixture; planned Figure 1 | Controlled fixture, not interface-effect prevalence or usability evidence. |
+| Representation can change permission while held facts remain fixed | F0, F4, P0 fixture | Slice 1 record bundle and P0 receipt | representation-preservation fixture; [Figure 1](figures/figure1_evidence_to_action_protocol.svg) | Controlled fixture, not interface-effect prevalence or usability evidence. |
 | Weaker evidence must not add unsupported automatic progression | Proposition 1; F1; FR1 | formal model, worked trace, core paired estimates | Table 2; U2O-U2C and U1-U0; Robodebt trace | Direction is partly rule-defined; simulation contributes magnitude and variation. |
 | Fail-closed safety can coexist with review/service failure | Proposition 2; FR3, FR5 | core analysis and queue validation | Figure 3 panels A-B; Table 2 | Three load points do not estimate a universal or continuous threshold. |
 | Fail-open timeout converts review shortfall into progression | Proposition 2, part 3 | U2O-U2C paired estimates | Figure 3B; Table 2 | Applies to declared policies and parameter space, not all institutions. |
 | Information-first changes a vector of outcomes | action taxonomy; F1/F2 boundary | U3-U0 core and sensitivity receipts | Figure 3C; Table 2 | No scalar welfare ranking; interaction proxy is not substantive burden. |
 | Correction is not complete restoration | Proposition 3; F5; FR6 | fixed worked trace and censoring receipts | Table 3 baseline B-08 to B-10 | Trace-specific; terminal comparative restoration remains unidentified. |
-| Robodebt is a structurally suitable application | application contract | source manifest, dated profiles, process maps/crosswalk | planned Figure 2 and fixed trace | No numerical reconstruction, independent legality finding, or attackability claim. |
+| Robodebt is a structurally suitable application | application contract | source manifest, dated profiles, process maps/crosswalk | [Figure 2](figures/figure2_robodebt_process_profiles.svg) and fixed trace | No numerical reconstruction, independent legality finding, or attackability claim. |
 | Method transfers across vocabulary | F0-F5 protocol and isomorphic-adapter contract | transfer canary and Slice 1 receipt | compact LLM-summary canary | Representability only; no validated transfer or practitioner-performance claim. |
 | Contribution is a bounded synthesis | all three propositions plus dynamic demonstration | literature/originality map and conducted analyses | introduction/discussion pending | No claim to invent information ordering, queues, burden, oversight, or red teaming generally. |
 
@@ -252,7 +252,7 @@ The LLM-summary transfer canary is an author-constructed cross-vocabulary illust
 | Dynamic methods, results, Figure 3, Table 2 | drafted and critically revised | [Methods/results draft](ARTICLE_METHODS_RESULTS_DRAFT.md) |
 | Five-step protocol, worked example, governance interventions | drafted and critically revised | [Protocol/governance draft](ARTICLE_PROTOCOL_GOVERNANCE_DRAFT.md) |
 | Limitations and conclusion | drafted; integration review pending | [Limitations/conclusion draft](ARTICLE_LIMITATIONS_CONCLUSION_DRAFT.md) |
-| Introduction, mechanism/literature, formal-model exposition, and case application | drafted and critically revised; integration review pending | [Sections 1–4 draft](ARTICLE_INTRO_FORMAL_CASE_DRAFT.md) |
+| Introduction, mechanism/literature, formal-model exposition, and case application | drafted and critically revised; Figures 1–2 built; integration review pending | [Sections 1–4 draft](ARTICLE_INTRO_FORMAL_CASE_DRAFT.md) |
 | Complete integrated manuscript and verified word count | pending | no artifact yet |
 
 The paper is a natural extension of *When Uncertainty Expands Authority* because it formalizes and tests the precursor mechanism. It remains standalone by defining its own concepts, motivating the case, presenting conducted analysis, and restricting lineage material to internal controls, acknowledgments, or a concise origin statement. The continuity table in `CONTINUITY_AND_CLAIM_BOUNDARY.md` classifies precursor claims as retained, refined, tested, bounded, or rejected.
