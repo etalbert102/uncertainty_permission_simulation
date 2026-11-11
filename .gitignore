@@ -10,3 +10,25 @@ dist/
 
 outputs/*
 !outputs/.gitkeep
+
+# Slice 6 release evidence: retain compact inventories, reconciliations,
+# analyses, and derived figures without committing per-attempt outputs.
+!outputs/confirmatory_v1/
+outputs/confirmatory_v1/*
+!outputs/confirmatory_v1/run_index.json
+!outputs/confirmatory_v1/reconciliation.json
+!outputs/confirmatory_v1/analysis/
+outputs/confirmatory_v1/analysis/*
+!outputs/confirmatory_v1/analysis/analysis_r030.json
+!outputs/confirmatory_v1/analysis/capacity_timeout_r030.svg
+!outputs/confirmatory_v1/analysis/information_tradeoff_r030.svg
+
+!outputs/sensitivity_information_latency_v1/
+outputs/sensitivity_information_latency_v1/*
+!outputs/sensitivity_information_latency_v1/run_index.json
+!outputs/sensitivity_information_latency_v1/reconciliation.json
+!outputs/sensitivity_information_latency_v1/analysis/
+outputs/sensitivity_information_latency_v1/analysis/*
+!outputs/sensitivity_information_latency_v1/analysis/analysis_r030.json
+!outputs/sensitivity_information_latency_v1/analysis/capacity_timeout_r030.svg
+!outputs/sensitivity_information_latency_v1/analysis/information_tradeoff_r030.svg

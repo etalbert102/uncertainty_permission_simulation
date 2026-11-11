@@ -1,0 +1,14 @@
+{
+  "artifact_kind": "confirmatory_reconciliation",
+  "config_id": "SENSITIVITY-INFORMATION-LATENCY-V1",
+  "expected_attempt_count": 16200,
+  "manifest_hash": "35f360d81e7eebe1effeae813f4144991b0fa043001df6d920d3f8592bfee65c",
+  "missing_attempt_ids": [],
+  "observed_attempt_count": 16200,
+  "reconciliation_hash": "db8ccf476a4815f276cd5b3dc233d5c9fe37a7de296c687e1e031b0af23c5493",
+  "run_index_hash": "b4e2bd26a04b0390a9a206fb983f7e78b869a30e616a72aa36dbbbd656719ce7",
+  "schema_version": 1,
+  "status": "complete",
+  "target_replications": 30,
+  "unexpected_attempt_ids": []
+}
