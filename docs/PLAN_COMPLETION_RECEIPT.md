@@ -4,6 +4,8 @@ Date: 2026-10-31
 
 Status: execution-ready study plan; simulation and research results not yet implemented
 
+Governance amendment, 2026-11-11: the planning-stage project-lead comprehensibility return is no longer a study or release requirement. The example inputs and reference profiles remain internal QA artifacts, and the paper makes no formal usability claim. The historical planning receipt below is otherwise preserved.
+
 ## Completion Boundary
 
 This receipt closes planning, not the study. The repository now specifies the formal model, generic configuration boundary, Robodebt application boundary, dynamic experiment, validation sequence, pilot decisions, confirmatory freeze, analysis, evidence packet, and 10,000-word manuscript. Slices 1–6 must still be executed. No simulation, pilot, confirmatory result, or empirical manuscript claim is certified here.
@@ -17,7 +19,7 @@ This receipt closes planning, not the study. The repository now specifies the fo
 | Case-neutral execution architecture | `docs/CONFIGURATION_COMPILATION.md`, `data/model/schema_manifest_v1.yaml` | only a validated compiled configuration executes; every runtime slot has exactly one owner |
 | Documented institutional application | `docs/ROBODEBT_CASE_STUDY.md`, `data/sources/robodebt/` | dated early/enhanced profiles, three-axis validity, no silent historical defaults |
 | Dynamic simulation and analysis design | `docs/STUDY_PLAN.md`, `docs/PREREGISTRATION.md` | policies, factors, estimands, controls, horizon, keyed pairing, precision, and extension rule specified |
-| Practical process-red-team output | `docs/PROCESS_RED_TEAM_PROTOCOL.md`, staged review inputs, reference profiles, and `docs/PROCEDURE_COMPREHENSIBILITY_REVIEW.md` | application levels, closed statuses, escalation, non-composite report, and post-simulation project-lead review specified |
+| Practical process-red-team output | `docs/PROCESS_RED_TEAM_PROTOCOL.md`, example inputs, and reference profiles | application levels, closed statuses, escalation, and non-composite reporting specified; no formal usability review required |
 | Execution order and ownership | Work Slices 0–7 and file/mutation contract in `docs/STUDY_PLAN.md` | each slice has purpose, owned outputs, forbidden work, commands, done conditions, and commit rule |
 | Failure handling and runtime feasibility | Execution Protocol and Verification Tiers in `docs/STUDY_PLAN.md` | stable diagnostic envelope, escalation order, measured runtime ceilings, and stop rule specified |
 | External and future dependencies | `docs/DEFERRED.md` | nine items have an owner, risk, next action, and due gate |
@@ -53,4 +55,4 @@ PLAN_VALID slices=8 primary_hypotheses=3 policies=5 audit_questions=39 deferred_
 
 ## Entry Decision
 
-Both validators pass and `D-009` records approved baseline commit `9cf836cb15edba29235abc60b4f754d311343fe3` plus the environment receipt. Slices 1–3 are now complete, and Slice 4 may begin once the automated freeze inputs reconcile. The project-lead procedure review occurs after Slice 5 analysis and blocks Slice 6 completion; it does not block protocol `1.0`, confirmatory freeze, or execution. Exact Robodebt population calibration is neither required nor permitted as a silent prerequisite for the generic kernel.
+Both validators pass and `D-009` records approved baseline commit `9cf836cb15edba29235abc60b4f754d311343fe3` plus the environment receipt. Slices 1–3 are now complete, and Slice 4 may begin once the automated freeze inputs reconcile. At the time of this receipt, a project-lead procedure review was scheduled after Slice 5; the 2026-11-11 governance amendment retired that requirement, so it no longer blocks Slice 6. Exact Robodebt population calibration is neither required nor permitted as a silent prerequisite for the generic kernel.

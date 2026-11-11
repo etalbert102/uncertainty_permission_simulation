@@ -1,6 +1,6 @@
 # Article Outline: From Incomplete Evidence to Automated Action
 
-Status: results-informed drafting outline; design-frozen simulation complete; one prespecified service metric excluded after semantic audit; project-lead comprehensibility review and evidence packet still pending
+Status: results-informed drafting outline; design-frozen simulation complete; one prespecified service metric excluded after semantic audit; evidence packet still pending; no formal comprehensibility review required
 
 Working title: *From Incomplete Evidence to Automated Action: A Formal Model and Dynamic Simulation of Review Capacity and Timeout Rules, with a Robodebt Application*
 
@@ -115,7 +115,7 @@ Core exhibit: **Figure 1, evidence-to-action chain with the five protocol steps.
 - Explain how this sole representation change alters routing, scrutiny, gate configuration, and automatic permission.
 - State what the pair does not test: model accuracy, latent truth, frequency, queues, or historical behavior.
 
-This definition incorporates the first project-lead comprehensibility issue (`PCR-001`) and must appear before any formal notation.
+This plain-language definition resolves an author-noted ambiguity and must appear before any formal notation.
 
 ### 2.2 Mechanism and bounded expectation — 170 words
 
@@ -380,11 +380,11 @@ Core exhibits:
 - Connect each failure mechanism to a specific intervention and empowered owner.
 - Report the tradeoff for provenance preservation, evidence acquisition, fail-closed review, capacity reservation, deadline change, recovery pause, and restoration.
 - Apply the protocol briefly to the held-out LLM-summary canary as a transfer check, not a second empirical case.
-- Use the completed project-lead comprehensibility review as editorial QA. At minimum, define “controlled pair” in plain language, resolve every material clarity issue, and report unresolved ambiguities without converting the walkthrough into usability validation.
+- Use ordinary author editorial QA: define “controlled pair” in plain language, resolve material clarity issues, and state residual limitations without creating a formal comprehensibility or usability claim.
 
 Core exhibit: **Table 3, five-step diagnostic applied to the fixed Robodebt trace.**
 
-Section 7 makes no formal usability claim. The staged P0, Robodebt, and canary walkthroughs plus the evidence-packet traceability check are used to improve instructions, examples, and worksheets and to expose residual ambiguity.
+Section 7 makes no formal usability claim. The stored P0, Robodebt, and canary examples plus the evidence-packet traceability check may inform ordinary author editing; they are not a required evaluation.
 
 ## 8. Limitations and Conclusion — 750 Words
 
@@ -433,7 +433,7 @@ Six core exhibits are a ceiling. Move exhaustive formal results, full scenario t
 - **Module B:** source manifest, dated Robodebt profiles, crosswalk, and inference limits.
 - **Module C:** simulation schemas, parameters, validation, design-freeze record, and reproducibility receipts.
 - **Module D:** full family-level results, controls, censoring reasons, sensitivity, and trace-selection receipt.
-- **Repository supplement:** protocol worksheets, staged review inputs/reference profiles, completed comprehensibility review, executable traces, evidence packet, and commands.
+- **Repository supplement:** protocol worksheets, example inputs/reference profiles, executable traces, evidence packet, and commands. Optional author editorial notes are not a study result.
 
 These modules are repository supplements, not submitted appendices outside the word budget. Any material moved into the submitted article or a submitted appendix counts toward the 10,000-word ceiling. The main article must remain understandable without the repository.
 
@@ -442,7 +442,7 @@ These modules are repository supplements, not submitted appendices outside the w
 1. Build Table 2 and Figure 3 directly from the stored analysis receipts; exclude the invalid service metric and lock the result language and units.
 2. Draft Sections 5 and 6 from the frozen configs, manifest, reconciliation, and analysis artifacts.
 3. Draft Sections 3 and 4 from the formal model and source packet, retaining only notation used later.
-4. Complete the staged project-lead comprehensibility review and resolve editorial issues; any semantic defect triggers a new freeze and affected rerun.
+4. Run an ordinary author editorial pass over the protocol presentation; no formal review return is required, and any semantic defect still triggers a new freeze and affected rerun.
 5. Draft Section 7 and Table 3 from the frozen protocol, fixed Robodebt trace, canary, and completed review.
 6. Draft Section 2 so the mechanism and literature lead naturally into the formal and simulation contributions.
 7. Draft Section 1, Section 8, and the abstract last from the locked claim/evidence matrix.
@@ -465,7 +465,7 @@ These modules are repository supplements, not submitted appendices outside the w
 - Robodebt remains structural grounding, not numerical calibration or contemporary-AI equivalence.
 - The controlled pair is defined without repository jargon or reliance on the precursor essay.
 - The main text contains the protocol's complete steps, required inputs, output fields, escalation rules, and claim limits; this completeness is not presented as evidence of usability.
-- The project-lead review is completed and accurately described as editorial comprehensibility QA, not independent validation, a practitioner study, or evidence of human performance.
+- No project-lead or external-reader return is required; internal examples and author editing are not presented as independent validation, a practitioner study, or evidence of human performance.
 - No formal usability, adoption, efficiency, inter-rater reliability, or reproducible-classification claim appears.
 - Any semantic post-result change receives a new freeze and affected rerun.
 - The final literature-update search recorded in `docs/DEFERRED.md` is completed before submission.

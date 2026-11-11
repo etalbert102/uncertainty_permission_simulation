@@ -1,4 +1,4 @@
-# P0 Usability Walkthrough and Expected Profile
+# P0 Protocol Walkthrough and Expected Profile
 
 Status: draft post-assessment reference and practitioner-facing walkthrough; expected-output projection only
 
@@ -10,7 +10,7 @@ Formal fixture: `docs/PRECURSOR_FIDELITY_FIXTURE.md`
 
 ## Purpose and Boundary
 
-This walkthrough shows how the process-red-team protocol turns a controlled representation comparison into an inspectable diagnostic profile. It also serves as the reference profile for the staged project-lead comprehensibility review. It is not an executed trace, a historical Robodebt case, an F1 evidence-refinement test, an F2 system-intervention test, or evidence of prevalence or attackability.
+This walkthrough shows how the process-red-team protocol turns a controlled representation comparison into an inspectable diagnostic profile. It serves as an internal reference profile, not a required human-review return or usability evaluation. It is not an executed trace, a historical Robodebt case, an F1 evidence-refinement test, an F2 system-intervention test, or evidence of prevalence or attackability.
 
 The executable stored-record bundle and canonical hashes remain Slice 1 deliverables. Until then, the IDs and expected classifications below are an oracle projection from the fixture specification, not generated results.
 

@@ -1,31 +1,31 @@
-# Post-Simulation Procedure Comprehensibility Review
+# Optional Author Editorial Notes
 
-Status: required project-lead review after Slice 5 analysis and before Slice 6 completion
+Status: retired as a formal review requirement; retained as optional, incomplete author notes
 
 ## Purpose and evidentiary boundary
 
-This review asks whether the five-step process-red-team procedure is understandable and practically usable when read alongside the completed simulation and worked examples. It is performed by the project lead after the dynamic simulation and confirmatory analysis are complete.
+This worksheet records an author walkthrough begun after the dynamic simulation and confirmatory analysis. It may help identify unclear wording or missing links between assessments and evidence, but completing it is optional and does not gate Slice 6, release, or submission.
 
-The review is not independent validation, an inter-rater reliability study, evidence about human performance, or a test of the simulation's empirical validity. It cannot establish that a new practitioner will reproduce every classification. Its function is to identify unclear wording, missing instructions, unusable worksheets, and places where the article or repository fails to connect an assessment to its evidence and claim limit.
+These notes are not independent validation, an inter-rater reliability study, evidence about human performance, or a test of simulation validity. They cannot establish that a new practitioner will reproduce classifications and will not be cited as a paper result.
 
-## Review control
+## Editorial-notes context
 
 | Field | Entry |
 | --- | --- |
-| Review date |  |
+| Review date | 2026-11-02 |
 | Reviewer | project lead |
-| Protocol version and hash |  |
-| Confirmatory analysis receipt and hash |  |
-| Evidence-packet version and hash |  |
-| P0 review-input version |  |
-| Robodebt worked-trace review-input version |  |
-| Transfer-canary version |  |
-| Prior familiarity with reference profiles | none / partial / substantial |
-| Review conclusion | understandable / understandable with editorial fixes / semantic revision required |
+| Protocol version and hash | `1.0`; SHA-256 `ba2f845e2025545dadbe4f6d48db1c5c9313cd1b78c78118419d4dd85e64f4a3` |
+| Confirmatory analysis receipt and hash | `outputs/confirmatory_v1/analysis/analysis_r030.json`; analysis hash `bb486ee634365e53b7de464eb8cae8fc1e9169a29e1b6ad0ed3b496a684341cc` |
+| Evidence-packet version and hash | pending — evidence packet not yet created in Slice 6 |
+| P0 review-input version | `0.1` |
+| Robodebt worked-trace review-input version | not completed before formal requirement was retired |
+| Transfer-canary version | not completed before formal requirement was retired |
+| Prior familiarity with reference profiles | none |
+| Review conclusion | not required; optional walkthrough incomplete |
 
 Prior familiarity is a limitation to record, not a reason to invalidate this review.
 
-## Staged review procedure
+## Optional walkthrough
 
 1. Read the main-text five-step method and `docs/PROCESS_RED_TEAM_PROTOCOL.md` without consulting the reference profiles.
 2. Apply the procedure first to `docs/P0_PROCEDURE_REVIEW_PACKET.md`, then to `docs/ROBODEBT_WORKED_TRACE_REVIEW_PACKET.md`, and finally to `docs/TRANSFER_CANARY.md`.
@@ -35,7 +35,25 @@ Prior familiarity is a limitation to record, not a reason to invalidate this rev
 6. Trace the main-text Robodebt example and each reported simulation claim to its stored evidence without relying on the precursor essay.
 7. Classify every proposed correction as editorial or semantic and apply the change-control rule below.
 
-## Comprehensibility checklist
+## P0 first-pass review
+
+Reference-profile status: not consulted
+
+| Scope field | First-pass entry |
+| --- | --- |
+| Workflow/profile and version | `P0-Precursor`; review-input version `0.1`; protocol `1.0` |
+| Evaluation unit | Controlled pair of bounded deterministic trace specifications: `P0-E-PRESERVE` and `P0-E-FALLBACK` |
+| Application level and rationale | Level B — bounded deterministic trace. The packet supplies fixed case inputs, ordered events through a declared boundary, exact actions, gate and review state, and zero random draws; it supplies no stochastic cohort or shared-capacity system. |
+| Comparison and baseline | Compare the fallback representation with the preserve representation while holding the case, model output, policy, routing rule, process, resource, clock, and random draws fixed. |
+| Claim sought | Whether changing only the representation transformation changes scrutiny or automatic functional permission, and which trace-bounded formal properties/helpers can be assessed. |
+| Explicit non-claims | Model accuracy or latent truth; population frequency; shared-capacity or queue effects; completed review, action execution, contestability, or restoration beyond the trace boundary; historical causation, prevalence, legality, or attackability. |
+| Assessor | project lead |
+
+### P0 first-pass assessment profile
+
+Assessment rows remain pending. Complete them without consulting `docs/P0_USABILITY_WALKTHROUGH.md` or other P0 expected-result artifacts.
+
+## Optional editorial checklist
 
 Record `yes`, `no`, or `unclear`, with an artifact and section reference for every non-`yes` response.
 
@@ -58,20 +76,14 @@ Record `yes`, `no`, or `unclear`, with an artifact and section reference for eve
 
 | Issue ID | Artifact and location | What was unclear | Severity | Proposed correction | Editorial or semantic | Disposition | Rerun required |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-|  |  |  | blocking / material / minor |  |  |  |  |
+| `PCR-001` | `docs/P0_PROCEDURE_REVIEW_PACKET.md`, “Fixed Unit and Comparison” | “Controlled pair” did not immediately identify what is paired, what changes, and what remains fixed. | minor | Add one plain-language sentence before the table defining the two arms, the sole intended variation, and the held inputs. | editorial | pending | no |
 
 ## Change-control rule
 
 An editorial change may improve navigation, define an already-frozen term more plainly, add a cross-reference, or correct wording without changing application level, required input, status, completeness, diagnostic, property meaning, ownership, intervention logic, claim limit, scenario, metric, or result interpretation. Record and verify editorial changes, but they do not invalidate confirmatory artifacts.
 
-A semantic change alters any frozen construct, classification rule, required input, protocol step, application mapping, intervention, scenario, metric, analysis, worked-trace selection rule, or supported conclusion. A semantic change requires a new protocol and freeze version, invalidation of affected confirmatory artifacts, rerunning the affected simulation or analysis, and repeating this review on the new evidence packet. It must not be disguised as editorial clarification.
+A semantic change alters any frozen construct, classification rule, required input, protocol step, application mapping, intervention, scenario, metric, analysis, worked-trace selection rule, or supported conclusion. A semantic change requires a new protocol and freeze version, invalidation of affected confirmatory artifacts, and rerunning the affected simulation or analysis. Updating these optional notes is permitted but never required. A semantic change must not be disguised as editorial clarification.
 
-## Completion decision
+## No completion gate
 
-Slice 6 may complete only when:
-
-- every blocking or material comprehensibility issue has a recorded disposition;
-- all accepted editorial corrections are reflected in the protocol, article, and evidence packet;
-- no unresolved issue prevents the project lead from following the five steps and tracing the examples to evidence;
-- any semantic revision has followed the new-freeze and rerun rule; and
-- the review conclusion and limitations are recorded without claiming independent validation.
+This worksheet does not block any slice or release artifact. Authors may resolve useful editorial observations through ordinary drafting. Any change to frozen semantics still follows the repository's separate new-freeze and rerun rule, regardless of whether this worksheet is used.

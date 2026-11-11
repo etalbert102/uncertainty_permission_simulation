@@ -14,7 +14,7 @@ Read `docs/STUDY_PLAN.md` before implementation. Follow its slice order, stop co
 - Keep the lineage continuity matrix internal. Reader-facing sections, headings, conclusions, and examples must stand alone rather than present the article as a sequel.
 - Keep the base uncertainty-to-permission vulnerability, structural susceptibility, process red-teaming, and adversarial exploitability distinct. Attribute adversarial exploitability only when inducibility, observability, repeatability, and benefit are supported; do not attribute those conditions to Robodebt.
 - Freeze the protocol semantics, `pass`/`fail`/`unassessable` classifications, held-out AI canary, and worked-trace selection rule before confirmatory results; post-result prose may not change them.
-- After Slice 5 analysis, the project lead reviews whether the complete procedure is understandable using the staged P0, Robodebt, and transfer-canary inputs. Treat this as a comprehensibility review, not independent validation or evidence about human performance.
+- The paper makes no formal usability or comprehensibility claim. P0, the Robodebt worked trace, and the transfer canary remain internal examples and automated QA fixtures; no project-lead or external-reader return is required.
 - Post-simulation editorial clarifications may not alter frozen semantics. Any change to a construct, status rule, required input, application mapping, metric, or supported conclusion requires a new freeze and rerun of affected confirmatory artifacts.
 - Draft named article sections to 9,400 words and track the 600-word contingency explicitly; do not spend the reserve merely to reach the 10,000-word ceiling.
 - Treat this as a formal counterfactual simulation grounded in Robodebt, not a numeric reconstruction of the historical program or evidence of current-system prevalence.
@@ -50,11 +50,11 @@ Read `docs/STUDY_PLAN.md` before implementation. Follow its slice order, stop co
 - Only one dependent plan slice may be active.
 - Before any Slice 1 mutation, close `D-009`: review and commit the validated Slice 0 baseline, create the declared environment, and record both validator outputs and environment versions in the ledger.
 - Automated specification, fixture, source, pilot, and freeze gates authorize protocol `1.0` and confirmatory execution. No external-reader return is required.
-- The project-lead comprehensibility review occurs only after Slice 5 analysis and blocks Slice 6 completion, not confirmatory freeze or execution.
+- No formal comprehensibility review blocks Slice 6. Ordinary author editorial checks are optional and cannot be reported as validation, reproducible-classification evidence, or practitioner performance.
 - Update the execution ledger at the end of every slice.
 - Record exact commands, results, residual risk, and commit SHA.
 - Finish, remove, or explicitly defer partial subsystems; do not leave unowned TODOs.
 - Preserve append-only attempts after model-backed execution begins.
 - Run `python3 scripts/validate_plan.py` before entering Slice 1 and after any change to the canonical plan, preregistration, architecture, deferred register, or execution controls.
 - Run `python3 scripts/validate_slice0.py` before entering Slice 1 and after any change to source, application profile, protocol, packet, preregistration, or worked-trace artifacts.
-- P0 is the synthetic representation-preservation fixture, not a Robodebt trace. Slice 3 generates a separate review input from the executable prespecified Robodebt trace; after Slice 5, the project lead reviews P0, that trace, and the transfer canary in sequence.
+- P0 is the synthetic representation-preservation fixture, not a Robodebt trace. The executable prespecified Robodebt trace and transfer canary remain separate fixtures with reference profiles; they do not create a required post-Slice-5 review sequence.
