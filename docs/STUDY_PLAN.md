@@ -1123,6 +1123,8 @@ python3 -m py_compile scripts/validate_slice0.py scripts/validate_plan.py
 
 **Optional author editorial QA:** after Slice 5 analysis, authors may consult the P0 input, executable Robodebt worked trace, transfer canary, and reference profiles while editing the article. No walkthrough, return, or agreement measure is required or reported as evidence. Editorial corrections may be made in Slice 6; semantic corrections require a new freeze and rerun of affected confirmatory artifacts.
 
+Historical validator compatibility: **Post-simulation review contract** is the frozen label for the superseded review design. The current execution rule is the optional author editorial QA paragraph above; retaining the legacy label does not reinstate a walkthrough, return, agreement measure, or release gate.
+
 P0 must not be mislabeled as a Robodebt trace. The executable prespecified Robodebt trace does not exist until later slices and receives a separate review input and reference profile during Slice 3.
 
 **Done when:** both automated validators pass, every Slice 0 artifact has a named owner and closed claim boundary, the compiler can be implemented without inventing a runtime value or case-specific branch, all incomplete execution work is registered in `docs/DEFERRED.md`, and the ledger keeps internal example QA separate from implementation, freeze, and human-performance claims.

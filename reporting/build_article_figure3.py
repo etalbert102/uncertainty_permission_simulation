@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""Build article Figure 3 from the frozen core analysis receipt."""
+"""Build article Figure 3 from the frozen core analysis receipt.
+
+This is a post-freeze reporting utility, not part of the frozen simulation or
+verification-code inventory.
+"""
 
 from __future__ import annotations
 

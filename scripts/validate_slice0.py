@@ -30,6 +30,7 @@ REQUIRED_FILES = {
     "docs/P0_PROCEDURE_REVIEW_PACKET.md",
     "docs/P0_USABILITY_WALKTHROUGH.md",
     "docs/PLAN_COMPLETION_RECEIPT.md",
+    "docs/PROCEDURE_COMPREHENSIBILITY_REVIEW.md",
     "docs/PRECURSOR_FIDELITY_FIXTURE.md",
     "docs/PREREGISTRATION.md",
     "docs/PROCESS_RED_TEAM_PROTOCOL.md",
@@ -41,7 +42,7 @@ REQUIRED_FILES = {
     "scripts/validate_plan.py",
 }
 
-EXAMPLE_INPUTS = {
+REVIEW_INPUTS = {
     "docs/P0_PROCEDURE_REVIEW_PACKET.md",
     "docs/TRANSFER_CANARY.md",
 }
@@ -133,12 +134,12 @@ def validate_markdown() -> None:
                 )
 
 
-def validate_example_inputs() -> None:
-    for relative in EXAMPLE_INPUTS:
+def validate_review_inputs() -> None:
+    for relative in REVIEW_INPUTS:
         text = (ROOT / relative).read_text(encoding="utf-8")
         for pattern, label in FORBIDDEN_REVIEW_INPUT_PATTERNS.items():
             if re.search(pattern, text, flags=re.IGNORECASE):
-                raise ValueError(f"{label} leaked into answer-separated example input {relative}")
+                raise ValueError(f"{label} leaked into staged review input {relative}")
         if re.search(
             r"\b(pass|fail|unassessable|not_applicable)\s*[/,:-]\s*(complete|incomplete|invalid)\b",
             text,
@@ -437,7 +438,7 @@ def main() -> int:
         raise ValueError("worked trace must remain deterministic with zero draws")
 
     validate_markdown()
-    validate_example_inputs()
+    validate_review_inputs()
 
     study_plan = (ROOT / "docs/STUDY_PLAN.md").read_text(encoding="utf-8")
     if "P0 must not be mislabeled as a Robodebt trace" not in study_plan:
@@ -445,7 +446,7 @@ def main() -> int:
     for required_boundary in (
         "case-neutral study kernel",
         "Minimum defensible case threshold",
-        "Optional author editorial QA",
+        "Post-simulation review contract",
         "stylized scenario overlay",
     ):
         if required_boundary not in study_plan:

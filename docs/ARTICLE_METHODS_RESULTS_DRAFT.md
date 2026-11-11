@@ -162,6 +162,6 @@ Claim boundaries: **A**, timeout directions follow the declared fail-open/fail-c
 | Policy, factor, seed, horizon, and precision definitions | `experiments/configs/confirmatory_v1.yaml`; `experiments/configs/sensitivity_information_latency_v1.yaml` |
 | Negative-control results | `data/golden_traces/slice4_negative_control_receipt_v1.json` |
 | Design-freeze identity | manifest hash `35f360d81e7eebe1effeae813f4144991b0fa043001df6d920d3f8592bfee65c` |
-| Figure 3 deterministic build | `scripts/build_article_figure3.py`; source receipt is the frozen core analysis above |
+| Figure 3 deterministic build | `reporting/build_article_figure3.py`; source receipt is the frozen core analysis above |
 | Excluded service numerator | `src/uncertainty_permission_simulation/experiments.py`, function `_run_metrics` |
 | Stage-specific censoring semantics | `src/uncertainty_permission_simulation/simulator.py`, administrative-cutoff closure logic |

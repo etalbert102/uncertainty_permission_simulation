@@ -12,7 +12,7 @@ This ledger is the canonical slice-status record. Update it at the end of every 
 | 3. Experiment pilot and freeze candidate | complete; ready for Slice 4 freeze work | `e8905fa`; gate amended 2026-11-01 and 2026-11-11 | pilot, Slice 0/plan/Slice 3 gates, executable worked trace and example/reference materials | no formal post-Slice-5 review; semantic findings still require a new freeze and rerun |
 | 4. Confirmatory freeze | complete; immutable manifest issued | `0b8e890` frozen baseline; manifest `35f360d8…65c` | 77-file manifest, 10 source identities, exact environment, 108-family core, sensitivity, five-control receipt, and all 178 tests verify | any frozen-file, inventory, or environment drift blocks execution and requires an explicit new freeze |
 | 5. Confirmatory execution and analysis | complete; core and sensitivity reconciled and analyzed | core receipt `b544ded`; sensitivity receipt recorded below | 32,400/32,400 attempts across separate core and sensitivity inventories; deterministic replays retained all attempts; complete Slice 5 repository gate and 178 tests pass | no formal comprehensibility review is due; narrative claims must retain the frozen model and case-study boundaries |
-| 6. Evidence packet and 10,000-word article | active; candidate evidence packet and Sections 5–7 drafted | — | stored artifact identities reconciled; final release verification pending | complete integrated article, word count, literature/citation audit, and resolution of post-freeze article-script inventory drift remain open |
+| 6. Evidence packet and 10,000-word article | active; candidate evidence packet and Sections 5–7 drafted | `669aff5` evidence packet; drift-resolution commit pending | stored artifact identities reconciled; frozen inventory and technical release gate verify | complete integrated article, word count, literature/citation audit, and submission-readiness receipt remain open |
 
 ## Slice 0 Closeout Receipt
 
@@ -951,3 +951,21 @@ This receipt closes the prespecified simulation execution stage. It does not poo
 ### 2026-11-11 execution-control amendment
 
 The final sentence above records the rule in force when Slice 5 closed. It is superseded for current execution: no formal project-lead or external-reader comprehensibility return is required for Slice 6, release, or submission. P0, the Robodebt worked trace, the transfer canary, and their reference profiles remain internal consistency examples. Authors may use them for ordinary editorial checking, but the paper makes no usability, inter-rater reliability, or reproducible-classification claim. This amendment changes execution control only; it does not modify frozen protocol semantics, simulation inputs, outputs, estimands, or confirmatory artifacts.
+
+## Slice 6 Release-Gate Drift Resolution
+
+Status: complete; technical release gate restored without changing the immutable manifest
+
+Date: 2026-11-11
+
+The post-freeze Figure 3 renderer was initially placed under `scripts/`, whose complete Python inventory belongs to the 77-file scientific freeze. It was moved to `reporting/build_article_figure3.py`, a reporting-only tree outside the frozen simulation and verification inventory. The renderer reproduced Figure 3 byte-for-byte at SHA-256 `16d4f7d5fe5c30b7e22e44eedbe5124a963ad93459ef55880f11946b0c12ece1`.
+
+The inventory repair exposed four earlier post-freeze execution-control edits: `docs/P0_USABILITY_WALKTHROUGH.md`, `scripts/validate_slice0.py`, `scripts/validate_slice3.py`, and `scripts/verify_repo.py`. All four were restored byte-for-byte to their manifest hashes. The retirement of formal comprehensibility review remains in non-frozen current-control documents and does not require a completed return. The restored verifier checks only for the retained optional-notes artifact.
+
+Verification:
+
+- direct SHA-256 comparison reports zero mismatches across all 77 manifest files;
+- `reporting/build_article_figure3.py` reproduces the committed Figure 3 with no diff;
+- `./.venv/bin/python scripts/verify_repo.py --release` passes through Slice 5 with manifest hash `35f360d81e7eebe1effeae813f4144991b0fa043001df6d920d3f8592bfee65c`, both frozen config identities, the stored negative-control receipt, all documentation gates, and 178 tests.
+
+This is a technical repository release-gate result, not a submission-readiness receipt. The integrated manuscript, final citation/claim audit, and verified word count remain open Slice 6 work.

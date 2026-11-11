@@ -4,7 +4,7 @@ Status: Slice 6 candidate, assembled 2026-11-11 from stored artifacts
 
 Study: *From Incomplete Evidence to Automated Action: A Formal Model and Dynamic Simulation of Review Capacity and Timeout Rules, with a Robodebt Application*
 
-This packet is the inspection index for the formal model, source-grounded application, executable validation, frozen design, confirmatory runs, quantitative results, and article drafts. It does not itself certify submission readiness. The complete article, final literature update, final word-count check, and a clean repository release gate remain pending. No reader study, formal comprehensibility return, usability claim, inter-rater claim, or practitioner-performance claim is required or supplied.
+This packet is the inspection index for the formal model, source-grounded application, executable validation, frozen design, confirmatory runs, quantitative results, and article drafts. It does not itself certify submission readiness. The technical repository release gate passes; the complete article, final literature/citation audit, final word-count check, and submission-readiness receipt remain pending. No reader study, formal comprehensibility return, usability claim, inter-rater claim, or practitioner-performance claim is required or supplied.
 
 ## 1. Scope and evidence rule
 
@@ -58,7 +58,9 @@ An internal self-hash is the canonical identity stored inside a JSON receipt aft
 
 The source manifest records official URLs, publication metadata, local record hashes, and citation locators. Remote source bytes were not archived or byte-hashed at freeze; the manifest records `remote_byte_hash: null` and `http_outcome_at_freeze: not_rechecked`. Historical claims must therefore be checked against the cited official locator, not treated as vendored-source reproduction.
 
-The declared frozen scientific inputs and stored results retain their recorded hashes. The full repository freeze verifier is nevertheless blocked because the later article-only file `scripts/build_article_figure3.py` lies under the manifest-covered `scripts/*.py` inventory but was not present in the 77-file manifest. This is repository inventory drift, not evidence that a confirmatory input or result changed. It must be resolved explicitly before release; this packet does not rewrite or silently expand the freeze.
+The declared frozen scientific inputs and stored results retain their recorded hashes. A post-freeze article renderer was initially added beneath the manifest-covered `scripts/*.py` tree, causing inventory drift even though it did not affect the scientific run. It now lives at `reporting/build_article_figure3.py`, outside the frozen executable and verification trees. This restores the original 77-file inventory without rewriting or expanding the immutable manifest. The move changes reporting organization only; the renderer remains bound to the stored core-analysis self-hash.
+
+A later execution-control decision retiring formal comprehensibility review had also edited one frozen reference profile and three frozen validators. Those four files have been restored byte-for-byte to their manifest identities. The retirement remains recorded in non-frozen current-control documents: no completed return, agreement measure, usability claim, or practitioner-performance claim is required. The restored release validator checks only that the retained optional-notes file exists; it does not require completion or treat it as evidence.
 
 ### Release evidence packaging
 
@@ -294,7 +296,7 @@ PYTHONPATH=src ./.venv/bin/python -m uncertainty_permission_simulation.cli run e
 
 These full-run commands are reproduction instructions, not commands to run inside the current result-bearing working tree. A reproducer must compare the resulting run-index, reconciliation, and analysis self-hashes with section 5.
 
-`scripts/verify_repo.py --release` is not currently a valid release certificate: it stops on the inventory drift described in section 2. It also checks only for the presence of this packet after earlier gates; it does not enforce final manuscript completeness, word count, claim coverage, or the 39-question audit. Those remain explicit human/editorial release conditions.
+`scripts/verify_repo.py --release` verifies the frozen inventory, stored analyses, negative controls, repository validators, tests, and presence of this packet. Passing it is a technical repository gate, not a submission-readiness certificate: it does not enforce final manuscript completeness, word count, claim coverage, or the 39-question audit. Those remain explicit human/editorial release conditions.
 
 The plan named an `evidence-packet` CLI command, but it was not implemented before the confirmatory freeze. Adding it now would alter the frozen executable inventory after results. This packet is therefore assembled as a non-frozen documentation artifact from stored self-hashes and receipts. The discrepancy is recorded rather than repaired post hoc.
 
@@ -315,12 +317,12 @@ Status key: **supported** means stored evidence answers the question within the 
 | 9 | bounded | The model and traces expose all named mechanisms, and results report their principal aggregate consequences. Not every mechanism has an independently valid headline estimand; service and substantive burden remain unmeasured. |
 | 10 | supported | Yes. Case/event-keyed draws, paired membership, and common-random-number diagnostics are stored. |
 | 11 | supported | Yes. Support, delay, workload, interactions, exposure, correction, and restoration/censoring are separate; there is no utility weighting. |
-| 12 | bounded | No declared confirmatory source, parameter, seed, metric, or analysis identity changed. Direct hashes match, but repository-wide freeze certification is blocked by the post-freeze article script inventory drift. |
+| 12 | supported | No declared confirmatory source, parameter, seed, metric, or analysis identity changed. Direct hashes match and the immutable 77-file scientific inventory verifies after the article-only renderer was relocated outside the frozen trees. |
 | 13 | pending | The source packet anchors current historical/legal claims; the final integrated manuscript does not yet exist, so complete manuscript-wide citation coverage cannot be certified. |
 | 14 | pending | Draft quantitative claims map to run artifacts and MCSE statements. Final manuscript-wide coverage remains pending. |
 | 15 | supported | Yes. Transfer is limited to the formal invariant, method, and bounded institutional connections; the canary carries explicit nonclaims. |
 | 16 | supported | Yes. Optional or incomplete subsystems are removed, excluded, or recorded in `DEFERRED.md`; the invalid service construct is explicitly excluded. |
-| 17 | bounded | Existing commands reproduce traces and derived simulation analysis from stored inputs/attempts. The planned packet CLI is absent and the current full release verifier is blocked by inventory drift. |
+| 17 | bounded | Existing commands reproduce traces and derived simulation analysis from stored inputs/attempts, and the technical release verifier passes. The planned packet CLI remains absent and is deliberately not added post-freeze. |
 | 18 | pending | The continuity control and outline make the extension explicit, but the complete article must still demonstrate it. |
 | 19 | supported | Yes. Confirmatory and sensitivity analyses were conducted; the methods/results draft reports stored results rather than only a design. |
 | 20 | supported | Yes. The continuity table classifies precursor claims as retained, refined, tested, bounded, or rejected. |
@@ -348,11 +350,10 @@ Status key: **supported** means stored evidence answers the question within the 
 
 The study is not yet complete. Release requires:
 
-1. Resolve the manifest-covered `scripts/build_article_figure3.py` inventory drift through an explicit, documented release decision without rewriting history or silently changing the scientific freeze.
-2. Draft and integrate the remaining article sections.
-3. Normalize the bibliography and audit every final comparison-to-prior-work, historical, legal, and quantitative claim against the literature map, source packet, or run receipt; update the map only if final drafting introduces a new claim or source.
-4. Run the final 10,000-word budget check, including the 9,400-word core and any use of the 600-word contingency.
-5. Re-run all non-destructive validators, confirm the exact stored artifact identities above, and issue a submission-readiness receipt only when every pending or bounded completion item has been narrowed or closed.
+1. Draft and integrate the remaining article sections.
+2. Normalize the bibliography and audit every final comparison-to-prior-work, historical, legal, and quantitative claim against the literature map, source packet, or run receipt; update the map only if final drafting introduces a new claim or source.
+3. Run the final 10,000-word budget check, including the 9,400-word core and any use of the 600-word contingency.
+4. Re-run all non-destructive validators, confirm the exact stored artifact identities above, and issue a submission-readiness receipt only when every pending or bounded completion item has been narrowed or closed.
 
 The selected release receipts and figures must be committed with this packet. Per-attempt files may remain outside Git only if the final release states their archival location or confirms that exact regeneration from the frozen runner is the supported route.
 

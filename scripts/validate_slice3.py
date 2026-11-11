@@ -1,7 +1,7 @@
 """Blocking Slice 3 engineering and artifact validator.
 
-Example inputs and reference profiles are internal consistency fixtures, not a
-formal comprehensibility or human-performance gate.
+Procedure comprehensibility is reviewed by the project lead after Slice 5 analysis;
+it is not an external pre-freeze gate.
 """
 
 from __future__ import annotations
@@ -124,6 +124,7 @@ def main(*, allow_confirmatory_output: bool = False) -> int:
     for path in (
         ROOT / "docs/CASE_APPLICATION_SUFFICIENCY.md",
         ROOT / "docs/PROTOCOL_REVISION_LOG.md",
+        ROOT / "docs/PROCEDURE_COMPREHENSIBILITY_REVIEW.md",
         ROOT / "docs/PILOT_AUDIT.md",
     ):
         if not path.exists() or not path.read_text(encoding="utf-8").strip():
@@ -140,7 +141,7 @@ def main(*, allow_confirmatory_output: bool = False) -> int:
         "Slice 3 engineering gate passed: "
         f"{validation['family_count']} development families, "
         f"{len(receipt['cell_summaries'])} family-policy cells, "
-        f"pilot receipt {receipt['receipt_hash']}; example/reference-profile QA retained without a formal review gate"
+        f"pilot receipt {receipt['receipt_hash']}; post-simulation project-lead review scheduled after Slice 5"
     )
     return 0
 

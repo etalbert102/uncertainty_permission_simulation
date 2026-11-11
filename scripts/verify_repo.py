@@ -115,7 +115,10 @@ def verify_repository(*, through_slice: int, release: bool) -> dict[str, object]
         _verify_slice5_config(confirmatory_path)
         _verify_slice5_config(sensitivity_path)
     if release:
-        required = (ROOT / "docs/EVIDENCE_PACKET.md",)
+        required = (
+            ROOT / "docs/EVIDENCE_PACKET.md",
+            ROOT / "docs/PROCEDURE_COMPREHENSIBILITY_REVIEW.md",
+        )
         missing = [path.relative_to(ROOT).as_posix() for path in required if not path.is_file()]
         if missing:
             raise ContractError(
