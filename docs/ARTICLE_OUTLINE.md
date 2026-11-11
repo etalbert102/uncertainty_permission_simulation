@@ -1,6 +1,6 @@
 # Article Outline: From Incomplete Evidence to Automated Action
 
-Status: results-informed drafting outline; design-frozen simulation and candidate evidence packet complete; Sections 5–8 drafted; one prespecified service metric excluded after semantic audit; no formal comprehensibility review required
+Status: results-informed drafting outline; design-frozen simulation and candidate evidence packet complete; Sections 1–8 drafted but not yet integrated; one prespecified service metric excluded after semantic audit; no formal comprehensibility review required
 
 Working title: *From Incomplete Evidence to Automated Action: A Formal Model and Dynamic Simulation of Review Capacity and Timeout Rules, with a Robodebt Application*
 

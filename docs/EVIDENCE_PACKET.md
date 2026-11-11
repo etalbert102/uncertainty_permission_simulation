@@ -252,7 +252,7 @@ The LLM-summary transfer canary is an author-constructed cross-vocabulary illust
 | Dynamic methods, results, Figure 3, Table 2 | drafted and critically revised | [Methods/results draft](ARTICLE_METHODS_RESULTS_DRAFT.md) |
 | Five-step protocol, worked example, governance interventions | drafted and critically revised | [Protocol/governance draft](ARTICLE_PROTOCOL_GOVERNANCE_DRAFT.md) |
 | Limitations and conclusion | drafted; integration review pending | [Limitations/conclusion draft](ARTICLE_LIMITATIONS_CONCLUSION_DRAFT.md) |
-| Remaining introduction, mechanism/literature, formal-model exposition, and case application | pending | outline controls |
+| Introduction, mechanism/literature, formal-model exposition, and case application | drafted and critically revised; integration review pending | [Sections 1–4 draft](ARTICLE_INTRO_FORMAL_CASE_DRAFT.md) |
 | Complete integrated manuscript and verified word count | pending | no artifact yet |
 
 The paper is a natural extension of *When Uncertainty Expands Authority* because it formalizes and tests the precursor mechanism. It remains standalone by defining its own concepts, motivating the case, presenting conducted analysis, and restricting lineage material to internal controls, acknowledgments, or a concise origin statement. The continuity table in `CONTINUITY_AND_CLAIM_BOUNDARY.md` classifies precursor claims as retained, refined, tested, bounded, or rejected.
