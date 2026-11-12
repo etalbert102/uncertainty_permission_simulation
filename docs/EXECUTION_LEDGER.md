@@ -12,7 +12,7 @@ This ledger is the canonical slice-status record. Update it at the end of every 
 | 3. Experiment pilot and freeze candidate | complete; ready for Slice 4 freeze work | `e8905fa`; gate amended 2026-11-01 and 2026-11-11 | pilot, Slice 0/plan/Slice 3 gates, executable worked trace and example/reference materials | no formal post-Slice-5 review; semantic findings still require a new freeze and rerun |
 | 4. Confirmatory freeze | complete; immutable manifest issued | `0b8e890` frozen baseline; manifest `35f360d8…65c` | 77-file manifest, 10 source identities, exact environment, 108-family core, sensitivity, five-control receipt, and all 178 tests verify | any frozen-file, inventory, or environment drift blocks execution and requires an explicit new freeze |
 | 5. Confirmatory execution and analysis | complete; core and sensitivity reconciled and analyzed | core receipt `b544ded`; sensitivity receipt recorded below | 32,400/32,400 attempts across separate core and sensitivity inventories; deterministic replays retained all attempts; complete Slice 5 repository gate and 178 tests pass | no formal comprehensibility review is due; narrative claims must retain the frozen model and case-study boundaries |
-| 6. Evidence packet and 10,000-word article | active; candidate evidence packet, Sections 1–8, and Figures 1–3 drafted | `669aff5` evidence packet; `96f7618` release-gate repair; `59d2cb1` Sections 8 status | stored artifact identities reconciled; frozen inventory and technical release gate verify | integration, abstract, word count, literature/citation audit, and submission-readiness receipt remain open |
+| 6. Evidence packet and 10,000-word article | active; audited manuscript candidate selectively merged; abstract, Sections 1–8, Figures 1–3, Tables 1–2, availability statement, references, and publication-facing protocol supplement assembled | `669aff5` evidence packet; `96f7618` release-gate repair; `59d2cb1` Sections 8 status | call-counted main text 8,958 whitespace-delimited words excluding bibliography; citation and source-description defects corrected; five main-text exhibits plus two supplementary tables; stored artifact identities reconciled | final publisher-style formatting, independent source-anchor verification, publisher-rendered count, and submission-readiness receipt remain open |
 
 ## Slice 0 Closeout Receipt
 
@@ -969,3 +969,23 @@ Verification:
 - `./.venv/bin/python scripts/verify_repo.py --release` passes through Slice 5 with manifest hash `35f360d81e7eebe1effeae813f4144991b0fa043001df6d920d3f8592bfee65c`, both frozen config identities, the stored negative-control receipt, all documentation gates, and 178 tests.
 
 This is a technical repository release-gate result, not a submission-readiness receipt. The integrated manuscript, final citation/claim audit, and verified word count remain open Slice 6 work.
+
+## Slice 6 Manuscript-Audit Candidate Merge
+
+Status: applied with reviewed fixes; not yet committed
+
+Date: 2026-11-11
+
+The manuscript-audit candidate was selectively merged rather than copied without review. The article retains all five substantive protocol steps while moving status/completeness machinery, receipt fields, the reference worksheet, and fixed worked-trace tables into `ARTICLE_SUPPLEMENTARY_MATERIAL.md`. The merge also restores the stronger problem-led abstract opening, narrows claims about oversight and the proposed diagnostics, corrects the description of bank-statement handling, preserves the distinction between automatic progression and robust permission, and restores the adverse-proxy interpretation for the information-first policy. Bibliographic years, authorship, titles, and publication details identified by the audit were corrected.
+
+The data-and-code statement now records the repository's actual private-during-development status and promises public access before submission rather than claiming current availability. The article has 8,958 whitespace-delimited main-text words before the bibliography, leaving 1,042 words below the verified 10,000-word ceiling. The 1,732-word publication-facing supplement is tracked separately; its eligibility outside the paper ceiling still requires confirmation from the publisher.
+
+Verification after the merge:
+
+- `scripts/validate_plan.py` passes;
+- `scripts/validate_slice0.py` passes;
+- `scripts/validate_slice3.py --allow-confirmatory-output` passes;
+- all 178 tests pass; and
+- `scripts/verify_repo.py --release` passes with the unchanged 77-file manifest hash `35f360d81e7eebe1effeae813f4144991b0fa043001df6d920d3f8592bfee65c`.
+
+This receipt confirms repository consistency, not publisher formatting, independent source verification, supplement eligibility, or submission readiness.

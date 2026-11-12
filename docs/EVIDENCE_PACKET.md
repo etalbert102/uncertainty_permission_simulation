@@ -4,7 +4,7 @@ Status: Slice 6 candidate, assembled 2026-11-11 from stored artifacts
 
 Study: *From Incomplete Evidence to Automated Action: A Formal Model and Dynamic Simulation of Review Capacity and Timeout Rules, with a Robodebt Application*
 
-This packet is the inspection index for the formal model, source-grounded application, executable validation, frozen design, confirmatory runs, quantitative results, and article drafts. It does not itself certify submission readiness. The technical repository release gate passes; the complete article, final literature/citation audit, final word-count check, and submission-readiness receipt remain pending. No reader study, formal comprehensibility return, usability claim, inter-rater claim, or practitioner-performance claim is required or supplied.
+This packet is the inspection index for the formal model, source-grounded application, executable validation, frozen design, confirmatory runs, quantitative results, and integrated article. It does not itself certify submission readiness. The technical repository release gate passes, and the manuscript's identified false and incomplete bibliographic attributions have been corrected; final publisher-style formatting, source-anchor polish, publisher-rendered word counting, and the submission-readiness receipt remain pending. No reader study, formal comprehensibility return, usability claim, inter-rater claim, or practitioner-performance claim is required or supplied.
 
 ## 1. Scope and evidence rule
 
@@ -204,7 +204,7 @@ This is a three-point capacity response, not a located continuous boundary. A co
 | Fail-closed safety can coexist with review/service failure | Proposition 2; FR3, FR5 | core analysis and queue validation | Figure 3 panels A-B; Table 2 | Three load points do not estimate a universal or continuous threshold. |
 | Fail-open timeout converts review shortfall into progression | Proposition 2, part 3 | U2O-U2C paired estimates | Figure 3B; Table 2 | Applies to declared policies and parameter space, not all institutions. |
 | Information-first changes a vector of outcomes | action taxonomy; F1/F2 boundary | U3-U0 core and sensitivity receipts | Figure 3C; Table 2 | No scalar welfare ranking; interaction proxy is not substantive burden. |
-| Correction is not complete restoration | Proposition 3; F5; FR6 | fixed worked trace and censoring receipts | Table 3 baseline B-08 to B-10 | Trace-specific; terminal comparative restoration remains unidentified. |
+| Correction is not complete restoration | Proposition 3; F5; FR6 | fixed worked trace and censoring receipts | Supplementary Tables S1–S2, baseline B-08 to B-10 | Trace-specific; terminal comparative restoration remains unidentified. |
 | Robodebt is a structurally suitable application | application contract | source manifest, dated profiles, process maps/crosswalk | [Figure 2](figures/figure2_robodebt_process_profiles.svg) and fixed trace | No numerical reconstruction, independent legality finding, or attackability claim. |
 | Method transfers across vocabulary | F0-F5 protocol and isomorphic-adapter contract | transfer canary and Slice 1 receipt | compact LLM-summary canary | Representability only; no validated transfer or practitioner-performance claim. |
 | Contribution is a bounded synthesis | all three propositions plus dynamic demonstration | literature/originality map and conducted analyses | introduction/discussion pending | No claim to invent information ordering, queues, burden, oversight, or red teaming generally. |
@@ -227,7 +227,7 @@ The fixed Robodebt example is Level B. It holds case, evidence, access, later ev
 
 The LLM-summary transfer canary is an author-constructed cross-vocabulary illustration. It does not validate transfer, current-system prevalence, legality, strategic exploitation, adoption, efficiency, or practitioner performance. The paper may claim that the same formal vocabulary can represent the example, not that unfamiliar users can apply the protocol reliably.
 
-### Main-text protocol completeness
+### Article-and-supplement protocol completeness
 
 | Required element | Drafted location | Evidence status |
 | --- | --- | --- |
@@ -237,10 +237,11 @@ The LLM-summary transfer canary is an author-constructed cross-vocabulary illust
 | Step 3: operational review | Article Section 7.4 | present |
 | Step 4: access, workload, deadlines, and queues | Article Section 7.5 | present |
 | Step 5: contestability and restoration | Article Section 7.6 | present |
-| `pass`/`fail`/`unassessable`/`not_applicable` and `omitted_by_claim_limit` | protocol 1.0 and Table 3 | present; omitted claims receive no fabricated assessment status |
-| Diagnostic owner, intervention owner, tradeoff | Table 3B and protocol report contract | present |
+| `pass`/`fail`/`unassessable`/`not_applicable` and `omitted_by_claim_limit` | protocol 1.0 and supplementary material | present; omitted claims receive no fabricated assessment status |
+| Diagnostic owner, intervention owner, tradeoff | Supplementary Table S2 and protocol report contract | present |
 | Fixed Level B Robodebt pair | Article Section 7.7; artifact hash `5057bf6a...755d` | present; prespecified rather than selected from results |
 | Compact held-out AI canary | Article Section 7.8 | present as bounded illustration |
+| Publication-facing detailed worksheet and worked-trace receipts | [Supplementary material](ARTICLE_SUPPLEMENTARY_MATERIAL.md) | present as Tables S1–S2 and reference worksheet |
 | Extended worksheets/schemas | repository protocol packets and schema manifest | present |
 | Author editorial pass | critically revised Section 7 and traceability notes | present; ordinary editing only, with no formal return or usability inference |
 
@@ -253,7 +254,8 @@ The LLM-summary transfer canary is an author-constructed cross-vocabulary illust
 | Five-step protocol, worked example, governance interventions | drafted and critically revised | [Protocol/governance draft](ARTICLE_PROTOCOL_GOVERNANCE_DRAFT.md) |
 | Limitations and conclusion | drafted; integration review pending | [Limitations/conclusion draft](ARTICLE_LIMITATIONS_CONCLUSION_DRAFT.md) |
 | Introduction, mechanism/literature, formal-model exposition, and case application | drafted and critically revised; Figures 1–2 built; integration review pending | [Sections 1–4 draft](ARTICLE_INTRO_FORMAL_CASE_DRAFT.md) |
-| Complete integrated manuscript and verified word count | pending | no artifact yet |
+| Integrated manuscript and word count | manuscript-audit candidate selectively merged; 8,958 whitespace-delimited main-text words excluding bibliography under the verified call; bibliography and source-description defects corrected; publisher-style formatting, independent source-anchor verification, and rendered count pending | [Integrated manuscript](ARTICLE_MANUSCRIPT.md) |
+| Publication-facing protocol supplement | detailed levels, statuses, completeness rules, receipt fields, reference worksheet, and fixed Robodebt worked trace assembled without a usability claim | [Supplementary material](ARTICLE_SUPPLEMENTARY_MATERIAL.md) |
 
 The paper is a natural extension of *When Uncertainty Expands Authority* because it formalizes and tests the precursor mechanism. It remains standalone by defining its own concepts, motivating the case, presenting conducted analysis, and restricting lineage material to internal controls, acknowledgments, or a concise origin statement. The continuity table in `CONTINUITY_AND_CLAIM_BOUNDARY.md` classifies precursor claims as retained, refined, tested, bounded, or rejected.
 
@@ -319,23 +321,23 @@ Status key: **supported** means stored evidence answers the question within the 
 | 10 | supported | Yes. Case/event-keyed draws, paired membership, and common-random-number diagnostics are stored. |
 | 11 | supported | Yes. Support, delay, workload, interactions, exposure, correction, and restoration/censoring are separate; there is no utility weighting. |
 | 12 | supported | No declared confirmatory source, parameter, seed, metric, or analysis identity changed. Direct hashes match and the immutable 77-file scientific inventory verifies after the article-only renderer was relocated outside the frozen trees. |
-| 13 | pending | The source packet anchors current historical/legal claims; the final integrated manuscript does not yet exist, so complete manuscript-wide citation coverage cannot be certified. |
+| 13 | bounded | The integrated manuscript includes a repository-grounded reference list, and the false authorship, omitted coauthor, incomplete author-list, and incorrect-title defects found in integration review are corrected. Final publisher-style formatting and source-anchor polish remain open. |
 | 14 | pending | Draft quantitative claims map to run artifacts and MCSE statements. Final manuscript-wide coverage remains pending. |
 | 15 | supported | Yes. Transfer is limited to the formal invariant, method, and bounded institutional connections; the canary carries explicit nonclaims. |
 | 16 | supported | Yes. Optional or incomplete subsystems are removed, excluded, or recorded in `DEFERRED.md`; the invalid service construct is explicitly excluded. |
 | 17 | bounded | Existing commands reproduce traces and derived simulation analysis from stored inputs/attempts, and the technical release verifier passes. The planned packet CLI remains absent and is deliberately not added post-freeze. |
-| 18 | pending | The continuity control and outline make the extension explicit, but the complete article must still demonstrate it. |
+| 18 | bounded | The integrated article defines the mechanism, formal model, case application, simulation, and protocol without requiring the precursor; final standalone editorial review remains open. |
 | 19 | supported | Yes. Confirmatory and sensitivity analyses were conducted; the methods/results draft reports stored results rather than only a design. |
 | 20 | supported | Yes. The continuity table classifies precursor claims as retained, refined, tested, bounded, or rejected. |
 | 21 | supported | Yes. Protocol semantics, canary, classifications, and worked-trace selection/specification appear in the pre-output freeze. |
 | 22 | supported | Yes. `unassessable` is a first-class status for missing lineage, authority, timing, or process evidence. |
 | 23 | supported | Yes. Drafts explicitly reject usability, inter-rater, practitioner-performance, and formal comprehensibility claims. |
 | 24 | bounded | The canary demonstrates representability across a different vocabulary, not validated use by independent practitioners or a second empirical case. |
-| 25 | pending | The integrated manuscript and verified 9,400-word core/600-word contingency accounting do not yet exist. |
+| 25 | bounded | The integrated manuscript has 8,958 whitespace-delimited main-text words excluding bibliography, leaving 1,042 words under the verified call ceiling. The publication-facing supplement is tracked separately, but its eligibility outside that ceiling must be confirmed; a publisher-rendered submission count remains pending. |
 | 26 | supported | Yes. P0 holds the uncertain output, downstream rule, and process state fixed while changing only interface representation. |
 | 27 | supported | Yes. The formal model and case boundary distinguish base vulnerability, structural susceptibility, process red-teaming, and adversarial exploitability; Robodebt is not labeled attackable. |
 | 28 | supported | Yes. The main-text canary develops the precursor's LLM-summary example rather than introducing an unrelated vignette. |
-| 29 | pending | The planned article is standalone, but reader comprehension cannot be assessed until the complete integrated article exists. No formal reader study is required. |
+| 29 | bounded | The integrated article is written to stand alone and does not rely on the precursor as an unexplained premise. No formal reader study or comprehensibility claim is required. |
 | 30 | supported | Yes. Lineage is confined to internal controls and a prospective concise origin statement, not the article's organizing structure. |
 | 31 | supported | Yes. The protocol requires Level A/B/C declaration, claim-limit compliance, and escalation. |
 | 32 | supported | Yes. The report preserves the complete profile and prohibits an overall score or hidden weighted ranking. |
