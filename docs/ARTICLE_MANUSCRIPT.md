@@ -381,7 +381,7 @@ Anyabolu, Chisom, Akshat Dubey, and Georges Hattab. 2026. “Visualizing Uncerta
 
 Bennett, Hayley, Morgan Currie, and Lena Podoletz. 2026. “Universal Credit: Administrative Burdens of Automated Welfare.” *Journal of Social Policy* 55 (1): 24–42. https://doi.org/10.1017/S0047279424000175.
 
-Blackwell, David. 1953. “Equivalent Comparisons of Experiments.” *Annals of Mathematical Statistics* 24 (2). https://doi.org/10.1214/aoms/1177729032.
+Blackwell, David. 1953. “Equivalent Comparisons of Experiments.” *Annals of Mathematical Statistics* 24 (2): 265–272. https://doi.org/10.1214/aoms/1177729032.
 
 Commonwealth Ombudsman. 2017. *Centrelink’s Automated Debt Raising and Recovery System*. https://www.ombudsman.gov.au/__data/assets/pdf_file/0022/43528/Report-Centrelinks-automated-debt-raising-and-recovery-system-April-2017.pdf.
 
@@ -395,27 +395,27 @@ Deloitte for the Royal Commission into the Robodebt Scheme. 2023b. *3B. Income M
 
 Deloitte for the Royal Commission into the Robodebt Scheme. 2023c. *4B. Debt Calculation and Notification—OCI Baseline*. https://robodebt.royalcommission.gov.au/system/files/2023-03/4B-Debt-Calculation-and-Notification-Process-Map-OCI.pdf.
 
-El-Yaniv, Ran, and Yair Wiener. 2010. “On the Foundations of Noise-Free Selective Classification.” *Journal of Machine Learning Research* 11. https://jmlr.org/papers/v11/el-yaniv10a.html.
+El-Yaniv, Ran, and Yair Wiener. 2010. “On the Foundations of Noise-Free Selective Classification.” *Journal of Machine Learning Research* 11: 1605–1641. https://jmlr.org/papers/v11/el-yaniv10a.html.
 
-Franc, Vojtěch, and Daniel Průša. 2019. “On Discriminative Learning of Prediction Uncertainty.” *Proceedings of the 36th International Conference on Machine Learning*. https://proceedings.mlr.press/v97/franc19a.html.
+Franc, Vojtěch, and Daniel Průša. 2019. “On Discriminative Learning of Prediction Uncertainty.” *Proceedings of the 36th International Conference on Machine Learning*, Proceedings of Machine Learning Research 97: 1963–1971. https://proceedings.mlr.press/v97/franc19a.html.
 
-Gilboa, Itzhak, and David Schmeidler. 1989. “Maxmin Expected Utility with Non-Unique Prior.” *Journal of Mathematical Economics* 18 (2). https://doi.org/10.1016/0304-4068(89)90018-9.
+Gilboa, Itzhak, and David Schmeidler. 1989. “Maxmin Expected Utility with Non-Unique Prior.” *Journal of Mathematical Economics* 18 (2): 141–153. https://doi.org/10.1016/0304-4068(89)90018-9.
 
 Landau, Susan, James X. Dempsey, Ece Kamar, and Steven M. Bellovin. 2024. *Recommendations for Government Development and Use of Advanced Automated Systems to Make Decisions about Individuals*. Stanford Center for International Security and Cooperation. https://cisac.fsi.stanford.edu/publication/recommendations-government-development-and-use-advanced-automated-systems-make.
 
 Leveson, Nancy. 2012. *Engineering a Safer World: Systems Thinking Applied to Safety*. MIT Press.
 
-Little, John D. C. 1961. “A Proof for the Queuing Formula: L = λW.” *Operations Research* 9 (3). https://doi.org/10.1287/opre.9.3.383.
+Little, John D. C. 1961. “A Proof for the Queuing Formula: L = λW.” *Operations Research* 9 (3): 383–387. https://doi.org/10.1287/opre.9.3.383.
 
-Moynihan, Donald P., Pamela Herd, and Hope Harvey. 2015. “Administrative Burden.” *Journal of Public Administration Research and Theory* 25 (1). https://doi.org/10.1093/jopart/muu009.
+Moynihan, Donald P., Pamela Herd, and Hope Harvey. 2015. “Administrative Burden: Learning, Psychological, and Compliance Costs in Citizen–State Interactions.” *Journal of Public Administration Research and Theory* 25 (1): 43–69. https://doi.org/10.1093/jopart/muu009.
 
 National Institute of Standards and Technology. 2023. *Artificial Intelligence Risk Management Framework (AI RMF 1.0)*. https://doi.org/10.6028/NIST.AI.100-1.
 
-Prabhudesai, Snehal, Leyao Yang, Sumit Asthana, Xun Huan, Q. Vera Liao, and Nikola Banovic. 2023. “Understanding Uncertainty: How Lay Decision-Makers Perceive and Interpret Uncertainty in Human-AI Decision Making.” *Proceedings of the 28th International Conference on Intelligent User Interfaces*. https://doi.org/10.1145/3581641.3584033.
+Prabhudesai, Snehal, Leyao Yang, Sumit Asthana, Xun Huan, Q. Vera Liao, and Nikola Banovic. 2023. “Understanding Uncertainty: How Lay Decision-Makers Perceive and Interpret Uncertainty in Human-AI Decision Making.” *Proceedings of the 28th International Conference on Intelligent User Interfaces*, 379–396. https://doi.org/10.1145/3581641.3584033.
 
 Reisman, Dillon, Jason Schultz, Kate Crawford, and Meredith Whittaker. 2018. *Algorithmic Impact Assessments: A Practical Framework for Public Agency Accountability*. AI Now Institute. https://ainowinstitute.org/publication/algorithmic-impact-assessments-report-2.
 
-Roehl, Ulrik B. U. 2023. “Automated Decision-Making and Good Administration: Views from Inside the Government Machinery.” *Government Information Quarterly* 40 (4). https://doi.org/10.1016/j.giq.2023.101864.
+Roehl, Ulrik B. U. 2023. “Automated Decision-Making and Good Administration: Views from Inside the Government Machinery.” *Government Information Quarterly* 40 (4): 101864. https://doi.org/10.1016/j.giq.2023.101864.
 
 Roehl, Ulrik B. U., and Morten Balle Hansen. 2024. “Automated, Administrative Decision-Making and Good Governance: Synergies, Trade-Offs, and Limits.” *Public Administration Review* 84 (6): 1184–1199. https://doi.org/10.1111/puar.13799.
 
@@ -423,4 +423,4 @@ Royal Commission into the Robodebt Scheme. 2023. *Report of the Royal Commission
 
 Services Australia. 2025. *Automation and Artificial Intelligence Strategy 2025–27*. https://www.servicesaustralia.gov.au/sites/default/files/2025-05/automation-and-ai-strategy-2025-27.pdf.
 
-Sterz, Sarah, Kevin Baum, Sebastian Biewer, Holger Hermanns, Anne Lauber-Rönsberg, Philip Meinel, and Markus Langer. 2024. “On the Quest for Effectiveness in Human Oversight: Interdisciplinary Perspectives.” *Proceedings of the 2024 ACM Conference on Fairness, Accountability, and Transparency*. https://doi.org/10.1145/3630106.3659051.
+Sterz, Sarah, Kevin Baum, Sebastian Biewer, Holger Hermanns, Anne Lauber-Rönsberg, Philip Meinel, and Markus Langer. 2024. “On the Quest for Effectiveness in Human Oversight: Interdisciplinary Perspectives.” *Proceedings of the 2024 ACM Conference on Fairness, Accountability, and Transparency*, 2495–2507. https://doi.org/10.1145/3630106.3659051.

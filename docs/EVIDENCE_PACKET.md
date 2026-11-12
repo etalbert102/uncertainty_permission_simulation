@@ -4,7 +4,7 @@ Status: Slice 6 candidate, assembled 2026-11-11 from stored artifacts
 
 Study: *From Incomplete Evidence to Automated Action: A Formal Model and Dynamic Simulation of Review Capacity and Timeout Rules, with a Robodebt Application*
 
-This packet is the inspection index for the formal model, source-grounded application, executable validation, frozen design, confirmatory runs, quantitative results, and integrated article. It does not itself certify submission readiness. The technical repository release gate passes, and the manuscript's identified false and incomplete bibliographic attributions have been corrected; final publisher-style formatting, source-anchor polish, publisher-rendered word counting, and the submission-readiness receipt remain pending. No reader study, formal comprehensibility return, usability claim, inter-rater claim, or practitioner-performance claim is required or supplied.
+This packet is the inspection index for the formal model, source-grounded application, executable validation, frozen design, confirmatory runs, quantitative results, and integrated article. It does not itself certify submission readiness. The technical repository release gate passes, and the audit of currently cited source anchors found no substantive source or numerical contradiction; identified attribution, title, source-description, issue/article-identifier, and page-range defects have been corrected. The deferred literature-update search, final publisher-style formatting, publisher-rendered word counting, public repository release, supplement eligibility, and the submission-readiness receipt remain pending. No reader study, formal comprehensibility return, usability claim, inter-rater claim, or practitioner-performance claim is required or supplied.
 
 ## 1. Scope and evidence rule
 
@@ -93,6 +93,8 @@ The release candidate includes the two compact run indexes, reconciliations, ana
 | Worked-trace selection | [Selection rule](WORKED_TRACE_SELECTION.md) | `5b4640979dfbbd2b7f29b63116bc4fdc157c8978b7a606e4d092484cce3885d2` | Explanatory fixed trace, not representative sampling. |
 
 The paper separates three claim classes: formal consequences of declared definitions; simulated operational outcomes in the designed parameter space; and source-attributed historical or legal statements. Monetary correctness is outside all three.
+
+Source-metadata correction note: the frozen `OMB-APPORTIONMENT-2023` manifest entry uses “Income Apportionment—Lawfulness of Income Apportionment Decisions” as a shorthand title. The issuing document's displayed title is *Lessons in Lawfulness: Own Motion Investigation into Services Australia’s and the Department of Social Services’ Response to the Question of the Lawfulness of Income Apportionment before 7 December 2020*, which the article now uses. The source identity, issuing body, date, URL, locator, permitted use, and terminology-boundary claim are unchanged. Because `source_manifest.yaml` belongs to the immutable 77-file scientific inventory, this post-freeze bibliographic correction is carried in the current evidence packet rather than silently rewriting the frozen input.
 
 ### Formal assumption summary
 
@@ -254,7 +256,7 @@ The LLM-summary transfer canary is an author-constructed cross-vocabulary illust
 | Five-step protocol, worked example, governance interventions | drafted and critically revised | [Protocol/governance draft](ARTICLE_PROTOCOL_GOVERNANCE_DRAFT.md) |
 | Limitations and conclusion | drafted; integration review pending | [Limitations/conclusion draft](ARTICLE_LIMITATIONS_CONCLUSION_DRAFT.md) |
 | Introduction, mechanism/literature, formal-model exposition, and case application | drafted and critically revised; Figures 1–2 built; integration review pending | [Sections 1–4 draft](ARTICLE_INTRO_FORMAL_CASE_DRAFT.md) |
-| Integrated manuscript and word count | manuscript-audit candidate selectively merged; 8,958 whitespace-delimited main-text words excluding bibliography under the verified call; bibliography and source-description defects corrected; publisher-style formatting, independent source-anchor verification, and rendered count pending | [Integrated manuscript](ARTICLE_MANUSCRIPT.md) |
+| Integrated manuscript and word count | manuscript-audit candidate selectively merged; 8,958 whitespace-delimited main-text words excluding bibliography under the verified call; audit of currently cited source anchors found no substantive source or numerical contradiction and completed bibliographic metadata; deferred literature update, publisher-style formatting, and rendered count pending | [Integrated manuscript](ARTICLE_MANUSCRIPT.md) |
 | Publication-facing protocol supplement | detailed levels, statuses, completeness rules, receipt fields, reference worksheet, and fixed Robodebt worked trace assembled without a usability claim | [Supplementary material](ARTICLE_SUPPLEMENTARY_MATERIAL.md) |
 
 The paper is a natural extension of *When Uncertainty Expands Authority* because it formalizes and tests the precursor mechanism. It remains standalone by defining its own concepts, motivating the case, presenting conducted analysis, and restricting lineage material to internal controls, acknowledgments, or a concise origin statement. The continuity table in `CONTINUITY_AND_CLAIM_BOUNDARY.md` classifies precursor claims as retained, refined, tested, bounded, or rejected.
@@ -321,8 +323,8 @@ Status key: **supported** means stored evidence answers the question within the 
 | 10 | supported | Yes. Case/event-keyed draws, paired membership, and common-random-number diagnostics are stored. |
 | 11 | supported | Yes. Support, delay, workload, interactions, exposure, correction, and restoration/censoring are separate; there is no utility weighting. |
 | 12 | supported | No declared confirmatory source, parameter, seed, metric, or analysis identity changed. Direct hashes match and the immutable 77-file scientific inventory verifies after the article-only renderer was relocated outside the frozen trees. |
-| 13 | bounded | The integrated manuscript includes a repository-grounded reference list, and the false authorship, omitted coauthor, incomplete author-list, and incorrect-title defects found in integration review are corrected. Final publisher-style formatting and source-anchor polish remain open. |
-| 14 | pending | Draft quantitative claims map to run artifacts and MCSE statements. Final manuscript-wide coverage remains pending. |
+| 13 | supported | The integrated manuscript includes a repository-grounded reference list. Publication records were checked and the identified authorship, author-list, title, issue/article-identifier, and page-range defects were corrected. Publisher house style remains a formatting task, not a source-support gap. |
+| 14 | supported | The final source audit recomputed headline quantitative claims from stored core and sensitivity artifacts and checked historical and literature claims against the source packet and publication records. No substantive contradiction was found. |
 | 15 | supported | Yes. Transfer is limited to the formal invariant, method, and bounded institutional connections; the canary carries explicit nonclaims. |
 | 16 | supported | Yes. Optional or incomplete subsystems are removed, excluded, or recorded in `DEFERRED.md`; the invalid service construct is explicitly excluded. |
 | 17 | bounded | Existing commands reproduce traces and derived simulation analysis from stored inputs/attempts, and the technical release verifier passes. The planned packet CLI remains absent and is deliberately not added post-freeze. |
@@ -349,14 +351,15 @@ Status key: **supported** means stored evidence answers the question within the 
 | 38 | supported | Yes. Unsupported historical values cannot execute; stylized overlays have separate ownership and parameter-binding receipts. |
 | 39 | supported | Yes. The application, adapter, source packet, provenance table, and worked-trace rule/specification are included in the pre-output freeze. |
 
-## 12. Release blockers and next actions
+## 12. Release conditions and next actions
 
-The study is not yet complete. Release requires:
+The audit of currently cited source anchors is complete, but submission release still requires:
 
-1. Draft and integrate the remaining article sections.
-2. Normalize the bibliography and audit every final comparison-to-prior-work, historical, legal, and quantitative claim against the literature map, source packet, or run receipt; update the map only if final drafting introduces a new claim or source.
-3. Run the final 10,000-word budget check, including the 9,400-word core and any use of the 600-word contingency.
-4. Re-run all non-destructive validators, confirm the exact stored artifact identities above, and issue a submission-readiness receipt only when every pending or bounded completion item has been narrowed or closed.
+1. Run the final literature-update search required by `DEFERRED.md`; record any new equivalent work and revise only unfrozen manuscript claims unless a scientific change requires an explicit new freeze and affected rerun.
+2. Apply the publisher's final style and obtain a publisher-rendered word count for the article.
+3. Confirm whether the 1,732-word publication-facing supplement may accompany the article outside the 10,000-word ceiling; if it counts, shorten or withhold it rather than silently exceeding the limit.
+4. Make the repository publicly accessible before submission, as the data-and-code statement promises, and state the archival or exact-regeneration boundary for ignored per-attempt files.
+5. Re-run all non-destructive validators, confirm the exact stored artifact identities above, and issue a submission-readiness receipt only when those conditions are closed.
 
 The selected release receipts and figures must be committed with this packet. Per-attempt files may remain outside Git only if the final release states their archival location or confirms that exact regeneration from the frozen runner is the supported route.
 

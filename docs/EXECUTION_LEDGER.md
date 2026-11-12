@@ -12,7 +12,7 @@ This ledger is the canonical slice-status record. Update it at the end of every 
 | 3. Experiment pilot and freeze candidate | complete; ready for Slice 4 freeze work | `e8905fa`; gate amended 2026-11-01 and 2026-11-11 | pilot, Slice 0/plan/Slice 3 gates, executable worked trace and example/reference materials | no formal post-Slice-5 review; semantic findings still require a new freeze and rerun |
 | 4. Confirmatory freeze | complete; immutable manifest issued | `0b8e890` frozen baseline; manifest `35f360d8…65c` | 77-file manifest, 10 source identities, exact environment, 108-family core, sensitivity, five-control receipt, and all 178 tests verify | any frozen-file, inventory, or environment drift blocks execution and requires an explicit new freeze |
 | 5. Confirmatory execution and analysis | complete; core and sensitivity reconciled and analyzed | core receipt `b544ded`; sensitivity receipt recorded below | 32,400/32,400 attempts across separate core and sensitivity inventories; deterministic replays retained all attempts; complete Slice 5 repository gate and 178 tests pass | no formal comprehensibility review is due; narrative claims must retain the frozen model and case-study boundaries |
-| 6. Evidence packet and 10,000-word article | active; audited manuscript candidate selectively merged; abstract, Sections 1–8, Figures 1–3, Tables 1–2, availability statement, references, and publication-facing protocol supplement assembled | `669aff5` evidence packet; `96f7618` release-gate repair; `59d2cb1` Sections 8 status | call-counted main text 8,958 whitespace-delimited words excluding bibliography; citation and source-description defects corrected; five main-text exhibits plus two supplementary tables; stored artifact identities reconciled | final publisher-style formatting, independent source-anchor verification, publisher-rendered count, and submission-readiness receipt remain open |
+| 6. Evidence packet and 10,000-word article | active; audited manuscript candidate selectively merged; abstract, Sections 1–8, Figures 1–3, Tables 1–2, availability statement, references, and publication-facing protocol supplement assembled | `669aff5` evidence packet; `96f7618` release-gate repair; manuscript package `a366b6a` | call-counted main text 8,958 whitespace-delimited words excluding bibliography; audit of currently cited source anchors completed with no substantive contradiction; bibliographic metadata completed; five main-text exhibits plus two supplementary tables; stored artifact identities reconciled | deferred literature-update search, final publisher-style formatting, publisher-rendered count, public repository release, supplement eligibility, and submission-readiness receipt remain open |
 
 ## Slice 0 Closeout Receipt
 
@@ -972,7 +972,7 @@ This is a technical repository release-gate result, not a submission-readiness r
 
 ## Slice 6 Manuscript-Audit Candidate Merge
 
-Status: applied with reviewed fixes; not yet committed
+Status: applied with reviewed fixes; committed and pushed as `a366b6a`
 
 Date: 2026-11-11
 
@@ -988,4 +988,26 @@ Verification after the merge:
 - all 178 tests pass; and
 - `scripts/verify_repo.py --release` passes with the unchanged 77-file manifest hash `35f360d81e7eebe1effeae813f4144991b0fa043001df6d920d3f8592bfee65c`.
 
-This receipt confirms repository consistency, not publisher formatting, independent source verification, supplement eligibility, or submission readiness.
+This receipt confirms repository consistency, not publisher formatting, supplement eligibility, or submission readiness.
+
+## Slice 6 Final Source Audit
+
+Status: substantive verification of currently cited sources and artifacts complete; bibliographic fixes applied; release conditions remain
+
+Date: 2026-11-11
+
+The source audit checked the current manuscript rather than the earlier isolated audit workspace. Robodebt process claims were traced to the Commonwealth Ombudsman's 2017 and 2019 reports, the 2023 income-apportionment statement, the Royal Commission report, and the Royal Commission-hosted Deloitte process maps. The corrected treatment of bank-statement evidence, the early and enhanced OCI chronology, notice and timeout rules, recovery path, reassessment route, and terminology boundary matched their cited sources. Literature claims remained bounded syntheses and matched the cited publication scopes. This verifies the current source set; it does not substitute for the final literature-update search required by `DEFERRED.md`.
+
+The audit recomputed every headline simulation mean, family range, interval-direction count, censoring rate, run count, and sensitivity summary directly from the stored core and sensitivity analysis artifacts rather than from manuscript prose. It also inspected the fixed Robodebt worked trace and confirmed the article's event sequence. No substantive historical, legal, formal, trace, or numerical contradiction was found.
+
+Nine bibliography entries were completed from publication records: Blackwell; El-Yaniv and Wiener; Franc and Průša; Gilboa and Schmeidler; Little; Moynihan, Herd, and Harvey; Prabhudesai et al.; Roehl; and Sterz et al. The evidence packet records the official full title for the 2023 Ombudsman source while preserving the frozen manifest's shorthand title and byte identity.
+
+Verification after the corrections:
+
+- `scripts/validate_slice0.py` passes with 10 sources, 10 claims, two profiles, 12 YAML files, and 95 diagnostics;
+- all literature and historical URLs resolve through their publisher, DOI, or issuing-institution records, with access-control responses distinguished from dead links;
+- stored core, sensitivity, trace, and figure artifacts are present;
+- the call-counted main text remains 8,958 words because bibliography is excluded; and
+- `scripts/verify_repo.py --release` passes with all 178 tests and the unchanged manifest hash `35f360d81e7eebe1effeae813f4144991b0fa043001df6d920d3f8592bfee65c`.
+
+Remaining release conditions are the deferred literature-update search, publisher-style formatting and rendered count, public repository availability before submission, confirmation that the 1,732-word supplement may sit outside the 10,000-word ceiling, and a final submission-readiness receipt. These are not failures of the currently cited sources and were not marked complete.
