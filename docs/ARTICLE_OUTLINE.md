@@ -1,6 +1,6 @@
 # Article Outline: From Incomplete Evidence to Automated Action
 
-Status: results-informed drafting outline; design-frozen simulation and candidate evidence packet complete; manuscript-audit candidate selectively merged at 8,958 call-counted main-text words excluding bibliography; detailed protocol machinery and worked-trace receipts moved to a publication-facing supplement while the five substantive steps remain in the article; audit of currently cited source anchors completed with no substantive contradiction and bibliographic details corrected; deferred literature-update search, final publisher-style formatting, publisher-rendered count, public repository release, supplement eligibility, and submission-readiness receipt pending; one prespecified service metric excluded after semantic audit; no formal comprehensibility review required
+Status: results-informed drafting outline; design-frozen simulation and candidate evidence packet complete; integrated manuscript at 9,045 call-counted main-text words excluding bibliography after the 2026-11-11 final literature update; detailed protocol machinery and worked-trace receipts moved to a publication-facing supplement while the five substantive steps remain in the article; current source anchors audited with no substantive contradiction and bibliographic details corrected; final publisher-style formatting, publisher-rendered count, public repository release, supplement eligibility, and submission-readiness receipt pending; one prespecified service metric excluded after semantic audit; no formal comprehensibility review required
 
 Working title: *From Incomplete Evidence to Automated Action: A Formal Model and Dynamic Simulation of Review Capacity and Timeout Rules, with a Robodebt Application*
 
@@ -127,11 +127,11 @@ This plain-language definition resolves an author-noted ambiguity and must appea
 
 Organize prior work into three functional clusters:
 
-- uncertainty, calibration, abstention, and uncertainty communication;
-- human oversight, contestability, administrative burden, and algorithmic administration; and
-- sociotechnical assurance, process safety, and red teaming.
+- uncertainty, calibration, abstention, uncertainty communication, and evidence-supported consequential action;
+- human oversight, functional control, contestability, administrative burden, and algorithmic administration; and
+- finite-capacity queue control, sociotechnical assurance, process safety, and red teaming.
 
-Treat uncertainty-to-action binding as prior work. Locate the paper's narrower contribution in its information-refinement invariant, independently supported automatic progression, finite-capacity review, restoration semantics, executable controls, and documented process application. Avoid exhaustive-absence or “first paper” claims.
+Treat uncertainty-to-action binding, provenance-sensitive action auditing, functional oversight diagnostics, and congestible human-AI service as prior work. Locate the paper's narrower contribution in its information-refinement invariant, independently supported automatic progression, fixed-rule capacity and timeout stress test, restoration semantics, executable controls, and documented process application. Avoid exhaustive-absence or “first paper” claims.
 
 ### 2.4 Three research questions and falsifiability — 150 words
 
@@ -468,7 +468,7 @@ These modules are repository supplements, not submitted appendices. The publicat
 - No project-lead or external-reader return is required; internal examples and author editing are not presented as independent validation, a practitioner study, or evidence of human performance.
 - No formal usability, adoption, efficiency, inter-rater reliability, or reproducible-classification claim appears.
 - Any semantic post-result change receives a new freeze and affected rerun.
-- The final literature-update search recorded in `docs/DEFERRED.md` is completed before submission.
+- The completed final literature-update search and its narrowed comparison language remain recorded in `docs/LITERATURE_SEARCH_AUDIT.md` and `docs/DEFERRED.md`.
 - No overall workflow score, weighted policy winner, historical prevalence estimate, legality inference, or attackability claim appears.
 
 Internal continuity and claim-lineage controls remain in `docs/CONTINUITY_AND_CLAIM_BOUNDARY.md`; they are not reader-facing exhibits.

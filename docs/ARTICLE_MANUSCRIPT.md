@@ -52,11 +52,11 @@ This is a base workflow vulnerability, not necessarily an attack. Structural sus
 
 ### 2.3 Literature and proposed integration
 
-Three research traditions frame the unresolved workflow question. Work on information structures, robust choice, selective classification, abstention, and uncertainty communication establishes that evidence can be ordered, ambiguity can matter to choice, and uncertain outputs can be withheld or communicated (Blackwell 1953; Gilboa and Schmeidler 1989; El-Yaniv and Wiener 2010; Franc and Průša 2019; Prabhudesai et al. 2023). Uncertainty-to-action binding already makes oversight responses to uncertainty explicit (Anyabolu, Dubey, and Hattab 2026). The article’s question is whether the surrounding workflow expands automatic progression when decision-relevant information is lost.
+Three research traditions frame the unresolved workflow question. Work on information structures, robust choice, selective classification, abstention, and uncertainty communication establishes that evidence can be ordered, ambiguity can matter to choice, and uncertain outputs can be withheld or communicated (Blackwell 1953; Gilboa and Schmeidler 1989; El-Yaniv and Wiener 2010; Franc and Průša 2019; Prabhudesai et al. 2023). Uncertainty-to-action binding already makes oversight responses to uncertainty explicit (Anyabolu, Dubey, and Hattab 2026). Recent agent and fraud-operation preprints further distinguish correct endpoints from actions supported by established, authorized, or sufficiently fresh evidence (Deng 2026; Liao et al. 2026; Lin et al. 2026). The article’s different question is whether the surrounding workflow expands automatic progression when decision-relevant information is lost.
 
-Research on effective human oversight, automation bias, administrative burden, automated administration, and contestability examines the conditions and risks under which nominal human presence may be insufficient and why burdens, discretion, and challenge mechanisms must be treated institutionally (Moynihan, Herd, and Harvey 2015; Alon-Barkat and Busuioc 2023; Roehl 2023; Roehl and Hansen 2024; Sterz et al. 2024; Bennett, Currie, and Podoletz 2026; Landau et al. 2024). The article’s own institutional synthesis distinguishes gate safety, action-binding review, timely supported service, correction opportunity, and restoration while leaving reviewer psychology outside its numerical claims.
+Research on effective human oversight, automation bias, administrative burden, automated administration, and contestability examines the conditions and risks under which nominal human presence may be insufficient and why burdens, discretion, and challenge mechanisms must be treated institutionally (Moynihan, Herd, and Harvey 2015; Alon-Barkat and Busuioc 2023; Roehl 2023; Roehl and Hansen 2024; Sterz et al. 2024; Bennett, Currie, and Podoletz 2026; Sztandar-Sztanderska 2026; Landau et al. 2024). Hardy’s (2026) Oversight-to-Control framework is a particularly close institutional comparison because it separates observation, interpretation, challenge, intervention, and recovery. This article instead adds an evidence-refinement permission invariant and an executed dynamic counterfactual while leaving reviewer psychology outside its numerical claims.
 
-Finally, queueing, system safety, AI risk governance, and algorithmic impact assessment treat performance as a property of service capacity, control structures, context, ownership, and feedback rather than a component in isolation (Little 1961; Leveson 2012; Reisman et al. 2018; NIST 2023). Here, *process red teaming* means stress-testing how evidence, rules, capacity, deadlines, and defaults interact across a workflow; it does not imply an adversarial attack. The article synthesizes established ideas into robust permission and tests that construct in a finite-capacity process. Its proposed integration couples evidentiary refinement, independently supported automatic progression, restoration semantics, executable controls, and a source-bounded public-administration application. This is a bounded synthesis claim, not a claim of verified novelty or an assertion that prior frameworks lack those ingredients.
+Finally, queueing, system safety, AI risk governance, and algorithmic impact assessment treat performance as a property of service capacity, control structures, context, ownership, and feedback rather than a component in isolation (Little 1961; Leveson 2012; Reisman et al. 2018; NIST 2023). Recent queue-control preprints explicitly coordinate automation or escalation with congestible human service (Montanari, Scarsini, and Perchet 2026; Wang and Rachev 2026). This article does not propose an optimal controller; it stress-tests fixed safeguard and timeout rules across declared capacity conditions. Here, *process red teaming* means stress-testing how evidence, rules, capacity, deadlines, and defaults interact across a workflow; it does not imply an adversarial attack. The article synthesizes established ideas into robust permission and tests that construct in a finite-capacity process. Its proposed integration couples evidentiary refinement, independently supported automatic progression, restoration semantics, executable controls, and a source-bounded public-administration application. This is a bounded synthesis claim, not a claim of verified novelty or an assertion that prior frameworks lack those ingredients.
 
 ### 2.4 Research questions and falsifiability
 
@@ -395,17 +395,27 @@ Deloitte for the Royal Commission into the Robodebt Scheme. 2023b. *3B. Income M
 
 Deloitte for the Royal Commission into the Robodebt Scheme. 2023c. *4B. Debt Calculation and Notification—OCI Baseline*. https://robodebt.royalcommission.gov.au/system/files/2023-03/4B-Debt-Calculation-and-Notification-Process-Map-OCI.pdf.
 
+Deng, Jie. 2026. “When Can Fraud Operations Authorize Automation? A Decision-Support Framework for Fresh Audit Evidence and Review Workload.” arXiv:2608.08577. https://arxiv.org/abs/2608.08577.
+
 El-Yaniv, Ran, and Yair Wiener. 2010. “On the Foundations of Noise-Free Selective Classification.” *Journal of Machine Learning Research* 11: 1605–1641. https://jmlr.org/papers/v11/el-yaniv10a.html.
 
 Franc, Vojtěch, and Daniel Průša. 2019. “On Discriminative Learning of Prediction Uncertainty.” *Proceedings of the 36th International Conference on Machine Learning*, Proceedings of Machine Learning Research 97: 1963–1971. https://proceedings.mlr.press/v97/franc19a.html.
 
 Gilboa, Itzhak, and David Schmeidler. 1989. “Maxmin Expected Utility with Non-Unique Prior.” *Journal of Mathematical Economics* 18 (2): 141–153. https://doi.org/10.1016/0304-4068(89)90018-9.
 
+Hardy, Karim. 2026. “From Human Oversight to Effective Control: A Comparative Documentary Framework for High-Impact AI Systems.” *Design+*: 026290034. https://doi.org/10.36922/DP026290034.
+
 Landau, Susan, James X. Dempsey, Ece Kamar, and Steven M. Bellovin. 2024. *Recommendations for Government Development and Use of Advanced Automated Systems to Make Decisions about Individuals*. Stanford Center for International Security and Cooperation. https://cisac.fsi.stanford.edu/publication/recommendations-government-development-and-use-advanced-automated-systems-make.
 
 Leveson, Nancy. 2012. *Engineering a Safer World: Systems Thinking Applied to Safety*. MIT Press.
 
+Liao, Junchi, Qiang Huang, Rui Qian, Xutao Mao, Juntao Cheng, Kangning Cui, Yu Li, Jingyu Sun, and Yuchao Hou. 2026. “Auditing Provenance Sensitivity in LLM Agent Action Selection.” arXiv:2607.20827. https://arxiv.org/abs/2607.20827.
+
+Lin, Hongzhan, Shidong Cao, Ziyang Luo, Wenhao Chai, Mong-Li Lee, and Wynne Hsu. 2026. “From Evidence to Action: How Tool-Using Agents Fail.” arXiv:2610.07753. https://arxiv.org/abs/2610.07753.
+
 Little, John D. C. 1961. “A Proof for the Queuing Formula: L = λW.” *Operations Research* 9 (3): 383–387. https://doi.org/10.1287/opre.9.3.383.
+
+Montanari, Giovanni, Marco Scarsini, and Vianney Perchet. 2026. “Learning When to Automate: Queue Control in Human-AI Service Systems.” arXiv:2607.06017. https://arxiv.org/abs/2607.06017.
 
 Moynihan, Donald P., Pamela Herd, and Hope Harvey. 2015. “Administrative Burden: Learning, Psychological, and Compliance Costs in Citizen–State Interactions.” *Journal of Public Administration Research and Theory* 25 (1): 43–69. https://doi.org/10.1093/jopart/muu009.
 
@@ -424,3 +434,7 @@ Royal Commission into the Robodebt Scheme. 2023. *Report of the Royal Commission
 Services Australia. 2025. *Automation and Artificial Intelligence Strategy 2025–27*. https://www.servicesaustralia.gov.au/sites/default/files/2025-05/automation-and-ai-strategy-2025-27.pdf.
 
 Sterz, Sarah, Kevin Baum, Sebastian Biewer, Holger Hermanns, Anne Lauber-Rönsberg, Philip Meinel, and Markus Langer. 2024. “On the Quest for Effectiveness in Human Oversight: Interdisciplinary Perspectives.” *Proceedings of the 2024 ACM Conference on Fairness, Accountability, and Transparency*, 2495–2507. https://doi.org/10.1145/3630106.3659051.
+
+Sztandar-Sztanderska, Karolina. 2026. “How Context Matters: Human Oversight of Automated Decision-Making Systems in Welfare Administration.” *Journal of European Social Policy* 36 (3): 255–269. https://doi.org/10.1177/09589287251358069.
+
+Wang, Ziyao, and Svetlozar T. Rachev. 2026. “Operating Imperfect AI: Reliability Drift and Human Congestion.” arXiv:2601.22295. https://arxiv.org/abs/2601.22295.

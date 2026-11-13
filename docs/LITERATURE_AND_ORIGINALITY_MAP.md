@@ -1,6 +1,6 @@
 # Literature and Originality Map
 
-Status: Slice 3 structured map updated after pre-freeze search and citation chaining; bibliography must be normalized before manuscript submission
+Status: Slice 3 structured map updated after pre-freeze search and citation chaining; final literature-update search completed 2026-11-11; bibliography normalized for the current manuscript
 
 ## Purpose
 
@@ -24,6 +24,10 @@ This map prevents the paper from claiming novelty for established ideas and iden
 | Effective human oversight and automation bias | Sterz et al., “On the Quest for Effectiveness in Human Oversight,” FAccT 2024, DOI [10.1145/3630106.3659051](https://doi.org/10.1145/3630106.3659051); Alon-Barkat & Busuioc, “Human–AI Interactions in Public Sector Decision Making,” *JPART* 2022, DOI [10.1093/jopart/muac007](https://doi.org/10.1093/jopart/muac007) | Nominal human presence is not effective oversight; human decision makers can show automation bias and selective adherence. | Operationalize action-binding authority, timing, evidence access, and finite capacity while keeping cognitive bias outside the numerical model. | The need for effective oversight or the existence of automation bias. |
 | Uncertainty communication in decision support | Prabhudesai et al., “Understanding Uncertainty,” IUI 2023, DOI [10.1145/3581641.3584033](https://doi.org/10.1145/3581641.3584033) | Decision makers' interpretation and use of displayed uncertainty affect reliance. | Distinguish uncertainty surfacing from the downstream action set and functional permission. | The importance of communicating uncertainty to decision makers. |
 | Automated-welfare burden | Bennett, Currie & Podoletz, “Universal Credit: administrative burdens of automated welfare,” *Journal of Social Policy* 2024, DOI [10.1017/S0047279424000175](https://doi.org/10.1017/S0047279424000175) | Automated welfare processes can create and redistribute administrative burdens. | Model recipient evidence-production burden and agency workload as separate outcome coordinates. | The claim that welfare automation can shift burden. |
+| Evidence-supported consequential action | Lin et al., “From Evidence to Action,” 2026, [arXiv:2610.07753](https://arxiv.org/abs/2610.07753); Liao et al., “Auditing Provenance Sensitivity,” 2026, [arXiv:2607.20827](https://arxiv.org/abs/2607.20827); Deng, “When Can Fraud Operations Authorize Automation?,” 2026, [arXiv:2608.08577](https://arxiv.org/abs/2608.08577) | Correct endpoints can lack established or authorized evidence; evidence freshness and review workload can constrain automation. | Compare the representation-preservation fixture and robust-permission rule to action-support, provenance, and freshness audits. | Evidence-to-action auditing, provenance-sensitive action selection, or capacity-aware authorization generally. |
+| Functional oversight diagnostics | Hardy, “From Human Oversight to Effective Control,” 2026, DOI [10.36922/DP026290034](https://doi.org/10.36922/DP026290034) | Effective control depends on distinct observation, interpretation, challenge, intervention, and recovery functions rather than nominal human presence. | Treat F1–F4 and restoration as a formal and executable specialization for the declared process class. | Separating oversight functions or recovery from real-time control. |
+| Welfare-administration oversight context | Sztandar-Sztanderska, “How Context Matters,” 2026, DOI [10.1177/09589287251358069](https://doi.org/10.1177/09589287251358069) | Policy, organization, professional practice, and technology jointly shape whether frontline welfare oversight is effective. | Support the institutional treatment of review while keeping the simulation's parameters stylized. | The contextual or organizational character of human oversight in welfare administration. |
+| Congestible human-AI service | Wang & Rachev, “Operating Imperfect AI,” 2026, [arXiv:2601.22295](https://arxiv.org/abs/2601.22295); Montanari, Scarsini & Perchet, “Learning When to Automate,” 2026, [arXiv:2607.06017](https://arxiv.org/abs/2607.06017) | Escalation and automation policies interact dynamically with scarce human service and queue congestion. | Stress-test fixed safeguard and timeout policies across declared capacity conditions. | Capacity-aware escalation, human-AI queue control, or the fact that review capacity can bind. |
 
 ## Specific Gap the Paper Tests
 
@@ -73,10 +77,12 @@ Avoid:
 
 ## Pre-Submission Literature Gate
 
-Completed on 2026-11-01 and recorded in `docs/LITERATURE_SEARCH_AUDIT.md`:
+The pre-freeze search was completed on 2026-11-01 and the final update search on 2026-11-11, both recorded in `docs/LITERATURE_SEARCH_AUDIT.md`:
 
 1. ran forward and backward citation review for the core information-order, abstention, human-oversight, public-ADM, burden, contestability, and system-safety anchors;
 2. added work on uncertainty-to-action binding, effective oversight, automation bias, uncertainty communication, and automated-welfare burden;
 3. narrowed the originality statement around the closest neighboring formulation;
 4. distinguished cited theory from sources used only for institutional context; and
-5. retained a Slice 6 check requiring every “unlike prior work” sentence to name a specific comparison rather than an unbounded absence claim.
+5. repeated the ten original search strings through the current date and screened targeted evidence/action, timeout/default, queue/capacity, contestability, and restoration combinations;
+6. added the closest new evidence-to-action, provenance, automation-authorization, queue-control, welfare-oversight, and functional-control comparisons; and
+7. retained the rule that every “unlike prior work” sentence must name a specific comparison rather than an unbounded absence claim.

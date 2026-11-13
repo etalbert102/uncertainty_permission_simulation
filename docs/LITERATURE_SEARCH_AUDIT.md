@@ -1,6 +1,6 @@
-# Pre-Freeze Literature Search and Citation-Chaining Audit
+# Literature Search and Citation-Chaining Audit
 
-Status: completed 2026-11-01; structured pre-submission search, not a systematic-review claim
+Status: pre-freeze search completed 2026-11-01; final update search completed 2026-11-11; structured pre-submission search, not a systematic-review claim
 
 ## Method
 
@@ -21,9 +21,28 @@ Search strings included:
 
 The citation-chain anchors were Blackwell (1953), Gilboa and Schmeidler (1989), Little (1961), Moynihan, Herd, and Harvey (2015), Roehl (2023), Alon-Barkat and Busuioc (2022), Prabhudesai et al. (2023), Sterz et al. (2024), and Yurrita et al. (2023). The OpenAlex records reported 480 combined backward references and more than 10,000 combined citing records before deduplication. Screening prioritized titles and abstracts concerning uncertainty, information, abstention, authority, human oversight, review, contestability, administrative burden, public automation, and queue/service capacity. Counts are search diagnostics, not bibliometric findings.
 
-Limitations: one broad index can miss books, legal scholarship, non-English work, and unindexed reports; title/abstract screening can miss conceptually equivalent work under different terminology. The paper therefore makes no exhaustive absence claim and retains a final reference normalization check before submission.
+Limitations: one broad index can miss books, legal scholarship, non-English work, and unindexed reports; title/abstract screening can miss conceptually equivalent work under different terminology. The paper therefore makes no exhaustive absence claim.
 
-## Closest and load-bearing additions
+## Final update method
+
+On 2026-11-11, the ten original keyword strings were repeated in OpenAlex with publication dates limited to 2025-01-01 through 2026-11-11 and results ordered by relevance. The first ten results were screened for eight strings; the first fifteen were screened for `algorithmic recourse contestability government` and `permission monotonicity algorithm`. Targeted web searches then combined `timeout`, `default`, `evidence`, `automatic action`, `permission`, `restoration`, `human review`, `queue`, and `capacity`. Candidate records were checked against their publisher, DOI, or arXiv pages. Screening asked whether a work contributed one or more of the paper's load-bearing elements: evidence-supported action, permission or authority allocation, finite review capacity, timeout/default behavior, contestability, restoration, or automated-welfare administration.
+
+This was an update and equivalence check, not a systematic review. Search-result counts were retained only as volatile diagnostics and are not reported as findings. The update found several close additions that sharpen comparison language but no work in the screened set that combined the evidence-refinement permission invariant, independent-support exception, fixed-rule dynamic stress test, contestability and restoration semantics, and source-bounded Robodebt application.
+
+### Additions requiring a manuscript response
+
+| Work | Existing contribution | Consequence for this paper |
+| --- | --- | --- |
+| Hardy, “From Human Oversight to Effective Control” (2026), DOI `10.36922/DP026290034` | Separates Observe, Detect, Interpret, Challenge and Decide, Intervene, and Recover and Learn in a documentary diagnostic of public cases. | Treat this as the closest new institutional diagnostic. Distinguish the paper's formal permission invariant and executed dynamic counterfactual rather than claiming those functional distinctions as new. |
+| Lin et al., “From Evidence to Action” (2026), arXiv:2610.07753 | Shows that correct tool-agent outcomes can lack evidence established before action and supplies an evidence ledger plus trajectory evaluator. | Do not claim to originate evidence-to-action trace auditing. Distinguish evidence refinement, workflow permission, finite institutional capacity, and restoration. |
+| Liao et al., “Auditing Provenance Sensitivity in LLM Agent Action Selection” (2026), arXiv:2607.20827 | Separates relevance from authorization and tests whether untrusted context affects tool actions. | Treat provenance-sensitive action auditing as prior work; retain the article's different controlled coarsening and institutional permission question. |
+| Deng, “When Can Fraud Operations Authorize Automation?” (2026), arXiv:2608.08577 | Constrains automatic approval, analyst review, and blocking by empirical risk, evidence freshness, and shared review workload. | Distinguish refinement-monotone permission and restoration from risk-certified action regions and audit freshness. |
+| Wang and Rachev, “Operating Imperfect AI” (2026), arXiv:2601.22295; Montanari, Scarsini, and Perchet, “Learning When to Automate” (2026), arXiv:2607.06017 | Model queue-aware escalation or automation when human service is congestible. | Do not imply that finite-capacity human-AI queues are new. State that this paper stress-tests fixed safeguards and timeouts rather than optimizing a controller. |
+| Sztandar-Sztanderska, “How Context Matters” (2026), DOI `10.1177/09589287251358069` | Empirically links welfare caseworkers' oversight capacity to policy, organizational, professional, and technological context. | Use it to support the institutional treatment of review while preserving the simulation's non-empirical parameter boundary. |
+
+FALCON, the 2026 fatigue-aware learning-to-defer preprint; recent meaningful-oversight design frameworks; and 2025–2026 contestability studies were also screened. They reinforce capacity, agency, and challenge-path concerns but do not change the paper's narrow comparison or require additional numerical claims.
+
+## Pre-freeze closest and load-bearing additions
 
 | Work | Existing contribution | Consequence for this paper |
 | --- | --- | --- |

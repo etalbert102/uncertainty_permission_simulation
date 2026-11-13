@@ -4,7 +4,7 @@ Status: Slice 6 candidate, assembled 2026-11-11 from stored artifacts
 
 Study: *From Incomplete Evidence to Automated Action: A Formal Model and Dynamic Simulation of Review Capacity and Timeout Rules, with a Robodebt Application*
 
-This packet is the inspection index for the formal model, source-grounded application, executable validation, frozen design, confirmatory runs, quantitative results, and integrated article. It does not itself certify submission readiness. The technical repository release gate passes, and the audit of currently cited source anchors found no substantive source or numerical contradiction; identified attribution, title, source-description, issue/article-identifier, and page-range defects have been corrected. The deferred literature-update search, final publisher-style formatting, publisher-rendered word counting, public repository release, supplement eligibility, and the submission-readiness receipt remain pending. No reader study, formal comprehensibility return, usability claim, inter-rater claim, or practitioner-performance claim is required or supplied.
+This packet is the inspection index for the formal model, source-grounded application, executable validation, frozen design, confirmatory runs, quantitative results, and integrated article. It does not itself certify submission readiness. The technical repository release gate passes, the audit of currently cited source anchors found no substantive source or numerical contradiction, and the final literature update was completed on 2026-11-11. Identified attribution, title, source-description, issue/article-identifier, and page-range defects have been corrected, and the closest new comparisons have been integrated without changing the frozen study. Final publisher-style formatting, publisher-rendered word counting, public repository release, supplement eligibility, and the submission-readiness receipt remain pending. No reader study, formal comprehensibility return, usability claim, inter-rater claim, or practitioner-performance claim is required or supplied.
 
 ## 1. Scope and evidence rule
 
@@ -256,7 +256,7 @@ The LLM-summary transfer canary is an author-constructed cross-vocabulary illust
 | Five-step protocol, worked example, governance interventions | drafted and critically revised | [Protocol/governance draft](ARTICLE_PROTOCOL_GOVERNANCE_DRAFT.md) |
 | Limitations and conclusion | drafted; integration review pending | [Limitations/conclusion draft](ARTICLE_LIMITATIONS_CONCLUSION_DRAFT.md) |
 | Introduction, mechanism/literature, formal-model exposition, and case application | drafted and critically revised; Figures 1–2 built; integration review pending | [Sections 1–4 draft](ARTICLE_INTRO_FORMAL_CASE_DRAFT.md) |
-| Integrated manuscript and word count | manuscript-audit candidate selectively merged; 8,958 whitespace-delimited main-text words excluding bibliography under the verified call; audit of currently cited source anchors found no substantive source or numerical contradiction and completed bibliographic metadata; deferred literature update, publisher-style formatting, and rendered count pending | [Integrated manuscript](ARTICLE_MANUSCRIPT.md) |
+| Integrated manuscript and word count | 9,045 whitespace-delimited main-text words excluding bibliography under the verified call after the 2026-11-11 literature update; current source anchors audited with no substantive contradiction; bibliographic metadata completed; publisher-style formatting and rendered count pending | [Integrated manuscript](ARTICLE_MANUSCRIPT.md) |
 | Publication-facing protocol supplement | detailed levels, statuses, completeness rules, receipt fields, reference worksheet, and fixed Robodebt worked trace assembled without a usability claim | [Supplementary material](ARTICLE_SUPPLEMENTARY_MATERIAL.md) |
 
 The paper is a natural extension of *When Uncertainty Expands Authority* because it formalizes and tests the precursor mechanism. It remains standalone by defining its own concepts, motivating the case, presenting conducted analysis, and restricting lineage material to internal controls, acknowledgments, or a concise origin statement. The continuity table in `CONTINUITY_AND_CLAIM_BOUNDARY.md` classifies precursor claims as retained, refined, tested, bounded, or rejected.
@@ -323,7 +323,7 @@ Status key: **supported** means stored evidence answers the question within the 
 | 10 | supported | Yes. Case/event-keyed draws, paired membership, and common-random-number diagnostics are stored. |
 | 11 | supported | Yes. Support, delay, workload, interactions, exposure, correction, and restoration/censoring are separate; there is no utility weighting. |
 | 12 | supported | No declared confirmatory source, parameter, seed, metric, or analysis identity changed. Direct hashes match and the immutable 77-file scientific inventory verifies after the article-only renderer was relocated outside the frozen trees. |
-| 13 | supported | The integrated manuscript includes a repository-grounded reference list. Publication records were checked and the identified authorship, author-list, title, issue/article-identifier, and page-range defects were corrected. Publisher house style remains a formatting task, not a source-support gap. |
+| 13 | supported | The integrated manuscript includes a repository-grounded reference list. Publication records were checked, identified metadata defects were corrected, and the final 2026-11-11 literature update integrated the closest new comparisons. Publisher house style remains a formatting task, not a source-support gap. |
 | 14 | supported | The final source audit recomputed headline quantitative claims from stored core and sensitivity artifacts and checked historical and literature claims against the source packet and publication records. No substantive contradiction was found. |
 | 15 | supported | Yes. Transfer is limited to the formal invariant, method, and bounded institutional connections; the canary carries explicit nonclaims. |
 | 16 | supported | Yes. Optional or incomplete subsystems are removed, excluded, or recorded in `DEFERRED.md`; the invalid service construct is explicitly excluded. |
@@ -335,7 +335,7 @@ Status key: **supported** means stored evidence answers the question within the 
 | 22 | supported | Yes. `unassessable` is a first-class status for missing lineage, authority, timing, or process evidence. |
 | 23 | supported | Yes. Drafts explicitly reject usability, inter-rater, practitioner-performance, and formal comprehensibility claims. |
 | 24 | bounded | The canary demonstrates representability across a different vocabulary, not validated use by independent practitioners or a second empirical case. |
-| 25 | bounded | The integrated manuscript has 8,958 whitespace-delimited main-text words excluding bibliography, leaving 1,042 words under the verified call ceiling. The publication-facing supplement is tracked separately, but its eligibility outside that ceiling must be confirmed; a publisher-rendered submission count remains pending. |
+| 25 | bounded | The integrated manuscript has 9,045 whitespace-delimited main-text words excluding bibliography, leaving 955 words under the verified call ceiling. The publication-facing supplement is tracked separately, but its eligibility outside that ceiling must be confirmed; a publisher-rendered submission count remains pending. |
 | 26 | supported | Yes. P0 holds the uncertain output, downstream rule, and process state fixed while changing only interface representation. |
 | 27 | supported | Yes. The formal model and case boundary distinguish base vulnerability, structural susceptibility, process red-teaming, and adversarial exploitability; Robodebt is not labeled attackable. |
 | 28 | supported | Yes. The main-text canary develops the precursor's LLM-summary example rather than introducing an unrelated vignette. |
@@ -353,13 +353,12 @@ Status key: **supported** means stored evidence answers the question within the 
 
 ## 12. Release conditions and next actions
 
-The audit of currently cited source anchors is complete, but submission release still requires:
+The cited-source audit and final literature update are complete, but submission release still requires:
 
-1. Run the final literature-update search required by `DEFERRED.md`; record any new equivalent work and revise only unfrozen manuscript claims unless a scientific change requires an explicit new freeze and affected rerun.
-2. Apply the publisher's final style and obtain a publisher-rendered word count for the article.
-3. Confirm whether the 1,732-word publication-facing supplement may accompany the article outside the 10,000-word ceiling; if it counts, shorten or withhold it rather than silently exceeding the limit.
-4. Make the repository publicly accessible before submission, as the data-and-code statement promises, and state the archival or exact-regeneration boundary for ignored per-attempt files.
-5. Re-run all non-destructive validators, confirm the exact stored artifact identities above, and issue a submission-readiness receipt only when those conditions are closed.
+1. Apply the publisher's final style and obtain a publisher-rendered word count for the article.
+2. Confirm whether the 1,732-word publication-facing supplement may accompany the article outside the 10,000-word ceiling; if it counts, shorten or withhold it rather than silently exceeding the limit.
+3. Make the repository publicly accessible before submission, as the data-and-code statement promises, and state the archival or exact-regeneration boundary for ignored per-attempt files.
+4. Re-run all non-destructive validators, confirm the exact stored artifact identities above, and issue a submission-readiness receipt only when those conditions are closed.
 
 The selected release receipts and figures must be committed with this packet. Per-attempt files may remain outside Git only if the final release states their archival location or confirms that exact regeneration from the frozen runner is the supported route.
 
