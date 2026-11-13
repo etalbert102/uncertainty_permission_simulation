@@ -28,6 +28,8 @@ Two measurement limits narrow those findings. The invalid decision-service outpu
 
 The paper develops robust permission as a workflow-level rule, an executable representation pair with negative controls, a documented institutional application, a finite-capacity simulation, and a five-step process-red-team protocol. It does not estimate historical Robodebt rates, debts, legality, or causal effects; validate practitioner usability; or establish strategic exploitation. Section 2 isolates the mechanism and locates it in adjacent research. Section 3 states the formal model. Section 4 establishes the case mapping and its limits. Sections 5 and 6 describe the simulation and results, Section 7 turns the analysis into a bounded protocol, and Section 8 states the limitations and candidate diagnostic.
 
+Figure 1 previews the evidence-to-action chain that serves as the unit of analysis and the five diagnostic steps developed in Section 7.
+
 ![Figure 1. Evidence-to-action chain and five process-red-team steps.](figures/figure1_evidence_to_action_protocol.svg)
 
 **Figure 1. Evidence-to-action chain and five process-red-team steps.** The protocol follows one action through representation, permission, review, execution, and restoration while keeping formal authority, independent support, automatic permission, and executed action distinct.
@@ -56,7 +58,7 @@ Three research traditions frame the unresolved workflow question. Work on inform
 
 Research on effective human oversight, automation bias, administrative burden, automated administration, and contestability examines the conditions and risks under which nominal human presence may be insufficient and why burdens, discretion, and challenge mechanisms must be treated institutionally (Moynihan, Herd, and Harvey 2015; Alon-Barkat and Busuioc 2023; Roehl 2023; Roehl and Hansen 2024; Sterz et al. 2024; Bennett, Currie, and Podoletz 2026; Sztandar-Sztanderska 2026; Landau et al. 2024). Hardy’s (2026) Oversight-to-Control framework is a particularly close institutional comparison because it separates observation, interpretation, challenge, intervention, and recovery. This article instead adds an evidence-refinement permission invariant and an executed dynamic counterfactual while leaving reviewer psychology outside its numerical claims.
 
-Finally, queueing, system safety, AI risk governance, and algorithmic impact assessment treat performance as a property of service capacity, control structures, context, ownership, and feedback rather than a component in isolation (Little 1961; Leveson 2012; Reisman et al. 2018; NIST 2023). Recent queue-control preprints explicitly coordinate automation or escalation with congestible human service (Montanari, Scarsini, and Perchet 2026; Wang and Rachev 2026). This article does not propose an optimal controller; it stress-tests fixed safeguard and timeout rules across declared capacity conditions. Here, *process red teaming* means stress-testing how evidence, rules, capacity, deadlines, and defaults interact across a workflow; it does not imply an adversarial attack. The article synthesizes established ideas into robust permission and tests that construct in a finite-capacity process. Its proposed integration couples evidentiary refinement, independently supported automatic progression, restoration semantics, executable controls, and a source-bounded public-administration application. This is a bounded synthesis claim, not a claim of verified novelty or an assertion that prior frameworks lack those ingredients.
+Finally, queueing, system safety, AI risk governance, and algorithmic impact assessment treat performance as a property of service capacity, control structures, context, ownership, and feedback rather than a component in isolation (Little 1961; Leveson 2012; Reisman et al. 2018; National Institute of Standards and Technology 2023). Recent queue-control preprints explicitly coordinate automation or escalation with congestible human service (Montanari, Scarsini, and Perchet 2026; Wang and Rachev 2026). This article does not propose an optimal controller; it stress-tests fixed safeguard and timeout rules across declared capacity conditions. Here, *process red teaming* means stress-testing how evidence, rules, capacity, deadlines, and defaults interact across a workflow; it does not imply an adversarial attack. The article synthesizes established ideas into robust permission and tests that construct in a finite-capacity process. Its proposed integration couples evidentiary refinement, independently supported automatic progression, restoration semantics, executable controls, and a source-bounded public-administration application. This is a bounded synthesis claim, not a claim of verified novelty or an assertion that prior frameworks lack those ingredients.
 
 ### 2.4 Research questions and falsifiability
 
@@ -140,6 +142,8 @@ The documented OCI design also expanded manual intervention for disputed inputs,
 
 These changes target access, surfacing, evidence acquisition, routing, and recovery gating. They form a bounded repair profile, not proof that every failure disappeared or that configured manual intervention was adequately staffed, timely, or effective. Later EIC, CUPI, PAYG Manual, and remediation processes are outside this profile.
 
+Figure 2 contrasts the documented early OCI pathway with the enhanced repair bundle and identifies the separate, study-owned simulation layer.
+
 ![Figure 2. Early and enhanced OCI process profiles.](figures/figure2_robodebt_process_profiles.svg)
 
 **Figure 2. Early and enhanced OCI process profiles.** Source-grounded process structure establishes analytical relevance; the simulation layer remains study-owned and stylized rather than a numerical reconstruction of Robodebt.
@@ -168,7 +172,7 @@ Matched policies shared case membership, latent attributes, potential evidence, 
 
 ### 5.2 Policy designs
 
-We compared five counterfactual policy designs. They are study-owned interventions, not labels for historical Robodebt policies.
+Table 1 compares five counterfactual policy designs. They are study-owned interventions, not labels for historical Robodebt policies.
 
 **Table 1. Counterfactual study policies and principal modeled tradeoffs.**
 
@@ -266,9 +270,13 @@ With retrieval latency doubled, U3 and U0 again had zero unsupported progression
 
 The strongest within-model result is that identical timely-review-completion rates can coexist with opposite permission consequences. Timely supported service was invalidly measured, substantive burden received only an interaction-event proxy, and censoring blocked complete-restoration comparisons.
 
+Figure 3 visualizes the load response and the two principal paired-policy tradeoffs.
+
 ![Figure 3. Capacity, timeout, and information-first tradeoffs.](figures/figure3_simulation_results.svg)
 
 **Figure 3. Capacity, timeout, and information-first tradeoffs.** Panel A shows the fail-closed load response. Panels B and C show unweighted means and family ranges for the paired policy contrasts. Family ranges describe variation across the 108 designed scenarios, not uncertainty; Panel C labels its different outcome units explicitly.
+
+Table 2 reports the prespecified paired estimates, computational-precision summaries, and claim boundaries underlying those contrasts.
 
 **Table 2. Prespecified paired estimates, computational precision, and claim boundaries.**
 
@@ -297,7 +305,7 @@ Usability is a design objective, not an evaluated result. The proposed protocol 
 
 Use the least demanding adequate level. A document audit supports structural findings; a bounded deterministic trace supports trace-specific conclusions about ordered events; and a dynamic system simulation supports estimates only within its designed parameter space. Escalate when conclusions depend on realized timing, shared resources, spillovers, or endogenous behavior. If the needed inputs are unavailable, return `unassessable` and name them.
 
-A controlled pair compares two arms while holding the declared case or system inputs fixed and changing only the named representation, rule, or intervention. Detailed levels, status codes, completeness rules, receipt fields, and reference worksheets are provided in the [supplementary material](ARTICLE_SUPPLEMENTARY_MATERIAL.md).
+A controlled pair compares two arms while holding the declared case or system inputs fixed and changing only the named representation, rule, or intervention. Detailed levels, status codes, completeness rules, receipt fields, and reference worksheets are provided in Sections S1–S4 of the Supplementary Material.
 
 ### 7.2 Step 1: map transformations and ownership
 
@@ -337,7 +345,7 @@ In the baseline, a notice fails, the 21-day deadline expires, and aggregate inco
 
 A component-local check might confirm that averaging ran as specified; another might confirm that notice issued. Neither of those two checks establishes how failed access, imputation, deadline expiry, and the permission rule combine. The process trace demonstrates that combination in this fixed example, but does not show that no other diagnostic could expose it.
 
-The detailed Robodebt assessment profile, ownership and intervention receipt, evidence limits, statuses, and tradeoffs are provided in the [supplementary material](ARTICLE_SUPPLEMENTARY_MATERIAL.md).
+The detailed Robodebt assessment profile, ownership and intervention receipt, evidence limits, statuses, and tradeoffs are provided in Section S5 of the Supplementary Material.
 
 ### 7.8 Governance interventions and bounded transfer
 
