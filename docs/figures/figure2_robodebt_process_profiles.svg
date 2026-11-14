@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1500" viewBox="0 0 1200 1500" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1385" viewBox="0 90 1200 1385" role="img" aria-labelledby="title desc">
   <title id="title">Figure 2. Early and enhanced OCI process profiles with source and simulation boundaries</title>
   <desc id="desc">Side-by-side process maps compare the early Online Compliance Intervention baseline with an enhanced early-2017 repair bundle. The enhanced profile separates response and nonresponse paths and distinguishes the collector-referral gate from later reassessment or review. A lower dashed panel separates source-grounded process structure from stylized simulation parameters and counterfactual study policies.</desc>
   <defs>
@@ -164,6 +164,5 @@
   <text x="70" y="1386" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700" fill="#B3382C">Claim boundary:</text>
   <text x="220" y="1386" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#52606D">simulation rates are designed-parameter-space results—not historical prevalence, capacity, debt error, legality, or causal effects.</text>
 
-  <text x="45" y="1450" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#52606D">Sources: Commonwealth Ombudsman (2017), paras. 1.17–1.46 and app. B; Royal Commission Deloitte maps 2B, 3B, and 4B.</text>
-  <text x="45" y="1477" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#52606D">Profile boundary: early OCI and the enhanced repair bundle remain dated separately; later EIC, CUPI, PAYG Manual, and remediation are outside scope.</text>
+  <text x="45" y="1450" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#52606D">Profile boundary: early OCI and the enhanced repair bundle remain dated separately; later EIC, CUPI, PAYG Manual, and remediation are outside scope.</text>
 </svg>

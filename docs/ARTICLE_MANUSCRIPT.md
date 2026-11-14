@@ -4,6 +4,8 @@
 
 Automated decision workflows can convert incomplete evidence into consequential action even when each component follows its local rule. The central question is: when evidence becomes less decision-relevant, what may an automated workflow now do? This article develops a formal model that separates evidence, representation, formal authority, functional permission, execution, review, contestability, and restoration. The formal model supplies a conditional rule for robust permission; a deterministic representation-preservation pair demonstrates its mechanics; a source-bounded application to Australia’s Robodebt program establishes structural compatibility with the proposed mechanism; and a prospectively frozen finite-cohort simulation estimates behavior only inside a stylized system. Across three prespecified loads, fail-closed review remained gate-safe while timely review completion declined and unresolved holding increased. A matched fail-open policy converted the same review shortfall into unsupported progression and recovery-process exposure. An agency-assisted information-first policy also avoided unsupported progression but increased interaction and agency-workload events relative to conservative holding; because the interaction measure does not capture effort or welfare, its effect on substantive recipient burden remains unresolved. The simulation does not reconstruct historical Robodebt, estimate a continuous capacity threshold, or support complete-restoration comparisons for heavily censored policies. A post-run semantic audit also excluded an invalid timely-service measure. The resulting five-step process-red-team protocol is a proposed diagnostic for tracing how evidence transformations, permission rules, operational review, capacity, and restoration interact, while keeping gate safety, delay, burden, workload, exposure, and unresolved cases separate.
 
+*Keywords:* automated decision-making, human oversight, uncertainty, discrete-event simulation, Robodebt
+
 ## 1. Introduction
 
 ### 1.1 The organizational failure mode
@@ -30,9 +32,13 @@ The paper develops robust permission as a workflow-level rule, an executable rep
 
 Figure 1 previews the evidence-to-action chain that serves as the unit of analysis and the five diagnostic steps developed in Section 7.
 
+**Figure 1**
+
+*Evidence-to-Action Chain and Five Process-Red-Team Steps*
+
 ![Figure 1. Evidence-to-action chain and five process-red-team steps.](figures/figure1_evidence_to_action_protocol.svg)
 
-**Figure 1. Evidence-to-action chain and five process-red-team steps.** The protocol follows one action through representation, permission, review, execution, and restoration while keeping formal authority, independent support, automatic permission, and executed action distinct.
+*Note.* The protocol follows one action through representation, permission, review, execution, and restoration while keeping formal authority, independent support, automatic permission, and executed action distinct.
 
 ## 2. Mechanism, Literature, and Research Questions
 
@@ -54,11 +60,11 @@ This is a base workflow vulnerability, not necessarily an attack. Structural sus
 
 ### 2.3 Literature and proposed integration
 
-Three research traditions frame the unresolved workflow question. Work on information structures, robust choice, selective classification, abstention, and uncertainty communication establishes that evidence can be ordered, ambiguity can matter to choice, and uncertain outputs can be withheld or communicated (Blackwell 1953; Gilboa and Schmeidler 1989; El-Yaniv and Wiener 2010; Franc and Průša 2019; Prabhudesai et al. 2023). Uncertainty-to-action binding already makes oversight responses to uncertainty explicit (Anyabolu, Dubey, and Hattab 2026). Recent agent and fraud-operation preprints further distinguish correct endpoints from actions supported by established, authorized, or sufficiently fresh evidence (Deng 2026; Liao et al. 2026; Lin et al. 2026). The article’s different question is whether the surrounding workflow expands automatic progression when decision-relevant information is lost.
+Three research traditions frame the unresolved workflow question. Work on information structures, robust choice, selective classification, abstention, and uncertainty communication establishes that evidence can be ordered, ambiguity can matter to choice, and uncertain outputs can be withheld or communicated (Blackwell, 1953; El-Yaniv & Wiener, 2010; Franc & Průša, 2019; Gilboa & Schmeidler, 1989; Prabhudesai et al., 2023). Uncertainty-to-action binding already makes oversight responses to uncertainty explicit (Anyabolu et al., 2026). Recent agent and fraud-operation preprints further distinguish correct endpoints from actions supported by established, authorized, or sufficiently fresh evidence (Deng, 2026; Liao et al., 2026; Lin et al., 2026). The article’s different question is whether the surrounding workflow expands automatic progression when decision-relevant information is lost.
 
-Research on effective human oversight, automation bias, administrative burden, automated administration, and contestability examines the conditions and risks under which nominal human presence may be insufficient and why burdens, discretion, and challenge mechanisms must be treated institutionally (Moynihan, Herd, and Harvey 2015; Alon-Barkat and Busuioc 2023; Roehl 2023; Roehl and Hansen 2024; Sterz et al. 2024; Bennett, Currie, and Podoletz 2026; Sztandar-Sztanderska 2026; Landau et al. 2024). Hardy’s (2026) Oversight-to-Control framework is a particularly close institutional comparison because it separates observation, interpretation, challenge, intervention, and recovery. This article instead adds an evidence-refinement permission invariant and an executed dynamic counterfactual while leaving reviewer psychology outside its numerical claims.
+Research on effective human oversight, automation bias, administrative burden, automated administration, and contestability examines the conditions and risks under which nominal human presence may be insufficient and why burdens, discretion, and challenge mechanisms must be treated institutionally (Alon-Barkat & Busuioc, 2023; Bennett et al., 2026; Landau et al., 2024; Moynihan et al., 2015; Roehl, 2023; Roehl & Hansen, 2024; Sterz et al., 2024; Sztandar-Sztanderska, 2026). Hardy’s (2026) Oversight-to-Control framework is a particularly close institutional comparison because it separates observation, interpretation, challenge, intervention, and recovery. This article instead adds an evidence-refinement permission invariant and an executed dynamic counterfactual while leaving reviewer psychology outside its numerical claims.
 
-Finally, queueing, system safety, AI risk governance, and algorithmic impact assessment treat performance as a property of service capacity, control structures, context, ownership, and feedback rather than a component in isolation (Little 1961; Leveson 2012; Reisman et al. 2018; National Institute of Standards and Technology 2023). Recent queue-control preprints explicitly coordinate automation or escalation with congestible human service (Montanari, Scarsini, and Perchet 2026; Wang and Rachev 2026). This article does not propose an optimal controller; it stress-tests fixed safeguard and timeout rules across declared capacity conditions. Here, *process red teaming* means stress-testing how evidence, rules, capacity, deadlines, and defaults interact across a workflow; it does not imply an adversarial attack. The article synthesizes established ideas into robust permission and tests that construct in a finite-capacity process. Its proposed integration couples evidentiary refinement, independently supported automatic progression, restoration semantics, executable controls, and a source-bounded public-administration application. This is a bounded synthesis claim, not a claim of verified novelty or an assertion that prior frameworks lack those ingredients.
+Finally, queueing, system safety, AI risk governance, and algorithmic impact assessment treat performance as a property of service capacity, control structures, context, ownership, and feedback rather than a component in isolation (Leveson, 2012; Little, 1961; National Institute of Standards and Technology, 2023; Reisman et al., 2018). Recent queue-control preprints explicitly coordinate automation or escalation with congestible human service (Montanari et al., 2026; Wang & Rachev, 2026). This article does not propose an optimal controller; it stress-tests fixed safeguard and timeout rules across declared capacity conditions. Here, *process red teaming* means stress-testing how evidence, rules, capacity, deadlines, and defaults interact across a workflow; it does not imply an adversarial attack. The article synthesizes established ideas into robust permission and tests that construct in a finite-capacity process. Its proposed integration couples evidentiary refinement, independently supported automatic progression, restoration semantics, executable controls, and a source-bounded public-administration application. This is a bounded synthesis claim, not a claim of verified novelty or an assertion that prior frameworks lack those ingredients.
 
 ### 2.4 Research questions and falsifiability
 
@@ -120,15 +126,15 @@ The supplied record documents an OCI evidence-to-action process in which aggrega
 
 ### 4.2 Sources and application validity
 
-The fixed packet contains ten sources retrieved through 31 October 2026. The principal process source is the Commonwealth Ombudsman’s April 2017 report, supplemented by its 2019 implementation report; Deloitte process maps commissioned for the Royal Commission provide node-level routing and calculation structure; and the Royal Commission report owns its historical findings and governance recommendations. Services Australia material supplies only bounded program or current governance context. The 2023 Ombudsman report on income apportionment is used solely to prevent that distinct practice from being conflated with Robodebt income averaging.
+The fixed packet contains ten sources retrieved through 31 October 2026. The principal process sources are the Commonwealth Ombudsman’s reports (Commonwealth Ombudsman, 2017, 2019); Deloitte’s process maps provide node-level routing and calculation structure (Deloitte for the Royal Commission into the Robodebt Scheme, 2023a, 2023b, 2023c); and the Royal Commission’s report owns its historical findings and governance recommendations (Royal Commission into the Robodebt Scheme, 2023). Services Australia (2025) supplies only bounded program or current governance context. The Commonwealth Ombudsman’s (2023) report on income apportionment is used solely to prevent that distinct practice from being conflated with Robodebt income averaging.
 
 Three validity claims remain separate. Documentary validity concerns whether attributed facts are anchored to the proper source and period. Structural mapping validity concerns the study’s analytical judgment that those facts instantiate evidence, transformation, routing, action, review, and correction constructs. Both are supported within the bounded early and enhanced OCI profiles, but neither establishes that the proposed mechanism independently caused the program’s outcomes. Numerical calibration validity would require historical distributions for arrivals, capacity, service, engagement, retrieval, correction, and restoration. The packet does not supply them, so the paper deliberately makes no calibration claim.
 
 ### 4.3 Early OCI process profile
 
-The early profile covers the July 2016 OCI launch through 19 January 2017, ending before the first specifically dated letter change. Under the documented OCI design, matched Australian Taxation Office pay-as-you-go income and Centrelink information passed through refresh, inclusion, discrepancy, and risk rules before a notice was sent through the selected digital channel or last-known address. The initial letter allowed 21 days from its date to respond, with a reminder after 14 days (Commonwealth Ombudsman 2017, paras. 1.17–1.29; Deloitte maps 2B, 3B, and 4B).
+The early profile covers the July 2016 OCI launch through 19 January 2017, ending before the first specifically dated letter change. Under the documented OCI design, matched Australian Taxation Office pay-as-you-go income and Centrelink information passed through refresh, inclusion, discrepancy, and risk rules before a notice was sent through the selected digital channel or last-known address. The initial letter allowed 21 days from its date to respond, with a reminder after 14 days (Commonwealth Ombudsman, 2017, paras. 1.17–1.29; Deloitte for the Royal Commission into the Robodebt Scheme, 2023a, 2023b, 2023c).
 
-A responding recipient could confirm or correct employer, amount, and pay-period information and supply evidence; specified errors or unresolved inputs could receive compliance-officer handling. The documented process placed responsibility on recipients to reconstruct and enter historical income information. The Ombudsman noted that decision accuracy depended on their ability to obtain those records despite weaker information-gathering powers and possible bank-statement costs (Commonwealth Ombudsman 2017, paras. 3.26–3.28). If the recipient did not respond by the due date, the documented OCI design evenly apportioned ATO earnings information over the employer-reported employment period, calculated entitlement and any debt, issued a debt notice when the calculation produced one, and commenced normal recovery. Later information could trigger reassessment, and internal review remained available (Commonwealth Ombudsman 2017, paras. 1.17–1.29 and appendix B).
+A responding recipient could confirm or correct employer, amount, and pay-period information and supply evidence; specified errors or unresolved inputs could receive compliance-officer handling. The documented process placed responsibility on recipients to reconstruct and enter historical income information. The Ombudsman noted that decision accuracy depended on their ability to obtain those records despite weaker information-gathering powers and possible bank-statement costs (Commonwealth Ombudsman, 2017, paras. 3.26–3.28). If the recipient did not respond by the due date, the documented OCI design evenly apportioned ATO earnings information over the employer-reported employment period, calculated entitlement and any debt, issued a debt notice when the calculation produced one, and commenced normal recovery. Later information could trigger reassessment, and internal review remained available (Commonwealth Ombudsman, 2017, paras. 1.17–1.29, Appendix B).
 
 The critical analytical transition is not aggregation alone. An annual employer total is evidence about total income, but even apportionment creates fortnightly values through a transformation rather than revealing actual fortnightly income. In the documented OCI pathway, nonresponse allowed those values to feed automatic calculation, debt notice, and recovery; the study maps that sequence as a coupling of representation, deadline, and permission. This establishes a documented pathway compatible with the proposed mechanism. It does not show that representation loss independently caused the institutional outcome, decide whether a particular debt was legally or monetarily valid, establish how often the pathway occurred, or determine why an individual failed to respond.
 
@@ -136,17 +142,21 @@ The documentary record fixes the 21-day clock, 14-day reminder, averaging transi
 
 ### 4.4 Enhanced OCI and repair mechanisms
 
-The enhanced profile is an as-documented early-2017 repair bundle, not a single policy activated on one invented date. The Ombudsman’s April report identified changes beginning with the first letter revision on 20 January and further changes during February. The bundle added direct access using a confirmation code and customer reference number, clearer contact information, registered-mail and telephone follow-up, more recent address information where authorized, and 28 days from receipt with a signposted extension route.
+The enhanced profile is an as-documented early-2017 repair bundle, not a single policy activated on one invented date. The Commonwealth Ombudsman’s (2017) April report identified changes beginning with the first letter revision on 20 January and further changes during February. The bundle added direct access using a confirmation code and customer reference number, clearer contact information, registered-mail and telephone follow-up, more recent address information where authorized, and 28 days from receipt with a signposted extension route.
 
-The documented OCI design also expanded manual intervention for disputed inputs, complex circumstances, selected other-income answers, and difficulty accessing records; added online bank-statement entry with net-to-gross calculation and clearer handling when payslips were unavailable; made an estimated gross amount visible; and provided more opportunity to revise inputs before accepting a provisional result. The Ombudsman reported that bank statements had already been accepted as reasonable historical-income evidence when other evidence was unavailable. An attributed agency statement added a guard against debt-collector referral after nonresponse until the agency was satisfied that the notice had been received and ignored (Commonwealth Ombudsman 2017, paras. 1.30–1.46).
+The documented OCI design also expanded manual intervention for disputed inputs, complex circumstances, selected other-income answers, and difficulty accessing records; added online bank-statement entry with net-to-gross calculation and clearer handling when payslips were unavailable; made an estimated gross amount visible; and provided more opportunity to revise inputs before accepting a provisional result. The Ombudsman reported that bank statements had already been accepted as reasonable historical-income evidence when other evidence was unavailable. An attributed agency statement added a guard against debt-collector referral after nonresponse until the agency was satisfied that the notice had been received and ignored (Commonwealth Ombudsman, 2017, paras. 1.30–1.46).
 
 These changes target access, surfacing, evidence acquisition, routing, and recovery gating. They form a bounded repair profile, not proof that every failure disappeared or that configured manual intervention was adequately staffed, timely, or effective. Later EIC, CUPI, PAYG Manual, and remediation processes are outside this profile.
 
 Figure 2 contrasts the documented early OCI pathway with the enhanced repair bundle and identifies the separate, study-owned simulation layer.
 
+**Figure 2**
+
+*Early and Enhanced OCI Process Profiles*
+
 ![Figure 2. Early and enhanced OCI process profiles.](figures/figure2_robodebt_process_profiles.svg)
 
-**Figure 2. Early and enhanced OCI process profiles.** Source-grounded process structure establishes analytical relevance; the simulation layer remains study-owned and stylized rather than a numerical reconstruction of Robodebt.
+*Note.* Source-grounded process structure establishes analytical relevance; the simulation layer remains study-owned and stylized rather than a numerical reconstruction of Robodebt. The historical process structure is synthesized from Commonwealth Ombudsman (2017, paras. 1.17–1.46, Appendix B) and Deloitte for the Royal Commission into the Robodebt Scheme (2023a, 2023b, 2023c).
 
 ### 4.5 Formal crosswalk and inference limits
 
@@ -174,7 +184,9 @@ Matched policies shared case membership, latent attributes, potential evidence, 
 
 Table 1 compares five counterfactual policy designs. They are study-owned interventions, not labels for historical Robodebt policies.
 
-**Table 1. Counterfactual study policies and principal modeled tradeoffs.**
+**Table 1**
+
+*Counterfactual Study Policies and Principal Modeled Tradeoffs*
 
 | Policy | Operational rule | Principal modeled tradeoff |
 | --- | --- | --- |
@@ -272,30 +284,42 @@ The strongest within-model result is that identical timely-review-completion rat
 
 Figure 3 visualizes the load response and the two principal paired-policy tradeoffs.
 
+**Figure 3**
+
+*Capacity, Timeout, and Information-First Tradeoffs*
+
 ![Figure 3. Capacity, timeout, and information-first tradeoffs.](figures/figure3_simulation_results.svg)
 
-**Figure 3. Capacity, timeout, and information-first tradeoffs.** Panel A shows the fail-closed load response. Panels B and C show unweighted means and family ranges for the paired policy contrasts. Family ranges describe variation across the 108 designed scenarios, not uncertainty; Panel C labels its different outcome units explicitly.
+*Note.* The figure reports the frozen core simulation of 108 designed families with 30 paired replications per family. Panel A shows the fail-closed load response. Panels B and C show unweighted means and family ranges for the paired policy contrasts. Family ranges describe variation across designed scenarios, not uncertainty; Panel C labels its different outcome units explicitly.
 
 Table 2 reports the prespecified paired estimates, computational-precision summaries, and claim boundaries underlying those contrasts.
 
-**Table 2. Prespecified paired estimates, computational precision, and claim boundaries.**
+**Table 2**
 
-| Contrast | Outcome | Mean difference | Family range | MCSE range; intervals excluding zero | Claim key |
+*Prespecified Paired Estimates, Computational Precision, and Claim Boundaries*
+
+| Contrast | Outcome | Mean difference | Family range | MCSE range; intervals excluding zero | Claim note |
 | --- | --- | ---: | ---: | ---: | :---: |
-| U2O − U2C | Unsupported-progression rate | +0.476 | +0.042 to +0.881 | 0.009–0.043; 108/108 above | A |
-| U2O − U2C | Gate-safety rate | −0.476 | −0.881 to −0.042 | 0.009–0.043; 108/108 below | A |
-| U2O − U2C | Timely-review-completion rate | 0.000 | 0.000 to 0.000 | 0.000; 0/108 | A |
-| U2O − U2C | Unresolved-hold rate | −0.476 | −0.881 to −0.042 | 0.009–0.043; 108/108 below | A |
-| U2O − U2C | External/recovery-process-exposure rate | +0.476 | +0.042 to +0.881 | 0.009–0.043; 108/108 above | B |
-| U3 − U0 | Unsupported-progression rate | 0.000 | 0.000 to 0.000 | 0.000; 0/108 | C |
-| U3 − U0 | Recipient interaction events per case | +1.096 | +0.860 to +1.312 | 0.012–0.024; 108/108 above | C |
-| U3 − U0 | Agency-workload events per case | +1.209 | +0.749 to +1.728 | 0.011–0.027; 108/108 above | C |
-| U3 − U0 | External/recovery-process-exposure rate | +0.594 | +0.369 to +0.815 | 0.006–0.013; 108/108 above | B, C |
-| U1 − U0 | Unsupported-progression rate | +0.781 | +0.578 to +0.914 | 0.004–0.011; 108/108 above | D |
+| U2O − U2C | Unsupported-progression rate | +0.476 | +0.042 to +0.881 | 0.009–0.043; 108/108 above | <sup>a</sup> |
+| U2O − U2C | Gate-safety rate | −0.476 | −0.881 to −0.042 | 0.009–0.043; 108/108 below | <sup>a</sup> |
+| U2O − U2C | Timely-review-completion rate | 0.000 | 0.000 to 0.000 | 0.000; 0/108 | <sup>a</sup> |
+| U2O − U2C | Unresolved-hold rate | −0.476 | −0.881 to −0.042 | 0.009–0.043; 108/108 below | <sup>a</sup> |
+| U2O − U2C | External/recovery-process-exposure rate | +0.476 | +0.042 to +0.881 | 0.009–0.043; 108/108 above | <sup>b</sup> |
+| U3 − U0 | Unsupported-progression rate | 0.000 | 0.000 to 0.000 | 0.000; 0/108 | <sup>c</sup> |
+| U3 − U0 | Recipient interaction events per case | +1.096 | +0.860 to +1.312 | 0.012–0.024; 108/108 above | <sup>c</sup> |
+| U3 − U0 | Agency-workload events per case | +1.209 | +0.749 to +1.728 | 0.011–0.027; 108/108 above | <sup>c</sup> |
+| U3 − U0 | External/recovery-process-exposure rate | +0.594 | +0.369 to +0.815 | 0.006–0.013; 108/108 above | <sup>b, c</sup> |
+| U1 − U0 | Unsupported-progression rate | +0.781 | +0.578 to +0.914 | 0.004–0.011; 108/108 above | <sup>d</sup> |
 
-Claim boundaries: **A**, timeout directions follow the declared fail-open/fail-closed semantics; the simulation supplies magnitude and family variation. The policies used the same review queue, and fewer holds represent progression rather than established resolution. A fail-open release with unmet prerequisites is not gate-safe. **B**, exposure is structurally downstream, may follow supported progression, and is neither independent confirmation nor proof of harm. **C**, both policies prevented unsupported progression; interaction events do not measure effort, subjective burden, welfare, or cost, while the workload direction follows the metric and policy definitions. **D**, U1−U0 is implementation validation, not a substantive discovery or recommendation.
+*Note.* MCSE = Monte Carlo standard error. Differences are left policy minus right policy. Means and ranges are unweighted summaries over 108 deliberately designed scenario families. Each family estimate uses 30 paired replications. A family-specific computational-precision interval is the paired estimate ± 1.96 × MCSE; these intervals do not represent population, historical, or model uncertainty. The semantically invalid timely-supported-decision-service output is excluded. U3−U0 unresolved holding is not included because the frozen receipt did not generate that paired estimand.
 
-*Note:* Differences are left policy minus right policy. Means and ranges are unweighted summaries over 108 deliberately designed scenario families. Each family estimate uses 30 paired replications. A family-specific computational-precision interval is the paired estimate ± 1.96 × MCSE; these intervals do not represent population, historical, or model uncertainty. The semantically invalid timely-supported-decision-service output is excluded. U3−U0 unresolved holding is not included because the frozen receipt did not generate that paired estimand.
+<sup>a</sup> Timeout directions follow the declared fail-open/fail-closed semantics; the simulation supplies magnitude and family variation. The policies used the same review queue, and fewer holds represent progression rather than established resolution. A fail-open release with unmet prerequisites is not gate-safe.
+
+<sup>b</sup> Exposure is structurally downstream, may follow supported progression, and is neither independent confirmation nor proof of harm.
+
+<sup>c</sup> Both policies prevented unsupported progression; interaction events do not measure effort, subjective burden, welfare, or cost, while the workload direction follows the metric and policy definitions.
+
+<sup>d</sup> U1−U0 is implementation validation, not a substantive discovery or recommendation.
 
 ## 7. Process-Red-Team Protocol and Governance Implications
 
@@ -383,66 +407,66 @@ The code, frozen specifications, source manifest, fixed traces, validation recei
 
 ## References
 
-Alon-Barkat, Saar, and Madalina Busuioc. 2023. “Human–AI Interactions in Public Sector Decision Making: ‘Automation Bias’ and ‘Selective Adherence’ to Algorithmic Advice.” *Journal of Public Administration Research and Theory* 33 (1): 153–169. https://doi.org/10.1093/jopart/muac007.
+Alon-Barkat, S., & Busuioc, M. (2023). Human–AI interactions in public sector decision making: “Automation bias” and “selective adherence” to algorithmic advice. *Journal of Public Administration Research and Theory, 33*(1), 153–169. https://doi.org/10.1093/jopart/muac007
 
-Anyabolu, Chisom, Akshat Dubey, and Georges Hattab. 2026. “Visualizing Uncertainty-to-Action Composition for Human Oversight.” arXiv:2608.16428. https://arxiv.org/abs/2608.16428.
+Anyabolu, C., Dubey, A., & Hattab, G. (2026). Visualizing uncertainty-to-action composition for human oversight. arXiv. https://arxiv.org/abs/2608.16428
 
-Bennett, Hayley, Morgan Currie, and Lena Podoletz. 2026. “Universal Credit: Administrative Burdens of Automated Welfare.” *Journal of Social Policy* 55 (1): 24–42. https://doi.org/10.1017/S0047279424000175.
+Bennett, H., Currie, M., & Podoletz, L. (2026). Universal Credit: Administrative burdens of automated welfare. *Journal of Social Policy, 55*(1), 24–42. https://doi.org/10.1017/S0047279424000175
 
-Blackwell, David. 1953. “Equivalent Comparisons of Experiments.” *Annals of Mathematical Statistics* 24 (2): 265–272. https://doi.org/10.1214/aoms/1177729032.
+Blackwell, D. (1953). Equivalent comparisons of experiments. *Annals of Mathematical Statistics, 24*(2), 265–272. https://doi.org/10.1214/aoms/1177729032
 
-Commonwealth Ombudsman. 2017. *Centrelink’s Automated Debt Raising and Recovery System*. https://www.ombudsman.gov.au/__data/assets/pdf_file/0022/43528/Report-Centrelinks-automated-debt-raising-and-recovery-system-April-2017.pdf.
+Commonwealth Ombudsman. (2017). *Centrelink’s automated debt raising and recovery system*. https://www.ombudsman.gov.au/__data/assets/pdf_file/0022/43528/Report-Centrelinks-automated-debt-raising-and-recovery-system-April-2017.pdf
 
-Commonwealth Ombudsman. 2019. *Centrelink’s Automated Debt Raising and Recovery System—Implementation Report*. https://www.ombudsman.gov.au/__data/assets/pdf_file/0027/286551/Centrelinks-Automated-Debt-Raising-and-Recovery-System.pdf.
+Commonwealth Ombudsman. (2019). *Centrelink’s automated debt raising and recovery system—Implementation report*. https://www.ombudsman.gov.au/__data/assets/pdf_file/0027/286551/Centrelinks-Automated-Debt-Raising-and-Recovery-System.pdf
 
-Commonwealth Ombudsman. 2023. *Lessons in Lawfulness: Own Motion Investigation into Services Australia’s and the Department of Social Services’ Response to the Question of the Lawfulness of Income Apportionment before 7 December 2020*. https://www.ombudsman.gov.au/__data/assets/pdf_file/0040/299947/Income-Apportionment-Lawfulness.pdf.
+Commonwealth Ombudsman. (2023). *Lessons in lawfulness: Own motion investigation into Services Australia’s and the Department of Social Services’ response to the question of the lawfulness of income apportionment before 7 December 2020*. https://www.ombudsman.gov.au/__data/assets/pdf_file/0040/299947/Income-Apportionment-Lawfulness.pdf
 
-Deloitte for the Royal Commission into the Robodebt Scheme. 2023a. *2B. Identity Matching—OCI and EIC*. https://robodebt.royalcommission.gov.au/system/files/2023-03/2B-Identity-Matching-Process-Map-OCI-and-EIC.pdf.
+Deloitte for the Royal Commission into the Robodebt Scheme. (2023a). *2B. Identity matching—OCI and EIC*. https://robodebt.royalcommission.gov.au/system/files/2023-03/2B-Identity-Matching-Process-Map-OCI-and-EIC.pdf
 
-Deloitte for the Royal Commission into the Robodebt Scheme. 2023b. *3B. Income Matching—OCI*. https://robodebt.royalcommission.gov.au/system/files/2023-03/3B-Income-Matching-Process-Map-OCI.pdf.
+Deloitte for the Royal Commission into the Robodebt Scheme. (2023b). *3B. Income matching—OCI*. https://robodebt.royalcommission.gov.au/system/files/2023-03/3B-Income-Matching-Process-Map-OCI.pdf
 
-Deloitte for the Royal Commission into the Robodebt Scheme. 2023c. *4B. Debt Calculation and Notification—OCI Baseline*. https://robodebt.royalcommission.gov.au/system/files/2023-03/4B-Debt-Calculation-and-Notification-Process-Map-OCI.pdf.
+Deloitte for the Royal Commission into the Robodebt Scheme. (2023c). *4B. Debt calculation and notification—OCI baseline*. https://robodebt.royalcommission.gov.au/system/files/2023-03/4B-Debt-Calculation-and-Notification-Process-Map-OCI.pdf
 
-Deng, Jie. 2026. “When Can Fraud Operations Authorize Automation? A Decision-Support Framework for Fresh Audit Evidence and Review Workload.” arXiv:2608.08577. https://arxiv.org/abs/2608.08577.
+Deng, J. (2026). When can fraud operations authorize automation? A decision-support framework for fresh audit evidence and review workload. arXiv. https://arxiv.org/abs/2608.08577
 
-El-Yaniv, Ran, and Yair Wiener. 2010. “On the Foundations of Noise-Free Selective Classification.” *Journal of Machine Learning Research* 11: 1605–1641. https://jmlr.org/papers/v11/el-yaniv10a.html.
+El-Yaniv, R., & Wiener, Y. (2010). On the foundations of noise-free selective classification. *Journal of Machine Learning Research, 11*, 1605–1641. https://jmlr.org/papers/v11/el-yaniv10a.html
 
-Franc, Vojtěch, and Daniel Průša. 2019. “On Discriminative Learning of Prediction Uncertainty.” *Proceedings of the 36th International Conference on Machine Learning*, Proceedings of Machine Learning Research 97: 1963–1971. https://proceedings.mlr.press/v97/franc19a.html.
+Franc, V., & Průša, D. (2019). On discriminative learning of prediction uncertainty. In K. Chaudhuri & R. Salakhutdinov (Eds.), *Proceedings of the 36th International Conference on Machine Learning* (Vol. 97, pp. 1963–1971). PMLR. https://proceedings.mlr.press/v97/franc19a.html
 
-Gilboa, Itzhak, and David Schmeidler. 1989. “Maxmin Expected Utility with Non-Unique Prior.” *Journal of Mathematical Economics* 18 (2): 141–153. https://doi.org/10.1016/0304-4068(89)90018-9.
+Gilboa, I., & Schmeidler, D. (1989). Maxmin expected utility with non-unique prior. *Journal of Mathematical Economics, 18*(2), 141–153. https://doi.org/10.1016/0304-4068(89)90018-9
 
-Hardy, Karim. 2026. “From Human Oversight to Effective Control: A Comparative Documentary Framework for High-Impact AI Systems.” *Design+*: 026290034. https://doi.org/10.36922/DP026290034.
+Hardy, K. (2026). From human oversight to effective control: A comparative documentary framework for high-impact AI systems. *Design+*. Advance online publication. https://doi.org/10.36922/DP026290034
 
-Landau, Susan, James X. Dempsey, Ece Kamar, and Steven M. Bellovin. 2024. *Recommendations for Government Development and Use of Advanced Automated Systems to Make Decisions about Individuals*. Stanford Center for International Security and Cooperation. https://cisac.fsi.stanford.edu/publication/recommendations-government-development-and-use-advanced-automated-systems-make.
+Landau, S., Dempsey, J. X., Kamar, E., & Bellovin, S. M. (2024). *Recommendations for government development and use of advanced automated systems to make decisions about individuals*. Stanford Center for International Security and Cooperation. https://cisac.fsi.stanford.edu/publication/recommendations-government-development-and-use-advanced-automated-systems-make
 
-Leveson, Nancy. 2012. *Engineering a Safer World: Systems Thinking Applied to Safety*. MIT Press.
+Leveson, N. (2012). *Engineering a safer world: Systems thinking applied to safety*. MIT Press.
 
-Liao, Junchi, Qiang Huang, Rui Qian, Xutao Mao, Juntao Cheng, Kangning Cui, Yu Li, Jingyu Sun, and Yuchao Hou. 2026. “Auditing Provenance Sensitivity in LLM Agent Action Selection.” arXiv:2607.20827. https://arxiv.org/abs/2607.20827.
+Liao, J., Huang, Q., Qian, R., Mao, X., Cheng, J., Cui, K., Li, Y., Sun, J., & Hou, Y. (2026). Auditing provenance sensitivity in LLM agent action selection. arXiv. https://arxiv.org/abs/2607.20827
 
-Lin, Hongzhan, Shidong Cao, Ziyang Luo, Wenhao Chai, Mong-Li Lee, and Wynne Hsu. 2026. “From Evidence to Action: How Tool-Using Agents Fail.” arXiv:2610.07753. https://arxiv.org/abs/2610.07753.
+Lin, H., Cao, S., Luo, Z., Chai, W., Lee, M.-L., & Hsu, W. (2026). From evidence to action: How tool-using agents fail. arXiv. https://arxiv.org/abs/2610.07753
 
-Little, John D. C. 1961. “A Proof for the Queuing Formula: L = λW.” *Operations Research* 9 (3): 383–387. https://doi.org/10.1287/opre.9.3.383.
+Little, J. D. C. (1961). A proof for the queuing formula: L = λW. *Operations Research, 9*(3), 383–387. https://doi.org/10.1287/opre.9.3.383
 
-Montanari, Giovanni, Marco Scarsini, and Vianney Perchet. 2026. “Learning When to Automate: Queue Control in Human-AI Service Systems.” arXiv:2607.06017. https://arxiv.org/abs/2607.06017.
+Montanari, G., Scarsini, M., & Perchet, V. (2026). Learning when to automate: Queue control in human-AI service systems. arXiv. https://arxiv.org/abs/2607.06017
 
-Moynihan, Donald P., Pamela Herd, and Hope Harvey. 2015. “Administrative Burden: Learning, Psychological, and Compliance Costs in Citizen–State Interactions.” *Journal of Public Administration Research and Theory* 25 (1): 43–69. https://doi.org/10.1093/jopart/muu009.
+Moynihan, D. P., Herd, P., & Harvey, H. (2015). Administrative burden: Learning, psychological, and compliance costs in citizen–state interactions. *Journal of Public Administration Research and Theory, 25*(1), 43–69. https://doi.org/10.1093/jopart/muu009
 
-National Institute of Standards and Technology. 2023. *Artificial Intelligence Risk Management Framework (AI RMF 1.0)*. https://doi.org/10.6028/NIST.AI.100-1.
+National Institute of Standards and Technology. (2023). *Artificial intelligence risk management framework (AI RMF 1.0)*. https://doi.org/10.6028/NIST.AI.100-1
 
-Prabhudesai, Snehal, Leyao Yang, Sumit Asthana, Xun Huan, Q. Vera Liao, and Nikola Banovic. 2023. “Understanding Uncertainty: How Lay Decision-Makers Perceive and Interpret Uncertainty in Human-AI Decision Making.” *Proceedings of the 28th International Conference on Intelligent User Interfaces*, 379–396. https://doi.org/10.1145/3581641.3584033.
+Prabhudesai, S., Yang, L., Asthana, S., Huan, X., Liao, Q. V., & Banovic, N. (2023). Understanding uncertainty: How lay decision-makers perceive and interpret uncertainty in human-AI decision making. In *Proceedings of the 28th International Conference on Intelligent User Interfaces* (pp. 379–396). Association for Computing Machinery. https://doi.org/10.1145/3581641.3584033
 
-Reisman, Dillon, Jason Schultz, Kate Crawford, and Meredith Whittaker. 2018. *Algorithmic Impact Assessments: A Practical Framework for Public Agency Accountability*. AI Now Institute. https://ainowinstitute.org/publication/algorithmic-impact-assessments-report-2.
+Reisman, D., Schultz, J., Crawford, K., & Whittaker, M. (2018). *Algorithmic impact assessments: A practical framework for public agency accountability*. AI Now Institute. https://ainowinstitute.org/publication/algorithmic-impact-assessments-report-2
 
-Roehl, Ulrik B. U. 2023. “Automated Decision-Making and Good Administration: Views from Inside the Government Machinery.” *Government Information Quarterly* 40 (4): 101864. https://doi.org/10.1016/j.giq.2023.101864.
+Roehl, U. B. U. (2023). Automated decision-making and good administration: Views from inside the government machinery. *Government Information Quarterly, 40*(4), Article 101864. https://doi.org/10.1016/j.giq.2023.101864
 
-Roehl, Ulrik B. U., and Morten Balle Hansen. 2024. “Automated, Administrative Decision-Making and Good Governance: Synergies, Trade-Offs, and Limits.” *Public Administration Review* 84 (6): 1184–1199. https://doi.org/10.1111/puar.13799.
+Roehl, U. B. U., & Hansen, M. B. (2024). Automated, administrative decision-making and good governance: Synergies, trade-offs, and limits. *Public Administration Review, 84*(6), 1184–1199. https://doi.org/10.1111/puar.13799
 
-Royal Commission into the Robodebt Scheme. 2023. *Report of the Royal Commission into the Robodebt Scheme*. https://robodebt.royalcommission.gov.au/publications/report.
+Royal Commission into the Robodebt Scheme. (2023). *Report of the Royal Commission into the Robodebt Scheme*. https://robodebt.royalcommission.gov.au/publications/report
 
-Services Australia. 2025. *Automation and Artificial Intelligence Strategy 2025–27*. https://www.servicesaustralia.gov.au/sites/default/files/2025-05/automation-and-ai-strategy-2025-27.pdf.
+Services Australia. (2025). *Automation and artificial intelligence strategy 2025–27*. https://www.servicesaustralia.gov.au/sites/default/files/2025-05/automation-and-ai-strategy-2025-27.pdf
 
-Sterz, Sarah, Kevin Baum, Sebastian Biewer, Holger Hermanns, Anne Lauber-Rönsberg, Philip Meinel, and Markus Langer. 2024. “On the Quest for Effectiveness in Human Oversight: Interdisciplinary Perspectives.” *Proceedings of the 2024 ACM Conference on Fairness, Accountability, and Transparency*, 2495–2507. https://doi.org/10.1145/3630106.3659051.
+Sterz, S., Baum, K., Biewer, S., Hermanns, H., Lauber-Rönsberg, A., Meinel, P., & Langer, M. (2024). On the quest for effectiveness in human oversight: Interdisciplinary perspectives. In *Proceedings of the 2024 ACM Conference on Fairness, Accountability, and Transparency* (pp. 2495–2507). Association for Computing Machinery. https://doi.org/10.1145/3630106.3659051
 
-Sztandar-Sztanderska, Karolina. 2026. “How Context Matters: Human Oversight of Automated Decision-Making Systems in Welfare Administration.” *Journal of European Social Policy* 36 (3): 255–269. https://doi.org/10.1177/09589287251358069.
+Sztandar-Sztanderska, K. (2026). How context matters: Human oversight of automated decision-making systems in welfare administration. *Journal of European Social Policy, 36*(3), 255–269. https://doi.org/10.1177/09589287251358069
 
-Wang, Ziyao, and Svetlozar T. Rachev. 2026. “Operating Imperfect AI: Reliability Drift and Human Congestion.” arXiv:2601.22295. https://arxiv.org/abs/2601.22295.
+Wang, Z., & Rachev, S. T. (2026). Operating imperfect AI: Reliability drift and human congestion. arXiv. https://arxiv.org/abs/2601.22295

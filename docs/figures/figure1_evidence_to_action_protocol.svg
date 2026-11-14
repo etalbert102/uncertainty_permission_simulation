@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1120" viewBox="0 0 1200 1120" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1030" viewBox="0 90 1200 1030" role="img" aria-labelledby="title desc">
   <title id="title">Figure 1. Evidence-to-action chain and five process-red-team steps</title>
   <desc id="desc">A six-stage evidence-to-action chain runs from evidence through representation, routing and permission, review, action, and correction or restoration, with reassessment feeding back to evidence and representation. A comparison rail keeps formal authority, independent support, automatic permission, and execution distinct. Five diagnostic steps below map transformations, test permission, test review and service, stress operational conditions, and test contestability and restoration.</desc>
   <defs>
