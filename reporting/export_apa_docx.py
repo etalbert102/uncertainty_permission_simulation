@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""Export the Markdown article as a review-ready APA-style Word manuscript."""
+"""Export the Markdown article as a review-ready APA-style Word manuscript.
+
+This reporting-only utility intentionally lives outside the frozen scientific
+``scripts/*.py`` inventory. It does not alter simulation inputs, execution, or
+analysis artifacts.
+"""
 
 from __future__ import annotations
 
@@ -376,7 +381,11 @@ def add_hyperlink(paragraph, text: str, url: str):
     rpr.extend((rfonts, size, size_cs, color))
     run.append(rpr)
     node = OxmlElement("w:t")
-    node.text = text
+    # LibreOffice and some Word renderers treat a hyperlink as one unbreakable
+    # object.  Invisible break opportunities after URL separators prevent long
+    # reference entries from colliding with adjacent lines while preserving the
+    # hyperlink target and visible APA text.
+    node.text = text.replace("/", "/\u200b") if text.startswith(("http://", "https://")) else text
     run.append(node)
     hyperlink.append(run)
     paragraph._p.append(hyperlink)

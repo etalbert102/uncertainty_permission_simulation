@@ -12,7 +12,7 @@ This ledger is the canonical slice-status record. Update it at the end of every 
 | 3. Experiment pilot and freeze candidate | complete; ready for Slice 4 freeze work | `e8905fa`; gate amended 2026-11-01 and 2026-11-11 | pilot, Slice 0/plan/Slice 3 gates, executable worked trace and example/reference materials | no formal post-Slice-5 review; semantic findings still require a new freeze and rerun |
 | 4. Confirmatory freeze | complete; immutable manifest issued | `0b8e890` frozen baseline; manifest `35f360d8…65c` | 77-file manifest, 10 source identities, exact environment, 108-family core, sensitivity, five-control receipt, and all 178 tests verify | any frozen-file, inventory, or environment drift blocks execution and requires an explicit new freeze |
 | 5. Confirmatory execution and analysis | complete; core and sensitivity reconciled and analyzed | core receipt `b544ded`; sensitivity receipt recorded below | 32,400/32,400 attempts across separate core and sensitivity inventories; deterministic replays retained all attempts; complete Slice 5 repository gate and 178 tests pass | no formal comprehensibility review is due; narrative claims must retain the frozen model and case-study boundaries |
-| 6. Evidence packet and 10,000-word article | active; audited manuscript candidate selectively merged; abstract, Sections 1–8, Figures 1–3, Tables 1–2, availability statement, references, and publication-facing protocol supplement assembled | `669aff5` evidence packet; `96f7618` release-gate repair; manuscript package `a366b6a`; source-audit commit `27e6076` | call-counted main text 9,045 whitespace-delimited words excluding bibliography after final literature update; current source anchors audited with no substantive contradiction; bibliographic metadata completed; five main-text exhibits plus two supplementary tables; stored artifact identities reconciled | final publisher-style formatting, publisher-rendered count, public repository release, supplement eligibility, and submission-readiness receipt remain open |
+| 6. Evidence packet and 10,000-word article | local submission package complete; integrated article is standalone and the technical appendix is optional | `669aff5` evidence packet; `96f7618` release-gate repair; manuscript package `a366b6a`; source-audit commit `27e6076`; local-readiness receipt recorded below | conservative source count 9,228 words before references; 46-page APA Word copy rendered and inspected; accessibility, archive, image, section, plan, Slice 0, Slice 3, 178-test, and release-gate checks pass | public repository activation and final link confirmation remain intentionally under project-lead control |
 
 ## Slice 0 Closeout Receipt
 
@@ -1031,4 +1031,24 @@ Verification after the update:
 - `scripts/validate_slice0.py` passes with 10 sources, 10 claims, two profiles, 12 YAML files, and 95 diagnostics; and
 - `scripts/verify_repo.py --release` passes with all 178 tests and the unchanged manifest hash `35f360d81e7eebe1effeae813f4144991b0fa043001df6d920d3f8592bfee65c`.
 
-Remaining release conditions are publisher-style formatting and rendered count, public repository availability before submission, confirmation that the 1,732-word supplement may sit outside the 10,000-word ceiling, and a final submission-readiness receipt.
+At this literature-update stage, remaining release conditions were publisher-style formatting and rendered count, public repository availability before submission, confirmation that the then-publication-facing supplement could sit outside the 10,000-word ceiling, and a final submission-readiness receipt. The local-readiness receipt below supersedes those packaging conditions.
+
+## Slice 6 Local Submission Readiness Receipt
+
+Status: complete locally; public-repository activation intentionally deferred
+
+Date: 2026-11-13
+
+The integrated article now contains the complete five-step protocol and its worked Robodebt conclusion without depending on supplementary material. The former publication-facing supplement is an optional online technical appendix: it preserves implementation-level status codes, receipt fields, worksheets, and trace detail, but may be withheld without changing the article's claims or interpretation. This removes supplement eligibility as a submission dependency.
+
+The conservative Markdown-source count is 9,228 whitespace-delimited words before the bibliography, leaving 772 words below the 10,000-word ceiling. A document-order count of the rendered Word content is 9,208 pre-reference word tokens. The conservative source count controls. The APA review copy contains 46 pages, two tables, three figures with alternative text, 33 hyperlinks, and three sections. All pages were visually inspected after regeneration; a page-44 reference collision was corrected by adding invisible URL break opportunities in the reporting-only exporter. Metadata was scrubbed, the DOCX archive is intact, and the accessibility audit reports zero high-, medium-, or low-severity findings.
+
+Final verification:
+
+- `scripts/validate_plan.py` passes with eight slices, three primary hypotheses, five policies, 39 audit questions, nine deferred items, and the 10,000-word ceiling;
+- `scripts/validate_slice0.py` passes with 10 sources, 10 claims, two profiles, 12 YAML files, and 95 diagnostics;
+- `scripts/validate_slice3.py --allow-confirmatory-output` passes;
+- all 178 tests pass; and
+- `scripts/verify_repo.py --release` passes with release status `true`, unchanged manifest hash `35f360d81e7eebe1effeae813f4144991b0fa043001df6d920d3f8592bfee65c`, and the stored core, sensitivity, and negative-control identities.
+
+The only remaining external activation is to make the project repository public and confirm that the data-and-code link resolves before submission. That action is intentionally project-lead controlled. The detailed current certificate is `docs/SUBMISSION_READINESS_RECEIPT.md`.

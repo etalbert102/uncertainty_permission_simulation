@@ -1,8 +1,8 @@
-# Supplementary Material: Process Red-Team Protocol and Worked Trace
+# Optional Online Technical Appendix: Process Red-Team Protocol and Worked Trace
 
-This supplement accompanies *From Incomplete Evidence to Automated Action: A Formal Model and Dynamic Simulation of Review Capacity and Timeout Rules, with a Robodebt Application*. It contains the protocol machinery and worked-trace receipts referenced in Section 7 of the article. It does not add a new empirical study, modify the frozen protocol, or extend the article's claim boundaries.
+This optional technical appendix accompanies *From Incomplete Evidence to Automated Action: A Formal Model and Dynamic Simulation of Review Capacity and Timeout Rules, with a Robodebt Application*. The article contains the complete five-step argument, method, worked-example conclusion, and claim boundaries needed to interpret the study. This appendix supplies implementation-level protocol machinery and worked-trace receipts for readers who want to apply or inspect the procedure. It may be distributed through the project repository or submitted separately if a venue permits supplementary material; the article does not depend on its acceptance.
 
-The confirmatory protocol is version `1.0`. The canonical technical specification remains [PROCESS_RED_TEAM_PROTOCOL.md](PROCESS_RED_TEAM_PROTOCOL.md), and the formal definitions remain [FORMAL_MODEL.md](FORMAL_MODEL.md). This supplement is a publication-facing rendering of those frozen materials.
+The confirmatory protocol is version `1.0`. The canonical technical specification remains [PROCESS_RED_TEAM_PROTOCOL.md](PROCESS_RED_TEAM_PROTOCOL.md), and the formal definitions remain [FORMAL_MODEL.md](FORMAL_MODEL.md). This appendix is an optional publication-facing rendering of those frozen materials, not part of the article's 10,000-word submission count.
 
 ## S1. Application levels and escalation
 

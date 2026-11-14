@@ -329,7 +329,7 @@ Usability is a design objective, not an evaluated result. The proposed protocol 
 
 Use the least demanding adequate level. A document audit supports structural findings; a bounded deterministic trace supports trace-specific conclusions about ordered events; and a dynamic system simulation supports estimates only within its designed parameter space. Escalate when conclusions depend on realized timing, shared resources, spillovers, or endogenous behavior. If the needed inputs are unavailable, return `unassessable` and name them.
 
-A controlled pair compares two arms while holding the declared case or system inputs fixed and changing only the named representation, rule, or intervention. Detailed levels, status codes, completeness rules, receipt fields, and reference worksheets are provided in Sections S1–S4 of the Supplementary Material.
+A controlled pair compares two arms while holding the declared case or system inputs fixed and changing only the named representation, rule, or intervention. The five steps below contain the complete article-level procedure. An optional online technical appendix provides implementation-level application tiers, status codes, completeness rules, receipt fields, and reference worksheets; the article does not depend on that appendix for its claims or interpretation.
 
 ### 7.2 Step 1: map transformations and ownership
 
@@ -369,7 +369,7 @@ In the baseline, a notice fails, the 21-day deadline expires, and aggregate inco
 
 A component-local check might confirm that averaging ran as specified; another might confirm that notice issued. Neither of those two checks establishes how failed access, imputation, deadline expiry, and the permission rule combine. The process trace demonstrates that combination in this fixed example, but does not show that no other diagnostic could expose it.
 
-The detailed Robodebt assessment profile, ownership and intervention receipt, evidence limits, statuses, and tradeoffs are provided in Section S5 of the Supplementary Material.
+The article-level conclusion from this example is contained above. An optional online technical appendix provides the detailed assessment profile, ownership and intervention receipt, evidence limits, statuses, and tradeoffs for readers implementing the protocol.
 
 ### 7.8 Governance interventions and bounded transfer
 

@@ -1,6 +1,6 @@
 # Article Outline: From Incomplete Evidence to Automated Action
 
-Status: results-informed drafting outline; design-frozen simulation and candidate evidence packet complete; integrated manuscript at 9,045 call-counted main-text words excluding bibliography after the 2026-11-11 final literature update; detailed protocol machinery and worked-trace receipts moved to a publication-facing supplement while the five substantive steps remain in the article; current source anchors audited with no substantive contradiction and bibliographic details corrected; final publisher-style formatting, publisher-rendered count, public repository release, supplement eligibility, and submission-readiness receipt pending; one prespecified service metric excluded after semantic audit; no formal comprehensibility review required
+Status: completed results-informed article architecture; design-frozen simulation, evidence packet, integrated manuscript, APA Word review copy, and local submission-readiness audit complete; conservative source count 9,228 words before the bibliography; detailed protocol machinery and worked-trace receipts retained in an optional online technical appendix while the complete five-step procedure remains in the article; current source anchors audited with no substantive contradiction and bibliographic details corrected; public repository activation remains deferred until authorized; one prespecified service metric excluded after semantic audit; no formal comprehensibility review required
 
 Working title: *From Incomplete Evidence to Automated Action: A Formal Model and Dynamic Simulation of Review Capacity and Timeout Rules, with a Robodebt Application*
 
@@ -423,9 +423,9 @@ Address each limit and say whether it narrows interpretation or requires new evi
 | Table 1 | Policies, contrasts, metrics, and claim limits | 5 | frozen configs and prospective design-freeze record |
 | Figure 3 | Multi-panel capacity, timeout, and information-first tradeoffs | 6 | core and sensitivity analysis receipts |
 | Table 2 | Prespecified paired estimates and computational precision | 6 | analysis receipts |
-| Tables S1–S2 | Assessment profile and ownership/intervention receipt for the fixed trace | supplement | frozen protocol and worked-trace receipt |
+| Tables S1–S2 | Assessment profile and ownership/intervention receipt for the fixed trace | optional online technical appendix | frozen protocol and worked-trace receipt |
 
-Five main-text exhibits are the current ceiling. The publication-facing supplement carries Tables S1–S2 and the detailed protocol machinery; exhaustive formal results, full scenario tables, censoring reasons, controls, sensitivity details, and source crosswalks remain in repository supplement modules.
+Five main-text exhibits are the current ceiling. The optional online technical appendix carries Tables S1–S2 and the detailed protocol machinery; exhaustive formal results, full scenario tables, censoring reasons, controls, sensitivity details, and source crosswalks remain in repository modules.
 
 ## Repository Supplement Modules
 
@@ -435,7 +435,7 @@ Five main-text exhibits are the current ceiling. The publication-facing suppleme
 - **Module D:** full family-level results, controls, censoring reasons, sensitivity, and trace-selection receipt.
 - **Repository supplement:** protocol worksheets, example inputs/reference profiles, executable traces, evidence packet, and commands. Optional author editorial notes are not a study result.
 
-These modules are repository supplements, not submitted appendices. The publication-facing protocol supplement is a separate candidate artifact; whether it may accompany submission outside the 10,000-word ceiling must be confirmed against the publisher's instructions. If it counts toward that ceiling, it must be shortened or withheld rather than silently added to the article. The main article must remain understandable without the repository or supplement.
+These modules are repository materials, not submitted appendices. The optional protocol appendix may accompany the article only if the venue permits supplementary material; otherwise it is withheld and distributed through the repository. The main article is independently complete and remains below the 10,000-word ceiling without relying on the appendix.
 
 ## Drafting Order
 
@@ -443,7 +443,7 @@ These modules are repository supplements, not submitted appendices. The publicat
 2. Draft Sections 5 and 6 from the frozen configs, manifest, reconciliation, and analysis artifacts.
 3. Draft Sections 3 and 4 from the formal model and source packet, retaining only notation used later.
 4. Run an ordinary author editorial pass over the protocol presentation; no formal review return is required, and any semantic defect still triggers a new freeze and affected rerun.
-5. Draft Section 7 from the frozen protocol, fixed Robodebt trace, canary, and completed review; render the full trace as Tables S1–S2 in the publication-facing supplement.
+5. Draft Section 7 from the frozen protocol, fixed Robodebt trace, canary, and completed review; render the full trace as Tables S1–S2 in the optional online technical appendix.
 6. Draft Section 2 so the mechanism and literature lead naturally into the formal and simulation contributions.
 7. Draft Section 1, Section 8, and the abstract last from the locked claim/evidence matrix.
 8. Run the word-count, claim-to-evidence, standalone-reader, source, and reproduction audits before prose polish.
@@ -464,7 +464,7 @@ These modules are repository supplements, not submitted appendices. The publicat
 - Censoring and unresolved cases are reported by policy and reason; extensive terminal censoring appears in the abstract boundary and results synthesis.
 - Robodebt remains structural grounding, not numerical calibration or contemporary-AI equivalence.
 - The controlled pair is defined without repository jargon or reliance on the precursor essay.
-- The main text contains all five substantive protocol steps, the controlled-pair rule, compact escalation logic, and claim limits; the publication-facing supplement contains detailed inputs, output fields, status/completeness rules, receipt fields, and the worked trace. This completeness is not presented as evidence of usability.
+- The main text contains all five substantive protocol steps, the controlled-pair rule, compact escalation logic, and claim limits; the optional online technical appendix contains detailed inputs, output fields, status/completeness rules, receipt fields, and the worked trace. The article does not depend on the appendix, and this completeness is not presented as evidence of usability.
 - No project-lead or external-reader return is required; internal examples and author editing are not presented as independent validation, a practitioner study, or evidence of human performance.
 - No formal usability, adoption, efficiency, inter-rater reliability, or reproducible-classification claim appears.
 - Any semantic post-result change receives a new freeze and affected rerun.

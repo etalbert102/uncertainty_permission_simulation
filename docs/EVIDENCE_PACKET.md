@@ -1,10 +1,10 @@
 # Evidence Packet
 
-Status: Slice 6 candidate, assembled 2026-11-11 from stored artifacts
+Status: Slice 6 local submission candidate, updated 2026-11-13 from stored artifacts
 
 Study: *From Incomplete Evidence to Automated Action: A Formal Model and Dynamic Simulation of Review Capacity and Timeout Rules, with a Robodebt Application*
 
-This packet is the inspection index for the formal model, source-grounded application, executable validation, frozen design, confirmatory runs, quantitative results, and integrated article. It does not itself certify submission readiness. The technical repository release gate passes, the audit of currently cited source anchors found no substantive source or numerical contradiction, and the final literature update was completed on 2026-11-11. Identified attribution, title, source-description, issue/article-identifier, and page-range defects have been corrected, and the closest new comparisons have been integrated without changing the frozen study. Final publisher-style formatting, publisher-rendered word counting, public repository release, supplement eligibility, and the submission-readiness receipt remain pending. No reader study, formal comprehensibility return, usability claim, inter-rater claim, or practitioner-performance claim is required or supplied.
+This packet is the inspection index for the formal model, source-grounded application, executable validation, frozen design, confirmatory runs, quantitative results, and integrated article. The technical repository release gate passes after relocating the APA exporter to the reporting-only tree. The audit of cited source anchors found no substantive source or numerical contradiction, and the final literature update was completed on 2026-11-11. Identified attribution, title, source-description, issue/article-identifier, and page-range defects have been corrected, and the closest new comparisons have been integrated without changing the frozen study. The APA Word review copy has been generated, metadata-scrubbed, rendered, and inspected. A conservative source count places the article at 9,228 words before the bibliography. The optional online technical appendix is not required to interpret the article and is withheld from submission unless a venue permits it. The local package is covered by the [submission-readiness receipt](SUBMISSION_READINESS_RECEIPT.md); public repository activation remains an intentional final external step. No reader study, formal comprehensibility return, usability claim, inter-rater claim, or practitioner-performance claim is required or supplied.
 
 ## 1. Scope and evidence rule
 
@@ -25,7 +25,7 @@ An internal self-hash is the canonical identity stored inside a JSON receipt aft
 | Required component | Packet location and owner | Status |
 | --- | --- | --- |
 | Formal definitions and assumptions | Section 3; `FORMAL_MODEL.md` | present |
-| Literature and originality | Section 3; `LITERATURE_AND_ORIGINALITY_MAP.md` | present; final manuscript comparison-language audit pending |
+| Literature and originality | Section 3; `LITERATURE_AND_ORIGINALITY_MAP.md` | present; final update and comparison-language audit complete |
 | Sourced process diagrams and model crosswalk | Section 3; `ROBODEBT_CASE_STUDY.md` | present |
 | Simulator validation | Section 4; Slice 1/2, pilot, control, and worked-trace receipts | present |
 | Scenario, seed, run, and exclusion inventory | Section 5 | present |
@@ -41,7 +41,7 @@ An internal self-hash is the canonical identity stored inside a JSON receipt aft
 | Precursor continuity | Section 9; `CONTINUITY_AND_CLAIM_BOUNDARY.md` | present |
 | Author editorial pass | Sections 8-9; protocol/governance draft | present as ordinary editing, not formal review evidence |
 | Self-contained five-step protocol, Robodebt trace, and AI canary | Section 8; protocol/governance draft and stored fixtures | present in drafted Section 7 |
-| Complete integrated manuscript and consistent headline findings | Section 9 | pending |
+| Complete integrated manuscript and consistent headline findings | Section 9 | present; source, integration, and APA-format review complete |
 
 ## 2. Freeze and repository identity
 
@@ -88,7 +88,7 @@ The release candidate includes the two compact run indexes, reconciliations, ana
 | Five-step process-red-team method | [Protocol](PROCESS_RED_TEAM_PROTOCOL.md) | `ba2f845e2025545dadbe4f6d48db1c5c9313cd1b78c78118419d4dd85e64f4a3` | Inspectable method, not validated usability or practitioner performance. |
 | Robodebt process history and formal crosswalk | [Case study](ROBODEBT_CASE_STUDY.md) | `d451a24a795849fcb3f13fcc522288cbced5957a30a4d427edc91f449302fc9d` | Source-grounded structural application, not numerical reconstruction or independent legal conclusion. |
 | Early and enhanced profiles | [Early profile](../data/sources/robodebt/r_oci_early.yaml); [enhanced profile](../data/sources/robodebt/r_oci_enhanced.yaml) | `248211b2...e720a`; `c9e2df36...14e1` | Separately dated profiles; mixed-precision chronology remains explicit. |
-| Literature/originality map | [Literature map](LITERATURE_AND_ORIGINALITY_MAP.md) | current byte hash `667ff0490c8c97ddf28d02cd5c93c814bddea8dd5f0f90bc6f312fac0e06a291` | Structured scoping map, not a systematic review; final update pending. |
+| Literature/originality map | [Literature map](LITERATURE_AND_ORIGINALITY_MAP.md) | current byte hash `667ff0490c8c97ddf28d02cd5c93c814bddea8dd5f0f90bc6f312fac0e06a291` | Structured scoping map, not a systematic review; final update complete. |
 | Precursor continuity and standalone boundary | [Continuity control](CONTINUITY_AND_CLAIM_BOUNDARY.md) | `448dbd056c00de911108d284d40018dd774bf4ac430e8ac1e632a7e914b1e608` | Internal drafting control; published article must stand alone. |
 | Worked-trace selection | [Selection rule](WORKED_TRACE_SELECTION.md) | `5b4640979dfbbd2b7f29b63116bc4fdc157c8978b7a606e4d092484cce3885d2` | Explanatory fixed trace, not representative sampling. |
 
@@ -209,7 +209,7 @@ This is a three-point capacity response, not a located continuous boundary. A co
 | Correction is not complete restoration | Proposition 3; F5; FR6 | fixed worked trace and censoring receipts | Supplementary Tables S1–S2, baseline B-08 to B-10 | Trace-specific; terminal comparative restoration remains unidentified. |
 | Robodebt is a structurally suitable application | application contract | source manifest, dated profiles, process maps/crosswalk | [Figure 2](figures/figure2_robodebt_process_profiles.svg) and fixed trace | No numerical reconstruction, independent legality finding, or attackability claim. |
 | Method transfers across vocabulary | F0-F5 protocol and isomorphic-adapter contract | transfer canary and Slice 1 receipt | compact LLM-summary canary | Representability only; no validated transfer or practitioner-performance claim. |
-| Contribution is a bounded synthesis | all three propositions plus dynamic demonstration | literature/originality map and conducted analyses | introduction/discussion pending | No claim to invent information ordering, queues, burden, oversight, or red teaming generally. |
+| Contribution is a bounded synthesis | all three propositions plus dynamic demonstration | literature/originality map and conducted analyses | integrated introduction and conclusion | No claim to invent information ordering, queues, burden, oversight, or red teaming generally. |
 
 ## 7. Measurement audit and censoring
 
@@ -229,7 +229,7 @@ The fixed Robodebt example is Level B. It holds case, evidence, access, later ev
 
 The LLM-summary transfer canary is an author-constructed cross-vocabulary illustration. It does not validate transfer, current-system prevalence, legality, strategic exploitation, adoption, efficiency, or practitioner performance. The paper may claim that the same formal vocabulary can represent the example, not that unfamiliar users can apply the protocol reliably.
 
-### Article-and-supplement protocol completeness
+### Article-and-optional-appendix protocol completeness
 
 | Required element | Drafted location | Evidence status |
 | --- | --- | --- |
@@ -239,11 +239,11 @@ The LLM-summary transfer canary is an author-constructed cross-vocabulary illust
 | Step 3: operational review | Article Section 7.4 | present |
 | Step 4: access, workload, deadlines, and queues | Article Section 7.5 | present |
 | Step 5: contestability and restoration | Article Section 7.6 | present |
-| `pass`/`fail`/`unassessable`/`not_applicable` and `omitted_by_claim_limit` | protocol 1.0 and supplementary material | present; omitted claims receive no fabricated assessment status |
+| `pass`/`fail`/`unassessable`/`not_applicable` and `omitted_by_claim_limit` | protocol 1.0 and optional technical appendix | present; omitted claims receive no fabricated assessment status |
 | Diagnostic owner, intervention owner, tradeoff | Supplementary Table S2 and protocol report contract | present |
 | Fixed Level B Robodebt pair | Article Section 7.7; artifact hash `5057bf6a...755d` | present; prespecified rather than selected from results |
 | Compact held-out AI canary | Article Section 7.8 | present as bounded illustration |
-| Publication-facing detailed worksheet and worked-trace receipts | [Supplementary material](ARTICLE_SUPPLEMENTARY_MATERIAL.md) | present as Tables S1–S2 and reference worksheet |
+| Optional implementation worksheet and worked-trace receipts | [Online technical appendix](ARTICLE_SUPPLEMENTARY_MATERIAL.md) | present as Tables S1–S2 and reference worksheet; not required for article interpretation |
 | Extended worksheets/schemas | repository protocol packets and schema manifest | present |
 | Author editorial pass | critically revised Section 7 and traceability notes | present; ordinary editing only, with no formal return or usability inference |
 
@@ -254,10 +254,10 @@ The LLM-summary transfer canary is an author-constructed cross-vocabulary illust
 | Claim-driven architecture and word budget | drafted and reviewed | [Article outline](ARTICLE_OUTLINE.md) |
 | Dynamic methods, results, Figure 3, Table 2 | drafted and critically revised | [Methods/results draft](ARTICLE_METHODS_RESULTS_DRAFT.md) |
 | Five-step protocol, worked example, governance interventions | drafted and critically revised | [Protocol/governance draft](ARTICLE_PROTOCOL_GOVERNANCE_DRAFT.md) |
-| Limitations and conclusion | drafted; integration review pending | [Limitations/conclusion draft](ARTICLE_LIMITATIONS_CONCLUSION_DRAFT.md) |
-| Introduction, mechanism/literature, formal-model exposition, and case application | drafted and critically revised; Figures 1–2 built; integration review pending | [Sections 1–4 draft](ARTICLE_INTRO_FORMAL_CASE_DRAFT.md) |
-| Integrated manuscript and word count | 9,045 whitespace-delimited main-text words excluding bibliography under the verified call after the 2026-11-11 literature update; current source anchors audited with no substantive contradiction; bibliographic metadata completed; publisher-style formatting and rendered count pending | [Integrated manuscript](ARTICLE_MANUSCRIPT.md) |
-| Publication-facing protocol supplement | detailed levels, statuses, completeness rules, receipt fields, reference worksheet, and fixed Robodebt worked trace assembled without a usability claim | [Supplementary material](ARTICLE_SUPPLEMENTARY_MATERIAL.md) |
+| Limitations and conclusion | integrated and reviewed | [Integrated manuscript](ARTICLE_MANUSCRIPT.md) |
+| Introduction, mechanism/literature, formal-model exposition, and case application | integrated and reviewed; Figures 1–2 built | [Integrated manuscript](ARTICLE_MANUSCRIPT.md) |
+| Integrated manuscript and word count | conservative source count 9,228 words before the bibliography; current source anchors audited with no substantive contradiction; bibliographic metadata and APA Word review copy completed | [Integrated manuscript](ARTICLE_MANUSCRIPT.md) and [APA Word manuscript](ARTICLE_MANUSCRIPT_APA.docx) |
+| Optional online technical appendix | detailed levels, statuses, completeness rules, receipt fields, reference worksheet, and fixed Robodebt worked trace assembled without a usability claim; may be withheld without impairing the article | [Online technical appendix](ARTICLE_SUPPLEMENTARY_MATERIAL.md) |
 
 The paper is a natural extension of *When Uncertainty Expands Authority* because it formalizes and tests the precursor mechanism. It remains standalone by defining its own concepts, motivating the case, presenting conducted analysis, and restricting lineage material to internal controls, acknowledgments, or a concise origin statement. The continuity table in `CONTINUITY_AND_CLAIM_BOUNDARY.md` classifies precursor claims as retained, refined, tested, bounded, or rejected.
 
@@ -323,19 +323,19 @@ Status key: **supported** means stored evidence answers the question within the 
 | 10 | supported | Yes. Case/event-keyed draws, paired membership, and common-random-number diagnostics are stored. |
 | 11 | supported | Yes. Support, delay, workload, interactions, exposure, correction, and restoration/censoring are separate; there is no utility weighting. |
 | 12 | supported | No declared confirmatory source, parameter, seed, metric, or analysis identity changed. Direct hashes match and the immutable 77-file scientific inventory verifies after the article-only renderer was relocated outside the frozen trees. |
-| 13 | supported | The integrated manuscript includes a repository-grounded reference list. Publication records were checked, identified metadata defects were corrected, and the final 2026-11-11 literature update integrated the closest new comparisons. Publisher house style remains a formatting task, not a source-support gap. |
+| 13 | supported | The integrated manuscript includes a repository-grounded reference list. Publication records were checked, identified metadata defects were corrected, and the final 2026-11-11 literature update integrated the closest new comparisons. An APA Word review copy is complete; any later publisher-specific house style remains an external production step, not a source-support gap. |
 | 14 | supported | The final source audit recomputed headline quantitative claims from stored core and sensitivity artifacts and checked historical and literature claims against the source packet and publication records. No substantive contradiction was found. |
 | 15 | supported | Yes. Transfer is limited to the formal invariant, method, and bounded institutional connections; the canary carries explicit nonclaims. |
 | 16 | supported | Yes. Optional or incomplete subsystems are removed, excluded, or recorded in `DEFERRED.md`; the invalid service construct is explicitly excluded. |
 | 17 | bounded | Existing commands reproduce traces and derived simulation analysis from stored inputs/attempts, and the technical release verifier passes. The planned packet CLI remains absent and is deliberately not added post-freeze. |
-| 18 | bounded | The integrated article defines the mechanism, formal model, case application, simulation, and protocol without requiring the precursor; final standalone editorial review remains open. |
+| 18 | supported | The integrated article defines the mechanism, formal model, case application, simulation, and protocol without requiring the precursor; standalone integration and cold-read review are complete. |
 | 19 | supported | Yes. Confirmatory and sensitivity analyses were conducted; the methods/results draft reports stored results rather than only a design. |
 | 20 | supported | Yes. The continuity table classifies precursor claims as retained, refined, tested, bounded, or rejected. |
 | 21 | supported | Yes. Protocol semantics, canary, classifications, and worked-trace selection/specification appear in the pre-output freeze. |
 | 22 | supported | Yes. `unassessable` is a first-class status for missing lineage, authority, timing, or process evidence. |
 | 23 | supported | Yes. Drafts explicitly reject usability, inter-rater, practitioner-performance, and formal comprehensibility claims. |
 | 24 | bounded | The canary demonstrates representability across a different vocabulary, not validated use by independent practitioners or a second empirical case. |
-| 25 | bounded | The integrated manuscript has 9,045 whitespace-delimited main-text words excluding bibliography, leaving 955 words under the verified call ceiling. The publication-facing supplement is tracked separately, but its eligibility outside that ceiling must be confirmed; a publisher-rendered submission count remains pending. |
+| 25 | supported | A conservative source count places the integrated article at 9,228 whitespace-delimited words before the bibliography, leaving 772 words under the verified ceiling. The separately tracked online technical appendix is optional, is not needed to interpret the article, and will be withheld unless the venue permits supplementary material. |
 | 26 | supported | Yes. P0 holds the uncertain output, downstream rule, and process state fixed while changing only interface representation. |
 | 27 | supported | Yes. The formal model and case boundary distinguish base vulnerability, structural susceptibility, process red-teaming, and adversarial exploitability; Robodebt is not labeled attackable. |
 | 28 | supported | Yes. The main-text canary develops the precursor's LLM-summary example rather than introducing an unrelated vignette. |
@@ -351,15 +351,12 @@ Status key: **supported** means stored evidence answers the question within the 
 | 38 | supported | Yes. Unsupported historical values cannot execute; stylized overlays have separate ownership and parameter-binding receipts. |
 | 39 | supported | Yes. The application, adapter, source packet, provenance table, and worked-trace rule/specification are included in the pre-output freeze. |
 
-## 12. Release conditions and next actions
+## 12. Release activation and next action
 
-The cited-source audit and final literature update are complete, but submission release still requires:
+The cited-source audit, literature update, APA review-copy formatting, rendered word-count check, optional-appendix fallback, non-destructive validators, stored-artifact checks, and local submission-readiness receipt are complete. The article can be submitted without the optional appendix and remains below the verified ceiling.
 
-1. Apply the publisher's final style and obtain a publisher-rendered word count for the article.
-2. Confirm whether the 1,732-word publication-facing supplement may accompany the article outside the 10,000-word ceiling; if it counts, shorten or withhold it rather than silently exceeding the limit.
-3. Make the repository publicly accessible before submission, as the data-and-code statement promises, and state the archival or exact-regeneration boundary for ignored per-attempt files.
-4. Re-run all non-destructive validators, confirm the exact stored artifact identities above, and issue a submission-readiness receipt only when those conditions are closed.
+One intentionally deferred external activation remains: make the repository publicly accessible before submission, as the data-and-code statement promises. At activation, confirm that the public evidence packet is reachable and state that exact regeneration from the frozen runner is the supported route for ignored per-attempt files retained outside Git.
 
-The selected release receipts and figures must be committed with this packet. Per-attempt files may remain outside Git only if the final release states their archival location or confirms that exact regeneration from the frozen runner is the supported route.
+The selected release receipts and figures must be committed with this packet. Per-attempt files may remain outside Git because exact regeneration from the frozen runner is the supported public route; any separate archive location may be added later without enlarging the paper's claims.
 
 No external reader return or formal comprehensibility review is a release blocker.
