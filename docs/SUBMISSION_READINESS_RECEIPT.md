@@ -1,6 +1,6 @@
 # Submission Readiness Receipt
 
-Date: 2026-11-13
+Date: 2026-11-16
 
 Status: local submission package complete; public-repository activation intentionally deferred
 
@@ -12,15 +12,21 @@ This receipt covers the integrated article, APA Word review copy, optional onlin
 
 - The article contains the complete five-step process-red-team procedure and the worked Robodebt application conclusion. Its claims and interpretation do not depend on supplementary material.
 - `ARTICLE_SUPPLEMENTARY_MATERIAL.md` is an optional online technical appendix containing implementation-level status codes, receipt fields, worksheets, and worked-trace detail. It may be withheld if a venue does not accept supplementary material.
-- The conservative Markdown-source count is 9,228 whitespace-delimited words before the bibliography, 772 below the 10,000-word ceiling. A document-order count of the rendered Word content is 9,208 pre-reference word tokens. The conservative source count controls the release decision.
+- The conservative Markdown-source count is 9,558 whitespace-delimited words before the bibliography, 442 below the 10,000-word ceiling. A document-order count of the rendered Word content is 9,536 pre-reference word tokens. The conservative source count controls the release decision.
 - The manuscript uses no endnotes to evade the word ceiling.
 
 ## APA Word review copy
 
-- `ARTICLE_MANUSCRIPT_APA.docx` contains 46 rendered pages, two tables with repeating header rows, three figures with alternative-text descriptions, 33 hyperlinks, and three correctly oriented sections.
+- `ARTICLE_MANUSCRIPT_APA.docx` contains 48 rendered pages, two tables with repeating header rows, three figures with alternative-text descriptions, 33 hyperlinks, and three correctly oriented sections.
 - Every rendered page was visually inspected. A long-reference wrapping collision found on page 44 was corrected in the reporting-only exporter and the affected reference pages were regenerated and reinspected.
 - The final archive passes ZIP integrity checks. The accessibility audit reports zero high-, medium-, or low-severity findings; the image and section audits report the expected three figures and three sections.
 - Author and last-modified-by metadata are blank, revision-session identifiers were scrubbed, and the export utility remains outside the frozen `scripts/*.py` inventory.
+
+## Call-fit editorial pass
+
+- On 2026-11-16, the abstract and introduction were revised to foreground AI-enabled organizational workflows and the call's emerging-technology theme.
+- The manuscript now states its bounded original contribution affirmatively, adds a plain-language bridge into the formal model, uses descriptive policy names alongside internal IDs, and presents a compact owner–intervention–tradeoff implementation map.
+- These are reader-facing editorial changes only. No formal definition, source mapping, parameter, policy, seed, metric, stored result, quantitative interpretation, or claim boundary changed, and no usability or field-transfer claim was added.
 
 ## Scientific and repository controls
 
