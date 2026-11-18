@@ -1,6 +1,6 @@
 # Submission Readiness Receipt
 
-Date: 2026-11-16
+Date: 2026-11-18
 
 Status: local submission package complete; public-repository activation intentionally deferred
 
@@ -12,7 +12,7 @@ This receipt covers the integrated article, APA Word review copy, optional onlin
 
 - The article contains the complete five-step process-red-team procedure and the worked Robodebt application conclusion. Its claims and interpretation do not depend on supplementary material.
 - `ARTICLE_SUPPLEMENTARY_MATERIAL.md` is an optional online technical appendix containing implementation-level status codes, receipt fields, worksheets, and worked-trace detail. It may be withheld if a venue does not accept supplementary material.
-- The conservative Markdown-source count is 9,558 whitespace-delimited words before the bibliography, 442 below the 10,000-word ceiling. A document-order count of the rendered Word content is 9,536 pre-reference word tokens. The conservative source count controls the release decision.
+- The conservative Markdown-source count is 9,589 whitespace-delimited words before the bibliography, 411 below the 10,000-word ceiling. A document-order count of the rendered Word content is 9,567 pre-reference word tokens. The conservative source count controls the release decision.
 - The manuscript uses no endnotes to evade the word ceiling.
 
 ## APA Word review copy
@@ -27,6 +27,12 @@ This receipt covers the integrated article, APA Word review copy, optional onlin
 - On 2026-11-16, the abstract and introduction were revised to foreground AI-enabled organizational workflows and the call's emerging-technology theme.
 - The manuscript now states its bounded original contribution affirmatively, adds a plain-language bridge into the formal model, uses descriptive policy names alongside internal IDs, and presents a compact owner–intervention–tradeoff implementation map.
 - These are reader-facing editorial changes only. No formal definition, source mapping, parameter, policy, seed, metric, stored result, quantitative interpretation, or claim boundary changed, and no usability or field-transfer claim was added.
+
+## High-value clarity pass
+
+- On 2026-11-18, the manuscript simplified the plain-language review definition, evidence-layer explanation, formal-model bridge, refinement-coverage explanation, Robodebt crosswalk, simulation unit, results interpretation, and five-step protocol instructions. Review corrections restored the complete effective-review conditions and the information-first policy's frozen applicability boundary.
+- The edits preserve `robust permission`, gate safety, effective review, correction, restoration, the frozen policy comparisons, and every numerical result and claim boundary. They add no practitioner-usability, field-transfer, historical-causation, legality, or general-safety claim.
+- The APA Word copy was regenerated and metadata-scrubbed. All 48 pages were visually inspected; the accessibility, image, section, archive-integrity, and repository verification checks pass.
 
 ## Scientific and repository controls
 
