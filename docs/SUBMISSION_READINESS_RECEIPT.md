@@ -12,7 +12,7 @@ This receipt covers the integrated article, APA Word review copy, optional onlin
 
 - The article contains the complete five-step process-red-team procedure and the worked Robodebt application conclusion. Its claims and interpretation do not depend on supplementary material.
 - `ARTICLE_SUPPLEMENTARY_MATERIAL.md` is an optional online technical appendix containing implementation-level status codes, receipt fields, worksheets, and worked-trace detail. It may be withheld if a venue does not accept supplementary material.
-- The conservative Markdown-source count is 9,589 whitespace-delimited words before the bibliography, 411 below the 10,000-word ceiling. A document-order count of the rendered Word content is 9,567 pre-reference word tokens. The conservative source count controls the release decision.
+- The conservative Markdown-source count is 9,667 whitespace-delimited words before the bibliography, 333 below the 10,000-word ceiling. A document-order count of the rendered Word content is 9,645 pre-reference word tokens. The conservative source count controls the release decision.
 - The manuscript uses no endnotes to evade the word ceiling.
 
 ## APA Word review copy
@@ -33,6 +33,14 @@ This receipt covers the integrated article, APA Word review copy, optional onlin
 - On 2026-11-18, the manuscript simplified the plain-language review definition, evidence-layer explanation, formal-model bridge, refinement-coverage explanation, Robodebt crosswalk, simulation unit, results interpretation, and five-step protocol instructions. Review corrections restored the complete effective-review conditions and the information-first policy's frozen applicability boundary.
 - The edits preserve `robust permission`, gate safety, effective review, correction, restoration, the frozen policy comparisons, and every numerical result and claim boundary. They add no practitioner-usability, field-transfer, historical-causation, legality, or general-safety claim.
 - The APA Word copy was regenerated and metadata-scrubbed. All 48 pages were visually inspected; the accessibility, image, section, archive-integrity, and repository verification checks pass.
+
+## Simulation-contribution refocus
+
+- On 2026-11-18, the abstract, research-question framing, methods purpose, results interpretation, synthesis, and conclusion were revised to separate what follows from the authored rules from what requires dynamic execution.
+- Timeout direction remains a rule-semantic implication. The simulation contribution is now stated as the frequency with which finite capacity activates those consequences, variation across the 108 designed scenario families, and the coupled queue, holding, exposure, interaction, workload, censoring, and sensitivity outcomes preserved by the dynamic model.
+- The third research question is explicitly reported as only partly answered because the decision-service measure failed semantic audit, interaction events do not establish substantive burden, and terminal censoring blocks complete-resolution and complete-restoration comparisons.
+- This is a freeze-safe editorial clarification. It adds no post hoc estimand, factor-marginal analysis, parameter, result, or policy recommendation and does not change the immutable scientific manifest.
+- The source manuscript remains below the call ceiling at 9,667 words. The regenerated and metadata-scrubbed Word copy contains 48 pages and 9,645 pre-reference word tokens; every page was visually inspected after export.
 
 ## Scientific and repository controls
 

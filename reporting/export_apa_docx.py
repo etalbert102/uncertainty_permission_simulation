@@ -582,9 +582,7 @@ def export(source: Path, output: Path):
 
             if stripped.startswith("## "):
                 heading = stripped[3:]
-                if heading == "1. Introduction":
-                    doc.add_page_break()
-                elif heading == "References":
+                if heading == "References":
                     doc.add_page_break()
                     in_references = True
                 in_abstract = heading == "Abstract"

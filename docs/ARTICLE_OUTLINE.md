@@ -1,6 +1,6 @@
 # Article Outline: From Incomplete Evidence to Automated Action
 
-Status: completed results-informed article architecture; design-frozen simulation, evidence packet, integrated manuscript, APA Word review copy, local submission-readiness audit, call-fit editorial pass, and high-value clarity pass complete; conservative source count 9,589 words before the bibliography; detailed protocol machinery and worked-trace receipts retained in an optional online technical appendix while the complete five-step procedure remains in the article; emerging-technology framing, originality, plain-language policy labels, implementation map, review definition, formal-model bridge, Robodebt crosswalk, simulation unit, results interpretation, and protocol instructions strengthened without changing the frozen study; current source anchors audited with no substantive contradiction and bibliographic details corrected; public repository activation remains deferred until authorized; one prespecified service metric excluded after semantic audit; no formal comprehensibility review required
+Status: completed results-informed article architecture; design-frozen simulation, evidence packet, integrated manuscript, APA Word review copy, local submission-readiness audit, call-fit editorial pass, high-value clarity pass, and simulation-contribution refocus complete; current word and page counts are recorded in the submission-readiness receipt; detailed protocol machinery and worked-trace receipts retained in an optional online technical appendix while the complete five-step procedure remains in the article; emerging-technology framing, originality, plain-language policy labels, implementation map, review definition, formal-model bridge, Robodebt crosswalk, simulation unit, results interpretation, protocol instructions, and the distinction between rule-implied directions and dynamic quantities strengthened without changing the frozen study; current source anchors audited with no substantive contradiction and bibliographic details corrected; public repository activation remains deferred until authorized; one prespecified service metric excluded after semantic audit; no formal comprehensibility review required
 
 Working title: *From Incomplete Evidence to Automated Action: A Formal Model and Dynamic Simulation of Review Capacity and Timeout Rules, with a Robodebt Application*
 
@@ -13,14 +13,14 @@ The paper explains and demonstrates a process-level failure mode: weaker or coar
 1. a formal model separating evidence, representation, formal authority, functional permission, action, review, contestability, and restoration;
 2. a deterministic controlled pair showing how representation alone can change routing and automatic permission;
 3. a documented Robodebt process application that establishes institutional relevance without pretending to numerically reconstruct historical Robodebt;
-4. a frozen finite-cohort dynamic simulation showing how review capacity and timeout semantics change organizational outcomes; and
+4. a frozen finite-cohort dynamic simulation estimating how often finite capacity activates alternative timeout consequences and tracing the associated process outcomes; and
 5. a five-step process-red-team protocol designed for practical application.
 
 The article stands alone. The 1,500-word precursor essay is lineage evidence, not required reading, and its title or argument must not be used as an unexplained premise.
 
 ## Results-Led Thesis
 
-Uncertainty does not expand authority by itself. Authority expands when a workflow turns incomplete evidence into a representation, route, or timeout rule that permits progression without the safeguards the evidence state requires. In the design-frozen simulation, fail-closed review remained gate-safe as load rose but accumulated unresolved holds, while the matched fail-open design converted the same review shortfall into unsupported progression and recovery exposure. The information-first policy avoided unsupported progression, but its prespecified interaction-event proxy moved opposite the expected burden direction and agency-workload events increased; because that proxy does not measure effort or welfare, the substantive evidence-production-burden question remains unresolved. Effective governance therefore requires explicit choices among safety, timeliness, burden, workload, exposure, and restoration rather than a nominal reviewer or a single “best policy.”
+Uncertainty does not expand authority by itself. Authority expands when a workflow turns incomplete evidence into a representation, route, or timeout rule that permits progression without the safeguards the evidence state requires. Fail-closed retention and fail-open release follow the declared policy semantics; the design-frozen simulation contributes the frequency, scenario variation, and coupled process outcomes of those rules under finite capacity. Fail-closed review remained gate-safe as load rose but accumulated unresolved holds, while the matched fail-open design redirected the same review shortfall into unsupported progression and recovery exposure. The information-first policy avoided unsupported progression, but its prespecified interaction-event proxy moved opposite the expected burden direction and agency-workload events increased; because that proxy does not measure effort or welfare, the substantive evidence-production-burden question remains unresolved. Effective governance therefore requires explicit choices among safety, timeliness, burden, workload, exposure, and restoration rather than a nominal reviewer or a single “best policy.”
 
 ## Claim Hierarchy
 
@@ -66,7 +66,7 @@ Use six moves:
 1. Problem: automated workflows can convert incomplete evidence into consequential action even when each component follows its local rule.
 2. Gap: component accuracy, transparency, and nominal human review do not show that uncertainty remains operationally constraining.
 3. Method: formal model, deterministic representation pair, documented Robodebt mapping, and prospectively design-frozen dynamic simulation.
-4. Findings: fail-closed safety/backlog tradeoff; fail-open conversion of delay into unsupported progression; adverse prespecified interaction-event result with substantive burden unresolved.
+4. Findings: rule-implied timeout directions separated from simulated activation rates and scenario variation; fail-closed safety/backlog tradeoff; fail-open redirection of non-completion into unsupported progression; adverse prespecified interaction-event result with substantive burden unresolved.
 5. Boundary: stylized designed-parameter-space findings, extensive terminal censoring, and exclusion of the semantically invalid service metric—not a numerical reconstruction or legal judgment about Robodebt.
 6. Contribution: an application-oriented process-red-team protocol for tracing evidence into functional permission.
 
@@ -225,6 +225,7 @@ Core exhibit: **Figure 2, early and enhanced OCI process maps with source/styliz
 
 ### 5.1 Kernel and unit of analysis — 170 words
 
+- State the limited purpose: the simulation does not discover the logical direction of fail-open or fail-closed rules; it estimates how often finite capacity activates their consequences and traces coupled process outcomes.
 - Describe the case-neutral discrete-event kernel, finite cohorts, queues, deadlines, keyed exogenous draws, complete state snapshots, and administrative cutoff.
 - Explain common-random-number pairing and branch-independent causal keys.
 - State that Robodebt identifiers do not enter generic kernel logic.
@@ -320,10 +321,10 @@ Core exhibit: **Table 1, policy definitions, frozen contrasts, and claim limits.
 Answer the three questions directly:
 
 1. weaker evidence may not automatically expand progression beyond independently supported actions;
-2. fail-closed review can preserve gate safety while effective review deteriorates, whereas fail-open timeouts convert the same review shortfall into permission and exposure; and
-3. information acquisition must be evaluated on interaction events, workload, timing, exposure, and restoration rather than assumed to dominate conservative holding; its effect on substantive recipient burden remains unmeasured here.
+2. fail-closed review can preserve gate safety while timely review completion deteriorates, whereas fail-open timeouts convert the same review shortfall into permission and exposure; and
+3. information acquisition must be evaluated on interaction events, workload, timing, exposure, and restoration rather than assumed to dominate conservative holding; this question is only partly answered because substantive recipient burden, timely supported service, and terminal outcomes remain unmeasured or unidentifiable here.
 
-Separate formal, simulated, and historical evidence in a compact matrix. State the strongest finding, most important tradeoff, and largest unresolved uncertainty. Repeat that the service metric is excluded and that terminal censoring prevents complete-restoration comparisons.
+Separate formal, simulated, and historical evidence in a compact matrix. State that rule direction comes from the policy semantics, while activation frequency, family variation, and coupled process outcomes come from the dynamic execution. State the strongest finding, most important tradeoff, and largest unresolved uncertainty. Repeat that the service metric is excluded and that terminal censoring prevents complete-restoration comparisons.
 
 Core exhibits:
 
