@@ -12,12 +12,12 @@ This receipt covers the integrated article, APA Word review copy, optional onlin
 
 - The article contains the complete five-step process-red-team procedure and the worked Robodebt application conclusion. Its claims and interpretation do not depend on supplementary material.
 - `ARTICLE_SUPPLEMENTARY_MATERIAL.md` is an optional online technical appendix containing implementation-level status codes, receipt fields, worksheets, and worked-trace detail. It may be withheld if a venue does not accept supplementary material.
-- The conservative Markdown-source count is 9,667 whitespace-delimited words before the bibliography, 333 below the 10,000-word ceiling. A document-order count of the rendered Word content is 9,645 pre-reference word tokens. The conservative source count controls the release decision.
+- The conservative Markdown-source count is 9,805 whitespace-delimited words before the bibliography, 195 below the 10,000-word ceiling. The rendered Word copy contains 9,785 pre-reference word tokens. The conservative source count controls the release decision.
 - The manuscript uses no endnotes to evade the word ceiling.
 
 ## APA Word review copy
 
-- `ARTICLE_MANUSCRIPT_APA.docx` contains 48 rendered pages, two tables with repeating header rows, three figures with alternative-text descriptions, 33 hyperlinks, and three correctly oriented sections.
+- `ARTICLE_MANUSCRIPT_APA.docx` contains 49 rendered pages, two tables with repeating header rows, three figures with alternative-text descriptions, 33 hyperlinks, and three correctly oriented sections.
 - Every rendered page was visually inspected. A long-reference wrapping collision found on page 44 was corrected in the reporting-only exporter and the affected reference pages were regenerated and reinspected.
 - The final archive passes ZIP integrity checks. The accessibility audit reports zero high-, medium-, or low-severity findings; the image and section audits report the expected three figures and three sections.
 - Author and last-modified-by metadata are blank, revision-session identifiers were scrubbed, and the export utility remains outside the frozen `scripts/*.py` inventory.
@@ -41,6 +41,14 @@ This receipt covers the integrated article, APA Word review copy, optional onlin
 - The third research question is explicitly reported as only partly answered because the decision-service measure failed semantic audit, interaction events do not establish substantive burden, and terminal censoring blocks complete-resolution and complete-restoration comparisons.
 - This is a freeze-safe editorial clarification. It adds no post hoc estimand, factor-marginal analysis, parameter, result, or policy recommendation and does not change the immutable scientific manifest.
 - The source manuscript remains below the call ceiling at 9,667 words. The regenerated and metadata-scrubbed Word copy contains 48 pages and 9,645 pre-reference word tokens; every page was visually inspected after export.
+
+## Targeted venue-fit bridge
+
+- On 2026-11-18, the introduction was revised to state that the emerging-technology connection is functional rather than historical: contemporary AI outputs can occupy the same organizational position between evidence and consequential workflow rules.
+- The Robodebt rationale now presents the case as a documented institutional testbed for the sequence from evidentiary transformation through automated action, review, and reassessment, while leaving complete restoration unestablished and retaining the non-equivalence, non-prevalence, and non-causation boundaries.
+- The governance section now states a prospective use for current AI deployment: compare matched representations through the actual downstream rules and stress action-binding review before rollout or material workflow change. This is an ex ante method, not field-transfer evidence.
+- No formal definition, source mapping, parameter, policy, seed, metric, stored result, quantitative interpretation, field-transfer status, or claim boundary changed. The immutable scientific manifest remains unchanged.
+- The source manuscript remains below the call ceiling at 9,805 words. The regenerated and metadata-scrubbed Word copy contains 49 pages and 9,785 pre-reference word tokens; all 49 pages were visually inspected after export.
 
 ## Scientific and repository controls
 

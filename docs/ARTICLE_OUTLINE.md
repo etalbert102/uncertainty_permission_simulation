@@ -1,6 +1,6 @@
 # Article Outline: From Incomplete Evidence to Automated Action
 
-Status: completed results-informed article architecture; design-frozen simulation, evidence packet, integrated manuscript, APA Word review copy, local submission-readiness audit, call-fit editorial pass, high-value clarity pass, and simulation-contribution refocus complete; current word and page counts are recorded in the submission-readiness receipt; detailed protocol machinery and worked-trace receipts retained in an optional online technical appendix while the complete five-step procedure remains in the article; emerging-technology framing, originality, plain-language policy labels, implementation map, review definition, formal-model bridge, Robodebt crosswalk, simulation unit, results interpretation, protocol instructions, and the distinction between rule-implied directions and dynamic quantities strengthened without changing the frozen study; current source anchors audited with no substantive contradiction and bibliographic details corrected; public repository activation remains deferred until authorized; one prespecified service metric excluded after semantic audit; no formal comprehensibility review required
+Status: completed results-informed article architecture; design-frozen simulation, evidence packet, integrated manuscript, APA Word review copy, local submission-readiness audit, call-fit editorial pass, high-value clarity pass, simulation-contribution refocus, and targeted venue-fit bridge complete; current word and page counts are recorded in the submission-readiness receipt; detailed protocol machinery and worked-trace receipts retained in an optional online technical appendix while the complete five-step procedure remains in the article; emerging-technology framing, originality, plain-language policy labels, implementation map, review definition, formal-model bridge, Robodebt crosswalk, simulation unit, results interpretation, protocol instructions, and the distinction between rule-implied directions and dynamic quantities strengthened without changing the frozen study; current source anchors audited with no substantive contradiction and bibliographic details corrected; public repository activation remains deferred until authorized; one prespecified service metric excluded after semantic audit; no formal comprehensibility review required
 
 Working title: *From Incomplete Evidence to Automated Action: A Formal Model and Dynamic Simulation of Review Capacity and Timeout Rules, with a Robodebt Application*
 
@@ -78,6 +78,7 @@ Do not open with Robodebt, use policy IDs, or claim a universally preferred poli
 
 - Open with the standalone puzzle: a defensible abstraction can remove the distinction that would trigger caution.
 - Follow the full chain: evidence → representation → routing → review → action → correction/restoration.
+- Explain that the emerging-technology connection is functional rather than historical: contemporary AI outputs can occupy the same organizational position between evidence and consequential workflow rules.
 - Define functional permission in plain language: what the operating workflow allows to proceed, whether or not formal authority changed.
 - State the paper's central question: when evidence becomes less decision-relevant, what may the workflow now do automatically?
 
@@ -189,7 +190,7 @@ Name the falsifiers: no representation-to-permission change in an enabling contr
 ### 4.1 Why this case — 140 words
 
 - Explain the analytical fit: aggregate evidence, evidentiary transformation, notice and access, deadlines, automation, review, recovery, correction, and restoration.
-- Explain why the case is useful for process analysis without presenting it as contemporary AI equivalence.
+- Explain why the case is a documented institutional testbed for the sequence from evidentiary transformation through automated action, review, and reassessment without presenting it as contemporary AI equivalence, prevalence evidence, or proof of complete restoration.
 
 ### 4.2 Sources and application validity — 180 words
 
@@ -380,6 +381,7 @@ Core exhibits:
 
 - Connect each failure mechanism to a specific intervention and empowered owner.
 - Report the tradeoff for provenance preservation, evidence acquisition, fail-closed review, capacity reservation, deadline change, recovery pause, and restoration.
+- State the prospective AI-governance use: compare matched representations through the actual downstream rules and stress action-binding review before rollout or material workflow change.
 - Apply the protocol briefly to the held-out LLM-summary canary as a transfer check, not a second empirical case.
 - Use ordinary author editorial QA: define “controlled pair” in plain language, resolve material clarity issues, and state residual limitations without creating a formal comprehensibility or usability claim.
 
