@@ -31,6 +31,8 @@ TITLE = (
     "From Incomplete Evidence to Automated Action: A Formal Model and Dynamic "
     "Simulation of Review Capacity and Timeout Rules, with a Robodebt Application"
 )
+AUTHOR = "Eli Talbert"
+CORRESPONDENCE_EMAIL = "etalbert102@gmail.com"
 
 FIGURE_ALTS = {
     "figure1_evidence_to_action_protocol.svg": (
@@ -139,6 +141,15 @@ def configure_styles(doc: Document):
     title.paragraph_format.space_before = Pt(42)
     title.paragraph_format.space_after = Pt(0)
     title.paragraph_format.keep_together = True
+
+    author = styles.add_style("APA Author", WD_STYLE_TYPE.PARAGRAPH)
+    author.base_style = normal
+    set_style_font(author, 12)
+    author.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    author.paragraph_format.line_spacing_rule = WD_LINE_SPACING.DOUBLE
+    author.paragraph_format.space_before = Pt(0)
+    author.paragraph_format.space_after = Pt(0)
+    author.paragraph_format.keep_together = True
 
     label = styles.add_style("APA Exhibit Label", WD_STYLE_TYPE.PARAGRAPH)
     label.base_style = normal
@@ -541,6 +552,10 @@ def set_table_description(table, description: str):
 def add_title_page(doc: Document):
     paragraph = doc.add_paragraph(style="APA Title")
     add_markdown_runs(paragraph, TITLE)
+    paragraph = doc.add_paragraph(style="APA Author")
+    add_markdown_runs(paragraph, AUTHOR)
+    paragraph = doc.add_paragraph(style="APA Author")
+    add_markdown_runs(paragraph, f"Correspondence: {CORRESPONDENCE_EMAIL}")
     paragraph.add_run().add_break(WD_BREAK.PAGE)
 
 
@@ -577,6 +592,10 @@ def export(source: Path, output: Path):
             line = lines[index]
             stripped = line.strip()
             if not stripped:
+                index += 1
+                continue
+
+            if stripped in {f"**{AUTHOR}**", f"Correspondence: {CORRESPONDENCE_EMAIL}"}:
                 index += 1
                 continue
 

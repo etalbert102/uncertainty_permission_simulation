@@ -12,12 +12,12 @@ This receipt covers the integrated article, APA Word review copy, optional onlin
 
 - The article contains the complete five-step process-red-team procedure and the worked Robodebt application conclusion. Its claims and interpretation do not depend on supplementary material.
 - `ARTICLE_SUPPLEMENTARY_MATERIAL.md` is an optional online technical appendix containing implementation-level status codes, receipt fields, worksheets, and worked-trace detail. It may be withheld if a venue does not accept supplementary material.
-- The conservative Markdown-source count is 9,805 whitespace-delimited words before the bibliography, 195 below the 10,000-word ceiling. The rendered Word copy contains 9,785 pre-reference word tokens. The conservative source count controls the release decision.
+- The conservative Markdown-source count is 9,809 whitespace-delimited words before the bibliography, 191 below the 10,000-word ceiling. The rendered Word copy contains 9,789 pre-reference word tokens. The conservative source count controls the release decision.
 - The manuscript uses no endnotes to evade the word ceiling.
 
 ## APA Word review copy
 
-- `ARTICLE_MANUSCRIPT_APA.docx` contains 49 rendered pages, two tables with repeating header rows, three figures with alternative-text descriptions, 33 hyperlinks, and three correctly oriented sections.
+- `ARTICLE_MANUSCRIPT_APA.docx` contains an author name and correspondence address, 49 rendered pages, two tables with repeating header rows, three figures with alternative-text descriptions, 33 hyperlinks, and three correctly oriented sections.
 - Every rendered page was visually inspected. A long-reference wrapping collision found on page 44 was corrected in the reporting-only exporter and the affected reference pages were regenerated and reinspected.
 - The final archive passes ZIP integrity checks. The accessibility audit reports zero high-, medium-, or low-severity findings; the image and section audits report the expected three figures and three sections.
 - Author and last-modified-by metadata are blank, revision-session identifiers were scrubbed, and the export utility remains outside the frozen `scripts/*.py` inventory.
@@ -49,6 +49,12 @@ This receipt covers the integrated article, APA Word review copy, optional onlin
 - The governance section now states a prospective use for current AI deployment: compare matched representations through the actual downstream rules and stress action-binding review before rollout or material workflow change. This is an ex ante method, not field-transfer evidence.
 - No formal definition, source mapping, parameter, policy, seed, metric, stored result, quantitative interpretation, field-transfer status, or claim boundary changed. The immutable scientific manifest remains unchanged.
 - The source manuscript remains below the call ceiling at 9,805 words. The regenerated and metadata-scrubbed Word copy contains 49 pages and 9,785 pre-reference word tokens; all 49 pages were visually inspected after export.
+
+## Author identity packaging
+
+- On 2026-11-18, the Markdown source and APA Word title page were updated to identify Eli Talbert and provide `etalbert102@gmail.com` for correspondence.
+- No organizational affiliation or employer endorsement is asserted. Author and last-modified-by metadata remain blank to avoid embedding device or application identity beyond the visible, intentional author block.
+- The source manuscript remains below the call ceiling at 9,809 words. The regenerated Word copy contains 49 pages and 9,789 pre-reference word tokens; all 49 pages were visually inspected after export.
 
 ## Scientific and repository controls
 
