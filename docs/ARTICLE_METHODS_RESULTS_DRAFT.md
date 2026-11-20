@@ -53,7 +53,7 @@ Keyed U[0,1) variates generated binary events by threshold and stochastic timing
 | Retrieval and recovery | Retrieval latency U[0, 10) days in the core; recovery capacity 2, fixed service demand 8 days, and window 20 days. |
 | Correction and restoration | Correction-uptake probability 0.50 after a 7-day delay; reassessment capacity 2, fixed service demand 10 days, and window 14 days; restoration delay 5 days, window 50 days, and administrative cutoff day 650. |
 
-The 108-family design used five policies and 30 paired replications: 16,200 core runs and 1,296,000 case-policy trajectories. Load was a designed input, not measured utilization or an estimated threshold. The corrected frozen manifest fixed 3,240 family-replication seeds per suite under SHA-256 identity `9d0d2ed34f74608e5aed96b6a28d81ded2d6d15bba552be91706c5ce862b2801`.
+The 108-family design used five policies and 30 paired replications: 16,200 core runs and 1,296,000 case-policy trajectories. Load was a designed input, not measured utilization or an estimated threshold. Freeze 3 fixed 3,240 family-replication seeds per suite under manifest self-hash `47170f8cb450709b19f0bf47b48b887208ee75cde07dbf1ee34169891f6b9c6b`.
 
 MCSE targets were 0.05 for rates and 0.06 for paired differences. A miss after 30 replications would have extended every core cell to 60; none did. A separate 16,200-run sensitivity doubled retrieval-latency scale from 10 to 20 days without pooling with the core.
 
@@ -141,11 +141,11 @@ The strongest result is that identical timely-review-completion rates can coexis
 | U2O − U2C | Gate-safety rate | −0.476 | −0.881 to −0.042 | 0.009–0.043; 108/108 below | A |
 | U2O − U2C | Timely-review-completion rate | 0.000 | 0.000 to 0.000 | 0.000; 0/108 | A |
 | U2O − U2C | Unresolved-hold rate | −0.476 | −0.881 to −0.042 | 0.009–0.043; 108/108 below | A |
-| U2O − U2C | External/recovery-process-exposure rate | +0.476 | +0.042 to +0.881 | 0.009–0.043; 108/108 above | B |
+| U2O − U2C | Modeled-downstream-exposure rate | +0.476 | +0.042 to +0.881 | 0.009–0.043; 108/108 above | B |
 | U3 − U0 | Unsupported-progression rate | 0.000 | 0.000 to 0.000 | 0.000; 0/108 | C |
 | U3 − U0 | Recipient interaction events per case | +1.096 | +0.860 to +1.312 | 0.012–0.024; 108/108 above | C |
 | U3 − U0 | Agency-workload events per case | +1.209 | +0.749 to +1.728 | 0.011–0.027; 108/108 above | C |
-| U3 − U0 | External/recovery-process-exposure rate | +0.594 | +0.369 to +0.815 | 0.006–0.013; 108/108 above | B, C |
+| U3 − U0 | Modeled-downstream-exposure rate | +0.594 | +0.369 to +0.815 | 0.006–0.013; 108/108 above | B, C |
 | U1 − U0 | Unsupported-progression rate | +0.781 | +0.578 to +0.914 | 0.004–0.011; 108/108 above | D |
 
 Claim boundaries: **A**, timeout directions follow the declared fail-open/fail-closed semantics; the simulation supplies magnitude and family variation. The policies used the same review queue, and fewer holds represent progression rather than established resolution. A fail-open release with unmet prerequisites is not gate-safe. **B**, exposure is structurally downstream, may follow supported progression, and is neither independent confirmation nor proof of harm. **C**, both policies prevented unsupported progression; interaction events do not measure effort, subjective burden, welfare, or cost, while the workload direction follows the metric and policy definitions. **D**, U1−U0 is implementation validation, not a substantive discovery or recommendation.
@@ -156,12 +156,12 @@ Claim boundaries: **A**, timeout directions follow the declared fail-open/fail-c
 
 | Draft claim | Frozen artifact |
 | --- | --- |
-| Core execution, precision, family summaries, and paired estimates | `outputs/confirmatory_v1/analysis/analysis_r030.json` (`analysis_hash`: `4d549f5e1fed84f294052749d9987d807e9fe2199843b44d7eb7aece867b36bd`) |
-| Latency sensitivity estimates | `outputs/sensitivity_information_latency_v1/analysis/analysis_r030.json` (`analysis_hash`: `f1cbc3437418e803510483a080052444ce75658df42a95fcd5f4f6922f637452`) |
-| Complete run inventories | `outputs/confirmatory_v1/reconciliation.json`; `outputs/sensitivity_information_latency_v1/reconciliation.json` |
+| Core execution, precision, family summaries, and paired estimates | `outputs/confirmatory_v2/analysis/analysis_r030.json` (`analysis_hash`: `b3c2fde249fe38bc6778edac77cfd929144ddc48a8c41a150a97518636752112`) |
+| Latency sensitivity estimates | `outputs/sensitivity_information_latency_v2/analysis/analysis_r030.json` (`analysis_hash`: `210b211cc4893411813e4c747f8491f83121515d0ccf868e7be36ce5e91095f4`) |
+| Complete run inventories | `outputs/confirmatory_v2/reconciliation.json`; `outputs/sensitivity_information_latency_v2/reconciliation.json` |
 | Policy, factor, seed, horizon, and precision definitions | `experiments/configs/confirmatory_v1.yaml`; `experiments/configs/sensitivity_information_latency_v1.yaml` |
-| Negative-control results | `data/golden_traces/slice4_negative_control_receipt_v1.json` |
-| Design-freeze identity | corrected manifest hash `9d0d2ed34f74608e5aed96b6a28d81ded2d6d15bba552be91706c5ce862b2801` |
+| Negative-control results | `data/golden_traces/slice4_negative_control_receipt_v2.json` |
+| Design-freeze identity | Freeze 3 manifest self-hash `47170f8cb450709b19f0bf47b48b887208ee75cde07dbf1ee34169891f6b9c6b` |
 | Figure 3 deterministic build | `reporting/build_article_figure3.py`; source receipt is the frozen core analysis above |
 | Excluded service numerator | `src/uncertainty_permission_simulation/experiments.py`, function `_run_metrics` |
 | Stage-specific censoring semantics | `src/uncertainty_permission_simulation/simulator.py`, administrative-cutoff closure logic |

@@ -32,6 +32,7 @@ TITLE = (
     "Simulation of Review Capacity and Timeout Rules, with a Robodebt Application"
 )
 AUTHOR = "Eli Talbert"
+AFFILIATION = "Independent researcher"
 CORRESPONDENCE_EMAIL = "etalbert102@gmail.com"
 
 FIGURE_ALTS = {
@@ -532,7 +533,9 @@ def make_figure_png(svg_path: Path, out_dir: Path):
 def add_figure(doc: Document, svg_path: Path, temp_dir: Path):
     png, aspect = make_figure_png(svg_path, temp_dir)
     max_width = 6.5
-    max_height = 7.0
+    max_height = (
+        6.1 if svg_path.name == "figure2_robodebt_process_profiles.svg" else 7.0
+    )
     width = min(max_width, max_height * aspect)
     paragraph = doc.add_paragraph()
     paragraph.alignment = WD_ALIGN_PARAGRAPH.CENTER
@@ -552,11 +555,29 @@ def set_table_description(table, description: str):
     tbl_pr.append(caption)
 
 
+def scrub_revision_session_ids(doc: Document) -> None:
+    """Remove template-generated revision-session identifiers from the package."""
+    rsid_names = {
+        qn("w:rsidDel"),
+        qn("w:rsidP"),
+        qn("w:rsidR"),
+        qn("w:rsidRDefault"),
+        qn("w:rsidRPr"),
+        qn("w:rsidSect"),
+    }
+    for element in doc.element.iter():
+        for attribute in tuple(element.attrib):
+            if attribute in rsid_names:
+                del element.attrib[attribute]
+
+
 def add_title_page(doc: Document):
     paragraph = doc.add_paragraph(style="APA Title")
     add_markdown_runs(paragraph, TITLE)
     paragraph = doc.add_paragraph(style="APA Author")
     add_markdown_runs(paragraph, AUTHOR)
+    paragraph = doc.add_paragraph(style="APA Author")
+    add_markdown_runs(paragraph, AFFILIATION)
     paragraph = doc.add_paragraph(style="APA Author")
     add_markdown_runs(paragraph, f"Correspondence: {CORRESPONDENCE_EMAIL}")
     paragraph.add_run().add_break(WD_BREAK.PAGE)
@@ -598,7 +619,10 @@ def export(source: Path, output: Path):
                 index += 1
                 continue
 
-            if stripped in {f"**{AUTHOR}**", f"Correspondence: {CORRESPONDENCE_EMAIL}"}:
+            if stripped in {
+                f"**{AUTHOR}**", AFFILIATION,
+                f"Correspondence: {CORRESPONDENCE_EMAIL}",
+            }:
                 index += 1
                 continue
 
@@ -705,6 +729,7 @@ def export(source: Path, output: Path):
                 paragraph.paragraph_format.keep_with_next = True
             index += 1
 
+    scrub_revision_session_ids(doc)
     output.parent.mkdir(parents=True, exist_ok=True)
     doc.save(output)
 

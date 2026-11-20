@@ -13,9 +13,10 @@ These notes are not independent validation, an inter-rater reliability study, ev
 | Field | Entry |
 | --- | --- |
 | Review date | 2026-11-02 |
+| Package cross-reference updated | 2026-11-20; current-package references below were not evidence available to the dated walkthrough |
 | Reviewer | project lead |
 | Protocol version and hash | `1.0`; SHA-256 `ba2f845e2025545dadbe4f6d48db1c5c9313cd1b78c78118419d4dd85e64f4a3` |
-| Confirmatory analysis receipt and hash | `outputs/confirmatory_v1/analysis/analysis_r030.json`; corrected analysis hash `4d549f5e1fed84f294052749d9987d807e9fe2199843b44d7eb7aece867b36bd` |
+| Current confirmatory analysis cross-reference | `outputs/confirmatory_v2/analysis/analysis_r030.json`; Freeze 3 analysis hash `b3c2fde249fe38bc6778edac77cfd929144ddc48a8c41a150a97518636752112` |
 | Evidence-packet version and hash | pending — evidence packet not yet created in Slice 6 |
 | P0 review-input version | `0.1` |
 | Robodebt worked-trace review-input version | not completed before formal requirement was retired |

@@ -15,9 +15,9 @@ from statistics import mean
 
 
 ROOT = Path(__file__).resolve().parents[1]
-RECEIPT = ROOT / "outputs/confirmatory_v1/analysis/analysis_r030.json"
+RECEIPT = ROOT / "outputs/confirmatory_v2/analysis/analysis_r030.json"
 OUTPUT = ROOT / "docs/figures/figure3_simulation_results.svg"
-EXPECTED_ANALYSIS_HASH = "4d549f5e1fed84f294052749d9987d807e9fe2199843b44d7eb7aece867b36bd"
+EXPECTED_ANALYSIS_HASH = "b3c2fde249fe38bc6778edac77cfd929144ddc48a8c41a150a97518636752112"
 
 WIDTH = 1000
 HEIGHT = 1390
@@ -196,7 +196,7 @@ def build_svg(receipt: dict[str, object]) -> str:
     parts.append(text((b_left + b_right) / 2, b_bottom + 55, "Paired rate difference", size=17, anchor="middle"))
     b_rows = (
         ("Unsupported progression", "unsupported_progression_rate", COLORS["red"]),
-        ("Exposure", "recovery_exposure_rate", COLORS["orange"]),
+        ("Modeled downstream exposure", "recovery_exposure_rate", COLORS["orange"]),
         ("Gate safety", "gate_safe_rate", COLORS["green"]),
         ("Unresolved hold", "unresolved_hold_rate", COLORS["blue"]),
         ("Timely review completion", "review_effective_rate", COLORS["purple"]),
@@ -228,7 +228,7 @@ def build_svg(receipt: dict[str, object]) -> str:
     parts.append(text((c_left + c_right) / 2, c_bottom + 57, "Paired difference per initiated case", size=17, anchor="middle"))
     c_rows = (
         ("Unsupported progression", "rate", "unsupported_progression_rate", COLORS["red"]),
-        ("Exposure", "rate", "recovery_exposure_rate", COLORS["orange"]),
+        ("Modeled downstream exposure", "rate", "recovery_exposure_rate", COLORS["orange"]),
         ("Interaction events", "events/case", "recipient_burden_rate", COLORS["purple"]),
         ("Agency workload", "events/case", "agency_workload_rate", COLORS["blue"]),
     )
@@ -247,7 +247,7 @@ def build_svg(receipt: dict[str, object]) -> str:
         text(45, 1225, "Reading the figure", size=20, weight=700),
         text(45, 1258, "Panel A shows unweighted means over other designed factors; Panels B and C show means and family min–max ranges.", size=16, fill=COLORS["muted"]),
         text(45, 1288, "Family ranges show scenario variation, not uncertainty. Panel C rows use different units and are not a common scale.", size=16, fill=COLORS["muted"]),
-        text(45, 1318, "MCSE intervals appear in Table 3. Timely review completion is timing only; exposure is downstream and not proof of harm.", size=16, fill=COLORS["muted"]),
+        text(45, 1318, "MCSE intervals appear in Table 3. Timely review completion is timing only; downstream exposure is not proof of harm.", size=16, fill=COLORS["muted"]),
         text(45, 1358, "Scope: frozen stylized parameter space; no historical, legal, population, or complete-restoration estimate.", size=16, weight=700),
         "</svg>",
     ])

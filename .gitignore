@@ -32,3 +32,24 @@ outputs/sensitivity_information_latency_v1/analysis/*
 !outputs/sensitivity_information_latency_v1/analysis/analysis_r030.json
 !outputs/sensitivity_information_latency_v1/analysis/capacity_timeout_r030.svg
 !outputs/sensitivity_information_latency_v1/analysis/information_tradeoff_r030.svg
+
+# Freeze 3 compact release artifacts. Per-attempt outputs remain ignored.
+!outputs/confirmatory_v2/
+outputs/confirmatory_v2/*
+!outputs/confirmatory_v2/run_index.json
+!outputs/confirmatory_v2/reconciliation.json
+!outputs/confirmatory_v2/analysis/
+outputs/confirmatory_v2/analysis/*
+!outputs/confirmatory_v2/analysis/analysis_r030.json
+!outputs/confirmatory_v2/analysis/capacity_timeout_r030.svg
+!outputs/confirmatory_v2/analysis/information_tradeoff_r030.svg
+
+!outputs/sensitivity_information_latency_v2/
+outputs/sensitivity_information_latency_v2/*
+!outputs/sensitivity_information_latency_v2/run_index.json
+!outputs/sensitivity_information_latency_v2/reconciliation.json
+!outputs/sensitivity_information_latency_v2/analysis/
+outputs/sensitivity_information_latency_v2/analysis/*
+!outputs/sensitivity_information_latency_v2/analysis/analysis_r030.json
+!outputs/sensitivity_information_latency_v2/analysis/capacity_timeout_r030.svg
+!outputs/sensitivity_information_latency_v2/analysis/information_tradeoff_r030.svg

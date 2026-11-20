@@ -64,7 +64,7 @@
 <line x1="690.4" y1="607.0" x2="690.4" y2="623.0" stroke="#B3382C" stroke-width="2.0"/>
 <line x1="900.3" y1="607.0" x2="900.3" y2="623.0" stroke="#B3382C" stroke-width="2.0"/>
 <circle cx="799.1" cy="615.0" r="7.5" fill="#B3382C"/>
-<text x="70.0" y="651.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" text-anchor="start" fill="#17212B">Exposure</text>
+<text x="70.0" y="651.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" text-anchor="start" fill="#17212B">Modeled downstream exposure</text>
 <line x1="690.4" y1="645.0" x2="900.3" y2="645.0" stroke="#C56A11" stroke-width="4.0"/>
 <line x1="690.4" y1="637.0" x2="690.4" y2="653.0" stroke="#C56A11" stroke-width="2.0"/>
 <line x1="900.3" y1="637.0" x2="900.3" y2="653.0" stroke="#C56A11" stroke-width="2.0"/>
@@ -102,7 +102,7 @@
 <line x1="430.0" y1="962.0" x2="430.0" y2="978.0" stroke="#B3382C" stroke-width="2.0"/>
 <line x1="430.0" y1="962.0" x2="430.0" y2="978.0" stroke="#B3382C" stroke-width="2.0"/>
 <circle cx="430.0" cy="970.0" r="7.5" fill="#B3382C"/>
-<text x="70.0" y="1010.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" text-anchor="start" fill="#17212B">Exposure</text>
+<text x="70.0" y="1010.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" text-anchor="start" fill="#17212B">Modeled downstream exposure</text>
 <text x="70.0" y="1029.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" text-anchor="start" fill="#52606D">rate</text>
 <line x1="532.5" y1="1010.0" x2="656.5" y2="1010.0" stroke="#C56A11" stroke-width="4.0"/>
 <line x1="532.5" y1="1002.0" x2="532.5" y2="1018.0" stroke="#C56A11" stroke-width="2.0"/>
@@ -123,6 +123,6 @@
 <text x="45.0" y="1225.0" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700" text-anchor="start" fill="#17212B">Reading the figure</text>
 <text x="45.0" y="1258.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" text-anchor="start" fill="#52606D">Panel A shows unweighted means over other designed factors; Panels B and C show means and family min–max ranges.</text>
 <text x="45.0" y="1288.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" text-anchor="start" fill="#52606D">Family ranges show scenario variation, not uncertainty. Panel C rows use different units and are not a common scale.</text>
-<text x="45.0" y="1318.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" text-anchor="start" fill="#52606D">MCSE intervals appear in Table 3. Timely review completion is timing only; exposure is downstream and not proof of harm.</text>
+<text x="45.0" y="1318.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" text-anchor="start" fill="#52606D">MCSE intervals appear in Table 3. Timely review completion is timing only; downstream exposure is not proof of harm.</text>
 <text x="45.0" y="1358.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700" text-anchor="start" fill="#17212B">Scope: frozen stylized parameter space; no historical, legal, population, or complete-restoration estimate.</text>
 </svg>

@@ -54,6 +54,16 @@ The archived and corrected analysis receipts were compared as structured JSON. F
 | `precision` | exact match | exact match |
 | `common_random_number_diagnostics` | exact match | exact match |
 
+## Freeze 3 provenance closure
+
+A second Goldfish audit on 2026-11-20 found that the repaired runtime still needed a complete coverage claim, exact action identity, compact stored bridge receipts, and stronger freeze-to-commit verification. These were provenance and contract defects, not numerical-result discrepancies.
+
+The final repair moves the period-evidence specification to `experiments/evaluation_specs/period_evidence_v2.json`; declares its generator, assumptions, exclusions, coverage argument, proof identifier, and conclusion mode; and requires exact comparison of the symbolic action family plus the case-specific instantiated action. Confirmatory compilation records an external specification origin and rejects the implicit development fixture. Every attempt stores an evaluation-bridge receipt, and each analysis stores a suite summary.
+
+Freeze 3 (`UPS-CONFIRMATORY-FREEZE@3`) was created from clean commit `dc96716c0865517ab0f61700fb0a06ca39d0042a` with manifest self-hash `47170f8cb450709b19f0bf47b48b887208ee75cde07dbf1ee34169891f6b9c6b`. The historical Freeze 2 manifest is preserved as `FREEZE_MANIFEST_EVALUATION_BRIDGE_V2.json`; `FREEZE_COMMIT_ATTESTATIONS.json` binds each of its 77 frozen blobs to the repository commit containing that exact content.
+
+The complete core and sensitivity suites were rerun. Their analysis self-hashes are `b3c2fde249fe38bc6778edac77cfd929144ddc48a8c41a150a97518636752112` and `210b211cc4893411813e4c747f8491f83121515d0ccf868e7be36ce5e91095f4`. Across both suites, 2,592,000 routing/action comparisons produced zero mismatches. Structured comparison again found exact equality for `cell_summaries`, `paired_estimates`, `precision`, and `common_random_number_diagnostics`; only provenance-bearing identities changed.
+
 Configuration, event, manifest, run-index, reconciliation, and analysis identities changed as expected because the executable provenance changed. No scenario, policy, parameter, seed, estimand, exclusion, or claim boundary was changed, and no post hoc result was added.
 
 ## Claim limit
