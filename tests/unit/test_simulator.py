@@ -509,6 +509,29 @@ def test_sufficient_evidence_is_not_labeled_as_imputation() -> None:
     trace = run_engagement_stage(cohort, compiled("U2C", cohort.overlay)).traces[0]
     representation = next(event for event in trace.events if event.event_type_id == "REPRESENTATION_APPLIED")
     assert representation.details["representation_mode"] == "period_specific_evidence"
+    assert representation.details["robust_action_support"] is True
+    assert representation.details["evaluation_spec_id"] == "TEST-EVALUATION"
+    assert representation.details["refinement_certificate_id"] == "CERT-PERIOD-EVIDENCE-PRESENT@1"
+    action = next(event for event in trace.events if event.event_type_id == "ACTION_COMPUTED")
+    assert action.details["robust_action_support"] is True
+    assert action.details["evaluation_specification_hash"] == representation.details["evaluation_specification_hash"]
+
+
+def test_unresolved_evidence_executes_non_supporting_refinement() -> None:
+    unresolved = overlay(
+        notice_delivery_probability=Decimal("1"),
+        administrative_access_probability=Decimal("1"),
+        comprehension_probability=Decimal("1"),
+        record_availability_probability=Decimal("0"),
+        response_effort_limit=Decimal("1"),
+    )
+    cohort = generate_stochastic_cohort(spec(case_ids=("CASE-1",), overlay=unresolved))
+    trace = run_engagement_stage(cohort, compiled("U1", cohort.overlay)).traces[0]
+    action = next(event for event in trace.events if event.event_type_id == "ACTION_COMPUTED")
+    assert action.details["robust_action_support"] is False
+    assert action.details["refinement_certificate_id"] == "CERT-PERIOD-EVIDENCE-UNRESOLVED@1"
+    assert trace.action_decision is not None
+    assert trace.action_decision.progression_supported is False
 
 
 def test_engagement_runner_rejects_configuration_overlay_drift() -> None:

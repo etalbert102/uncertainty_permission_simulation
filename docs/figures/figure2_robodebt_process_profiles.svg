@@ -164,5 +164,5 @@
   <text x="70" y="1386" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700" fill="#B3382C">Claim boundary:</text>
   <text x="220" y="1386" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#52606D">simulation rates are designed-parameter-space results—not historical prevalence, capacity, debt error, legality, or causal effects.</text>
 
-  <text x="45" y="1450" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#52606D">Profile boundary: early OCI and the enhanced repair bundle remain dated separately; later EIC, CUPI, PAYG Manual, and remediation are outside scope.</text>
+  <text x="45" y="1450" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#52606D">Profile boundary: early OCI and the enhanced repair bundle remain dated separately; later program variants, manual processes, and remediation are outside scope.</text>
 </svg>

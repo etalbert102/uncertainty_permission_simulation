@@ -265,7 +265,7 @@ Define these as counterfactual study policies. Do not label any as historical Ro
 ### 5.5 Validation, controls, and claim boundary — 260 words
 
 - Summarize hand traces, queue checks, deterministic replay, configuration closure, adapter swap, negative controls, and append-only receipts.
-- Report 32,400 reconciled family-policy-replication runs across both suites, representing 2,592,000 simulated case-policy trajectories. Describe the 178 tests as automated validation checks, then report maximum core MCSE `0.04332` and maximum sensitivity MCSE `0.04051`.
+- Report 32,400 reconciled family-policy-replication runs across both suites, representing 2,592,000 simulated case-policy trajectories. Describe the 180 tests as automated validation checks, then report maximum core MCSE `0.04332` and maximum sensitivity MCSE `0.04051`.
 - Distinguish execution integrity from measurement validity: all runs reconciled and passed their design-frozen checks, but the post-run semantic audit invalidated the service interpretation.
 - State that the simulation estimates only the declared model and parameter space; do not use successful execution to rehabilitate an invalid construct.
 - Explain stage-specific censoring and why an open path at day 650 cannot be treated as completed restoration or failure.
@@ -330,7 +330,7 @@ Separate formal, simulated, and historical evidence in a compact matrix. State t
 Core exhibits:
 
 - **Figure 3, multi-panel capacity, timeout, and information-first tradeoffs.**
-- **Table 2, prespecified paired estimates, MCSE, scenario range, and claim boundary.**
+- **Table 3, prespecified paired estimates, MCSE, scenario range, and claim boundary.**
 
 ## 7. Process-Red-Team Protocol and Governance Implications — 1,600 Words
 
@@ -425,7 +425,7 @@ Address each limit and say whether it narrows interpretation or requires new evi
 | Figure 2 | Early and enhanced OCI process maps | 4 | source manifest and process profiles |
 | Table 1 | Policies, contrasts, metrics, and claim limits | 5 | frozen configs and prospective design-freeze record |
 | Figure 3 | Multi-panel capacity, timeout, and information-first tradeoffs | 6 | core and sensitivity analysis receipts |
-| Table 2 | Prespecified paired estimates and computational precision | 6 | analysis receipts |
+| Table 3 | Prespecified paired estimates and computational precision | 6 | analysis receipts |
 | Tables S1–S2 | Assessment profile and ownership/intervention receipt for the fixed trace | optional online technical appendix | frozen protocol and worked-trace receipt |
 
 Five main-text exhibits are the current ceiling. The optional online technical appendix carries Tables S1–S2 and the detailed protocol machinery; exhaustive formal results, full scenario tables, censoring reasons, controls, sensitivity details, and source crosswalks remain in repository modules.
@@ -442,7 +442,7 @@ These modules are repository materials, not submitted appendices. The optional p
 
 ## Drafting Order
 
-1. Build Table 2 and Figure 3 directly from the stored analysis receipts; exclude the invalid service metric and lock the result language and units.
+1. Build Table 3 and Figure 3 directly from the stored analysis receipts; exclude the invalid service metric and lock the result language and units.
 2. Draft Sections 5 and 6 from the frozen configs, manifest, reconciliation, and analysis artifacts.
 3. Draft Sections 3 and 4 from the formal model and source packet, retaining only notation used later.
 4. Run an ordinary author editorial pass over the protocol presentation; no formal review return is required, and any semantic defect still triggers a new freeze and affected rerun.

@@ -1,5 +1,5 @@
 {
-  "analysis_hash": "0abaab09c09c94eb797d46ade1dbe5d7dd46c1ce85d515ba769ed4d1b5bc82db",
+  "analysis_hash": "f1cbc3437418e803510483a080052444ce75658df42a95fcd5f4f6922f637452",
   "artifact_kind": "confirmatory_analysis",
   "attempt_count": 16200,
   "cell_summaries": [
@@ -18489,7 +18489,7 @@
       "sha256": "76f25bfd8f4ac4f104ae61951c01cdbf4a8ff57405f3c633c8f11dcc67429062"
     }
   ],
-  "manifest_hash": "35f360d81e7eebe1effeae813f4144991b0fa043001df6d920d3f8592bfee65c",
+  "manifest_hash": "9d0d2ed34f74608e5aed96b6a28d81ded2d6d15bba552be91706c5ce862b2801",
   "paired_estimates": [
     {
       "ci95_high": 0.06815723080057412,
@@ -34712,6 +34712,6 @@
     "right_censored_rate"
   ],
   "replications": 30,
-  "row_hash": "12dad20fe77f0466fcc355acb5ff9d134fc90e60c83eafb8815918c704b37a1c",
+  "row_hash": "197345609652ad110fbd2e584aed23a93b81d798d1251719177f3a214ae07ee9",
   "schema_version": 1
 }

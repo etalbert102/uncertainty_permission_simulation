@@ -1,6 +1,6 @@
 # Submission Readiness Receipt
 
-Date: 2026-11-18
+Date: 2026-11-19
 
 Status: local submission package complete; public-repository activation intentionally deferred
 
@@ -12,14 +12,14 @@ This receipt covers the integrated article, APA Word review copy, optional onlin
 
 - The article contains the complete five-step process-red-team procedure and the worked Robodebt application conclusion. Its claims and interpretation do not depend on supplementary material.
 - `ARTICLE_SUPPLEMENTARY_MATERIAL.md` is an optional online technical appendix containing implementation-level status codes, receipt fields, worksheets, and worked-trace detail. It may be withheld if a venue does not accept supplementary material.
-- The conservative Markdown-source count is 9,809 whitespace-delimited words before the bibliography, 191 below the 10,000-word ceiling. The rendered Word copy contains 9,789 pre-reference word tokens. The conservative source count controls the release decision.
+- The conservative Markdown-source count is 9,912 whitespace-delimited words before the bibliography, 88 below the 10,000-word ceiling. The conservative source count controls the release decision.
 - The manuscript uses no endnotes to evade the word ceiling.
 
 ## APA Word review copy
 
-- `ARTICLE_MANUSCRIPT_APA.docx` contains an author name and correspondence address, 49 rendered pages, two tables with repeating header rows, three figures with alternative-text descriptions, 33 hyperlinks, and three correctly oriented sections.
-- Every rendered page was visually inspected. A long-reference wrapping collision found on page 44 was corrected in the reporting-only exporter and the affected reference pages were regenerated and reinspected.
-- The final archive passes ZIP integrity checks. The accessibility audit reports zero high-, medium-, or low-severity findings; the image and section audits report the expected three figures and three sections.
+- `ARTICLE_MANUSCRIPT_APA.docx` contains an author name and correspondence address, 49 rendered pages, three tables with repeating header rows, three figures with alternative-text descriptions, 31 external hyperlinks, and three correctly oriented sections.
+- Every rendered page was visually inspected after the Goldfish correction. Tables 1-3, Figures 1-3, notation, long references, headers, and the landscape-to-portrait transition are legible and free of clipping or overlap.
+- The final archive passes ZIP integrity checks. The image, table, section, tracked-change, relationship, and metadata audits report the expected contents and no structural defect.
 - Author and last-modified-by metadata are blank, revision-session identifiers were scrubbed, and the export utility remains outside the frozen `scripts/*.py` inventory.
 
 ## Call-fit editorial pass
@@ -58,9 +58,11 @@ This receipt covers the integrated article, APA Word review copy, optional onlin
 
 ## Scientific and repository controls
 
-- The immutable 77-file scientific manifest remains unchanged at SHA-256 `35f360d81e7eebe1effeae813f4144991b0fa043001df6d920d3f8592bfee65c`.
+- The Goldfish review exposed an implementation-to-specification gap: the first runtime stored the evaluation-specification identifier without invoking its general support rule. The corrected kernel now executes a content-addressed rule over finite exact refinement certificates at routing and action time and records the specification, implementation, certificate, and result identities.
+- A second immutable 77-file scientific manifest was issued at SHA-256 `9d0d2ed34f74608e5aed96b6a28d81ded2d6d15bba552be91706c5ce862b2801`. Both 16,200-attempt suites were rerun. The corrected and archived analyses have exact equality for `cell_summaries`, `paired_estimates`, `precision`, and `common_random_number_diagnostics`; only provenance-bearing identities changed.
+- The first manifest remains preserved as `FREEZE_MANIFEST_PRE_EVALUATION_BRIDGE.json`, and the original attempts remain locally archived for audit. The correction is documented in `EVALUATION_SPECIFICATION_CORRECTION.md`.
 - The final source audit and literature update are complete. They found no substantive contradiction in the historical, formal, trace, or numerical claims and did not change the frozen study.
-- Plan, Slice 0, and Slice 3 validators pass; all 178 tests pass; and the technical release gate passes with the frozen core and sensitivity artifacts.
+- Plan, Slice 0, and Slice 3 validators pass; all 180 tests pass; and the technical release gate passes with the corrected frozen core and sensitivity artifacts.
 - Per-attempt outputs remain intentionally ignored because they are large reproducible intermediates. The repository retains the frozen inputs, exact environment and seed inventories, compact indexes, reconciliations, analyses, figures, and receipts needed to regenerate and verify them.
 
 ## Remaining external activation

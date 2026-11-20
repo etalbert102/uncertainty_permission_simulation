@@ -15,7 +15,7 @@ These notes are not independent validation, an inter-rater reliability study, ev
 | Review date | 2026-11-02 |
 | Reviewer | project lead |
 | Protocol version and hash | `1.0`; SHA-256 `ba2f845e2025545dadbe4f6d48db1c5c9313cd1b78c78118419d4dd85e64f4a3` |
-| Confirmatory analysis receipt and hash | `outputs/confirmatory_v1/analysis/analysis_r030.json`; analysis hash `bb486ee634365e53b7de464eb8cae8fc1e9169a29e1b6ad0ed3b496a684341cc` |
+| Confirmatory analysis receipt and hash | `outputs/confirmatory_v1/analysis/analysis_r030.json`; corrected analysis hash `4d549f5e1fed84f294052749d9987d807e9fe2199843b44d7eb7aece867b36bd` |
 | Evidence-packet version and hash | pending — evidence packet not yet created in Slice 6 |
 | P0 review-input version | `0.1` |
 | Robodebt worked-trace review-input version | not completed before formal requirement was retired |

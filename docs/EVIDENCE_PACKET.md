@@ -1,10 +1,10 @@
 # Evidence Packet
 
-Status: Slice 6 local submission candidate, updated 2026-11-18 from stored artifacts
+Status: Slice 6 local submission candidate, updated 2026-11-19 after Goldfish review and corrected rerun
 
 Study: *From Incomplete Evidence to Automated Action: A Formal Model and Dynamic Simulation of Review Capacity and Timeout Rules, with a Robodebt Application*
 
-This packet is the inspection index for the formal model, source-grounded application, executable validation, frozen design, confirmatory runs, quantitative results, and integrated article. The technical repository release gate passes after relocating the APA exporter to the reporting-only tree. The audit of cited source anchors found no substantive source or numerical contradiction, and the final literature update was completed on 2026-11-11. Identified attribution, title, source-description, issue/article-identifier, and page-range defects have been corrected, and the closest new comparisons have been integrated without changing the frozen study. A 2026-11-16 call-fit pass strengthened the emerging-technology framing, affirmative originality statement, descriptive policy labels, and implementation map. The 2026-11-18 clarity, simulation-contribution, and targeted venue-fit passes simplified the presentation, made the inferential division explicit, and clarified the functional bridge from a documented automated institutional process to prospective governance of contemporary AI-enabled workflows. They did not change formal semantics, results, estimands, claim boundaries, or field-transfer status. The author-identified 49-page APA Word review copy has been generated, metadata-scrubbed, rendered, and inspected. A conservative source count places the article at 9,809 words before the bibliography. The optional online technical appendix is not required to interpret the article and is withheld from submission unless a venue permits it. The local package is covered by the [submission-readiness receipt](SUBMISSION_READINESS_RECEIPT.md); public repository activation remains an intentional final external step. No reader study, formal comprehensibility return, usability claim, inter-rater claim, or practitioner-performance claim is required or supplied.
+This packet indexes the formal model, source-grounded application, executable validation, design freeze, corrected confirmatory runs, quantitative results, and integrated article. A 2026-11-19 Goldfish review found that the first runtime stored the evaluation-specification identifier without invoking its general support rule. The implementation now binds a content-addressed specification, executes the registered action-support rule across finite exact refinement certificates, and records those identities at routing and action time. A second immutable freeze and both complete 16,200-attempt suites were executed. Every cell summary, paired estimate, precision result, and common-random-number diagnostic exactly matches the archived first run; event, configuration, manifest, and analysis-receipt hashes changed as expected. The source audit found no substantive historical or numerical contradiction. A conservative source count places the revised article at 9,912 words before the bibliography. The final APA Word review copy has been regenerated and all 49 rendered pages inspected. Public repository activation remains the only external release step. No reader study, usability claim, inter-rater claim, or practitioner-performance claim is supplied.
 
 ## 1. Scope and evidence rule
 
@@ -42,15 +42,17 @@ An internal self-hash is the canonical identity stored inside a JSON receipt aft
 | Author editorial pass | Sections 8-9; protocol/governance draft | present as ordinary editing, not formal review evidence |
 | Self-contained five-step protocol, Robodebt trace, and AI canary | Section 8; protocol/governance draft and stored fixtures | present in drafted Section 7 |
 | Complete integrated manuscript and consistent headline findings | Section 9 | present; source, integration, and APA-format review complete |
+| Goldfish review resolution | Sections 1-12; `GOLDFISH_RESOLUTION.md` | all scientific and presentation findings resolved; public activation remains project-lead controlled |
+| Evaluation-specification correction and exact-rerun comparison | Section 2; `EVALUATION_SPECIFICATION_CORRECTION.md` | present; executable bridge closed and all reported estimates unchanged |
 
 ## 2. Freeze and repository identity
 
 | Item | Stored identity or value | Evidence |
 | --- | --- | --- |
-| Freeze ID | `UPS-CONFIRMATORY-FREEZE@1` | `FREEZE_MANIFEST.json` |
-| Freeze manifest self-hash | `35f360d81e7eebe1effeae813f4144991b0fa043001df6d920d3f8592bfee65c` | [Freeze manifest](FREEZE_MANIFEST.json) |
-| Frozen repository head | `0b8e890b0ed7a773cfaf328997a3e865ded3457a` | `repository_head_at_creation` in manifest |
-| Freeze time | `2026-11-01T19:35:05.140725+00:00` | manifest |
+| Freeze ID | `UPS-CONFIRMATORY-FREEZE@2` | `FREEZE_MANIFEST.json` |
+| Freeze manifest self-hash | `9d0d2ed34f74608e5aed96b6a28d81ded2d6d15bba552be91706c5ce862b2801` | [Freeze manifest](FREEZE_MANIFEST.json) |
+| Frozen repository head | `dd6df521c212f45978417f2e43c9f2003bed9271` | `repository_head_at_creation` in manifest |
+| Freeze time | `2026-11-20T02:23:23.590011+00:00` | manifest |
 | Frozen file inventory | 77 files; inventory-path hash `93569b6ad029ae634213e6e02f162f7c28e39567d83889ae414abba6b6190a0c` | manifest |
 | Source inventory | 10 selected sources, retrieved through 2026-10-31; source-manifest hash `fff48f4a818f29cd7ea5e7168c877c6697cd287a0714c2147b436814c2d87500` | manifest and [source manifest](../data/sources/robodebt/source_manifest.yaml) |
 | Frozen runtime | CPython 3.14.4, macOS 26.5.2 arm64 | manifest |
@@ -58,9 +60,9 @@ An internal self-hash is the canonical identity stored inside a JSON receipt aft
 
 The source manifest records official URLs, publication metadata, local record hashes, and citation locators. Remote source bytes were not archived or byte-hashed at freeze; the manifest records `remote_byte_hash: null` and `http_outcome_at_freeze: not_rechecked`. Historical claims must therefore be checked against the cited official locator, not treated as vendored-source reproduction.
 
-The declared frozen scientific inputs and stored results retain their recorded hashes. A post-freeze article renderer was initially added beneath the manifest-covered `scripts/*.py` tree, causing inventory drift even though it did not affect the scientific run. It now lives at `reporting/build_article_figure3.py`, outside the frozen executable and verification trees. This restores the original 77-file inventory without rewriting or expanding the immutable manifest. The move changes reporting organization only; the renderer remains bound to the stored core-analysis self-hash.
+The original manifest is preserved as `FREEZE_MANIFEST_PRE_EVALUATION_BRIDGE.json`; its 32,400 attempts are retained locally under `outputs/archive_pre_evaluation_bridge/`. The second freeze changes the executable provenance bridge, validation receipt hashes, and tests without changing scenario parameters, seeds, metrics, contrasts, or quantitative outcomes. The reporting renderer remains outside the frozen executable tree and is bound to the corrected core-analysis self-hash.
 
-A later execution-control decision retiring formal comprehensibility review had also edited one frozen reference profile and three frozen validators. Those four files have been restored byte-for-byte to their manifest identities. The retirement remains recorded in non-frozen current-control documents: no completed return, agreement measure, usability claim, or practitioner-performance claim is required. The restored release validator checks only that the retained optional-notes file exists; it does not require completion or treat it as evidence.
+The auditable defect, repair, rerun identities, and field-by-field equality result are summarized in [Evaluation-Specification Correction Receipt](EVALUATION_SPECIFICATION_CORRECTION.md).
 
 ### Release evidence packaging
 
@@ -68,14 +70,14 @@ The release candidate includes the two compact run indexes, reconciliations, ana
 
 | Packaged artifact | File SHA-256 |
 | --- | --- |
-| Core run index | `b5adc0ec16ab237fd903a34fcbdc3f134ff9c0f3afe380b0b51f3ca5fa07d207` |
-| Core reconciliation | `ab7a90f6fdbe0ec5d14001d544f364e84e43ea4b8ce5ff881c1dcec072c3e4d0` |
-| Core analysis | `0b22048528518825343657c0a1e1df95880df99ef7a937ba2dee2cb0a680bf8a` |
+| Core run index | `c2920f06a10fc46c94c7dc5f9f44ebe59ded4ef5bc8ed38ee9ad23661aefe26a` |
+| Core reconciliation | `5853b7deb78bf6e946bfa8b0696c2537fcb5af1b4b677aedf95731149860bb3b` |
+| Core analysis | `85535696db67c74a982ba17eff2f9ab5c6570a051f751a5e478e687c49dca34e` |
 | Core capacity/timeout SVG | `d4ecc9c52ad16b758498c3e718f700a5cb225fde58dfcb05d38468aa2de018f9` |
 | Core information-tradeoff SVG | `fd8b122c9ca5932217e424575ac1faf0ca26b6cc503a1b81a810bd42214fbc83` |
-| Sensitivity run index | `daa0010d57c81762fa0d5dd5c27f8942380e24a8b9a427bea1e2d525459de891` |
-| Sensitivity reconciliation | `f0cdbaa2f0e8026a50142b817fdd7bb19e3a6e5b28468ba5e62164d6ca779729` |
-| Sensitivity analysis | `509525b249e0a60d1c3fffd223f64230eeb661f8caab0d4b88711b4ec358510c` |
+| Sensitivity run index | `22547259ee0dcf3e1516a1536f8c6f7b81ea028c20cacee8dff900b90ceeac2d` |
+| Sensitivity reconciliation | `14c3595c5f25f80d01e707349a85ccca8332186f832cbf0e862d7a444502fb2d` |
+| Sensitivity analysis | `638da3d667d377b5449cd27f64f67a46dc461fded2ca5ed843d8e2bbb7f252f6` |
 | Sensitivity capacity/timeout SVG | `22f52e37eec54f33fa56e791ea0ed85f47a2afdc14370a77dd220b6e059d6a5c` |
 | Sensitivity information-tradeoff SVG | `76f25bfd8f4ac4f104ae61951c01cdbf4a8ff57405f3c633c8f11dcc67429062` |
 
@@ -119,11 +121,12 @@ These diagrams own topology and documented transition meaning only. They do not 
 | Receipt | Stored evidence | Result | Claim limit |
 | --- | --- | --- | --- |
 | Deterministic vertical slice | [Slice 1 records](../data/golden_traces/slice1_records_v1.json), byte hash `29ec5616135d9e94a6d8e84dbdff3879fcc63dfbacadaa4e640258dab2912db8` | 726 records; closure valid; 9 expected/observed comparisons; 4,240 typed and 51 explicit polymorphic references resolved; three architecture/application receipts match | Deterministic implementation validation only. |
-| Stochastic engine | [Slice 2 receipt](../data/golden_traces/slice2_stochastic_validation_v1.json), byte hash `7e30903f264a0c9630ebdd27b5e113cf94ec71b670c79a8105491a35a8273c66` | 5 exact golden traces and replays; 3 queue receipts; 2 application-equivalence receipts; keyed paired-draw canary matches | Implementation validation, not a pilot or substantive result. |
+| Stochastic engine | [Slice 2 receipt](../data/golden_traces/slice2_stochastic_validation_v1.json), byte hash `25e536f2fa48d5c86663f764a1444c8939e043925f1ef446ba94df3ae5c5daed` | 5 exact golden traces and replays; 3 queue receipts; 2 application-equivalence receipts; keyed paired-draw canary matches | Implementation validation, not a pilot or substantive result. |
 | Development pilot | [Pilot receipt](../data/pilot/pilot_v1_receipt.json), self-hash `e1f53d50d30aa71d5ebc33bc276e892e0452730d2e1dd1a445f881d188299b31` | 15 families, 5 policies, 6 replications; runtime and precision design rehearsed | Development diagnostics only; excluded from confirmatory claims. |
 | Negative controls | [Control receipt](../data/golden_traces/slice4_negative_control_receipt_v1.json), self-hash `ed9c0462413d96db8b14ec44c2062fc2433df448ed29f95784560fa239d7a861` | 5/5 pass | Matched control behavior only. |
 | Fixed Robodebt trace | [Worked trace](../data/golden_traces/robodebt_worked_trace_v1.json), internal artifact hash `5057bf6a0836a97c849bf5a22f37c2bf79abe63b6a2040d9ad4f063537a0755d`, byte hash `eaa28ab1cb90828383aca462726ae79e8ba0de324f0b771c538a4acaac5f6baa` | Baseline/repair controlled pair compiled under specification hash `279d3888856f434a12a6be950cbff7b19d5745054aa5a3ead2bb59a5a2fd05a2` | Explanatory Level B trace; no representativeness, legality, monetary, or attackability inference. |
-| Automated repository checks | test suite | 178 tests passed at Slice 5 closeout | Test coverage is implementation evidence, not substantive validity. |
+| Executable evaluation bridge | compiled specification and action receipts | Content-addressed support rule and finite exact certificates invoked at routing and action time; corrected and archived estimates are exactly equal | Binary period-evidence specification only; not a universal domain specification. |
+| Automated repository checks | test suite | 180 tests passed after bridge correction | Test coverage is implementation evidence, not substantive validity. |
 
 The kernel is case-neutral. The stored isomorphic-vocabulary receipt checks semantic preservation under renamed vocabulary; the non-isomorphic-topology receipt checks that a changed topology is not falsely treated as isomorphic; and the application-adapter receipt checks that Robodebt-specific material remains outside the kernel.
 
@@ -141,10 +144,10 @@ The five matched controls are individually visible rather than collapsed into th
 
 | Suite | Families x policies x replications | Runs; trajectories | Run-index self-hash | Reconciliation self-hash | Analysis self-hash | Precision decision |
 | --- | ---: | ---: | --- | --- | --- | --- |
-| Core `CONFIRMATORY-V1` | 108 x 5 x 30 | 16,200; 1,296,000 | `5153ce51558ce63db314b89e4cea206c345760d904dc5c54caec219a05d6a8d6` | `89ff2c78d842459fb210dcae112ef0f725447ca8a090db8226e17cbd2b203d48` | `bb486ee634365e53b7de464eb8cae8fc1e9169a29e1b6ad0ed3b496a684341cc` | Maximum paired/rate MCSE 0.04332; targets 0.06/0.05 met; no extension. |
-| Retrieval-latency sensitivity | 108 x 5 x 30 | 16,200; 1,296,000 | `b4e2bd26a04b0390a9a206fb983f7e78b869a30e616a72aa36dbbbd656719ce7` | `db8ccf476a4815f276cd5b3dc233d5c9fe37a7de296c687e1e031b0af23c5493` | `0abaab09c09c94eb797d46ade1dbe5d7dd46c1ce85d515ba769ed4d1b5bc82db` | Maximum paired/rate MCSE 0.04051; targets met; no extension. |
+| Core `CONFIRMATORY-V1` | 108 x 5 x 30 | 16,200; 1,296,000 | `3fcb54de9657ae212cee87ddc9c09184798b4948e90b2cd534f8580892c71d99` | `4d596c0872aa872214c5815615246a683f5e7be0c6ce8dc38cbae257df23273c` | `4d549f5e1fed84f294052749d9987d807e9fe2199843b44d7eb7aece867b36bd` | Maximum paired/rate MCSE 0.04332; targets 0.06/0.05 met; no extension. |
+| Retrieval-latency sensitivity | 108 x 5 x 30 | 16,200; 1,296,000 | `00851d0dffd7c7b649897d6d78f8d2c90a8f31134f948323b455f8a60823732f` | `08b36d1f16ef1e27435cc1e8a17f929864d0775f20da495f782c6596faf48e9e` | `f1cbc3437418e803510483a080052444ce75658df42a95fcd5f4f6922f637452` | Maximum paired/rate MCSE 0.04051; targets met; no extension. |
 
-Both reconciliations report 16,200 expected and observed attempts, zero missing IDs, and zero unexpected IDs. The suites total 32,400 runs and 2,592,000 case-policy trajectories. The sensitivity doubles retrieval-latency scale from 10 to 20 days and remains separate from the core rather than being pooled.
+Both corrected reconciliations report 16,200 expected and observed attempts, zero missing IDs, and zero unexpected IDs. The suites total 32,400 runs and 2,592,000 case-policy trajectories. The sensitivity doubles retrieval-latency scale from 10 to 20 days and remains separate from the core. It tests delayed routing and queue phasing, not acquisition failure, abandonment, or deadline expiry.
 
 | Frozen design identity | Core | Sensitivity |
 | --- | --- | --- |
@@ -164,14 +167,14 @@ All means and ranges below are unweighted summaries across 108 deliberately desi
 | Claim | Result | Direct evidence | Boundary |
 | --- | --- | --- | --- |
 | Fail-closed safety under tested loads | U2C mean gate safety was 1.000 at loads 0.60, 0.95, and 1.20. Timely review completion fell 0.857 -> 0.502 -> 0.212 while unresolved holding rose 0.143 -> 0.498 -> 0.788. | Core analysis `cell_summaries`; [Methods/results draft](ARTICLE_METHODS_RESULTS_DRAFT.md), sec. 6.2 | Three tested loads do not locate a continuous threshold. Safety is not service or resolution. |
-| Timeout consequence | U2O-U2C unsupported progression +0.476 (family range +0.042 to +0.881; all 108 intervals above zero). Gate safety and unresolved holding changed by -0.476; exposure changed by +0.476. | Core analysis `paired_estimates`; Table 2 in methods/results draft | Direction follows declared timeout semantics; simulation contributes magnitude and scenario variation. |
-| Review-completion equivalence | U2O-U2C timely-review-completion difference was 0.000 in all 108 families. | Core analysis `paired_estimates`; Table 2 | Measures timely pre-action completion, not the full formal `ReviewEffective` construct. |
-| Information-first comparison | U3-U0 unsupported progression 0.000; interaction events +1.096 (+0.860 to +1.312); workload events +1.209 (+0.749 to +1.728); exposure +0.594 (+0.369 to +0.815); all nonzero-family intervals above zero. | Core analysis `paired_estimates`; Table 2 | Interaction events are not effort, subjective burden, welfare, or cost. Workload direction partly follows metric/policy definitions. Exposure is not error or harm. |
+| Timeout consequence | U2O-U2C unsupported progression +0.476 (family range +0.042 to +0.881; all 108 intervals above zero). Gate safety and unresolved holding changed by -0.476; exposure changed by +0.476. | Core analysis `paired_estimates`; manuscript Table 3 | Direction follows declared timeout semantics; simulation contributes magnitude and scenario variation. |
+| Review-completion equivalence | U2O-U2C timely-review-completion difference was 0.000 in all 108 families. | Core analysis `paired_estimates`; manuscript Table 3 | Measures timely pre-action completion, not the full formal `ReviewEffective` construct. |
+| Information-first comparison | U3-U0 unsupported progression 0.000; interaction events +1.096 (+0.860 to +1.312); workload events +1.209 (+0.749 to +1.728); exposure +0.594 (+0.369 to +0.815); all nonzero-family intervals above zero. | Core analysis `paired_estimates`; manuscript Table 3 | Interaction events are not effort, subjective burden, welfare, or cost. U3 review metrics are excluded because zero-request replications lack a denominator-aware value. |
 | Descriptive unresolved holding | Designed-family mean unresolved holds: U3 0.009, U0 0.766. | Core analysis `cell_summaries`; sec. 6.4 | Descriptive, not a generated paired estimand; fewer action-stage holds do not prove terminal resolution. |
-| Validation contrast | U1-U0 unsupported progression +0.781 (+0.578 to +0.914); all 108 intervals above zero. | Core analysis `paired_estimates`; Table 2 | Benchmark activation only, not a policy recommendation or independent discovery. |
+| Validation contrast | U1-U0 unsupported progression +0.781 (+0.578 to +0.914); all 108 intervals above zero. | Core analysis `paired_estimates`; manuscript Table 3 | Benchmark activation only, not a policy recommendation or independent discovery. |
 | Retrieval-latency sensitivity | U3-U0: interactions +1.098 (+0.855 to +1.325), workload +1.209 (+0.748 to +1.724), exposure +0.595 (+0.370 to +0.824); both policies again had zero unsupported progression. | Sensitivity analysis `paired_estimates`; sec. 6.5 | Stability to one prespecified perturbation, not general robustness. |
 
-The deterministic publication exhibit is [Figure 3](figures/figure3_simulation_results.svg), byte hash `16d4f7d5fe5c30b7e22e44eedbe5124a963ad93459ef55880f11946b0c12ece1`. Table 2 is embedded in the [methods/results draft](ARTICLE_METHODS_RESULTS_DRAFT.md). The analysis JSON, not the rendered exhibit, remains the quantitative source of record.
+The deterministic publication exhibit is [Figure 3](figures/figure3_simulation_results.svg), byte hash `e180bbf1f71b507d78d0fda041cc8638744f5fe4964ecfd46c2351be26095040`. Table 3 appears in the [integrated manuscript](ARTICLE_MANUSCRIPT.md). The analysis JSON, not the rendered exhibit, remains the quantitative source of record. The execution ledger retains the earlier renderer hash as a historical receipt rather than the current exhibit identity.
 
 ### Queue and effective-review boundary map
 
@@ -195,21 +198,21 @@ This is a three-point capacity response, not a located continuous boundary. A co
 | Recipient burden | Response plus assistance-request interaction events | Compare modeled interaction counts only. | Learning, compliance, psychological burden, welfare, or subjective effort. |
 | Recovery exposure | Entry into the modeled external/recovery path | Compare exposure rates and paired policy differences. | Error, harm, amount recovered, or independent confirmation of unsupported action. |
 | Correction | Worked-trace reassessment/correction events; stage-aware attempt telemetry | Show that correction is distinct from prior exposure and restoration. | A preregistered paired correction-rate result: the frozen analysis receipt did not emit one. |
-| Restoration | Worked-trace residual consequence and stage-aware censoring | Show trace-specific partial restoration and identify open terminal paths. | Complete-restoration policy comparisons: U0, U2C, and U3 are fully terminally censored, and no registered paired restoration estimand exists. |
+| Restoration | Worked-trace residual consequence and stage-aware closure coding | Show trace-specific partial restoration and identify open terminal paths. | Complete-restoration policy comparisons: U0, U2C, and U3 lack modeled terminal-resolution events, and no registered paired restoration estimand exists. |
 
 ### Master claim-owner map
 
 | Claim family | Formal proposition or construct | Source/run owner | Article exhibit or trace | Required limitation |
 | --- | --- | --- | --- | --- |
 | Representation can change permission while held facts remain fixed | F0, F4, P0 fixture | Slice 1 record bundle and P0 receipt | representation-preservation fixture; [Figure 1](figures/figure1_evidence_to_action_protocol.svg) | Controlled fixture, not interface-effect prevalence or usability evidence. |
-| Weaker evidence must not add unsupported automatic progression | Proposition 1; F1; FR1 | formal model, worked trace, core paired estimates | Table 2; U2O-U2C and U1-U0; Robodebt trace | Direction is partly rule-defined; simulation contributes magnitude and variation. |
-| Fail-closed safety can coexist with review/service failure | Proposition 2; FR3, FR5 | core analysis and queue validation | Figure 3 panels A-B; Table 2 | Three load points do not estimate a universal or continuous threshold. |
-| Fail-open timeout converts review shortfall into progression | Proposition 2, part 3 | U2O-U2C paired estimates | Figure 3B; Table 2 | Applies to declared policies and parameter space, not all institutions. |
-| Information-first changes a vector of outcomes | action taxonomy; F1/F2 boundary | U3-U0 core and sensitivity receipts | Figure 3C; Table 2 | No scalar welfare ranking; interaction proxy is not substantive burden. |
+| Weaker evidence must not add unsupported automatic progression | Characterization 1; F1; FR1 | formal model, worked trace, core paired estimates | Table 3; U2O-U2C and U1-U0; Robodebt trace | Direction is partly rule-defined; simulation contributes magnitude and variation. |
+| Fail-closed safety can coexist with review/service failure | Characterization 2; FR3, FR5 | core analysis and queue validation | Figure 3 panels A-B; Table 3 | Three load points do not estimate a universal or continuous threshold. |
+| Fail-open timeout converts review shortfall into progression | Characterization 2, part 3 | U2O-U2C paired estimates | Figure 3B; Table 3 | Applies to declared policies and parameter space, not all institutions. |
+| Information-first changes a vector of outcomes | action taxonomy; F1/F2 boundary | U3-U0 core and sensitivity receipts | Figure 3C; Table 3 | No scalar welfare ranking; interaction proxy is not substantive burden. |
 | Correction is not complete restoration | Proposition 3; F5; FR6 | fixed worked trace and censoring receipts | Supplementary Tables S1–S2, baseline B-08 to B-10 | Trace-specific; terminal comparative restoration remains unidentified. |
 | Robodebt is a structurally suitable application | application contract | source manifest, dated profiles, process maps/crosswalk | [Figure 2](figures/figure2_robodebt_process_profiles.svg) and fixed trace | No numerical reconstruction, independent legality finding, or attackability claim. |
 | Method transfers across vocabulary | F0-F5 protocol and isomorphic-adapter contract | transfer canary and Slice 1 receipt | compact LLM-summary canary | Representability only; no validated transfer or practitioner-performance claim. |
-| Contribution is a bounded synthesis | all three propositions plus dynamic demonstration | literature/originality map and conducted analyses | integrated introduction and conclusion | No claim to invent information ordering, queues, burden, oversight, or red teaming generally. |
+| Contribution is a bounded synthesis | formal characterizations plus dynamic demonstration | literature/originality map and conducted analyses | integrated introduction and conclusion | No claim to invent information ordering, queues, burden, oversight, or red teaming generally. |
 
 ## 7. Measurement audit and censoring
 
@@ -219,7 +222,9 @@ The stored `review_effective_rate` measures timely pre-action review completion 
 
 The stored `recipient_burden_rate` counts interaction events. The article calls it **recipient interaction events per case** because it does not measure effort, subjective burden, welfare, or cost.
 
-Administrative closure does not manufacture resolution. Every U0, U2C, and U3 family cell was terminally right-censored; designed-family mean censoring was 0.219 for U1 and 0.524 for U2O. These values include structurally open paths. Complete restoration cannot be compared for the fully censored policies, although earlier stage-specific outcomes remain interpretable within their declared horizons.
+U3 review metrics are excluded from confirmatory interpretation because zero-request replications were encoded as `0.0` rather than not applicable; averaging them would understate conditional performance. No denominator-aware replacement is introduced post hoc.
+
+Administrative closure does not manufacture resolution. Every U0, U2C, and U3 family cell had an open-or-administratively-censored terminal-path rate of 1.000 because those policies lacked modeled terminal-resolution events. Designed-family means were 0.219 for U1 and 0.524 for U2O. Terminal resolution and complete restoration therefore cannot be compared across all five policies, although earlier stage outcomes remain interpretable.
 
 ## 8. Robodebt application and transfer boundary
 
@@ -252,11 +257,11 @@ The LLM-summary transfer canary is an author-constructed cross-vocabulary illust
 | Article component | Status | Artifact |
 | --- | --- | --- |
 | Claim-driven architecture and word budget | drafted and reviewed | [Article outline](ARTICLE_OUTLINE.md) |
-| Dynamic methods, results, Figure 3, Table 2 | drafted and critically revised | [Methods/results draft](ARTICLE_METHODS_RESULTS_DRAFT.md) |
+| Dynamic methods, results, Figure 3, Table 3 | integrated and critically revised | [Integrated manuscript](ARTICLE_MANUSCRIPT.md) |
 | Five-step protocol, worked example, governance interventions | drafted and critically revised | [Protocol/governance draft](ARTICLE_PROTOCOL_GOVERNANCE_DRAFT.md) |
 | Limitations and conclusion | integrated and reviewed | [Integrated manuscript](ARTICLE_MANUSCRIPT.md) |
 | Introduction, mechanism/literature, formal-model exposition, and case application | integrated and reviewed; Figures 1–2 built | [Integrated manuscript](ARTICLE_MANUSCRIPT.md) |
-| Integrated manuscript and word count | conservative source count 9,809 words before the bibliography; author identity, call-fit, clarity, simulation-contribution, and targeted venue-fit editorial passes and 49-page APA Word review copy completed; current source anchors audited with no substantive contradiction | [Integrated manuscript](ARTICLE_MANUSCRIPT.md) and [APA Word manuscript](ARTICLE_MANUSCRIPT_APA.docx) |
+| Integrated manuscript and word count | conservative source count 9,912 words before the bibliography after Goldfish fixes; final APA Word copy has 49 visually inspected pages, three tables, three figures, and three correctly oriented sections | [Integrated manuscript](ARTICLE_MANUSCRIPT.md) and [APA Word manuscript](ARTICLE_MANUSCRIPT_APA.docx) |
 | Optional online technical appendix | detailed levels, statuses, completeness rules, receipt fields, reference worksheet, and fixed Robodebt worked trace assembled without a usability claim; may be withheld without impairing the article | [Online technical appendix](ARTICLE_SUPPLEMENTARY_MATERIAL.md) |
 
 The paper is a natural extension of *When Uncertainty Expands Authority* because it formalizes and tests the precursor mechanism. It remains standalone by defining its own concepts, motivating the case, presenting conducted analysis, and restricting lineage material to internal controls, acknowledgments, or a concise origin statement. The continuity table in `CONTINUITY_AND_CLAIM_BOUNDARY.md` classifies precursor claims as retained, refined, tested, bounded, or rejected.

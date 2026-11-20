@@ -1106,3 +1106,30 @@ Date: 2026-11-18
 The manuscript title page now identifies Eli Talbert and supplies `etalbert102@gmail.com` as the correspondence address. No organizational affiliation or employer endorsement is asserted. The reporting-only exporter reproduces the same block while metadata scrubbing remains in place.
 
 No scientific definition, source mapping, design element, result, interpretation, or claim boundary changed. The conservative source count is 9,809 words before the bibliography, leaving 191 below the verified ceiling; the rendered Word count is 9,789 pre-reference tokens. The regenerated APA review copy contains 49 pages, two tables, three figures, 33 hyperlinks, and three sections. All 49 pages were visually inspected after export; accessibility, archive, image, section, metadata, and tracked-change checks pass.
+
+## Post-Slice-6 Goldfish Correction and Second Freeze
+
+Status: executable specification bridge closed; corrected suites reconciled; manuscript and package revised; release gate passes
+
+Date: 2026-11-19
+
+The comprehensive Goldfish review found that the first confirmatory runtime stored the evaluation-specification identifier without invoking the general action-support rule. The corrected compiled configuration contains a content-addressed evaluation specification, action-specific support rule, finite exact refinement certificates, and implementation hash. The simulator now invokes that rule across every certified refinement at routing and action time and records the specification, implementation, certificate, evidence-state, and robust-support identities in its receipts. Unit coverage includes both supported and unresolved evidence states.
+
+The pre-correction manifest and attempts were preserved. A second 77-file freeze, `UPS-CONFIRMATORY-FREEZE@2`, has manifest self-hash `9d0d2ed34f74608e5aed96b6a28d81ded2d6d15bba552be91706c5ce862b2801`. Both 16,200-attempt suites were rerun and reconciled. Structured comparison with the archived analyses found exact equality for `cell_summaries`, `paired_estimates`, `precision`, and `common_random_number_diagnostics` in both suites. The corrected core and sensitivity analysis self-hashes are `4d549f5e1fed84f294052749d9987d807e9fe2199843b44d7eb7aece867b36bd` and `f1cbc3437418e803510483a080052444ce75658df42a95fcd5f4f6922f637452`. The correction receipt is `docs/EVALUATION_SPECIFICATION_CORRECTION.md`.
+
+The manuscript now states the executable binary support condition, correction and rerun history, U3 applicability boundary, retrieval-latency sensitivity scope, terminal non-absorption boundary, evidence-layer architecture, bounded originality claim, and current-AI use more directly. It contains 9,912 conservative source words before the bibliography. The APA review copy contains 49 pages, three tables, three figures, 31 external hyperlinks, and three sections; every page was visually inspected after regeneration. No result, scenario, policy, parameter, seed, estimand, or claim boundary changed.
+
+Exact final verification commands:
+
+```bash
+PYTHONPATH=src .venv/bin/python scripts/validate_plan.py
+PYTHONPATH=src .venv/bin/python scripts/validate_slice0.py
+PYTHONPATH=src .venv/bin/python scripts/validate_slice3.py --allow-confirmatory-output
+PYTHONPATH=src .venv/bin/python -m uncertainty_permission_simulation.cli verify-freeze docs/FREEZE_MANIFEST.json
+PYTHONPATH=src .venv/bin/python -m pytest -q
+PYTHONPATH=src .venv/bin/python scripts/verify_repo.py --release
+```
+
+Results: plan valid with eight slices, three primary hypotheses, five policies, 39 audit questions, nine deferred items, and a 10,000-word ceiling; Slice 0 valid with 10 sources, 10 claims, two profiles, 12 YAML files, and 95 diagnostics; Slice 3 engineering gate passed; freeze verification returned `status: ok`; all 180 tests passed; and the repository verifier returned `release: true` under the second manifest. The working-tree base is commit `dd6df521c212f45978417f2e43c9f2003bed9271`; the correction remains uncommitted pending project-lead instruction.
+
+Residual release condition: the repository remains intentionally private. The manuscript contains no dead placeholder link; exact public repository and evidence-packet URLs must be inserted and tested from a logged-out session after public activation and before submission. No reader study, external-reader return, formal comprehensibility review, usability claim, or supplement assumption is required.

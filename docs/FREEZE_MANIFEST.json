@@ -1,7 +1,7 @@
 {
   "artifact_kind": "confirmatory_freeze_manifest",
   "claim_boundary": "formal counterfactual simulation over the declared parameter space; no historical prevalence, monetary correctness, legality, or attackability inference",
-  "created_at_utc": "2026-11-01T19:35:05.140725+00:00",
+  "created_at_utc": "2026-11-20T02:23:23.590011+00:00",
   "design": {
     "confirmatory_validation": {
       "cohort_size": 80,
@@ -88,7 +88,7 @@
     {
       "category": "validation_receipts",
       "path": "data/golden_traces/slice2_stochastic_validation_v1.json",
-      "sha256": "7e30903f264a0c9630ebdd27b5e113cf94ec71b670c79a8105491a35a8273c66",
+      "sha256": "25e536f2fa48d5c86663f764a1444c8939e043925f1ef446ba94df3ae5c5daed",
       "size_bytes": 10271
     },
     {
@@ -328,8 +328,8 @@
     {
       "category": "executable_code",
       "path": "src/uncertainty_permission_simulation/configuration.py",
-      "sha256": "c5c58278b6b16c47dba89c6840c643ea5115929147e84f0c45fe7a2d99227dec",
-      "size_bytes": 4769
+      "sha256": "5adaec4db7470a9b76247bda4ef65cbeff09d325247f11789484b265fde40911",
+      "size_bytes": 10738
     },
     {
       "category": "executable_code",
@@ -358,7 +358,7 @@
     {
       "category": "executable_code",
       "path": "src/uncertainty_permission_simulation/freeze.py",
-      "sha256": "6752f718d2293341331b927f391d1d9a538c3427edb0f66ac3d06356269ed92b",
+      "sha256": "38e0ca7042dee13feed13dd38513f5afedb28a0a8cab023b058bbe4c804c4a74",
       "size_bytes": 14622
     },
     {
@@ -424,8 +424,8 @@
     {
       "category": "executable_code",
       "path": "src/uncertainty_permission_simulation/simulator.py",
-      "sha256": "a695d6c9ff2ae58121b77c23aac17332a3cde81572812567c553aeb4f3a05ab1",
-      "size_bytes": 102452
+      "sha256": "25b91ccfb80280484fb2f4d742df5e2eaaee26192a7e6d0de5bbd34905d2126d",
+      "size_bytes": 104141
     },
     {
       "category": "executable_code",
@@ -508,8 +508,8 @@
     {
       "category": "verification_tests",
       "path": "tests/unit/test_process_model.py",
-      "sha256": "1f50395c334b872679cb7cc2fe2cd28f22d507d63f2950bda40361371a775317",
-      "size_bytes": 10487
+      "sha256": "3b85f93e3304f7059b0295e52362f6d94555a96378a88b00f12e1c2569b8fcc4",
+      "size_bytes": 11414
     },
     {
       "category": "verification_tests",
@@ -526,14 +526,14 @@
     {
       "category": "verification_tests",
       "path": "tests/unit/test_simulator.py",
-      "sha256": "e29db91ba58864bff23a2424db1e8a77d9e24f9bb6157159e792d0e0ef3abf92",
-      "size_bytes": 33442
+      "sha256": "97b8695729c411960e1020d93979c13f4748f6f56c824841a63a25cd602c0002",
+      "size_bytes": 34847
     }
   ],
-  "freeze_id": "UPS-CONFIRMATORY-FREEZE@1",
+  "freeze_id": "UPS-CONFIRMATORY-FREEZE@2",
   "inventory_path_hash": "93569b6ad029ae634213e6e02f162f7c28e39567d83889ae414abba6b6190a0c",
-  "manifest_hash": "35f360d81e7eebe1effeae813f4144991b0fa043001df6d920d3f8592bfee65c",
-  "repository_head_at_creation": "0b8e890b0ed7a773cfaf328997a3e865ded3457a",
+  "manifest_hash": "9d0d2ed34f74608e5aed96b6a28d81ded2d6d15bba552be91706c5ce862b2801",
+  "repository_head_at_creation": "dd6df521c212f45978417f2e43c9f2003bed9271",
   "schema_version": 1,
   "source_identity": {
     "identity_rule": "docs/SOURCE_IDENTITY_RULE.md",

@@ -5,13 +5,40 @@ import pytest
 from uncertainty_permission_simulation.applications.robodebt import load_early_adapter
 from uncertainty_permission_simulation.artifacts import BundleBuilder, build_bundle, ref
 from uncertainty_permission_simulation.cli import _slice1_validation_observations, _specs
-from uncertainty_permission_simulation.configuration import CompilationError, ParameterValue, ScenarioOverlaySpec, compile_configuration
+from uncertainty_permission_simulation.configuration import (
+    CompilationError,
+    ParameterValue,
+    SUPPORTED_EVIDENCE_STATE_ID,
+    ScenarioOverlaySpec,
+    UNRESOLVED_EVIDENCE_STATE_ID,
+    compile_configuration,
+    evaluate_robust_action_support,
+    period_evidence_evaluation_specification,
+)
 from uncertainty_permission_simulation.process_model import TraceSpec, execute_topology, run_trace
 from uncertainty_permission_simulation.profiles import canonical_process, nonisomorphic_process, policy, smoke_overlay
 from uncertainty_permission_simulation.schemas import ContractError
 
 
 ROOT = Path(__file__).resolve().parents[2]
+
+
+def test_period_evidence_specification_executes_exact_refinement_certificate() -> None:
+    specification = period_evidence_evaluation_specification("TEST-EVALUATION@1")
+    supported, supported_certificate = evaluate_robust_action_support(
+        specification,
+        action_type_id="progress",
+        evidence_state_id=SUPPORTED_EVIDENCE_STATE_ID,
+    )
+    unresolved, unresolved_certificate = evaluate_robust_action_support(
+        specification,
+        action_type_id="progress",
+        evidence_state_id=UNRESOLVED_EVIDENCE_STATE_ID,
+    )
+    assert supported is True
+    assert unresolved is False
+    assert supported_certificate == "CERT-PERIOD-EVIDENCE-PRESENT@1"
+    assert unresolved_certificate == "CERT-PERIOD-EVIDENCE-UNRESOLVED@1"
 
 
 def test_all_seven_golden_behaviors() -> None:

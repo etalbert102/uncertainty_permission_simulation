@@ -9,7 +9,15 @@ from hashlib import sha256
 import json
 from typing import Literal
 
-from .configuration import CompiledConfigurationSpec, ParameterValue, ScenarioOverlaySpec
+from .configuration import (
+    CompiledConfigurationSpec,
+    EvaluationSpecificationSpec,
+    ParameterValue,
+    SUPPORTED_EVIDENCE_STATE_ID,
+    ScenarioOverlaySpec,
+    UNRESOLVED_EVIDENCE_STATE_ID,
+    evaluate_robust_action_support,
+)
 from .events import DEFAULT_PRIORITIES, Event, EventQueue
 from .policies import ActionDecision, EngagementDecision, EngagementInputs, decide_action, map_engagement, policy_behavior
 from .random_streams import DRAW_FAMILY_IDS, KeyedDraw, KeyedRandomStream, normalized_decimal
@@ -676,6 +684,7 @@ def _case_engagement_trace(
     overlay: StochasticInputOverlay,
     assistance_visit: ServiceVisit | None,
     assistance_queue_id: str,
+    evaluation_specification: EvaluationSpecificationSpec,
 ) -> EngagementTrace:
     behavior = policy_behavior(policy_id)
     draws = case.draw_map
@@ -795,7 +804,16 @@ def _case_engagement_trace(
         )
         routing_time = max(routing_time, return_time)
 
-    evidence_sufficient = decision.adequate_response_evidence or decision.retrieved_evidence
+    evidence_state_id = (
+        SUPPORTED_EVIDENCE_STATE_ID
+        if decision.adequate_response_evidence or decision.retrieved_evidence
+        else UNRESOLVED_EVIDENCE_STATE_ID
+    )
+    evidence_sufficient, refinement_certificate_id = evaluate_robust_action_support(
+        evaluation_specification,
+        action_type_id="progress",
+        evidence_state_id=evidence_state_id,
+    )
     representation_mode = (
         "period_specific_evidence" if evidence_sufficient
         else "imputed_unflagged" if behavior.policy_id == "U1"
@@ -807,7 +825,18 @@ def _case_engagement_trace(
         ("deadline_extension",) if decision.extension_granted else (),
         {"deadline_kind": "response"},
     )
-    emit("REPRESENTATION_APPLIED", routing_time, "representation")
+    emit(
+        "REPRESENTATION_APPLIED",
+        routing_time,
+        "representation",
+        extra_details={
+            "evidence_state_id": evidence_state_id,
+            "evaluation_spec_id": evaluation_specification.evaluation_spec_id,
+            "evaluation_specification_hash": evaluation_specification.specification_hash,
+            "refinement_certificate_id": refinement_certificate_id,
+            "robust_action_support": evidence_sufficient,
+        },
+    )
     emit("REPRESENTATION_SURFACED", routing_time, "representation")
     emit("ROUTING_COMPLETED", routing_time, "routing")
     review_required = behavior.review_scope == "all_progression" or (
@@ -946,14 +975,22 @@ def _add_action_events(
     trace: EngagementTrace,
     visit: ServiceVisit | None,
     administrative_cutoff: Decimal,
+    evaluation_specification: EvaluationSpecificationSpec,
 ) -> EngagementTrace:
     review_required = visit is not None
     review_completed_by_deadline = visit.completed_by_deadline if visit is not None else False
     routing_events = tuple(event for event in trace.events if event.event_type_id == "ROUTING_COMPLETED")
     if len(routing_events) != 1:
         raise ContractError("SIM_SYSTEM_STATE_INCOMPLETE", f"expected one routing event for {trace.case_id}")
-    evidence_sufficient = (
-        trace.decision.adequate_response_evidence or trace.decision.retrieved_evidence
+    evidence_state_id = (
+        SUPPORTED_EVIDENCE_STATE_ID
+        if trace.decision.adequate_response_evidence or trace.decision.retrieved_evidence
+        else UNRESOLVED_EVIDENCE_STATE_ID
+    )
+    evidence_sufficient, refinement_certificate_id = evaluate_robust_action_support(
+        evaluation_specification,
+        action_type_id="progress",
+        evidence_state_id=evidence_state_id,
     )
     action_decision = decide_action(
         policy_id=trace.policy_id,
@@ -1001,6 +1038,11 @@ def _add_action_events(
         "unauthorized_progression": action_decision.unauthorized_progression,
         "gate_safe": action_decision.gate_safe,
         "unsupported_reason_codes": action_decision.unsupported_reason_codes,
+        "evidence_state_id": evidence_state_id,
+        "evaluation_spec_id": evaluation_specification.evaluation_spec_id,
+        "evaluation_specification_hash": evaluation_specification.specification_hash,
+        "refinement_certificate_id": refinement_certificate_id,
+        "robust_action_support": evidence_sufficient,
     }
     added: list[Event] = []
     if action_decision.review_authorization_recorded:
@@ -1787,6 +1829,7 @@ def run_engagement_stage(cohort: StochasticCohort, compiled: CompiledConfigurati
             cohort.overlay,
             assistance_visit_by_case.get(case.case_id),
             assistance_queue.config.queue_id,
+            compiled.evaluation_specification,
         )
         for case in cohort.cases
     )
@@ -1807,6 +1850,7 @@ def run_engagement_stage(cohort: StochasticCohort, compiled: CompiledConfigurati
             trace,
             visit_by_case.get(trace.case_id),
             cohort.overlay.administrative_cutoff,
+            compiled.evaluation_specification,
         )
         for trace in review_traces
     )

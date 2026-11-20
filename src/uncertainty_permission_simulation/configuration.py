@@ -4,9 +4,12 @@ from __future__ import annotations
 
 from hashlib import sha256
 import inspect
+import json
 from typing import Any, Literal
 
 from pydantic import BaseModel, ConfigDict
+
+from .rules import RULE_IMPLEMENTATIONS, implementation_code_hash
 
 
 class CompilationError(ValueError):
@@ -55,11 +58,151 @@ class BindingReceipt(FrozenModel):
     value: Any
 
 
+class RefinementStateSpec(FrozenModel):
+    refinement_id: str
+    satisfied_support_condition_ids: tuple[str, ...]
+
+
+class RefinementCertificateSpec(FrozenModel):
+    certificate_id: str
+    evidence_state_id: str
+    coverage_mode: Literal["finite_exact"]
+    owner_id: str
+    refinements: tuple[RefinementStateSpec, ...]
+
+
+class ActionSupportRuleSpec(FrozenModel):
+    action_type_id: str
+    implementation_id: str
+    implementation_code_hash: str
+    support_condition_ids: tuple[str, ...]
+
+
+class EvaluationSpecificationSpec(FrozenModel):
+    evaluation_spec_id: str
+    owner_id: str
+    action_support_rules: tuple[ActionSupportRuleSpec, ...]
+    refinement_certificates: tuple[RefinementCertificateSpec, ...]
+    specification_hash: str
+
+
+PERIOD_EVIDENCE_SUPPORT_CONDITION_ID = "PERIOD-SPECIFIC-EVIDENCE"
+SUPPORTED_EVIDENCE_STATE_ID = "PERIOD-SPECIFIC-EVIDENCE-PRESENT"
+UNRESOLVED_EVIDENCE_STATE_ID = "PERIOD-SPECIFIC-EVIDENCE-UNRESOLVED"
+
+
+def _canonical_hash(value: object) -> str:
+    return sha256(
+        json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode()
+    ).hexdigest()
+
+
+def period_evidence_evaluation_specification(
+    evaluation_spec_id: str,
+    *,
+    owner_id: str = "INDEPENDENT-EVALUATION-OWNER",
+) -> EvaluationSpecificationSpec:
+    """Build the closed binary support specification used by the stylized kernel."""
+
+    rule = ActionSupportRuleSpec(
+        action_type_id="progress",
+        implementation_id="action_support_membership",
+        implementation_code_hash=implementation_code_hash("action_support_membership"),
+        support_condition_ids=(PERIOD_EVIDENCE_SUPPORT_CONDITION_ID,),
+    )
+    certificates = (
+        RefinementCertificateSpec(
+            certificate_id="CERT-PERIOD-EVIDENCE-PRESENT@1",
+            evidence_state_id=SUPPORTED_EVIDENCE_STATE_ID,
+            coverage_mode="finite_exact",
+            owner_id=owner_id,
+            refinements=(RefinementStateSpec(
+                refinement_id="REF-PERIOD-EVIDENCE-PRESENT",
+                satisfied_support_condition_ids=(PERIOD_EVIDENCE_SUPPORT_CONDITION_ID,),
+            ),),
+        ),
+        RefinementCertificateSpec(
+            certificate_id="CERT-PERIOD-EVIDENCE-UNRESOLVED@1",
+            evidence_state_id=UNRESOLVED_EVIDENCE_STATE_ID,
+            coverage_mode="finite_exact",
+            owner_id=owner_id,
+            refinements=(
+                RefinementStateSpec(
+                    refinement_id="REF-PERIOD-EVIDENCE-AVAILABLE",
+                    satisfied_support_condition_ids=(PERIOD_EVIDENCE_SUPPORT_CONDITION_ID,),
+                ),
+                RefinementStateSpec(
+                    refinement_id="REF-PERIOD-EVIDENCE-ABSENT",
+                    satisfied_support_condition_ids=(),
+                ),
+            ),
+        ),
+    )
+    content = {
+        "evaluation_spec_id": evaluation_spec_id,
+        "owner_id": owner_id,
+        "action_support_rules": [rule.model_dump(mode="json")],
+        "refinement_certificates": [item.model_dump(mode="json") for item in certificates],
+    }
+    return EvaluationSpecificationSpec(
+        **content,
+        specification_hash=_canonical_hash(content),
+    )
+
+
+def evaluate_robust_action_support(
+    specification: EvaluationSpecificationSpec,
+    *,
+    action_type_id: str,
+    evidence_state_id: str,
+) -> tuple[bool, str]:
+    """Evaluate support across every refinement in a validated finite certificate."""
+
+    content = specification.model_dump(mode="json", exclude={"specification_hash"})
+    if specification.specification_hash != _canonical_hash(content):
+        raise CompilationError("EVALUATION_SPEC_HASH_MISMATCH", specification.evaluation_spec_id)
+    rules = tuple(
+        rule for rule in specification.action_support_rules
+        if rule.action_type_id == action_type_id
+    )
+    if len(rules) != 1:
+        raise CompilationError("EVALUATION_ACTION_RULE_INVALID", action_type_id)
+    rule = rules[0]
+    if (
+        rule.implementation_id not in RULE_IMPLEMENTATIONS
+        or rule.implementation_code_hash != implementation_code_hash(rule.implementation_id)
+    ):
+        raise CompilationError("EVALUATION_IMPLEMENTATION_HASH_MISMATCH", rule.implementation_id)
+    certificates = tuple(
+        certificate for certificate in specification.refinement_certificates
+        if certificate.evidence_state_id == evidence_state_id
+    )
+    if len(certificates) != 1 or not certificates[0].refinements:
+        raise CompilationError("EVALUATION_REFINEMENT_CERTIFICATE_INVALID", evidence_state_id)
+    certificate = certificates[0]
+    parameters = {
+        "support_condition_refs": [
+            {"object_id": condition_id} for condition_id in rule.support_condition_ids
+        ],
+    }
+    supported = all(
+        bool(RULE_IMPLEMENTATIONS[rule.implementation_id](
+            {"evidence_state": {
+                "satisfied_support_condition_ids": refinement.satisfied_support_condition_ids,
+            }},
+            parameters,
+        ))
+        for refinement in certificate.refinements
+    )
+    return supported, certificate.certificate_id
+
+
 class CompiledConfigurationSpec(FrozenModel):
     configuration_id: str
     process_profile: ProcessProfileSpec
     policy_profile: PolicyProfileSpec
     evaluation_spec_id: str
+    evaluation_specification: EvaluationSpecificationSpec
     application_mapping_id: str | None
     overlay_id: str
     receipts: tuple[BindingReceipt, ...]
@@ -78,8 +221,23 @@ def compile_configuration(
     policy: PolicyProfileSpec,
     overlay: ScenarioOverlaySpec,
     evaluation_spec_id: str,
+    evaluation_specification: EvaluationSpecificationSpec | None = None,
     application_mapping_id: str | None = None,
 ) -> CompiledConfigurationSpec:
+    evaluation = evaluation_specification or period_evidence_evaluation_specification(
+        evaluation_spec_id
+    )
+    if evaluation.evaluation_spec_id != evaluation_spec_id:
+        raise CompilationError(
+            "EVALUATION_SPEC_ID_MISMATCH",
+            f"{evaluation_spec_id} != {evaluation.evaluation_spec_id}",
+        )
+    for evidence_state_id in (SUPPORTED_EVIDENCE_STATE_ID, UNRESOLVED_EVIDENCE_STATE_ID):
+        evaluate_robust_action_support(
+            evaluation,
+            action_type_id="progress",
+            evidence_state_id=evidence_state_id,
+        )
     if not policy.required_capabilities <= process.capabilities:
         missing = sorted(policy.required_capabilities - process.capabilities)
         raise CompilationError("PROFILE_POLICY_PROCESS_OVERLAP", f"undeclared capabilities: {missing}")
@@ -119,6 +277,7 @@ def compile_configuration(
         process_profile=process,
         policy_profile=policy,
         evaluation_spec_id=evaluation_spec_id,
+        evaluation_specification=evaluation,
         application_mapping_id=application_mapping_id,
         overlay_id=overlay.overlay_id,
         receipts=tuple(receipts),

@@ -53,7 +53,7 @@ Keyed U[0,1) variates generated binary events by threshold and stochastic timing
 | Retrieval and recovery | Retrieval latency U[0, 10) days in the core; recovery capacity 2, fixed service demand 8 days, and window 20 days. |
 | Correction and restoration | Correction-uptake probability 0.50 after a 7-day delay; reassessment capacity 2, fixed service demand 10 days, and window 14 days; restoration delay 5 days, window 50 days, and administrative cutoff day 650. |
 
-The 108-family design used five policies and 30 paired replications: 16,200 core runs and 1,296,000 case-policy trajectories. Load was a designed input, not measured utilization or an estimated threshold. The frozen manifest fixed 3,240 family-replication seeds per suite under SHA-256 identity `35f360d81e7eebe1effeae813f4144991b0fa043001df6d920d3f8592bfee65c`.
+The 108-family design used five policies and 30 paired replications: 16,200 core runs and 1,296,000 case-policy trajectories. Load was a designed input, not measured utilization or an estimated threshold. The corrected frozen manifest fixed 3,240 family-replication seeds per suite under SHA-256 identity `9d0d2ed34f74608e5aed96b6a28d81ded2d6d15bba552be91706c5ce862b2801`.
 
 MCSE targets were 0.05 for rates and 0.06 for paired differences. A miss after 30 replications would have extended every core cell to 60; none did. A separate 16,200-run sensitivity doubled retrieval-latency scale from 10 to 20 days without pooling with the core.
 
@@ -87,7 +87,7 @@ All 16,200 core and 16,200 sensitivity runs reconciled with no missing or unexpe
 
 The semantic audit found the service-numerator mismatch described above. We exclude that measure from results, figures, and conclusions without a post hoc substitute. This is a construct-validity failure in the demonstration, not an execution failure or population finding.
 
-Every U0, U2C, and U3 family cell had terminal right-censoring of 1.000; unweighted designed-family mean censoring rates were 0.219 for U1 and 0.524 for U2O. These values include structurally open terminal paths, not only work that exceeded day 650. The simulation therefore does not identify terminal disposition or permit complete-restoration comparisons for the fully censored policies, although earlier stage-specific outcomes remain interpretable within their horizons.
+Every U0, U2C, and U3 family cell had an open-or-administratively-censored terminal-path rate of 1.000; unweighted designed-family mean rates were 0.219 for U1 and 0.524 for U2O. These values combine structural non-absorption with work that exceeded day 650. The simulation therefore does not identify terminal disposition or permit complete-restoration comparisons for those policies, although earlier stage-specific outcomes remain interpretable within their horizons.
 
 ### 6.2 Expectation 1: fail-closed safety across tested load regimes
 
@@ -133,7 +133,7 @@ The strongest result is that identical timely-review-completion rates can coexis
 
 ![Three-panel simulation results: fail-closed load response, timeout-semantics paired differences, and information-first paired differences.](figures/figure3_simulation_results.svg)
 
-**Table 2. Prespecified paired estimates, computational precision, and claim boundaries.**
+**Table 3. Prespecified paired estimates, computational precision, and claim boundaries.**
 
 | Contrast | Outcome | Mean difference | Family range | MCSE range; intervals excluding zero | Claim key |
 | --- | --- | ---: | ---: | ---: | :---: |
@@ -156,12 +156,12 @@ Claim boundaries: **A**, timeout directions follow the declared fail-open/fail-c
 
 | Draft claim | Frozen artifact |
 | --- | --- |
-| Core execution, precision, family summaries, and paired estimates | `outputs/confirmatory_v1/analysis/analysis_r030.json` (`analysis_hash`: `bb486ee634365e53b7de464eb8cae8fc1e9169a29e1b6ad0ed3b496a684341cc`) |
-| Latency sensitivity estimates | `outputs/sensitivity_information_latency_v1/analysis/analysis_r030.json` (`analysis_hash`: `0abaab09c09c94eb797d46ade1dbe5d7dd46c1ce85d515ba769ed4d1b5bc82db`) |
+| Core execution, precision, family summaries, and paired estimates | `outputs/confirmatory_v1/analysis/analysis_r030.json` (`analysis_hash`: `4d549f5e1fed84f294052749d9987d807e9fe2199843b44d7eb7aece867b36bd`) |
+| Latency sensitivity estimates | `outputs/sensitivity_information_latency_v1/analysis/analysis_r030.json` (`analysis_hash`: `f1cbc3437418e803510483a080052444ce75658df42a95fcd5f4f6922f637452`) |
 | Complete run inventories | `outputs/confirmatory_v1/reconciliation.json`; `outputs/sensitivity_information_latency_v1/reconciliation.json` |
 | Policy, factor, seed, horizon, and precision definitions | `experiments/configs/confirmatory_v1.yaml`; `experiments/configs/sensitivity_information_latency_v1.yaml` |
 | Negative-control results | `data/golden_traces/slice4_negative_control_receipt_v1.json` |
-| Design-freeze identity | manifest hash `35f360d81e7eebe1effeae813f4144991b0fa043001df6d920d3f8592bfee65c` |
+| Design-freeze identity | corrected manifest hash `9d0d2ed34f74608e5aed96b6a28d81ded2d6d15bba552be91706c5ce862b2801` |
 | Figure 3 deterministic build | `reporting/build_article_figure3.py`; source receipt is the frozen core analysis above |
 | Excluded service numerator | `src/uncertainty_permission_simulation/experiments.py`, function `_run_metrics` |
 | Stage-specific censoring semantics | `src/uncertainty_permission_simulation/simulator.py`, administrative-cutoff closure logic |

@@ -20,7 +20,7 @@ from .schemas import ContractError
 
 
 FREEZE_MANIFEST_PATH = Path("docs/FREEZE_MANIFEST.json")
-FREEZE_ID = "UPS-CONFIRMATORY-FREEZE@1"
+FREEZE_ID = "UPS-CONFIRMATORY-FREEZE@2"
 
 FROZEN_DOCUMENT_PATHS = (
     "pyproject.toml",

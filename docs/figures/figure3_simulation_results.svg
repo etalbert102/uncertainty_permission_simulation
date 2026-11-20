@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1300" viewBox="0 90 1000 1300" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1390" viewBox="0 0 1000 1390" role="img" aria-labelledby="title desc">
 <title id="title">Figure 3. Capacity, timeout, and information-first results</title>
 <desc id="desc">Three panels show the U2C load response, U2O minus U2C paired differences, and U3 minus U0 paired differences over 108 designed scenario families.</desc>
 <rect x="0" y="0" width="1000" height="1390" fill="white"/>
@@ -123,6 +123,6 @@
 <text x="45.0" y="1225.0" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700" text-anchor="start" fill="#17212B">Reading the figure</text>
 <text x="45.0" y="1258.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" text-anchor="start" fill="#52606D">Panel A shows unweighted means over other designed factors; Panels B and C show means and family min–max ranges.</text>
 <text x="45.0" y="1288.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" text-anchor="start" fill="#52606D">Family ranges show scenario variation, not uncertainty. Panel C rows use different units and are not a common scale.</text>
-<text x="45.0" y="1318.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" text-anchor="start" fill="#52606D">MCSE intervals appear in Table 2. Timely review completion is timing only; exposure is downstream and not proof of harm.</text>
+<text x="45.0" y="1318.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" text-anchor="start" fill="#52606D">MCSE intervals appear in Table 3. Timely review completion is timing only; exposure is downstream and not proof of harm.</text>
 <text x="45.0" y="1358.0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700" text-anchor="start" fill="#17212B">Scope: frozen stylized parameter space; no historical, legal, population, or complete-restoration estimate.</text>
 </svg>

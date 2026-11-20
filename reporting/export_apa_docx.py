@@ -345,7 +345,7 @@ def configure_section(section, kind: str):
         margins = 0.75
         content_width = 7.0
         header_distance = 0.35
-    elif kind == "table2":
+    elif kind == "table3":
         section.orientation = WD_ORIENT.LANDSCAPE
         section.page_width = Inches(11)
         section.page_height = Inches(8.5)
@@ -461,6 +461,9 @@ def add_table(doc: Document, lines: list[str], table_number: int):
     rows = [parse_table_row(line) for line in lines]
     rows = [row for row in rows if not is_separator_row(row)]
     if table_number == 1:
+        widths = [1.05, 2.25, 1.75, 1.45]
+        font_size = 8.5
+    elif table_number == 2:
         widths = [1.55, 3.15, 1.80]
         font_size = 9
     else:
@@ -480,7 +483,7 @@ def add_table(doc: Document, lines: list[str], table_number: int):
             paragraph.style = doc.styles["APA Table Text"]
             if row_index == 0:
                 paragraph.alignment = WD_ALIGN_PARAGRAPH.CENTER
-            elif table_number == 2 and col_index in {2, 3, 4, 5}:
+            elif table_number == 3 and col_index in {2, 3, 4, 5}:
                 paragraph.alignment = WD_ALIGN_PARAGRAPH.CENTER
             else:
                 paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
@@ -582,8 +585,8 @@ def export(source: Path, output: Path):
     pending_exhibit_title = False
     current_figure = False
     current_table_number = None
-    table2_notes = False
-    table2_section_started = False
+    table3_notes = False
+    table3_section_started = False
 
     with tempfile.TemporaryDirectory(prefix="apa_docx_figures_") as temp_name:
         temp_dir = Path(temp_name)
@@ -627,11 +630,11 @@ def export(source: Path, output: Path):
             if stripped.startswith("**Table "):
                 match = re.search(r"Table (\d+)", stripped)
                 current_table_number = int(match.group(1))
-                if current_table_number == 2 and not table2_section_started:
-                    new_section(doc, "table2")
-                    table2_section_started = True
-                if current_table_number == 2:
-                    table2_notes = True
+                if current_table_number == 3 and not table3_section_started:
+                    new_section(doc, "table3")
+                    table3_section_started = True
+                if current_table_number == 3:
+                    table3_notes = True
                 pending_exhibit_title = True
                 paragraph = doc.add_paragraph(style="APA Exhibit Label")
                 add_markdown_runs(paragraph, stripped)
@@ -660,10 +663,12 @@ def export(source: Path, output: Path):
                     table_lines.append(lines[index].strip())
                     index += 1
                 table = add_table(doc, table_lines, current_table_number)
-                set_table_description(
-                    table,
-                    "Counterfactual policy comparison" if current_table_number == 1 else "Paired simulation estimates",
-                )
+                descriptions = {
+                    1: "Evidence architecture and diagnostic scope",
+                    2: "Counterfactual policy comparison",
+                    3: "Paired simulation estimates",
+                }
+                set_table_description(table, descriptions[current_table_number])
                 continue
 
             if stripped.startswith("*Note.*"):
@@ -674,13 +679,13 @@ def export(source: Path, output: Path):
                 index += 1
                 continue
 
-            if table2_notes and stripped.startswith("<sup>"):
+            if table3_notes and stripped.startswith("<sup>"):
                 paragraph = doc.add_paragraph(style="APA Exhibit Note")
                 add_markdown_runs(paragraph, stripped, size=9)
                 if stripped.startswith("<sup>d</sup>"):
                     new_section(doc, "apa")
-                    table2_notes = False
-                    table2_section_started = False
+                    table3_notes = False
+                    table3_section_started = False
                     current_table_number = None
                 index += 1
                 continue
@@ -691,9 +696,9 @@ def export(source: Path, output: Path):
                 style = "APA Keywords" if stripped.startswith("*Keywords:*") else "APA Abstract"
             else:
                 style = "APA Body"
-            if stripped.startswith("Table 2 reports") and not table2_section_started:
-                new_section(doc, "table2")
-                table2_section_started = True
+            if stripped.startswith("Table 3 reports") and not table3_section_started:
+                new_section(doc, "table3")
+                table3_section_started = True
             paragraph = doc.add_paragraph(style=style)
             add_markdown_runs(paragraph, stripped)
             if re.match(r"^Figure [123] (previews|contrasts|visualizes)\b", stripped):
