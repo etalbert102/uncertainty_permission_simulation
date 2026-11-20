@@ -12,7 +12,7 @@ This ledger is the canonical slice-status record. Update it at the end of every 
 | 3. Experiment pilot and freeze candidate | complete; ready for Slice 4 freeze work | `e8905fa`; gate amended 2026-11-01 and 2026-11-11 | pilot, Slice 0/plan/Slice 3 gates, executable worked trace and example/reference materials | no formal post-Slice-5 review; semantic findings still require a new freeze and rerun |
 | 4. Confirmatory freeze | complete; Freeze 3 active | checkpoint `dc96716`; manifest `47170f8c…c6b` | clean-commit 79-file inventory; prior 77-file freeze attested blob-by-blob; five-control receipt and all 182 tests verify | any frozen-file, inventory, or environment drift blocks execution and requires an explicit new freeze |
 | 5. Confirmatory execution and analysis | complete; Freeze 3 core and sensitivity reconciled and analyzed | core analysis `b3c2fde…112`; sensitivity analysis `210b211…5f4` | 32,400/32,400 attempts; 2,592,000 routing/action comparisons with zero mismatches; result-bearing fields exactly match the prior corrected runs | no formal comprehensibility review is due; narrative claims must retain the frozen model and case-study boundaries |
-| 6. Evidence packet and 10,000-word article | local submission package complete; integrated article is standalone and the technical appendix is optional | `669aff5` evidence packet; `96f7618` release-gate repair; manuscript package `a366b6a`; source-audit commit `27e6076`; later receipts recorded below | conservative source count 9,884 words before references; plan, Slice 0, Slice 3, 182-test, and release-gate checks pass | public repository activation and final link confirmation remain intentionally under project-lead control |
+| 6. Evidence packet and 10,000-word article | local submission package complete; integrated article is standalone and the technical appendix is optional | `669aff5` evidence packet; `96f7618` release-gate repair; manuscript package `a366b6a`; source-audit commit `27e6076`; later receipts recorded below | conservative source count 9,914 words before references; plan, Slice 0, Slice 3, 182-test, and release-gate checks pass | public repository activation and final link confirmation remain intentionally under project-lead control |
 
 ## Slice 0 Closeout Receipt
 
@@ -1177,3 +1177,13 @@ Date: 2026-11-20
 The fixed Robodebt pair now names access and clocks explicitly among the held-fixed variables, matching the canonical bounded trace and evidence packet. This receipt distinguishes the precision cleanup from the preceding concreteness pass. No formal definition, source mapping, design element, result, quantitative value, interpretation, or claim boundary changed.
 
 The conservative source count is 9,884 words before the bibliography, leaving 116 below the ceiling. The regenerated APA export contains 48 pages, three tables, three figures, and three correctly oriented sections; every page was visually inspected at full resolution. Accessibility, archive, image, and section checks pass, as do the release verifier and all 182 tests.
+
+## Slice 6 Paragraph-Transition Pass
+
+Status: paragraph handoffs tightened; claims and architecture unchanged
+
+Date: 2026-11-20
+
+The revision makes the manuscript's paragraph progression explicit at six high-value joins: findings to measurement limits, pre-action review to post-action repair, kernel neutrality to the evaluation specification, terminal-path description to validation and sensitivity, worked trace to component-local checks and intervention ownership, and the layered limitations sequence. It changes no formal definition, source mapping, design element, result, quantitative value, interpretation, or claim boundary.
+
+The conservative source count is 9,914 words before the bibliography, leaving 86 below the ceiling. The regenerated APA export contains 48 pages, three tables, three figures, and three correctly oriented sections; every page was visually inspected at full resolution. Accessibility, archive, image, and section checks pass, as do the release verifier and all 182 tests.

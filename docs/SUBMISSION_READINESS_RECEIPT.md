@@ -12,7 +12,7 @@ This receipt covers the integrated article, APA Word review copy, optional onlin
 
 - The article contains the complete five-step process-red-team procedure and the worked Robodebt application conclusion. Its claims and interpretation do not depend on supplementary material.
 - `ARTICLE_SUPPLEMENTARY_MATERIAL.md` is an optional online technical appendix containing implementation-level status codes, receipt fields, worksheets, and worked-trace detail. It may be withheld if a venue does not accept supplementary material.
-- The conservative Markdown-source count is 9,884 whitespace-delimited words before the bibliography, 116 below the 10,000-word ceiling. The conservative source count controls the release decision.
+- The conservative Markdown-source count is 9,914 whitespace-delimited words before the bibliography, 86 below the 10,000-word ceiling. The conservative source count controls the release decision.
 - The manuscript uses no endnotes to evade the word ceiling.
 
 ## APA Word review copy
