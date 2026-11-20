@@ -8,7 +8,7 @@ Correspondence: etalbert102@gmail.com
 
 ## Abstract
 
-AI-generated classifications, summaries, and recommendations increasingly enter workflows that route cases, assign review, trigger deadlines, and permit action. The central question is: when evidence becomes less decision-relevant, what may an automated workflow now do? This article proposes robust permission: weaker evidence should not newly enable automatic progression unless the same action remains independently supported across admissible refinements. Reviewed progression must remain outside the automatic set, bind the exact action, and revalidate support at execution. A formal model states these rules; a deterministic pair demonstrates their mechanics; a source-bounded Robodebt application establishes relevance to a documented automated process; and a design-frozen finite-cohort simulation estimates how often capacity activates alternative timeout consequences. Across three loads, fail-closed review remained gate-safe while timely completion declined and holding increased. A matched fail-open policy converted the same review shortfall into unsupported progression and modeled downstream exposure. An information-first policy avoided unsupported progression but increased interaction and workload events; substantive burden remains unresolved. Semantic audit excluded an invalid service measure. The study neither reconstructs historical Robodebt nor supports a continuous capacity threshold or cross-policy restoration comparison. Its five-step protocol keeps safety, delay, workload, modeled downstream exposure, and unresolved cases separate.
+AI-generated classifications, summaries, and recommendations increasingly enter workflows that route cases, assign review, trigger deadlines, and permit action. The central question is: when evidence becomes less decision-relevant, what may an automated workflow now do? This article proposes robust permission: weaker evidence should not newly enable an exact action—such as debt calculation, recovery, or account provisioning—unless that action remains independently supported across every admissible refinement. Reviewed progression must remain outside the automatic set, bind the exact action, and revalidate support at execution. A formal model states these rules; a deterministic pair demonstrates their mechanics; a source-bounded Robodebt application establishes relevance to a documented automated process; and a design-frozen finite-cohort simulation estimates how often capacity activates alternative timeout consequences. Across three loads, fail-closed review remained gate-safe while timely completion declined and holding increased. A matched fail-open policy converted the same review shortfall into unsupported progression and modeled downstream exposure. An information-first policy avoided unsupported progression but increased interaction and workload events; substantive burden remains unresolved. Semantic audit excluded an invalid service measure. The study neither reconstructs historical Robodebt nor supports a continuous capacity threshold or cross-policy restoration comparison. Its five-step protocol keeps safety, delay, workload, modeled downstream exposure, and unresolved cases separate.
 
 *Keywords:* automated decision-making, human oversight, uncertainty, discrete-event simulation, Robodebt
 
@@ -20,7 +20,7 @@ A defensible abstraction can still remove the distinction that would have trigge
 
 The emerging-technology connection is functional rather than historical. Before deploying an AI-enabled workflow, an organization can vary the representation of the same output and stress the downstream gate under expected and adverse load. Contemporary AI classifications, summaries, recommendations, and agent records can become inputs to routing, deadlines, review, and defaults. Robodebt contributes something the synthetic examples cannot: a documented, consequential institutional sequence from evidence transformation through automated action, recovery, and reassessment. It is a testbed for that governance architecture, not evidence about current AI prevalence or performance.
 
-This paper calls what the operating workflow allows to proceed *functional permission*. Functional permission is distinct from formal authority, legal validity, and action actually taken. It includes every action the workflow makes automatically available in the current state, whether or not an operator selects it and whether or not formal authority has changed. The central question is: when evidence becomes less decision-relevant, what may the workflow now do automatically? The failure of interest occurs when lost information removes a safeguard or adds consequential progression that the remaining evidence cannot independently support.
+This paper calls what the operating workflow allows to proceed *functional permission*. Functional permission is distinct from formal authority, legal validity, and action actually taken. It includes every action the workflow makes automatically available in the current state, whether or not an operator selects it and whether or not formal authority has changed. The central question is: when evidence becomes less decision-relevant, what may the workflow now do automatically? The failure occurs when lost information removes a safeguard or enables progression the remaining evidence cannot independently support. In the Robodebt application, that would mean using imputed fortnightly values after nonresponse to enable debt calculation, debt notice, or recovery.
 
 ### 1.2 Why nominal review is insufficient
 
@@ -64,7 +64,7 @@ Figure 1 previews the evidence-to-action chain that serves as the unit of analys
 
 ### 2.1 Representation-preservation controlled pair
 
-A controlled pair is two deterministic traces of the same synthetic case and the same stored model output. The operational policy, routing rule, process state, reviewer resource, clock, and absence of random draws are held fixed. Only the representation transformation and the representation it mechanically emits differ.
+A controlled pair is two deterministic traces of the same synthetic case and the same stored model output. The operational policy, routing rule, process state, reviewer resource, clock, and absence of random draws are held fixed. Only the representation transformation and the representation it mechanically emits differ. This domain-neutral mechanism test isolates the representation-to-permission link before the institutional Robodebt application and the later AI-style transfer example.
 
 The output describes a low-resolution road object as a pickup-like silhouette with confidence 0.42 and lists live alternatives that include an armed technical. In the preservation arm, typed alternatives, confidence, unresolved status, and provenance remain visible. The material alternative triggers an information action, enhanced scrutiny, and a fail-closed review dependency; routine disposition is unavailable automatically. In the fallback arm, the identical output becomes the broad untyped label `vehicle`. That label is compatible with every listed alternative and is not literally false, but it suppresses the distinction used by the fixed policy. The same downstream rule now routes the case routinely, removes the information and review steps, and automatically permits routine disposition. Here, routine disposition means finalizing the synthetic organizational case without enhanced scrutiny; it does not authorize action against the physical object.
 
@@ -96,7 +96,7 @@ The design can fail its intended contribution. The representation account would 
 
 ## 3. Formal Model
 
-In plain language, the model asks three questions. What possibilities remain compatible with the evidence? Which exact actions does the workflow make automatically available? Would each progression action still be supported if the missing detail were resolved in any admissible way? If the answer to the third question is no, the workflow must seek more evidence, pause the case, or require effective review. Any reviewed action must be supported again before execution. The notation below makes those questions reproducible and keeps formal authority, operational permission, and executed action distinct.
+In plain language, the model asks three questions. What possibilities remain compatible with the evidence? Which exact actions does the workflow make automatically available? Would each progression action still be supported if the missing detail were resolved in any admissible way? In the Robodebt mapping, the annual employer total is coarse evidence, supported fortnight-specific income records define finer evidence states, and debt calculation, debt notice, and recovery are the actions under inspection. If support for an action fails under any admissible refinement, the workflow must seek evidence, pause the case, or require effective review; a reviewed action must be supported again before execution. The notation below keeps formal authority, operational permission, and executed action distinct.
 
 ### 3.1 Evidence, compatible states, and refinement
 
@@ -140,7 +140,7 @@ F5 separates six questions often collapsed into “appeal available”: Does a f
 
 **Formal characterization 2—operational review.** A correctly enforced fail-closed gate remains gate-safe regardless of delay, but need not yield effective review or timely supported service. Over a service window `H`, an aggregate reviewer service rate `μ` cannot complete required work `W` plus initial backlog `B0` when `W + B0 > μH`. If prerequisites remain unmet at timeout, fail-closed semantics retain unresolved cases; fail-open semantics can release unsupported progression. The two designs may therefore have identical review completion yet opposite permission consequences. This diagnostic characterization requires deterministic ordering, a non-bypassable fail-closed gate, declared finite capacity, and explicit deadlines and timeout rules.
 
-The information-first result is not a third theorem. Under the frozen implementation and parameter space, information acquisition produced more interaction events, agency workload, and modeled downstream exposure; it also coincided descriptively with fewer action-stage holds, but the frozen receipt did not contain a paired unresolved-holding estimand. Those empirical patterns depend on the declared process and parameters and cannot be derived from the formal definitions alone. Full notation, proofs, subordinate properties, and counterexamples remain in the repository specification.
+These characterizations do not determine whether information acquisition improves operational outcomes. An information-first policy may preserve permission while changing interactions, workload, modeled downstream exposure, and unresolved holding; those quantities depend on the declared process and parameters and must be estimated rather than derived. The simulation therefore treats information first as an empirical policy comparison, not a third theorem. Full notation, proofs, subordinate properties, and counterexamples remain in the repository specification.
 
 ## 4. Robodebt as a Documented Process Application
 
@@ -266,11 +266,7 @@ Estimates apply only to the declared model and parameter space. Execution integr
 
 ### 6.1 Execution integrity, precision, and measurement audit
 
-All 16,200 core and 16,200 sensitivity runs reconciled with no missing or unexpected identifiers.
-
-The invalid service measure is excluded without a post hoc substitute.
-
-Every U0, U2C, and U3 family cell had an open-or-administratively-censored terminal-path rate of 1.000; unweighted designed-family means were 0.219 for U1 and 0.524 for U2O. For U0, U2C, and U3, the value is driven by missing terminal-resolution semantics, not simply observation ending at day 650. The simulation therefore cannot compare terminal disposition or complete restoration across all five policies. Earlier stage-specific outcomes remain interpretable within their horizons.
+All 16,200 core and 16,200 sensitivity runs reconciled with no missing or unexpected identifiers. The measurement audit excluded the invalid service measure without a post hoc substitute and identified the terminal-path field as a mixture of structural non-absorption and administrative censoring. Those boundaries govern the results below; Section 6.5 reports the detailed terminal-path pattern.
 
 ### 6.2 Fail-closed gate safety across tested load regimes
 
@@ -284,9 +280,9 @@ Within the design, this pattern matches the prespecified expectation, but three 
 
 The paired fail-open-minus-fail-closed contrast (U2O−U2C) held cases, draws, and review machinery fixed while changing only the consequence of non-completion. Unsupported progression increased by an unweighted mean +0.476 across families (range +0.042 to +0.881); all 108 family MCSE intervals lay above zero.
 
-Modeled downstream exposure increased identically; gate safety and unresolved holding moved by the same magnitude in the opposite direction. Timely-review-completion differences were zero in every family. Fail-closed review averaged 0.476 unresolved holding and zero unsupported progression; fail-open review averaged the reverse.
+Put operationally, unfinished reviews did not disappear. Fail closed left them as unresolved holds; fail open released them into progression after timeout. Timely-review completion was identical, while mean unresolved holding fell by 0.476 and unsupported progression and modeled downstream exposure each rose by 0.476; gate safety fell by the same amount.
 
-The direction follows the declared timeout rules; the simulation estimates activation across families, from 0.042 to 0.881 of initiated cases, and traces associated queue consequences. The exposure measure is downstream of progression, not independent confirmation. Fail closed keeps automatic progression within the robust-permission set but retains cases; fail open redirects those holds into potentially unsupported action and modeled downstream exposure.
+The timeout rule, not better review, changed what non-completion did. The direction follows the declared policies; the simulation estimates how often it activated across designed families—0.042 to 0.881 of initiated cases—and traces the queue consequences. Exposure remains a downstream process state, not independent confirmation.
 
 ### 6.4 The information-first tradeoff
 
@@ -299,6 +295,8 @@ Information first minus conservative holding increased interaction events by mea
 The paired modeled-downstream-exposure rate increased by an unweighted family mean +0.594 (range +0.369 to +0.815), with every interval above zero. Because both policies had zero unsupported progression, this reflects downstream movement that can follow supported action. Descriptively, the information-first policy combined fewer action-stage holds with more interactions, work, and downstream exposure while terminal paths remained open. Substantive burden therefore remains unresolved rather than rejected.
 
 ### 6.5 Censoring, validation contrast, and sensitivity
+
+Every U0, U2C, and U3 family cell had an open-or-administratively-censored terminal-path rate of 1.000; unweighted designed-family means were 0.219 for U1 and 0.524 for U2O. For U0, U2C, and U3, the value is driven by missing terminal-resolution semantics, not simply observation ending at day 650. The simulation therefore cannot compare terminal disposition or complete restoration across all five policies. Earlier stage-specific outcomes remain interpretable within their horizons.
 
 At the cutoff, unweighted designed-family mean shares of initiated cases remaining before modeled downstream exposure or on an open downstream-exposure path were 76.6% and 23.4% under conservative holding. The corresponding shares were 88.5% and 11.5% under fail-closed review, and 17.1% and 82.9% under the information-first policy. Impute and progress left 21.9% on the latter path. Fail-open review left 52.4% open, split between 40.9% before exposure and 11.5% on the downstream-exposure path. These classifications combine structural non-absorption with administrative censoring and imply neither resolution nor complete restoration; exact codes remain in the analysis artifacts.
 
@@ -349,6 +347,8 @@ Table 3 reports the prespecified paired estimates, computational-precision summa
 
 <sup>d</sup> U1−U0 is implementation validation, not a substantive discovery or recommendation.
 
+Taken together, the formal rule identifies what must be inspected, the documented application identifies where it appears in an institutional process, and the simulation shows why review must be tested under capacity and timeout conditions. Section 7 converts those lessons into a five-step protocol.
+
 ## 7. Process-Red-Team Protocol and Governance Implications
 
 ### 7.1 What the protocol produces
@@ -383,11 +383,11 @@ Declare the consequence vector and baseline before claiming restoration. Correct
 
 ### 7.7 Fixed Robodebt worked example
 
-The worked controlled pair is explanatory, not representative. It holds the case, evidence, access, later evidence, process, clocks, evaluation rules, resources, and draws fixed. Only policy changes: impute and progress versus the information-first policy.
+The worked pair makes the five steps concrete but remains explanatory, not representative. Step 1 locates the annual-total-to-fortnightly-imputation transformation and its ownership question. Step 2 names the actions enabled after nonresponse: debt calculation, debt notice, and recovery. Step 3 asks whether officer handling receives material evidence and binds those exact actions. Step 4 tests failed access against the 21-day deadline while holding the case, evidence, access, later evidence, process, clocks, resources, rules, and draws fixed. Step 5 separates reassessment from restoration of downstream exposure. Only the policy changes: impute and progress versus information first.
 
 In the baseline, a notice fails, the 21-day deadline expires, and aggregate income becomes an imputed period representation without surfaced uncertainty. Unsupported modeled debt progression and downstream exposure follow; later correction leaves that exposure unrestored at the day-60 restoration check. The repair holds progression, obtains records, records a supported disposition, and avoids modeled downstream exposure. This trace does not establish that information first is costless, generally superior, or historically typical.
 
-A component-local check might confirm that averaging ran as specified; another might confirm that notice issued. Neither of those two checks establishes how failed access, imputation, deadline expiry, and the permission rule combine. The process trace demonstrates that combination in this fixed example, but does not show that no other diagnostic could expose it.
+A local check might confirm that averaging ran as specified; another might confirm that notice issued. Neither establishes how failed access, imputation, deadline expiry, and the permission rule combine. The process trace demonstrates that combination in this fixed example, but does not show that no other diagnostic could expose it.
 
 The example supports only the trace-specific conclusion above. An optional online technical appendix provides the detailed assessment profile, ownership and intervention receipt, evidence limits, statuses, and tradeoffs for readers implementing the protocol.
 
@@ -419,7 +419,7 @@ Four measurement limits restrict comparison. First, the decision-service output 
 
 The kernel represents declared rules, finite queues, deadlines, keyed exogenous variation, and modeled correction paths. It does not model reviewer psychology, discretion, deference to automated outputs, strategic adaptation, endogenous demand, adaptive staffing, priority rules, or organizational learning. Nor does it supply a single welfare measure. Gate safety, timeliness, unresolved holding, interaction events, agency workload, modeled downstream exposure, correction, and restoration remain separate outcomes. Because no welfare function combines them, the model cannot rank policies overall. Delay, deprivation, abandonment, queue displacement, and spillovers were not measured as terminal consequences. Consequence-complete comparison requires future evidence, including broader sensitivities or observed institutional traces.
 
-The study provides executable examples and a canary in a second domain, but no practitioner study, usability validation, adoption evidence, or estimate of inter-rater agreement. The canary shows only that the protocol can represent the same pattern in a contemporary AI-style workflow; it does not establish field transfer or prevalence. Process susceptibility also does not prove historical attackability: inducibility, observability, repeatability, and actor benefit were not established.
+The study provides a Robodebt worked trace and an LLM-summary example, but no practitioner study, usability validation, adoption evidence, or estimate of inter-rater agreement. The LLM example shows only that the protocol can represent the same pattern in a contemporary AI-style workflow; it does not establish field transfer or prevalence. Process susceptibility also does not prove historical attackability: inducibility, observability, repeatability, and actor benefit were not established.
 
 ### 8.2 Conclusion
 
@@ -435,7 +435,7 @@ For process red teaming, the candidate diagnostic is compact: when evidence beco
 
 ## Data and Code Availability
 
-The reproducible package is staged at https://github.com/etalbert102/uncertainty_permission_simulation. It contains code, frozen specifications, the source manifest, fixed traces, validation receipts, family-level analyses, protocol worksheets, and reproduction commands. The repository remains private during final review; public activation and a logged-out link check are required before submission. The evidence packet records the active manifest and analysis hashes. Earlier freezes are preserved, original attempts are retained locally for audit, and exact regeneration is the public reproduction route. Historical source documents remain with their publishers or issuing institutions and are identified by URL and retrieval metadata in the source manifest.
+The reproducible package is staged at https://github.com/etalbert102/uncertainty_permission_simulation with code, frozen specifications, source manifest, traces, receipts, analyses, worksheets, and reproduction commands. The repository remains private during final review; public activation and a logged-out link check are required before submission. The evidence packet records manifest and analysis hashes. Earlier freezes and attempts remain available for audit; exact regeneration is the public route. Historical documents remain with publishers or issuing institutions and are identified in the source manifest.
 
 ## References
 

@@ -12,7 +12,7 @@ This ledger is the canonical slice-status record. Update it at the end of every 
 | 3. Experiment pilot and freeze candidate | complete; ready for Slice 4 freeze work | `e8905fa`; gate amended 2026-11-01 and 2026-11-11 | pilot, Slice 0/plan/Slice 3 gates, executable worked trace and example/reference materials | no formal post-Slice-5 review; semantic findings still require a new freeze and rerun |
 | 4. Confirmatory freeze | complete; Freeze 3 active | checkpoint `dc96716`; manifest `47170f8c…c6b` | clean-commit 79-file inventory; prior 77-file freeze attested blob-by-blob; five-control receipt and all 182 tests verify | any frozen-file, inventory, or environment drift blocks execution and requires an explicit new freeze |
 | 5. Confirmatory execution and analysis | complete; Freeze 3 core and sensitivity reconciled and analyzed | core analysis `b3c2fde…112`; sensitivity analysis `210b211…5f4` | 32,400/32,400 attempts; 2,592,000 routing/action comparisons with zero mismatches; result-bearing fields exactly match the prior corrected runs | no formal comprehensibility review is due; narrative claims must retain the frozen model and case-study boundaries |
-| 6. Evidence packet and 10,000-word article | local submission package complete; integrated article is standalone and the technical appendix is optional | `669aff5` evidence packet; `96f7618` release-gate repair; manuscript package `a366b6a`; source-audit commit `27e6076`; later receipts recorded below | conservative source count 9,719 words before references; plan, Slice 0, Slice 3, 182-test, and release-gate checks pass | public repository activation and final link confirmation remain intentionally under project-lead control |
+| 6. Evidence packet and 10,000-word article | local submission package complete; integrated article is standalone and the technical appendix is optional | `669aff5` evidence packet; `96f7618` release-gate repair; manuscript package `a366b6a`; source-audit commit `27e6076`; later receipts recorded below | conservative source count 9,884 words before references; plan, Slice 0, Slice 3, 182-test, and release-gate checks pass | public repository activation and final link confirmation remain intentionally under project-lead control |
 
 ## Slice 0 Closeout Receipt
 
@@ -1147,3 +1147,33 @@ The executable repair was committed at `dc96716c0865517ab0f61700fb0a06ca39d0042a
 Both 16,200-attempt suites were rerun. The core run-index, reconciliation, analysis, and bridge-summary hashes are `5ff83bdd32a9231d6e5333a3ce30365f54da47256a52a2a78727caa06387e676`, `58f27a685d1b7b5891765ec4f1b0faab34bc2077f98a5aa8edc6ce87e7e58e64`, `b3c2fde249fe38bc6778edac77cfd929144ddc48a8c41a150a97518636752112`, and `da3388f3e2d7e45a668849a96d76b12ccd7a9777eaee2cb9ebe9751c29ae31dd`. The sensitivity equivalents are `68b06d4b670bc2b8be33bde1f495e5fea9e4a1766c946be78230399a120f3d2f`, `35861361f474c8a08ceddc9682e91bd778de669b7a6819a166ab66112b1a5c4a`, `210b211cc4893411813e4c747f8491f83121515d0ccf868e7be36ce5e91095f4`, and `9c48733e8ea16e25af96b552d4b6a1eb3ebbfac344ada9cb18c88c9b22216c71`.
 
 Across the suites, 2,592,000 routing/action comparisons produced zero mismatches. Structured comparison against the preceding corrected analyses found exact equality in `cell_summaries`, `paired_estimates`, `precision`, and `common_random_number_diagnostics`. All 182 tests pass. The manuscript and evidence package now use Freeze 3 identities, define modeled downstream exposure consistently, correct diagnostic ownership, distinguish four evidentiary layers from the prospective protocol layer, and include the author's independent-researcher affiliation. The source count is 9,719 words before the bibliography, leaving 281 under the call ceiling. The final APA export contains 47 pages; every page was visually inspected, including the Figure 2 note and landscape Table 3 transitions.
+
+## Slice 6 Argument-Progression Pass
+
+Status: through-line tightened; manuscript and APA export synchronized
+
+Date: 2026-11-20
+
+A cold-read structural audit tested whether each section answered the question created by the preceding section. The revision signposts the controlled pair as the domain-neutral mechanism test, recasts information first as an empirical policy comparison rather than a premature result, moves the detailed terminal-path pattern from the Results opening to the censoring subsection, adds an explicit bridge from the formal rule, documented application, and dynamic simulation to the five-step protocol, and identifies the fixed Robodebt pair as an application of those steps.
+
+No formal definition, source mapping, design element, result, quantitative value, interpretation, or claim boundary changed. The conservative source count is 9,813 words before the bibliography, leaving 187 below the ceiling. The regenerated APA export contains 47 pages, three tables, three figures, and three correctly oriented sections; every page was visually inspected at full resolution. Accessibility, archive, image, and section checks pass, as do the release verifier and all 182 tests.
+
+## Slice 6 Focused Concreteness Pass
+
+Status: concrete examples strengthened; scientific and historical boundaries unchanged
+
+Date: 2026-11-20
+
+The revision names exact actions in the abstract and introduction, carries the Robodebt mapping into the formal-model opening, explains the fail-open contrast as a change in what unfinished review does, maps the five protocol steps explicitly onto the fixed Robodebt pair, and replaces the undefined transfer-canary label in the manuscript with the LLM-summary example. The pass adds no case, result, estimand, historical attribution, usability claim, or field-transfer claim.
+
+The conservative source count is 9,882 words before the bibliography, leaving 118 below the ceiling. The regenerated APA export contains 48 pages, three tables, three figures, and three correctly oriented sections; every page was visually inspected at full resolution. The exporter now starts references with a heading-level page break, preventing a trailing page-break paragraph from creating a blank page. Accessibility, archive, image, and section checks pass, as do the release verifier and all 182 tests.
+
+## Slice 6 Precision Pass
+
+Status: controlled-pair wording and audit trace synchronized
+
+Date: 2026-11-20
+
+The fixed Robodebt pair now names access and clocks explicitly among the held-fixed variables, matching the canonical bounded trace and evidence packet. This receipt distinguishes the precision cleanup from the preceding concreteness pass. No formal definition, source mapping, design element, result, quantitative value, interpretation, or claim boundary changed.
+
+The conservative source count is 9,884 words before the bibliography, leaving 116 below the ceiling. The regenerated APA export contains 48 pages, three tables, three figures, and three correctly oriented sections; every page was visually inspected at full resolution. Accessibility, archive, image, and section checks pass, as do the release verifier and all 182 tests.

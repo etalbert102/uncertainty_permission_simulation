@@ -628,11 +628,11 @@ def export(source: Path, output: Path):
 
             if stripped.startswith("## "):
                 heading = stripped[3:]
-                if heading == "References":
-                    doc.add_page_break()
-                    in_references = True
                 in_abstract = heading == "Abstract"
                 paragraph = doc.add_paragraph(style="Heading 1")
+                if heading == "References":
+                    paragraph.paragraph_format.page_break_before = True
+                    in_references = True
                 add_markdown_runs(paragraph, heading)
                 index += 1
                 continue
