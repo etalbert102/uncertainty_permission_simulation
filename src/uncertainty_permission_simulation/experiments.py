@@ -14,7 +14,11 @@ from typing import Iterable, Mapping
 
 import yaml
 
-from .configuration import compile_configuration
+from .configuration import (
+    compile_configuration,
+    load_evaluation_specification,
+    period_evidence_evaluation_specification,
+)
 from .negative_controls import (
     CONFIRMATORY_NEGATIVE_CONTROL_IDS,
     NEGATIVE_CONTROL_RECEIPT_PATH,
@@ -99,6 +103,20 @@ def load_experiment_config(path: Path) -> dict[str, object]:
                 "EXPERIMENT_CONFIG_INVALID",
                 "analysis.primary_metrics must match the closed implemented metric order",
             )
+        evaluation_path = config.get("evaluation_specification_path")
+        if not isinstance(evaluation_path, str) or not evaluation_path:
+            raise ContractError(
+                "EXPERIMENT_CONFIG_INVALID",
+                "frozen config requires evaluation_specification_path",
+            )
+        relative_evaluation_path = Path(evaluation_path)
+        root = path.resolve().parents[2]
+        resolved_evaluation_path = (root / relative_evaluation_path).resolve()
+        if relative_evaluation_path.is_absolute() or not resolved_evaluation_path.is_relative_to(root):
+            raise ContractError(
+                "EXPERIMENT_CONFIG_INVALID",
+                "evaluation specification path must remain repository-relative",
+            )
         if analysis.get("confidence_interval") != "normal_95_from_replication_mcse":
             raise ContractError(
                 "EXPERIMENT_CONFIG_INVALID",
@@ -144,10 +162,10 @@ def load_experiment_config(path: Path) -> dict[str, object]:
                 "ready config cannot retain unresolved freeze items",
             )
         if config["mode"] == "sensitivity":
-            if config.get("parent_config_id") != "CONFIRMATORY-V1":
+            if config.get("parent_config_id") != "CONFIRMATORY-V2":
                 raise ContractError(
                     "EXPERIMENT_CONFIG_INVALID",
-                    "sensitivity config must name CONFIRMATORY-V1 as parent",
+                    "sensitivity config must name CONFIRMATORY-V2 as parent",
                 )
             if not isinstance(config.get("sensitivity_id"), str) or not config["sensitivity_id"]:
                 raise ContractError(
@@ -193,6 +211,11 @@ def load_experiment_config(path: Path) -> dict[str, object]:
 
 def validate_experiment_config(path: Path) -> dict[str, object]:
     config = load_experiment_config(path)
+    if config["mode"] != "development_pilot":
+        root = path.resolve().parents[2]
+        load_evaluation_specification(
+            (root / str(config["evaluation_specification_path"])).resolve()
+        )
     negative_control_receipt: dict[str, object] | None = None
     if (
         config["mode"] != "development_pilot"
@@ -458,6 +481,7 @@ def _adapter_swap_rehearsal(family: ScenarioFamily) -> dict[str, object]:
         policy=policy("U2C"),
         overlay=family.overlay.to_compilation_overlay(),
         evaluation_spec_id="PILOT-EVALUATION@1",
+        evaluation_specification=period_evidence_evaluation_specification("PILOT-EVALUATION@1"),
     )
     alternate = compile_configuration(
         configuration_id="SLICE3-ADAPTER-SWAP-ALTERNATE",
@@ -465,6 +489,7 @@ def _adapter_swap_rehearsal(family: ScenarioFamily) -> dict[str, object]:
         policy=policy("U2C"),
         overlay=family.overlay.to_compilation_overlay(),
         evaluation_spec_id="PILOT-EVALUATION@1",
+        evaluation_specification=period_evidence_evaluation_specification("PILOT-EVALUATION@1"),
     )
     original_run = run_engagement_stage(cohort, original)
     alternate_run = run_engagement_stage(cohort, alternate)
@@ -516,6 +541,7 @@ def run_experiment(config_path: Path) -> dict[str, object]:
                     policy=policy(policy_id),
                     overlay=family.overlay.to_compilation_overlay(),
                     evaluation_spec_id="PILOT-EVALUATION@1",
+                    evaluation_specification=period_evidence_evaluation_specification("PILOT-EVALUATION@1"),
                 )
                 run = run_engagement_stage(cohort, compiled)
                 rows.append(_run_metrics(family, replication, policy_id, run))

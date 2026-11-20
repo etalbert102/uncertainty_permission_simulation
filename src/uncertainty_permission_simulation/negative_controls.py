@@ -29,7 +29,7 @@ SENSITIVITY_NEGATIVE_CONTROL_IDS = (
 )
 
 NEGATIVE_CONTROL_RECEIPT_PATH = Path(
-    "data/golden_traces/slice4_negative_control_receipt_v1.json"
+    "data/golden_traces/slice4_negative_control_receipt_v2.json"
 )
 
 
@@ -294,7 +294,7 @@ def build_negative_control_receipt(config_path: Path) -> dict[str, object]:
     receipt = {
         "schema_version": 1,
         "artifact_kind": "matched_negative_control_receipt",
-        "receipt_id": "SLICE4-NEGATIVE-CONTROLS@1",
+        "receipt_id": "SLICE4-NEGATIVE-CONTROLS@2",
         "source_config_id": config["config_id"],
         "source_control_contract_hash": _canonical_hash({
             "config_id": config["config_id"],

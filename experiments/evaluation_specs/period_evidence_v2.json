@@ -1,0 +1,109 @@
+{
+  "action_comparison_schema": {
+    "material_field_names": [
+      "action_family_id",
+      "action_type_id",
+      "actor_role_id",
+      "target_id",
+      "parameter_vector",
+      "operational_consequence",
+      "authority_direction"
+    ],
+    "schema_id": "PROGRESSION-ACTION-COMPARISON@2"
+  },
+  "action_support_rules": [
+    {
+      "action_family_id": "CASE-PROGRESSION@2",
+      "implementation_code_hash": "2d2c35a64dedf75bfb6abc4af4e7aed246da8ca368712a404113a5ae8af69dc7",
+      "implementation_id": "action_support_membership",
+      "support_condition_ids": [
+        "PERIOD-SPECIFIC-EVIDENCE"
+      ]
+    }
+  ],
+  "artifact_kind": "evaluation_specification",
+  "evaluation_spec_id": "CONFIRMATORY-PERIOD-EVIDENCE@2",
+  "evaluation_spec_version": "2.0",
+  "evidence_universe": [
+    "PERIOD-SPECIFIC-EVIDENCE-PRESENT",
+    "PERIOD-SPECIFIC-EVIDENCE-UNRESOLVED"
+  ],
+  "owner_id": "INDEPENDENT-EVALUATION-OWNER",
+  "refinement_certificates": [
+    {
+      "admissibility_assumptions": [
+        "The stylized kernel represents decision-relevant period evidence as present or absent.",
+        "No latent evidence class exists inside the declared binary kernel state."
+      ],
+      "certificate_id": "CERT-PERIOD-EVIDENCE-PRESENT@1",
+      "conclusion_validity": "universal_pass_and_failure",
+      "coverage_argument": "The supported state denotes one binary refinement: period evidence present.",
+      "coverage_mode": "finite_exact",
+      "evidence_state_id": "PERIOD-SPECIFIC-EVIDENCE-PRESENT",
+      "excluded_refinement_classes": [
+        "Evidence quality, provenance, and partial sufficiency are outside this binary kernel."
+      ],
+      "generator_hash": "93db47cfff062b33fa06915a703ef8e3653ddb4950d9ad817c153bd1697a4020",
+      "generator_id": "BINARY-PERIOD-EVIDENCE-ENUMERATOR",
+      "generator_version": "2.0",
+      "owner_id": "INDEPENDENT-EVALUATION-OWNER",
+      "proof_artifact_id": "BINARY-ENUMERATION-PROOF@2",
+      "refinements": [
+        {
+          "refinement_id": "REF-PERIOD-EVIDENCE-PRESENT",
+          "satisfied_support_condition_ids": [
+            "PERIOD-SPECIFIC-EVIDENCE"
+          ]
+        }
+      ]
+    },
+    {
+      "admissibility_assumptions": [
+        "The stylized kernel represents unresolved evidence as compatible with presence or absence.",
+        "No third evidence class exists inside the declared binary kernel state."
+      ],
+      "certificate_id": "CERT-PERIOD-EVIDENCE-UNRESOLVED@1",
+      "conclusion_validity": "universal_pass_and_failure",
+      "coverage_argument": "The unresolved state exhausts the two values of the declared binary evidence universe.",
+      "coverage_mode": "finite_exact",
+      "evidence_state_id": "PERIOD-SPECIFIC-EVIDENCE-UNRESOLVED",
+      "excluded_refinement_classes": [
+        "Evidence quality, provenance, and partial sufficiency are outside this binary kernel."
+      ],
+      "generator_hash": "717434ec949b656982b820d4c50f9d555951a59c83046d018a95c174d1f76a91",
+      "generator_id": "BINARY-PERIOD-EVIDENCE-ENUMERATOR",
+      "generator_version": "2.0",
+      "owner_id": "INDEPENDENT-EVALUATION-OWNER",
+      "proof_artifact_id": "BINARY-ENUMERATION-PROOF@2",
+      "refinements": [
+        {
+          "refinement_id": "REF-PERIOD-EVIDENCE-AVAILABLE",
+          "satisfied_support_condition_ids": [
+            "PERIOD-SPECIFIC-EVIDENCE"
+          ]
+        },
+        {
+          "refinement_id": "REF-PERIOD-EVIDENCE-ABSENT",
+          "satisfied_support_condition_ids": []
+        }
+      ]
+    }
+  ],
+  "schema_version": 2,
+  "symbolic_action_families": [
+    {
+      "action_family_id": "CASE-PROGRESSION@2",
+      "action_type_id": "progress",
+      "actor_role_id": "SYSTEM",
+      "authority_direction": "expands_progression",
+      "operational_consequence": "case_progresses_to_modeled_external_consequence_path",
+      "parameter_vector": [
+        [
+          "disposition",
+          "advance_to_recovery_eligible_state"
+        ]
+      ],
+      "target_binding": "case_id"
+    }
+  ]
+}

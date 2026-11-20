@@ -20,7 +20,8 @@ from .schemas import ContractError
 
 
 FREEZE_MANIFEST_PATH = Path("docs/FREEZE_MANIFEST.json")
-FREEZE_ID = "UPS-CONFIRMATORY-FREEZE@2"
+FREEZE_ATTESTATION_PATH = Path("docs/FREEZE_COMMIT_ATTESTATIONS.json")
+FREEZE_ID = "UPS-CONFIRMATORY-FREEZE@3"
 
 FROZEN_DOCUMENT_PATHS = (
     "pyproject.toml",
@@ -43,6 +44,7 @@ FROZEN_DOCUMENT_PATHS = (
     "docs/WORKED_TRACE_SELECTION.md",
     "experiments/configs/confirmatory_v1.yaml",
     "experiments/configs/sensitivity_information_latency_v1.yaml",
+    "experiments/evaluation_specs/period_evidence_v2.json",
 )
 
 FROZEN_TREE_RULES = (
@@ -161,6 +163,94 @@ def _git_head(root: Path) -> str:
     return result.stdout.strip()
 
 
+def _assert_clean_worktree(root: Path) -> None:
+    result = subprocess.run(
+        ["git", "status", "--porcelain"],
+        cwd=root,
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    if result.stdout.strip():
+        raise ContractError(
+            "FREEZE_WORKTREE_DIRTY",
+            "commit the reviewed frozen inputs before creating the manifest",
+        )
+
+
+def _git_blob_hash(root: Path, commit: str, relative: str) -> str:
+    result = subprocess.run(
+        ["git", "show", f"{commit}:{relative}"],
+        cwd=root,
+        capture_output=True,
+    )
+    if result.returncode:
+        raise ContractError(
+            "FREEZE_COMMIT_ATTESTATION_INVALID",
+            f"frozen file absent from attested commit: {relative}",
+        )
+    return sha256(result.stdout).hexdigest()
+
+
+def verify_manifest_commit_binding(root: Path, manifest: Mapping[str, object]) -> None:
+    commit = manifest.get("repository_head_at_creation")
+    entries = manifest.get("files")
+    if not isinstance(commit, str) or not commit or not isinstance(entries, list):
+        raise ContractError(
+            "FREEZE_COMMIT_ATTESTATION_INVALID",
+            "manifest lacks a repository commit or file inventory",
+        )
+    for entry in entries:
+        if not isinstance(entry, dict):
+            raise ContractError("FREEZE_COMMIT_ATTESTATION_INVALID", "invalid file entry")
+        relative = str(entry.get("path"))
+        if _git_blob_hash(root, commit, relative) != entry.get("sha256"):
+            raise ContractError(
+                "FREEZE_COMMIT_ATTESTATION_INVALID",
+                f"attested commit does not contain the frozen bytes: {relative}",
+            )
+
+
+def verify_historical_freeze_attestations(
+    root: Path,
+    attestation_path: Path = FREEZE_ATTESTATION_PATH,
+) -> dict[str, object]:
+    path = attestation_path if attestation_path.is_absolute() else root / attestation_path
+    try:
+        value = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise ContractError("FREEZE_ATTESTATION_INVALID", str(path)) from exc
+    if not isinstance(value, dict):
+        raise ContractError("FREEZE_ATTESTATION_INVALID", "attestation must be a mapping")
+    observed_hash = value.get("attestation_hash")
+    hash_input = dict(value)
+    hash_input.pop("attestation_hash", None)
+    if observed_hash != canonical_hash(hash_input):
+        raise ContractError("FREEZE_ATTESTATION_INVALID", "attestation hash mismatch")
+    records = value.get("records")
+    if not isinstance(records, list) or not records:
+        raise ContractError("FREEZE_ATTESTATION_INVALID", "attestation records are missing")
+    for record in records:
+        if not isinstance(record, dict):
+            raise ContractError("FREEZE_ATTESTATION_INVALID", "invalid attestation record")
+        manifest_path = root / str(record.get("manifest_path"))
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        if (
+            manifest.get("freeze_id") != record.get("freeze_id")
+            or manifest.get("manifest_hash") != record.get("manifest_hash")
+            or manifest.get("repository_head_at_creation")
+            != record.get("working_tree_head_at_freeze_creation")
+            or len(manifest.get("files", ())) != record.get("verified_file_count")
+        ):
+            raise ContractError("FREEZE_ATTESTATION_INVALID", "manifest identity mismatch")
+        attested = dict(manifest)
+        attested["repository_head_at_creation"] = record.get(
+            "first_commit_containing_exact_frozen_inventory"
+        )
+        verify_manifest_commit_binding(root, attested)
+    return value
+
+
 def _source_identity(root: Path) -> dict[str, object]:
     path = root / "data/sources/robodebt/source_manifest.yaml"
     manifest = yaml.safe_load(path.read_text(encoding="utf-8"))
@@ -237,8 +327,8 @@ def _assert_freeze_ready(root: Path) -> tuple[dict[str, object], dict[str, objec
 
 def _confirmatory_output_paths(root: Path) -> list[str]:
     output_roots = (
-        root / "outputs/confirmatory_v1",
-        root / "outputs/sensitivity_information_latency_v1",
+        root / "outputs/confirmatory_v2",
+        root / "outputs/sensitivity_information_latency_v2",
     )
     return sorted(
         path.relative_to(root).as_posix()
@@ -257,6 +347,7 @@ def build_freeze_manifest(root: Path) -> dict[str, object]:
             "confirmatory or sensitivity output exists before freeze",
         )
     confirmatory, sensitivity = _assert_freeze_ready(root)
+    _assert_clean_worktree(root)
     negative_controls = verify_stored_negative_control_receipt(
         root,
         root / "experiments/configs/confirmatory_v1.yaml",
@@ -377,6 +468,8 @@ def verify_freeze_manifest(
             "FREEZE_ENVIRONMENT_DRIFT",
             "current interpreter, platform, or dependency versions differ from freeze",
         )
+    if manifest.get("repository_head_at_creation") is not None:
+        verify_manifest_commit_binding(root, manifest)
     return manifest
 
 

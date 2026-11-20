@@ -12,7 +12,12 @@ import yaml
 
 from .applications.robodebt import load_early_adapter
 from .artifacts import build_bundle
-from .configuration import ParameterValue, ScenarioOverlaySpec, compile_configuration
+from .configuration import (
+    ParameterValue,
+    ScenarioOverlaySpec,
+    compile_configuration,
+    period_evidence_evaluation_specification,
+)
 from .confirmatory import (
     analyze_frozen_experiment,
     reconcile_frozen_experiment,
@@ -104,6 +109,7 @@ def _slice1_validation_observations(reference_u2c: object) -> dict[str, dict[str
     renamed_config = compile_configuration(
         configuration_id="RENAMED-U2C", process=renamed, policy=policy("U2C"),
         overlay=smoke_overlay("RENAMED-OVERLAY@1"), evaluation_spec_id="P0-SIGMA-1",
+        evaluation_specification=period_evidence_evaluation_specification("P0-SIGMA-1"),
     )
     original_canary = run_trace(TraceSpec("CANARY-ORIGINAL", "U2C", review_delay=30))
     renamed_canary = run_trace(TraceSpec("CANARY-RENAMED", "U2C", review_delay=30))
@@ -112,6 +118,7 @@ def _slice1_validation_observations(reference_u2c: object) -> dict[str, dict[str
     nonisomorphic_config = compile_configuration(
         configuration_id="NONISO-U2C", process=nonisomorphic, policy=policy("U2C"),
         overlay=smoke_overlay("NONISO-OVERLAY@1"), evaluation_spec_id="P0-SIGMA-1",
+        evaluation_specification=period_evidence_evaluation_specification("P0-SIGMA-1"),
     )
     nonisomorphic_events = execute_topology(
         ("CASE_ARRIVAL", "ROUTING_COMPLETED", "EVIDENCE_REQUESTED", "REVIEW_QUEUED", "CASE_CLOSED")
@@ -129,6 +136,7 @@ def _slice1_validation_observations(reference_u2c: object) -> dict[str, dict[str
     adapter = compile_configuration(
         configuration_id="R-OCI-EARLY-SMOKE", process=early_process, policy=early_policy,
         overlay=adapter_overlay, evaluation_spec_id="P0-SIGMA-1",
+        evaluation_specification=period_evidence_evaluation_specification("P0-SIGMA-1"),
         application_mapping_id="R-OCI-EARLY-MAPPING@1",
     )
     unsupported_slots = {
@@ -170,7 +178,7 @@ def _slice1_validation_observations(reference_u2c: object) -> dict[str, dict[str
 
 def run_smoke(config_path: Path) -> dict[str, object]:
     config = yaml.safe_load(config_path.read_text(encoding="utf-8"))
-    compiled = [compile_configuration(configuration_id=f"SYNTH-{name}", process=canonical_process(), policy=policy(name), overlay=smoke_overlay(), evaluation_spec_id="P0-SIGMA-1") for name in ("U1", "U2C", "U2O")]
+    compiled = [compile_configuration(configuration_id=f"SYNTH-{name}", process=canonical_process(), policy=policy(name), overlay=smoke_overlay(), evaluation_spec_id="P0-SIGMA-1", evaluation_specification=period_evidence_evaluation_specification("P0-SIGMA-1")) for name in ("U1", "U2C", "U2O")]
     specs = _specs()
     results = {spec.trace_id: run_trace(spec) for spec in specs}
     report = render_p0_report(results["P0-E-PRESERVE"], results["P0-E-FALLBACK"])
@@ -267,6 +275,7 @@ def run_stochastic_smoke(config_path: Path) -> dict[str, object]:
             configuration_id=f"{config['config_id']}-{policy_id}", process=stochastic_process(),
             policy=policy(policy_id), overlay=spec.overlay.to_compilation_overlay(),
             evaluation_spec_id="STOCHASTIC-ENGAGEMENT-QA@1",
+            evaluation_specification=period_evidence_evaluation_specification("STOCHASTIC-ENGAGEMENT-QA@1"),
         )
         for policy_id in POLICY_IDS
     }

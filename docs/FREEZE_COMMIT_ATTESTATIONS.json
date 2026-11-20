@@ -1,0 +1,16 @@
+{
+  "artifact_kind": "freeze_commit_attestations",
+  "attestation_hash": "cf0c71ab05891afcec10bd03f8fdb9f8fc07475184218aed01821457cb11e241",
+  "records": [
+    {
+      "first_commit_containing_exact_frozen_inventory": "74d657e42a60c28f7ab2675d8934cd11b2afd1e9",
+      "freeze_id": "UPS-CONFIRMATORY-FREEZE@2",
+      "interpretation": "The recorded creation head identifies the checked-out commit while the manifest was built from a dirty working tree; the attested commit is the first immutable commit containing every exact frozen blob.",
+      "manifest_hash": "9d0d2ed34f74608e5aed96b6a28d81ded2d6d15bba552be91706c5ce862b2801",
+      "manifest_path": "docs/FREEZE_MANIFEST_EVALUATION_BRIDGE_V2.json",
+      "verified_file_count": 77,
+      "working_tree_head_at_freeze_creation": "dd6df521c212f45978417f2e43c9f2003bed9271"
+    }
+  ],
+  "schema_version": 1
+}

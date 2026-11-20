@@ -1,0 +1,259 @@
+{
+  "all_controls_pass": true,
+  "artifact_kind": "matched_negative_control_receipt",
+  "claim_limit": "implementation and falsification controls only; excluded from the 108-family confirmatory design and not evidence of historical prevalence or policy effect",
+  "control_count": 5,
+  "control_ids": [
+    "P0-SAME-RULE-SEMANTIC-NULL",
+    "P0-ROUTING-INVARIANCE",
+    "VERIFIED-MATCH-PROGRESSION",
+    "NO-SUPPORT-NO-PROGRESSION",
+    "NO-THRESHOLD-NO-PROGRESSION"
+  ],
+  "controls": [
+    {
+      "action_support_scope": "omitted_by_claim_limit; this control tests representation-induced permission change",
+      "control_id": "P0-SAME-RULE-SEMANTIC-NULL",
+      "control_kind": "matched_representation_pair",
+      "evaluation_rule": "fallback must not add progression or functional permission relative to the preserving arm",
+      "expected": {
+        "robust_permission_violation_count": 0,
+        "semantic_projection_equal": true
+      },
+      "observed": {
+        "fallback": {
+          "event_hash": "26e1dc729cf1c2b3091decb3f56b61c0ca542e9b7e434e2532b3f9a8517b1cb7",
+          "event_types": [
+            "CASE_ARRIVAL",
+            "SOURCE_EVIDENCE_INGESTED",
+            "NOTICE_SENT",
+            "NOTICE_DELIVERED",
+            "SUBJECT_NONRESPONSE",
+            "REPRESENTATION_APPLIED",
+            "REPRESENTATION_SURFACED",
+            "ROUTING_COMPLETED",
+            "DEADLINE_REACHED",
+            "ACTION_COMPUTED",
+            "PROGRESSION_EXECUTED",
+            "CASE_CLOSED"
+          ],
+          "final_action": "progress",
+          "functional_permission": true,
+          "gate_state": "absent",
+          "route": "timeout_progression",
+          "trace_hash": "98f8b0b19bdd04d34d7f249a3d35651cc51d3e0d1e985610a8634116294b0de6",
+          "trace_id": "P0-SAME-RULE-SEMANTIC-NULL-FALLBACK"
+        },
+        "fallback_adds_functional_permission": false,
+        "fallback_adds_progression": false,
+        "preserve": {
+          "event_hash": "26e1dc729cf1c2b3091decb3f56b61c0ca542e9b7e434e2532b3f9a8517b1cb7",
+          "event_types": [
+            "CASE_ARRIVAL",
+            "SOURCE_EVIDENCE_INGESTED",
+            "NOTICE_SENT",
+            "NOTICE_DELIVERED",
+            "SUBJECT_NONRESPONSE",
+            "REPRESENTATION_APPLIED",
+            "REPRESENTATION_SURFACED",
+            "ROUTING_COMPLETED",
+            "DEADLINE_REACHED",
+            "ACTION_COMPUTED",
+            "PROGRESSION_EXECUTED",
+            "CASE_CLOSED"
+          ],
+          "final_action": "progress",
+          "functional_permission": true,
+          "gate_state": "absent",
+          "route": "timeout_progression",
+          "trace_hash": "ad6ac8e00ab2e8b49702fad0f96d8e71f1817ed632979840ff8f7d4b6d11ef2f",
+          "trace_id": "P0-SAME-RULE-SEMANTIC-NULL-PRESERVE"
+        },
+        "semantic_projection_equal": true
+      },
+      "robust_permission_violation_count": 0,
+      "status": "pass"
+    },
+    {
+      "action_support_scope": "omitted_by_claim_limit; this control tests representation-induced permission change",
+      "control_id": "P0-ROUTING-INVARIANCE",
+      "control_kind": "matched_representation_pair",
+      "evaluation_rule": "fallback must not add progression or functional permission relative to the preserving arm",
+      "expected": {
+        "robust_permission_violation_count": 0,
+        "semantic_projection_equal": true
+      },
+      "observed": {
+        "fallback": {
+          "event_hash": "8300187a1db51da08104cd020d238d710dbe1e8cab45c9e96302eb3e64b2c0e8",
+          "event_types": [
+            "CASE_ARRIVAL",
+            "SOURCE_EVIDENCE_INGESTED",
+            "NOTICE_SENT",
+            "NOTICE_DELIVERED",
+            "REVIEW_QUEUED",
+            "SUBJECT_NONRESPONSE",
+            "REPRESENTATION_APPLIED",
+            "REPRESENTATION_SURFACED",
+            "ROUTING_COMPLETED",
+            "DEADLINE_REACHED",
+            "ACTION_COMPUTED",
+            "CASE_CLOSED"
+          ],
+          "final_action": "hold",
+          "functional_permission": false,
+          "gate_state": "closed",
+          "route": "enhanced_scrutiny",
+          "trace_hash": "17ae5ae39bcb56893ae8f31d6a909af2b01ba0b947758f75fd2d2d5e014e73eb",
+          "trace_id": "P0-ROUTING-INVARIANCE-FALLBACK"
+        },
+        "fallback_adds_functional_permission": false,
+        "fallback_adds_progression": false,
+        "preserve": {
+          "event_hash": "8300187a1db51da08104cd020d238d710dbe1e8cab45c9e96302eb3e64b2c0e8",
+          "event_types": [
+            "CASE_ARRIVAL",
+            "SOURCE_EVIDENCE_INGESTED",
+            "NOTICE_SENT",
+            "NOTICE_DELIVERED",
+            "REVIEW_QUEUED",
+            "SUBJECT_NONRESPONSE",
+            "REPRESENTATION_APPLIED",
+            "REPRESENTATION_SURFACED",
+            "ROUTING_COMPLETED",
+            "DEADLINE_REACHED",
+            "ACTION_COMPUTED",
+            "CASE_CLOSED"
+          ],
+          "final_action": "hold",
+          "functional_permission": false,
+          "gate_state": "closed",
+          "route": "enhanced_scrutiny",
+          "trace_hash": "10e626b1fb3e7bc34bbb688686c80c20aee5b087367e42578a568c29ba38c8ae",
+          "trace_id": "P0-ROUTING-INVARIANCE-PRESERVE"
+        },
+        "semantic_projection_equal": true
+      },
+      "robust_permission_violation_count": 0,
+      "status": "pass"
+    },
+    {
+      "control_id": "VERIFIED-MATCH-PROGRESSION",
+      "control_kind": "supported_progression",
+      "evaluation_rule": "verified action-specific evidence plus timely required review may progress without a robust-permission violation",
+      "expected": {
+        "action": "progress",
+        "progression_supported": true,
+        "robust_permission_violation_count": 0
+      },
+      "observed": {
+        "action": "progress",
+        "arm_id": "verified_period_specific_evidence",
+        "evidence_sufficient": true,
+        "evidentially_supported_progression": true,
+        "functional_permission": true,
+        "observation_hash": "b9f4aa47f918253f454a95c507f31529f4abaa146774fb449e195e806590d131",
+        "policy_id": "U2C",
+        "progression_supported": true,
+        "progression_threshold_crossed": true,
+        "reason_code": "supported_after_timely_review",
+        "review_authorization_recorded": true,
+        "review_required": true,
+        "unauthorized_progression": false,
+        "unsupported_reason_codes": []
+      },
+      "robust_permission_violation_count": 0,
+      "status": "pass"
+    },
+    {
+      "control_id": "NO-SUPPORT-NO-PROGRESSION",
+      "control_kind": "unsupported_action_withheld",
+      "evaluation_rule": "neither evidence state satisfies the action-specific support rule, so neither may progress",
+      "expected": {
+        "actions": [
+          "hold",
+          "hold"
+        ],
+        "robust_permission_violation_count": 0
+      },
+      "observed": {
+        "actions": [
+          "hold",
+          "hold"
+        ],
+        "arms": [
+          {
+            "action": "hold",
+            "arm_id": "aggregate_only",
+            "evidence_sufficient": false,
+            "evidentially_supported_progression": false,
+            "functional_permission": false,
+            "observation_hash": "81acb165e5d2f6fe35e7eec88163565886a515d63dd92787e82cb0807d0d3cba",
+            "policy_id": "U0",
+            "progression_supported": false,
+            "progression_threshold_crossed": true,
+            "reason_code": "insufficient_evidence_hold",
+            "review_authorization_recorded": false,
+            "review_required": false,
+            "unauthorized_progression": false,
+            "unsupported_reason_codes": []
+          },
+          {
+            "action": "hold",
+            "arm_id": "missing_period_specific_evidence",
+            "evidence_sufficient": false,
+            "evidentially_supported_progression": false,
+            "functional_permission": false,
+            "observation_hash": "cad1cad63b4995f91109ac2a63cbc0dd521d7a58540de141573d3336d766b98f",
+            "policy_id": "U0",
+            "progression_supported": false,
+            "progression_threshold_crossed": true,
+            "reason_code": "insufficient_evidence_hold",
+            "review_authorization_recorded": false,
+            "review_required": false,
+            "unauthorized_progression": false,
+            "unsupported_reason_codes": []
+          }
+        ]
+      },
+      "robust_permission_violation_count": 0,
+      "status": "pass"
+    },
+    {
+      "control_id": "NO-THRESHOLD-NO-PROGRESSION",
+      "control_kind": "false_progression_antecedent",
+      "evaluation_rule": "before the declared deadline/progression threshold is reached, the pending decision must not progress",
+      "expected": {
+        "action": "hold",
+        "reason_code": "pending",
+        "robust_permission_violation_count": 0
+      },
+      "observed": {
+        "action": "hold",
+        "arm_id": "progression_antecedent_false",
+        "evidence_sufficient": false,
+        "evidentially_supported_progression": false,
+        "functional_permission": false,
+        "observation_hash": "e64c91dae5656dc4338a56ab518879e219bd85a2fd55e762a40feab573a53afe",
+        "policy_id": "U0",
+        "progression_supported": false,
+        "progression_threshold_crossed": false,
+        "reason_code": "pending",
+        "review_authorization_recorded": false,
+        "review_required": false,
+        "unauthorized_progression": false,
+        "unsupported_reason_codes": []
+      },
+      "robust_permission_violation_count": 0,
+      "status": "pass"
+    }
+  ],
+  "execution_mode": "deterministic_pre_freeze_validation",
+  "primary_family_count": 0,
+  "receipt_hash": "ff0be43e83326f5de2e3fe103ae9dbc40c392ddd5f27c619efc7d4754eb7d2a0",
+  "receipt_id": "SLICE4-NEGATIVE-CONTROLS@2",
+  "robust_permission_violation_count": 0,
+  "schema_version": 1,
+  "source_config_id": "CONFIRMATORY-V2",
+  "source_control_contract_hash": "f47a0a1332cef3fdf05e58916b9722d5ede4730b845afcb535b4a018105f22a7"
+}

@@ -133,7 +133,8 @@ def test_repository_freeze_inventory_covers_load_bearing_inputs() -> None:
         "src/uncertainty_permission_simulation/simulator.py",
         "src/uncertainty_permission_simulation/confirmatory.py",
         "scripts/verify_repo.py",
-        "data/golden_traces/slice4_negative_control_receipt_v1.json",
+        "data/golden_traces/slice4_negative_control_receipt_v2.json",
+        "experiments/evaluation_specs/period_evidence_v2.json",
     ):
         assert path in inventory
     source_identity = freeze._source_identity(ROOT)
@@ -178,7 +179,17 @@ def test_append_only_run_reconcile_and_analysis_path(
         SimpleNamespace(family_id="FAMILY-A"),
         SimpleNamespace(family_id="FAMILY-B"),
     )
-    monkeypatch.setattr(confirmatory, "_assert_executable_config", lambda path: (config, manifest))
+    monkeypatch.setattr(
+        confirmatory,
+        "_assert_executable_config",
+        lambda path: (
+            config,
+            manifest,
+            confirmatory.load_evaluation_specification(
+                ROOT / "experiments/evaluation_specs/period_evidence_v2.json"
+            ),
+        ),
+    )
     monkeypatch.setattr(confirmatory, "_families", lambda value: families)
 
     def fake_attempt_artifact(**kwargs: object) -> dict[str, object]:
@@ -205,11 +216,25 @@ def test_append_only_run_reconcile_and_analysis_path(
             "correction_mean_exposure_time": 0.0,
         }
         artifact = {
-            "schema_version": 1,
+            "schema_version": 2,
             "artifact_kind": "confirmatory_attempt",
             "attempt_id": attempt_id,
             "config_id": config["config_id"],
             "manifest_hash": manifest["manifest_hash"],
+            "evaluation_bridge_receipt": {
+                "evaluation_spec_id": "CONFIRMATORY-PERIOD-EVIDENCE@2",
+                "evaluation_specification_hash": "e" * 64,
+                "implementation_code_hash": "i" * 64,
+                "routing_receipt_count": 4,
+                "action_receipt_count": 4,
+                "routing_action_compared_count": 4,
+                "routing_action_mismatch_count": 0,
+                "action_missing_by_cutoff_count": 0,
+                "certificate_counts": {"CERT": 4},
+                "evidence_state_counts": {"STATE": 4},
+                "support_outcome_counts": {"true": 4},
+                "receipt_hash": f"RECEIPT-{attempt_id}",
+            },
             "row": row,
         }
         return artifact | {"attempt_hash": canonical_hash(artifact)}

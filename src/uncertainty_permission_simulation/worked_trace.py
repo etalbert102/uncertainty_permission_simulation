@@ -10,7 +10,11 @@ from typing import Mapping
 import yaml
 
 from .applications.robodebt import load_early_stochastic_adapter
-from .configuration import CompiledConfigurationSpec, compile_configuration
+from .configuration import (
+    CompiledConfigurationSpec,
+    compile_configuration,
+    period_evidence_evaluation_specification,
+)
 from .experiments import canonical_hash
 from .profiles import policy
 from .scenarios import overlay_from_mapping
@@ -184,6 +188,7 @@ def build_worked_trace(root: Path, pilot_config_path: Path) -> dict[str, object]
         policy=policy("U1"),
         overlay=overlay.to_compilation_overlay(exclude_slot_ids=frozenset({"response_deadline"})),
         evaluation_spec_id="RB-WORKED-TRACE-EVALUATION@1",
+        evaluation_specification=period_evidence_evaluation_specification("RB-WORKED-TRACE-EVALUATION@1"),
         application_mapping_id="R-OCI-EARLY-WORKED-TRACE-MAPPING@1",
     )
     counterfactual_process = process.model_copy(update={
@@ -196,6 +201,7 @@ def build_worked_trace(root: Path, pilot_config_path: Path) -> dict[str, object]
         policy=policy("U3"),
         overlay=overlay.to_compilation_overlay(exclude_slot_ids=frozenset({"response_deadline"})),
         evaluation_spec_id="RB-WORKED-TRACE-EVALUATION@1",
+        evaluation_specification=period_evidence_evaluation_specification("RB-WORKED-TRACE-EVALUATION@1"),
         application_mapping_id="R-OCI-EARLY-WORKED-TRACE-MAPPING@1",
     )
     held_value = {

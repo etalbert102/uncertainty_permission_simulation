@@ -2,13 +2,14 @@
 
 from __future__ import annotations
 
+from collections import Counter
 from hashlib import sha256
 import json
 from pathlib import Path
 from statistics import mean
 from typing import Mapping
 
-from .configuration import compile_configuration
+from .configuration import EvaluationSpecificationSpec, compile_configuration, load_evaluation_specification
 from .experiments import (
     PRIMARY_METRICS,
     _common_random_number_diagnostics,
@@ -145,7 +146,9 @@ def planned_attempt_count(config_path: Path, *, extension: bool = False) -> int:
     return len(_families(config)) * replication_count * len(POLICY_IDS)
 
 
-def _assert_executable_config(config_path: Path) -> tuple[dict[str, object], dict[str, object]]:
+def _assert_executable_config(
+    config_path: Path,
+) -> tuple[dict[str, object], dict[str, object], EvaluationSpecificationSpec]:
     root = config_path.resolve().parents[2]
     manifest = verify_freeze_manifest(root, FREEZE_MANIFEST_PATH)
     validation = validate_experiment_config(config_path)
@@ -157,11 +160,103 @@ def _assert_executable_config(config_path: Path) -> tuple[dict[str, object], dic
     relative = config_path.resolve().relative_to(root).as_posix()
     if manifest_file_hash(manifest, relative) != _sha256(config_path):
         raise ContractError("RUN_CONFIG_HASH_MISMATCH", "config differs from frozen manifest")
-    return config, manifest | {"validated_config": validation}
+    evaluation_relative = str(config["evaluation_specification_path"])
+    evaluation_path = _resolve_repo_path(
+        root, evaluation_relative, "RUN_EVALUATION_SPEC_PATH_INVALID"
+    )
+    if manifest_file_hash(manifest, evaluation_relative) != _sha256(evaluation_path):
+        raise ContractError(
+            "RUN_EVALUATION_SPEC_HASH_MISMATCH",
+            "evaluation specification differs from frozen manifest",
+        )
+    evaluation = load_evaluation_specification(evaluation_path)
+    return config, manifest | {"validated_config": validation}, evaluation
 
 
 def _sha256(path: Path) -> str:
     return sha256(path.read_bytes()).hexdigest()
+
+
+def _evaluation_bridge_receipt(run: object) -> dict[str, object]:
+    """Preserve a compact, inspectable receipt for runtime support evaluations."""
+
+    receipt_fields = (
+        "evaluation_spec_id",
+        "evaluation_specification_hash",
+        "action_comparison_schema_id",
+        "action_family_id",
+        "action_instance_id",
+        "action_instance_hash",
+        "evidence_state_id",
+        "refinement_certificate_id",
+        "refinement_certificate_hash",
+        "implementation_id",
+        "implementation_code_hash",
+        "robust_action_support",
+    )
+    routing_receipts: dict[str, dict[str, object]] = {}
+    action_receipts: dict[str, dict[str, object]] = {}
+    for trace in run.traces:
+        for event in trace.events:
+            if event.event_type_id not in {"REPRESENTATION_APPLIED", "ACTION_COMPUTED"}:
+                continue
+            receipt = {field: event.details.get(field) for field in receipt_fields}
+            if any(value is None for value in receipt.values()):
+                raise ContractError(
+                    "RUN_EVALUATION_RECEIPT_INCOMPLETE",
+                    f"support receipt incomplete for {trace.case_id}:{event.event_type_id}",
+                )
+            target = routing_receipts if event.event_type_id == "REPRESENTATION_APPLIED" else action_receipts
+            if trace.case_id in target:
+                raise ContractError(
+                    "RUN_EVALUATION_RECEIPT_DUPLICATE",
+                    f"duplicate support receipt for {trace.case_id}:{event.event_type_id}",
+                )
+            target[trace.case_id] = receipt
+    compared_case_ids = sorted(set(routing_receipts) & set(action_receipts))
+    mismatches = [
+        case_id for case_id in compared_case_ids
+        if routing_receipts[case_id] != action_receipts[case_id]
+    ]
+    routing_values = list(routing_receipts.values())
+    if not routing_values or mismatches:
+        raise ContractError(
+            "RUN_EVALUATION_RECEIPT_MISMATCH",
+            f"routing/action support mismatch for {len(mismatches)} cases",
+        )
+    specification_ids = sorted({str(item["evaluation_spec_id"]) for item in routing_values})
+    specification_hashes = sorted({str(item["evaluation_specification_hash"]) for item in routing_values})
+    implementation_hashes = sorted({str(item["implementation_code_hash"]) for item in routing_values})
+    if len(specification_ids) != 1 or len(specification_hashes) != 1 or len(implementation_hashes) != 1:
+        raise ContractError(
+            "RUN_EVALUATION_RECEIPT_IDENTITY_DRIFT",
+            "an attempt emitted multiple evaluation or implementation identities",
+        )
+    value = {
+        "schema_version": 1,
+        "artifact_kind": "evaluation_bridge_receipt",
+        "evaluation_spec_id": specification_ids[0],
+        "evaluation_specification_hash": specification_hashes[0],
+        "implementation_code_hash": implementation_hashes[0],
+        "routing_receipt_count": len(routing_receipts),
+        "action_receipt_count": len(action_receipts),
+        "routing_action_compared_count": len(compared_case_ids),
+        "routing_action_mismatch_count": len(mismatches),
+        "action_missing_by_cutoff_count": len(set(routing_receipts) - set(action_receipts)),
+        "certificate_counts": dict(sorted(Counter(
+            str(item["refinement_certificate_id"]) for item in routing_values
+        ).items())),
+        "evidence_state_counts": dict(sorted(Counter(
+            str(item["evidence_state_id"]) for item in routing_values
+        ).items())),
+        "support_outcome_counts": dict(sorted(Counter(
+            str(bool(item["robust_action_support"])).lower() for item in routing_values
+        ).items())),
+        "action_instance_inventory_hash": canonical_hash(sorted(
+            str(item["action_instance_hash"]) for item in routing_values
+        )),
+    }
+    return value | {"receipt_hash": canonical_hash(value)}
 
 
 def _attempt_artifact(
@@ -171,6 +266,7 @@ def _attempt_artifact(
     family: object,
     replication: int,
     policy_id: str,
+    evaluation_specification: EvaluationSpecificationSpec,
 ) -> dict[str, object]:
     seed_id = f"{config['seed_prefix']}-{family.family_id}-R{replication:03d}"
     cohort = generate_stochastic_cohort(StochasticCohortSpec(
@@ -187,13 +283,15 @@ def _attempt_artifact(
         process=stochastic_process(),
         policy=policy(policy_id),
         overlay=family.overlay.to_compilation_overlay(),
-        evaluation_spec_id="CONFIRMATORY-EVALUATION@1",
+        evaluation_spec_id=evaluation_specification.evaluation_spec_id,
+        evaluation_specification=evaluation_specification,
     )
     run = run_engagement_stage(cohort, compiled)
     row = _run_metrics(family, replication, policy_id, run)
     attempt_id = _attempt_id(family.family_id, replication, policy_id)
+    bridge_receipt = _evaluation_bridge_receipt(run)
     artifact = {
-        "schema_version": 1,
+        "schema_version": 2,
         "artifact_kind": "confirmatory_attempt",
         "attempt_id": attempt_id,
         "config_id": config["config_id"],
@@ -204,6 +302,7 @@ def _attempt_artifact(
         "policy_id": policy_id,
         "seed_id": seed_id,
         "compiled_configuration_hash": canonical_hash(compiled.model_dump(mode="json")),
+        "evaluation_bridge_receipt": bridge_receipt,
         "row": row,
         "claim_limit": "confirmatory estimate within the frozen declared model and parameter space; no historical prevalence, legality, or field-effect inference",
     }
@@ -236,7 +335,7 @@ def run_frozen_experiment(
     extension: bool = False,
 ) -> dict[str, object]:
     root = root.resolve()
-    config, manifest = _assert_executable_config(config_path)
+    config, manifest, evaluation_specification = _assert_executable_config(config_path)
     initial = int(config["replications"])
     maximum = int(config["precision"]["maximum_replications"])
     if extension:
@@ -280,6 +379,7 @@ def run_frozen_experiment(
                     family=family,
                     replication=replication,
                     policy_id=policy_id,
+                    evaluation_specification=evaluation_specification,
                 )
                 _write_exclusive_json(path, artifact, "RUN_APPEND_ONLY_VIOLATION")
                 created += 1
@@ -338,7 +438,7 @@ def _collect_attempts(
 
 def reconcile_frozen_experiment(root: Path, config_path: Path) -> dict[str, object]:
     root = root.resolve()
-    config, manifest = _assert_executable_config(config_path)
+    config, manifest, _ = _assert_executable_config(config_path)
     artifacts, missing, unexpected = _collect_attempts(root, config_path, config, manifest)
     target = _target_replications(config_path, config)
     run_index = {
@@ -407,6 +507,47 @@ def _precision_summary(
         "rate_target_met": rate_mcse <= target_rate,
         "paired_target_met": paired_mcse <= target_paired,
     }
+
+
+def _evaluation_bridge_summary(
+    artifacts: list[dict[str, object]],
+) -> dict[str, object]:
+    receipts = [dict(artifact["evaluation_bridge_receipt"]) for artifact in artifacts]
+    specification_ids = sorted({str(item["evaluation_spec_id"]) for item in receipts})
+    specification_hashes = sorted({str(item["evaluation_specification_hash"]) for item in receipts})
+    implementation_hashes = sorted({str(item["implementation_code_hash"]) for item in receipts})
+    if len(specification_ids) != 1 or len(specification_hashes) != 1 or len(implementation_hashes) != 1:
+        raise ContractError(
+            "ANALYSIS_EVALUATION_RECEIPT_DRIFT",
+            "attempts contain multiple evaluation or implementation identities",
+        )
+    certificate_counts: Counter[str] = Counter()
+    evidence_state_counts: Counter[str] = Counter()
+    support_outcome_counts: Counter[str] = Counter()
+    for receipt in receipts:
+        certificate_counts.update(receipt["certificate_counts"])
+        evidence_state_counts.update(receipt["evidence_state_counts"])
+        support_outcome_counts.update(receipt["support_outcome_counts"])
+    value = {
+        "schema_version": 1,
+        "artifact_kind": "evaluation_bridge_suite_summary",
+        "evaluation_spec_id": specification_ids[0],
+        "evaluation_specification_hash": specification_hashes[0],
+        "implementation_code_hash": implementation_hashes[0],
+        "attempt_receipt_count": len(receipts),
+        "routing_receipt_count": sum(int(item["routing_receipt_count"]) for item in receipts),
+        "action_receipt_count": sum(int(item["action_receipt_count"]) for item in receipts),
+        "routing_action_compared_count": sum(int(item["routing_action_compared_count"]) for item in receipts),
+        "routing_action_mismatch_count": sum(int(item["routing_action_mismatch_count"]) for item in receipts),
+        "action_missing_by_cutoff_count": sum(int(item["action_missing_by_cutoff_count"]) for item in receipts),
+        "certificate_counts": dict(sorted(certificate_counts.items())),
+        "evidence_state_counts": dict(sorted(evidence_state_counts.items())),
+        "support_outcome_counts": dict(sorted(support_outcome_counts.items())),
+        "attempt_receipt_inventory_hash": canonical_hash(sorted(
+            str(item["receipt_hash"]) for item in receipts
+        )),
+    }
+    return value | {"summary_hash": canonical_hash(value)}
 
 
 def _svg_document(
@@ -536,7 +677,7 @@ def _verify_or_write_figure(path: Path, content: str) -> None:
 
 def analyze_frozen_experiment(root: Path, config_path: Path) -> dict[str, object]:
     root = root.resolve()
-    config, manifest = _assert_executable_config(config_path)
+    config, manifest, _ = _assert_executable_config(config_path)
     artifacts, missing, unexpected = _collect_attempts(root, config_path, config, manifest)
     if missing or unexpected:
         raise ContractError(
@@ -548,6 +689,14 @@ def analyze_frozen_experiment(root: Path, config_path: Path) -> dict[str, object
     cells = _summarize_cells(rows)
     pairs = _paired_estimates(rows)
     precision = _precision_summary(config, cells, pairs)
+    reconciliation_path = _resolve_repo_path(
+        root, config["outputs"]["reconciliation_path"], "RUN_OUTPUT_PATH_INVALID"
+    )
+    reconciliation = _load_self_hashed(
+        reconciliation_path, "reconciliation_hash", "RUN_RECONCILIATION_INVALID"
+    )
+    if reconciliation.get("status") != "complete":
+        raise ContractError("RUN_RECONCILIATION_INCOMPLETE", str(config["config_id"]))
     initial = int(config["replications"])
     maximum = int(config["precision"]["maximum_replications"])
     extension_required = (
@@ -570,6 +719,8 @@ def analyze_frozen_experiment(root: Path, config_path: Path) -> dict[str, object
         "artifact_kind": "confirmatory_analysis",
         "config_id": config["config_id"],
         "manifest_hash": manifest["manifest_hash"],
+        "reconciliation_hash": reconciliation["reconciliation_hash"],
+        "run_index_hash": reconciliation["run_index_hash"],
         "replications": replications,
         "family_count": len(_families(config)),
         "attempt_count": len(artifacts),
@@ -580,6 +731,7 @@ def analyze_frozen_experiment(root: Path, config_path: Path) -> dict[str, object
         "cell_summaries": cells,
         "paired_estimates": pairs,
         "common_random_number_diagnostics": _common_random_number_diagnostics(rows),
+        "evaluation_bridge_summary": _evaluation_bridge_summary(artifacts),
         "figures": figures,
         "row_hash": canonical_hash(sorted(rows, key=lambda row: (
             str(row["family_id"]), int(row["replication"]), str(row["policy_id"])

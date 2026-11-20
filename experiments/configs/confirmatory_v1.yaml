@@ -1,7 +1,8 @@
-config_id: CONFIRMATORY-V1
+config_id: CONFIRMATORY-V2
 mode: confirmatory
 design_role: core_confirmatory
-purpose: frozen core factorial study; execution prohibited until the Slice 4 manifest verifies
+purpose: frozen core factorial study with independently stored evaluation specification; execution prohibited until the active manifest verifies
+evaluation_specification_path: experiments/evaluation_specs/period_evidence_v2.json
 policy_ids: [U0, U1, U2C, U2O, U3]
 cohort_size: 80
 replications: 30
@@ -76,11 +77,11 @@ negative_controls:
   - NO-SUPPORT-NO-PROGRESSION
   - NO-THRESHOLD-NO-PROGRESSION
 outputs:
-  attempts_directory: outputs/confirmatory_v1/attempts
-  run_index_path: outputs/confirmatory_v1/run_index.json
-  reconciliation_path: outputs/confirmatory_v1/reconciliation.json
-  analysis_directory: outputs/confirmatory_v1/analysis
-  negative_control_receipt_path: data/golden_traces/slice4_negative_control_receipt_v1.json
+  attempts_directory: outputs/confirmatory_v2/attempts
+  run_index_path: outputs/confirmatory_v2/run_index.json
+  reconciliation_path: outputs/confirmatory_v2/reconciliation.json
+  analysis_directory: outputs/confirmatory_v2/analysis
+  negative_control_receipt_path: data/golden_traces/slice4_negative_control_receipt_v2.json
 freeze_readiness:
   status: ready
   unresolved_items: []

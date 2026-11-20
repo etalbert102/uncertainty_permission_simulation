@@ -13,7 +13,9 @@ from uncertainty_permission_simulation.configuration import (
     UNRESOLVED_EVIDENCE_STATE_ID,
     compile_configuration,
     evaluate_robust_action_support,
+    load_evaluation_specification,
     period_evidence_evaluation_specification,
+    progression_action_instance,
 )
 from uncertainty_permission_simulation.process_model import TraceSpec, execute_topology, run_trace
 from uncertainty_permission_simulation.profiles import canonical_process, nonisomorphic_process, policy, smoke_overlay
@@ -25,20 +27,48 @@ ROOT = Path(__file__).resolve().parents[2]
 
 def test_period_evidence_specification_executes_exact_refinement_certificate() -> None:
     specification = period_evidence_evaluation_specification("TEST-EVALUATION@1")
-    supported, supported_certificate = evaluate_robust_action_support(
+    supported = evaluate_robust_action_support(
         specification,
-        action_type_id="progress",
+        action=progression_action_instance(specification, case_id="CASE-1"),
         evidence_state_id=SUPPORTED_EVIDENCE_STATE_ID,
     )
-    unresolved, unresolved_certificate = evaluate_robust_action_support(
+    unresolved = evaluate_robust_action_support(
         specification,
-        action_type_id="progress",
+        action=progression_action_instance(specification, case_id="CASE-1"),
         evidence_state_id=UNRESOLVED_EVIDENCE_STATE_ID,
     )
-    assert supported is True
-    assert unresolved is False
-    assert supported_certificate == "CERT-PERIOD-EVIDENCE-PRESENT@1"
-    assert unresolved_certificate == "CERT-PERIOD-EVIDENCE-UNRESOLVED@1"
+    assert supported.robust_action_support is True
+    assert unresolved.robust_action_support is False
+    assert supported.refinement_certificate_id == "CERT-PERIOD-EVIDENCE-PRESENT@1"
+    assert unresolved.refinement_certificate_id == "CERT-PERIOD-EVIDENCE-UNRESOLVED@1"
+    assert supported.action_instance_id == "CASE-1:PROGRESS"
+
+
+def test_support_evaluation_rejects_action_identity_drift() -> None:
+    specification = period_evidence_evaluation_specification("TEST-EVALUATION@1")
+    action = progression_action_instance(specification, case_id="CASE-1")
+    drifted = action.model_copy(update={"authority_direction": "narrows_progression"})
+    with pytest.raises(CompilationError, match="EVALUATION_ACTION_INSTANCE_INVALID"):
+        evaluate_robust_action_support(
+            specification,
+            action=drifted,
+            evidence_state_id=SUPPORTED_EVIDENCE_STATE_ID,
+        )
+
+
+def test_frozen_evaluation_specification_is_loaded_as_external_artifact() -> None:
+    specification = load_evaluation_specification(
+        ROOT / "experiments/evaluation_specs/period_evidence_v2.json"
+    )
+    compiled = compile_configuration(
+        configuration_id="EXTERNAL-SPEC",
+        process=canonical_process(),
+        policy=policy("U2C"),
+        overlay=smoke_overlay(),
+        evaluation_spec_id=specification.evaluation_spec_id,
+        evaluation_specification=specification,
+    )
+    assert compiled.evaluation_specification_origin == "external"
 
 
 def test_all_seven_golden_behaviors() -> None:

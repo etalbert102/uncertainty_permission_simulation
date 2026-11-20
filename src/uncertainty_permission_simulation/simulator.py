@@ -17,6 +17,7 @@ from .configuration import (
     ScenarioOverlaySpec,
     UNRESOLVED_EVIDENCE_STATE_ID,
     evaluate_robust_action_support,
+    progression_action_instance,
 )
 from .events import DEFAULT_PRIORITIES, Event, EventQueue
 from .policies import ActionDecision, EngagementDecision, EngagementInputs, decide_action, map_engagement, policy_behavior
@@ -809,11 +810,12 @@ def _case_engagement_trace(
         if decision.adequate_response_evidence or decision.retrieved_evidence
         else UNRESOLVED_EVIDENCE_STATE_ID
     )
-    evidence_sufficient, refinement_certificate_id = evaluate_robust_action_support(
+    support_receipt = evaluate_robust_action_support(
         evaluation_specification,
-        action_type_id="progress",
+        action=progression_action_instance(evaluation_specification, case_id=case.case_id),
         evidence_state_id=evidence_state_id,
     )
+    evidence_sufficient = support_receipt.robust_action_support
     representation_mode = (
         "period_specific_evidence" if evidence_sufficient
         else "imputed_unflagged" if behavior.policy_id == "U1"
@@ -831,10 +833,7 @@ def _case_engagement_trace(
         "representation",
         extra_details={
             "evidence_state_id": evidence_state_id,
-            "evaluation_spec_id": evaluation_specification.evaluation_spec_id,
-            "evaluation_specification_hash": evaluation_specification.specification_hash,
-            "refinement_certificate_id": refinement_certificate_id,
-            "robust_action_support": evidence_sufficient,
+            **support_receipt.model_dump(mode="json"),
         },
     )
     emit("REPRESENTATION_SURFACED", routing_time, "representation")
@@ -987,11 +986,12 @@ def _add_action_events(
         if trace.decision.adequate_response_evidence or trace.decision.retrieved_evidence
         else UNRESOLVED_EVIDENCE_STATE_ID
     )
-    evidence_sufficient, refinement_certificate_id = evaluate_robust_action_support(
+    support_receipt = evaluate_robust_action_support(
         evaluation_specification,
-        action_type_id="progress",
+        action=progression_action_instance(evaluation_specification, case_id=trace.case_id),
         evidence_state_id=evidence_state_id,
     )
+    evidence_sufficient = support_receipt.robust_action_support
     action_decision = decide_action(
         policy_id=trace.policy_id,
         evidence_sufficient=evidence_sufficient,
@@ -1039,10 +1039,7 @@ def _add_action_events(
         "gate_safe": action_decision.gate_safe,
         "unsupported_reason_codes": action_decision.unsupported_reason_codes,
         "evidence_state_id": evidence_state_id,
-        "evaluation_spec_id": evaluation_specification.evaluation_spec_id,
-        "evaluation_specification_hash": evaluation_specification.specification_hash,
-        "refinement_certificate_id": refinement_certificate_id,
-        "robust_action_support": evidence_sufficient,
+        **support_receipt.model_dump(mode="json"),
     }
     added: list[Event] = []
     if action_decision.review_authorization_recorded:
