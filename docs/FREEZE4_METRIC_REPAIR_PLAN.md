@@ -331,7 +331,7 @@ This table is the sole status ledger for this plan. Do not create a second statu
 
 | Slice | Status | Entry condition | Completion evidence | Commit |
 | --- | --- | --- | --- | --- |
-| 0. Repair contract | pending | Plan recorded | Contract review and clean diff | — |
+| 0. Repair contract | complete | Plan recorded | Contract review, Freeze 3 verification, validators, and focused tests | `91cbb90` |
 | 1. Freeze 4 infrastructure | pending | Slice 0 committed | Historical and candidate freeze tests | — |
 | 2. Metric implementation | pending | Slice 1 committed | Golden, metamorphic, adversarial, and full tests | — |
 | 3. Pilot and reporting rehearsal | pending | Slice 2 committed | Pilot receipt and exhibit-contract audit | — |
@@ -354,6 +354,16 @@ Each completion entry must record:
 - residual risk;
 - deferred items; and
 - commit SHA.
+
+### Slice 0 completion receipt — 2026-11-21
+
+- **Files changed:** `docs/FREEZE4_METRIC_REPAIR_PLAN.md` records this closeout; the controlling contract itself was introduced at `91cbb90`.
+- **Files intentionally unchanged:** active and historical freeze manifests, attestations, experiment configurations, runtime and analysis code, outputs, manuscript, and existing execution controls.
+- **Commands and results:** `./.venv/bin/python scripts/validate_plan.py` passed with eight slices, three primary hypotheses, five policies, 39 audit questions, nine deferred items, and the 10,000-word ceiling; `./.venv/bin/python scripts/validate_slice0.py` passed with 10 sources, 10 claims, two profiles, 12 YAML files, and 95 diagnostics; `PYTHONPATH=src ./.venv/bin/python -m uncertainty_permission_simulation.cli verify-freeze docs/FREEZE_MANIFEST.json` verified 79 files under `UPS-CONFIRMATORY-FREEZE@3` with manifest hash `47170f8cb450709b19f0bf47b48b887208ee75cde07dbf1ee34169891f6b9c6b`; the focused freeze/configuration suite passed 16 tests.
+- **Fixtures and comparisons:** the recorded metric contract was checked against the active Freeze 3 identity, the canonical study-plan and Slice 0 validators, and the freeze machinery tests.
+- **Residual risk:** freeze and release code remains hard-coded to Freeze 3 and V2 output roots; this is the declared work of Slice 1 and blocks Freeze 4 issuance, not Slice 0 closure.
+- **Deferred items:** none. Infrastructure migration is scheduled, owned work rather than an incomplete Slice 0 subsystem.
+- **Commit SHA:** `91cbb90` owns the recorded repair contract; the closeout receipt is an administrative ledger update made before Slice 1 mutation.
 
 ## 10. Verification Tiers
 
