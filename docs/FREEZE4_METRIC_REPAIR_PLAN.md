@@ -338,7 +338,7 @@ This table is the sole status ledger for this plan. Do not create a second statu
 | 4. Freeze 4 issuance | complete | Slices 0–3 committed and clean | Active manifest, historical verification, repository Slice 4 gate | `ffe3859` |
 | 5. Core and sensitivity rerun | complete | Freeze 4 verifies | Two 16,200-attempt reconciliations, analyses, replay, and Slice 5 gate | `50dbced` |
 | 6. Differential audit | complete | Both suites complete | Deterministic machine and human receipts over 32,400 paired attempts | `fc732c5` |
-| 7. Scientific-value gate | pending | Differential audit passes | Recorded retain/demote decision | — |
+| 7. Scientific-value gate | complete | Differential audit passes | Deterministic retain-full-section decision recorded before prose revision | `41bbfa4` |
 | 8. Manuscript reconstruction | pending | Value decision recorded | Integrated Markdown, DOCX, exhibits, and QA | — |
 | 9. Release audit | pending | Manuscript package complete | Final evidence packet and release verification | — |
 
@@ -424,6 +424,16 @@ Each completion entry must record:
 - **Residual risk:** compiled-configuration receipt hashes and attempt hashes changed universally and are recorded as identity-level differences; the unchanged compiler source, exact frozen family/seed identities, byte-equivalent support receipts, exact event hashes, and exact shared outcomes rule out generated-behavior drift within the stored model trace.
 - **Deferred items:** none.
 - **Commit SHA:** `fc732c5` contains the differential builder and both receipts.
+
+### Slice 7 completion receipt — 2026-11-21
+
+- **Files changed:** a deterministic value-gate builder and machine- and human-readable decision receipts were added outside the frozen executable inventory.
+- **Files intentionally unchanged:** manuscript and exhibits, frozen inputs and manifests, both analysis suites, source fixtures, and every declared parameter, interaction, sensitivity, and outcome.
+- **Commands and results:** the gate was run twice with byte-identical outputs and decision hash `b418d8660a6139eff94687a598b551b3f003ca0ae9c00d45e2b2def75b74af06`; active Freeze 4 continued to verify. The decision is `retain_full_simulation_section`.
+- **Fixtures and comparisons:** the core U3 retrievability margin ranged 0.214823, exceeding the 0.05 threshold and 178.1 times its largest level-specific simulation MCSE. Access-barrier and staff-access ranges were 0.025775 and 0.000764 and did not qualify. The U3 review diagnostic contained 44,381 requests, 42,098 timely completions, 20 zero-request family-replications out of 3,240, and positive total denominators in all 108 families. The latency sensitivity retained a 0.214591 retrievability range.
+- **Residual risk:** the gate controls article prominence, not historical validity, calibration, welfare, legality, population prevalence, or policy value. All nonqualifying factor margins and the complete sensitivity analysis remain mandatory disclosures.
+- **Deferred items:** none. No post-decision parameter, sensitivity, interaction, or outcome may be added.
+- **Commit SHA:** `41bbfa4` records the value decision before manuscript reconstruction.
 
 ## 10. Verification Tiers
 
