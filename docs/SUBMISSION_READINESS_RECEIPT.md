@@ -1,6 +1,6 @@
 # Submission Readiness Receipt
 
-Date: 2026-11-20
+Date: 2026-11-21
 
 Status: local submission package complete; public-repository activation intentionally deferred
 
@@ -12,13 +12,13 @@ This receipt covers the integrated article, APA Word review copy, optional onlin
 
 - The article contains the complete five-step process-red-team procedure and the worked Robodebt application conclusion. Its claims and interpretation do not depend on supplementary material.
 - `ARTICLE_SUPPLEMENTARY_MATERIAL.md` is an optional online technical appendix containing implementation-level status codes, receipt fields, worksheets, and worked-trace detail. It may be withheld if a venue does not accept supplementary material.
-- The conservative Markdown-source count is 9,889 whitespace-delimited words before the bibliography, 111 below the 10,000-word ceiling. The conservative source count controls the release decision.
+- The conservative Markdown-source count is 9,997 whitespace-delimited words before the bibliography, 3 below the 10,000-word ceiling. The conservative source count controls the release decision.
 - The manuscript uses no endnotes to evade the word ceiling.
 
 ## APA Word review copy
 
-- `ARTICLE_MANUSCRIPT_APA.docx` contains an author name, an affiliation, and a correspondence address; 47 rendered pages; three tables with repeating header rows; three figures with alternative-text descriptions; external hyperlinks; and three correctly oriented sections.
-- All 47 pages were visually inspected after the final export. Tables 1-3, Figures 1-3, notation, long references, headers, and the landscape-to-portrait transition are legible and free of clipping or overlap. Figure 2 and its note remain together; Figure 3 uses the final modeled-downstream-exposure terminology.
+- `ARTICLE_MANUSCRIPT_APA.docx` contains an author name, an affiliation, and a correspondence address; 51 rendered pages; three tables with repeating header rows; three figures with alternative-text descriptions; external hyperlinks; and three correctly oriented sections.
+- All 51 pages were visually inspected after the bounded audit repair and final export. Tables 1-3, Figures 1-3, notation, long references, headers, and section transitions are legible and free of clipping or overlap. Figure 2 and its note remain together; Figure 3 uses the final modeled-downstream-exposure terminology.
 - The final archive passes ZIP integrity checks. The image, table, section, tracked-change, relationship, and metadata audits report the expected contents and no structural defect.
 - Author and last-modified-by metadata are blank, revision-session identifiers were scrubbed, and the export utility remains outside the frozen `scripts/*.py` inventory.
 
@@ -32,7 +32,7 @@ This receipt covers the integrated article, APA Word review copy, optional onlin
 
 - On 2026-11-18, the manuscript simplified the plain-language review definition, evidence-layer explanation, formal-model bridge, refinement-coverage explanation, Robodebt crosswalk, simulation unit, results interpretation, and five-step protocol instructions. Review corrections restored the complete effective-review conditions and the information-first policy's frozen applicability boundary.
 - The edits preserve `robust permission`, gate safety, effective review, correction, restoration, the frozen policy comparisons, and every numerical result and claim boundary. They add no practitioner-usability, field-transfer, historical-causation, legality, or general-safety claim.
-- The APA Word copy was regenerated and metadata-scrubbed. All 47 pages were visually inspected; the accessibility, image, section, archive-integrity, and repository verification checks pass.
+- The APA Word copy was regenerated and metadata-scrubbed after the bounded audit repair. All 51 pages were visually inspected; the accessibility, image, section, archive-integrity, and repository verification checks pass.
 
 ## Simulation-contribution refocus
 
