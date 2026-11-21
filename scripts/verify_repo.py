@@ -18,6 +18,7 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from uncertainty_permission_simulation.experiments import canonical_hash, validate_experiment_config  # noqa: E402
 from uncertainty_permission_simulation.freeze import (  # noqa: E402
+    ACTIVE_OUTPUT_ROOTS,
     verify_freeze_manifest,
     verify_historical_freeze_attestations,
 )
@@ -128,10 +129,7 @@ def verify_repository(*, through_slice: int, release: bool) -> dict[str, object]
     if through_slice == 4:
         forbidden = sorted(
             path.relative_to(ROOT).as_posix()
-            for base in (
-                ROOT / "outputs/confirmatory_v2",
-                ROOT / "outputs/sensitivity_information_latency_v2",
-            )
+            for base in (ROOT / relative for relative in ACTIVE_OUTPUT_ROOTS)
             if base.exists()
             for path in base.rglob("*")
             if path.is_file()

@@ -21,7 +21,11 @@ from .schemas import ContractError
 
 FREEZE_MANIFEST_PATH = Path("docs/FREEZE_MANIFEST.json")
 FREEZE_ATTESTATION_PATH = Path("docs/FREEZE_COMMIT_ATTESTATIONS.json")
-FREEZE_ID = "UPS-CONFIRMATORY-FREEZE@3"
+FREEZE_ID = "UPS-CONFIRMATORY-FREEZE@4"
+ACTIVE_OUTPUT_ROOTS = (
+    Path("outputs/confirmatory_v3"),
+    Path("outputs/sensitivity_information_latency_v3"),
+)
 
 FROZEN_DOCUMENT_PATHS = (
     "pyproject.toml",
@@ -30,6 +34,7 @@ FROZEN_DOCUMENT_PATHS = (
     "docs/CONFIGURATION_COMPILATION.md",
     "docs/CONTINUITY_AND_CLAIM_BOUNDARY.md",
     "docs/FORMAL_MODEL.md",
+    "docs/FREEZE4_METRIC_REPAIR_PLAN.md",
     "docs/P0_PROCEDURE_REVIEW_PACKET.md",
     "docs/P0_USABILITY_WALKTHROUGH.md",
     "docs/PREREGISTRATION.md",
@@ -234,7 +239,20 @@ def verify_historical_freeze_attestations(
         if not isinstance(record, dict):
             raise ContractError("FREEZE_ATTESTATION_INVALID", "invalid attestation record")
         manifest_path = root / str(record.get("manifest_path"))
-        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        try:
+            manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError) as exc:
+            raise ContractError(
+                "FREEZE_ATTESTATION_INVALID",
+                f"historical manifest is unreadable: {manifest_path}",
+            ) from exc
+        hash_input = dict(manifest) if isinstance(manifest, dict) else {}
+        observed_manifest_hash = hash_input.pop("manifest_hash", None)
+        if observed_manifest_hash != canonical_hash(hash_input):
+            raise ContractError(
+                "FREEZE_ATTESTATION_INVALID",
+                f"historical manifest self-hash mismatch: {manifest_path}",
+            )
         if (
             manifest.get("freeze_id") != record.get("freeze_id")
             or manifest.get("manifest_hash") != record.get("manifest_hash")
@@ -326,10 +344,7 @@ def _assert_freeze_ready(root: Path) -> tuple[dict[str, object], dict[str, objec
 
 
 def _confirmatory_output_paths(root: Path) -> list[str]:
-    output_roots = (
-        root / "outputs/confirmatory_v2",
-        root / "outputs/sensitivity_information_latency_v2",
-    )
+    output_roots = tuple(root / relative for relative in ACTIVE_OUTPUT_ROOTS)
     return sorted(
         path.relative_to(root).as_posix()
         for output_root in output_roots

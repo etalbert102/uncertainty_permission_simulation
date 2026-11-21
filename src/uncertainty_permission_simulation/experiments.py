@@ -50,6 +50,25 @@ PRIMARY_METRICS = (
     "right_censored_rate",
 )
 
+CORE_CONFIG_ID = "CONFIRMATORY-V3"
+SENSITIVITY_CONFIG_ID = "SENSITIVITY-INFORMATION-LATENCY-V3"
+EXPECTED_OUTPUTS = {
+    "confirmatory": {
+        "attempts_directory": "outputs/confirmatory_v3/attempts",
+        "run_index_path": "outputs/confirmatory_v3/run_index.json",
+        "reconciliation_path": "outputs/confirmatory_v3/reconciliation.json",
+        "analysis_directory": "outputs/confirmatory_v3/analysis",
+        "negative_control_receipt_path": str(NEGATIVE_CONTROL_RECEIPT_PATH),
+    },
+    "sensitivity": {
+        "attempts_directory": "outputs/sensitivity_information_latency_v3/attempts",
+        "run_index_path": "outputs/sensitivity_information_latency_v3/run_index.json",
+        "reconciliation_path": "outputs/sensitivity_information_latency_v3/reconciliation.json",
+        "analysis_directory": "outputs/sensitivity_information_latency_v3/analysis",
+        "negative_control_receipt_path": str(NEGATIVE_CONTROL_RECEIPT_PATH),
+    },
+}
+
 
 def canonical_hash(value: object) -> str:
     return sha256(
@@ -103,6 +122,14 @@ def load_experiment_config(path: Path) -> dict[str, object]:
                 "EXPERIMENT_CONFIG_INVALID",
                 "analysis.primary_metrics must match the closed implemented metric order",
             )
+        expected_config_id = (
+            CORE_CONFIG_ID if config["mode"] == "confirmatory" else SENSITIVITY_CONFIG_ID
+        )
+        if config["config_id"] != expected_config_id:
+            raise ContractError(
+                "EXPERIMENT_CONFIG_INVALID",
+                f"{config['mode']} config_id must be {expected_config_id}",
+            )
         evaluation_path = config.get("evaluation_specification_path")
         if not isinstance(evaluation_path, str) or not evaluation_path:
             raise ContractError(
@@ -139,10 +166,10 @@ def load_experiment_config(path: Path) -> dict[str, object]:
                 f"{config['mode']} negative-control IDs or order differ from the closed contract",
             )
         outputs = config["outputs"]
-        if not isinstance(outputs, dict) or outputs.get("negative_control_receipt_path") != str(NEGATIVE_CONTROL_RECEIPT_PATH):
+        if not isinstance(outputs, dict) or outputs != EXPECTED_OUTPUTS[config["mode"]]:
             raise ContractError(
                 "EXPERIMENT_CONFIG_INVALID",
-                "frozen config must reference the closed stored negative-control receipt path",
+                f"{config['mode']} outputs must match the closed Freeze 4 paths",
             )
         readiness = config.get("freeze_readiness")
         if not isinstance(readiness, dict) or readiness.get("status") not in {"blocked", "ready"}:
@@ -162,10 +189,10 @@ def load_experiment_config(path: Path) -> dict[str, object]:
                 "ready config cannot retain unresolved freeze items",
             )
         if config["mode"] == "sensitivity":
-            if config.get("parent_config_id") != "CONFIRMATORY-V2":
+            if config.get("parent_config_id") != CORE_CONFIG_ID:
                 raise ContractError(
                     "EXPERIMENT_CONFIG_INVALID",
-                    "sensitivity config must name CONFIRMATORY-V2 as parent",
+                    f"sensitivity config must name {CORE_CONFIG_ID} as parent",
                 )
             if not isinstance(config.get("sensitivity_id"), str) or not config["sensitivity_id"]:
                 raise ContractError(

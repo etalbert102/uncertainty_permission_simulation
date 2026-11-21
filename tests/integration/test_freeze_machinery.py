@@ -12,7 +12,11 @@ from uncertainty_permission_simulation.confirmatory import (
     run_frozen_experiment,
 )
 from uncertainty_permission_simulation.experiments import PRIMARY_METRICS, canonical_hash
-from uncertainty_permission_simulation.freeze import FREEZE_ID, verify_freeze_manifest
+from uncertainty_permission_simulation.freeze import (
+    FREEZE_ID,
+    verify_freeze_manifest,
+    verify_historical_freeze_attestations,
+)
 from uncertainty_permission_simulation.policies import POLICY_IDS
 from uncertainty_permission_simulation.schemas import ContractError
 
@@ -127,19 +131,58 @@ def test_repository_freeze_inventory_covers_load_bearing_inputs() -> None:
     inventory = freeze.frozen_inventory(ROOT)
     for path in (
         "docs/FORMAL_MODEL.md",
+        "docs/FREEZE4_METRIC_REPAIR_PLAN.md",
         "docs/PREREGISTRATION.md",
         "docs/PROCESS_RED_TEAM_PROTOCOL.md",
         "experiments/configs/confirmatory_v1.yaml",
         "src/uncertainty_permission_simulation/simulator.py",
         "src/uncertainty_permission_simulation/confirmatory.py",
         "scripts/verify_repo.py",
-        "data/golden_traces/slice4_negative_control_receipt_v2.json",
+        "data/golden_traces/slice4_negative_control_receipt_v3.json",
         "experiments/evaluation_specs/period_evidence_v2.json",
     ):
         assert path in inventory
     source_identity = freeze._source_identity(ROOT)
     assert source_identity["selected_source_count"] == 10
     assert all(source["local_record_hash"] for source in source_identity["sources"])
+
+
+def test_freeze3_is_archived_and_independently_attested() -> None:
+    value = verify_historical_freeze_attestations(ROOT)
+    records = {record["freeze_id"]: record for record in value["records"]}
+    assert records["UPS-CONFIRMATORY-FREEZE@3"] == {
+        "first_commit_containing_exact_frozen_inventory": "dc96716c0865517ab0f61700fb0a06ca39d0042a",
+        "freeze_id": "UPS-CONFIRMATORY-FREEZE@3",
+        "interpretation": "Freeze 3 was created from a clean committed input state; the creation head is the first commit containing every exact frozen blob.",
+        "manifest_hash": "47170f8cb450709b19f0bf47b48b887208ee75cde07dbf1ee34169891f6b9c6b",
+        "manifest_path": "docs/FREEZE_MANIFEST_V3.json",
+        "verified_file_count": 79,
+        "working_tree_head_at_freeze_creation": "dc96716c0865517ab0f61700fb0a06ca39d0042a",
+    }
+    with pytest.raises(ContractError, match="FREEZE_MANIFEST_INVALID"):
+        verify_freeze_manifest(ROOT, ROOT / "docs/FREEZE_MANIFEST_V3.json")
+
+
+def test_only_freeze4_output_roots_block_candidate_creation(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(
+        freeze,
+        "ACTIVE_OUTPUT_ROOTS",
+        (Path("outputs/core_v3"), Path("outputs/sensitivity_v3")),
+    )
+    old_output = tmp_path / "outputs/core_v2/attempt.json"
+    old_output.parent.mkdir(parents=True)
+    old_output.write_text("historical", encoding="utf-8")
+    assert freeze._confirmatory_output_paths(tmp_path) == []
+
+    active_output = tmp_path / "outputs/core_v3/attempt.json"
+    active_output.parent.mkdir(parents=True)
+    active_output.write_text("candidate", encoding="utf-8")
+    assert freeze._confirmatory_output_paths(tmp_path) == [
+        "outputs/core_v3/attempt.json"
+    ]
 
 
 def _mini_config() -> dict[str, object]:

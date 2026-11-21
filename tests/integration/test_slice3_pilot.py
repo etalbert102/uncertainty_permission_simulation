@@ -39,7 +39,7 @@ def test_slice4_confirmatory_freeze_ready_config_closes_grid_seeds_and_pilot_dec
     assert result["cohort_size"] == 80
     assert result["seed_count"] == 108 * 30
     assert len(result["seed_inventory_hash"]) == 64
-    assert result["negative_control_receipt_hash"] == "ff0be43e83326f5de2e3fe103ae9dbc40c392ddd5f27c619efc7d4754eb7d2a0"
+    assert result["negative_control_receipt_hash"] == "a90f810032f3b0af9acde802401fd07294ceb42d69575df32226f35a9014b45b"
     assert result["freeze_readiness"] == {"status": "ready", "unresolved_items": []}
 
 
