@@ -334,7 +334,7 @@ This table is the sole status ledger for this plan. Do not create a second statu
 | 0. Repair contract | complete | Plan recorded | Contract review, Freeze 3 verification, validators, and focused tests | `91cbb90` |
 | 1. Freeze 4 infrastructure | complete | Slice 0 committed | Historical and candidate freeze tests; 190-test suite | `56099ad` |
 | 2. Metric implementation | complete | Slice 1 committed | Golden, metamorphic, adversarial, and 206-test full suite | `22ef835` |
-| 3. Pilot and reporting rehearsal | pending | Slice 2 committed | Pilot receipt and exhibit-contract audit | — |
+| 3. Pilot and reporting rehearsal | complete | Slice 2 committed | Repaired pilot receipt, three-panel figure, five-row table, and 209-test suite | `849b086` |
 | 4. Freeze 4 issuance | pending | Slices 0–3 committed and clean | Active manifest and historical verification | — |
 | 5. Core and sensitivity rerun | pending | Freeze 4 verifies | Run indexes, reconciliations, and analyses | — |
 | 6. Differential audit | pending | Both suites complete | Machine and human differential receipts | — |
@@ -384,6 +384,16 @@ Each completion entry must record:
 - **Residual risk:** production exhibit builders and stored pilot artifacts still need rehearsal against the repaired schema; this is Slice 3 work. No Freeze 4 output exists.
 - **Deferred items:** none.
 - **Commit SHA:** `22ef835` contains the metric and semantic-QA implementation; this receipt is the required administrative closeout before Slice 3 mutation.
+
+### Slice 3 completion receipt — 2026-11-21
+
+- **Files changed:** the development pilot and dummy receipts were regenerated under the repaired schema; process-event contrasts were separated from the sole U3 decision-state contrast; the Slice 3 validator was updated; Figure 3 and Table 3 reporting builders now consume stored analysis artifacts; development-only reporting rehearsals and integration tests were added.
+- **Files intentionally unchanged:** confirmatory and sensitivity output roots, active and historical manifests, policy and simulator behavior, random streams, source fixtures, and manuscript numerical claims.
+- **Commands and results:** the development pilot completed 15 families, 75 family-policy cells, and 21,600 case-policy runs; its receipt hash is `b3d61a36b6195fc0d94fbaff8a94f2d5d19a0b57df92e8f75ae27a772f2de340`; projected 30-replication runtime was 734.33 seconds; projected primary rate and paired MCSEs were 0.04909 and 0.01889; the Slice 3 gate passed; the full suite passed 209 tests.
+- **Fixtures and comparisons:** Figure 3 rehearses timely review and timeout by load, U0/U3 five-state decomposition, and U3 unresolved location by the three declared factors. Table 3 contains exactly five unique quantities and rejects repeated identities. Mutation testing confirms the exhibit values come from the receipt rather than prose constants.
+- **Residual risk:** pilot factor margins are coverage-subset rehearsals, not results; production builders must be rerun on the complete Freeze 4 analysis after Slice 5.
+- **Deferred items:** none.
+- **Commit SHA:** `849b086` contains the pilot and reporting rehearsal; this receipt is the required administrative closeout before freeze issuance.
 
 ## 10. Verification Tiers
 
