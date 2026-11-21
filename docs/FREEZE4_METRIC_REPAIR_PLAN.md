@@ -335,7 +335,7 @@ This table is the sole status ledger for this plan. Do not create a second statu
 | 1. Freeze 4 infrastructure | complete | Slice 0 committed | Historical and candidate freeze tests; 190-test suite | `56099ad` |
 | 2. Metric implementation | complete | Slice 1 committed | Golden, metamorphic, adversarial, and 206-test full suite | `22ef835` |
 | 3. Pilot and reporting rehearsal | complete | Slice 2 committed | Repaired pilot receipt, three-panel figure, five-row table, and 209-test suite | `849b086` |
-| 4. Freeze 4 issuance | pending | Slices 0–3 committed and clean | Active manifest and historical verification | — |
+| 4. Freeze 4 issuance | complete | Slices 0–3 committed and clean | Active manifest, historical verification, repository Slice 4 gate | `ffe3859` |
 | 5. Core and sensitivity rerun | pending | Freeze 4 verifies | Run indexes, reconciliations, and analyses | — |
 | 6. Differential audit | pending | Both suites complete | Machine and human differential receipts | — |
 | 7. Scientific-value gate | pending | Differential audit passes | Recorded retain/demote decision | — |
@@ -394,6 +394,16 @@ Each completion entry must record:
 - **Residual risk:** pilot factor margins are coverage-subset rehearsals, not results; production builders must be rerun on the complete Freeze 4 analysis after Slice 5.
 - **Deferred items:** none.
 - **Commit SHA:** `849b086` contains the pilot and reporting rehearsal; this receipt is the required administrative closeout before freeze issuance.
+
+### Slice 4 completion receipt — 2026-11-21
+
+- **Files changed:** the mutable execution ledger was correctly excluded from the immutable scientific inventory; the byte-identical Freeze 3 archive and attestation were retained; the legacy active-manifest copy was retired; `docs/FREEZE_MANIFEST.json` now records `UPS-CONFIRMATORY-FREEZE@4` over 84 files.
+- **Files intentionally unchanged:** every frozen input after checkpoint `d7e8494`, historical manifests, V2 output trees, policy and simulator behavior, source fixtures, and both empty V3 output roots.
+- **Commands and results:** plan, Slice 0, and Slice 3 validators passed; the full suite passed 209 tests; the clean candidate build passed; active Freeze 4 verified; historical attestations verified Freeze 2 and Freeze 3; `scripts/verify_repo.py --through-slice 4` passed with manifest hash `bd330d56273ae7a85aed872b5e1442400b02b1f6b822c1fa6154ae2de5d62c63`, core config hash `9c323731dacf5fae84b89f938e7cdd6bf698f9763cb0a1c2b3a3d9a62c8e8a00`, and sensitivity config hash `04a5b801a8ee3da2cab7874f7e748f8c98e1de21cc30339513c5a606108c0b47`.
+- **Fixtures and comparisons:** active-ID rejection, historical commit binding, bad manifest self-hash, wrong parent/config/output identity, dirty creation, and pre-run output contamination remain blocking tests.
+- **Residual risk:** none at issuance. Scientific value remains unknown until the declared suites run and the differential audit passes.
+- **Deferred items:** none.
+- **Commit SHA:** `d7e8494` is the clean executable checkpoint recorded by the manifest; `ffe3859` commits the immutable Freeze 4 manifest.
 
 ## 10. Verification Tiers
 
