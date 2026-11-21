@@ -1,0 +1,206 @@
+{
+  "artifact_kind": "scientific_value_decision",
+  "claim_boundary": "the gate determines article prominence only; it is not evidence of historical prevalence, calibration, causality outside the model, welfare, or overall policy value",
+  "core_analysis_hash": "5ac3d5c5a5d04cea7241e76ec5f390f9f266cfbd60cafd2339507dd44e360588",
+  "core_factor_evidence": [
+    {
+      "error_multiple": 20.816940375530997,
+      "factor": "access_barrier",
+      "levels": [
+        {
+          "cell_count": 36,
+          "estimate": 0.15880787037037036,
+          "level": "0.1",
+          "simulation_mcse": 0.001162447121622962
+        },
+        {
+          "cell_count": 36,
+          "estimate": 0.17027777777777778,
+          "level": "0.3",
+          "simulation_mcse": 0.0011985310745051886
+        },
+        {
+          "cell_count": 36,
+          "estimate": 0.18458333333333332,
+          "level": "0.5",
+          "simulation_mcse": 0.0012381965119744682
+        }
+      ],
+      "maximum_level_simulation_mcse": 0.0012381965119744682,
+      "range": 0.02577546296296296,
+      "range_gate_pass": false,
+      "range_threshold": 0.05,
+      "required_error_multiple": 2.0,
+      "simulation_error_gate_pass": true,
+      "summary_id": "u3_unresolved_by_access_barrier"
+    },
+    {
+      "error_multiple": 178.1010178304134,
+      "factor": "retrievability",
+      "levels": [
+        {
+          "cell_count": 54,
+          "estimate": 0.06381172839506173,
+          "level": "high",
+          "simulation_mcse": 0.000682287998499903
+        },
+        {
+          "cell_count": 54,
+          "estimate": 0.2786342592592593,
+          "level": "low",
+          "simulation_mcse": 0.0012061836225369027
+        }
+      ],
+      "maximum_level_simulation_mcse": 0.0012061836225369027,
+      "range": 0.21482253086419756,
+      "range_gate_pass": true,
+      "range_threshold": 0.05,
+      "required_error_multiple": 2.0,
+      "simulation_error_gate_pass": true,
+      "summary_id": "u3_unresolved_by_retrievability"
+    },
+    {
+      "error_multiple": 0.7734562206487966,
+      "factor": "staff_access",
+      "levels": [
+        {
+          "cell_count": 54,
+          "estimate": 0.17160493827160495,
+          "level": "complete",
+          "simulation_mcse": 0.0009721018494680703
+        },
+        {
+          "cell_count": 54,
+          "estimate": 0.17084104938271605,
+          "level": "partial",
+          "simulation_mcse": 0.000987630415911745
+        }
+      ],
+      "maximum_level_simulation_mcse": 0.000987630415911745,
+      "range": 0.0007638888888888973,
+      "range_gate_pass": false,
+      "range_threshold": 0.05,
+      "required_error_multiple": 2.0,
+      "simulation_error_gate_pass": false,
+      "summary_id": "u3_unresolved_by_staff_access"
+    }
+  ],
+  "core_review_denominator": {
+    "conditional_timely_review_rate": 0.9485590680696695,
+    "families_with_positive_total_requests": 108,
+    "family_count": 108,
+    "interpretability_gate_pass": true,
+    "interpretability_rule": "positive total denominator and positive request coverage in every designed family; report zero-request replications",
+    "review_request_count": 44381,
+    "timely_review_count": 42098,
+    "total_family_replications": 3240,
+    "zero_request_replications": 20
+  },
+  "decision": "retain_full_simulation_section",
+  "decision_hash": "b418d8660a6139eff94687a598b551b3f003ca0ae9c00d45e2b2def75b74af06",
+  "decision_timing": "recorded after differential audit and before manuscript reconstruction",
+  "factor_range_threshold": 0.05,
+  "full_disclosure_rule": "retain both complete analyses and report all three declared factor margins regardless of which factor qualifies",
+  "gate_pass": true,
+  "post_decision_prohibition": "do not add a parameter, sensitivity, interaction, or outcome after this decision",
+  "qualifying_core_factors": [
+    "retrievability"
+  ],
+  "schema_version": 1,
+  "sensitivity_analysis_hash": "d5762c5194d62e5c3dd6082bd72bb0c2856765c2326087e8988882ecded93570",
+  "sensitivity_factor_evidence": [
+    {
+      "error_multiple": 22.513045997768454,
+      "factor": "access_barrier",
+      "levels": [
+        {
+          "cell_count": 36,
+          "estimate": 0.15707175925925926,
+          "level": "0.1",
+          "simulation_mcse": 0.001155691975877733
+        },
+        {
+          "cell_count": 36,
+          "estimate": 0.17109953703703704,
+          "level": "0.3",
+          "simulation_mcse": 0.0011927300748267979
+        },
+        {
+          "cell_count": 36,
+          "estimate": 0.18577546296296296,
+          "level": "0.5",
+          "simulation_mcse": 0.0012749809024753416
+        }
+      ],
+      "maximum_level_simulation_mcse": 0.0012749809024753416,
+      "range": 0.028703703703703703,
+      "range_gate_pass": false,
+      "range_threshold": 0.05,
+      "required_error_multiple": 2.0,
+      "simulation_error_gate_pass": true,
+      "summary_id": "u3_unresolved_by_access_barrier"
+    },
+    {
+      "error_multiple": 175.84928177338185,
+      "factor": "retrievability",
+      "levels": [
+        {
+          "cell_count": 54,
+          "estimate": 0.06402006172839506,
+          "level": "high",
+          "simulation_mcse": 0.000677639787430469
+        },
+        {
+          "cell_count": 54,
+          "estimate": 0.2786111111111111,
+          "level": "low",
+          "simulation_mcse": 0.0012203123448593948
+        }
+      ],
+      "maximum_level_simulation_mcse": 0.0012203123448593948,
+      "range": 0.21459104938271603,
+      "range_gate_pass": true,
+      "range_threshold": 0.05,
+      "required_error_multiple": 2.0,
+      "simulation_error_gate_pass": true,
+      "summary_id": "u3_unresolved_by_retrievability"
+    },
+    {
+      "error_multiple": 1.6538056612426275,
+      "factor": "staff_access",
+      "levels": [
+        {
+          "cell_count": 54,
+          "estimate": 0.17214506172839505,
+          "level": "complete",
+          "simulation_mcse": 0.001003110979821804
+        },
+        {
+          "cell_count": 54,
+          "estimate": 0.17048611111111112,
+          "level": "partial",
+          "simulation_mcse": 0.0009706318883521118
+        }
+      ],
+      "maximum_level_simulation_mcse": 0.001003110979821804,
+      "range": 0.0016589506172839386,
+      "range_gate_pass": false,
+      "range_threshold": 0.05,
+      "required_error_multiple": 2.0,
+      "simulation_error_gate_pass": false,
+      "summary_id": "u3_unresolved_by_staff_access"
+    }
+  ],
+  "sensitivity_review_denominator": {
+    "conditional_timely_review_rate": 0.9506587096047743,
+    "families_with_positive_total_requests": 108,
+    "family_count": 108,
+    "interpretability_gate_pass": true,
+    "interpretability_rule": "positive total denominator and positive request coverage in every designed family; report zero-request replications",
+    "review_request_count": 44405,
+    "timely_review_count": 42214,
+    "total_family_replications": 3240,
+    "zero_request_replications": 24
+  },
+  "simulation_error_multiple": 2.0
+}
