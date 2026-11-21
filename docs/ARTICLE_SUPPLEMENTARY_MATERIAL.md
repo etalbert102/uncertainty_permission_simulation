@@ -61,8 +61,8 @@ The intake worksheet records the workflow and version, evaluation unit, conseque
 | --- | --- | --- | --- |
 | **1. Map transformations and ownership** | Where does a policy-material distinction disappear or become unavailable to an empowered role? | Source value and evidence type; transformation; assumptions; downstream representation; provenance; F0 and F4 result; diagnostic and intervention owners. | Use a trace when the finding depends on event order or realized surfacing. |
 | **2. Test what weaker evidence permits** | Does weaker evidence permit progression excluded by an admissible refinement, or does a purported fallback create progression or spillovers? | Exact actions; target and parameters; prerequisites; independent support rule; default and timeout; refinement certificate or failure witness; F1 and F2 result. | Use Level C when the intervention changes shared resources, another case, or a cohort path. |
-| **3. Test whether review is operational** | Is a configured gate blocking, action-bound, current, adequately informed, and timely? | `GateSafe`, `ReviewEffective`, F3, and `DecisionServiceEffective` separately; reviewer evidence, authority, dependency, timing, decision, and execution-state revalidation. | Escalate when queueing or capacity determines timely completion. |
-| **4. Stress access, workload, and deadlines** | How do access, arrivals, service demand, capacity, deadlines, and defaults alter outcomes? | Gate safety, timely completion, unresolved cases, interaction events, workload, exposure, correction, and restoration as separate outcomes. | Use dynamic simulation for feedback, resource competition, or spillovers. |
+| **3. Test whether review is operational** | Is a configured gate blocking, action-bound, current, adequately informed, and timely? | Gate safety, effective-review conditions, F3, and timely supported service separately; reviewer evidence, authority, dependency, timing, decision, and execution-state revalidation. | Escalate when queueing or capacity determines timely completion. |
+| **4. Stress access, workload, and deadlines** | How do access, arrivals, service demand, capacity, deadlines, and defaults alter outcomes? | Gate safety, timely completion, unresolved cases, interaction events, workload, recovery-path entry, correction, and restoration as separate outcomes. | Use dynamic simulation for feedback, resource competition, or spillovers. |
 | **5. Test contestability and restoration** | Does a correction path exist, can it be used in time, and are all declared consequences restored? | Structural path, access, use, correction, consequence vector, baseline, restoration status, residual effects, horizon, and owner. | Treat an unfinished horizon as `unassessable`; do not infer restoration from record correction alone. |
 
 ## S5. Fixed Robodebt bounded trace
@@ -79,7 +79,7 @@ The worked trace is explanatory, not representative. It holds the case, evidence
 | 2/F2 | `unassessable/incomplete`: the trace cannot test spillovers. | Same. | No cohort, shared queue, or noninterference evidence; Level C required. |
 | 3/F3 | `fail/complete`: a required pre-action gate is absent. | `not_applicable/complete`: the supported disposition does not require review in this trace. | No general review-reliability estimate. |
 | 4/capacity-service | `omitted_by_claim_limit`; no status. | Same. | No arrivals or shared queues; Level C required. |
-| 5/F5 | `fail/complete`: later correction leaves modeled recovery-process exposure unrestored at the day-60 check. | `not_applicable/complete`: no modeled consequence is created that requires restoration. | Avoided exposure does not demonstrate restoration capability; no legal, frequency, or attackability finding. |
+| 5/F5 | `fail/complete`: later correction leaves modeled recovery status unrestored at the day-60 check. | `not_applicable/complete`: no modeled consequence is created that requires restoration. | Avoided recovery-path entry does not demonstrate restoration capability; no legal, frequency, or attackability finding. |
 
 ### Table S2. Ownership and intervention receipt
 
@@ -95,9 +95,31 @@ Entries appear as baseline; repair.
 | 4/capacity-service | simulation; simulation | Add queues, resources, and paired policies — simulation; same | Modeling assumptions and computation; same. |
 | 5/F5 | reassessment; process | Restore every consequence — restoration; none in trace — policy if progression occurs | Broader remediation; avoidance proves no restoration capability. |
 
-The baseline trace does not establish that every historical Robodebt case followed this path, that the modeled debt was legally or monetarily invalid, or that information-first handling is costless or generally superior. The repair trace demonstrates avoided modeled exposure, not restoration performance.
+The baseline trace does not establish that every historical Robodebt case followed this path, that the modeled debt was legally or monetarily invalid, or that information-first handling is costless or generally superior. The repair trace demonstrates avoided recovery-path entry, not restoration performance.
 
-## S6. Reference artifacts
+## S6. Executable representation fixture
+
+The article uses domain-neutral language for the deterministic representation pair. The executable fixture retains its original safety-specific labels so that readers can reproduce the exact frozen test rather than infer that the example was rewritten after results were known.
+
+A low-resolution sensor output records a pickup-like silhouette at confidence 0.42, typed alternatives that include an armed technical, and the broad class `vehicle`. The preservation arm keeps confidence, alternatives, unresolved status, and provenance visible. A fixed rule then requires added observation and fail-closed review before routine administrative disposition. The fallback arm emits only the defensible broad label `vehicle`; every listed alternative remains compatible with that label, but the policy-material distinction disappears and the same rule permits routine disposition. The fixture concerns routing of a synthetic organizational case. It does not authorize action against a physical object, estimate prevalence, or model an operational deployment.
+
+Two negative controls delimit the mechanism. When no policy-material alternative is present, both representations route identically. When scrutiny is representation-independent, both arms retain it. The canonical specification is [PRECURSOR_FIDELITY_FIXTURE.md](PRECURSOR_FIDELITY_FIXTURE.md), and the publication review packet is [P0_PROCEDURE_REVIEW_PACKET.md](P0_PROCEDURE_REVIEW_PACKET.md).
+
+## S7. Freeze 4 simulation details and sensitivity
+
+The core U3 conditional-review denominator contains 44,381 requests and 42,098 timely completions. Twenty of 3,240 family-replications generated no request and are treated as not applicable; all 108 families have a positive denominator after aggregation. A completed review of unresolved evidence produces an evidence-request state rather than progression, so completion does not imply resolution or supported service.
+
+| U3 factor | Levels and unresolved non-progression | Range | Maximum level MCSE |
+| --- | --- | ---: | ---: |
+| Access barrier | 0.10: 0.159; 0.30: 0.170; 0.50: 0.185 | 0.026 | 0.00124 |
+| Retrievability | high: 0.064; low: 0.279 | 0.215 | 0.00121 |
+| Staff access | complete: 0.172; partial: 0.171 | 0.001 | 0.00099 |
+
+The latency sensitivity doubled the retrieval-time scale from 10 to 20 days. U3 unresolved non-progression remained 0.064 under high retrievability and 0.279 under low retrievability, a range of 0.215. Access-barrier levels spanned 0.029 and staff-access levels spanned 0.002. U3 generated 44,405 review requests, of which 42,214 completed on time; 24 family-replications generated no request. The sensitivity changes routing and queue phasing only. It does not test retrieval failure, abandonment, deadline expiry, or historical calibration.
+
+Complete machine-readable evidence is in [FREEZE4_SCIENTIFIC_VALUE_DECISION.json](FREEZE4_SCIENTIFIC_VALUE_DECISION.json), the core and sensitivity analysis receipts under `outputs/`, and [FREEZE3_FREEZE4_DIFFERENTIAL_AUDIT.json](FREEZE3_FREEZE4_DIFFERENTIAL_AUDIT.json).
+
+## S8. Reference artifacts
 
 - Confirmatory protocol: [PROCESS_RED_TEAM_PROTOCOL.md](PROCESS_RED_TEAM_PROTOCOL.md)
 - Formal definitions and executable contracts: [FORMAL_MODEL.md](FORMAL_MODEL.md)

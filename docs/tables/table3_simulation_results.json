@@ -1,0 +1,61 @@
+{
+  "accounting_identity_policy": "one reported quantity per decision-state accounting identity",
+  "artifact_kind": "simulation_table3_data",
+  "row_count": 5,
+  "rows": [
+    {
+      "claim_boundary": "queue deadline misses in the designed grid; fail-open progression and fail-closed holding are rule-defined consequences, not separate findings",
+      "estimate": 0.4762114197530864,
+      "family_count": 108,
+      "family_maximum": 0.88125,
+      "family_minimum": 0.041666666666666664,
+      "label": "Fail-closed timeout activation per initiated case",
+      "quantity_id": "U2C_TIMEOUT_ACTIVATION",
+      "simulation_mcse": 0.002432522415684618
+    },
+    {
+      "claim_boundary": "sole aggregate U3-minus-U0 decision-state contrast",
+      "estimate": -0.5943132716049383,
+      "family_count": 108,
+      "family_maximum": -0.36916666666666664,
+      "family_minimum": -0.8154166666666667,
+      "label": "Information-first change in unresolved non-progression",
+      "quantity_id": "U3_MINUS_U0_UNRESOLVED_NONPROGRESSION",
+      "simulation_mcse": 0.0009196285694183085
+    },
+    {
+      "claim_boundary": "request-weighted diagnostic; null when no request exists and not a supported-disposition measure",
+      "denominator_count": 259200,
+      "estimate": 0.5237885802469135,
+      "label": "Timely review conditional on a review request",
+      "numerator_count": 135766,
+      "quantity_id": "U2C_CONDITIONAL_TIMELY_REVIEW",
+      "simulation_mcse": null,
+      "zero_request_replications": 0
+    },
+    {
+      "claim_boundary": "event count, not effort, subjective burden, welfare, or cost",
+      "estimate": 1.095925925925926,
+      "family_count": 108,
+      "family_maximum": 1.3120833333333333,
+      "family_minimum": 0.8595833333333334,
+      "label": "Additional modeled interaction events per initiated case",
+      "quantity_id": "U3_MINUS_U0_INTERACTION_EVENTS",
+      "simulation_mcse": 0.0017661597706937339
+    },
+    {
+      "claim_boundary": "event count, not staffing cost, efficiency, or overall policy value",
+      "estimate": 1.2090162037037038,
+      "family_count": 108,
+      "family_maximum": 1.7279166666666668,
+      "family_minimum": 0.7491666666666666,
+      "label": "Additional modeled agency-work events per initiated case",
+      "quantity_id": "U3_MINUS_U0_WORKLOAD_EVENTS",
+      "simulation_mcse": 0.001713333114761576
+    }
+  ],
+  "schema_version": 1,
+  "source_hash": "5ac3d5c5a5d04cea7241e76ec5f390f9f266cfbd60cafd2339507dd44e360588",
+  "status": "frozen_result",
+  "table_hash": "efbb334a25e4647cc665c462b1c0a3ff56d96de3f7c6b4903df12d6475067959"
+}
