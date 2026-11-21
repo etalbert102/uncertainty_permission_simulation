@@ -1,8 +1,4 @@
-"""Blocking Slice 3 engineering and artifact validator.
-
-Procedure comprehensibility is reviewed by the project lead after Slice 5 analysis;
-it is not an external pre-freeze gate.
-"""
+"""Blocking Slice 3 engineering and reporting-rehearsal validator."""
 
 from __future__ import annotations
 
@@ -44,8 +40,10 @@ def main(*, allow_confirmatory_output: bool = False) -> int:
         diagnostics.append("pilot receipt hash mismatch")
     if len(receipt["families"]) != 15 or len(receipt["cell_summaries"]) != 75:
         diagnostics.append("pilot must store 15 family and 75 family-policy summaries")
-    if len(receipt["paired_estimates"]) != 225:
+    if len(receipt["paired_estimates"]) != 15:
         diagnostics.append("pilot paired-estimate inventory mismatch")
+    if len(receipt["process_contrasts"]) != 30:
+        diagnostics.append("pilot process-contrast inventory mismatch")
     runtime = receipt["runtime"]
     if not runtime["within_ceiling"] or runtime["predicted_confirmatory_seconds"] > 86400:
         diagnostics.append("predicted confirmatory runtime exceeds the frozen 24-hour ceiling")
@@ -56,7 +54,7 @@ def main(*, allow_confirmatory_output: bool = False) -> int:
         diagnostics.append("projected paired MCSE target not met at minimum replications")
     audit = receipt["audit"]
     for key in (
-        "queue_dynamics_change_review_effectiveness",
+        "queue_dynamics_change_timeout_activation",
         "timeout_semantics_change_progression",
         "paired_case_membership_preserved",
     ):
@@ -80,6 +78,35 @@ def main(*, allow_confirmatory_output: bool = False) -> int:
         text = (ROOT / "data/pilot" / name).read_text(encoding="utf-8")
         if "Prototype" not in text or "confirmatory" not in text:
             diagnostics.append(f"figure prototype lacks development-only boundary: {name}")
+
+    figure3 = (ROOT / "data/pilot/figure3_reporting_rehearsal.svg").read_text(
+        encoding="utf-8"
+    )
+    if (
+        "Development-only reporting rehearsal" not in figure3
+        or "Decision state at cutoff" not in figure3
+        or "Where U3 unresolved cases accumulate" not in figure3
+    ):
+        diagnostics.append("Figure 3 reporting rehearsal lacks the repaired three-panel contract")
+    table3 = _json(ROOT / "data/pilot/table3_reporting_rehearsal.json")
+    if not _self_hash(table3, "table_hash"):
+        diagnostics.append("Table 3 reporting rehearsal hash mismatch")
+    expected_quantities = {
+        "U2C_TIMEOUT_ACTIVATION",
+        "U3_MINUS_U0_UNRESOLVED_NONPROGRESSION",
+        "U2C_CONDITIONAL_TIMELY_REVIEW",
+        "U3_MINUS_U0_INTERACTION_EVENTS",
+        "U3_MINUS_U0_WORKLOAD_EVENTS",
+    }
+    observed_quantities = {
+        str(row["quantity_id"]) for row in table3.get("rows", [])
+    }
+    if (
+        table3.get("status") != "development_only_rehearsal"
+        or observed_quantities != expected_quantities
+        or table3.get("row_count") != len(expected_quantities)
+    ):
+        diagnostics.append("Table 3 reporting rehearsal does not match the repaired quantity contract")
 
     trace_path = ROOT / "data/golden_traces/robodebt_worked_trace_v1.json"
     trace = _json(trace_path)
@@ -130,7 +157,16 @@ def main(*, allow_confirmatory_output: bool = False) -> int:
         if not path.exists() or not path.read_text(encoding="utf-8").strip():
             diagnostics.append(f"required Slice 3 artifact missing or empty: {path.relative_to(ROOT)}")
 
-    confirmatory_artifacts = list((ROOT / "outputs").glob("confirmatory*/**/*"))
+    confirmatory_artifacts = [
+        path
+        for base in (
+            ROOT / "outputs/confirmatory_v3",
+            ROOT / "outputs/sensitivity_information_latency_v3",
+        )
+        if base.exists()
+        for path in base.rglob("*")
+        if path.is_file()
+    ]
     if confirmatory_artifacts and not allow_confirmatory_output:
         diagnostics.append("confirmatory output exists before freeze")
     if diagnostics:
@@ -141,7 +177,7 @@ def main(*, allow_confirmatory_output: bool = False) -> int:
         "Slice 3 engineering gate passed: "
         f"{validation['family_count']} development families, "
         f"{len(receipt['cell_summaries'])} family-policy cells, "
-        f"pilot receipt {receipt['receipt_hash']}; post-simulation project-lead review scheduled after Slice 5"
+        f"pilot receipt {receipt['receipt_hash']}; Figure 3 and Table 3 reporting rehearsal verified"
     )
     return 0
 

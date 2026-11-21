@@ -4,12 +4,12 @@
 <text x="30" y="58" font-family="sans-serif" font-size="12" fill="#444">Development-only pilot means across the coverage subset; confirmatory data not used</text>
 <line x1="70" y1="370" x2="710" y2="370" stroke="#222"/>
 <line x1="70" y1="80" x2="70" y2="370" stroke="#222"/>
-<polyline points="70.00,102.49 390.00,195.80 710.00,276.13" fill="none" stroke="#276FBF" stroke-width="3"/>
-<circle cx="70.00" cy="102.49" r="4" fill="#276FBF"/>
-<circle cx="390.00" cy="195.80" r="4" fill="#276FBF"/>
-<circle cx="710.00" cy="276.13" r="4" fill="#276FBF"/>
+<polyline points="70.00,347.51 390.00,254.20 710.00,173.87" fill="none" stroke="#276FBF" stroke-width="3"/>
+<circle cx="70.00" cy="347.51" r="4" fill="#276FBF"/>
+<circle cx="390.00" cy="254.20" r="4" fill="#276FBF"/>
+<circle cx="710.00" cy="173.87" r="4" fill="#276FBF"/>
 <line x1="530" y1="92" x2="550" y2="92" stroke="#276FBF" stroke-width="3"/>
-<text x="558" y="96" font-family="sans-serif" font-size="11">U2C effective review</text>
+<text x="558" y="96" font-family="sans-serif" font-size="11">U2C timeout activation</text>
 <polyline points="70.00,347.51 390.00,254.20 710.00,173.87" fill="none" stroke="#C23B22" stroke-width="3"/>
 <circle cx="70.00" cy="347.51" r="4" fill="#C23B22"/>
 <circle cx="390.00" cy="254.20" r="4" fill="#C23B22"/>

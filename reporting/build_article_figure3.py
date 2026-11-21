@@ -1,13 +1,11 @@
 #!/usr/bin/env python3
-"""Build article Figure 3 from the frozen core analysis receipt.
-
-This is a post-freeze reporting utility, not part of the frozen simulation or
-verification-code inventory.
-"""
+"""Build Figure 3 from a stored pilot or frozen analysis artifact."""
 
 from __future__ import annotations
 
+import argparse
 from collections import defaultdict
+from hashlib import sha256
 from html import escape
 import json
 from pathlib import Path
@@ -15,14 +13,8 @@ from statistics import mean
 
 
 ROOT = Path(__file__).resolve().parents[1]
-RECEIPT = ROOT / "outputs/confirmatory_v2/analysis/analysis_r030.json"
-OUTPUT = ROOT / "docs/figures/figure3_simulation_results.svg"
-EXPECTED_ANALYSIS_HASH = "b3c2fde249fe38bc6778edac77cfd929144ddc48a8c41a150a97518636752112"
-
-WIDTH = 1000
-HEIGHT = 1390
-FONT = "Arial, Helvetica, sans-serif"
-
+DEFAULT_RECEIPT = ROOT / "outputs/confirmatory_v3/analysis/analysis_r030.json"
+DEFAULT_OUTPUT = ROOT / "docs/figures/figure3_simulation_results.svg"
 COLORS = {
     "blue": "#2563A6",
     "orange": "#C56A11",
@@ -32,236 +24,218 @@ COLORS = {
     "gray": "#59636E",
     "grid": "#D8DEE6",
     "ink": "#17212B",
-    "muted": "#52606D",
     "panel": "#F8FAFC",
 }
+FONT = "Arial, Helvetica, sans-serif"
 
 
-def text(x: float, y: float, value: str, *, size: int = 16, weight: int = 400,
-         anchor: str = "start", fill: str | None = None) -> str:
-    color = fill or COLORS["ink"]
+def _canonical_hash(value: object) -> str:
+    return sha256(
+        json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode()
+    ).hexdigest()
+
+
+def _verify_receipt(receipt: dict[str, object]) -> None:
+    field = "analysis_hash" if "analysis_hash" in receipt else "receipt_hash"
+    observed = receipt.get(field)
+    candidate = dict(receipt)
+    candidate.pop(field, None)
+    if observed != _canonical_hash(candidate):
+        raise RuntimeError(f"source artifact {field} does not verify")
+    if receipt.get("artifact_kind") not in {
+        "confirmatory_analysis", "development_pilot_receipt"
+    }:
+        raise RuntimeError("unsupported Figure 3 source artifact")
+
+
+def build_payload(receipt: dict[str, object]) -> dict[str, object]:
+    _verify_receipt(receipt)
+    cells = [dict(cell) for cell in receipt["cell_summaries"]]
+    family_count = len({str(cell["family_id"]) for cell in cells})
+
+    load_groups: dict[str, list[dict[str, object]]] = defaultdict(list)
+    for cell in cells:
+        if cell["policy_id"] == "U2C":
+            load_groups[str(cell["factors"]["load"])].append(cell)
+    panel_a = []
+    for load, values in sorted(load_groups.items(), key=lambda item: float(item[0])):
+        timely = sum(int(value["conditional_timely_review"]["numerator_count"]) for value in values)
+        requests = sum(int(value["conditional_timely_review"]["denominator_count"]) for value in values)
+        panel_a.append({
+            "load": load,
+            "cell_count": len(values),
+            "timeout_activation_rate": mean(float(value["timeout_activation_rate"]) for value in values),
+            "conditional_timely_review_rate": timely / requests if requests else None,
+            "timely_review_count": timely,
+            "review_request_count": requests,
+        })
+
+    state_metrics = (
+        "supported_progression_rate",
+        "unsupported_progression_rate",
+        "evidence_requested_rate",
+        "held_rate",
+        "pre_action_open_rate",
+    )
+    panel_b = []
+    for policy_id in ("U0", "U3"):
+        values = [cell for cell in cells if cell["policy_id"] == policy_id]
+        states = {
+            metric: mean(float(value[metric]) for value in values)
+            for metric in state_metrics
+        }
+        if abs(sum(states.values()) - 1.0) > 1e-12:
+            raise RuntimeError(f"decision-state decomposition does not conserve {policy_id}")
+        panel_b.append({"policy_id": policy_id, "cell_count": len(values), "states": states})
+
+    panel_c = []
+    u3 = [cell for cell in cells if cell["policy_id"] == "U3"]
+    for factor in ("access_barrier", "retrievability", "staff_access"):
+        groups: dict[str, list[dict[str, object]]] = defaultdict(list)
+        for cell in u3:
+            groups[str(cell["factors"][factor])].append(cell)
+        for level, values in sorted(groups.items()):
+            panel_c.append({
+                "factor": factor,
+                "level": level,
+                "cell_count": len(values),
+                "unresolved_nonprogression_rate": mean(
+                    float(value["unresolved_nonprogression_rate"]) for value in values
+                ),
+            })
+    return {
+        "schema_version": 1,
+        "family_count": family_count,
+        "source_hash": receipt.get("analysis_hash", receipt.get("receipt_hash")),
+        "panel_a": panel_a,
+        "panel_b": panel_b,
+        "panel_c": panel_c,
+    }
+
+
+def _text(x: float, y: float, value: str, *, size: int = 16, weight: int = 400,
+          anchor: str = "start", fill: str | None = None) -> str:
     return (
         f'<text x="{x:.1f}" y="{y:.1f}" font-family="{FONT}" font-size="{size}" '
-        f'font-weight="{weight}" text-anchor="{anchor}" fill="{color}">'
+        f'font-weight="{weight}" text-anchor="{anchor}" fill="{fill or COLORS["ink"]}">'
         f"{escape(value)}</text>"
     )
 
 
-def line(x1: float, y1: float, x2: float, y2: float, *, stroke: str,
-         width: float = 1.0, dash: str | None = None) -> str:
-    dashed = f' stroke-dasharray="{dash}"' if dash else ""
+def _line(x1: float, y1: float, x2: float, y2: float, *, color: str, width: float = 1) -> str:
     return (
         f'<line x1="{x1:.1f}" y1="{y1:.1f}" x2="{x2:.1f}" y2="{y2:.1f}" '
-        f'stroke="{stroke}" stroke-width="{width:.1f}"{dashed}/>'
+        f'stroke="{color}" stroke-width="{width:.1f}"/>'
     )
 
 
-def circle(x: float, y: float, color: str, radius: float = 6.0) -> str:
-    return f'<circle cx="{x:.1f}" cy="{y:.1f}" r="{radius:.1f}" fill="{color}"/>'
-
-
-def square(x: float, y: float, color: str, side: float = 12.0) -> str:
-    half = side / 2
-    return (
-        f'<rect x="{x-half:.1f}" y="{y-half:.1f}" width="{side:.1f}" height="{side:.1f}" '
-        f'fill="{color}"/>'
-    )
-
-
-def triangle(x: float, y: float, color: str, radius: float = 7.0) -> str:
-    points = f"{x:.1f},{y-radius:.1f} {x-radius:.1f},{y+radius:.1f} {x+radius:.1f},{y+radius:.1f}"
-    return f'<polygon points="{points}" fill="{color}"/>'
-
-
-def load_summaries(cells: list[dict[str, object]]) -> dict[str, dict[str, float]]:
-    metrics = ("gate_safe_rate", "review_effective_rate", "unresolved_hold_rate")
-    grouped: dict[str, dict[str, list[float]]] = defaultdict(lambda: defaultdict(list))
-    for cell in cells:
-        if cell["policy_id"] != "U2C":
-            continue
-        load = str(cell["factors"]["load"])
-        for metric in metrics:
-            grouped[load][metric].append(float(cell[metric]))
-    return {
-        load: {metric: mean(values) for metric, values in metric_values.items()}
-        for load, metric_values in grouped.items()
-    }
-
-
-def paired_summary(pairs: list[dict[str, object]], contrast: str, metric: str) -> tuple[float, float, float]:
-    values = [
-        float(item["estimate"])
-        for item in pairs
-        if item["contrast_id"] == contrast and item["metric"] == metric
-    ]
-    if len(values) != 108:
-        raise RuntimeError(f"expected 108 paired estimates for {contrast}/{metric}, found {len(values)}")
-    return mean(values), min(values), max(values)
-
-
-def panel_frame(
-    parts: list[str],
-    y: float,
-    title_value: str,
-    subtitle: str,
-    *,
-    height: float,
-) -> None:
+def _panel(parts: list[str], y: float, title: str, subtitle: str, height: float) -> None:
     parts.append(
         f'<rect x="45" y="{y:.1f}" width="910" height="{height:.1f}" rx="10" '
         f'fill="{COLORS["panel"]}" stroke="{COLORS["grid"]}"/>'
     )
-    parts.append(text(70, y + 38, title_value, size=23, weight=700))
-    parts.append(text(70, y + 68, subtitle, size=17, fill=COLORS["muted"]))
+    parts.append(_text(70, y + 36, title, size=22, weight=700))
+    parts.append(_text(70, y + 62, subtitle, size=15, fill=COLORS["gray"]))
 
 
-def build_svg(receipt: dict[str, object]) -> str:
-    cells = list(receipt["cell_summaries"])
-    pairs = list(receipt["paired_estimates"])
-    loads = load_summaries(cells)
-
-    parts = [
-        f'<svg xmlns="http://www.w3.org/2000/svg" width="{WIDTH}" height="{HEIGHT}" viewBox="0 0 {WIDTH} {HEIGHT}" role="img" aria-labelledby="title desc">',
-        '<title id="title">Figure 3. Capacity, timeout, and information-first results</title>',
-        '<desc id="desc">Three panels show the U2C load response, U2O minus U2C paired differences, and U3 minus U0 paired differences over 108 designed scenario families.</desc>',
-        f'<rect x="0" y="0" width="{WIDTH}" height="{HEIGHT}" fill="white"/>',
-        text(45, 45, "Figure 3. Capacity, timeout, and information-first tradeoffs", size=28, weight=700),
-        text(45, 76, "Frozen core simulation; 108 designed families, 30 paired replications per family", size=18, fill=COLORS["muted"]),
-    ]
-
-    # Panel A: load-stratified U2C summaries.
-    panel_frame(
-        parts,
-        100,
-        "A  Fail-closed load response",
-        "U2C; unweighted means over other designed factors",
-        height=380,
-    )
-    left, right, top, bottom = 130.0, 930.0, 245.0, 400.0
+def _axis(parts: list[str], *, left: float, right: float, top: float, bottom: float) -> None:
     for tick in (0.0, 0.25, 0.5, 0.75, 1.0):
         y = bottom - tick * (bottom - top)
-        parts.append(line(left, y, right, y, stroke=COLORS["grid"]))
-        parts.append(text(left - 15, y + 6, f"{tick:.2f}", size=16, anchor="end", fill=COLORS["muted"]))
-    parts.append(line(left, top, left, bottom, stroke=COLORS["ink"], width=1.5))
-    parts.append(line(left, bottom, right, bottom, stroke=COLORS["ink"], width=1.5))
-    load_order = ("0.6", "0.95", "1.2")
-    x_positions = (left, (left + right) / 2, right)
-    for load, x in zip(load_order, x_positions):
-        parts.append(text(x, bottom + 27, load, size=16, anchor="middle"))
-    parts.append(text((left + right) / 2, bottom + 57, "Nominal initiation load", size=17, anchor="middle"))
-    parts.append(
-        f'<text x="67" y="{(top + bottom) / 2:.1f}" font-family="{FONT}" font-size="17" '
-        f'text-anchor="middle" fill="{COLORS["ink"]}" transform="rotate(-90 67 {(top + bottom) / 2:.1f})">Rate</text>'
-    )
+        parts.append(_line(left, y, right, y, color=COLORS["grid"]))
+        parts.append(_text(left - 12, y + 5, f"{tick:.2f}", size=13, anchor="end", fill=COLORS["gray"]))
+    parts.append(_line(left, top, left, bottom, color=COLORS["ink"], width=1.5))
+    parts.append(_line(left, bottom, right, bottom, color=COLORS["ink"], width=1.5))
 
-    series = (
-        ("Gate safety", "gate_safe_rate", COLORS["green"], circle),
-        ("Timely review completion", "review_effective_rate", COLORS["blue"], square),
-        ("Unresolved hold", "unresolved_hold_rate", COLORS["orange"], triangle),
-    )
-    for index, (label, metric, color, marker) in enumerate(series):
-        points: list[tuple[float, float]] = []
-        for load, x in zip(load_order, x_positions):
-            value = loads[load][metric]
-            y = bottom - value * (bottom - top)
+
+def build_svg(receipt: dict[str, object], *, development: bool = False) -> str:
+    payload = build_payload(receipt)
+    boundary = "Development-only reporting rehearsal" if development else "Frozen core simulation"
+    parts = [
+        '<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1320" viewBox="0 0 1000 1320" role="img">',
+        '<rect width="1000" height="1320" fill="white"/>',
+        _text(45, 43, "Figure 3. Timeout activation and unresolved case location", size=27, weight=700),
+        _text(45, 72, f"{boundary}; {payload['family_count']} designed families", size=17, fill=COLORS["gray"]),
+    ]
+
+    _panel(parts, 95, "A  Review timing by load", "U2C; timeout per initiated case and timely completion per review request", 340)
+    left, right, top, bottom = 135.0, 920.0, 205.0, 365.0
+    _axis(parts, left=left, right=right, top=top, bottom=bottom)
+    loads = list(payload["panel_a"])
+    for index, item in enumerate(loads):
+        x = left + index * (right - left) / max(1, len(loads) - 1)
+        parts.append(_text(x, bottom + 25, str(item["load"]), size=14, anchor="middle"))
+    for label, field, color in (
+        ("Timeout activation", "timeout_activation_rate", COLORS["orange"]),
+        ("Timely review | request", "conditional_timely_review_rate", COLORS["blue"]),
+    ):
+        points = []
+        for index, item in enumerate(loads):
+            value = item[field]
+            if value is None:
+                continue
+            x = left + index * (right - left) / max(1, len(loads) - 1)
+            y = bottom - float(value) * (bottom - top)
             points.append((x, y))
-        rendered = " ".join(f"{x:.1f},{y:.1f}" for x, y in points)
-        parts.append(f'<polyline points="{rendered}" fill="none" stroke="{color}" stroke-width="3"/>')
+        parts.append(f'<polyline points="{" ".join(f"{x:.1f},{y:.1f}" for x, y in points)}" fill="none" stroke="{color}" stroke-width="3"/>')
         for x, y in points:
-            parts.append(marker(x, y, color))
-        legend_x = (110, 390, 725)[index]
-        legend_y = 210
-        parts.append(line(legend_x, legend_y, legend_x + 30, legend_y, stroke=color, width=3))
-        parts.append(
-            marker(legend_x + 15, legend_y, color, 6)
-            if marker is circle
-            else marker(legend_x + 15, legend_y, color, 12)
-        )
-        parts.append(text(legend_x + 42, legend_y + 6, label, size=16))
+            parts.append(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="5" fill="{color}"/>')
+        legend_y = 175 if field == "timeout_activation_rate" else 195
+        parts.append(_text(650, legend_y, label, size=14, fill=color))
 
-    # Panel B: U2O-U2C paired differences.
-    panel_frame(
-        parts,
-        505,
-        "B  Timeout semantics",
-        "U2O − U2C; point = unweighted mean, line = family min–max range",
-        height=330,
+    _panel(parts, 460, "B  Decision state at cutoff", "Unweighted designed-family means; each policy bar sums to 1", 330)
+    state_order = (
+        ("supported_progression_rate", COLORS["green"], "Supported progression"),
+        ("unsupported_progression_rate", COLORS["red"], "Unsupported progression"),
+        ("evidence_requested_rate", COLORS["purple"], "Evidence requested"),
+        ("held_rate", COLORS["orange"], "Held"),
+        ("pre_action_open_rate", COLORS["gray"], "Pre-action open"),
     )
-    b_left, b_right = 430.0, 930.0
-    b_top, b_bottom = 600.0, 755.0
-    for tick in (-1.0, -0.5, 0.0, 0.5, 1.0):
-        x = b_left + (tick + 1) / 2 * (b_right - b_left)
-        parts.append(line(x, b_top, x, b_bottom, stroke=COLORS["ink"] if tick == 0 else COLORS["grid"], width=1.5 if tick == 0 else 1))
-        parts.append(text(x, b_bottom + 27, f"{tick:+.1f}", size=16, anchor="middle"))
-    parts.append(text((b_left + b_right) / 2, b_bottom + 55, "Paired rate difference", size=17, anchor="middle"))
-    b_rows = (
-        ("Unsupported progression", "unsupported_progression_rate", COLORS["red"]),
-        ("Modeled downstream exposure", "recovery_exposure_rate", COLORS["orange"]),
-        ("Gate safety", "gate_safe_rate", COLORS["green"]),
-        ("Unresolved hold", "unresolved_hold_rate", COLORS["blue"]),
-        ("Timely review completion", "review_effective_rate", COLORS["purple"]),
-    )
-    for index, (label, metric, color) in enumerate(b_rows):
-        y = 615 + index * 30
-        avg, minimum, maximum = paired_summary(pairs, "U2O-minus-U2C", metric)
-        scale = lambda value: b_left + (value + 1) / 2 * (b_right - b_left)
-        parts.append(text(70, y + 6, label, size=16))
-        parts.append(line(scale(minimum), y, scale(maximum), y, stroke=color, width=4))
-        parts.append(line(scale(minimum), y - 8, scale(minimum), y + 8, stroke=color, width=2))
-        parts.append(line(scale(maximum), y - 8, scale(maximum), y + 8, stroke=color, width=2))
-        parts.append(circle(scale(avg), y, color, 7.5))
+    bar_left, bar_width = 190.0, 700.0
+    for row_index, item in enumerate(payload["panel_b"]):
+        y = 585 + row_index * 80
+        parts.append(_text(90, y + 22, str(item["policy_id"]), size=18, weight=700))
+        cursor = bar_left
+        for metric, color, _ in state_order:
+            width = float(item["states"][metric]) * bar_width
+            parts.append(f'<rect x="{cursor:.1f}" y="{y:.1f}" width="{width:.1f}" height="32" fill="{color}"/>')
+            cursor += width
+    for index, (_, color, label) in enumerate(state_order):
+        x = 95 + (index % 3) * 290
+        y = 735 + (index // 3) * 24
+        parts.append(f'<rect x="{x:.1f}" y="{y-12:.1f}" width="14" height="14" fill="{color}"/>')
+        parts.append(_text(x + 21, y, label, size=13))
 
-    # Panel C: U3-U0 paired differences. Metrics carry their own units.
-    panel_frame(
-        parts,
-        860,
-        "C  Information-first tradeoff",
-        "U3 − U0; outcome rows have different units",
-        height=330,
-    )
-    c_left, c_right = 430.0, 930.0
-    c_top, c_bottom = 950.0, 1110.0
-    for tick in (0.0, 0.6, 1.2, 1.8):
-        x = c_left + tick / 1.8 * (c_right - c_left)
-        parts.append(line(x, c_top, x, c_bottom, stroke=COLORS["ink"] if tick == 0 else COLORS["grid"], width=1.5 if tick == 0 else 1))
-        parts.append(text(x, c_bottom + 27, f"{tick:.1f}", size=16, anchor="middle"))
-    parts.append(text((c_left + c_right) / 2, c_bottom + 57, "Paired difference per initiated case", size=17, anchor="middle"))
-    c_rows = (
-        ("Unsupported progression", "rate", "unsupported_progression_rate", COLORS["red"]),
-        ("Modeled downstream exposure", "rate", "recovery_exposure_rate", COLORS["orange"]),
-        ("Interaction events", "events/case", "recipient_burden_rate", COLORS["purple"]),
-        ("Agency workload", "events/case", "agency_workload_rate", COLORS["blue"]),
-    )
-    for index, (label, unit, metric, color) in enumerate(c_rows):
-        y = 970 + index * 40
-        avg, minimum, maximum = paired_summary(pairs, "U3-minus-U0", metric)
-        scale = lambda value: c_left + value / 1.8 * (c_right - c_left)
-        parts.append(text(70, y, label, size=16))
-        parts.append(text(70, y + 19, unit, size=16, fill=COLORS["muted"]))
-        parts.append(line(scale(minimum), y, scale(maximum), y, stroke=color, width=4))
-        parts.append(line(scale(minimum), y - 8, scale(minimum), y + 8, stroke=color, width=2))
-        parts.append(line(scale(maximum), y - 8, scale(maximum), y + 8, stroke=color, width=2))
-        parts.append(circle(scale(avg), y, color, 7.5))
+    _panel(parts, 815, "C  Where U3 unresolved cases accumulate", "Unweighted U3 means across each declared organizational factor", 390)
+    c_left, c_right, c_top, c_bottom = 255.0, 920.0, 925.0, 1145.0
+    _axis(parts, left=c_left, right=c_right, top=c_top, bottom=c_bottom)
+    entries = list(payload["panel_c"])
+    for index, item in enumerate(entries):
+        x = c_left + index * (c_right - c_left) / max(1, len(entries) - 1)
+        value = float(item["unresolved_nonprogression_rate"])
+        y = c_bottom - value * (c_bottom - c_top)
+        parts.append(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="6" fill="{COLORS["purple"]}"/>')
+        parts.append(_text(x, c_bottom + 24, str(item["level"]), size=12, anchor="middle"))
+        parts.append(_text(x, c_bottom + 42, str(item["factor"]).replace("_", " "), size=10, anchor="middle", fill=COLORS["gray"]))
 
     parts.extend([
-        text(45, 1225, "Reading the figure", size=20, weight=700),
-        text(45, 1258, "Panel A shows unweighted means over other designed factors; Panels B and C show means and family min–max ranges.", size=16, fill=COLORS["muted"]),
-        text(45, 1288, "Family ranges show scenario variation, not uncertainty. Panel C rows use different units and are not a common scale.", size=16, fill=COLORS["muted"]),
-        text(45, 1318, "MCSE intervals appear in Table 3. Timely review completion is timing only; downstream exposure is not proof of harm.", size=16, fill=COLORS["muted"]),
-        text(45, 1358, "Scope: frozen stylized parameter space; no historical, legal, population, or complete-restoration estimate.", size=16, weight=700),
+        _text(45, 1240, "Rates describe the declared model and designed grid, not historical Robodebt frequencies.", size=15, weight=700),
+        _text(45, 1267, "Conditional review excludes cells with no review requests; decision states and recovery paths remain distinct.", size=15, fill=COLORS["gray"]),
         "</svg>",
     ])
     return "\n".join(parts) + "\n"
 
 
 def main() -> None:
-    receipt = json.loads(RECEIPT.read_text(encoding="utf-8"))
-    if receipt.get("analysis_hash") != EXPECTED_ANALYSIS_HASH:
-        raise RuntimeError("core analysis receipt hash differs from the frozen article source")
-    svg = build_svg(receipt)
-    OUTPUT.parent.mkdir(parents=True, exist_ok=True)
-    OUTPUT.write_text(svg, encoding="utf-8")
-    print(OUTPUT.relative_to(ROOT))
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--receipt", type=Path, default=DEFAULT_RECEIPT)
+    parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
+    parser.add_argument("--development", action="store_true")
+    args = parser.parse_args()
+    receipt = json.loads(args.receipt.read_text(encoding="utf-8"))
+    svg = build_svg(receipt, development=args.development)
+    args.output.parent.mkdir(parents=True, exist_ok=True)
+    args.output.write_text(svg, encoding="utf-8")
+    print(args.output.relative_to(ROOT) if args.output.is_relative_to(ROOT) else args.output)
 
 
 if __name__ == "__main__":

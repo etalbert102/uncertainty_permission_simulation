@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1320" viewBox="0 0 1000 1320" role="img">
+<rect width="1000" height="1320" fill="white"/>
+<text x="45.0" y="43.0" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="700" text-anchor="start" fill="#17212B">Figure 3. Timeout activation and unresolved case location</text>
+<text x="45.0" y="72.0" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" text-anchor="start" fill="#59636E">Development-only reporting rehearsal; 15 designed families</text>
+<rect x="45" y="95.0" width="910" height="340.0" rx="10" fill="#F8FAFC" stroke="#D8DEE6"/>
+<text x="70.0" y="131.0" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" text-anchor="start" fill="#17212B">A  Review timing by load</text>
+<text x="70.0" y="157.0" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" text-anchor="start" fill="#59636E">U2C; timeout per initiated case and timely completion per review request</text>
+<line x1="135.0" y1="365.0" x2="920.0" y2="365.0" stroke="#D8DEE6" stroke-width="1.0"/>
+<text x="123.0" y="370.0" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="400" text-anchor="end" fill="#59636E">0.00</text>
+<line x1="135.0" y1="325.0" x2="920.0" y2="325.0" stroke="#D8DEE6" stroke-width="1.0"/>
+<text x="123.0" y="330.0" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="400" text-anchor="end" fill="#59636E">0.25</text>
+<line x1="135.0" y1="285.0" x2="920.0" y2="285.0" stroke="#D8DEE6" stroke-width="1.0"/>
+<text x="123.0" y="290.0" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="400" text-anchor="end" fill="#59636E">0.50</text>
+<line x1="135.0" y1="245.0" x2="920.0" y2="245.0" stroke="#D8DEE6" stroke-width="1.0"/>
+<text x="123.0" y="250.0" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="400" text-anchor="end" fill="#59636E">0.75</text>
+<line x1="135.0" y1="205.0" x2="920.0" y2="205.0" stroke="#D8DEE6" stroke-width="1.0"/>
+<text x="123.0" y="210.0" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="400" text-anchor="end" fill="#59636E">1.00</text>
+<line x1="135.0" y1="205.0" x2="135.0" y2="365.0" stroke="#17212B" stroke-width="1.5"/>
+<line x1="135.0" y1="365.0" x2="920.0" y2="365.0" stroke="#17212B" stroke-width="1.5"/>
+<text x="135.0" y="390.0" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="400" text-anchor="middle" fill="#17212B">0.6</text>
+<text x="527.5" y="390.0" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="400" text-anchor="middle" fill="#17212B">0.95</text>
+<text x="920.0" y="390.0" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="400" text-anchor="middle" fill="#17212B">1.2</text>
+<polyline points="135.0,352.6 527.5,301.1 920.0,256.8" fill="none" stroke="#C56A11" stroke-width="3"/>
+<circle cx="135.0" cy="352.6" r="5" fill="#C56A11"/>
+<circle cx="527.5" cy="301.1" r="5" fill="#C56A11"/>
+<circle cx="920.0" cy="256.8" r="5" fill="#C56A11"/>
+<text x="650.0" y="175.0" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="400" text-anchor="start" fill="#C56A11">Timeout activation</text>
+<polyline points="135.0,217.4 527.5,268.9 920.0,313.2" fill="none" stroke="#2563A6" stroke-width="3"/>
+<circle cx="135.0" cy="217.4" r="5" fill="#2563A6"/>
+<circle cx="527.5" cy="268.9" r="5" fill="#2563A6"/>
+<circle cx="920.0" cy="313.2" r="5" fill="#2563A6"/>
+<text x="650.0" y="195.0" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="400" text-anchor="start" fill="#2563A6">Timely review | request</text>
+<rect x="45" y="460.0" width="910" height="330.0" rx="10" fill="#F8FAFC" stroke="#D8DEE6"/>
+<text x="70.0" y="496.0" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" text-anchor="start" fill="#17212B">B  Decision state at cutoff</text>
+<text x="70.0" y="522.0" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" text-anchor="start" fill="#59636E">Unweighted designed-family means; each policy bar sums to 1</text>
+<text x="90.0" y="607.0" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" text-anchor="start" fill="#17212B">U0</text>
+<rect x="190.0" y="585.0" width="188.8" height="32" fill="#2E7D5B"/>
+<rect x="378.8" y="585.0" width="0.0" height="32" fill="#B3382C"/>
+<rect x="378.8" y="585.0" width="0.0" height="32" fill="#7252A3"/>
+<rect x="378.8" y="585.0" width="511.2" height="32" fill="#C56A11"/>
+<rect x="890.0" y="585.0" width="0.0" height="32" fill="#59636E"/>
+<text x="90.0" y="687.0" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" text-anchor="start" fill="#17212B">U3</text>
+<rect x="190.0" y="665.0" width="585.8" height="32" fill="#2E7D5B"/>
+<rect x="775.8" y="665.0" width="0.0" height="32" fill="#B3382C"/>
+<rect x="775.8" y="665.0" width="107.9" height="32" fill="#7252A3"/>
+<rect x="883.7" y="665.0" width="6.3" height="32" fill="#C56A11"/>
+<rect x="890.0" y="665.0" width="0.0" height="32" fill="#59636E"/>
+<rect x="95.0" y="723.0" width="14" height="14" fill="#2E7D5B"/>
+<text x="116.0" y="735.0" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="400" text-anchor="start" fill="#17212B">Supported progression</text>
+<rect x="385.0" y="723.0" width="14" height="14" fill="#B3382C"/>
+<text x="406.0" y="735.0" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="400" text-anchor="start" fill="#17212B">Unsupported progression</text>
+<rect x="675.0" y="723.0" width="14" height="14" fill="#7252A3"/>
+<text x="696.0" y="735.0" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="400" text-anchor="start" fill="#17212B">Evidence requested</text>
+<rect x="95.0" y="747.0" width="14" height="14" fill="#C56A11"/>
+<text x="116.0" y="759.0" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="400" text-anchor="start" fill="#17212B">Held</text>
+<rect x="385.0" y="747.0" width="14" height="14" fill="#59636E"/>
+<text x="406.0" y="759.0" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="400" text-anchor="start" fill="#17212B">Pre-action open</text>
+<rect x="45" y="815.0" width="910" height="390.0" rx="10" fill="#F8FAFC" stroke="#D8DEE6"/>
+<text x="70.0" y="851.0" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" text-anchor="start" fill="#17212B">C  Where U3 unresolved cases accumulate</text>
+<text x="70.0" y="877.0" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" text-anchor="start" fill="#59636E">Unweighted U3 means across each declared organizational factor</text>
+<line x1="255.0" y1="1145.0" x2="920.0" y2="1145.0" stroke="#D8DEE6" stroke-width="1.0"/>
+<text x="243.0" y="1150.0" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="400" text-anchor="end" fill="#59636E">0.00</text>
+<line x1="255.0" y1="1090.0" x2="920.0" y2="1090.0" stroke="#D8DEE6" stroke-width="1.0"/>
+<text x="243.0" y="1095.0" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="400" text-anchor="end" fill="#59636E">0.25</text>
+<line x1="255.0" y1="1035.0" x2="920.0" y2="1035.0" stroke="#D8DEE6" stroke-width="1.0"/>
+<text x="243.0" y="1040.0" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="400" text-anchor="end" fill="#59636E">0.50</text>
+<line x1="255.0" y1="980.0" x2="920.0" y2="980.0" stroke="#D8DEE6" stroke-width="1.0"/>
+<text x="243.0" y="985.0" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="400" text-anchor="end" fill="#59636E">0.75</text>
+<line x1="255.0" y1="925.0" x2="920.0" y2="925.0" stroke="#D8DEE6" stroke-width="1.0"/>
+<text x="243.0" y="930.0" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="400" text-anchor="end" fill="#59636E">1.00</text>
+<line x1="255.0" y1="925.0" x2="255.0" y2="1145.0" stroke="#17212B" stroke-width="1.5"/>
+<line x1="255.0" y1="1145.0" x2="920.0" y2="1145.0" stroke="#17212B" stroke-width="1.5"/>
+<circle cx="255.0" cy="1109.1" r="6" fill="#7252A3"/>
+<text x="255.0" y="1169.0" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="400" text-anchor="middle" fill="#17212B">0.1</text>
+<text x="255.0" y="1187.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="400" text-anchor="middle" fill="#59636E">access barrier</text>
+<circle cx="365.8" cy="1117.5" r="6" fill="#7252A3"/>
+<text x="365.8" y="1169.0" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="400" text-anchor="middle" fill="#17212B">0.3</text>
+<text x="365.8" y="1187.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="400" text-anchor="middle" fill="#59636E">access barrier</text>
+<circle cx="476.7" cy="1098.6" r="6" fill="#7252A3"/>
+<text x="476.7" y="1169.0" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="400" text-anchor="middle" fill="#17212B">0.5</text>
+<text x="476.7" y="1187.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="400" text-anchor="middle" fill="#59636E">access barrier</text>
+<circle cx="587.5" cy="1131.0" r="6" fill="#7252A3"/>
+<text x="587.5" y="1169.0" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="400" text-anchor="middle" fill="#17212B">high</text>
+<text x="587.5" y="1187.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="400" text-anchor="middle" fill="#59636E">retrievability</text>
+<circle cx="698.3" cy="1089.9" r="6" fill="#7252A3"/>
+<text x="698.3" y="1169.0" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="400" text-anchor="middle" fill="#17212B">low</text>
+<text x="698.3" y="1187.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="400" text-anchor="middle" fill="#59636E">retrievability</text>
+<circle cx="809.2" cy="1107.4" r="6" fill="#7252A3"/>
+<text x="809.2" y="1169.0" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="400" text-anchor="middle" fill="#17212B">complete</text>
+<text x="809.2" y="1187.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="400" text-anchor="middle" fill="#59636E">staff access</text>
+<circle cx="920.0" cy="1111.1" r="6" fill="#7252A3"/>
+<text x="920.0" y="1169.0" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="400" text-anchor="middle" fill="#17212B">partial</text>
+<text x="920.0" y="1187.0" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="400" text-anchor="middle" fill="#59636E">staff access</text>
+<text x="45.0" y="1240.0" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" text-anchor="start" fill="#17212B">Rates describe the declared model and designed grid, not historical Robodebt frequencies.</text>
+<text x="45.0" y="1267.0" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" text-anchor="start" fill="#59636E">Conditional review excludes cells with no review requests; decision states and recovery paths remain distinct.</text>
+</svg>

@@ -620,6 +620,39 @@ def _paired_estimates(rows: Iterable[Mapping[str, object]]) -> list[dict[str, ob
     return output
 
 
+def _process_contrasts(rows: Iterable[Mapping[str, object]]) -> list[dict[str, object]]:
+    """Keep process-event contrasts separate from the sole decision-state contrast."""
+
+    keyed = {
+        (str(row["family_id"]), int(row["replication"]), str(row["policy_id"])): row
+        for row in rows
+    }
+    output: list[dict[str, object]] = []
+    families = sorted({key[0] for key in keyed})
+    replications = sorted({key[1] for key in keyed})
+    for family_id in families:
+        for metric in ("recipient_burden_rate", "agency_workload_rate"):
+            differences = [
+                float(keyed[(family_id, replication, "U3")][metric])
+                - float(keyed[(family_id, replication, "U0")][metric])
+                for replication in replications
+            ]
+            estimate = mean(differences)
+            mcse = stdev(differences) / sqrt(len(differences)) if len(differences) > 1 else 0.0
+            output.append({
+                "family_id": family_id,
+                "contrast_id": "U3-minus-U0-process-events",
+                "metric": metric,
+                "estimate": estimate,
+                "mcse": mcse,
+                "ci95_low": estimate - 1.96 * mcse,
+                "ci95_high": estimate + 1.96 * mcse,
+                "replications": len(differences),
+                "claim_boundary": "event counts per initiated case; not effort, welfare, cost, or overall policy value",
+            })
+    return output
+
+
 def _common_random_number_diagnostics(rows: Iterable[Mapping[str, object]]) -> list[dict[str, object]]:
     keyed = {
         (str(row["family_id"]), int(row["replication"]), str(row["policy_id"])): row
@@ -681,7 +714,7 @@ def _audit(rows: list[dict[str, object]], cells: list[dict[str, object]]) -> dic
             for replication in {int(row["replication"]) for row in rows}
         ),
         "stage_aware_censoring_reason_counts": dict(sorted(censoring_reasons.items())),
-        "censoring_interpretation": "ongoing recovery exposure and unresolved post-action paths remain right-censored; a timely action or hold is scored separately as decision service and is not relabeled resolved",
+        "censoring_interpretation": "ongoing recovery exposure and unresolved post-action paths remain stage-coded supplementary diagnostics; they are not relabeled as decision resolution",
         "claim_limit": "development-only pilot diagnostics; not confirmatory evidence",
     }
 
@@ -766,6 +799,7 @@ def run_experiment(config_path: Path) -> dict[str, object]:
     elapsed = monotonic() - started
     cells = _summarize_cells(rows)
     pairs = _paired_estimates(rows)
+    process_contrasts = _process_contrasts(rows)
     crn = _common_random_number_diagnostics(rows)
     total_case_policy_runs = sum(int(row["case_count"]) for row in rows)
     throughput = total_case_policy_runs / elapsed if elapsed else 0.0
@@ -828,6 +862,7 @@ def run_experiment(config_path: Path) -> dict[str, object]:
         "adapter_swap_rehearsal": _adapter_swap_rehearsal(families[0]),
         "cell_summaries": cells,
         "paired_estimates": pairs,
+        "process_contrasts": process_contrasts,
         "common_random_number_diagnostics": crn,
         "dummy_analysis_receipt": dummy_receipt,
         "row_hash": canonical_hash(rows),

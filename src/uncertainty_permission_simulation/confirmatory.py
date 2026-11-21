@@ -15,6 +15,7 @@ from .experiments import (
     PRIMARY_METRICS,
     _common_random_number_diagnostics,
     _paired_estimates,
+    _process_contrasts,
     _run_metrics,
     _summarize_cells,
     _validate_metric_row,
@@ -712,6 +713,7 @@ def analyze_frozen_experiment(root: Path, config_path: Path) -> dict[str, object
     replications = max(int(row["replication"]) for row in rows)
     cells = _summarize_cells(rows)
     pairs = _paired_estimates(rows)
+    process_contrasts = _process_contrasts(rows)
     family_count = len(_families(config))
     precision = _precision_summary(config, cells, pairs)
     reconciliation_path = _resolve_repo_path(
@@ -755,6 +757,7 @@ def analyze_frozen_experiment(root: Path, config_path: Path) -> dict[str, object
         "extension_rule": config["precision"]["extension_rule"],
         "cell_summaries": cells,
         "paired_estimates": pairs,
+        "process_contrasts": process_contrasts,
         "designed_grid_summaries": (
             _designed_grid_summaries(cells)
             if family_count == 108
