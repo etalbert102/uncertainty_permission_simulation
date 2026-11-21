@@ -337,7 +337,7 @@ This table is the sole status ledger for this plan. Do not create a second statu
 | 3. Pilot and reporting rehearsal | complete | Slice 2 committed | Repaired pilot receipt, three-panel figure, five-row table, and 209-test suite | `849b086` |
 | 4. Freeze 4 issuance | complete | Slices 0–3 committed and clean | Active manifest, historical verification, repository Slice 4 gate | `ffe3859` |
 | 5. Core and sensitivity rerun | complete | Freeze 4 verifies | Two 16,200-attempt reconciliations, analyses, replay, and Slice 5 gate | `50dbced` |
-| 6. Differential audit | pending | Both suites complete | Machine and human differential receipts | — |
+| 6. Differential audit | complete | Both suites complete | Deterministic machine and human receipts over 32,400 paired attempts | `fc732c5` |
 | 7. Scientific-value gate | pending | Differential audit passes | Recorded retain/demote decision | — |
 | 8. Manuscript reconstruction | pending | Value decision recorded | Integrated Markdown, DOCX, exhibits, and QA | — |
 | 9. Release audit | pending | Manuscript package complete | Final evidence packet and release verification | — |
@@ -414,6 +414,16 @@ Each completion entry must record:
 - **Residual risk:** behavioral continuity with Freeze 3 has not yet been proven; Slice 6 owns the differential audit. Raw attempts remain local under the established ignored-artifact policy, while compact indexes and receipts are committed.
 - **Deferred items:** none.
 - **Commit SHA:** `50dbced` contains the compact Freeze 4 result chain.
+
+### Slice 6 completion receipt — 2026-11-21
+
+- **Files changed:** a post-freeze differential-audit builder and deterministic machine- and human-readable receipts were added outside the frozen executable inventory.
+- **Files intentionally unchanged:** all frozen inputs and manifests, both result suites and attempts, configurations, manuscript, source fixtures, and historical outputs.
+- **Commands and results:** the audit paired all 16,200 core and 16,200 sensitivity attempts across Freeze 3 and Freeze 4 and passed with zero blocking mismatches; rerunning the audit reproduced byte-identical receipts with audit hash `916c1c203be866725b3d64c537e41187b604ac635d49cca20a98995aaccf4778`; active Freeze 4 still verified after audit generation.
+- **Fixtures and comparisons:** cohort hashes, event hashes, seed and case identities, evaluation-bridge receipts and suite summaries, shared valid row metrics, shared cell estimates and MCSEs, held-state bridges, recovery-entry bridges, stage-coded censoring bridges, timeout partitions, decision partitions, and recovery partitions all matched. Event-detail, event-order, timestamp, action, queue, outcome, and unresolved-event mismatch counts were zero.
+- **Residual risk:** compiled-configuration receipt hashes and attempt hashes changed universally and are recorded as identity-level differences; the unchanged compiler source, exact frozen family/seed identities, byte-equivalent support receipts, exact event hashes, and exact shared outcomes rule out generated-behavior drift within the stored model trace.
+- **Deferred items:** none.
+- **Commit SHA:** `fc732c5` contains the differential builder and both receipts.
 
 ## 10. Verification Tiers
 
