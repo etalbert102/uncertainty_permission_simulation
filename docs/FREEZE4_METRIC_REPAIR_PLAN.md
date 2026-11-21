@@ -332,7 +332,7 @@ This table is the sole status ledger for this plan. Do not create a second statu
 | Slice | Status | Entry condition | Completion evidence | Commit |
 | --- | --- | --- | --- | --- |
 | 0. Repair contract | complete | Plan recorded | Contract review, Freeze 3 verification, validators, and focused tests | `91cbb90` |
-| 1. Freeze 4 infrastructure | pending | Slice 0 committed | Historical and candidate freeze tests | — |
+| 1. Freeze 4 infrastructure | complete | Slice 0 committed | Historical and candidate freeze tests; 190-test suite | `56099ad` |
 | 2. Metric implementation | pending | Slice 1 committed | Golden, metamorphic, adversarial, and full tests | — |
 | 3. Pilot and reporting rehearsal | pending | Slice 2 committed | Pilot receipt and exhibit-contract audit | — |
 | 4. Freeze 4 issuance | pending | Slices 0–3 committed and clean | Active manifest and historical verification | — |
@@ -364,6 +364,16 @@ Each completion entry must record:
 - **Residual risk:** freeze and release code remains hard-coded to Freeze 3 and V2 output roots; this is the declared work of Slice 1 and blocks Freeze 4 issuance, not Slice 0 closure.
 - **Deferred items:** none. Infrastructure migration is scheduled, owned work rather than an incomplete Slice 0 subsystem.
 - **Commit SHA:** `91cbb90` owns the recorded repair contract; the closeout receipt is an administrative ledger update made before Slice 1 mutation.
+
+### Slice 1 completion receipt — 2026-11-21
+
+- **Files changed:** the active experiment configurations and their deterministic negative-control receipt advanced to V3 identities and output roots; freeze, experiment-validation, and release-verification code became Freeze 4 aware; focused tests were expanded; `docs/FREEZE_MANIFEST_V3.json` and its attestation record preserve Freeze 3.
+- **Files intentionally unchanged:** policy behavior, simulator transitions and queues, random streams, evaluation specification, Robodebt source fixtures, V2 output trees, manuscript, and the byte-identical `docs/FREEZE_MANIFEST.json` working copy pending Slice 4 replacement.
+- **Commands and results:** both repository validators passed; the full suite passed 190 tests; historical attestation verified two freezes; `cmp` confirmed the active Freeze 3 working copy and archive were byte-identical; a clean-tree candidate build produced `UPS-CONFIRMATORY-FREEZE@4` over 81 files and rejected Freeze 3 as the active identity.
+- **Fixtures and comparisons:** bad config ID, wrong parent ID, V2 output-root substitution, wrong receipt path, active-ID mismatch, historical attestation, and V3-only output contamination have focused regression coverage.
+- **Residual risk:** the candidate manifest hash changes when later frozen inputs change and therefore is not authoritative until Slice 4 issuance. No Freeze 4 output exists.
+- **Deferred items:** none. Metric-schema changes belong to Slice 2.
+- **Commit SHA:** `56099ad` contains the infrastructure migration; this receipt is the required administrative closeout before Slice 2 mutation.
 
 ## 10. Verification Tiers
 
