@@ -333,7 +333,7 @@ This table is the sole status ledger for this plan. Do not create a second statu
 | --- | --- | --- | --- | --- |
 | 0. Repair contract | complete | Plan recorded | Contract review, Freeze 3 verification, validators, and focused tests | `91cbb90` |
 | 1. Freeze 4 infrastructure | complete | Slice 0 committed | Historical and candidate freeze tests; 190-test suite | `56099ad` |
-| 2. Metric implementation | pending | Slice 1 committed | Golden, metamorphic, adversarial, and full tests | — |
+| 2. Metric implementation | complete | Slice 1 committed | Golden, metamorphic, adversarial, and 206-test full suite | `22ef835` |
 | 3. Pilot and reporting rehearsal | pending | Slice 2 committed | Pilot receipt and exhibit-contract audit | — |
 | 4. Freeze 4 issuance | pending | Slices 0–3 committed and clean | Active manifest and historical verification | — |
 | 5. Core and sensitivity rerun | pending | Freeze 4 verifies | Run indexes, reconciliations, and analyses | — |
@@ -374,6 +374,16 @@ Each completion entry must record:
 - **Residual risk:** the candidate manifest hash changes when later frozen inputs change and therefore is not authoritative until Slice 4 issuance. No Freeze 4 output exists.
 - **Deferred items:** none. Metric-schema changes belong to Slice 2.
 - **Commit SHA:** `56099ad` contains the infrastructure migration; this receipt is the required administrative closeout before Slice 2 mutation.
+
+### Slice 2 completion receipt — 2026-11-21
+
+- **Files changed:** experiment and confirmatory analysis code now stores raw metric counts, validates the five-state decision and three-state recovery-entry partitions, calculates nullable conditional review and gate estimands by ratio of sums with delete-one-replication cluster jackknife MCSE, limits primary metrics to timeout activation and unresolved non-progression, emits the four prespecified balanced-grid summaries, and retires service effectiveness and aggregate censoring from the primary schema. Configurations, derived-metric receipts, and focused tests were updated consistently.
+- **Files intentionally unchanged:** policy decisions, simulator event generation and ordering, queue scheduling, random streams, action-support evaluation, Robodebt application fixtures, and all V2 result outputs.
+- **Commands and results:** both repository validators passed; the full suite passed 206 tests; 17 focused stochastic-receipt and metric tests confirmed unchanged event hashes and updated derived-metric receipts.
+- **Fixtures and comparisons:** tests cover zero review requests, request-weighted rather than replication-weighted ratios, completed-but-unresolved review, pre-action open cases, supported and unsupported recovery entry, exact conservation, balanced factor margins, row reordering, policy relabeling, duplicated equivalent replications, irrelevant fields, missing or double classification, numerator overflow, orphaned recovery entry, and malformed nullability.
+- **Residual risk:** production exhibit builders and stored pilot artifacts still need rehearsal against the repaired schema; this is Slice 3 work. No Freeze 4 output exists.
+- **Deferred items:** none.
+- **Commit SHA:** `22ef835` contains the metric and semantic-QA implementation; this receipt is the required administrative closeout before Slice 3 mutation.
 
 ## 10. Verification Tiers
 
