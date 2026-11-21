@@ -5,6 +5,7 @@ from __future__ import annotations
 from collections import Counter
 from hashlib import sha256
 import json
+from math import sqrt
 from pathlib import Path
 from statistics import mean
 from typing import Mapping
@@ -16,6 +17,7 @@ from .experiments import (
     _paired_estimates,
     _run_metrics,
     _summarize_cells,
+    _validate_metric_row,
     canonical_hash,
     load_experiment_config,
     validate_experiment_config,
@@ -29,30 +31,11 @@ from .simulator import StochasticCohortSpec, generate_stochastic_cohort, run_eng
 
 
 APPLICABLE_CELL_METRICS = {
-    "U0": (
-        "unsupported_progression_rate", "decision_service_effective_rate",
-        "recipient_burden_rate", "agency_workload_rate", "recovery_exposure_rate",
-        "right_censored_rate",
-    ),
-    "U1": (
-        "unsupported_progression_rate", "decision_service_effective_rate",
-        "recovery_exposure_rate", "right_censored_rate",
-    ),
-    "U2C": (
-        "unsupported_progression_rate", "gate_safe_rate", "review_effective_rate",
-        "decision_service_effective_rate", "unresolved_hold_rate",
-        "recovery_exposure_rate", "right_censored_rate",
-    ),
-    "U2O": (
-        "unsupported_progression_rate", "gate_safe_rate", "review_effective_rate",
-        "decision_service_effective_rate", "unresolved_hold_rate",
-        "recovery_exposure_rate", "right_censored_rate",
-    ),
-    "U3": (
-        "unsupported_progression_rate", "decision_service_effective_rate",
-        "recipient_burden_rate", "agency_workload_rate", "recovery_exposure_rate",
-        "right_censored_rate",
-    ),
+    "U0": ("unresolved_nonprogression_rate",),
+    "U1": (),
+    "U2C": ("timeout_activation_rate",),
+    "U2O": (),
+    "U3": ("unresolved_nonprogression_rate",),
 }
 
 
@@ -291,7 +274,7 @@ def _attempt_artifact(
     attempt_id = _attempt_id(family.family_id, replication, policy_id)
     bridge_receipt = _evaluation_bridge_receipt(run)
     artifact = {
-        "schema_version": 2,
+        "schema_version": 3,
         "artifact_kind": "confirmatory_attempt",
         "attempt_id": attempt_id,
         "config_id": config["config_id"],
@@ -325,6 +308,10 @@ def _validate_attempt(
         raise ContractError("RUN_ATTEMPT_FREEZE_MISMATCH", f"attempt uses another freeze: {path}")
     if config_id is not None and artifact.get("config_id") != config_id:
         raise ContractError("RUN_ATTEMPT_CONFIG_MISMATCH", f"attempt uses another config: {path}")
+    row = artifact.get("row")
+    if not isinstance(row, dict):
+        raise ContractError("RUN_ATTEMPT_INVALID", f"attempt metric row is missing: {path}")
+    _validate_metric_row(row)
     return artifact
 
 
@@ -509,6 +496,51 @@ def _precision_summary(
     }
 
 
+def _designed_grid_summaries(
+    cells: list[dict[str, object]],
+) -> dict[str, object]:
+    declarations = (
+        ("u2c_timeout_by_load", "U2C", "timeout_activation_rate", "load", 36),
+        ("u3_unresolved_by_access_barrier", "U3", "unresolved_nonprogression_rate", "access_barrier", 36),
+        ("u3_unresolved_by_retrievability", "U3", "unresolved_nonprogression_rate", "retrievability", 54),
+        ("u3_unresolved_by_staff_access", "U3", "unresolved_nonprogression_rate", "staff_access", 54),
+    )
+    output: dict[str, object] = {}
+    for summary_id, policy_id, metric, factor, expected_count in declarations:
+        grouped: dict[str, list[dict[str, object]]] = {}
+        for cell in cells:
+            if cell["policy_id"] != policy_id:
+                continue
+            grouped.setdefault(str(cell["factors"][factor]), []).append(cell)
+        levels: list[dict[str, object]] = []
+        for level, values in sorted(grouped.items()):
+            if len(values) != expected_count:
+                raise ContractError(
+                    "ANALYSIS_FACTOR_BALANCE_INVALID",
+                    f"{summary_id}:{level} has {len(values)} cells; expected {expected_count}",
+                )
+            estimate = mean(float(item[metric]) for item in values)
+            simulation_mcse = sqrt(sum(
+                float(item[f"{metric}_mcse"]) ** 2 for item in values
+            )) / len(values)
+            levels.append({
+                "level": level,
+                "cell_count": len(values),
+                "estimate": estimate,
+                "simulation_mcse": simulation_mcse,
+            })
+        estimates = [float(level["estimate"]) for level in levels]
+        output[summary_id] = {
+            "policy_id": policy_id,
+            "metric": metric,
+            "factor": factor,
+            "weighting": "unweighted_balanced_designed_cells",
+            "levels": levels,
+            "range": max(estimates) - min(estimates) if estimates else None,
+        }
+    return output
+
+
 def _evaluation_bridge_summary(
     artifacts: list[dict[str, object]],
 ) -> dict[str, object]:
@@ -604,7 +636,7 @@ def _analysis_figures(
 
     lines: list[tuple[str, str, list[tuple[float, float]]]] = []
     for policy_id, metric, label, color in (
-        ("U2C", "review_effective_rate", "U2C effective review", "blue"),
+        ("U2C", "timeout_activation_rate", "U2C timeout activation", "blue"),
         ("U2O", "unsupported_progression_rate", "U2O unsupported progression", "red"),
     ):
         points = []
@@ -623,30 +655,22 @@ def _analysis_figures(
         lines,
     )
 
-    u3_pairs = [item for item in pairs if item["contrast_id"] == "U3-minus-U0"]
-    agency = {
-        str(item["family_id"]): float(item["estimate"])
-        for item in u3_pairs if item["metric"] == "agency_workload_rate"
-    }
-    burden = {
-        str(item["family_id"]): float(item["estimate"])
-        for item in u3_pairs if item["metric"] == "recipient_burden_rate"
-    }
-    families = sorted(set(agency) & set(burden))
-    max_abs_x = max((abs(agency[item]) for item in families), default=0.01)
-    max_abs_y = max((abs(burden[item]) for item in families), default=0.01)
-    max_abs_x = max(max_abs_x, 0.01)
-    max_abs_y = max(max_abs_y, 0.01)
+    u3_pairs = [
+        item for item in pairs
+        if item["contrast_id"] == "U3-minus-U0"
+        and item["metric"] == "unresolved_nonprogression_rate"
+    ]
+    ordered = sorted(u3_pairs, key=lambda item: str(item["family_id"]))
     points = [
         (
-            plot_left + plot_width * (agency[item] / max_abs_x + 1) / 2,
-            plot_top + plot_height * (1 - (burden[item] / max_abs_y + 1) / 2),
+            plot_left + plot_width * index / max(1, len(ordered) - 1),
+            y(float(item["estimate"])),
         )
-        for item in families
+        for index, item in enumerate(ordered)
     ]
     tradeoff = _svg_document(
-        "Information-first workload/burden tradeoff",
-        f"U3-minus-U0 paired estimates at {replications} replications per family",
+        "Information-first unresolved non-progression",
+        f"U3-minus-U0 paired differences at {replications} replications per family",
         [("scenario families", "green", points)],
     )
     return {
@@ -688,6 +712,7 @@ def analyze_frozen_experiment(root: Path, config_path: Path) -> dict[str, object
     replications = max(int(row["replication"]) for row in rows)
     cells = _summarize_cells(rows)
     pairs = _paired_estimates(rows)
+    family_count = len(_families(config))
     precision = _precision_summary(config, cells, pairs)
     reconciliation_path = _resolve_repo_path(
         root, config["outputs"]["reconciliation_path"], "RUN_OUTPUT_PATH_INVALID"
@@ -715,14 +740,14 @@ def analyze_frozen_experiment(root: Path, config_path: Path) -> dict[str, object
         for name, content in sorted(figure_contents.items())
     ]
     analysis = {
-        "schema_version": 1,
+        "schema_version": 2,
         "artifact_kind": "confirmatory_analysis",
         "config_id": config["config_id"],
         "manifest_hash": manifest["manifest_hash"],
         "reconciliation_hash": reconciliation["reconciliation_hash"],
         "run_index_hash": reconciliation["run_index_hash"],
         "replications": replications,
-        "family_count": len(_families(config)),
+        "family_count": family_count,
         "attempt_count": len(artifacts),
         "primary_metrics": list(PRIMARY_METRICS),
         "precision": precision,
@@ -730,6 +755,14 @@ def analyze_frozen_experiment(root: Path, config_path: Path) -> dict[str, object
         "extension_rule": config["precision"]["extension_rule"],
         "cell_summaries": cells,
         "paired_estimates": pairs,
+        "designed_grid_summaries": (
+            _designed_grid_summaries(cells)
+            if family_count == 108
+            else {
+                "status": "not_applicable_nonproduction_fixture",
+                "family_count": family_count,
+            }
+        ),
         "common_random_number_diagnostics": _common_random_number_diagnostics(rows),
         "evaluation_bridge_summary": _evaluation_bridge_summary(artifacts),
         "figures": figures,

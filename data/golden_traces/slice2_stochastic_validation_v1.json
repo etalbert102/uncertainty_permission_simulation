@@ -30,15 +30,15 @@
       "comparison_status": "match",
       "expected_event_hash": "ccff60f796332f0c9e18eb63a8296aeb08e4e618f1db6bd03a533971f445554c",
       "observed_event_hash": "ccff60f796332f0c9e18eb63a8296aeb08e4e618f1db6bd03a533971f445554c",
-      "expected_metric_hash": "6b707087fcfc8234824b27fdb6802200757d943f612c1c27d46a6d079c36be71",
-      "observed_metric_hash": "6b707087fcfc8234824b27fdb6802200757d943f612c1c27d46a6d079c36be71"
+    "expected_metric_hash": "8bf21db4ea13967ed098e0fc39ec5e85bd5765616d039e9e67a747a442c3e997",
+    "observed_metric_hash": "8bf21db4ea13967ed098e0fc39ec5e85bd5765616d039e9e67a747a442c3e997"
     },
     "U1": {
       "comparison_status": "match",
       "expected_event_hash": "b5780974724904330a529db814be85477d498d43f56b3c3c04e2d94902301746",
       "observed_event_hash": "b5780974724904330a529db814be85477d498d43f56b3c3c04e2d94902301746",
-      "expected_metric_hash": "15aa0c58f97ad5d2d3d45930ef1a871dd9202fc3fdec54b8083a3bb0b87d2d8f",
-      "observed_metric_hash": "15aa0c58f97ad5d2d3d45930ef1a871dd9202fc3fdec54b8083a3bb0b87d2d8f"
+    "expected_metric_hash": "222167945180e7599ff09703e182116a213629c5ceb3cc76ef430661cf7efeb8",
+    "observed_metric_hash": "222167945180e7599ff09703e182116a213629c5ceb3cc76ef430661cf7efeb8"
     },
     "U2C": {
       "comparison_status": "match",
@@ -67,15 +67,15 @@
       "comparison_status": "match",
       "application_event_hash": "3367d2a824858ca0e711fbdb7a2abd30ed421243e7b03f98db6a59316a37b95e",
       "synthetic_event_hash": "3367d2a824858ca0e711fbdb7a2abd30ed421243e7b03f98db6a59316a37b95e",
-      "application_metric_hash": "1ea48a7e780e21396acd520e6f1a00c67fe4e26e336b72bfba650fde68e6f0bc",
-      "synthetic_metric_hash": "1ea48a7e780e21396acd520e6f1a00c67fe4e26e336b72bfba650fde68e6f0bc"
+    "application_metric_hash": "1306d667ee99e675f305668c5539f57b34798c5d8be538a09af79130b1ed0312",
+    "synthetic_metric_hash": "1306d667ee99e675f305668c5539f57b34798c5d8be538a09af79130b1ed0312"
     },
     "enhanced": {
       "comparison_status": "match",
       "application_event_hash": "51c9735cba87d2683dad53c2d34787e693a62825025822880c032fca5199f532",
       "synthetic_event_hash": "51c9735cba87d2683dad53c2d34787e693a62825025822880c032fca5199f532",
-      "application_metric_hash": "8f477020dd17cfc3395c39548c249fc38b0553e3be032652b5b832b84f529578",
-      "synthetic_metric_hash": "8f477020dd17cfc3395c39548c249fc38b0553e3be032652b5b832b84f529578"
+    "application_metric_hash": "5824f160000444b17d8a8576b005e0a21baf911944507fce988b3705b57eda13",
+    "synthetic_metric_hash": "5824f160000444b17d8a8576b005e0a21baf911944507fce988b3705b57eda13"
     }
   },
   "queue_validation_receipts": {

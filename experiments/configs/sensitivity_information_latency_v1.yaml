@@ -56,15 +56,8 @@ runtime:
   run_ceiling_seconds: 86400
 analysis:
   primary_metrics:
-    - unsupported_progression_rate
-    - gate_safe_rate
-    - review_effective_rate
-    - decision_service_effective_rate
-    - unresolved_hold_rate
-    - recovery_exposure_rate
-    - recipient_burden_rate
-    - agency_workload_rate
-    - right_censored_rate
+    - timeout_activation_rate
+    - unresolved_nonprogression_rate
   primary_contrasts: [U3-minus-U0]
   confidence_interval: normal_95_from_replication_mcse
   scenario_generalization_unit: family

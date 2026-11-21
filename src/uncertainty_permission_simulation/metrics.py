@@ -21,7 +21,7 @@ def trace_metrics(trace: TraceResult) -> dict[str, int | bool | None]:
     }
 
 
-def engagement_metrics(run: EngagementRun) -> dict[str, int | str]:
+def engagement_metrics(run: EngagementRun) -> dict[str, int | str | None]:
     """Render separate engagement and review-queue measures; never a composite score."""
 
     denominator = run.telemetry.case_count
@@ -120,7 +120,7 @@ def engagement_metrics(run: EngagementRun) -> dict[str, int | str]:
         "resolved_case": run.telemetry.resolved_case_count,
         "right_censored_case": run.telemetry.right_censored_case_count,
     }
-    result: dict[str, int | str] = {
+    result: dict[str, int | str | None] = {
         "case_count": denominator,
         "event_count": run.telemetry.event_count,
         **{
@@ -206,7 +206,7 @@ def engagement_metrics(run: EngagementRun) -> dict[str, int | str]:
         result.update({
             f"{name}_rate": (
                 normalized_decimal(Decimal(value) / Decimal(queue_denominator))
-                if queue_denominator else "0"
+                if queue_denominator else None
             )
             for name, value in review_counts.items()
         })
@@ -222,7 +222,7 @@ def engagement_metrics(run: EngagementRun) -> dict[str, int | str]:
         result.update({
             f"{name}_rate": (
                 normalized_decimal(Decimal(value) / Decimal(gate_denominator))
-                if gate_denominator else "0"
+                if gate_denominator else None
             )
             for name, value in gate_counts.items()
         })

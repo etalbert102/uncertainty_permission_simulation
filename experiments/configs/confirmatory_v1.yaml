@@ -56,20 +56,13 @@ runtime:
   pilot_predicted_core_seconds: 503.9974021638349
 analysis:
   primary_metrics:
-    - unsupported_progression_rate
-    - gate_safe_rate
-    - review_effective_rate
-    - decision_service_effective_rate
-    - unresolved_hold_rate
-    - recovery_exposure_rate
-    - recipient_burden_rate
-    - agency_workload_rate
-    - right_censored_rate
-  primary_contrasts: [U2O-minus-U2C, U3-minus-U0, U1-minus-U0]
+    - timeout_activation_rate
+    - unresolved_nonprogression_rate
+  primary_contrasts: [U3-minus-U0]
   confidence_interval: normal_95_from_replication_mcse
   scenario_generalization_unit: family
   pooling_rule: do not pool fail-closed and fail-open policies or core and sensitivity runs
-  censoring_rule: report open evidence, review, recovery, reassessment, and restoration paths separately by reason
+  censoring_rule: retain open evidence, review, recovery, reassessment, and restoration paths separately by reason in supplementary diagnostics; do not use an aggregate censoring rate as a primary result
 negative_controls:
   - P0-SAME-RULE-SEMANTIC-NULL
   - P0-ROUTING-INVARIANCE

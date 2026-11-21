@@ -95,7 +95,7 @@ def test_engagement_metrics_are_policy_specific_but_share_denominator() -> None:
     assert u1["external_exposure_count"] == 2
     assert u1["recovery_started_count"] == 2
     assert u1["gate_applicable_count"] == 0
-    assert u1["gate_safe_rate"] == "0"
+    assert u1["gate_safe_rate"] is None
     assert u2c["review_queue_count"] == 2
     assert u2c["gate_safe_rate"] == "1"
 

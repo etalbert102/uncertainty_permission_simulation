@@ -25,7 +25,7 @@ def test_dummy_analysis_pipeline_exercises_cells_and_paired_estimates() -> None:
     result = dummy_analysis_receipt()
     assert result["artifact_kind"] == "dummy_analysis_receipt"
     assert result["cell_count"] == 5
-    assert result["paired_estimate_count"] == 15
+    assert result["paired_estimate_count"] == 1
     assert len(result["receipt_hash"]) == 64
 
 

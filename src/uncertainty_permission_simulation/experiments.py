@@ -39,15 +39,23 @@ from .simulator import StochasticCohortSpec, generate_stochastic_cohort, run_eng
 
 
 PRIMARY_METRICS = (
+    "timeout_activation_rate",
+    "unresolved_nonprogression_rate",
+)
+
+CELL_RATE_METRICS = (
+    "timeout_activation_rate",
+    "supported_progression_rate",
     "unsupported_progression_rate",
-    "gate_safe_rate",
-    "review_effective_rate",
-    "decision_service_effective_rate",
-    "unresolved_hold_rate",
-    "recovery_exposure_rate",
+    "evidence_requested_rate",
+    "held_rate",
+    "pre_action_open_rate",
+    "unresolved_nonprogression_rate",
+    "supported_recovery_entry_rate",
+    "unsupported_recovery_entry_rate",
+    "no_recovery_entry_rate",
     "recipient_burden_rate",
     "agency_workload_rate",
-    "right_censored_rate",
 )
 
 CORE_CONFIG_ID = "CONFIRMATORY-V3"
@@ -306,6 +314,124 @@ def _rate(numerator: int, denominator: int) -> float:
     return numerator / denominator if denominator else 0.0
 
 
+def _nullable_rate(numerator: int, denominator: int) -> float | None:
+    return numerator / denominator if denominator else None
+
+
+def _validate_metric_row(row: Mapping[str, object]) -> None:
+    """Fail closed when raw counts do not implement the Freeze 4 metric contract."""
+
+    integer_fields = (
+        "case_count",
+        "review_request_count",
+        "timely_review_count",
+        "timeout_activation_count",
+        "gate_applicable_count",
+        "gate_safe_count",
+        "supported_progression_count",
+        "unsupported_progression_count",
+        "evidence_requested_count",
+        "held_count",
+        "pre_action_open_count",
+        "unresolved_nonprogression_count",
+        "supported_recovery_entry_count",
+        "unsupported_recovery_entry_count",
+        "no_recovery_entry_count",
+    )
+    for field in integer_fields:
+        value = row.get(field)
+        if not isinstance(value, int) or isinstance(value, bool) or value < 0:
+            raise ContractError(
+                "METRIC_COUNT_INVALID",
+                f"metric count must be a nonnegative integer: {field}",
+            )
+    cases = int(row["case_count"])
+    state_total = sum(int(row[field]) for field in (
+        "supported_progression_count",
+        "unsupported_progression_count",
+        "evidence_requested_count",
+        "held_count",
+        "pre_action_open_count",
+    ))
+    if state_total != cases:
+        raise ContractError(
+            "METRIC_DECISION_PARTITION_INVALID",
+            f"decision states sum to {state_total}, expected {cases}",
+        )
+    unresolved = sum(int(row[field]) for field in (
+        "evidence_requested_count", "held_count", "pre_action_open_count"
+    ))
+    if unresolved != int(row["unresolved_nonprogression_count"]):
+        raise ContractError(
+            "METRIC_UNRESOLVED_COUNT_INVALID",
+            "unresolved non-progression does not equal evidence-requested, held, and pre-action-open counts",
+        )
+    recovery_total = sum(int(row[field]) for field in (
+        "supported_recovery_entry_count",
+        "unsupported_recovery_entry_count",
+        "no_recovery_entry_count",
+    ))
+    if recovery_total != cases:
+        raise ContractError(
+            "METRIC_RECOVERY_PARTITION_INVALID",
+            f"recovery-entry states sum to {recovery_total}, expected {cases}",
+        )
+    if (
+        int(row["supported_recovery_entry_count"])
+        > int(row["supported_progression_count"])
+        or int(row["unsupported_recovery_entry_count"])
+        > int(row["unsupported_progression_count"])
+    ):
+        raise ContractError(
+            "METRIC_RECOVERY_ENTRY_ORPHANED",
+            "recovery-path entry exists without a progression in the same support state",
+        )
+    bounded_pairs = (
+        ("timely_review_count", "review_request_count"),
+        ("timeout_activation_count", "review_request_count"),
+        ("gate_safe_count", "gate_applicable_count"),
+    )
+    for numerator, denominator in bounded_pairs:
+        if int(row[numerator]) > int(row[denominator]):
+            raise ContractError(
+                "METRIC_NUMERATOR_EXCEEDS_DENOMINATOR",
+                f"{numerator} exceeds {denominator}",
+            )
+    if int(row["timely_review_count"]) + int(row["timeout_activation_count"]) != int(row["review_request_count"]):
+        raise ContractError(
+            "METRIC_TIMEOUT_PARTITION_INVALID",
+            "timely review and timeout activation do not partition required reviews",
+        )
+    for rate_name, numerator, denominator in (
+        ("conditional_timely_review_rate", "timely_review_count", "review_request_count"),
+        ("conditional_gate_safety_rate", "gate_safe_count", "gate_applicable_count"),
+    ):
+        expected = _nullable_rate(int(row[numerator]), int(row[denominator]))
+        if row.get(rate_name) != expected:
+            raise ContractError(
+                "METRIC_NULLABILITY_INVALID",
+                f"{rate_name} must be null exactly when {denominator} is zero",
+            )
+    for rate_name, count_name in (
+        ("timeout_activation_rate", "timeout_activation_count"),
+        ("supported_progression_rate", "supported_progression_count"),
+        ("unsupported_progression_rate", "unsupported_progression_count"),
+        ("evidence_requested_rate", "evidence_requested_count"),
+        ("held_rate", "held_count"),
+        ("pre_action_open_rate", "pre_action_open_count"),
+        ("unresolved_nonprogression_rate", "unresolved_nonprogression_count"),
+        ("supported_recovery_entry_rate", "supported_recovery_entry_count"),
+        ("unsupported_recovery_entry_rate", "unsupported_recovery_entry_count"),
+        ("no_recovery_entry_rate", "no_recovery_entry_count"),
+    ):
+        expected = _rate(int(row[count_name]), cases)
+        if row.get(rate_name) != expected:
+            raise ContractError(
+                "METRIC_RATE_COUNT_MISMATCH",
+                f"{rate_name} does not equal {count_name}/case_count",
+            )
+
+
 def _run_metrics(family: ScenarioFamily, replication: int, policy_id: str, run: object) -> dict[str, object]:
     telemetry = run.telemetry
     cases = telemetry.case_count
@@ -315,9 +441,18 @@ def _run_metrics(family: ScenarioFamily, replication: int, policy_id: str, run: 
         for event in trace.events:
             if event.event_type_id == "CASE_CLOSED" and event.details.get("right_censored"):
                 censoring_reasons[str(event.details.get("censoring_reason", "unspecified"))] += 1
-    timely_decision_service_count = (
-        (cases - review_requests) + telemetry.timely_review_count
+    timeout_activation_count = review_requests - telemetry.timely_review_count
+    supported_progression_count = telemetry.supported_progression_count
+    unsupported_progression_count = telemetry.unsupported_progression_count
+    evidence_requested_count = telemetry.request_evidence_action_count
+    held_count = telemetry.hold_count
+    pre_action_open_count = cases - telemetry.action_count
+    unresolved_nonprogression_count = (
+        evidence_requested_count + held_count + pre_action_open_count
     )
+    supported_recovery_entry_count = telemetry.supported_exposure_count
+    unsupported_recovery_entry_count = telemetry.unsupported_exposure_count
+    no_recovery_entry_count = cases - telemetry.external_exposure_count
     row = {
         "family_id": family.family_id,
         **family.factors.canonical_value(),
@@ -327,12 +462,36 @@ def _run_metrics(family: ScenarioFamily, replication: int, policy_id: str, run: 
         "event_count": telemetry.event_count,
         "cohort_hash": run.cohort_hash,
         "event_hash": telemetry.event_hash,
-        "unsupported_progression_rate": _rate(telemetry.unsupported_progression_count, cases),
-        "gate_safe_rate": _rate(telemetry.gate_safe_count, telemetry.gate_applicable_count),
-        "review_effective_rate": _rate(telemetry.timely_review_count, review_requests),
-        "decision_service_effective_rate": _rate(timely_decision_service_count, cases),
-        "unresolved_hold_rate": _rate(telemetry.hold_count, cases),
-        "recovery_exposure_rate": _rate(telemetry.external_exposure_count, cases),
+        "review_request_count": review_requests,
+        "timely_review_count": telemetry.timely_review_count,
+        "timeout_activation_count": timeout_activation_count,
+        "gate_applicable_count": telemetry.gate_applicable_count,
+        "gate_safe_count": telemetry.gate_safe_count,
+        "supported_progression_count": supported_progression_count,
+        "unsupported_progression_count": unsupported_progression_count,
+        "evidence_requested_count": evidence_requested_count,
+        "held_count": held_count,
+        "pre_action_open_count": pre_action_open_count,
+        "unresolved_nonprogression_count": unresolved_nonprogression_count,
+        "supported_recovery_entry_count": supported_recovery_entry_count,
+        "unsupported_recovery_entry_count": unsupported_recovery_entry_count,
+        "no_recovery_entry_count": no_recovery_entry_count,
+        "timeout_activation_rate": _rate(timeout_activation_count, cases),
+        "conditional_timely_review_rate": _nullable_rate(
+            telemetry.timely_review_count, review_requests
+        ),
+        "conditional_gate_safety_rate": _nullable_rate(
+            telemetry.gate_safe_count, telemetry.gate_applicable_count
+        ),
+        "supported_progression_rate": _rate(supported_progression_count, cases),
+        "unsupported_progression_rate": _rate(unsupported_progression_count, cases),
+        "evidence_requested_rate": _rate(evidence_requested_count, cases),
+        "held_rate": _rate(held_count, cases),
+        "pre_action_open_rate": _rate(pre_action_open_count, cases),
+        "unresolved_nonprogression_rate": _rate(unresolved_nonprogression_count, cases),
+        "supported_recovery_entry_rate": _rate(supported_recovery_entry_count, cases),
+        "unsupported_recovery_entry_rate": _rate(unsupported_recovery_entry_count, cases),
+        "no_recovery_entry_rate": _rate(no_recovery_entry_count, cases),
         "recipient_burden_rate": _rate(
             telemetry.response_count + telemetry.assistance_request_count,
             cases,
@@ -344,7 +503,6 @@ def _run_metrics(family: ScenarioFamily, replication: int, policy_id: str, run: 
             + telemetry.reassessment_completed_count,
             cases,
         ),
-        "right_censored_rate": _rate(telemetry.right_censored_case_count, cases),
         "censoring_reason_counts": dict(sorted(censoring_reasons.items())),
         "review_mean_wait_time": float(
             telemetry.review_total_wait_time / Decimal(review_requests)
@@ -353,7 +511,45 @@ def _run_metrics(family: ScenarioFamily, replication: int, policy_id: str, run: 
             telemetry.correction_total_exposure_time / Decimal(telemetry.correction_executed_count)
         ) if telemetry.correction_executed_count else 0.0,
     }
+    _validate_metric_row(row)
     return row
+
+
+def _cluster_jackknife_ratio(
+    values: list[Mapping[str, object]],
+    numerator: str,
+    denominator: str,
+) -> dict[str, object]:
+    total_numerator = sum(int(item[numerator]) for item in values)
+    total_denominator = sum(int(item[denominator]) for item in values)
+    zero_denominator_replications = sum(int(item[denominator]) == 0 for item in values)
+    estimate = _nullable_rate(total_numerator, total_denominator)
+    mcse: float | None = None
+    if estimate is not None and len(values) > 1:
+        leave_one_out: list[float] = []
+        for item in values:
+            remaining_denominator = total_denominator - int(item[denominator])
+            if remaining_denominator == 0:
+                leave_one_out = []
+                break
+            leave_one_out.append(
+                (total_numerator - int(item[numerator])) / remaining_denominator
+            )
+        if len(leave_one_out) == len(values):
+            jackknife_mean = mean(leave_one_out)
+            mcse = sqrt(
+                (len(values) - 1)
+                / len(values)
+                * sum((value - jackknife_mean) ** 2 for value in leave_one_out)
+            )
+    return {
+        "numerator_count": total_numerator,
+        "denominator_count": total_denominator,
+        "zero_denominator_replications": zero_denominator_replications,
+        "rate": estimate,
+        "cluster_jackknife_mcse": mcse,
+        "cluster_count": len(values),
+    }
 
 
 def _summarize_cells(rows: Iterable[Mapping[str, object]]) -> list[dict[str, object]]:
@@ -362,6 +558,8 @@ def _summarize_cells(rows: Iterable[Mapping[str, object]]) -> list[dict[str, obj
         grouped[(str(row["family_id"]), str(row["policy_id"]))].append(row)
     output: list[dict[str, object]] = []
     for (family_id, policy_id), values in sorted(grouped.items()):
+        for value in values:
+            _validate_metric_row(value)
         entry: dict[str, object] = {
             "family_id": family_id,
             "policy_id": policy_id,
@@ -371,10 +569,16 @@ def _summarize_cells(rows: Iterable[Mapping[str, object]]) -> list[dict[str, obj
                 for key in ("load", "missing_evidence", "access_barrier", "retrievability", "staff_access")
             },
         }
-        for metric in PRIMARY_METRICS:
+        for metric in CELL_RATE_METRICS:
             samples = [float(item[metric]) for item in values]
             entry[metric] = mean(samples)
             entry[f"{metric}_mcse"] = stdev(samples) / sqrt(len(samples)) if len(samples) > 1 else 0.0
+        entry["conditional_timely_review"] = _cluster_jackknife_ratio(
+            values, "timely_review_count", "review_request_count"
+        )
+        entry["conditional_gate_safety"] = _cluster_jackknife_ratio(
+            values, "gate_safe_count", "gate_applicable_count"
+        )
         output.append(entry)
     return output
 
@@ -384,28 +588,12 @@ def _paired_estimates(rows: Iterable[Mapping[str, object]]) -> list[dict[str, ob
         (str(row["family_id"]), int(row["replication"]), str(row["policy_id"])): row
         for row in rows
     }
-    contrasts = (
-        (
-            "U2O-minus-U2C", "U2O", "U2C",
-            (
-                "unsupported_progression_rate", "gate_safe_rate", "review_effective_rate",
-                "decision_service_effective_rate", "unresolved_hold_rate",
-                "recovery_exposure_rate", "right_censored_rate",
-            ),
-        ),
-        (
-            "U3-minus-U0", "U3", "U0",
-            (
-                "unsupported_progression_rate", "decision_service_effective_rate",
-                "recipient_burden_rate", "agency_workload_rate", "recovery_exposure_rate",
-                "right_censored_rate",
-            ),
-        ),
-        (
-            "U1-minus-U0", "U1", "U0",
-            ("unsupported_progression_rate", "recovery_exposure_rate"),
-        ),
-    )
+    contrasts = ((
+        "U3-minus-U0",
+        "U3",
+        "U0",
+        ("unresolved_nonprogression_rate",),
+    ),)
     families = sorted({key[0] for key in keyed})
     replications = sorted({key[1] for key in keyed})
     output: list[dict[str, object]] = []
@@ -440,9 +628,12 @@ def _common_random_number_diagnostics(rows: Iterable[Mapping[str, object]]) -> l
     diagnostics: list[dict[str, object]] = []
     for family_id in sorted({key[0] for key in keyed}):
         replications = sorted({key[1] for key in keyed if key[0] == family_id})
-        for metric in ("unsupported_progression_rate", "recovery_exposure_rate", "agency_workload_rate"):
-            left = [float(keyed[(family_id, rep, "U2O")][metric]) for rep in replications]
-            right = [float(keyed[(family_id, rep, "U2C")][metric]) for rep in replications]
+        for metric, left_policy, right_policy in (
+            ("timeout_activation_rate", "U2O", "U2C"),
+            ("unresolved_nonprogression_rate", "U3", "U0"),
+        ):
+            left = [float(keyed[(family_id, rep, left_policy)][metric]) for rep in replications]
+            right = [float(keyed[(family_id, rep, right_policy)][metric]) for rep in replications]
             differences = [a - b for a, b in zip(left, right, strict=True)]
             paired_variance = stdev(differences) ** 2 if len(differences) > 1 else 0.0
             unpaired_variance = (
@@ -464,7 +655,7 @@ def _audit(rows: list[dict[str, object]], cells: list[dict[str, object]]) -> dic
     for cell in u2c:
         by_load[str(cell["factors"]["load"])].append(cell)
     load_review = {
-        load: mean(float(cell["review_effective_rate"]) for cell in values)
+        load: mean(float(cell["timeout_activation_rate"]) for cell in values)
         for load, values in sorted(by_load.items())
     }
     u2o = [row for row in rows if row["policy_id"] == "U2O"]
@@ -474,8 +665,8 @@ def _audit(rows: list[dict[str, object]], cells: list[dict[str, object]]) -> dic
         for reason, count in row["censoring_reason_counts"].items():
             censoring_reasons[reason] += int(count)
     return {
-        "queue_dynamics_change_review_effectiveness": len(set(round(value, 8) for value in load_review.values())) > 1,
-        "u2c_review_effectiveness_by_load": load_review,
+        "queue_dynamics_change_timeout_activation": len(set(round(value, 8) for value in load_review.values())) > 1,
+        "u2c_timeout_activation_by_load": load_review,
         "timeout_semantics_change_progression": (
             mean(float(row["unsupported_progression_rate"]) for row in u2o)
             != mean(float(row["unsupported_progression_rate"]) for row in u2c_rows)
@@ -588,11 +779,11 @@ def run_experiment(config_path: Path) -> dict[str, object]:
     predicted_seconds = confirmatory_runs / throughput if throughput else float("inf")
     precision = config["precision"]
     applicable_cell_metrics = {
-        "U0": ("unsupported_progression_rate", "decision_service_effective_rate", "recipient_burden_rate", "agency_workload_rate", "recovery_exposure_rate", "right_censored_rate"),
-        "U1": ("unsupported_progression_rate", "decision_service_effective_rate", "recovery_exposure_rate", "right_censored_rate"),
-        "U2C": ("unsupported_progression_rate", "gate_safe_rate", "review_effective_rate", "decision_service_effective_rate", "unresolved_hold_rate", "recovery_exposure_rate", "right_censored_rate"),
-        "U2O": ("unsupported_progression_rate", "gate_safe_rate", "review_effective_rate", "decision_service_effective_rate", "unresolved_hold_rate", "recovery_exposure_rate", "right_censored_rate"),
-        "U3": ("unsupported_progression_rate", "decision_service_effective_rate", "recipient_burden_rate", "agency_workload_rate", "recovery_exposure_rate", "right_censored_rate"),
+        "U0": ("unresolved_nonprogression_rate",),
+        "U1": (),
+        "U2C": ("timeout_activation_rate",),
+        "U2O": (),
+        "U3": ("unresolved_nonprogression_rate",),
     }
     max_rate_mcse = max(
         float(cell[f"{metric}_mcse"])
@@ -700,7 +891,7 @@ def _write_figure_prototypes(receipt: Mapping[str, object], directory: Path) -> 
 
     capacity_lines: list[tuple[str, str, list[tuple[float, float]]]] = []
     for policy_id, metric, label, color in (
-        ("U2C", "review_effective_rate", "U2C effective review", "blue"),
+        ("U2C", "timeout_activation_rate", "U2C timeout activation", "blue"),
         ("U2O", "unsupported_progression_rate", "U2O unsupported progression", "red"),
     ):
         points = []
@@ -721,25 +912,23 @@ def _write_figure_prototypes(receipt: Mapping[str, object], directory: Path) -> 
     )
 
     pairs = [item for item in receipt["paired_estimates"] if item["contrast_id"] == "U3-minus-U0"]
-    agency = {item["family_id"]: float(item["estimate"]) for item in pairs if item["metric"] == "agency_workload_rate"}
-    burden = {item["family_id"]: float(item["estimate"]) for item in pairs if item["metric"] == "recipient_burden_rate"}
-    families = sorted(set(agency) & set(burden))
-    if families:
-        max_abs_x = max(max(abs(agency[item]) for item in families), 0.01)
-        max_abs_y = max(max(abs(burden[item]) for item in families), 0.01)
-        points = [
-            (
-                plot_left + plot_width * (agency[item] / max_abs_x + 1) / 2,
-                plot_top + plot_height * (1 - (burden[item] / max_abs_y + 1) / 2),
-            )
-            for item in families
-        ]
-    else:
-        points = []
+    unresolved = {
+        item["family_id"]: float(item["estimate"])
+        for item in pairs
+        if item["metric"] == "unresolved_nonprogression_rate"
+    }
+    families = sorted(unresolved)
+    points = [
+        (
+            plot_left + plot_width * index / max(1, len(families) - 1),
+            y(unresolved[family]),
+        )
+        for index, family in enumerate(families)
+    ]
     (directory / "figure_information_tradeoff_prototype_v1.svg").write_text(
         _svg_document(
-            "Information-first workload/burden tradeoff",
-            "U3-minus-U0 paired development estimates; centered axes are provisional",
+            "Information-first unresolved non-progression",
+            "U3-minus-U0 paired development estimates; family order is provisional",
             [("scenario families", "green", points)],
         ),
         encoding="utf-8",
@@ -753,6 +942,10 @@ def dummy_analysis_receipt() -> dict[str, object]:
     for replication in range(1, 5):
         for policy_index, policy_id in enumerate(POLICY_IDS):
             base = Decimal(replication + policy_index) / Decimal(20)
+            review_requests = 4 if policy_id in {"U2C", "U2O"} else 0
+            timely_reviews = min(replication, review_requests)
+            unresolved = 5 if policy_id == "U3" else 4
+            supported = 10 - unresolved - 1
             rows.append({
                 "family_id": "DUMMY-FAMILY",
                 "load": "0.95",
@@ -766,7 +959,39 @@ def dummy_analysis_receipt() -> dict[str, object]:
                 "event_count": 100,
                 "cohort_hash": f"DUMMY-{replication}",
                 "event_hash": f"DUMMY-{policy_id}-{replication}",
-                **{metric: float(base) for metric in PRIMARY_METRICS},
+                "review_request_count": review_requests,
+                "timely_review_count": timely_reviews,
+                "timeout_activation_count": review_requests - timely_reviews,
+                "gate_applicable_count": review_requests,
+                "gate_safe_count": timely_reviews,
+                "supported_progression_count": supported,
+                "unsupported_progression_count": 1,
+                "evidence_requested_count": unresolved - 3,
+                "held_count": 1,
+                "pre_action_open_count": 2,
+                "unresolved_nonprogression_count": unresolved,
+                "supported_recovery_entry_count": 3,
+                "unsupported_recovery_entry_count": 1,
+                "no_recovery_entry_count": 6,
+                "timeout_activation_rate": (review_requests - timely_reviews) / 10,
+                "conditional_timely_review_rate": (
+                    timely_reviews / review_requests if review_requests else None
+                ),
+                "conditional_gate_safety_rate": (
+                    timely_reviews / review_requests if review_requests else None
+                ),
+                "supported_progression_rate": supported / 10,
+                "unsupported_progression_rate": 0.1,
+                "evidence_requested_rate": (unresolved - 3) / 10,
+                "held_rate": 0.1,
+                "pre_action_open_rate": 0.2,
+                "unresolved_nonprogression_rate": unresolved / 10,
+                "supported_recovery_entry_rate": 0.3,
+                "unsupported_recovery_entry_rate": 0.1,
+                "no_recovery_entry_rate": 0.6,
+                "recipient_burden_rate": float(base),
+                "agency_workload_rate": float(base),
+                "censoring_reason_counts": {},
                 "review_mean_wait_time": float(replication),
                 "correction_mean_exposure_time": float(policy_index),
             })
