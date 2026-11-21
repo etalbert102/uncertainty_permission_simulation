@@ -131,7 +131,6 @@ def test_repository_freeze_inventory_covers_load_bearing_inputs() -> None:
     inventory = freeze.frozen_inventory(ROOT)
     for path in (
         "docs/FORMAL_MODEL.md",
-        "docs/FREEZE4_METRIC_REPAIR_PLAN.md",
         "docs/PREREGISTRATION.md",
         "docs/PROCESS_RED_TEAM_PROTOCOL.md",
         "experiments/configs/confirmatory_v1.yaml",
@@ -145,6 +144,8 @@ def test_repository_freeze_inventory_covers_load_bearing_inputs() -> None:
     source_identity = freeze._source_identity(ROOT)
     assert source_identity["selected_source_count"] == 10
     assert all(source["local_record_hash"] for source in source_identity["sources"])
+    assert "docs/FREEZE4_METRIC_REPAIR_PLAN.md" not in inventory
+    assert "docs/FREEZE_MANIFEST.json" not in inventory
 
 
 def test_freeze3_is_archived_and_independently_attested() -> None:
