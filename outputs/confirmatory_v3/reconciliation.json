@@ -1,0 +1,14 @@
+{
+  "artifact_kind": "confirmatory_reconciliation",
+  "config_id": "CONFIRMATORY-V3",
+  "expected_attempt_count": 16200,
+  "manifest_hash": "bd330d56273ae7a85aed872b5e1442400b02b1f6b822c1fa6154ae2de5d62c63",
+  "missing_attempt_ids": [],
+  "observed_attempt_count": 16200,
+  "reconciliation_hash": "9eec52257c6c089b39737cca1656d02b9be2ade6cad0a310d24cebf4737b88c7",
+  "run_index_hash": "ee02db83b3c1fdd5820b0c9df6bc1a5873021cccc8bb0e7056e59a2144a43dd5",
+  "schema_version": 1,
+  "status": "complete",
+  "target_replications": 30,
+  "unexpected_attempt_ids": []
+}
