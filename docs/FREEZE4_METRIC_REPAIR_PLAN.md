@@ -336,7 +336,7 @@ This table is the sole status ledger for this plan. Do not create a second statu
 | 2. Metric implementation | complete | Slice 1 committed | Golden, metamorphic, adversarial, and 206-test full suite | `22ef835` |
 | 3. Pilot and reporting rehearsal | complete | Slice 2 committed | Repaired pilot receipt, three-panel figure, five-row table, and 209-test suite | `849b086` |
 | 4. Freeze 4 issuance | complete | Slices 0–3 committed and clean | Active manifest, historical verification, repository Slice 4 gate | `ffe3859` |
-| 5. Core and sensitivity rerun | pending | Freeze 4 verifies | Run indexes, reconciliations, and analyses | — |
+| 5. Core and sensitivity rerun | complete | Freeze 4 verifies | Two 16,200-attempt reconciliations, analyses, replay, and Slice 5 gate | `50dbced` |
 | 6. Differential audit | pending | Both suites complete | Machine and human differential receipts | — |
 | 7. Scientific-value gate | pending | Differential audit passes | Recorded retain/demote decision | — |
 | 8. Manuscript reconstruction | pending | Value decision recorded | Integrated Markdown, DOCX, exhibits, and QA | — |
@@ -404,6 +404,16 @@ Each completion entry must record:
 - **Residual risk:** none at issuance. Scientific value remains unknown until the declared suites run and the differential audit passes.
 - **Deferred items:** none.
 - **Commit SHA:** `d7e8494` is the clean executable checkpoint recorded by the manifest; `ffe3859` commits the immutable Freeze 4 manifest.
+
+### Slice 5 completion receipt — 2026-11-21
+
+- **Files changed:** append-only attempts were created under the two V3 roots; compact run indexes, reconciliations, 30-replication analyses, and deterministic analysis figures were committed for both suites.
+- **Files intentionally unchanged:** frozen inputs, active and historical manifests, V2 outputs, policies, simulator, configurations, manuscript, and source fixtures.
+- **Commands and results:** core and sensitivity each created exactly 16,200 attempts; resume retained all 16,200 and created zero; reconciliation observed exactly 16,200 expected attempts in each suite; repeat reconciliation and analysis reproduced the same hashes; the Slice 5 repository gate passed with 209 tests. The core reconciliation hash is `9eec52257c6c089b39737cca1656d02b9be2ade6cad0a310d24cebf4737b88c7` and analysis hash is `5ac3d5c5a5d04cea7241e76ec5f390f9f266cfbd60cafd2339507dd44e360588`. The sensitivity reconciliation hash is `a3267a7c9e736381d209b651e51531ceb17ab478f01f69153b78f9f5e91707b8` and analysis hash is `d5762c5194d62e5c3dd6082bd72bb0c2856765c2326087e8988882ecded93570`.
+- **Fixtures and comparisons:** both suites bind to Freeze 4 manifest `bd330d56273ae7a85aed872b5e1442400b02b1f6b822c1fa6154ae2de5d62c63`; together they contain 32,400 attempts and 2,592,000 case-policy trajectories. Both met the frozen precision targets at 30 replications, so no extension was authorized.
+- **Residual risk:** behavioral continuity with Freeze 3 has not yet been proven; Slice 6 owns the differential audit. Raw attempts remain local under the established ignored-artifact policy, while compact indexes and receipts are committed.
+- **Deferred items:** none.
+- **Commit SHA:** `50dbced` contains the compact Freeze 4 result chain.
 
 ## 10. Verification Tiers
 
