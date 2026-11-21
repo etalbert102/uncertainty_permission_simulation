@@ -1,0 +1,171 @@
+{
+  "artifact_kind": "freeze_differential_audit",
+  "audit_hash": "916c1c203be866725b3d64c537e41187b604ac635d49cca20a98995aaccf4778",
+  "claim": "measurement-only Freeze 4 changes preserve generated cohort, event, action-support, queue, and shared valid outcome identities",
+  "freeze3_manifest_hash": "47170f8cb450709b19f0bf47b48b887208ee75cde07dbf1ee34169891f6b9c6b",
+  "freeze4_manifest_hash": "bd330d56273ae7a85aed872b5e1442400b02b1f6b822c1fa6154ae2de5d62c63",
+  "schema_version": 1,
+  "status": "pass",
+  "suites": [
+    {
+      "blocking_mismatch_count": 0,
+      "classified_event_difference_counts": {
+        "action": 0,
+        "compiled_configuration_receipt_identity": 16200,
+        "event_detail": 0,
+        "event_order": 0,
+        "identity_only_serialization": 16200,
+        "outcome": 0,
+        "queue": 0,
+        "timestamp": 0,
+        "unresolved_event_hash_mismatch": 0
+      },
+      "comparison_counts": {
+        "expected_attempt_hash_change_count": 16200,
+        "expected_attempt_schema_change_count": 16200,
+        "expected_config_identity_change_count": 16200,
+        "expected_manifest_identity_change_count": 16200,
+        "paired_attempt_count": 16200,
+        "top_level_compiled_configuration_hash_mismatch_count": 16200
+      },
+      "evaluation_bridge_summary_exact": true,
+      "first_failures": [],
+      "missing_attempt_ids": [],
+      "new_analysis_hash": "5ac3d5c5a5d04cea7241e76ec5f390f9f266cfbd60cafd2339507dd44e360588",
+      "new_attempt_count": 16200,
+      "new_root": "outputs/confirmatory_v3",
+      "old_analysis_hash": "b3c2fde249fe38bc6778edac77cfd929144ddc48a8c41a150a97518636752112",
+      "old_attempt_count": 16200,
+      "old_root": "outputs/confirmatory_v2",
+      "row_fields_added_signatures": [
+        {
+          "attempt_count": 16200,
+          "fields": [
+            "conditional_gate_safety_rate",
+            "conditional_timely_review_rate",
+            "evidence_requested_count",
+            "evidence_requested_rate",
+            "gate_applicable_count",
+            "gate_safe_count",
+            "held_count",
+            "held_rate",
+            "no_recovery_entry_count",
+            "no_recovery_entry_rate",
+            "pre_action_open_count",
+            "pre_action_open_rate",
+            "review_request_count",
+            "supported_progression_count",
+            "supported_progression_rate",
+            "supported_recovery_entry_count",
+            "supported_recovery_entry_rate",
+            "timely_review_count",
+            "timeout_activation_count",
+            "timeout_activation_rate",
+            "unresolved_nonprogression_count",
+            "unresolved_nonprogression_rate",
+            "unsupported_progression_count",
+            "unsupported_recovery_entry_count",
+            "unsupported_recovery_entry_rate"
+          ]
+        }
+      ],
+      "row_fields_removed_signatures": [
+        {
+          "attempt_count": 16200,
+          "fields": [
+            "decision_service_effective_rate",
+            "gate_safe_rate",
+            "recovery_exposure_rate",
+            "review_effective_rate",
+            "right_censored_rate",
+            "unresolved_hold_rate"
+          ]
+        }
+      ],
+      "shared_cell_comparison_counts": {},
+      "status": "pass",
+      "suite_id": "core",
+      "unexpected_attempt_ids": []
+    },
+    {
+      "blocking_mismatch_count": 0,
+      "classified_event_difference_counts": {
+        "action": 0,
+        "compiled_configuration_receipt_identity": 16200,
+        "event_detail": 0,
+        "event_order": 0,
+        "identity_only_serialization": 16200,
+        "outcome": 0,
+        "queue": 0,
+        "timestamp": 0,
+        "unresolved_event_hash_mismatch": 0
+      },
+      "comparison_counts": {
+        "expected_attempt_hash_change_count": 16200,
+        "expected_attempt_schema_change_count": 16200,
+        "expected_config_identity_change_count": 16200,
+        "expected_manifest_identity_change_count": 16200,
+        "paired_attempt_count": 16200,
+        "top_level_compiled_configuration_hash_mismatch_count": 16200
+      },
+      "evaluation_bridge_summary_exact": true,
+      "first_failures": [],
+      "missing_attempt_ids": [],
+      "new_analysis_hash": "d5762c5194d62e5c3dd6082bd72bb0c2856765c2326087e8988882ecded93570",
+      "new_attempt_count": 16200,
+      "new_root": "outputs/sensitivity_information_latency_v3",
+      "old_analysis_hash": "210b211cc4893411813e4c747f8491f83121515d0ccf868e7be36ce5e91095f4",
+      "old_attempt_count": 16200,
+      "old_root": "outputs/sensitivity_information_latency_v2",
+      "row_fields_added_signatures": [
+        {
+          "attempt_count": 16200,
+          "fields": [
+            "conditional_gate_safety_rate",
+            "conditional_timely_review_rate",
+            "evidence_requested_count",
+            "evidence_requested_rate",
+            "gate_applicable_count",
+            "gate_safe_count",
+            "held_count",
+            "held_rate",
+            "no_recovery_entry_count",
+            "no_recovery_entry_rate",
+            "pre_action_open_count",
+            "pre_action_open_rate",
+            "review_request_count",
+            "supported_progression_count",
+            "supported_progression_rate",
+            "supported_recovery_entry_count",
+            "supported_recovery_entry_rate",
+            "timely_review_count",
+            "timeout_activation_count",
+            "timeout_activation_rate",
+            "unresolved_nonprogression_count",
+            "unresolved_nonprogression_rate",
+            "unsupported_progression_count",
+            "unsupported_recovery_entry_count",
+            "unsupported_recovery_entry_rate"
+          ]
+        }
+      ],
+      "row_fields_removed_signatures": [
+        {
+          "attempt_count": 16200,
+          "fields": [
+            "decision_service_effective_rate",
+            "gate_safe_rate",
+            "recovery_exposure_rate",
+            "review_effective_rate",
+            "right_censored_rate",
+            "unresolved_hold_rate"
+          ]
+        }
+      ],
+      "shared_cell_comparison_counts": {},
+      "status": "pass",
+      "suite_id": "information_latency_sensitivity",
+      "unexpected_attempt_ids": []
+    }
+  ]
+}
