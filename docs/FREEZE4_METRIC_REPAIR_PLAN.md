@@ -339,8 +339,8 @@ This table is the sole status ledger for this plan. Do not create a second statu
 | 5. Core and sensitivity rerun | complete | Freeze 4 verifies | Two 16,200-attempt reconciliations, analyses, replay, and Slice 5 gate | `50dbced` |
 | 6. Differential audit | complete | Both suites complete | Deterministic machine and human receipts over 32,400 paired attempts | `fc732c5` |
 | 7. Scientific-value gate | complete | Differential audit passes | Deterministic retain-full-section decision recorded before prose revision | `41bbfa4` |
-| 8. Manuscript reconstruction | pending | Value decision recorded | Integrated Markdown, DOCX, exhibits, and QA | — |
-| 9. Release audit | pending | Manuscript package complete | Final evidence packet and release verification | — |
+| 8. Manuscript reconstruction | complete | Value decision recorded | Integrated Markdown, DOCX, exhibits, and QA | `b1d6f57` |
+| 9. Release audit | in_progress | Manuscript package complete | Final evidence packet and release verification | — |
 
 Allowed statuses are `pending`, `in_progress`, `complete`, and `blocked`. Only one slice may be `in_progress`.
 
@@ -434,6 +434,16 @@ Each completion entry must record:
 - **Residual risk:** the gate controls article prominence, not historical validity, calibration, welfare, legality, population prevalence, or policy value. All nonqualifying factor margins and the complete sensitivity analysis remain mandatory disclosures.
 - **Deferred items:** none. No post-decision parameter, sensitivity, interaction, or outcome may be added.
 - **Commit SHA:** `41bbfa4` records the value decision before manuscript reconstruction.
+
+### Slice 8 completion receipt — 2026-11-21
+
+- **Files changed:** the integrated manuscript, compact methods-and-results review copy, publication supplement, Figure 3, machine-readable Table 3, APA exporter, and regenerated APA Word manuscript were synchronized to the Freeze 4 scientific product.
+- **Files intentionally unchanged:** frozen inputs and manifests, policies, simulator and analysis code, both Freeze 4 result suites, source fixtures, Freeze 3 archives, differential receipts, and the scientific-value decision.
+- **Commands and results:** the conservative pre-reference source count was 9,505 words; the APA export produced 47 pages; all pages were visually inspected at full resolution; DOCX archive, accessibility, image, and section audits passed with zero accessibility findings; the full suite passed 209 tests; `scripts/verify_repo.py --through-slice 5` passed in the project environment; and active Freeze 4 reverified at manifest hash `bd330d56273ae7a85aed872b5e1442400b02b1f6b822c1fa6154ae2de5d62c63`.
+- **Fixtures and comparisons:** the manuscript and exhibits were checked against the 108-family core analysis, the repaired five-state decision and three-state recovery-entry partitions, the denominator-aware U3 review receipt, all three prespecified organizational-factor margins, the latency-sensitivity analysis, the enhanced Robodebt profile, and the deterministic representation fixture retained in the supplement.
+- **Residual risk:** the release packet and manuscript-audit outputs still describe the pre-repair manuscript and exhibit identities; Slice 9 must replace those stale release statements and prove that every reported number traces to Freeze 4. Public repository activation remains a separate project-lead decision.
+- **Deferred items:** none. Timely supported service, subjective burden, terminal resolution, and consequence-complete restoration remain explicit unestimated quantities rather than incomplete Slice 8 work.
+- **Commit SHA:** `b1d6f57` contains the reconstructed manuscript package.
 
 ## 10. Verification Tiers
 
