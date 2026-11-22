@@ -2,80 +2,56 @@
 
 Date: 2026-11-21
 
-Status: local submission package complete; public-repository activation intentionally deferred
+Status: Freeze 4 local release audit complete; public-repository activation intentionally deferred
 
 ## Scope
 
-This receipt covers the integrated article, APA Word review copy, optional online technical appendix, evidence packet, frozen simulation artifacts, and repository verification controls. It certifies the local package, not acceptance by a publisher or activation of an external repository.
+This receipt covers the integrated article, APA Word review copy, optional technical supplement, evidence packet, Freeze 4 simulation artifacts, and repository verification controls. It certifies only the local package. Publisher acceptance and public repository activation are external actions.
 
-## Article and appendix
+## Scientific product
 
-- The article contains the complete five-step process-red-team procedure and the worked Robodebt application conclusion. Its claims and interpretation do not depend on supplementary material.
-- `ARTICLE_SUPPLEMENTARY_MATERIAL.md` is an optional online technical appendix containing implementation-level status codes, receipt fields, worksheets, and worked-trace detail. It may be withheld if a venue does not accept supplementary material.
-- The conservative Markdown-source count is 9,997 whitespace-delimited words before the bibliography, 3 below the 10,000-word ceiling. The conservative source count controls the release decision.
-- The manuscript uses no endnotes to evade the word ceiling.
+- The article defines robust permission as an operational action-set test, applies it to a documented Robodebt process, and uses a fixed-rule dynamic simulation to estimate timeout activation and unresolved-case location across a designed grid.
+- The information-first analysis uses a five-state exhaustive decision partition. Timely review completion is conditional on a positive review-request denominator; zero-request replications are not treated as failure.
+- Recovery-path entry is distinct from recovery success, terminal resolution, and consequence-complete restoration.
+- Timely supported service, subjective burden, historical Robodebt rates, terminal resolution, and overall policy value are not estimated.
+- The article contains the complete five-step protocol and its Robodebt conclusion. The supplement preserves implementation detail and the safety-specific representation fixture but is not needed to understand the main claims.
 
-## APA Word review copy
+## Freeze 4 identity and execution
 
-- `ARTICLE_MANUSCRIPT_APA.docx` contains an author name, an affiliation, and a correspondence address; 51 rendered pages; three tables with repeating header rows; three figures with alternative-text descriptions; external hyperlinks; and three correctly oriented sections.
-- All 51 pages were visually inspected after the bounded audit repair and final export. Tables 1-3, Figures 1-3, notation, long references, headers, and section transitions are legible and free of clipping or overlap. Figure 2 and its note remain together; Figure 3 uses the final modeled-downstream-exposure terminology.
-- The final archive passes ZIP integrity checks. The image, table, section, tracked-change, relationship, and metadata audits report the expected contents and no structural defect.
-- Author and last-modified-by metadata are blank, revision-session identifiers were scrubbed, and the export utility remains outside the frozen `scripts/*.py` inventory.
+- Active freeze: `UPS-CONFIRMATORY-FREEZE@4`.
+- Manifest self-hash: `bd330d56273ae7a85aed872b5e1442400b02b1f6b822c1fa6154ae2de5d62c63` over 84 frozen files, issued from executable checkpoint `d7e8494`.
+- Core run: 16,200 attempts, reconciliation hash `9eec52257c6c089b39737cca1656d02b9be2ade6cad0a310d24cebf4737b88c7`, analysis hash `5ac3d5c5a5d04cea7241e76ec5f390f9f266cfbd60cafd2339507dd44e360588`.
+- Sensitivity run: 16,200 attempts, reconciliation hash `a3267a7c9e736381d209b651e51531ceb17ab478f01f69153b78f9f5e91707b8`, analysis hash `d5762c5194d62e5c3dd6082bd72bb0c2856765c2326087e8988882ecded93570`.
+- Both suites reconciled with zero missing or unexpected attempt IDs and reproduced deterministically at 30 paired replications.
+- The Freeze 3/4 differential audit paired all 32,400 attempts and found zero event-detail, event-order, timestamp, action, queue, outcome, or unresolved-event mismatches. Its audit hash is `916c1c203be866725b3d64c537e41187b604ac635d49cca20a98995aaccf4778`.
+- The scientific-value gate retained a full simulation section because the core U3 retrievability margin was 0.214823, above the 0.05 threshold and 178.1 times the largest relevant simulation MCSE. The decision hash is `b418d8660a6139eff94687a598b551b3f003ca0ae9c00d45e2b2def75b74af06`.
 
-## Call-fit editorial pass
+## Article and APA review copy
 
-- On 2026-11-16, the abstract and introduction were revised to foreground AI-enabled organizational workflows and the call's emerging-technology theme.
-- The manuscript now states its bounded original contribution affirmatively, adds a plain-language bridge into the formal model, uses descriptive policy names alongside internal IDs, and presents a compact owner–intervention–tradeoff implementation map.
-- These are reader-facing editorial changes only. No formal definition, source mapping, parameter, policy, seed, metric, stored result, quantitative interpretation, or claim boundary changed, and no usability or field-transfer claim was added.
+- The final audited source contains 9,544 whitespace-delimited words before `References`, leaving 456 words below the 10,000-word ceiling.
+- The manuscript uses no endnotes to evade the ceiling.
+- `ARTICLE_MANUSCRIPT_APA.docx` contains the visible author identity, affiliation, and correspondence address; three tables; three figures with alternative text; and three correctly oriented sections.
+- The final audited export has 47 rendered pages. Every page was inspected at full resolution. Tables 1–3, Figures 1–3, equations, references, headers, and portrait/landscape transitions were legible and free of clipping or overlap.
+- ZIP integrity, accessibility, image-placement, and section audits passed. The accessibility audit reported zero high-, medium-, or low-severity findings.
 
-## High-value clarity pass
+## Source and positioning audit
 
-- On 2026-11-18, the manuscript simplified the plain-language review definition, evidence-layer explanation, formal-model bridge, refinement-coverage explanation, Robodebt crosswalk, simulation unit, results interpretation, and five-step protocol instructions. Review corrections restored the complete effective-review conditions and the information-first policy's frozen applicability boundary.
-- The edits preserve `robust permission`, gate safety, effective review, correction, restoration, the frozen policy comparisons, and every numerical result and claim boundary. They add no practitioner-usability, field-transfer, historical-causation, legality, or general-safety claim.
-- The APA Word copy was regenerated and metadata-scrubbed after the bounded audit repair. All 51 pages were visually inspected; the accessibility, image, section, archive-integrity, and repository verification checks pass.
+- The historical source packet and formal claim boundaries remain unchanged.
+- The final literature audit distinguishes the article from Lin et al. on agent evidence-to-action chains; Wang and Rachev on capacity regimes; Green on oversight policy; Rinta-Kahila et al. on Robodebt system destructiveness; Carney on legality and rule-of-law safeguards; and Lykouris and Weng on optimized deferral under congestion.
+- Robodebt illustrates the operational test; it does not validate the rule, calibrate the simulation, establish historical causation, or supply an independent legal conclusion.
+- The enhanced OCI profile is structurally compatible with the mechanism, but its action-specific historical F1 verdict is `unassessable` on the supplied record. A later receipt-and-ignoring guard cannot supply missing period evidence upstream.
 
-## Simulation-contribution refocus
+## Repository checks
 
-- On 2026-11-18, the abstract, research-question framing, methods purpose, results interpretation, synthesis, and conclusion were revised to separate what follows from the authored rules from what requires dynamic execution.
-- Timeout direction remains a rule-semantic implication. The simulation contribution is now stated as the frequency with which finite capacity activates those consequences, variation across the 108 designed scenario families, and the coupled queue, holding, exposure, interaction, workload, censoring, and sensitivity outcomes preserved by the dynamic model.
-- The third research question is explicitly reported as only partly answered because the decision-service measure failed semantic audit, interaction events do not establish substantive burden, and terminal censoring blocks complete-resolution and complete-restoration comparisons.
-- This is a freeze-safe editorial clarification. It adds no post hoc estimand, factor-marginal analysis, parameter, result, or policy recommendation and does not change the immutable scientific manifest.
-- The source manuscript remains below the call ceiling at 9,667 words. The regenerated and metadata-scrubbed Word copy contains 48 pages and 9,645 pre-reference word tokens; every page was visually inspected after export.
+- The complete project suite passes: 209 tests.
+- `scripts/verify_repo.py --through-slice 5` passes in the project environment and binds the result chain to active Freeze 4.
+- Active Freeze 4 and the historical Freeze 2/3 attestations verify independently.
+- The current verification-packet manifest archives the Freeze 4 run indexes, reconciliations, analyses, differential receipts, value decision, repaired Table 3, supplement, and frozen scientific inputs for manuscript source verification.
 
-## Targeted venue-fit bridge
+## Remaining external condition
 
-- On 2026-11-18, the introduction was revised to state that the emerging-technology connection is functional rather than historical: contemporary AI outputs can occupy the same organizational position between evidence and consequential workflow rules.
-- The Robodebt rationale now presents the case as a documented institutional testbed for the sequence from evidentiary transformation through automated action, review, and reassessment, while leaving complete restoration unestablished and retaining the non-equivalence, non-prevalence, and non-causation boundaries.
-- The governance section now states a prospective use for current AI deployment: compare matched representations through the actual downstream rules and stress action-binding review before rollout or material workflow change. This is an ex ante method, not field-transfer evidence.
-- No formal definition, source mapping, parameter, policy, seed, metric, stored result, quantitative interpretation, field-transfer status, or claim boundary changed. The immutable scientific manifest remains unchanged.
-- The source manuscript remains below the call ceiling at 9,805 words. The regenerated and metadata-scrubbed Word copy contains 49 pages and 9,785 pre-reference word tokens; all 49 pages were visually inspected after export.
+- The manuscript audit is complete; its bounded corrections and project-lead manual dispositions are recorded in `FREEZE4_MANUSCRIPT_AUDIT_RECEIPT.md`.
+- The final evidence packet, article hashes, APA export, and execution records are synchronized. All 209 tests and the repository release gate pass.
+- Make the repository public and confirm the data-and-code URL from a logged-out session before submission. This external activation remains under project-lead control.
 
-## Author identity packaging
-
-- On 2026-11-18, the Markdown source and APA Word title page were updated to identify Eli Talbert and provide `etalbert102@gmail.com` for correspondence.
-- No organizational affiliation or employer endorsement is asserted. Author and last-modified-by metadata remain blank to avoid embedding device or application identity beyond the visible, intentional author block.
-- The source manuscript remains below the call ceiling at 9,809 words. The regenerated Word copy contains 49 pages and 9,789 pre-reference word tokens; all 49 pages were visually inspected after export.
-
-## Second Goldfish audit and Freeze 3
-
-- The second audit found four executable-provenance weaknesses: incomplete certificate-coverage metadata, action identity keyed too coarsely, bridge receipts available only inside events, and a prior freeze whose contents required explicit commit attestation.
-- The external specification now declares its generator, assumptions, exclusions, coverage argument, proof identifier, conclusion mode, and exact action-comparison schema. Confirmatory compilation rejects an implicit development fixture. Routing and action receipts bind the specification, implementation, certificate, evidence state, exact case-specific action, and support result.
-- Freeze 3, `UPS-CONFIRMATORY-FREEZE@3`, has manifest self-hash `47170f8cb450709b19f0bf47b48b887208ee75cde07dbf1ee34169891f6b9c6b` and was issued from clean commit `dc96716c0865517ab0f61700fb0a06ca39d0042a`. The historical 77-file Freeze 2 inventory is preserved and every blob is attested to commit `74d657e42a60c28f7ab2675d8934cd11b2afd1e9` in `FREEZE_COMMIT_ATTESTATIONS.json`.
-- The core run index, reconciliation, and analysis hashes are `5ff83bdd32a9231d6e5333a3ce30365f54da47256a52a2a78727caa06387e676`, `58f27a685d1b7b5891765ec4f1b0faab34bc2077f98a5aa8edc6ce87e7e58e64`, and `b3c2fde249fe38bc6778edac77cfd929144ddc48a8c41a150a97518636752112`. The sensitivity equivalents are `68b06d4b670bc2b8be33bde1f495e5fea9e4a1766c946be78230399a120f3d2f`, `35861361f474c8a08ceddc9682e91bd778de669b7a6819a166ab66112b1a5c4a`, and `210b211cc4893411813e4c747f8491f83121515d0ccf868e7be36ce5e91095f4`.
-- Across the two suites, 2,592,000 routing receipts were compared with 2,592,000 action receipts and produced zero mismatches. All result-bearing analysis fields exactly equal the preceding corrected analyses; only provenance-bearing identities changed.
-- Plan, Slice 0, and Slice 3 validators pass; all 182 tests pass; and the technical release gate verifies the active manifest, historical attestation, compact result chain, and bridge summaries.
-
-## Prior correction history and repository controls
-
-- The Goldfish review exposed an implementation-to-specification gap: the first runtime stored the evaluation-specification identifier without invoking its general support rule. The corrected kernel now executes a content-addressed rule over finite exact refinement certificates at routing and action time and records the specification, implementation, certificate, and result identities.
-- A second immutable 77-file scientific manifest was issued at SHA-256 `9d0d2ed34f74608e5aed96b6a28d81ded2d6d15bba552be91706c5ce862b2801`. Both 16,200-attempt suites were rerun. The corrected and archived analyses have exact equality for `cell_summaries`, `paired_estimates`, `precision`, and `common_random_number_diagnostics`; only provenance-bearing identities changed.
-- The first manifest remains preserved as `FREEZE_MANIFEST_PRE_EVALUATION_BRIDGE.json`, and the original attempts remain locally archived for audit. The correction is documented in `EVALUATION_SPECIFICATION_CORRECTION.md`.
-- The final source audit and literature update are complete. They found no substantive contradiction in the historical, formal, trace, or numerical claims and did not change the frozen study.
-- Plan, Slice 0, and Slice 3 validators pass; all 182 tests pass; and the technical release gate passes with the Freeze 3 core and sensitivity artifacts.
-- Per-attempt outputs remain intentionally ignored because they are large reproducible intermediates. The repository retains the frozen inputs, exact environment and seed inventories, compact indexes, reconciliations, analyses, figures, and receipts needed to regenerate and verify them.
-
-## Remaining external activation
-
-The sole remaining pre-submission activation is to make the project repository public and confirm that the manuscript's data-and-code link resolves. That action remains under project-lead control and was not performed by this local readiness pass. No external-reader return, formal comprehensibility review, usability study, or supplement-eligibility assumption is a release condition.
-
-This receipt does not claim historical causal identification, empirical calibration to Robodebt, field efficacy, practitioner usability, inter-rater reliability, or legal judgment.
+No external-reader return, formal comprehensibility review, usability study, inter-rater claim, or practitioner-performance claim is required.

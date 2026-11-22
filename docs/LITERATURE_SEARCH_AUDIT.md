@@ -29,6 +29,19 @@ On 2026-11-11, the ten original keyword strings were repeated in OpenAlex with p
 
 This was an update and equivalence check, not a systematic review. Search-result counts were retained only as volatile diagnostics and are not reported as findings. The update found several close additions that sharpen comparison language but no work in the screened set that combined the evidence-refinement permission invariant, independent-support exception, fixed-rule dynamic stress test, contestability and restoration semantics, and source-bounded Robodebt application.
 
+## Freeze 4 targeted comparison check
+
+On 2026-11-21, a targeted comparison check followed the external simulation-value review. Publication or repository records were checked for four works named as possible omissions. This check tested positioning rather than attempting a new comprehensive search, and it introduced no new simulation input, outcome, or hypothesis.
+
+| Work | Verified comparison | Manuscript response |
+| --- | --- | --- |
+| Green, “The Flaws of Policies Requiring Human Oversight of Government Algorithms” (2022), DOI `10.1016/j.clsr.2022.105681` | Critiques oversight mandates that can legitimate government algorithms without evidence that human review is effective. | The article now distinguishes its narrower action-binding and timeout test from general claims that human oversight works. |
+| Rinta-Kahila et al., “Algorithmic Decision-Making and System Destructiveness” (2022), DOI `10.1080/0960085X.2021.1960905` | Explains the emergence, persistence, and delegitimation of destructive effects in automated debt recovery. | The Robodebt application is positioned as a source-bounded permission diagnosis, not a substitute for organizational causal analysis. |
+| Carney, “Robo-debt Illegality” (2019), DOI `10.1177/1037969X18815913` | Analyzes Robodebt through legality and failed rule-of-law safeguards. | The manuscript separates the functional-permission test from legal validity and does not present the formal rule as a legality test. |
+| Lykouris and Weng, “Learning to Defer in Congested Systems” (2025), arXiv:2402.12237 | Studies learned deferral and scheduling when human service is congested. | The article now states that it neither learns an admission policy nor optimizes a controller; it estimates activation frequencies for fixed safeguard and timeout rules. |
+
+The targeted check also confirmed that the strengthened comparison to Lin et al. (2026) and Wang and Rachev (2026) should remain explicit. The revised article distinguishes its institutional action-set test from agent-trajectory evaluation and its fixed-rule stress test from analytic capacity-regime work. Robodebt remains illustrative rather than validating: the rule was developed with knowledge of the case, and the application cannot establish predictive or external validity.
+
 ### Additions requiring a manuscript response
 
 | Work | Existing contribution | Consequence for this paper |

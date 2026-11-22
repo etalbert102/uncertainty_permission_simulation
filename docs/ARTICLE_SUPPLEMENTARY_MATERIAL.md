@@ -67,7 +67,7 @@ The intake worksheet records the workflow and version, evaluation unit, conseque
 
 ## S5. Fixed Robodebt bounded trace
 
-The worked trace is explanatory, not representative. It holds the case, evidence, access, later evidence, process, clocks, evaluation rules, resources, and draws fixed. Only the policy changes: impute and progress versus agency-assisted information first. All F0–F5 rows below are `assessed`; capacity/service is `omitted_by_claim_limit`.
+The worked trace is an inspectable scripted illustration, not a representative or independently derived result. It holds the case, evidence, access, later evidence, process, clocks, evaluation rules, resources, and draws fixed. Only the policy changes: impute and progress versus agency-assisted information first. F0–F4 describe what follows from those declared inputs. Capacity/service and the substantive recovery/restoration endpoints are `omitted_by_claim_limit` because the fixture does not independently derive the inputs needed to establish them.
 
 ### Table S1. Assessment profile
 
@@ -79,7 +79,7 @@ The worked trace is explanatory, not representative. It holds the case, evidence
 | 2/F2 | `unassessable/incomplete`: the trace cannot test spillovers. | Same. | No cohort, shared queue, or noninterference evidence; Level C required. |
 | 3/F3 | `fail/complete`: a required pre-action gate is absent. | `not_applicable/complete`: the supported disposition does not require review in this trace. | No general review-reliability estimate. |
 | 4/capacity-service | `omitted_by_claim_limit`; no status. | Same. | No arrivals or shared queues; Level C required. |
-| 5/F5 | `fail/complete`: later correction leaves modeled recovery status unrestored at the day-60 check. | `not_applicable/complete`: no modeled consequence is created that requires restoration. | Avoided recovery-path entry does not demonstrate restoration capability; no legal, frequency, or attackability finding. |
+| 5/F5 | `omitted_by_claim_limit`; no status. | Same. | Recovery and restoration outcomes require acquired records and the resulting disposition, a recovery-entry rule, correction timing, restoration events and dependencies, a consequence baseline, and a day-60 observation rule. The fixture scripts rather than independently derives those inputs. |
 
 ### Table S2. Ownership and intervention receipt
 
@@ -93,9 +93,9 @@ Entries appear as baseline; repair.
 | 2/F2 | simulation; simulation | Build Level C cohort pair — simulation; same | Cohort spillovers remain unresolved; same. |
 | 3/F3 | process; process | Bind fail-closed review — review and gate; none in trace — policy if scope changes | Review consumes capacity; another progression path could require review. |
 | 4/capacity-service | simulation; simulation | Add queues, resources, and paired policies — simulation; same | Modeling assumptions and computation; same. |
-| 5/F5 | reassessment; process | Restore every consequence — restoration; none in trace — policy if progression occurs | Broader remediation; avoidance proves no restoration capability. |
+| 5/F5 | reassessment; process | Specify and test recovery and restoration endpoints before assigning an intervention — restoration and policy | Broader remediation and any endpoint effects remain unresolved. |
 
-The baseline trace does not establish that every historical Robodebt case followed this path, that the modeled debt was legally or monetarily invalid, or that information-first handling is costless or generally superior. The repair trace demonstrates avoided recovery-path entry, not restoration performance.
+The trace does not establish that every historical Robodebt case followed this path, that the modeled debt was legally or monetarily invalid, that either arm entered or avoided recovery, that restoration succeeded or failed, or that information-first handling is costless or generally superior. Its scripted recovery and restoration events remain useful for testing software contracts, but they do not independently establish the article's substantive worked-example endpoints.
 
 ## S6. Executable representation fixture
 
