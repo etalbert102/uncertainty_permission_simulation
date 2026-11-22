@@ -298,7 +298,7 @@ No new parameter, sensitivity, interaction, or outcome may be introduced after t
 
 - present robust permission as a definition and operational test;
 - replace formal characterizations with implications;
-- state that aggregate-only debt calculation and the resulting debt notice fail F1 under the enhanced Robodebt profile, while the receipt-and-ignoring guard may constrain later collector referral without repairing upstream permission;
+- report the enhanced profile's action-specific historical F1 verdict as `unassessable` unless the record supplies an exact action instance, independent support prerequisite, and defeating admissible refinement; retain the narrower point that a downstream receipt-and-ignoring guard cannot supply missing period evidence upstream;
 - explain that completed unresolved U3 review requests evidence;
 - distinguish the paper from Lin et al., Wang and Rachev, Green, Rinta-Kahila et al., Carney, and Lykouris and Weng;
 - remove the invalid service measure from the abstract and result claims;
@@ -340,7 +340,7 @@ This table is the sole status ledger for this plan. Do not create a second statu
 | 6. Differential audit | complete | Both suites complete | Deterministic machine and human receipts over 32,400 paired attempts | `fc732c5` |
 | 7. Scientific-value gate | complete | Differential audit passes | Deterministic retain-full-section decision recorded before prose revision | `41bbfa4` |
 | 8. Manuscript reconstruction | complete | Value decision recorded | Integrated Markdown, DOCX, exhibits, and QA | `b1d6f57` |
-| 9. Release audit | in_progress | Manuscript package complete | Final evidence packet and release verification | — |
+| 9. Release audit | complete | Manuscript package complete | Final evidence packet, bounded manuscript audit, 209-test suite, Word QA, and release verification | `d7e193f` |
 
 Allowed statuses are `pending`, `in_progress`, `complete`, and `blocked`. Only one slice may be `in_progress`.
 
@@ -444,6 +444,16 @@ Each completion entry must record:
 - **Residual risk:** the release packet and manuscript-audit outputs still describe the pre-repair manuscript and exhibit identities; Slice 9 must replace those stale release statements and prove that every reported number traces to Freeze 4. Public repository activation remains a separate project-lead decision.
 - **Deferred items:** none. Timely supported service, subjective burden, terminal resolution, and consequence-complete restoration remain explicit unestimated quantities rather than incomplete Slice 8 work.
 - **Commit SHA:** `b1d6f57` contains the reconstructed manuscript package.
+
+### Slice 9 completion receipt — 2026-11-21
+
+- **Files changed:** the article, APA Word copy, supplement, literature audit, submission-readiness receipt, evidence packet, verification-packet manifest, and Freeze 4 manuscript-audit receipt were synchronized to the bounded audit repair; this plan records closure.
+- **Files intentionally unchanged:** every active and historical freeze file, experiment configuration, simulator and analysis module, result suite, source fixture, differential receipt, scientific-value decision, Figure 1–3 asset, and Table 3 data artifact.
+- **Commands and results:** the adjacent audit pipeline passed all 31 tests; the project passed all 209 tests; `scripts/verify_repo.py --release` returned `release: true`; active Freeze 4 verified 84 files at manifest hash `bd330d56273ae7a85aed872b5e1442400b02b1f6b822c1fa6154ae2de5d62c63`; the final source count was 9,544 words before `References`; and the 47-page APA export passed ZIP, accessibility, image, and section audits with zero accessibility findings.
+- **Fixtures and comparisons:** the repair was checked against the 24-stage manuscript audit, its cumulative decision ledger, the final 74-file verification packet, the immutable worked-trace oracle, all three rendered figures, and the Freeze 4 compact result chain. Every final Word page was inspected; the two orphan spill pages found during review were eliminated before release.
+- **Residual risk:** the repository URL remains inaccessible to a logged-out reader until separately authorized public activation. The article therefore states that activation and a logged-out check remain required.
+- **Deferred items:** public repository activation and logged-out URL verification only. No recovery/restoration endpoint, external-reader return, formal comprehensibility review, usability study, or supplement-eligibility assumption remains a local release requirement.
+- **Commit SHA:** `d7e193f` removes the unsupported worked-example endpoints and records the audited manuscript package. The adjacent audit-pipeline contract fix is `f4b39e1`.
 
 ## 10. Verification Tiers
 

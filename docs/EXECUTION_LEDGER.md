@@ -1197,3 +1197,17 @@ Date: 2026-11-20
 A targeted prose pass replaced checklist-like contribution language, rewrote the most symmetrical literature-synthesis paragraph, removed the all-purpose use of “bounded,” and clarified Robodebt scope and transfer wording. Follow-up review replaced a vague timeout phrase with “declared timeout consequences” and recast the hypothetical LLM example as an instantiation rather than evidence that the procedure works. These changes affect no formal definition, source mapping, design element, result, quantitative value, interpretation, or claim boundary.
 
 The conservative source count is 9,893 words before the bibliography, leaving 107 below the ceiling. The regenerated APA export contains 47 pages, three tables, three figures, and three correctly oriented sections; every page was visually inspected at full resolution. Accessibility, archive, image, and section checks pass, as do the release verifier and all 182 tests.
+
+## Freeze 4 Bounded Endpoint Repair and Release Audit
+
+Status: complete locally; unsupported worked-example endpoints removed; public activation deferred
+
+Date: 2026-11-21
+
+The final manuscript audit retained the documented failed-notice setup and five-step Robodebt application but removed substantive claims that the fixed trace demonstrated recovery-path avoidance or failed restoration. The article and supplement now stop at the supported comparison—impute and progress versus information-first holding—and name the records, disposition, recovery rule, correction timing, restoration dependencies, consequence baseline, and observation rule required to establish later endpoints. Scripted recovery and restoration events remain part of the immutable software oracle but no longer serve as article results. The historical enhanced-profile F1 verdict is `unassessable`, while structural compatibility and the downstream-guard limitation remain.
+
+The isolated manuscript audit completed 24 stages and one repair round. All five automatic corrections passed coverage. The project lead resolved the operation-cap and figure-delivery flags without adding a thirteenth operation or dropping any exhibit. The adjacent audit pipeline corrected its coverage prompt to match its automatic-correction-only validator; all 31 pipeline tests pass at `f4b39e1`.
+
+The final article contains 9,544 whitespace-delimited words before `References`, leaving 456 below the call ceiling. The APA review copy contains 47 pages, three tables, three figures, and three correctly oriented sections. Every final page was inspected; ZIP integrity, accessibility, image, and section audits pass with zero accessibility findings. The project passes 209 tests, the repository verifier returns `release: true`, and active Freeze 4 verifies 84 files at manifest hash `bd330d56273ae7a85aed872b5e1442400b02b1f6b822c1fa6154ae2de5d62c63`. The audited manuscript package is commit `d7e193f`.
+
+The only remaining external action is public repository activation followed by a logged-out URL check. That action remains under project-lead control.
