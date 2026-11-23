@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="440" viewBox="0 0 760 440">
+<rect width="100%" height="100%" fill="white"/>
+<text x="30" y="34" font-family="sans-serif" font-size="20">Information-first unresolved non-progression</text>
+<text x="30" y="58" font-family="sans-serif" font-size="12" fill="#444">U3-minus-U0 paired differences at 30 replications per family</text>
+<line x1="70" y1="370" x2="710" y2="370" stroke="#222"/>
+<line x1="70" y1="80" x2="70" y2="370" stroke="#222"/>
+<polyline points="70.00,370.00 75.98,370.00 81.96,370.00 87.94,370.00 93.93,370.00 99.91,370.00 105.89,370.00 111.87,370.00 117.85,370.00 123.83,370.00 129.81,370.00 135.79,370.00 141.78,370.00 147.76,370.00 153.74,370.00 159.72,370.00 165.70,370.00 171.68,370.00 177.66,370.00 183.64,370.00 189.63,370.00 195.61,370.00 201.59,370.00 207.57,370.00 213.55,370.00 219.53,370.00 225.51,370.00 231.50,370.00 237.48,370.00 243.46,370.00 249.44,370.00 255.42,370.00 261.40,370.00 267.38,370.00 273.36,370.00 279.35,370.00 285.33,370.00 291.31,370.00 297.29,370.00 303.27,370.00 309.25,370.00 315.23,370.00 321.21,370.00 327.20,370.00 333.18,370.00 339.16,370.00 345.14,370.00 351.12,370.00 357.10,370.00 363.08,370.00 369.07,370.00 375.05,370.00 381.03,370.00 387.01,370.00 392.99,370.00 398.97,370.00 404.95,370.00 410.93,370.00 416.92,370.00 422.90,370.00 428.88,370.00 434.86,370.00 440.84,370.00 446.82,370.00 452.80,370.00 458.79,370.00 464.77,370.00 470.75,370.00 476.73,370.00 482.71,370.00 488.69,370.00 494.67,370.00 500.65,370.00 506.64,370.00 512.62,370.00 518.60,370.00 524.58,370.00 530.56,370.00 536.54,370.00 542.52,370.00 548.50,370.00 554.49,370.00 560.47,370.00 566.45,370.00 572.43,370.00 578.41,370.00 584.39,370.00 590.37,370.00 596.36,370.00 602.34,370.00 608.32,370.00 614.30,370.00 620.28,370.00 626.26,370.00 632.24,370.00 638.22,370.00 644.21,370.00 650.19,370.00 656.17,370.00 662.15,370.00 668.13,370.00 674.11,370.00 680.09,370.00 686.07,370.00 692.06,370.00 698.04,370.00 704.02,370.00 710.00,370.00" fill="none" stroke="#2E8B57" stroke-width="3"/>
+<circle cx="70.00" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="75.98" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="81.96" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="87.94" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="93.93" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="99.91" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="105.89" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="111.87" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="117.85" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="123.83" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="129.81" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="135.79" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="141.78" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="147.76" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="153.74" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="159.72" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="165.70" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="171.68" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="177.66" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="183.64" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="189.63" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="195.61" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="201.59" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="207.57" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="213.55" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="219.53" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="225.51" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="231.50" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="237.48" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="243.46" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="249.44" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="255.42" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="261.40" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="267.38" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="273.36" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="279.35" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="285.33" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="291.31" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="297.29" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="303.27" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="309.25" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="315.23" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="321.21" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="327.20" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="333.18" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="339.16" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="345.14" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="351.12" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="357.10" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="363.08" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="369.07" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="375.05" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="381.03" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="387.01" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="392.99" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="398.97" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="404.95" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="410.93" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="416.92" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="422.90" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="428.88" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="434.86" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="440.84" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="446.82" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="452.80" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="458.79" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="464.77" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="470.75" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="476.73" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="482.71" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="488.69" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="494.67" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="500.65" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="506.64" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="512.62" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="518.60" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="524.58" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="530.56" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="536.54" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="542.52" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="548.50" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="554.49" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="560.47" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="566.45" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="572.43" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="578.41" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="584.39" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="590.37" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="596.36" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="602.34" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="608.32" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="614.30" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="620.28" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="626.26" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="632.24" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="638.22" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="644.21" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="650.19" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="656.17" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="662.15" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="668.13" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="674.11" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="680.09" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="686.07" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="692.06" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="698.04" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="704.02" cy="370.00" r="4" fill="#2E8B57"/>
+<circle cx="710.00" cy="370.00" r="4" fill="#2E8B57"/>
+<line x1="530" y1="92" x2="550" y2="92" stroke="#2E8B57" stroke-width="3"/>
+<text x="558" y="96" font-family="sans-serif" font-size="11">scenario families</text>
+<text x="380" y="425" text-anchor="middle" font-family="sans-serif" font-size="11">Frozen-model estimates; see analysis receipt for scope and uncertainty</text>
+</svg>

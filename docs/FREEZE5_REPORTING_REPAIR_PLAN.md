@@ -101,6 +101,6 @@ Completion requires a verified Freeze 5 manifest; reconciled core and sensitivit
 | --- | --- | --- |
 | 0. Contract and baseline | complete | Freeze 4 verified; release gate passed; plan and Slice 0 validators passed; 209 tests passed |
 | 1. Reporting schema and tests | complete | exclusive failure and evidence-stage fields implemented; development rehearsal and 218 tests pass; Freeze 4 archived and attested |
-| 2. Freeze and replay | in progress | Freeze 5 issued from clean commit `05f4638`; core and sensitivity replay pending |
-| 3. Differential proof and reporting | pending | — |
+| 2. Freeze and replay | complete | both 16,200-attempt suites reconcile at 30 replications; deterministic reruns retained all attempts and reproduced analysis hashes |
+| 3. Differential proof and reporting | in progress | 32,400-pair behavioral audit passes; compact receipts ready for manuscript integration |
 | 4. Manuscript and release package | pending | — |
