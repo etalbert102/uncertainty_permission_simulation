@@ -1255,3 +1255,36 @@ The core and information-latency suites each created 16,200 new attempts under F
 The Freeze 4/5 differential audit paired all 32,400 attempts. Cohort hashes, complete event hashes, event counts, evaluation-bridge receipts, top-level study identities, all shared row fields, and all pre-existing analysis fields are exact. The only systematic compiled-configuration hash difference is the expected executable-receipt identity change after reporting code advanced. The machine audit passes at hash `edab65cb1e809a5af30f5e855e2aaa402831a00230b8291b5f991c4e8843bce8`. The through-Slice-5 repository gate passes with all 218 tests.
 
 The new core decomposition reports fail-open unsupported progression of 0.476211: 0 evidence-only, 0.104603 authorization-only, and 0.371609 joint evidence-and-authorization failure. The U3 stage accounting reports 0.573248 adequate response evidence, 0.426752 retrieval requests, 0.255529 successful retrieval, and 0.171223 unresolved after acquisition/review entry; final unresolved states divide into 0.162415 evidence requested and 0.008808 held. These are sequential accounting quantities, not independent component effects. Manuscript and exhibit integration remains Slice 3–4 work.
+
+### Slices 3–4 — Reporting integration and release closeout
+
+Status: complete locally; public activation deferred
+
+The manuscript, methods/results extract, supplement, Table 3, Figure 3, APA Word export, evidence packet, submission receipt, and Freeze 5 repair receipt now report the versioned decomposition. The article distinguishes authorization-only failure from joint evidence-and-authorization failure, reports U3 stages as sequential accounting, states that no post-request evidence-response cycle is modeled, and distinguishes the Robodebt rule-level F1 result under the study specification from actual-case unassessability. It discloses the post-result origin of Freezes 4 and 5 and does not treat behavioral identity as eliminating outcome-selection risk.
+
+Table 3 contains eight nonredundant quantities and conserves the 0.476211 fail-open union. Figure 3 panel C now displays U3 evidence and review stages rather than selected factor margins. Both builders were run twice; their stored byte hashes reproduced as `069ceed4f352f21ce52fc635d75e456326cfa39b93619a7a0d1249801dbb68d6` for Table 3 and `9cb0c63d40a656496e244fb69168e7d0c71c5acb6d5260427c48abfaf8a6c485` for Figure 3. The differential-audit builder also reproduced twice with machine audit hash `edab65cb1e809a5af30f5e855e2aaa402831a00230b8291b5f991c4e8843bce8` and zero blocking mismatches across 32,400 pairs.
+
+The APA export contains 41 pages, three tables, three inline figures, and portrait/landscape/portrait sections. Every page was inspected at full resolution. ZIP integrity passed; the accessibility audit returned zero high-, medium-, or low-severity findings; image, heading, style, and section audits found no blocking defect. Sparse lead-in space before two full-page figures reflects intact-exhibit placement rather than missing or clipped content.
+
+Final commands included:
+
+```bash
+python3 reporting/build_freeze5_differential_audit.py
+python3 reporting/build_article_table3.py
+python3 reporting/build_article_figure3.py
+python3 scripts/validate_plan.py
+python3 scripts/validate_slice0.py
+python3 scripts/validate_slice3.py --allow-confirmatory-output
+PYTHONPATH=src .venv/bin/python -m uncertainty_permission_simulation.cli verify-freeze docs/FREEZE_MANIFEST.json
+.venv/bin/python scripts/verify_repo.py --release
+python3 .../documents/scripts/a11y_audit.py docs/ARTICLE_MANUSCRIPT_APA.docx
+python3 .../documents/scripts/images_audit.py docs/ARTICLE_MANUSCRIPT_APA.docx
+python3 .../documents/scripts/section_audit.py docs/ARTICLE_MANUSCRIPT_APA.docx
+python3 .../documents/scripts/heading_audit.py docs/ARTICLE_MANUSCRIPT_APA.docx
+python3 .../documents/scripts/style_lint.py docs/ARTICLE_MANUSCRIPT_APA.docx
+unzip -t docs/ARTICLE_MANUSCRIPT_APA.docx
+```
+
+Results were `PLAN_VALID`, `SLICE0_VALID`, Slice 3 engineering pass, active Freeze 5 verification over 85 files, 218 passing tests, and `release: true`. The repaired manuscript contains 7,504 whitespace-delimited words before `References`. The implementation package is commit `d1b4224`.
+
+Residual risks are explicit: the designed grid is not a historical calibration; U3 stages do not identify component effects and stop after an evidence request; terminal resolution and overall policy value remain unestimated; rule-level Robodebt failure does not decide an actual case; and the repository is not yet publicly reachable. Public activation and a logged-out URL check require separate project-lead action.
