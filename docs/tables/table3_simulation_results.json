@@ -1,7 +1,7 @@
 {
   "accounting_identity_policy": "one reported quantity per decision-state accounting identity",
   "artifact_kind": "simulation_table3_data",
-  "row_count": 5,
+  "row_count": 8,
   "rows": [
     {
       "claim_boundary": "queue deadline misses in the designed grid; fail-open progression and fail-closed holding are rule-defined consequences, not separate findings",
@@ -12,6 +12,36 @@
       "label": "Fail-closed timeout activation per initiated case",
       "quantity_id": "U2C_TIMEOUT_ACTIVATION",
       "simulation_mcse": 0.002432522415684618
+    },
+    {
+      "claim_boundary": "exclusive component of the timeout-activated progression union; not a separate policy effect",
+      "estimate": 0.0,
+      "family_count": 108,
+      "family_maximum": 0.0,
+      "family_minimum": 0.0,
+      "label": "Fail-open evidence-only progression failure",
+      "quantity_id": "U2O_EVIDENCE_ONLY_FAILURE",
+      "simulation_mcse": 0.0
+    },
+    {
+      "claim_boundary": "sufficient evidence with required timely review authorization missing; exclusive union component",
+      "estimate": 0.10460262345679013,
+      "family_count": 108,
+      "family_maximum": 0.36833333333333335,
+      "family_minimum": 0.004166666666666667,
+      "label": "Fail-open authorization-only progression failure",
+      "quantity_id": "U2O_AUTHORIZATION_ONLY_FAILURE",
+      "simulation_mcse": 0.0007669007704348732
+    },
+    {
+      "claim_boundary": "evidence and required timely review authorization both missing; exclusive union component",
+      "estimate": 0.3716087962962963,
+      "family_count": 108,
+      "family_maximum": 0.75875,
+      "family_minimum": 0.025416666666666667,
+      "label": "Fail-open joint evidence-and-authorization failure",
+      "quantity_id": "U2O_JOINT_EVIDENCE_AUTHORIZATION_FAILURE",
+      "simulation_mcse": 0.0019956496478612707
     },
     {
       "claim_boundary": "sole aggregate U3-minus-U0 decision-state contrast",
@@ -54,8 +84,8 @@
       "simulation_mcse": 0.001713333114761576
     }
   ],
-  "schema_version": 1,
-  "source_hash": "5ac3d5c5a5d04cea7241e76ec5f390f9f266cfbd60cafd2339507dd44e360588",
+  "schema_version": 2,
+  "source_hash": "7bf7ee0a3ef39b355bcb9f7ddcf9320787b954e6ebbf9f83faa1e62210b98ba0",
   "status": "frozen_result",
-  "table_hash": "efbb334a25e4647cc665c462b1c0a3ff56d96de3f7c6b4903df12d6475067959"
+  "table_hash": "e5efca36c6245fe137ea98eb2ca5ed977f8657971634dfff14c2367cd957f611"
 }

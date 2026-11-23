@@ -2,7 +2,7 @@
 
 Status: **pass**
 
-Every Freeze 4 attempt was paired with its Freeze 5 counterpart. The comparison covers 16,200 core and 16,200 sensitivity attempts. Cohort hashes, complete system-event hashes, event counts, evaluation-bridge receipts, top-level study identities, every pre-existing row field, and every pre-existing analysis field are exact. There are no missing or unexpected attempt identifiers and no blocking mismatch.
+Every Freeze 4 attempt was paired with its Freeze 5 counterpart (32,400 attempts). Cohort hashes, complete system-event hashes, event counts, evaluation-bridge receipts, top-level study identities, every pre-existing row field, and every pre-existing analysis field are exact. There are no missing or unexpected attempt identifiers and no blocking mismatch.
 
 The event hash is a digest of the ordered system stream, including each case identifier, causal key, event type, timestamp, and event details. Exact event hashes therefore establish that Freeze 5 changed reporting rather than cases, event order, timing, actions, queues, or modeled outcomes.
 

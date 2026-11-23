@@ -2,56 +2,48 @@
 
 Date: 2026-11-22
 
-Status: Freeze 4 local release audit and final compression complete; public-repository activation intentionally deferred
+Status: Freeze 5 bounded reporting repair complete locally; public-repository activation intentionally deferred
 
 ## Scope
 
-This receipt covers the integrated article, APA Word review copy, optional technical supplement, evidence packet, Freeze 4 simulation artifacts, and repository verification controls. It certifies only the local package. Publisher acceptance and public repository activation are external actions.
+This receipt covers the integrated article, APA Word review copy, optional technical supplement, evidence packet, Freeze 5 simulation artifacts, and repository verification controls. It certifies the local package only. Publisher acceptance and public repository activation are external actions.
 
 ## Scientific product
 
-- The article defines robust permission as an operational action-set test, applies it to a documented Robodebt process, and uses a fixed-rule dynamic simulation to estimate timeout activation and unresolved-case location across a designed grid.
-- The information-first analysis uses a five-state exhaustive decision partition. Timely review completion is conditional on a positive review-request denominator; zero-request replications are not treated as failure.
-- Recovery-path entry is distinct from recovery success, terminal resolution, and consequence-complete restoration.
+- The article defines robust permission as an action-set test, applies it to a documented Robodebt process, and uses a fixed-rule dynamic simulation to estimate timeout activation and unresolved-case location over a designed grid.
+- Fail-open progression is no longer reported as an undifferentiated “unsupported” effect. Its 0.476 union is partitioned into 0.000 evidence-only, 0.105 authorization-only, and 0.372 joint evidence-and-authorization failure.
+- U3 now reports sequential evidence-acquisition stages. These stage rates locate cases; they are not independent assistance, retrieval, or review effects.
+- Timely review completion is conditional on a review request. With no modeled response cycle after an evidence request, review changes the unresolved-state label rather than evidentiary resolution.
 - Timely supported service, subjective burden, historical Robodebt rates, terminal resolution, and overall policy value are not estimated.
-- The article contains the complete five-step protocol and its Robodebt conclusion. The supplement preserves implementation detail and the safety-specific representation fixture but is not needed to understand the main claims.
 
-## Freeze 4 identity and execution
+## Freeze 5 identity and execution
 
-- Active freeze: `UPS-CONFIRMATORY-FREEZE@4`.
-- Manifest self-hash: `bd330d56273ae7a85aed872b5e1442400b02b1f6b822c1fa6154ae2de5d62c63` over 84 frozen files, issued from executable checkpoint `d7e8494`.
-- Core run: 16,200 attempts, reconciliation hash `9eec52257c6c089b39737cca1656d02b9be2ade6cad0a310d24cebf4737b88c7`, analysis hash `5ac3d5c5a5d04cea7241e76ec5f390f9f266cfbd60cafd2339507dd44e360588`.
-- Sensitivity run: 16,200 attempts, reconciliation hash `a3267a7c9e736381d209b651e51531ceb17ab478f01f69153b78f9f5e91707b8`, analysis hash `d5762c5194d62e5c3dd6082bd72bb0c2856765c2326087e8988882ecded93570`.
+- Active freeze: `UPS-CONFIRMATORY-FREEZE@5`.
+- Manifest self-hash: `d18c7377c6b84d6ac4748ab6be9ab512c2d76cc958b2273bd2a78737957fd4ea` over 85 frozen files, issued from executable checkpoint `05f4638`.
+- Core: 16,200 attempts; reconciliation `b1f854c17ce8c8a423b183e2d9ca9219d7c08473fc4ebd073a8d0b32c3596500`; analysis `7bf7ee0a3ef39b355bcb9f7ddcf9320787b954e6ebbf9f83faa1e62210b98ba0`.
+- Sensitivity: 16,200 attempts; reconciliation `c6c8cc5aed45b415070f86e8fdfc4a0782d3027efd327e811e0fa54aaadd2173`; analysis `3a67f1c898a90296ebde3c0d29bee843edfef840c7f1cd2e0ecd2c0b9fab62a7`.
 - Both suites reconciled with zero missing or unexpected attempt IDs and reproduced deterministically at 30 paired replications.
-- The Freeze 3/4 differential audit paired all 32,400 attempts and found zero event-detail, event-order, timestamp, action, queue, outcome, or unresolved-event mismatches. Its audit hash is `916c1c203be866725b3d64c537e41187b604ac635d49cca20a98995aaccf4778`.
-- The scientific-value gate retained a full simulation section because the core U3 retrievability margin was 0.214823, above the 0.05 threshold and 178.1 times the largest relevant simulation MCSE. The decision hash is `b418d8660a6139eff94687a598b551b3f003ca0ae9c00d45e2b2def75b74af06`.
+- The Freeze 4/5 differential audit paired all 32,400 attempts and found exact behavioral identity. Audit hash: `edab65cb1e809a5af30f5e855e2aaa402831a00230b8291b5f991c4e8843bce8`.
+- The manuscript discloses that Freeze 4 and Freeze 5 were post-result repairs and that behavioral identity does not remove outcome-selection risk.
 
 ## Article and APA review copy
 
-- The final compressed source contains 7,144 whitespace-delimited words before `References`, leaving 2,856 words below the 10,000-word ceiling. The compression removed 2,400 words from the audited candidate without changing the frozen scientific design or results; a post-compression precision check restored the authorization chain, outcome definition, and F1 coverage condition.
-- The manuscript uses no endnotes to evade the ceiling.
-- `ARTICLE_MANUSCRIPT_APA.docx` contains the visible author identity, affiliation, and correspondence address; three tables; three figures with alternative text; and three correctly oriented sections.
-- The final compressed export has 39 rendered pages. Every page was inspected at full resolution. Tables 1–3, Figures 1–3, equations, references, headers, and portrait/landscape transitions were legible and free of clipping or overlap.
-- ZIP integrity, accessibility, image-placement, and section audits passed. The accessibility audit reported zero high-, medium-, or low-severity findings.
-
-## Source and positioning audit
-
-- The historical source packet and formal claim boundaries remain unchanged.
-- The final literature audit distinguishes the article from Lin et al. on agent evidence-to-action chains; Wang and Rachev on capacity regimes; Green on oversight policy; Rinta-Kahila et al. on Robodebt system destructiveness; Carney on legality and rule-of-law safeguards; and Lykouris and Weng on optimized deferral under congestion.
-- Robodebt illustrates the operational test; it does not validate the rule, calibrate the simulation, establish historical causation, or supply an independent legal conclusion.
-- The enhanced OCI profile is structurally compatible with the mechanism, but its action-specific historical F1 verdict is `unassessable` on the supplied record. A later receipt-and-ignoring guard cannot supply missing period evidence upstream.
+- The source contains 7,504 whitespace-delimited words before `References`, leaving 2,496 below the 10,000-word ceiling.
+- The Robodebt application now distinguishes a rule-level F1 failure under the study specification from unassessability of any actual historical case.
+- Table 3 reports the exclusive fail-open failure partition. Figure 3 reports timeout activation, final decision states, and sequential U3 evidence/review stages.
+- `ARTICLE_MANUSCRIPT_APA.docx` contains visible author identity, affiliation, and correspondence address; three tables; three figures with alternative text; and three correctly oriented sections.
+- The final export has 41 rendered pages. Every page was inspected at full resolution. All exhibits, equations, references, headers, and section transitions are legible and free of clipping or overlap.
+- ZIP integrity, accessibility, image-placement, heading, and section audits passed. Accessibility reported zero high-, medium-, or low-severity findings.
 
 ## Repository checks
 
-- The complete project suite passes: 209 tests.
-- `scripts/verify_repo.py --through-slice 5` passes in the project environment and binds the result chain to active Freeze 4.
-- Active Freeze 4 and the historical Freeze 2/3 attestations verify independently.
-- The current verification-packet manifest archives the Freeze 4 run indexes, reconciliations, analyses, differential receipts, value decision, repaired Table 3, supplement, and frozen scientific inputs for manuscript source verification.
+- The complete project suite passes: 218 tests.
+- `scripts/verify_repo.py --through-slice 5` and `scripts/verify_repo.py --release` pass against active Freeze 5.
+- Active Freeze 5 and historical attestations verify independently.
+- The current verification packet binds the Freeze 5 run indexes, reconciliations, analyses, differential receipts, repaired Table 3 and Figure 3, supplement, and frozen scientific inputs.
 
 ## Remaining external condition
 
-- The manuscript audit is complete; its bounded corrections and project-lead manual dispositions are recorded in `FREEZE4_MANUSCRIPT_AUDIT_RECEIPT.md`.
-- The final evidence packet, article hashes, APA export, and execution records are synchronized. All 209 tests and the repository release gate pass.
-- Make the repository public and confirm the data-and-code URL from a logged-out session before submission. This external activation remains under project-lead control.
+Make the repository public and confirm the data-and-code URL from a logged-out session before submission. That activation remains under project-lead control.
 
 No external-reader return, formal comprehensibility review, usability study, inter-rater claim, or practitioner-performance claim is required.

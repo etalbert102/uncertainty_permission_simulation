@@ -105,19 +105,26 @@ A low-resolution sensor output records a pickup-like silhouette at confidence 0.
 
 Two negative controls delimit the mechanism. When no policy-material alternative is present, both representations route identically. When scrutiny is representation-independent, both arms retain it. The canonical specification is [PRECURSOR_FIDELITY_FIXTURE.md](PRECURSOR_FIDELITY_FIXTURE.md), and the publication review packet is [P0_PROCEDURE_REVIEW_PACKET.md](P0_PROCEDURE_REVIEW_PACKET.md).
 
-## S7. Freeze 4 simulation details and sensitivity
+## S7. Freeze 5 reporting details and sensitivity
 
 The core U3 conditional-review denominator contains 44,381 requests and 42,098 timely completions. Twenty of 3,240 family-replications generated no request and are treated as not applicable; all 108 families have a positive denominator after aggregation. A completed review of unresolved evidence produces an evidence-request state rather than progression, so completion does not imply resolution or supported service.
 
-| U3 factor | Levels and unresolved non-progression | Range | Maximum level MCSE |
-| --- | --- | ---: | ---: |
-| Access barrier | 0.10: 0.159; 0.30: 0.170; 0.50: 0.185 | 0.026 | 0.00124 |
-| Retrievability | high: 0.064; low: 0.279 | 0.215 | 0.00121 |
-| Staff access | complete: 0.172; partial: 0.171 | 0.001 | 0.00099 |
+The fail-open progression union is 0.476211 of initiated cases. Its exclusive components are 0 evidence-only, 0.104603 authorization-only, and 0.371609 joint evidence-and-authorization failure. The first component shows that no simulated case progressed with missing evidence after receiving required timely authorization; the second prevents authorization failure from being mislabeled as evidentiary failure; and the third identifies cases with both defects. These components partition the timeout-activation result and are not separate policy effects.
 
-The latency sensitivity doubled the retrieval-time scale from 10 to 20 days. U3 unresolved non-progression remained 0.064 under high retrievability and 0.279 under low retrievability, a range of 0.215. Access-barrier levels spanned 0.029 and staff-access levels spanned 0.002. U3 generated 44,405 review requests, of which 42,214 completed on time; 24 family-replications generated no request. The sensitivity changes routing and queue phasing only. It does not test retrieval failure, abandonment, deadline expiry, or historical calibration.
+| U3 sequential stage | Core rate per initiated case | Sensitivity rate |
+| --- | ---: | ---: |
+| Adequate response evidence before retrieval | 0.573248 | 0.573962 |
+| Retrieval requested | 0.426752 | 0.426038 |
+| Evidence retrieved and progression supported | 0.255529 | 0.254722 |
+| Unresolved after acquisition; entered review | 0.171223 | 0.171316 |
+| Evidence requested after timely review | 0.162415 | 0.162863 |
+| Held after review timeout | 0.008808 | 0.008453 |
 
-Complete machine-readable evidence is in [FREEZE4_SCIENTIFIC_VALUE_DECISION.json](FREEZE4_SCIENTIFIC_VALUE_DECISION.json), the core and sensitivity analysis receipts under `outputs/`, and [FREEZE3_FREEZE4_DIFFERENTIAL_AUDIT.json](FREEZE3_FREEZE4_DIFFERENTIAL_AUDIT.json).
+The stage rows are sequential rates, not additive quantities or independent component effects. Adequate response evidence plus unresolved response evidence sent to retrieval partitions initiated U3 cases; retrieved evidence plus unresolved evidence partitions retrieval requests. Unresolved evidence then enters review, where timely completion changes its recorded state to evidence requested and timeout leaves it held. The model has no post-request response cycle, so neither review branch resolves evidence.
+
+The latency sensitivity doubled the retrieval-time scale from 10 to 20 days. Its stage rates differ from the core by less than 0.001. U3 generated 44,405 review requests, of which 42,214 completed on time; 24 family-replications generated no request. The sensitivity changes routing and queue phasing only. It does not test retrieval failure, abandonment, deadline expiry, or historical calibration.
+
+Complete machine-readable evidence is in the Freeze 5 core and sensitivity analysis receipts under `outputs/`, [FREEZE4_FREEZE5_DIFFERENTIAL_AUDIT.json](FREEZE4_FREEZE5_DIFFERENTIAL_AUDIT.json), and the prior [FREEZE3_FREEZE4_DIFFERENTIAL_AUDIT.json](FREEZE3_FREEZE4_DIFFERENTIAL_AUDIT.json).
 
 ## S8. Reference artifacts
 

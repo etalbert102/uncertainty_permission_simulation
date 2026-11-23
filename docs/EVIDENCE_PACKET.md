@@ -1,156 +1,109 @@
 # Evidence Packet
 
-Status: Freeze 4 local release package complete; public activation deferred
+Status: Freeze 5 local reporting-repair package complete; public activation deferred
 
-Updated: 2026-11-21
+Updated: 2026-11-22
 
 Study: *From Incomplete Evidence to Automated Action: A Formal Model and Dynamic Simulation of Review Capacity and Timeout Rules, with a Robodebt Application*
 
 ## 1. Claim boundary
 
-This is a formal counterfactual simulation over a designed parameter grid, grounded by a documented Robodebt application. It is not a numerical reconstruction of Robodebt. The study does not estimate historical prevalence, monetary correctness, legal validity, population effects, subjective burden, field efficacy, practitioner usability, or overall policy value.
+This is a formal counterfactual simulation over a designed parameter grid, grounded by a documented Robodebt application. It is not a numerical reconstruction of Robodebt. The study does not estimate historical prevalence, monetary correctness, legal validity, population effects, subjective burden, field efficacy, practitioner usability, component-causal effects within the information-first bundle, or overall policy value.
 
 Evidence is interpreted in this order:
 
-1. the active freeze identifies the prespecified scientific inputs and executable environment;
+1. the active freeze identifies the fixed scientific inputs and executable environment;
 2. validation and differential receipts establish implementation behavior within their declared limits;
 3. reconciliations establish run completeness;
-4. analysis receipts establish designed-grid estimates and finite-run Monte Carlo precision; and
+4. stored analysis receipts establish designed-grid estimates and finite-run Monte Carlo precision; and
 5. article prose may narrow but may not enlarge those claims.
-
-An internal self-hash identifies canonical JSON content after excluding its own hash field. A file SHA-256 identifies stored bytes. They are not interchangeable.
 
 ## 2. Packet inventory
 
 | Required component | Primary artifact | Status |
 | --- | --- | --- |
-| Repair contract and completed ledger | [Freeze 4 plan](FREEZE4_METRIC_REPAIR_PLAN.md) | all nine implementation slices complete; closeout recorded |
-| Archived prior freeze | [Freeze 3 manifest](FREEZE_MANIFEST_V3.json) and [attestations](FREEZE_COMMIT_ATTESTATIONS.json) | preserved and verified |
-| Active design freeze | [Freeze 4 manifest](FREEZE_MANIFEST.json) | verified |
-| Core and sensitivity suites | `outputs/confirmatory_v3/`; `outputs/sensitivity_information_latency_v3/` | complete and reconciled |
-| Behavioral continuity | [differential audit](FREEZE3_FREEZE4_DIFFERENTIAL_AUDIT.md) | pass |
-| Semantic metric audit | Freeze 4 plan, Slices 0–3; tests | complete |
-| Scientific-value decision | [decision receipt](FREEZE4_SCIENTIFIC_VALUE_DECISION.md) | retain full simulation section |
+| Reporting-repair contract | [Freeze 5 plan](FREEZE5_REPORTING_REPAIR_PLAN.md) and [execution ledger](EXECUTION_LEDGER.md) | complete |
+| Archived prior freeze | [Freeze 4 manifest](FREEZE_MANIFEST_V4.json) and [attestations](FREEZE_COMMIT_ATTESTATIONS.json) | preserved and verified |
+| Active design freeze | [Freeze 5 manifest](FREEZE_MANIFEST.json) | verified |
+| Core and sensitivity suites | `outputs/confirmatory_v4/`; `outputs/sensitivity_information_latency_v4/` | complete and reconciled |
+| Behavioral continuity | [Freeze 4/5 differential audit](FREEZE4_FREEZE5_DIFFERENTIAL_AUDIT.md) | all 32,400 pairs pass |
 | Full results | analysis JSON, [Figure 3](figures/figure3_simulation_results.svg), [Table 3 data](tables/table3_simulation_results.json) | synchronized |
-| Manuscript package | [article](ARTICLE_MANUSCRIPT.md), [supplement](ARTICLE_SUPPLEMENTARY_MATERIAL.md), [APA Word copy](ARTICLE_MANUSCRIPT_APA.docx) | Slice 8 committed and visually inspected |
-| Source and citation audit | [literature audit](LITERATURE_SEARCH_AUDIT.md), source manifest, case-study crosswalk | updated for named comparisons |
-| Manuscript audit | [Freeze 4 audit receipt](FREEZE4_MANUSCRIPT_AUDIT_RECEIPT.md) | 24 stages complete; bounded repair applied; two manual dispositions resolved |
-| Word count and artifact QA | [submission receipt](SUBMISSION_READINESS_RECEIPT.md) | 7,144 call-counted source words; 39-page Word copy inspected |
-| Repository tests and release gate | test suite; `scripts/verify_repo.py` | 209 tests pass; final release gate returns `release: true` |
+| Manuscript package | [article](ARTICLE_MANUSCRIPT.md), [supplement](ARTICLE_SUPPLEMENTARY_MATERIAL.md), [APA Word copy](ARTICLE_MANUSCRIPT_APA.docx) | regenerated and inspected |
+| Reporting-repair audit | [Freeze 5 receipt](FREEZE5_MANUSCRIPT_REPAIR_RECEIPT.md) | pass |
+| Repository checks | tests; `scripts/verify_repo.py` | 218 tests and release gate pass |
 
-## 3. Freeze identities
-
-### Active Freeze 4
+## 3. Freeze identity and execution
 
 | Item | Value |
 | --- | --- |
-| Freeze ID | `UPS-CONFIRMATORY-FREEZE@4` |
-| Manifest self-hash | `bd330d56273ae7a85aed872b5e1442400b02b1f6b822c1fa6154ae2de5d62c63` |
-| Frozen inventory | 84 files |
-| Executable checkpoint | `d7e8494` |
-| Core config hash | `9c323731dacf5fae84b89f938e7cdd6bf698f9763cb0a1c2b3a3d9a62c8e8a00` |
-| Sensitivity config hash | `04a5b801a8ee3da2cab7874f7e748f8c98e1de21cc30339513c5a606108c0b47` |
-| Negative-control receipt hash | `a90f810032f3b0af9acde802401fd07294ceb42d69575df32226f35a9014b45b` |
+| Freeze ID | `UPS-CONFIRMATORY-FREEZE@5` |
+| Manifest self-hash | `d18c7377c6b84d6ac4748ab6be9ab512c2d76cc958b2273bd2a78737957fd4ea` |
+| Frozen inventory | 85 files |
+| Executable checkpoint | `05f4638` |
+| Historical-attestation hash | `807dc8bc879cb4b50de309b5c439d92356fdc6f58dddbecfdebcfcdbc7a8ec68` |
+| Negative-control receipt hash | `25a2a4107258f7ef43ab912b4f11894d74d76df222da2b747653cb997db09a81` |
 
-The active manifest verifies the formal model, source fixtures, experiment configurations, simulation and analysis code, evaluation specification, and scientific tests. Manuscript and reporting artifacts remain outside the immutable inventory so that results can be reported without silently changing scientific inputs.
+The active manifest covers the formal model, source fixtures, experiment configurations, simulation and analysis code, evaluation specification, and scientific tests. Reporting artifacts remain outside the immutable scientific inventory so that results can be rendered without silently changing executable inputs.
 
-### Historical continuity
-
-Freeze 2 and Freeze 3 remain preserved and commit-attested. Freeze 3 is archived as `FREEZE_MANIFEST_V3.json`; the earlier pre-bridge manifests and evaluation-specification correction remain available. Active Freeze 4 does not overwrite those records.
-
-## 4. Execution and result chain
-
-| Suite | Attempts | Trajectories | Run-index self-hash | Reconciliation self-hash | Analysis self-hash |
+| Suite | Attempts | Trajectories | Run-index hash | Reconciliation hash | Analysis hash |
 | --- | ---: | ---: | --- | --- | --- |
-| Core | 16,200 | 1,296,000 | `ee02db83b3c1fdd5820b0c9df6bc1a5873021cccc8bb0e7056e59a2144a43dd5` | `9eec52257c6c089b39737cca1656d02b9be2ade6cad0a310d24cebf4737b88c7` | `5ac3d5c5a5d04cea7241e76ec5f390f9f266cfbd60cafd2339507dd44e360588` |
-| Retrieval-latency sensitivity | 16,200 | 1,296,000 | `35c4330db4cfffcd49117214993c4674cf2ccf5824ac081514ea8036cf6c35f4` | `a3267a7c9e736381d209b651e51531ceb17ab478f01f69153b78f9f5e91707b8` | `d5762c5194d62e5c3dd6082bd72bb0c2856765c2326087e8988882ecded93570` |
+| Core | 16,200 | 1,296,000 | `4d761fb22c36f3261f8c38266ecab9be8d99258f79a7ddca3399bc86c504e30e` | `b1f854c17ce8c8a423b183e2d9ca9219d7c08473fc4ebd073a8d0b32c3596500` | `7bf7ee0a3ef39b355bcb9f7ddcf9320787b954e6ebbf9f83faa1e62210b98ba0` |
+| Retrieval-latency sensitivity | 16,200 | 1,296,000 | `7f03f0f410543d6688bfa7ce7b5f090ef4a806ab46566405fdd42fefa5b335ba` | `c6c8cc5aed45b415070f86e8fdfc4a0782d3027efd327e811e0fa54aaadd2173` | `3a67f1c898a90296ebde3c0d29bee843edfef840c7f1cd2e0ecd2c0b9fab62a7` |
 
-Each reconciliation observed exactly the expected 16,200 attempt IDs with no missing or unexpected IDs. Resume/replay created zero additional attempts. Reconciliation and analysis reruns reproduced their hashes. Both suites satisfied the frozen precision rule at 30 replications, so no extension to 60 was authorized.
+Each reconciliation observed exactly the expected 16,200 attempt IDs. Replay created zero new attempts and retained all existing attempts. Repeated analyses reproduced byte-identical hashes. Both suites stopped at the frozen 30 paired replications because every precision target passed.
 
-The stored compact indexes, reconciliations, analyses, and analysis SVGs are committed. The 32,400 append-only per-attempt files remain local ignored intermediates; exact regeneration from frozen inputs is the public reproducibility route.
+## 4. Freeze 4/5 behavioral identity
 
-## 5. Freeze 3/4 differential audit
+The [machine-readable audit](FREEZE4_FREEZE5_DIFFERENTIAL_AUDIT.json) passes at audit hash `edab65cb1e809a5af30f5e855e2aaa402831a00230b8291b5f991c4e8843bce8`.
 
-The [machine receipt](FREEZE3_FREEZE4_DIFFERENTIAL_AUDIT.json) has audit hash `916c1c203be866725b3d64c537e41187b604ac635d49cca20a98995aaccf4778`.
+Across all 32,400 paired attempts, Freeze 4 and Freeze 5 have identical cohort hashes, complete event hashes, event counts, evaluation-bridge receipts, event details, order, timestamps, actions, queues, every shared stored-row field, and every pre-existing analysis field. Config and schema identities changed as expected. Freeze 5 therefore adds observability and reporting fields; it does not change generated behavior.
 
-Across all 32,400 paired attempts:
+This identity proof does not remove outcome-selection risk. Freeze 4 followed inspection of Freeze 3, and Freeze 5 followed external review. The manuscript discloses both changes and states that the Freeze 4 unresolved-non-progression contrast is the sign-reversed value of the earlier exposure contrast under a corrected label.
 
-- cohort, event, and action-support receipts matched;
-- event detail, order, timestamps, actions, queues, and outcomes had zero blocking mismatches;
-- shared valid metrics and common-random-number identities matched; and
-- compiled configuration and attempt identities changed as expected because the manifest, config, schema, and stored row fields changed.
+## 5. Nonredundant simulation results
 
-Freeze 4 therefore changes measurement and reporting, not generated behavior. It removes the invalid service measure from primary reporting, makes conditional review metrics denominator-aware, conserves every initiated case across five decision states, and separates three recovery-entry states from terminal resolution.
-
-## 6. Scientific-value gate
-
-The [value decision](FREEZE4_SCIENTIFIC_VALUE_DECISION.json) has decision hash `b418d8660a6139eff94687a598b551b3f003ca0ae9c00d45e2b2def75b74af06` and retains the full simulation section.
-
-| U3 factor | Unresolved non-progression range | Largest level MCSE | Range/MCSE | Gate |
-| --- | ---: | ---: | ---: | --- |
-| Access barrier | 0.025775 | 0.001238 | 20.8 | fail: below 0.05 |
-| Retrievability | 0.214823 | 0.001206 | 178.1 | pass |
-| Staff access | 0.000764 | 0.000988 | 0.8 | fail |
-
-The U3 review diagnostic contains 44,381 requests and 42,098 timely completions. Twenty of 3,240 family-replications had no review request and were treated as not applicable; all 108 families had a positive aggregate request denominator. The latency sensitivity retained a 0.214591 retrievability range. This gate controls article prominence only and does not validate the model against historical Robodebt.
-
-## 7. Nonredundant simulation results
-
-The machine-readable Table 3 has self-hash `efbb334a25e4647cc665c462b1c0a3ff56d96de3f7c6b4903df12d6475067959`. The main article reports one quantity per decision-state accounting identity.
+Table 3 has internal self-hash `e5efca36c6245fe137ea98eb2ca5ed977f8657971634dfff14c2367cd957f611` and draws directly from the Freeze 5 core analysis.
 
 | Quantity | Estimate | Family range | Simulation MCSE | Interpretation boundary |
 | --- | ---: | ---: | ---: | --- |
-| Fail-closed timeout activation per initiated case | 0.476 | 0.042–0.881 | 0.0024 | queue deadline misses; fail-open progression and fail-closed holding are authored consequences |
+| Fail-closed timeout activation per initiated case | 0.476 | 0.042–0.881 | 0.0024 | queue deadline misses; timeout consequences are rule-defined |
+| U2O evidence-only failure | 0.000 | 0.000–0.000 | 0.0000 | exclusive component of the fail-open union |
+| U2O authorization-only failure | 0.105 | 0.004–0.368 | 0.0008 | evidence sufficient; timely authorization missing |
+| U2O joint evidence-and-authorization failure | 0.372 | 0.025–0.759 | 0.0020 | both prerequisites missing |
 | U3 minus U0 unresolved non-progression | −0.594 | −0.815 to −0.369 | 0.0009 | sole aggregate U3/U0 decision-state contrast |
-| U2C timely review conditional on request | 0.524 | — | — | 135,766/259,200 requests; not timely supported service |
-| Additional U3 interaction events per case | 1.096 | 0.860–1.312 | 0.0018 | event count, not effort, burden, welfare, or cost |
-| Additional U3 agency-work events per case | 1.209 | 0.749–1.728 | 0.0017 | event count, not staffing cost, efficiency, or policy value |
+| U2C timely review conditional on request | 135,766/259,200 = 0.524 | — | — | request-weighted queue diagnostic |
+| Additional U3 interaction events per case | +1.096 | 0.860–1.312 | 0.0018 | event count, not effort, burden, welfare, or cost |
+| Additional U3 agency-work events per case | +1.209 | 0.749–1.728 | 0.0017 | event count, not staffing cost or policy value |
 
-Under U3, timely review of incomplete evidence requests more evidence; it does not authorize progression. Recovery-path entry is reported directionally because it may follow supported or unsupported progression and is not itself error, harm, success, resolution, or restoration.
+The fail-open union is exactly partitioned by its three exclusive components. All fail-open progression lacks timely authorization, while 0.372 is also evidentially unsupported. The 0.476 is one timeout-activation result, not several independent effects.
 
-## 8. Formal and documented application
+U3 sequential stage rates are 0.573 adequate response evidence, 0.427 retrieval requests, 0.256 retrieved evidence, 0.171 unresolved after acquisition and entering review, 0.162 evidence requested after timely review, and 0.009 held after timeout. These values locate cases in the declared sequence. They do not identify independent assistance, retrieval, or review effects. Because the model has no post-request response cycle, completed review changes the unresolved-state label rather than evidentiary resolution.
 
-| Evidence layer | Artifact | Supported use | Excluded inference |
-| --- | --- | --- | --- |
-| Formal model | [FORMAL_MODEL.md](FORMAL_MODEL.md) | definition and operational test for robust permission; review and restoration conditions | prevalence or universal legal rule |
-| Representation fixture | main article plus supplement executable fixture | isolates representation suppression while evidence and downstream rule remain fixed | empirical interface effect or attackability |
-| Robodebt application | [ROBODEBT_CASE_STUDY.md](ROBODEBT_CASE_STUDY.md) and fixed source profiles | maps documented evidence transformation, notice, review, referral, and reassessment to the formal diagnostics | numerical calibration, independent causation, or legal judgment |
-| Dynamic simulation | frozen V3 analyses | estimates queue and decision-state quantities in a designed grid | historical Robodebt rates or population effects |
-| Five-step protocol | [PROCESS_RED_TEAM_PROTOCOL.md](PROCESS_RED_TEAM_PROTOCOL.md) | prospective inspectable workflow test | validated usability or reproducible practitioner performance |
+## 6. Formal and documented application
 
-The enhanced OCI profile is structurally compatible with the proposed mechanism, but its action-specific historical F1 verdict is `unassessable` without an exact action instance, independent support prerequisite, and defeating admissible same-total refinement. A later receipt-and-ignoring guard cannot supply missing period evidence upstream. The case illustrates rather than validates the rule.
+| Evidence layer | Supported use | Excluded inference |
+| --- | --- | --- |
+| Formal model | definition and operational test for robust permission; review and restoration conditions | prevalence or universal legal rule |
+| Representation fixture | isolates representation suppression while case, evidence, and downstream rule remain fixed | empirical interface effect or exploitability |
+| Robodebt application | maps documented evidence transformation, notice, action, recovery, and reassessment to the diagnostics | numerical calibration, independent causation, actual-case debt, or legal judgment |
+| Dynamic simulation | estimates queue activation, failure composition, and unresolved-case location in a designed grid | historical Robodebt rates or overall policy ranking |
+| Five-step protocol | prospective inspectable workflow test | validated usability or practitioner performance |
 
-## 9. Source and citation audit
+Under the study-authored period-evidence specification, the documented averaging rule fails F1 at the rule level: an admissible same-total refinement can place all earnings in non-benefit fortnights, where no debt is supported, while averaging can assign income to benefit fortnights and permit progression. A verdict for an actual historical case remains `unassessable` without its exact action, income timing, benefit record, and applicable support rule. The application illustrates the test; it does not independently validate it.
 
-The source manifest retains official locators and use boundaries for the fixed Robodebt packet. The [literature audit](LITERATURE_SEARCH_AUDIT.md) is a structured search and citation-chaining record, not a systematic-review claim.
+## 7. Manuscript and artifact QA
 
-The final comparison pass explicitly distinguishes this article from:
+- Markdown count before `References`: 7,504 whitespace-delimited words, leaving 2,496 below the 10,000-word ceiling.
+- APA Word export: 41 rendered pages, three tables, three figures, and three correctly oriented sections.
+- Full-resolution visual inspection: all 41 pages pass; exhibits are legible and unclipped.
+- ZIP integrity: pass.
+- Accessibility: zero high-, medium-, or low-severity findings.
+- Images: three inline images with expected dimensions.
+- Section audit: portrait, landscape Table 3, then portrait restoration.
+- Heading audit: 11 Heading 1 and 37 Heading 2 paragraphs; exhibit labels use their dedicated style.
+- Repository regression: 218 tests pass.
 
-- Lin et al. on observable evidence-to-action chains for tool-using agents;
-- Wang and Rachev on analytic capacity regimes;
-- Green on the limits of human-oversight mandates;
-- Rinta-Kahila et al. on Robodebt system destructiveness;
-- Carney on Robodebt legality and rule-of-law safeguards; and
-- Lykouris and Weng on learned deferral and scheduling under congestion.
-
-The contribution is the joint operationalization: a refinement-based action-set test, source-bounded administrative application, fixed-rule capacity/timeout simulation, and prospective process protocol. No priority claim is made for uncertainty-to-action auditing, human oversight, queueing, contestability, administrative burden, or Robodebt scholarship separately.
-
-## 10. Manuscript and artifact QA
-
-The Slice 8 package commit is `b1d6f57`; its ledger closeout is `b6b5153`. The final bounded endpoint repair and audited package are committed at `d7e193f`.
-
-- conservative Markdown count before `References`: 7,144 words;
-- APA Word export: 39 pages, three tables, three figures, three sections;
-- full-resolution visual inspection: all pages pass;
-- ZIP integrity: pass;
-- accessibility: zero high-, medium-, or low-severity findings;
-- images: three inline images with expected dimensions;
-- section audit: portrait, landscape Table 3, portrait restoration; and
-- repository regression: 209 tests pass.
-
-The adjacent manuscript-audit pipeline received an immutable manuscript copy and bounded Freeze 4 packet. It completed 24 stages and one repair round. The [audit receipt](FREEZE4_MANUSCRIPT_AUDIT_RECEIPT.md) records the accepted edits, the project-lead disposition of both manual flags, and hashes for the external release reports.
-
-## 11. Reproduction and verification
+## 8. Reproduction and remaining external action
 
 From the repository root with the recorded environment installed:
 
@@ -160,10 +113,6 @@ PYTHONPATH=src .venv/bin/python -m uncertainty_permission_simulation.cli verify-
 PYTHONPATH=src .venv/bin/python -m pytest -q
 ```
 
-The canonical run, resume, reconcile, and analyze commands are stored in the Freeze 4 plan and experiment configuration help. The compact result chain is sufficient to inspect reported results; regenerating ignored attempt files is required for complete attempt-level replay in a fresh public checkout.
+The canonical run, reconcile, and analyze commands and their outputs are recorded in the Freeze 5 plan and execution ledger. The compact result chain is committed; ignored append-only attempt files are deterministically regenerable from frozen inputs.
 
-## 12. Remaining external action
-
-The local release audit is complete: the bounded manuscript corrections and manual dispositions are recorded, the APA copy was regenerated and inspected, the artifact identities are synchronized, all 209 tests pass, and `scripts/verify_repo.py --release` returns `release: true`.
-
-The only external action left is repository activation and a logged-out URL check. No external-reader return, formal comprehensibility review, usability study, or supplement-eligibility assumption is a release blocker.
+The bounded reporting repair is locally complete. The remaining external action is repository activation and a logged-out URL check. Publicity remains under project-lead control and is not inferred from this repair.

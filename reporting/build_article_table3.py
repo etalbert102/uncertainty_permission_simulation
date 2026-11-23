@@ -12,7 +12,7 @@ from statistics import mean
 
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_RECEIPT = ROOT / "outputs/confirmatory_v3/analysis/analysis_r030.json"
+DEFAULT_RECEIPT = ROOT / "outputs/confirmatory_v4/analysis/analysis_r030.json"
 DEFAULT_OUTPUT = ROOT / "docs/tables/table3_simulation_results.json"
 
 
@@ -41,6 +41,25 @@ def _family_summary(items: list[dict[str, object]]) -> dict[str, float | int]:
     }
 
 
+def _cell_metric_summary(
+    cells: list[dict[str, object]],
+    *,
+    policy_id: str,
+    metric: str,
+) -> dict[str, float | int]:
+    selected = [cell for cell in cells if cell["policy_id"] == policy_id]
+    estimates = [float(cell[metric]) for cell in selected]
+    return {
+        "family_count": len(selected),
+        "estimate": mean(estimates),
+        "family_minimum": min(estimates),
+        "family_maximum": max(estimates),
+        "simulation_mcse": sqrt(sum(
+            float(cell[f"{metric}_mcse"]) ** 2 for cell in selected
+        )) / len(selected),
+    }
+
+
 def build_table(receipt: dict[str, object], *, development: bool = False) -> dict[str, object]:
     _verify_receipt(receipt)
     cells = [dict(cell) for cell in receipt["cell_summaries"]]
@@ -56,6 +75,19 @@ def build_table(receipt: dict[str, object], *, development: bool = False) -> dic
             float(cell["timeout_activation_rate_mcse"]) ** 2 for cell in u2c
         )) / len(u2c),
     }
+    failure_components = {
+        metric: _cell_metric_summary(cells, policy_id="U2O", metric=metric)
+        for metric in (
+            "evidence_only_failure_rate",
+            "authorization_only_failure_rate",
+            "joint_evidence_authorization_failure_rate",
+        )
+    }
+    if abs(
+        sum(float(item["estimate"]) for item in failure_components.values())
+        - float(timeout["estimate"])
+    ) > 1e-12:
+        raise RuntimeError("fail-open failure components do not conserve timeout activation")
     timely = sum(int(cell["conditional_timely_review"]["numerator_count"]) for cell in u2c)
     requests = sum(int(cell["conditional_timely_review"]["denominator_count"]) for cell in u2c)
     zero_request_replications = sum(
@@ -76,6 +108,29 @@ def build_table(receipt: dict[str, object], *, development: bool = False) -> dic
             **timeout,
             "claim_boundary": "queue deadline misses in the designed grid; fail-open progression and fail-closed holding are rule-defined consequences, not separate findings",
         },
+    ]
+    if not development:
+        rows.extend((
+        {
+            "quantity_id": "U2O_EVIDENCE_ONLY_FAILURE",
+            "label": "Fail-open evidence-only progression failure",
+            **failure_components["evidence_only_failure_rate"],
+            "claim_boundary": "exclusive component of the timeout-activated progression union; not a separate policy effect",
+        },
+        {
+            "quantity_id": "U2O_AUTHORIZATION_ONLY_FAILURE",
+            "label": "Fail-open authorization-only progression failure",
+            **failure_components["authorization_only_failure_rate"],
+            "claim_boundary": "sufficient evidence with required timely review authorization missing; exclusive union component",
+        },
+        {
+            "quantity_id": "U2O_JOINT_EVIDENCE_AUTHORIZATION_FAILURE",
+            "label": "Fail-open joint evidence-and-authorization failure",
+            **failure_components["joint_evidence_authorization_failure_rate"],
+            "claim_boundary": "evidence and required timely review authorization both missing; exclusive union component",
+        },
+        ))
+    rows.extend((
         {
             "quantity_id": "U3_MINUS_U0_UNRESOLVED_NONPROGRESSION",
             "label": "Information-first change in unresolved non-progression",
@@ -104,14 +159,14 @@ def build_table(receipt: dict[str, object], *, development: bool = False) -> dic
             **_family_summary(workload),
             "claim_boundary": "event count, not staffing cost, efficiency, or overall policy value",
         },
-    ]
+    ))
     quantity_ids = [str(row["quantity_id"]) for row in rows]
     if len(quantity_ids) != len(set(quantity_ids)):
         raise RuntimeError("Table 3 contains duplicate quantity identities")
     if len(unresolved) != len({str(item["family_id"]) for item in unresolved}):
         raise RuntimeError("Table 3 repeats the U3 decision contrast")
     value = {
-        "schema_version": 1,
+        "schema_version": 2,
         "artifact_kind": "simulation_table3_data",
         "status": "development_only_rehearsal" if development else "frozen_result",
         "source_hash": receipt.get("analysis_hash", receipt.get("receipt_hash")),

@@ -687,7 +687,7 @@ def export(source: Path, output: Path):
                 descriptions = {
                     1: "Evidence architecture and diagnostic scope",
                     2: "Counterfactual policy comparison",
-                    3: "Nonredundant core simulation quantities",
+                    3: "Core simulation quantities and fail-open failure partition",
                 }
                 set_table_description(table, descriptions[current_table_number])
                 continue

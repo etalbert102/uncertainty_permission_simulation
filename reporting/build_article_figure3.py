@@ -13,7 +13,7 @@ from statistics import mean
 
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_RECEIPT = ROOT / "outputs/confirmatory_v3/analysis/analysis_r030.json"
+DEFAULT_RECEIPT = ROOT / "outputs/confirmatory_v4/analysis/analysis_r030.json"
 DEFAULT_OUTPUT = ROOT / "docs/figures/figure3_simulation_results.svg"
 COLORS = {
     "blue": "#2563A6",
@@ -88,21 +88,35 @@ def build_payload(receipt: dict[str, object]) -> dict[str, object]:
             raise RuntimeError(f"decision-state decomposition does not conserve {policy_id}")
         panel_b.append({"policy_id": policy_id, "cell_count": len(values), "states": states})
 
-    panel_c = []
-    u3 = [cell for cell in cells if cell["policy_id"] == "U3"]
-    for factor in ("access_barrier", "retrievability", "staff_access"):
-        groups: dict[str, list[dict[str, object]]] = defaultdict(list)
-        for cell in u3:
-            groups[str(cell["factors"][factor])].append(cell)
-        for level, values in sorted(groups.items()):
-            panel_c.append({
-                "factor": factor,
-                "level": level,
-                "cell_count": len(values),
-                "unresolved_nonprogression_rate": mean(
-                    float(value["unresolved_nonprogression_rate"]) for value in values
-                ),
-            })
+    designed = receipt.get("designed_grid_summaries")
+    if isinstance(designed, dict) and "u3_evidence_stage_accounting" in designed:
+        stage_estimates = designed["u3_evidence_stage_accounting"]["estimates"]
+        panel_c = [
+            {"stage": "Response support", "rate": stage_estimates["adequate_response_evidence_rate"]},
+            {"stage": "Retrieval request", "rate": stage_estimates["retrieval_request_rate"]},
+            {"stage": "Retrieved support", "rate": stage_estimates["retrieved_evidence_rate"]},
+            {"stage": "Review entry", "rate": stage_estimates["unresolved_after_acquisition_rate"]},
+            {"stage": "Evidence request", "rate": stage_estimates["evidence_requested_rate"]},
+            {"stage": "Held", "rate": stage_estimates["held_rate"]},
+        ]
+        panel_c_mode = "stage_accounting"
+    else:
+        panel_c = []
+        u3 = [cell for cell in cells if cell["policy_id"] == "U3"]
+        for factor in ("access_barrier", "retrievability", "staff_access"):
+            groups: dict[str, list[dict[str, object]]] = defaultdict(list)
+            for cell in u3:
+                groups[str(cell["factors"][factor])].append(cell)
+            for level, values in sorted(groups.items()):
+                panel_c.append({
+                    "factor": factor,
+                    "level": level,
+                    "cell_count": len(values),
+                    "unresolved_nonprogression_rate": mean(
+                        float(value["unresolved_nonprogression_rate"]) for value in values
+                    ),
+                })
+        panel_c_mode = "development_factor_rehearsal"
     return {
         "schema_version": 1,
         "family_count": family_count,
@@ -110,6 +124,7 @@ def build_payload(receipt: dict[str, object]) -> dict[str, object]:
         "panel_a": panel_a,
         "panel_b": panel_b,
         "panel_c": panel_c,
+        "panel_c_mode": panel_c_mode,
     }
 
 
@@ -153,7 +168,7 @@ def build_svg(receipt: dict[str, object], *, development: bool = False) -> str:
     parts = [
         '<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1320" viewBox="0 0 1000 1320" role="img">',
         '<rect width="1000" height="1320" fill="white"/>',
-        _text(45, 43, "Figure 3. Timeout activation and unresolved case location", size=27, weight=700),
+        _text(45, 43, "Figure 3. Timeout activation, decision states, and information stages", size=25, weight=700),
         _text(45, 72, f"{boundary}; {payload['family_count']} designed families", size=17, fill=COLORS["gray"]),
     ]
 
@@ -205,21 +220,36 @@ def build_svg(receipt: dict[str, object], *, development: bool = False) -> str:
         parts.append(f'<rect x="{x:.1f}" y="{y-12:.1f}" width="14" height="14" fill="{color}"/>')
         parts.append(_text(x + 21, y, label, size=13))
 
-    _panel(parts, 815, "C  Where U3 unresolved cases accumulate", "Unweighted U3 means across each declared organizational factor", 390)
+    if payload["panel_c_mode"] == "stage_accounting":
+        panel_c_title = "C  U3 evidence and review stages"
+        panel_c_subtitle = "Sequential rates per initiated case; bars are not additive effects"
+    else:
+        panel_c_title = "C  Development factor rehearsal"
+        panel_c_subtitle = "Development-only U3 unresolved-case summaries"
+    _panel(parts, 815, panel_c_title, panel_c_subtitle, 390)
     c_left, c_right, c_top, c_bottom = 255.0, 920.0, 925.0, 1145.0
     _axis(parts, left=c_left, right=c_right, top=c_top, bottom=c_bottom)
     entries = list(payload["panel_c"])
     for index, item in enumerate(entries):
         x = c_left + index * (c_right - c_left) / max(1, len(entries) - 1)
-        value = float(item["unresolved_nonprogression_rate"])
+        value = float(
+            item["rate"]
+            if payload["panel_c_mode"] == "stage_accounting"
+            else item["unresolved_nonprogression_rate"]
+        )
         y = c_bottom - value * (c_bottom - c_top)
-        parts.append(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="6" fill="{COLORS["purple"]}"/>')
-        parts.append(_text(x, c_bottom + 24, str(item["level"]), size=12, anchor="middle"))
-        parts.append(_text(x, c_bottom + 42, str(item["factor"]).replace("_", " "), size=10, anchor="middle", fill=COLORS["gray"]))
+        if payload["panel_c_mode"] == "stage_accounting":
+            parts.append(f'<rect x="{x - 18:.1f}" y="{y:.1f}" width="36" height="{c_bottom - y:.1f}" fill="{COLORS["purple"]}" opacity="0.82"/>')
+            parts.append(_text(x, y - 10, f"{value:.3f}", size=12, anchor="middle", weight=700))
+            parts.append(_text(x, c_bottom + 24, str(item["stage"]), size=10, anchor="middle", fill=COLORS["gray"]))
+        else:
+            parts.append(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="6" fill="{COLORS["purple"]}"/>')
+            parts.append(_text(x, c_bottom + 24, str(item["level"]), size=12, anchor="middle"))
+            parts.append(_text(x, c_bottom + 42, str(item["factor"]).replace("_", " "), size=10, anchor="middle", fill=COLORS["gray"]))
 
     parts.extend([
         _text(45, 1240, "Rates describe the declared model and designed grid, not historical Robodebt frequencies.", size=15, weight=700),
-        _text(45, 1267, "Conditional review excludes cells with no review requests; decision states and recovery paths remain distinct.", size=15, fill=COLORS["gray"]),
+        _text(45, 1267, "Panel C follows one bundled sequence; its stage rates do not identify component-causal effects.", size=15, fill=COLORS["gray"]),
         "</svg>",
     ])
     return "\n".join(parts) + "\n"
