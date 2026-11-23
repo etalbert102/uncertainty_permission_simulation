@@ -137,7 +137,7 @@ def test_repository_freeze_inventory_covers_load_bearing_inputs() -> None:
         "src/uncertainty_permission_simulation/simulator.py",
         "src/uncertainty_permission_simulation/confirmatory.py",
         "scripts/verify_repo.py",
-        "data/golden_traces/slice4_negative_control_receipt_v3.json",
+        "data/golden_traces/slice4_negative_control_receipt_v4.json",
         "experiments/evaluation_specs/period_evidence_v2.json",
     ):
         assert path in inventory
@@ -162,6 +162,22 @@ def test_freeze3_is_archived_and_independently_attested() -> None:
     }
     with pytest.raises(ContractError, match="FREEZE_MANIFEST_INVALID"):
         verify_freeze_manifest(ROOT, ROOT / "docs/FREEZE_MANIFEST_V3.json")
+
+
+def test_freeze4_is_archived_and_independently_attested() -> None:
+    value = verify_historical_freeze_attestations(ROOT)
+    records = {record["freeze_id"]: record for record in value["records"]}
+    assert records["UPS-CONFIRMATORY-FREEZE@4"] == {
+        "first_commit_containing_exact_frozen_inventory": "d7e84946a126ec700e00336bdcef4e42603045b8",
+        "freeze_id": "UPS-CONFIRMATORY-FREEZE@4",
+        "interpretation": "Freeze 4 was created from a clean committed input state; the creation head is the first commit containing every exact frozen blob.",
+        "manifest_hash": "bd330d56273ae7a85aed872b5e1442400b02b1f6b822c1fa6154ae2de5d62c63",
+        "manifest_path": "docs/FREEZE_MANIFEST_V4.json",
+        "verified_file_count": 84,
+        "working_tree_head_at_freeze_creation": "d7e84946a126ec700e00336bdcef4e42603045b8",
+    }
+    with pytest.raises(ContractError, match="FREEZE_MANIFEST_INVALID"):
+        verify_freeze_manifest(ROOT, ROOT / "docs/FREEZE_MANIFEST_V4.json")
 
 
 def test_only_freeze4_output_roots_block_candidate_creation(
@@ -242,6 +258,8 @@ def test_append_only_run_reconcile_and_analysis_path(
         policy_id = str(kwargs["policy_id"])
         attempt_id = confirmatory._attempt_id(family.family_id, replication, policy_id)
         metric_value = (replication + POLICY_IDS.index(policy_id)) / 20
+        supported = 2 if policy_id == "U3" else 1
+        unsupported = 0 if policy_id == "U3" else 1
         row = {
             "family_id": family.family_id,
             "load": "0.95",
@@ -255,32 +273,51 @@ def test_append_only_run_reconcile_and_analysis_path(
             "event_count": 10,
             "cohort_hash": f"COHORT-{family.family_id}-{replication}",
             "event_hash": f"EVENT-{attempt_id}",
-            "review_request_count": 2,
+                "review_request_count": 2,
+                "review_request_rate": 0.5,
             "timely_review_count": 1,
             "timeout_activation_count": 1,
             "gate_applicable_count": 2,
             "gate_safe_count": 1,
-            "supported_progression_count": 1,
-            "unsupported_progression_count": 1,
+                "supported_progression_count": supported,
+                "unsupported_progression_count": unsupported,
+                "evidence_only_failure_count": 0,
+                "authorization_only_failure_count": 0,
+                "joint_evidence_authorization_failure_count": unsupported,
+                "evidentially_unsupported_progression_count": unsupported,
+                "unauthorized_progression_count": unsupported,
+                "adequate_response_evidence_count": 1,
+                "retrieval_request_count": 3,
+                "retrieved_evidence_count": 1,
+                "unresolved_after_acquisition_count": 2,
             "evidence_requested_count": 1,
             "held_count": 1,
             "pre_action_open_count": 0,
             "unresolved_nonprogression_count": 2,
-            "supported_recovery_entry_count": 1,
-            "unsupported_recovery_entry_count": 1,
-            "no_recovery_entry_count": 2,
+                "supported_recovery_entry_count": 1,
+                "unsupported_recovery_entry_count": unsupported,
+                "no_recovery_entry_count": 3 - unsupported,
             "timeout_activation_rate": 0.25,
             "conditional_timely_review_rate": 0.5,
             "conditional_gate_safety_rate": 0.5,
-            "supported_progression_rate": 0.25,
-            "unsupported_progression_rate": 0.25,
+                "supported_progression_rate": supported / 4,
+                "unsupported_progression_rate": unsupported / 4,
+                "evidence_only_failure_rate": 0.0,
+                "authorization_only_failure_rate": 0.0,
+                "joint_evidence_authorization_failure_rate": unsupported / 4,
+                "evidentially_unsupported_progression_rate": unsupported / 4,
+                "unauthorized_progression_rate": unsupported / 4,
+                "adequate_response_evidence_rate": 0.25,
+                "retrieval_request_rate": 0.75,
+                "retrieved_evidence_rate": 0.25,
+                "unresolved_after_acquisition_rate": 0.5,
             "evidence_requested_rate": 0.25,
             "held_rate": 0.25,
             "pre_action_open_rate": 0.0,
             "unresolved_nonprogression_rate": 0.5,
-            "supported_recovery_entry_rate": 0.25,
-            "unsupported_recovery_entry_rate": 0.25,
-            "no_recovery_entry_rate": 0.5,
+                "supported_recovery_entry_rate": 0.25,
+                "unsupported_recovery_entry_rate": unsupported / 4,
+                "no_recovery_entry_rate": (3 - unsupported) / 4,
             "recipient_burden_rate": metric_value,
             "agency_workload_rate": metric_value,
             "censoring_reason_counts": {},
@@ -288,7 +325,7 @@ def test_append_only_run_reconcile_and_analysis_path(
             "correction_mean_exposure_time": 0.0,
         }
         artifact = {
-            "schema_version": 2,
+            "schema_version": 4,
             "artifact_kind": "confirmatory_attempt",
             "attempt_id": attempt_id,
             "config_id": config["config_id"],

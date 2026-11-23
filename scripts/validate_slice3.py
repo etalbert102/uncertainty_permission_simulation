@@ -160,8 +160,8 @@ def main(*, allow_confirmatory_output: bool = False) -> int:
     confirmatory_artifacts = [
         path
         for base in (
-            ROOT / "outputs/confirmatory_v3",
-            ROOT / "outputs/sensitivity_information_latency_v3",
+            ROOT / "outputs/confirmatory_v4",
+            ROOT / "outputs/sensitivity_information_latency_v4",
         )
         if base.exists()
         for path in base.rglob("*")

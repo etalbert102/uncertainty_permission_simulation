@@ -1,7 +1,7 @@
-config_id: SENSITIVITY-INFORMATION-LATENCY-V3
+config_id: SENSITIVITY-INFORMATION-LATENCY-V4
 mode: sensitivity
 design_role: prespecified_sensitivity
-parent_config_id: CONFIRMATORY-V3
+parent_config_id: CONFIRMATORY-V4
 sensitivity_id: information_retrieval_latency_doubled
 purpose: prespecified non-core sensitivity for slower agency evidence acquisition
 evaluation_specification_path: experiments/evaluation_specs/period_evidence_v2.json
@@ -67,11 +67,11 @@ negative_controls:
   - P0-SAME-RULE-SEMANTIC-NULL
   - P0-ROUTING-INVARIANCE
 outputs:
-  attempts_directory: outputs/sensitivity_information_latency_v3/attempts
-  run_index_path: outputs/sensitivity_information_latency_v3/run_index.json
-  reconciliation_path: outputs/sensitivity_information_latency_v3/reconciliation.json
-  analysis_directory: outputs/sensitivity_information_latency_v3/analysis
-  negative_control_receipt_path: data/golden_traces/slice4_negative_control_receipt_v3.json
+  attempts_directory: outputs/sensitivity_information_latency_v4/attempts
+  run_index_path: outputs/sensitivity_information_latency_v4/run_index.json
+  reconciliation_path: outputs/sensitivity_information_latency_v4/reconciliation.json
+  analysis_directory: outputs/sensitivity_information_latency_v4/analysis
+  negative_control_receipt_path: data/golden_traces/slice4_negative_control_receipt_v4.json
 freeze_readiness:
   status: ready
   unresolved_items: []

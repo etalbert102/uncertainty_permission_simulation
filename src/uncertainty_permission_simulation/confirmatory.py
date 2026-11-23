@@ -275,7 +275,7 @@ def _attempt_artifact(
     attempt_id = _attempt_id(family.family_id, replication, policy_id)
     bridge_receipt = _evaluation_bridge_receipt(run)
     artifact = {
-        "schema_version": 3,
+        "schema_version": 4,
         "artifact_kind": "confirmatory_attempt",
         "attempt_id": attempt_id,
         "config_id": config["config_id"],
@@ -539,6 +539,85 @@ def _designed_grid_summaries(
             "levels": levels,
             "range": max(estimates) - min(estimates) if estimates else None,
         }
+    u2o = [cell for cell in cells if cell["policy_id"] == "U2O"]
+    u3 = [cell for cell in cells if cell["policy_id"] == "U3"]
+    if len(u2o) != 108 or len(u3) != 108:
+        raise ContractError(
+            "ANALYSIS_REPORTING_PARTITION_INVALID",
+            "production reporting summaries require 108 U2O and 108 U3 cells",
+        )
+
+    def balanced(values: list[dict[str, object]], metric: str) -> float:
+        return mean(float(item[metric]) for item in values)
+
+    u2o_partition_metrics = (
+        "unsupported_progression_rate",
+        "evidence_only_failure_rate",
+        "authorization_only_failure_rate",
+        "joint_evidence_authorization_failure_rate",
+        "evidentially_unsupported_progression_rate",
+        "unauthorized_progression_rate",
+    )
+    u2o_partition = {
+        metric: balanced(u2o, metric) for metric in u2o_partition_metrics
+    }
+    if abs(
+        u2o_partition["unsupported_progression_rate"]
+        - u2o_partition["evidence_only_failure_rate"]
+        - u2o_partition["authorization_only_failure_rate"]
+        - u2o_partition["joint_evidence_authorization_failure_rate"]
+    ) > 1e-12 or abs(
+        u2o_partition["evidentially_unsupported_progression_rate"]
+        - u2o_partition["evidence_only_failure_rate"]
+        - u2o_partition["joint_evidence_authorization_failure_rate"]
+    ) > 1e-12 or abs(
+        u2o_partition["unauthorized_progression_rate"]
+        - u2o_partition["authorization_only_failure_rate"]
+        - u2o_partition["joint_evidence_authorization_failure_rate"]
+    ) > 1e-12:
+        raise ContractError(
+            "ANALYSIS_PROGRESSION_FAILURE_PARTITION_INVALID",
+            "balanced U2O exclusive components do not conserve the union metrics",
+        )
+    output["u2o_progression_failure_partition"] = {
+        "policy_id": "U2O",
+        "denominator": "initiated_cases",
+        "weighting": "unweighted_balanced_designed_cells",
+        "estimates": u2o_partition,
+        "claim_boundary": "exclusive reporting decomposition of the frozen fail-open policy; not distinct policy effects",
+    }
+
+    u3_stage_metrics = (
+        "adequate_response_evidence_rate",
+        "retrieval_request_rate",
+        "retrieved_evidence_rate",
+        "unresolved_after_acquisition_rate",
+        "review_request_rate",
+        "evidence_requested_rate",
+        "held_rate",
+        "pre_action_open_rate",
+        "supported_progression_rate",
+    )
+    u3_stages = {metric: balanced(u3, metric) for metric in u3_stage_metrics}
+    if abs(
+        u3_stages["adequate_response_evidence_rate"]
+        + u3_stages["retrieved_evidence_rate"]
+        - u3_stages["supported_progression_rate"]
+    ) > 1e-12 or abs(
+        u3_stages["unresolved_after_acquisition_rate"]
+        - u3_stages["review_request_rate"]
+    ) > 1e-12:
+        raise ContractError(
+            "ANALYSIS_U3_STAGE_ACCOUNTING_INVALID",
+            "balanced U3 evidence stages do not conserve supported progression or review entry",
+        )
+    output["u3_evidence_stage_accounting"] = {
+        "policy_id": "U3",
+        "denominator": "initiated_cases",
+        "weighting": "unweighted_balanced_designed_cells",
+        "estimates": u3_stages,
+        "claim_boundary": "sequential stage accounting for a bundled policy; not independent component effects",
+    }
     return output
 
 
@@ -742,7 +821,7 @@ def analyze_frozen_experiment(root: Path, config_path: Path) -> dict[str, object
         for name, content in sorted(figure_contents.items())
     ]
     analysis = {
-        "schema_version": 2,
+        "schema_version": 3,
         "artifact_kind": "confirmatory_analysis",
         "config_id": config["config_id"],
         "manifest_hash": manifest["manifest_hash"],

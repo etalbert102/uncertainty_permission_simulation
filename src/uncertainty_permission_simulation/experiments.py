@@ -44,9 +44,19 @@ PRIMARY_METRICS = (
 )
 
 CELL_RATE_METRICS = (
+    "review_request_rate",
     "timeout_activation_rate",
     "supported_progression_rate",
     "unsupported_progression_rate",
+    "evidence_only_failure_rate",
+    "authorization_only_failure_rate",
+    "joint_evidence_authorization_failure_rate",
+    "evidentially_unsupported_progression_rate",
+    "unauthorized_progression_rate",
+    "adequate_response_evidence_rate",
+    "retrieval_request_rate",
+    "retrieved_evidence_rate",
+    "unresolved_after_acquisition_rate",
     "evidence_requested_rate",
     "held_rate",
     "pre_action_open_rate",
@@ -58,21 +68,21 @@ CELL_RATE_METRICS = (
     "agency_workload_rate",
 )
 
-CORE_CONFIG_ID = "CONFIRMATORY-V3"
-SENSITIVITY_CONFIG_ID = "SENSITIVITY-INFORMATION-LATENCY-V3"
+CORE_CONFIG_ID = "CONFIRMATORY-V4"
+SENSITIVITY_CONFIG_ID = "SENSITIVITY-INFORMATION-LATENCY-V4"
 EXPECTED_OUTPUTS = {
     "confirmatory": {
-        "attempts_directory": "outputs/confirmatory_v3/attempts",
-        "run_index_path": "outputs/confirmatory_v3/run_index.json",
-        "reconciliation_path": "outputs/confirmatory_v3/reconciliation.json",
-        "analysis_directory": "outputs/confirmatory_v3/analysis",
+        "attempts_directory": "outputs/confirmatory_v4/attempts",
+        "run_index_path": "outputs/confirmatory_v4/run_index.json",
+        "reconciliation_path": "outputs/confirmatory_v4/reconciliation.json",
+        "analysis_directory": "outputs/confirmatory_v4/analysis",
         "negative_control_receipt_path": str(NEGATIVE_CONTROL_RECEIPT_PATH),
     },
     "sensitivity": {
-        "attempts_directory": "outputs/sensitivity_information_latency_v3/attempts",
-        "run_index_path": "outputs/sensitivity_information_latency_v3/run_index.json",
-        "reconciliation_path": "outputs/sensitivity_information_latency_v3/reconciliation.json",
-        "analysis_directory": "outputs/sensitivity_information_latency_v3/analysis",
+        "attempts_directory": "outputs/sensitivity_information_latency_v4/attempts",
+        "run_index_path": "outputs/sensitivity_information_latency_v4/run_index.json",
+        "reconciliation_path": "outputs/sensitivity_information_latency_v4/reconciliation.json",
+        "analysis_directory": "outputs/sensitivity_information_latency_v4/analysis",
         "negative_control_receipt_path": str(NEGATIVE_CONTROL_RECEIPT_PATH),
     },
 }
@@ -177,7 +187,7 @@ def load_experiment_config(path: Path) -> dict[str, object]:
         if not isinstance(outputs, dict) or outputs != EXPECTED_OUTPUTS[config["mode"]]:
             raise ContractError(
                 "EXPERIMENT_CONFIG_INVALID",
-                f"{config['mode']} outputs must match the closed Freeze 4 paths",
+                f"{config['mode']} outputs must match the closed Freeze 5 paths",
             )
         readiness = config.get("freeze_readiness")
         if not isinstance(readiness, dict) or readiness.get("status") not in {"blocked", "ready"}:
@@ -319,7 +329,7 @@ def _nullable_rate(numerator: int, denominator: int) -> float | None:
 
 
 def _validate_metric_row(row: Mapping[str, object]) -> None:
-    """Fail closed when raw counts do not implement the Freeze 4 metric contract."""
+    """Fail closed when raw counts do not implement the active metric contract."""
 
     integer_fields = (
         "case_count",
@@ -330,6 +340,15 @@ def _validate_metric_row(row: Mapping[str, object]) -> None:
         "gate_safe_count",
         "supported_progression_count",
         "unsupported_progression_count",
+        "evidence_only_failure_count",
+        "authorization_only_failure_count",
+        "joint_evidence_authorization_failure_count",
+        "evidentially_unsupported_progression_count",
+        "unauthorized_progression_count",
+        "adequate_response_evidence_count",
+        "retrieval_request_count",
+        "retrieved_evidence_count",
+        "unresolved_after_acquisition_count",
         "evidence_requested_count",
         "held_count",
         "pre_action_open_count",
@@ -358,6 +377,64 @@ def _validate_metric_row(row: Mapping[str, object]) -> None:
             "METRIC_DECISION_PARTITION_INVALID",
             f"decision states sum to {state_total}, expected {cases}",
         )
+    progression_failure_total = sum(int(row[field]) for field in (
+        "evidence_only_failure_count",
+        "authorization_only_failure_count",
+        "joint_evidence_authorization_failure_count",
+    ))
+    if progression_failure_total != int(row["unsupported_progression_count"]):
+        raise ContractError(
+            "METRIC_PROGRESSION_FAILURE_PARTITION_INVALID",
+            "exclusive evidence, authorization, and joint failures do not equal unsupported progression",
+        )
+    if (
+        int(row["evidentially_unsupported_progression_count"])
+        != int(row["evidence_only_failure_count"])
+        + int(row["joint_evidence_authorization_failure_count"])
+    ):
+        raise ContractError(
+            "METRIC_EVIDENCE_FAILURE_UNION_INVALID",
+            "evidentially unsupported progression does not equal evidence-only plus joint failures",
+        )
+    if (
+        int(row["unauthorized_progression_count"])
+        != int(row["authorization_only_failure_count"])
+        + int(row["joint_evidence_authorization_failure_count"])
+    ):
+        raise ContractError(
+            "METRIC_AUTHORIZATION_FAILURE_UNION_INVALID",
+            "unauthorized progression does not equal authorization-only plus joint failures",
+        )
+    if int(row["retrieved_evidence_count"]) > int(row["retrieval_request_count"]):
+        raise ContractError(
+            "METRIC_RETRIEVAL_NUMERATOR_INVALID",
+            "retrieved evidence exceeds retrieval requests",
+        )
+    acquisition_total = (
+        int(row["adequate_response_evidence_count"])
+        + int(row["retrieved_evidence_count"])
+        + int(row["unresolved_after_acquisition_count"])
+    )
+    if acquisition_total != cases:
+        raise ContractError(
+            "METRIC_ACQUISITION_PARTITION_INVALID",
+            f"evidence-acquisition stages sum to {acquisition_total}, expected {cases}",
+        )
+    if row.get("policy_id") == "U3":
+        if (
+            int(row["adequate_response_evidence_count"])
+            + int(row["retrieved_evidence_count"])
+            != int(row["supported_progression_count"])
+        ):
+            raise ContractError(
+                "METRIC_U3_SUPPORTED_STAGE_INVALID",
+                "U3 pre-retrieval and retrieved evidence do not equal supported progression",
+            )
+        if int(row["unresolved_after_acquisition_count"]) != int(row["review_request_count"]):
+            raise ContractError(
+                "METRIC_U3_REVIEW_STAGE_INVALID",
+                "U3 unresolved acquisition cases do not equal review requests",
+            )
     unresolved = sum(int(row[field]) for field in (
         "evidence_requested_count", "held_count", "pre_action_open_count"
     ))
@@ -413,9 +490,19 @@ def _validate_metric_row(row: Mapping[str, object]) -> None:
                 f"{rate_name} must be null exactly when {denominator} is zero",
             )
     for rate_name, count_name in (
+        ("review_request_rate", "review_request_count"),
         ("timeout_activation_rate", "timeout_activation_count"),
         ("supported_progression_rate", "supported_progression_count"),
         ("unsupported_progression_rate", "unsupported_progression_count"),
+        ("evidence_only_failure_rate", "evidence_only_failure_count"),
+        ("authorization_only_failure_rate", "authorization_only_failure_count"),
+        ("joint_evidence_authorization_failure_rate", "joint_evidence_authorization_failure_count"),
+        ("evidentially_unsupported_progression_rate", "evidentially_unsupported_progression_count"),
+        ("unauthorized_progression_rate", "unauthorized_progression_count"),
+        ("adequate_response_evidence_rate", "adequate_response_evidence_count"),
+        ("retrieval_request_rate", "retrieval_request_count"),
+        ("retrieved_evidence_rate", "retrieved_evidence_count"),
+        ("unresolved_after_acquisition_rate", "unresolved_after_acquisition_count"),
         ("evidence_requested_rate", "evidence_requested_count"),
         ("held_rate", "held_count"),
         ("pre_action_open_rate", "pre_action_open_count"),
@@ -444,6 +531,33 @@ def _run_metrics(family: ScenarioFamily, replication: int, policy_id: str, run: 
     timeout_activation_count = review_requests - telemetry.timely_review_count
     supported_progression_count = telemetry.supported_progression_count
     unsupported_progression_count = telemetry.unsupported_progression_count
+    evidence_only_failure_count = sum(
+        trace.action_decision is not None
+        and trace.action_decision.action == "progress"
+        and not trace.action_decision.evidence_sufficient
+        and not trace.action_decision.unauthorized_progression
+        for trace in run.traces
+    )
+    authorization_only_failure_count = sum(
+        trace.action_decision is not None
+        and trace.action_decision.action == "progress"
+        and trace.action_decision.evidence_sufficient
+        and trace.action_decision.unauthorized_progression
+        for trace in run.traces
+    )
+    joint_evidence_authorization_failure_count = sum(
+        trace.action_decision is not None
+        and trace.action_decision.action == "progress"
+        and not trace.action_decision.evidence_sufficient
+        and trace.action_decision.unauthorized_progression
+        for trace in run.traces
+    )
+    adequate_response_evidence_count = telemetry.adequate_response_evidence_count
+    retrieval_request_count = telemetry.retrieval_request_count
+    retrieved_evidence_count = telemetry.retrieved_evidence_count
+    unresolved_after_acquisition_count = (
+        cases - adequate_response_evidence_count - retrieved_evidence_count
+    )
     evidence_requested_count = telemetry.request_evidence_action_count
     held_count = telemetry.hold_count
     pre_action_open_count = cases - telemetry.action_count
@@ -469,6 +583,15 @@ def _run_metrics(family: ScenarioFamily, replication: int, policy_id: str, run: 
         "gate_safe_count": telemetry.gate_safe_count,
         "supported_progression_count": supported_progression_count,
         "unsupported_progression_count": unsupported_progression_count,
+        "evidence_only_failure_count": evidence_only_failure_count,
+        "authorization_only_failure_count": authorization_only_failure_count,
+        "joint_evidence_authorization_failure_count": joint_evidence_authorization_failure_count,
+        "evidentially_unsupported_progression_count": telemetry.evidentially_unsupported_progression_count,
+        "unauthorized_progression_count": telemetry.unauthorized_progression_count,
+        "adequate_response_evidence_count": adequate_response_evidence_count,
+        "retrieval_request_count": retrieval_request_count,
+        "retrieved_evidence_count": retrieved_evidence_count,
+        "unresolved_after_acquisition_count": unresolved_after_acquisition_count,
         "evidence_requested_count": evidence_requested_count,
         "held_count": held_count,
         "pre_action_open_count": pre_action_open_count,
@@ -476,6 +599,7 @@ def _run_metrics(family: ScenarioFamily, replication: int, policy_id: str, run: 
         "supported_recovery_entry_count": supported_recovery_entry_count,
         "unsupported_recovery_entry_count": unsupported_recovery_entry_count,
         "no_recovery_entry_count": no_recovery_entry_count,
+        "review_request_rate": _rate(review_requests, cases),
         "timeout_activation_rate": _rate(timeout_activation_count, cases),
         "conditional_timely_review_rate": _nullable_rate(
             telemetry.timely_review_count, review_requests
@@ -485,6 +609,17 @@ def _run_metrics(family: ScenarioFamily, replication: int, policy_id: str, run: 
         ),
         "supported_progression_rate": _rate(supported_progression_count, cases),
         "unsupported_progression_rate": _rate(unsupported_progression_count, cases),
+        "evidence_only_failure_rate": _rate(evidence_only_failure_count, cases),
+        "authorization_only_failure_rate": _rate(authorization_only_failure_count, cases),
+        "joint_evidence_authorization_failure_rate": _rate(joint_evidence_authorization_failure_count, cases),
+        "evidentially_unsupported_progression_rate": _rate(
+            telemetry.evidentially_unsupported_progression_count, cases
+        ),
+        "unauthorized_progression_rate": _rate(telemetry.unauthorized_progression_count, cases),
+        "adequate_response_evidence_rate": _rate(adequate_response_evidence_count, cases),
+        "retrieval_request_rate": _rate(retrieval_request_count, cases),
+        "retrieved_evidence_rate": _rate(retrieved_evidence_count, cases),
+        "unresolved_after_acquisition_rate": _rate(unresolved_after_acquisition_count, cases),
         "evidence_requested_rate": _rate(evidence_requested_count, cases),
         "held_rate": _rate(held_count, cases),
         "pre_action_open_rate": _rate(pre_action_open_count, cases),
@@ -977,10 +1112,11 @@ def dummy_analysis_receipt() -> dict[str, object]:
     for replication in range(1, 5):
         for policy_index, policy_id in enumerate(POLICY_IDS):
             base = Decimal(replication + policy_index) / Decimal(20)
-            review_requests = 4 if policy_id in {"U2C", "U2O"} else 0
+            review_requests = 5 if policy_id == "U3" else (4 if policy_id in {"U2C", "U2O"} else 0)
             timely_reviews = min(replication, review_requests)
             unresolved = 5 if policy_id == "U3" else 4
-            supported = 10 - unresolved - 1
+            unsupported = 0 if policy_id == "U3" else 1
+            supported = 10 - unresolved - unsupported
             rows.append({
                 "family_id": "DUMMY-FAMILY",
                 "load": "0.95",
@@ -995,19 +1131,29 @@ def dummy_analysis_receipt() -> dict[str, object]:
                 "cohort_hash": f"DUMMY-{replication}",
                 "event_hash": f"DUMMY-{policy_id}-{replication}",
                 "review_request_count": review_requests,
+                "review_request_rate": review_requests / 10,
                 "timely_review_count": timely_reviews,
                 "timeout_activation_count": review_requests - timely_reviews,
                 "gate_applicable_count": review_requests,
                 "gate_safe_count": timely_reviews,
                 "supported_progression_count": supported,
-                "unsupported_progression_count": 1,
+                "unsupported_progression_count": unsupported,
+                "evidence_only_failure_count": 0,
+                "authorization_only_failure_count": 0,
+                "joint_evidence_authorization_failure_count": unsupported,
+                "evidentially_unsupported_progression_count": unsupported,
+                "unauthorized_progression_count": unsupported,
+                "adequate_response_evidence_count": supported,
+                "retrieval_request_count": unresolved + unsupported,
+                "retrieved_evidence_count": unsupported,
+                "unresolved_after_acquisition_count": unresolved,
                 "evidence_requested_count": unresolved - 3,
                 "held_count": 1,
                 "pre_action_open_count": 2,
                 "unresolved_nonprogression_count": unresolved,
                 "supported_recovery_entry_count": 3,
-                "unsupported_recovery_entry_count": 1,
-                "no_recovery_entry_count": 6,
+                "unsupported_recovery_entry_count": unsupported,
+                "no_recovery_entry_count": 7 - unsupported,
                 "timeout_activation_rate": (review_requests - timely_reviews) / 10,
                 "conditional_timely_review_rate": (
                     timely_reviews / review_requests if review_requests else None
@@ -1016,14 +1162,23 @@ def dummy_analysis_receipt() -> dict[str, object]:
                     timely_reviews / review_requests if review_requests else None
                 ),
                 "supported_progression_rate": supported / 10,
-                "unsupported_progression_rate": 0.1,
+                "unsupported_progression_rate": unsupported / 10,
+                "evidence_only_failure_rate": 0.0,
+                "authorization_only_failure_rate": 0.0,
+                "joint_evidence_authorization_failure_rate": unsupported / 10,
+                "evidentially_unsupported_progression_rate": unsupported / 10,
+                "unauthorized_progression_rate": unsupported / 10,
+                "adequate_response_evidence_rate": supported / 10,
+                "retrieval_request_rate": (unresolved + unsupported) / 10,
+                "retrieved_evidence_rate": unsupported / 10,
+                "unresolved_after_acquisition_rate": unresolved / 10,
                 "evidence_requested_rate": (unresolved - 3) / 10,
                 "held_rate": 0.1,
                 "pre_action_open_rate": 0.2,
                 "unresolved_nonprogression_rate": unresolved / 10,
                 "supported_recovery_entry_rate": 0.3,
-                "unsupported_recovery_entry_rate": 0.1,
-                "no_recovery_entry_rate": 0.6,
+                "unsupported_recovery_entry_rate": unsupported / 10,
+                "no_recovery_entry_rate": (7 - unsupported) / 10,
                 "recipient_burden_rate": float(base),
                 "agency_workload_rate": float(base),
                 "censoring_reason_counts": {},

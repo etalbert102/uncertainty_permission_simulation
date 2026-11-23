@@ -14,7 +14,7 @@ from uncertainty_permission_simulation.scenarios import core_factor_grid
 from uncertainty_permission_simulation.schemas import ContractError
 
 
-def _row(*, replication: int = 1, policy_id: str = "U3") -> dict[str, object]:
+def _row(*, replication: int = 1, policy_id: str = "GENERIC") -> dict[str, object]:
     return {
         "family_id": "FAMILY-A",
         "load": "0.95",
@@ -29,12 +29,22 @@ def _row(*, replication: int = 1, policy_id: str = "U3") -> dict[str, object]:
         "cohort_hash": f"COHORT-{replication}",
         "event_hash": f"EVENT-{policy_id}-{replication}",
         "review_request_count": 0,
+        "review_request_rate": 0.0,
         "timely_review_count": 0,
         "timeout_activation_count": 0,
         "gate_applicable_count": 0,
         "gate_safe_count": 0,
         "supported_progression_count": 4,
         "unsupported_progression_count": 1,
+        "evidence_only_failure_count": 0,
+        "authorization_only_failure_count": 0,
+        "joint_evidence_authorization_failure_count": 1,
+        "evidentially_unsupported_progression_count": 1,
+        "unauthorized_progression_count": 1,
+        "adequate_response_evidence_count": 4,
+        "retrieval_request_count": 6,
+        "retrieved_evidence_count": 1,
+        "unresolved_after_acquisition_count": 5,
         "evidence_requested_count": 2,
         "held_count": 1,
         "pre_action_open_count": 2,
@@ -47,6 +57,15 @@ def _row(*, replication: int = 1, policy_id: str = "U3") -> dict[str, object]:
         "conditional_gate_safety_rate": None,
         "supported_progression_rate": 0.4,
         "unsupported_progression_rate": 0.1,
+        "evidence_only_failure_rate": 0.0,
+        "authorization_only_failure_rate": 0.0,
+        "joint_evidence_authorization_failure_rate": 0.1,
+        "evidentially_unsupported_progression_rate": 0.1,
+        "unauthorized_progression_rate": 0.1,
+        "adequate_response_evidence_rate": 0.4,
+        "retrieval_request_rate": 0.6,
+        "retrieved_evidence_rate": 0.1,
+        "unresolved_after_acquisition_rate": 0.5,
         "evidence_requested_rate": 0.2,
         "held_rate": 0.1,
         "pre_action_open_rate": 0.2,
@@ -60,6 +79,44 @@ def _row(*, replication: int = 1, policy_id: str = "U3") -> dict[str, object]:
         "review_mean_wait_time": 0.0,
         "correction_mean_exposure_time": 0.0,
     }
+
+
+def _u3_row(*, replication: int = 1) -> dict[str, object]:
+    row = _row(replication=replication, policy_id="U3")
+    row.update({
+        "review_request_count": 6,
+        "review_request_rate": 0.6,
+        "timely_review_count": 2,
+        "timeout_activation_count": 4,
+        "timeout_activation_rate": 0.4,
+        "gate_applicable_count": 6,
+        "gate_safe_count": 6,
+        "conditional_timely_review_rate": 2 / 6,
+        "conditional_gate_safety_rate": 1.0,
+        "unsupported_progression_count": 0,
+        "unsupported_progression_rate": 0.0,
+        "joint_evidence_authorization_failure_count": 0,
+        "joint_evidence_authorization_failure_rate": 0.0,
+        "evidentially_unsupported_progression_count": 0,
+        "evidentially_unsupported_progression_rate": 0.0,
+        "unauthorized_progression_count": 0,
+        "unauthorized_progression_rate": 0.0,
+        "adequate_response_evidence_count": 3,
+        "adequate_response_evidence_rate": 0.3,
+        "retrieved_evidence_count": 1,
+        "retrieved_evidence_rate": 0.1,
+        "unresolved_after_acquisition_count": 6,
+        "unresolved_after_acquisition_rate": 0.6,
+        "pre_action_open_count": 3,
+        "pre_action_open_rate": 0.3,
+        "unresolved_nonprogression_count": 6,
+        "unresolved_nonprogression_rate": 0.6,
+        "unsupported_recovery_entry_count": 0,
+        "unsupported_recovery_entry_rate": 0.0,
+        "no_recovery_entry_count": 7,
+        "no_recovery_entry_rate": 0.7,
+    })
+    return row
 
 
 def test_zero_review_requests_are_null_not_zero() -> None:
@@ -78,10 +135,45 @@ def test_zero_review_requests_are_null_not_zero() -> None:
     }
 
 
+def test_u3_stage_accounting_conserves_cases_and_review_entry() -> None:
+    row = _u3_row()
+    _validate_metric_row(row)
+    assert (
+        row["adequate_response_evidence_count"]
+        + row["retrieved_evidence_count"]
+        + row["unresolved_after_acquisition_count"]
+        == row["case_count"]
+    )
+    assert row["unresolved_after_acquisition_count"] == row["review_request_count"]
+
+
+@pytest.mark.parametrize(
+    ("field", "replacement", "diagnostic"),
+    (
+        ("adequate_response_evidence_count", 2, "METRIC_ACQUISITION_PARTITION_INVALID"),
+        ("review_request_count", 5, "METRIC_U3_REVIEW_STAGE_INVALID"),
+    ),
+)
+def test_u3_stage_drift_fails_closed(
+    field: str,
+    replacement: object,
+    diagnostic: str,
+) -> None:
+    row = _u3_row()
+    row[field] = replacement
+    if field == "review_request_count":
+        row["review_request_rate"] = 0.5
+        row["timeout_activation_count"] = 3
+        row["timeout_activation_rate"] = 0.3
+    with pytest.raises(ContractError, match=diagnostic):
+        _validate_metric_row(row)
+
+
 def test_conditional_review_uses_ratio_of_sums_and_replication_jackknife() -> None:
     first = _row(replication=1)
     first.update({
         "review_request_count": 1,
+        "review_request_rate": 0.1,
         "timely_review_count": 1,
         "timeout_activation_count": 0,
         "gate_applicable_count": 1,
@@ -92,6 +184,7 @@ def test_conditional_review_uses_ratio_of_sums_and_replication_jackknife() -> No
     second = _row(replication=2)
     second.update({
         "review_request_count": 9,
+        "review_request_rate": 0.9,
         "timely_review_count": 0,
         "timeout_activation_count": 9,
         "gate_applicable_count": 9,
@@ -137,6 +230,11 @@ def test_decision_and_recovery_partitions_include_open_cases() -> None:
         ("no_recovery_entry_count", 5, "METRIC_RECOVERY_PARTITION_INVALID"),
         ("timely_review_count", 1, "METRIC_NUMERATOR_EXCEEDS_DENOMINATOR"),
         ("conditional_timely_review_rate", 0.0, "METRIC_NULLABILITY_INVALID"),
+        ("evidence_only_failure_count", 1, "METRIC_PROGRESSION_FAILURE_PARTITION_INVALID"),
+        ("evidentially_unsupported_progression_count", 0, "METRIC_EVIDENCE_FAILURE_UNION_INVALID"),
+        ("unauthorized_progression_count", 0, "METRIC_AUTHORIZATION_FAILURE_UNION_INVALID"),
+        ("retrieved_evidence_count", 7, "METRIC_RETRIEVAL_NUMERATOR_INVALID"),
+        ("unresolved_after_acquisition_count", 4, "METRIC_ACQUISITION_PARTITION_INVALID"),
     ),
 )
 def test_adversarial_metric_rows_fail_closed(
@@ -174,6 +272,7 @@ def test_completed_review_can_leave_the_case_unresolved() -> None:
     row = _row()
     row.update({
         "review_request_count": 2,
+        "review_request_rate": 0.2,
         "timely_review_count": 2,
         "timeout_activation_count": 0,
         "gate_applicable_count": 2,
@@ -191,7 +290,7 @@ def test_primary_analysis_does_not_repeat_accounting_complements() -> None:
     for replication in (1, 2):
         rows.extend((
             _row(replication=replication, policy_id="U0"),
-            _row(replication=replication, policy_id="U3"),
+            _u3_row(replication=replication),
         ))
     pairs = _paired_estimates(rows)
     assert PRIMARY_METRICS == (
@@ -204,7 +303,7 @@ def test_primary_analysis_does_not_repeat_accounting_complements() -> None:
 
 
 def test_semantic_policy_relabeling_changes_identity_not_values() -> None:
-    original = _summarize_cells([_row(policy_id="U3")])[0]
+    original = _summarize_cells([_row(policy_id="INFORMATION-FIRST")])[0]
     renamed = _summarize_cells([_row(policy_id="RENAMED-INFORMATION-FIRST")])[0]
     original.pop("policy_id")
     renamed.pop("policy_id")
@@ -226,19 +325,53 @@ def test_prespecified_factor_margins_have_declared_balanced_counts() -> None:
     cells: list[dict[str, object]] = []
     for factors in core_factor_grid():
         canonical = factors.canonical_value()
-        for policy_id, metric in (
-            ("U2C", "timeout_activation_rate"),
-            ("U3", "unresolved_nonprogression_rate"),
-        ):
-            cells.append({
-                "family_id": factors.scenario_id,
-                "policy_id": policy_id,
-                "factors": canonical,
-                metric: float(factors.load) / 2 if policy_id == "U2C" else float(factors.access_barrier),
-                f"{metric}_mcse": 0.01,
-            })
+        cells.append({
+            "family_id": factors.scenario_id,
+            "policy_id": "U2C",
+            "factors": canonical,
+            "timeout_activation_rate": float(factors.load) / 2,
+            "timeout_activation_rate_mcse": 0.01,
+        })
+        cells.append({
+            "family_id": factors.scenario_id,
+            "policy_id": "U2O",
+            "factors": canonical,
+            "unsupported_progression_rate": 0.4,
+            "evidence_only_failure_rate": 0.1,
+            "authorization_only_failure_rate": 0.1,
+            "joint_evidence_authorization_failure_rate": 0.2,
+            "evidentially_unsupported_progression_rate": 0.3,
+            "unauthorized_progression_rate": 0.3,
+        })
+        cells.append({
+            "family_id": factors.scenario_id,
+            "policy_id": "U3",
+            "factors": canonical,
+            "unresolved_nonprogression_rate": float(factors.access_barrier),
+            "unresolved_nonprogression_rate_mcse": 0.01,
+            "adequate_response_evidence_rate": 0.5,
+            "retrieval_request_rate": 0.5,
+            "retrieved_evidence_rate": 0.3,
+            "unresolved_after_acquisition_rate": 0.2,
+            "review_request_rate": 0.2,
+            "evidence_requested_rate": 0.15,
+            "held_rate": 0.05,
+            "pre_action_open_rate": 0.0,
+            "supported_progression_rate": 0.8,
+        })
     summaries = _designed_grid_summaries(cells)
     assert [level["cell_count"] for level in summaries["u2c_timeout_by_load"]["levels"]] == [36, 36, 36]
     assert [level["cell_count"] for level in summaries["u3_unresolved_by_access_barrier"]["levels"]] == [36, 36, 36]
     assert [level["cell_count"] for level in summaries["u3_unresolved_by_retrievability"]["levels"]] == [54, 54]
     assert [level["cell_count"] for level in summaries["u3_unresolved_by_staff_access"]["levels"]] == [54, 54]
+    assert summaries["u2o_progression_failure_partition"]["estimates"] == {
+        "unsupported_progression_rate": pytest.approx(0.4),
+        "evidence_only_failure_rate": pytest.approx(0.1),
+        "authorization_only_failure_rate": pytest.approx(0.1),
+        "joint_evidence_authorization_failure_rate": pytest.approx(0.2),
+        "evidentially_unsupported_progression_rate": pytest.approx(0.3),
+        "unauthorized_progression_rate": pytest.approx(0.3),
+    }
+    assert summaries["u3_evidence_stage_accounting"]["claim_boundary"].endswith(
+        "not independent component effects"
+    )

@@ -1,14 +1,14 @@
 {
   "artifact_kind": "dummy_analysis_receipt",
   "cell_count": 5,
-  "cell_hash": "8767aea052446878152dc7996436fa8ead61e05a12c0b76f35829eaf3755ab13",
+  "cell_hash": "f20960121e37a84477270c42ba2d270b88b84936de6abc36312d30794d188f6d",
   "paired_estimate_count": 1,
   "paired_hash": "ba113a7812f3dcb2b6a69fecbac45a0df983ccf077eaafe84781285975ef152d",
   "primary_metrics": [
     "timeout_activation_rate",
     "unresolved_nonprogression_rate"
   ],
-  "receipt_hash": "7b55d1ad06c3f9608f83ee3ce85b5c2689ff3d703540f2f9da8193fccdf53844",
+  "receipt_hash": "c3f1381c471234262e3b4555c491716f7fc99ad894fe09cbfc60476392d13a4e",
   "schema_version": 1,
   "source": "synthetic dummy rows generated independently of pilot and confirmatory output"
 }

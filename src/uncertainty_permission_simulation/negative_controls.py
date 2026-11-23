@@ -29,9 +29,9 @@ SENSITIVITY_NEGATIVE_CONTROL_IDS = (
 )
 
 NEGATIVE_CONTROL_RECEIPT_PATH = Path(
-    "data/golden_traces/slice4_negative_control_receipt_v3.json"
+    "data/golden_traces/slice4_negative_control_receipt_v4.json"
 )
-NEGATIVE_CONTROL_RECEIPT_ID = "SLICE4-NEGATIVE-CONTROLS@3"
+NEGATIVE_CONTROL_RECEIPT_ID = "SLICE4-NEGATIVE-CONTROLS@4"
 
 
 def _canonical_hash(value: object) -> str:

@@ -75,7 +75,7 @@ def test_confirmatory_candidate_requires_stored_control_receipt_path(tmp_path: P
         tmp_path,
         {"outputs.negative_control_receipt_path": "data/golden_traces/other.json"},
     )
-    with pytest.raises(ContractError, match="closed Freeze 4 paths"):
+    with pytest.raises(ContractError, match="closed Freeze 5 paths"):
         load_experiment_config(candidate)
 
 
@@ -95,7 +95,7 @@ def test_confirmatory_candidate_rejects_freeze3_identity_or_output_root(
     replacement: object,
 ) -> None:
     candidate = _write_config(tmp_path, {path: replacement})
-    with pytest.raises(ContractError, match="CONFIRMATORY-V3|closed Freeze 4 paths"):
+    with pytest.raises(ContractError, match="CONFIRMATORY-V4|closed Freeze 5 paths"):
         load_experiment_config(candidate)
 
 
@@ -108,5 +108,5 @@ def test_sensitivity_candidate_rejects_wrong_parent(tmp_path: Path) -> None:
     value["parent_config_id"] = "CONFIRMATORY-V2"
     candidate = tmp_path / "sensitivity.yaml"
     candidate.write_text(yaml.safe_dump(value, sort_keys=False), encoding="utf-8")
-    with pytest.raises(ContractError, match="CONFIRMATORY-V3 as parent"):
+    with pytest.raises(ContractError, match="CONFIRMATORY-V4 as parent"):
         load_experiment_config(candidate)

@@ -1,6 +1,6 @@
 {
   "artifact_kind": "freeze_commit_attestations",
-  "attestation_hash": "f1bbb9bf8b894580edd51c3e741aaa95504f27bfdf9da24a3844fc92e5f704dd",
+  "attestation_hash": "807dc8bc879cb4b50de309b5c439d92356fdc6f58dddbecfdebcfcdbc7a8ec68",
   "records": [
     {
       "first_commit_containing_exact_frozen_inventory": "74d657e42a60c28f7ab2675d8934cd11b2afd1e9",
@@ -19,6 +19,15 @@
       "manifest_path": "docs/FREEZE_MANIFEST_V3.json",
       "verified_file_count": 79,
       "working_tree_head_at_freeze_creation": "dc96716c0865517ab0f61700fb0a06ca39d0042a"
+    },
+    {
+      "first_commit_containing_exact_frozen_inventory": "d7e84946a126ec700e00336bdcef4e42603045b8",
+      "freeze_id": "UPS-CONFIRMATORY-FREEZE@4",
+      "interpretation": "Freeze 4 was created from a clean committed input state; the creation head is the first commit containing every exact frozen blob.",
+      "manifest_hash": "bd330d56273ae7a85aed872b5e1442400b02b1f6b822c1fa6154ae2de5d62c63",
+      "manifest_path": "docs/FREEZE_MANIFEST_V4.json",
+      "verified_file_count": 84,
+      "working_tree_head_at_freeze_creation": "d7e84946a126ec700e00336bdcef4e42603045b8"
     }
   ],
   "schema_version": 1

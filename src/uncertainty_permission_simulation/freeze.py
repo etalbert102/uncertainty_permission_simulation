@@ -21,10 +21,10 @@ from .schemas import ContractError
 
 FREEZE_MANIFEST_PATH = Path("docs/FREEZE_MANIFEST.json")
 FREEZE_ATTESTATION_PATH = Path("docs/FREEZE_COMMIT_ATTESTATIONS.json")
-FREEZE_ID = "UPS-CONFIRMATORY-FREEZE@4"
+FREEZE_ID = "UPS-CONFIRMATORY-FREEZE@5"
 ACTIVE_OUTPUT_ROOTS = (
-    Path("outputs/confirmatory_v3"),
-    Path("outputs/sensitivity_information_latency_v3"),
+    Path("outputs/confirmatory_v4"),
+    Path("outputs/sensitivity_information_latency_v4"),
 )
 
 FROZEN_DOCUMENT_PATHS = (
