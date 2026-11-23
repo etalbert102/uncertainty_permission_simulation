@@ -101,6 +101,6 @@ Completion requires a verified Freeze 5 manifest; reconciled core and sensitivit
 | --- | --- | --- |
 | 0. Contract and baseline | complete | Freeze 4 verified; release gate passed; plan and Slice 0 validators passed; 209 tests passed |
 | 1. Reporting schema and tests | complete | exclusive failure and evidence-stage fields implemented; development rehearsal and 218 tests pass; Freeze 4 archived and attested |
-| 2. Freeze and replay | in progress | executable inputs ready for clean commit and Freeze 5 issuance |
+| 2. Freeze and replay | in progress | Freeze 5 issued from clean commit `05f4638`; core and sensitivity replay pending |
 | 3. Differential proof and reporting | pending | — |
 | 4. Manuscript and release package | pending | — |

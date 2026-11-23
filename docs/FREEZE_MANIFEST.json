@@ -1,0 +1,724 @@
+{
+  "artifact_kind": "confirmatory_freeze_manifest",
+  "claim_boundary": "formal counterfactual simulation over the declared parameter space; no historical prevalence, monetary correctness, legality, or attackability inference",
+  "created_at_utc": "2026-11-23T04:41:03.811717+00:00",
+  "design": {
+    "confirmatory_validation": {
+      "cohort_size": 80,
+      "config_hash": "fb24c394f22e5e1f3d821d15ddf9f864d9716e2dc4359279d2daf731c88f04b6",
+      "config_id": "CONFIRMATORY-V4",
+      "family_count": 108,
+      "freeze_readiness": {
+        "status": "ready",
+        "unresolved_items": []
+      },
+      "mode": "confirmatory",
+      "negative_control_receipt_hash": "25a2a4107258f7ef43ab912b4f11894d74d76df222da2b747653cb997db09a81",
+      "policy_count": 5,
+      "replications": 30,
+      "scenario_hash": "16bdb11bdf3dba909f4f71feaf25acefebd72d1ca21e61efe2c38265f2607506",
+      "seed_count": 3240,
+      "seed_inventory_hash": "f4967748d83393b82a5f3c05442438798e9343fa708aeb0483ddc46ece62bfcb",
+      "status": "valid_candidate"
+    },
+    "initial_replications": 30,
+    "negative_control_receipt_hash": "25a2a4107258f7ef43ab912b4f11894d74d76df222da2b747653cb997db09a81",
+    "primary_family_count": 108,
+    "seed_count": 3240,
+    "seed_inventory_hash": "f4967748d83393b82a5f3c05442438798e9343fa708aeb0483ddc46ece62bfcb",
+    "sensitivity_validation": {
+      "cohort_size": 80,
+      "config_hash": "7ae73173c0337a25bf8a2627725549cb75d7865a37175af594c1dc1ed593336e",
+      "config_id": "SENSITIVITY-INFORMATION-LATENCY-V4",
+      "family_count": 108,
+      "freeze_readiness": {
+        "status": "ready",
+        "unresolved_items": []
+      },
+      "mode": "sensitivity",
+      "negative_control_receipt_hash": "25a2a4107258f7ef43ab912b4f11894d74d76df222da2b747653cb997db09a81",
+      "policy_count": 5,
+      "replications": 30,
+      "scenario_hash": "9181f8192d5cfccca0a3e9d3d0850bd03e9b009ab3a5d358ee86ff599559da38",
+      "seed_count": 3240,
+      "seed_inventory_hash": "d424167cf637a756914b600e2963ba9d21c54c5fc27f22726bac6a8f320af139",
+      "status": "valid_candidate"
+    }
+  },
+  "environment": {
+    "dependency_versions": {
+      "PyYAML": "6.0.3",
+      "Pygments": "2.21.0",
+      "annotated-types": "0.8.0",
+      "iniconfig": "2.3.1",
+      "numpy": "2.5.4",
+      "orjson": "3.13.0",
+      "packaging": "26.3",
+      "pluggy": "1.7.0",
+      "pydantic": "2.14.2",
+      "pydantic_core": "2.50.2",
+      "pytest": "9.2.0",
+      "typing-inspection": "0.4.4",
+      "typing_extensions": "4.16.0"
+    },
+    "machine": "arm64",
+    "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+    "python_implementation": "CPython",
+    "python_version": "3.14.4"
+  },
+  "files": [
+    {
+      "category": "validation_receipts",
+      "path": "data/golden_traces/robodebt_worked_trace_v1.json",
+      "sha256": "eaa28ab1cb90828383aca462726ae79e8ba0de324f0b771c538a4acaac5f6baa",
+      "size_bytes": 36607
+    },
+    {
+      "category": "validation_receipts",
+      "path": "data/golden_traces/slice1_actual_v1.json",
+      "sha256": "40402e0918763dd931f504c7e54707455bc32ba044723aeb3e1f0c209140b07b",
+      "size_bytes": 19002
+    },
+    {
+      "category": "validation_receipts",
+      "path": "data/golden_traces/slice1_records_v1.json",
+      "sha256": "29ec5616135d9e94a6d8e84dbdff3879fcc63dfbacadaa4e640258dab2912db8",
+      "size_bytes": 1490489
+    },
+    {
+      "category": "validation_receipts",
+      "path": "data/golden_traces/slice2_stochastic_validation_v1.json",
+      "sha256": "c8e9d67c68cbe6598e9562dec6250bee65b2beccafd2de54b328d4b3e5b0e21b",
+      "size_bytes": 10255
+    },
+    {
+      "category": "validation_receipts",
+      "path": "data/golden_traces/slice4_negative_control_receipt_v1.json",
+      "sha256": "ec85d4137e91fc7353c40db5eb01e5eed0484dcfecafa65d95c7d43a39205d40",
+      "size_bytes": 9996
+    },
+    {
+      "category": "validation_receipts",
+      "path": "data/golden_traces/slice4_negative_control_receipt_v2.json",
+      "sha256": "a9f632f579093fad296309098d4f42cbb37d5378c6e5eeb20e2d469d80c914f1",
+      "size_bytes": 9996
+    },
+    {
+      "category": "validation_receipts",
+      "path": "data/golden_traces/slice4_negative_control_receipt_v3.json",
+      "sha256": "abe986fb9282a63164a73092266b8faece17de6a5c8762abcec0476da4d41a98",
+      "size_bytes": 9996
+    },
+    {
+      "category": "validation_receipts",
+      "path": "data/golden_traces/slice4_negative_control_receipt_v4.json",
+      "sha256": "38cd97e1fea4debb9df5374b5fc8a456e75d41a3a3a814a5567032882e022958",
+      "size_bytes": 9996
+    },
+    {
+      "category": "formal_data",
+      "path": "data/model/schema_manifest_v1.yaml",
+      "sha256": "852990c7295968a81ae1330cf49e77942f571b58ccfbe7692264d37d7a1adbf6",
+      "size_bytes": 81391
+    },
+    {
+      "category": "pilot_receipts",
+      "path": "data/pilot/dummy_analysis_receipt_v1.json",
+      "sha256": "941d5cd13a3f9a6ce11a791606bb114171b96b108cf42a900b2c65a65ac913d9",
+      "size_bytes": 563
+    },
+    {
+      "category": "pilot_receipts",
+      "path": "data/pilot/figure3_reporting_rehearsal.svg",
+      "sha256": "5513d331f8837135714aa78ce5ddfa642479bda833575ab0aebebefcc5c75146",
+      "size_bytes": 11152
+    },
+    {
+      "category": "pilot_receipts",
+      "path": "data/pilot/figure_capacity_timeout_prototype_v1.svg",
+      "sha256": "59c2b8b198639c25aadce08424660e30561ad9f1a7acf068bfe76f6f7f2a98e4",
+      "size_bytes": 1564
+    },
+    {
+      "category": "pilot_receipts",
+      "path": "data/pilot/figure_information_tradeoff_prototype_v1.svg",
+      "sha256": "e4c14bfad79301856dc3ece4c67fba7d9b43644b7bfe4eca83c41bcf720f9ed7",
+      "size_bytes": 1940
+    },
+    {
+      "category": "pilot_receipts",
+      "path": "data/pilot/pilot_v1_receipt.json",
+      "sha256": "6fbc627952fb51098aa1b3944f764a0396e75b052dac25f2ee0f44c372649c33",
+      "size_bytes": 287759
+    },
+    {
+      "category": "pilot_receipts",
+      "path": "data/pilot/table3_reporting_rehearsal.json",
+      "sha256": "0daa437f2bb746fc2d598e585174fb19c10943923ab5418cdd93e53d47bf7429",
+      "size_bytes": 2622
+    },
+    {
+      "category": "scenario_inputs",
+      "path": "data/scenarios/worked_trace_spec_v1.yaml",
+      "sha256": "279d3888856f434a12a6be950cbff7b19d5745054aa5a3ead2bb59a5a2fd05a2",
+      "size_bytes": 2976
+    },
+    {
+      "category": "source_identity",
+      "path": "data/sources/robodebt/r_oci_early.yaml",
+      "sha256": "248211b2b87c4372fc1eda307c4e6a81d9deb29b5b3d40e143490a24e17e720a",
+      "size_bytes": 6237
+    },
+    {
+      "category": "source_identity",
+      "path": "data/sources/robodebt/r_oci_enhanced.yaml",
+      "sha256": "c9e2df36c3b37e134f6a98889b28cf15abc291253a0b0ee525519230e7fd14e1",
+      "size_bytes": 5271
+    },
+    {
+      "category": "source_identity",
+      "path": "data/sources/robodebt/source_manifest.yaml",
+      "sha256": "fff48f4a818f29cd7ea5e7168c877c6697cd287a0714c2147b436814c2d87500",
+      "size_bytes": 14585
+    },
+    {
+      "category": "frozen_document",
+      "path": "docs/CASE_APPLICATION_SUFFICIENCY.md",
+      "sha256": "c8faa8c7fe7e05c20aa5a189a11c49f129cba388faab4fb3f95475c36e773814",
+      "size_bytes": 3558
+    },
+    {
+      "category": "frozen_document",
+      "path": "docs/CONFIGURATION_COMPILATION.md",
+      "sha256": "208c5e0dbb66e8f70dc300c7cc373a7206e5863928eb56c07f3f3b93ada30b6d",
+      "size_bytes": 8982
+    },
+    {
+      "category": "frozen_document",
+      "path": "docs/CONTINUITY_AND_CLAIM_BOUNDARY.md",
+      "sha256": "448dbd056c00de911108d284d40018dd774bf4ac430e8ac1e632a7e914b1e608",
+      "size_bytes": 8092
+    },
+    {
+      "category": "frozen_document",
+      "path": "docs/FORMAL_MODEL.md",
+      "sha256": "27c93a090b6811def20c6618f719d255b60970aaf73b26ff6c1bf3cba996a7e3",
+      "size_bytes": 119440
+    },
+    {
+      "category": "frozen_document",
+      "path": "docs/P0_PROCEDURE_REVIEW_PACKET.md",
+      "sha256": "3c41e4fb41cd17586ecfaabdc1381cd47e95e6b26a506e9ac5bce29ac0b28ca1",
+      "size_bytes": 9770
+    },
+    {
+      "category": "frozen_document",
+      "path": "docs/P0_USABILITY_WALKTHROUGH.md",
+      "sha256": "c9a887bcadd46e48bcad07e4637de8c24cdbe955e99d3c9cec0d7b95985c4d03",
+      "size_bytes": 11472
+    },
+    {
+      "category": "frozen_document",
+      "path": "docs/PRECURSOR_FIDELITY_FIXTURE.md",
+      "sha256": "0b30ded91efd84e36d4e8da08fbe1c45bde4b03bcdf32a4cd362e83c58ac7d04",
+      "size_bytes": 77812
+    },
+    {
+      "category": "frozen_document",
+      "path": "docs/PREREGISTRATION.md",
+      "sha256": "88bf3f8b3bbe0fc1adf370a9b204a1c70bb5abed78fa50ca4dc1bace02f20c67",
+      "size_bytes": 14522
+    },
+    {
+      "category": "frozen_document",
+      "path": "docs/PROCESS_RED_TEAM_PROTOCOL.md",
+      "sha256": "ba2f845e2025545dadbe4f6d48db1c5c9313cd1b78c78118419d4dd85e64f4a3",
+      "size_bytes": 24368
+    },
+    {
+      "category": "frozen_document",
+      "path": "docs/ROBODEBT_CASE_STUDY.md",
+      "sha256": "d451a24a795849fcb3f13fcc522288cbced5957a30a4d427edc91f449302fc9d",
+      "size_bytes": 16959
+    },
+    {
+      "category": "frozen_document",
+      "path": "docs/ROBODEBT_WORKED_TRACE_EXPECTED_PROFILE.md",
+      "sha256": "36e44c01d12cf2945163ba4ea03eb868460cd2156510212a8618a1816abfac33",
+      "size_bytes": 2479
+    },
+    {
+      "category": "frozen_document",
+      "path": "docs/ROBODEBT_WORKED_TRACE_REVIEW_PACKET.md",
+      "sha256": "0b548a74b6b06fc04a11fb5f8327dbfc90832d4c1df2017f3b2d07e4f84fb3b0",
+      "size_bytes": 2738
+    },
+    {
+      "category": "frozen_document",
+      "path": "docs/SOURCE_IDENTITY_RULE.md",
+      "sha256": "3e95c0507bb59379db8d871cc9744ecdd2753b0a7866deb97178051d14c731a8",
+      "size_bytes": 2251
+    },
+    {
+      "category": "frozen_document",
+      "path": "docs/TRANSFER_CANARY.md",
+      "sha256": "868d3d879e569f65389072f05d958ebb01a74a04fa7a73b6575d1ecf206a0839",
+      "size_bytes": 7885
+    },
+    {
+      "category": "frozen_document",
+      "path": "docs/TRANSFER_CANARY_EXPECTED_PROFILE.md",
+      "sha256": "494ba50dd375f556788ab50a15f1230e30b3be99516c36f37ddba9652884172b",
+      "size_bytes": 4312
+    },
+    {
+      "category": "frozen_document",
+      "path": "docs/WORKED_TRACE_SELECTION.md",
+      "sha256": "5b4640979dfbbd2b7f29b63116bc4fdc157c8978b7a606e4d092484cce3885d2",
+      "size_bytes": 4120
+    },
+    {
+      "category": "experiment_config",
+      "path": "experiments/configs/confirmatory_v1.yaml",
+      "sha256": "56f7f719660a7c9f5e127b800b94f9ea8aa1ab66935a4fe036712bc31a3454f6",
+      "size_bytes": 3141
+    },
+    {
+      "category": "experiment_config",
+      "path": "experiments/configs/sensitivity_information_latency_v1.yaml",
+      "sha256": "c4892909219c4032b6317e72ac863ee3fc720e912a53e610470b1f4f587df809",
+      "size_bytes": 2824
+    },
+    {
+      "category": "frozen_document",
+      "path": "experiments/evaluation_specs/period_evidence_v2.json",
+      "sha256": "74e31cc74d5ef7dce4e33be6b53721050287219411127ddf041927095e7622a5",
+      "size_bytes": 4025
+    },
+    {
+      "category": "environment_contract",
+      "path": "pyproject.toml",
+      "sha256": "76996e709b4683bf83b26e8770e7ce543b0e1dd066a32c77014715d35f87503b",
+      "size_bytes": 581
+    },
+    {
+      "category": "environment_contract",
+      "path": "requirements-lock.txt",
+      "sha256": "33acc235ff10530f72e16c47430a48417889acddb34709a383e94dbfc11253d3",
+      "size_bytes": 233
+    },
+    {
+      "category": "verification_code",
+      "path": "scripts/validate_plan.py",
+      "sha256": "eb38187dea442d94851352bdee57b78423e068620a267ad95c36f4771996f8cb",
+      "size_bytes": 7456
+    },
+    {
+      "category": "verification_code",
+      "path": "scripts/validate_slice0.py",
+      "sha256": "8bca379013ad871703897af844ae277411ef8600d56f4fd47af4a4336c9ffe7c",
+      "size_bytes": 19662
+    },
+    {
+      "category": "verification_code",
+      "path": "scripts/validate_slice3.py",
+      "sha256": "394b1d3468a62ae33fc58c62d841b008cf1d3b431b160cdc298460ede5c4fea3",
+      "size_bytes": 9191
+    },
+    {
+      "category": "verification_code",
+      "path": "scripts/verify_repo.py",
+      "sha256": "52ca26c13c46cc8563f2194ea3bf1640ef9659f8bc92ad255c0220287c082bc1",
+      "size_bytes": 7628
+    },
+    {
+      "category": "executable_code",
+      "path": "src/uncertainty_permission_simulation/__init__.py",
+      "sha256": "3eec2d00afad868843761c7b9d12b9401404e57f3c8e548e77709fb11b543b10",
+      "size_bytes": 73
+    },
+    {
+      "category": "executable_code",
+      "path": "src/uncertainty_permission_simulation/applications/__init__.py",
+      "sha256": "47f1bce310ea6ef6d586daf7f3010ab7410c781b5617b28a651da5cb11f2d136",
+      "size_bytes": 64
+    },
+    {
+      "category": "executable_code",
+      "path": "src/uncertainty_permission_simulation/applications/robodebt.py",
+      "sha256": "dfa1d24c657e691c27da8db5bc83595dbdd81ef22c17536ac3f14266e4116b1f",
+      "size_bytes": 6280
+    },
+    {
+      "category": "executable_code",
+      "path": "src/uncertainty_permission_simulation/artifacts.py",
+      "sha256": "ec77a45d0a5d240c48c6e2e26876c868ba610de3dbb9af0baf194ef484ba3c76",
+      "size_bytes": 33628
+    },
+    {
+      "category": "executable_code",
+      "path": "src/uncertainty_permission_simulation/cli.py",
+      "sha256": "d21344f11196bf7845790532207e34e858bd3665ba21835a6bd59077a9df67e5",
+      "size_bytes": 34678
+    },
+    {
+      "category": "executable_code",
+      "path": "src/uncertainty_permission_simulation/configuration.py",
+      "sha256": "f9099c34a0920247763fe988d1ed5354971643706d65c92f19a607cbc456a056",
+      "size_bytes": 21326
+    },
+    {
+      "category": "executable_code",
+      "path": "src/uncertainty_permission_simulation/confirmatory.py",
+      "sha256": "ec4f1f529ffb700bbab86239fcdac760655a0ac2c972303fdc409d7b7e48f084",
+      "size_bytes": 37493
+    },
+    {
+      "category": "executable_code",
+      "path": "src/uncertainty_permission_simulation/events.py",
+      "sha256": "0ed61085d69f20887e16165ffc5df29fb73d435bd686383e3308ed6f6a642151",
+      "size_bytes": 2191
+    },
+    {
+      "category": "executable_code",
+      "path": "src/uncertainty_permission_simulation/experiments.py",
+      "sha256": "da4594d9bd141ef3a4f643c7ad14888372566ce62924fc50c3fc2b2d0583cefd",
+      "size_bytes": 56994
+    },
+    {
+      "category": "executable_code",
+      "path": "src/uncertainty_permission_simulation/formal_model.py",
+      "sha256": "93439e5eae79f9bc3214d7354ade4b84b72049b0d8a6cc6da8a67817f44f8812",
+      "size_bytes": 3133
+    },
+    {
+      "category": "executable_code",
+      "path": "src/uncertainty_permission_simulation/freeze.py",
+      "sha256": "565eb142a9c6e613efd7a30c514c0105cee695190f58e3d6c5606aa732a2a5fa",
+      "size_bytes": 19298
+    },
+    {
+      "category": "executable_code",
+      "path": "src/uncertainty_permission_simulation/metrics.py",
+      "sha256": "10ce9efd339736f5e1005b95cd31981a9ca05231c0db5fd8f23fda93e884f8a7",
+      "size_bytes": 13303
+    },
+    {
+      "category": "executable_code",
+      "path": "src/uncertainty_permission_simulation/negative_controls.py",
+      "sha256": "1ee0080c2240d3e1d7506832c10e363849264c72593e0c3601a703bd059127df",
+      "size_bytes": 14048
+    },
+    {
+      "category": "executable_code",
+      "path": "src/uncertainty_permission_simulation/policies.py",
+      "sha256": "8ec3692b44cde7d441dc30d27d7176e1fdb51d2cc4aa02934470b523b9ab78ce",
+      "size_bytes": 11799
+    },
+    {
+      "category": "executable_code",
+      "path": "src/uncertainty_permission_simulation/process_model.py",
+      "sha256": "f36d0c3ba11cfc467bf85d8ab4c6d6c6ba580a4db21ae4a3c91d619b9c0f8e20",
+      "size_bytes": 4102
+    },
+    {
+      "category": "executable_code",
+      "path": "src/uncertainty_permission_simulation/profiles.py",
+      "sha256": "339ab3ae37f2455c12139890bf5d94c2453aff0d4f5351c071507409604f3c46",
+      "size_bytes": 4126
+    },
+    {
+      "category": "executable_code",
+      "path": "src/uncertainty_permission_simulation/random_streams.py",
+      "sha256": "ce1c2b6fe5756c026e0c9ebb9f2d543115f866d49479b5657dd2b58837fa4f1a",
+      "size_bytes": 4124
+    },
+    {
+      "category": "executable_code",
+      "path": "src/uncertainty_permission_simulation/reference_simulator.py",
+      "sha256": "0ae686d746dae1814087aca3285b56524f8ce5482b1360932f12350d4e6deb3b",
+      "size_bytes": 8556
+    },
+    {
+      "category": "executable_code",
+      "path": "src/uncertainty_permission_simulation/rules.py",
+      "sha256": "2ca97cbecfcf511dd502da2e85ec0cd7b06fa83b43ad0423cd1fce1d2a5a9556",
+      "size_bytes": 8156
+    },
+    {
+      "category": "executable_code",
+      "path": "src/uncertainty_permission_simulation/scenarios.py",
+      "sha256": "118fa239c442484423702a2f02686bd525080571a42afe14577c136b619a324d",
+      "size_bytes": 9532
+    },
+    {
+      "category": "executable_code",
+      "path": "src/uncertainty_permission_simulation/schemas.py",
+      "sha256": "8feb05a37754007809600a64301ecb38b2506c230569fb12a808689e825c6cf9",
+      "size_bytes": 27925
+    },
+    {
+      "category": "executable_code",
+      "path": "src/uncertainty_permission_simulation/simulator.py",
+      "sha256": "a21417f74ebd6e2ff0691534e7121e5c37108c8f16ae5e5ace3c026e76f48c45",
+      "size_bytes": 103887
+    },
+    {
+      "category": "executable_code",
+      "path": "src/uncertainty_permission_simulation/worked_trace.py",
+      "sha256": "5dc85dc9d979cbcd90c67a1a23bbe07cb9a1678f88462e806e4668f05e120f04",
+      "size_bytes": 16395
+    },
+    {
+      "category": "verification_tests",
+      "path": "tests/integration/test_application_profiles.py",
+      "sha256": "c47c68ca10c063deba73386f1f7f8f2bda5618568db3a3221195fd3677eb26a8",
+      "size_bytes": 5374
+    },
+    {
+      "category": "verification_tests",
+      "path": "tests/integration/test_freeze_machinery.py",
+      "sha256": "9fa386dde4713f30bdba3eeb5d7f0692a81d83b26f7bee526a7e977feb707b60",
+      "size_bytes": 16392
+    },
+    {
+      "category": "verification_tests",
+      "path": "tests/integration/test_negative_controls.py",
+      "sha256": "b6eba10e5e2b0fa501e6f662c001c2dee2ef75a2a663beaf333308facd5b16ea",
+      "size_bytes": 4282
+    },
+    {
+      "category": "verification_tests",
+      "path": "tests/integration/test_queue_validation.py",
+      "sha256": "16065a71416d0f81995b098e1a5cef3ead8b9e39b6fcf52ef01ecde9f794e922",
+      "size_bytes": 18231
+    },
+    {
+      "category": "verification_tests",
+      "path": "tests/integration/test_reference_simulator.py",
+      "sha256": "a5cd1b3e3d82e4575eea40f5708f68971380c775a61e2a9d288af4bab2515bc9",
+      "size_bytes": 8970
+    },
+    {
+      "category": "verification_tests",
+      "path": "tests/integration/test_reporting_rehearsal.py",
+      "sha256": "34c0d5f061a4477a5327b8ee550460b80b49e9a81f41f55e06843c3d5ef9af7f",
+      "size_bytes": 2092
+    },
+    {
+      "category": "verification_tests",
+      "path": "tests/integration/test_slice3_pilot.py",
+      "sha256": "a5a7c17e94bef2d43acfa924031abd4d1b8d0d3ce43f75312266eab7320ee85d",
+      "size_bytes": 2810
+    },
+    {
+      "category": "verification_tests",
+      "path": "tests/integration/test_stochastic_receipts.py",
+      "sha256": "6cbc0206657723410cd356a5ec13d378988ebd865ed422a1b1823ec5936a3c56",
+      "size_bytes": 11246
+    },
+    {
+      "category": "verification_tests",
+      "path": "tests/unit/test_events.py",
+      "sha256": "8824bd5a1861f065935bb98ea9d9dc1356fa0659e13303fbdd6a44aca19ec2be",
+      "size_bytes": 1462
+    },
+    {
+      "category": "verification_tests",
+      "path": "tests/unit/test_experiment_config.py",
+      "sha256": "b1f8563fc1c797f22393e25e4993f55aaf5a6a752724295789347b5391fa8eee",
+      "size_bytes": 4244
+    },
+    {
+      "category": "verification_tests",
+      "path": "tests/unit/test_formal_model.py",
+      "sha256": "a897693aecd723027a9501f2d7d68c6a8c0eeb2a2bd4969fd72fabcddc425c03",
+      "size_bytes": 8887
+    },
+    {
+      "category": "verification_tests",
+      "path": "tests/unit/test_freeze4_metrics.py",
+      "sha256": "9fa44838b44c74fe2bbb28bac78a13425ce503570393f6f5d615695998549dec",
+      "size_bytes": 14520
+    },
+    {
+      "category": "verification_tests",
+      "path": "tests/unit/test_metrics.py",
+      "sha256": "24e275f119fdcad69f20db63fedc3c0727f2ff5ab6163a8b428c85487dc447c2",
+      "size_bytes": 7803
+    },
+    {
+      "category": "verification_tests",
+      "path": "tests/unit/test_policies.py",
+      "sha256": "29a9d460d06b0dbc1a4b4ff0267c97aa9c6f999a5da03573d170662f52f5e4f6",
+      "size_bytes": 8841
+    },
+    {
+      "category": "verification_tests",
+      "path": "tests/unit/test_process_model.py",
+      "sha256": "0c31daf9e27ae854f13be8dfb3f4d4fa9bc6b0f8867d85277bc78a7d8bbfa657",
+      "size_bytes": 12789
+    },
+    {
+      "category": "verification_tests",
+      "path": "tests/unit/test_random_streams.py",
+      "sha256": "9b558c81653be458fbec9acfa880198da4adb56a842bec18367e91d8131746d6",
+      "size_bytes": 3164
+    },
+    {
+      "category": "verification_tests",
+      "path": "tests/unit/test_scenarios.py",
+      "sha256": "e8fcfdbec5826d7f7502d25bebc42bca596f1a41cb3c403f1239f5c16eea3414",
+      "size_bytes": 2343
+    },
+    {
+      "category": "verification_tests",
+      "path": "tests/unit/test_simulator.py",
+      "sha256": "97b8695729c411960e1020d93979c13f4748f6f56c824841a63a25cd602c0002",
+      "size_bytes": 34847
+    }
+  ],
+  "freeze_id": "UPS-CONFIRMATORY-FREEZE@5",
+  "inventory_path_hash": "ab2602576dd58af7cb7ecbd2ea49c097708cf9ad640733c4a6a83bd607a34514",
+  "manifest_hash": "d18c7377c6b84d6ac4748ab6be9ab512c2d76cc958b2273bd2a78737957fd4ea",
+  "repository_head_at_creation": "05f46382d4638b536016ed4a02f4653fe76b055b",
+  "schema_version": 1,
+  "source_identity": {
+    "identity_rule": "docs/SOURCE_IDENTITY_RULE.md",
+    "manifest_hash": "fff48f4a818f29cd7ea5e7168c877c6697cd287a0714c2147b436814c2d87500",
+    "retrieved_through": "2026-10-31",
+    "selected_source_count": 10,
+    "sources": [
+      {
+        "authoritative_url": "https://robodebt.royalcommission.gov.au/publications/report",
+        "content_type_at_freeze": "not_recorded",
+        "corrected_edition_date": "2023-07-11",
+        "http_outcome_at_freeze": "not_rechecked",
+        "local_copy": false,
+        "local_record_hash": "7f503a511fa3e1c38b78b7635809d97f1760e32ffc0d2778ee9d94a6a94f8ce6",
+        "publication_date": "2023-07-07",
+        "publisher": "Royal Commission into the Robodebt Scheme",
+        "remote_byte_hash": null,
+        "source_id": "RRC-REPORT-2023",
+        "title": "Report of the Royal Commission into the Robodebt Scheme"
+      },
+      {
+        "authoritative_url": "https://robodebt.royalcommission.gov.au/publications/deloitte-robodebt-process-maps",
+        "content_type_at_freeze": "not_recorded",
+        "corrected_edition_date": null,
+        "http_outcome_at_freeze": "not_rechecked",
+        "local_copy": false,
+        "local_record_hash": "14ea60c93f38dad21276301c7fd40efd3f1d293fcc3de278e6608fa18249a6c5",
+        "publication_date": "2023-03-08",
+        "publisher": "Deloitte for the Royal Commission into the Robodebt Scheme",
+        "remote_byte_hash": null,
+        "source_id": "RRC-MAP-1A-2023",
+        "title": "1A. Population Identification Process Map \u2014 Pre Robodebt to OCI"
+      },
+      {
+        "authoritative_url": "https://robodebt.royalcommission.gov.au/system/files/2023-03/2B-Identity-Matching-Process-Map-OCI-and-EIC.pdf",
+        "content_type_at_freeze": "not_recorded",
+        "corrected_edition_date": null,
+        "http_outcome_at_freeze": "not_rechecked",
+        "local_copy": false,
+        "local_record_hash": "a0adf142c46b2f9cecc7bc9fd7b171953afb4ece0c80d6a2222d983622e0bfb7",
+        "publication_date": "2023-03-08",
+        "publisher": "Deloitte for the Royal Commission into the Robodebt Scheme",
+        "remote_byte_hash": null,
+        "source_id": "RRC-MAP-2B-2023",
+        "title": "2B. Identity Matching \u2014 OCI and EIC"
+      },
+      {
+        "authoritative_url": "https://robodebt.royalcommission.gov.au/system/files/2023-03/3B-Income-Matching-Process-Map-OCI.pdf",
+        "content_type_at_freeze": "not_recorded",
+        "corrected_edition_date": null,
+        "http_outcome_at_freeze": "not_rechecked",
+        "local_copy": false,
+        "local_record_hash": "e3e232e0e4456ea95fe99adbd43ef4af9d675d6b5c1152542709349d0fc26429",
+        "publication_date": "2023-03-08",
+        "publisher": "Deloitte for the Royal Commission into the Robodebt Scheme",
+        "remote_byte_hash": null,
+        "source_id": "RRC-MAP-3B-2023",
+        "title": "3B. Income Matching \u2014 OCI"
+      },
+      {
+        "authoritative_url": "https://robodebt.royalcommission.gov.au/system/files/2023-03/4B-Debt-Calculation-and-Notification-Process-Map-OCI.pdf",
+        "content_type_at_freeze": "not_recorded",
+        "corrected_edition_date": null,
+        "http_outcome_at_freeze": "not_rechecked",
+        "local_copy": false,
+        "local_record_hash": "bc7f6fa5e23507897bf6378fa302e61c0bb866f5c1037d466d007faf4a5e609c",
+        "publication_date": "2023-03-08",
+        "publisher": "Deloitte for the Royal Commission into the Robodebt Scheme",
+        "remote_byte_hash": null,
+        "source_id": "RRC-MAP-4B-2023",
+        "title": "4B. Debt Calculation and Notification \u2014 OCI baseline"
+      },
+      {
+        "authoritative_url": "https://www.ombudsman.gov.au/__data/assets/pdf_file/0022/43528/Report-Centrelinks-automated-debt-raising-and-recovery-system-April-2017.pdf",
+        "content_type_at_freeze": "not_recorded",
+        "corrected_edition_date": null,
+        "http_outcome_at_freeze": "not_rechecked",
+        "local_copy": false,
+        "local_record_hash": "50ec3aa1f4cb276e572c64ca7553efea81496b15fb8a2cba218d3d9fd16cbb4c",
+        "publication_date": "2017-04-10",
+        "publisher": "Commonwealth Ombudsman",
+        "remote_byte_hash": null,
+        "source_id": "OMB-OCI-2017",
+        "title": "Centrelink's Automated Debt Raising and Recovery System"
+      },
+      {
+        "authoritative_url": "https://www.ombudsman.gov.au/__data/assets/pdf_file/0027/286551/Centrelinks-Automated-Debt-Raising-and-Recovery-System.pdf",
+        "content_type_at_freeze": "not_recorded",
+        "corrected_edition_date": null,
+        "http_outcome_at_freeze": "not_rechecked",
+        "local_copy": false,
+        "local_record_hash": "7ccdcbdad126abb0bb4b1527c1e7a0d1f477cbd9367f0467bd5e2fb320ce45ae",
+        "publication_date": "2019-04-03",
+        "publisher": "Commonwealth Ombudsman",
+        "remote_byte_hash": null,
+        "source_id": "OMB-IMPLEMENTATION-2019",
+        "title": "Centrelink's Automated Debt Raising and Recovery System \u2014 Implementation Report"
+      },
+      {
+        "authoritative_url": "https://www.ombudsman.gov.au/__data/assets/pdf_file/0040/299947/Income-Apportionment-Lawfulness.pdf",
+        "content_type_at_freeze": "not_recorded",
+        "corrected_edition_date": null,
+        "http_outcome_at_freeze": "not_rechecked",
+        "local_copy": false,
+        "local_record_hash": "6fc852b9db1f21dbd12debf94257c67f66e0ae4f3f5e37754e8c599befac2764",
+        "publication_date": "2023-08-02",
+        "publisher": "Commonwealth Ombudsman",
+        "remote_byte_hash": null,
+        "source_id": "OMB-APPORTIONMENT-2023",
+        "title": "Income Apportionment \u2014 Lawfulness of Income Apportionment Decisions"
+      },
+      {
+        "authoritative_url": "https://www.servicesaustralia.gov.au/information-about-robodebt?context=60271",
+        "content_type_at_freeze": "not_recorded",
+        "corrected_edition_date": null,
+        "http_outcome_at_freeze": "not_rechecked",
+        "local_copy": false,
+        "local_record_hash": "6edd27e70f5ca35655fbff9c4f7a72e95dfebcbeef12558482be60bf80dd9b4a",
+        "publication_date": "None",
+        "publisher": "Services Australia",
+        "remote_byte_hash": null,
+        "source_id": "SA-ROBODEBT-INFO",
+        "title": "Information about Robodebt"
+      },
+      {
+        "authoritative_url": "https://www.servicesaustralia.gov.au/sites/default/files/2025-05/automation-and-ai-strategy-2025-27.pdf",
+        "content_type_at_freeze": "not_recorded",
+        "corrected_edition_date": null,
+        "http_outcome_at_freeze": "not_rechecked",
+        "local_copy": false,
+        "local_record_hash": "b5aa66528840378f24455848f3bc7a9253421ee54f8abac34226c0208232f083",
+        "publication_date": "2025-05",
+        "publisher": "Services Australia",
+        "remote_byte_hash": null,
+        "source_id": "SA-AI-STRATEGY-2025-27",
+        "title": "Automation and Artificial Intelligence Strategy 2025\u201327"
+      }
+    ]
+  }
+}
