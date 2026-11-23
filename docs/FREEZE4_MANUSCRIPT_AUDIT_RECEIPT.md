@@ -45,3 +45,14 @@ The final author pass compressed the reviewed candidate to 9,544 whitespace-deli
 | Figure 3 | `19941c28ba9ac52771da13c41a83b66b01bb1dfd98ef7f6300004b922a09cd86` |
 
 The audit workspace remains outside the repository at `/Users/eli/Documents/Experiments/manuscript_audit_artifacts/freeze4-final-20261121`. The hashes above bind this receipt to its release and repair reports without treating that local path as a public reproducibility claim.
+
+## Post-audit final compression
+
+Date: 2026-11-22
+
+A final editorial compression removed repeated caveats, duplicated definitions, and internal implementation detail without changing a formal definition, source mapping, scenario, parameter, policy, seed, metric, stored result, quantitative value, or claim boundary. It also added the static queue-capacity benchmark and made the case-informed development of the framework explicit. A post-compression precision check restored three short specifications: the reviewer-to-executor authorization chain, the operational meaning of unsupported progression, and the refinement-coverage condition for an F1 pass. The call-counted manuscript now contains 7,144 whitespace-delimited words before `References`, 2,400 fewer than the audited candidate and 2,856 below the ceiling. The regenerated APA copy contains 39 pages. Every page was inspected; archive, accessibility, image-placement, and section audits pass with zero accessibility findings.
+
+| Compressed artifact | SHA-256 |
+| --- | --- |
+| Markdown manuscript | `b3ae2596cd3ac28ab1defc01f7bef2dd392bf0c0327b24136c1c8a4a451a5163` |
+| APA Word manuscript | `45f2c4d3deb421a6aece2f873814747988cea0ecf4bea468111102d60cd048b8` |

@@ -35,7 +35,7 @@ An internal self-hash identifies canonical JSON content after excluding its own 
 | Manuscript package | [article](ARTICLE_MANUSCRIPT.md), [supplement](ARTICLE_SUPPLEMENTARY_MATERIAL.md), [APA Word copy](ARTICLE_MANUSCRIPT_APA.docx) | Slice 8 committed and visually inspected |
 | Source and citation audit | [literature audit](LITERATURE_SEARCH_AUDIT.md), source manifest, case-study crosswalk | updated for named comparisons |
 | Manuscript audit | [Freeze 4 audit receipt](FREEZE4_MANUSCRIPT_AUDIT_RECEIPT.md) | 24 stages complete; bounded repair applied; two manual dispositions resolved |
-| Word count and artifact QA | [submission receipt](SUBMISSION_READINESS_RECEIPT.md) | 9,544 source words; 47-page Word copy inspected |
+| Word count and artifact QA | [submission receipt](SUBMISSION_READINESS_RECEIPT.md) | 7,144 call-counted source words; 39-page Word copy inspected |
 | Repository tests and release gate | test suite; `scripts/verify_repo.py` | 209 tests pass; final release gate returns `release: true` |
 
 ## 3. Freeze identities
@@ -139,8 +139,8 @@ The contribution is the joint operationalization: a refinement-based action-set 
 
 The Slice 8 package commit is `b1d6f57`; its ledger closeout is `b6b5153`. The final bounded endpoint repair and audited package are committed at `d7e193f`.
 
-- conservative Markdown count before `References`: 9,544 words;
-- APA Word export: 47 pages, three tables, three figures, three sections;
+- conservative Markdown count before `References`: 7,144 words;
+- APA Word export: 39 pages, three tables, three figures, three sections;
 - full-resolution visual inspection: all pages pass;
 - ZIP integrity: pass;
 - accessibility: zero high-, medium-, or low-severity findings;

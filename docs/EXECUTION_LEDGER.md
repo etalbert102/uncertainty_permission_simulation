@@ -1211,3 +1211,13 @@ The isolated manuscript audit completed 24 stages and one repair round. All five
 The final article contains 9,544 whitespace-delimited words before `References`, leaving 456 below the call ceiling. The APA review copy contains 47 pages, three tables, three figures, and three correctly oriented sections. Every final page was inspected; ZIP integrity, accessibility, image, and section audits pass with zero accessibility findings. The project passes 209 tests, the repository verifier returns `release: true`, and active Freeze 4 verifies 84 files at manifest hash `bd330d56273ae7a85aed872b5e1442400b02b1f6b822c1fa6154ae2de5d62c63`. The audited manuscript package is commit `d7e193f`.
 
 The only remaining external action is public repository activation followed by a logged-out URL check. That action remains under project-lead control.
+
+## Slice 8 Final Compression Pass
+
+Status: manuscript compressed; scientific design and frozen results unchanged
+
+Date: 2026-11-22
+
+The final editorial pass removed repeated scope caveats, duplicated definitions, internal field-language, and redundant transitions. It retained the robust-permission rule, documented Robodebt mapping, dynamic simulation results, five-step protocol, and all claim boundaries. It added a static workload-capacity benchmark to distinguish the analytical overload bound from what the dynamic simulation contributes, and it states explicitly that the framework and application were developed with knowledge of Robodebt.
+
+The call-counted source now contains 7,144 whitespace-delimited words before `References`, 2,400 fewer than the 9,544-word audited candidate and 2,856 below the call ceiling. A post-compression precision check restored the reviewer-to-executor authorization chain, defined unsupported progression operationally, and stated the refinement-coverage condition for an F1 pass. The regenerated APA review copy contains 39 pages, three tables, three figures, and three correctly oriented sections. Every page was visually inspected after export. ZIP integrity, accessibility, image, and section audits pass with zero accessibility findings. All 209 tests pass, active Freeze 4 verifies, and the repository verifier returns `release: true`. The compressed Markdown and Word hashes are `b3ae2596cd3ac28ab1defc01f7bef2dd392bf0c0327b24136c1c8a4a451a5163` and `45f2c4d3deb421a6aece2f873814747988cea0ecf4bea468111102d60cd048b8`.

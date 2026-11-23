@@ -1,8 +1,8 @@
 # Submission Readiness Receipt
 
-Date: 2026-11-21
+Date: 2026-11-22
 
-Status: Freeze 4 local release audit complete; public-repository activation intentionally deferred
+Status: Freeze 4 local release audit and final compression complete; public-repository activation intentionally deferred
 
 ## Scope
 
@@ -28,10 +28,10 @@ This receipt covers the integrated article, APA Word review copy, optional techn
 
 ## Article and APA review copy
 
-- The final audited source contains 9,544 whitespace-delimited words before `References`, leaving 456 words below the 10,000-word ceiling.
+- The final compressed source contains 7,144 whitespace-delimited words before `References`, leaving 2,856 words below the 10,000-word ceiling. The compression removed 2,400 words from the audited candidate without changing the frozen scientific design or results; a post-compression precision check restored the authorization chain, outcome definition, and F1 coverage condition.
 - The manuscript uses no endnotes to evade the ceiling.
 - `ARTICLE_MANUSCRIPT_APA.docx` contains the visible author identity, affiliation, and correspondence address; three tables; three figures with alternative text; and three correctly oriented sections.
-- The final audited export has 47 rendered pages. Every page was inspected at full resolution. Tables 1–3, Figures 1–3, equations, references, headers, and portrait/landscape transitions were legible and free of clipping or overlap.
+- The final compressed export has 39 rendered pages. Every page was inspected at full resolution. Tables 1–3, Figures 1–3, equations, references, headers, and portrait/landscape transitions were legible and free of clipping or overlap.
 - ZIP integrity, accessibility, image-placement, and section audits passed. The accessibility audit reported zero high-, medium-, or low-severity findings.
 
 ## Source and positioning audit
