@@ -35,8 +35,8 @@ The article now:
 
 Refreshed after the 24 November 2026 clarification pass:
 
-- Markdown manuscript SHA-256: `e52bada4e7301eed18926cb8c9ba71fc744836e297d613fb5a21639fb900634b`.
-- APA Word SHA-256: `279f88278059657c27409ef35e7fcd1a978b3c6b1b027be0f18e29334b92038d`.
+- Markdown manuscript SHA-256: `aaeaa6858ad2d9d2a01b0645163bca9bbf543668eb50a83a79f1555658aeeded`.
+- APA Word SHA-256: `be5f9ce37a19872da09e0e973fa9098c42dd4f9de47590a99790081bdc2876b7`.
 - Supplement SHA-256: `2fb9b73958ec507c2ba0f3f4588f7ded2d92b08b49485633c77eb810505674e6`.
 - Figure 3 SVG SHA-256: `9cb0c63d40a656496e244fb69168e7d0c71c5acb6d5260427c48abfaf8a6c485`.
 - Table 3 JSON SHA-256: `d17705e410c5a0dd285a87b2aac8b4bc65fbe897e57ff6321358c4de6b46870f`.

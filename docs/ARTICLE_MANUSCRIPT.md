@@ -28,19 +28,7 @@ The presence of a review field does not answer that question. A gate may be miss
 
 ### 1.3 Study design and contribution
 
-The study combines a formal model, a controlled representation pair, a documented Robodebt application, a dynamic simulation, and a prospective protocol. Table 1 maps each layer to the relevant diagnostics; no layer substitutes for another.
-
-**Table 1**
-
-*Evidence Architecture and Diagnostic Scope*
-
-| Layer | Question and principal diagnostics | Evidence used | Cannot establish |
-| --- | --- | --- | --- |
-| Formal model | What may weaker evidence permit, and what must review or restoration satisfy? F1–F5 | Declared refinement, support, action, gate, and consequence rules | Frequency, historical causation, or welfare |
-| Controlled representation pair | Can representation alone change routing and automatic permission? F0 and F4; F1 is unassessable because evidence is fixed | Same synthetic case and output; only representation changes | Prevalence, queues, or review effectiveness |
-| Robodebt application | Does a documented process contain the relevant evidence-to-action structure? F0, F4, and structural F3/F5 | Fixed source packet and dated OCI profiles | Independent causation or numerical calibration |
-| Dynamic simulation | How often do capacity and timeout rules activate, and with what modeled process outcomes? Paired outcomes relevant to F2 and the timing component of F3; timely supported service is unestimated | Designed families, paired policies, and finite queues | Historical rates, complete welfare, or full terminal comparison |
-| Five-step protocol | Can the same questions be posed prospectively in another inspectable workflow? All diagnostics as applicable | Article procedure | Usability, field transfer, or prevalence |
+The study combines a formal model, a controlled representation pair, a documented Robodebt application, a dynamic simulation, and a prospective protocol. No layer substitutes for another.
 
 Figure 1 previews the evidence-to-action chain that serves as the unit of analysis and the five diagnostic steps developed in Section 7.
 
@@ -58,13 +46,27 @@ The results separate rule-implied directions from dynamic quantities. Fail-close
 
 This paper’s claimed contribution is the joint specification and demonstration of a workflow-level permission rule: loss of decision-relevant information cannot by itself expand automatic progression unless the action remains independently supported, while capacity and timeout rules determine whether unresolved review produces holding or action.
 
+Table 1 maps the argument's five layers to their evidence and limits.
+
+**Table 1**
+
+*Evidence Architecture and Diagnostic Scope*
+
+| Layer | Question and principal diagnostics | Evidence used | Cannot establish |
+| --- | --- | --- | --- |
+| Formal model | What may weaker evidence permit, and what must review or restoration satisfy? F1–F5 | Declared refinement, support, action, gate, and consequence rules | Frequency, historical causation, or welfare |
+| Controlled representation pair | Can representation alone change routing and automatic permission? F0 and F4; F1 is unassessable because evidence is fixed | Same synthetic case and output; only representation changes | Prevalence, queues, or review effectiveness |
+| Robodebt application | Does a documented process contain the relevant evidence-to-action structure? F0, F4, and structural F3/F5 | Fixed source packet and dated OCI profiles | Independent causation or numerical calibration |
+| Dynamic simulation | How often do capacity and timeout rules activate, and with what modeled process outcomes? Paired outcomes relevant to F2 and the timing component of F3; timely supported service is unestimated | Designed families, paired policies, and finite queues | Historical rates, complete welfare, or full terminal comparison |
+| Five-step protocol | Can the same questions be posed prospectively in another inspectable workflow? All diagnostics as applicable | Article procedure | Usability, field transfer, or prevalence |
+
 ## 2. Mechanism, Literature, and Research Questions
 
 ### 2.1 Representation-preservation controlled pair
 
 A controlled pair traces the same synthetic case and stored model output while holding policy, routing rule, process state, reviewer resource, clock, and random draws fixed. Only the representation changes. Robodebt instead concerns aggregate evidence transformed into imputed period values, while the simulation includes unresolved or missing period evidence. All three examine the same downstream structure: a material distinction is lost or unresolved, and a rule changes permission.
 
-The stored output contains a broad category, low confidence, and two typed alternatives, one material to a fixed scrutiny rule. The preservation arm retains the alternatives, confidence, unresolved status, and provenance, triggering information gathering and fail-closed review. The fallback emits only the broad category. Although compatible with both alternatives, it suppresses the distinction used by the rule; the same rule then removes the information and review steps and makes routine disposition automatically available. The pair demonstrates changed routing and availability, not execution or injury. Its executable, safety-specific fixture remains in the supplement.
+Picture two otherwise identical case files. One displays low confidence and a policy-material alternative; the other displays only the defensible broad category. The first pauses for information gathering and fail-closed review, while the second proceeds to routine disposition. Formally, the preservation arm retains the alternatives, confidence, unresolved status, and provenance. The fallback remains compatible with both alternatives but suppresses the distinction used by the rule. The pair demonstrates changed routing and availability, not execution or injury. Its executable, safety-specific fixture remains in the supplement.
 
 Two controls bound the interpretation. When the output contains no policy-material alternative, changing representation leaves routing unchanged. When the safeguard is representation-independent, both representations retain scrutiny. Because the evidence is fixed, the pair isolates representation suppression rather than evidentiary weakening; F1 is unassessable. Frequency and review effectiveness require separate evidence.
 
@@ -78,7 +80,7 @@ This is a base workflow vulnerability, not necessarily an attack. Workflow susce
 
 ### 2.3 Literature and proposed integration
 
-Work on information structures, robust choice, selective classification, abstention, and uncertainty communication establishes that evidence can be ordered, ambiguity can affect choice, and uncertain outputs can be withheld or communicated (Blackwell, 1953; El-Yaniv & Wiener, 2010; Franc & Průša, 2019; Gilboa & Schmeidler, 1989; Prabhudesai et al., 2023). Uncertainty-to-action binding already makes oversight responses explicit (Anyabolu et al., 2026), while Lin et al. (2026) examine evidence-to-action failures in tool-using agents. This study instead specifies an institutional action-set test and binds it to review and timeout rules in a documented administrative process.
+Four literatures supply pieces of the argument but do not by themselves bind representation to organizational action. Work on information structures, robust choice, selective classification, abstention, and uncertainty communication establishes that evidence can be ordered, ambiguity can affect choice, and uncertain outputs can be withheld or communicated (Blackwell, 1953; El-Yaniv & Wiener, 2010; Franc & Průša, 2019; Gilboa & Schmeidler, 1989; Prabhudesai et al., 2023). Uncertainty-to-action binding makes oversight responses explicit (Anyabolu et al., 2026), while Lin et al. (2026) examine evidence-to-action failures in tool-using agents. This study specifies an institutional action-set test and binds it to review and timeout rules in a documented administrative process.
 
 Research on human oversight, automation bias, administrative burden, automated administration, and contestability treats review and challenge as institutional rather than merely interface-level problems (Alon-Barkat & Busuioc, 2023; Bennett et al., 2026; Landau et al., 2024; Moynihan et al., 2015; Roehl, 2023; Roehl & Hansen, 2024; Sterz et al., 2024; Sztandar-Sztanderska, 2026). Green (2022) questions oversight mandates unsupported by evidence of effectiveness; Hardy (2026) separates observation, interpretation, challenge, intervention, and recovery. Here, the narrower question is whether review binds an exact action and what timeout does when review remains incomplete.
 
@@ -86,7 +88,7 @@ Queueing, system safety, AI risk governance, and algorithmic impact assessment l
 
 Robodebt scholarship supplies a complementary institutional account. Rinta-Kahila et al. (2022) explain how destructive effects arose and persisted; Carney (2019) analyzes illegality and failed rule-of-law safeguards. This application asks a different question: which exact actions pass the declared robust-permission test, and which later safeguards leave an upstream permission defect intact?
 
-The integration joins refinement and support, rules for withholding action or seeking evidence, finite-capacity review, and post-action correction in one organizational sequence.
+Together, these literatures motivate the missing link developed here: one organizational sequence joining refinement and support, rules for withholding action or seeking evidence, finite-capacity review, and post-action correction.
 
 ### 2.4 Research questions and falsifiability
 
@@ -232,9 +234,9 @@ U2C and U2O deliberately routed every potential progression to review, including
 
 ### 5.3 Frozen scenario design and execution
 
-Before inspecting core results, we froze policies, scenarios, seeds, outcomes, contrasts, and analysis rules. This internal design freeze constrained result-driven tuning but was not an external preregistration. After inspecting Freeze 3, Freeze 4 replaced an invalid exposure label with unresolved non-progression; the reported −0.594 contrast is the sign-reversed value of the earlier +0.594 exposure contrast. After informal pre-submission feedback, Freeze 5 added the failure partition and evidence-stage fields reported here. Neither repair changed policies, cases, random streams, queues, or events, but behavioral identity does not remove the risk of choosing clearer outcomes after seeing results.
+Before inspecting core results, we froze policies, scenarios, seeds, outcomes, contrasts, and analysis rules. This internal freeze constrained tuning but was not an external preregistration. Post-result reporting repairs corrected an invalid exposure label—the reported −0.594 is the sign-reversed earlier +0.594 under the corrected label—and added the failure partition and evidence-stage fields after informal pre-submission feedback. The repairs changed no policies, cases, random streams, queues, or events, although exact behavioral identity cannot remove outcome-selection risk.
 
-The core crossed five designed relationships, none a historical estimate. Nominal initiation load `L` was 0.60, 0.95, or 1.20; with 80 cases, two reviewers, and mean service demand `s/2`, the initiation window was `Ns/(2kL)`. Higher load therefore compressed initiation while realized review demand still depended on routing. Missing-evidence and access-barrier probabilities were each 0.10, 0.30, or 0.50. Retrieval success was 0.35 or 0.85. Partial staff access increased the uniform review-service scale from 10 to 15 days; complete access retained 10 days. Staff access changed review duration, not evidence.
+The core crossed five designed relationships. Nominal initiation load `L` was 0.60, 0.95, or 1.20; with 80 cases, two reviewers, and mean service demand `s/2`, the initiation window was `Ns/(2kL)`. Higher load therefore compressed initiation while realized review demand still depended on routing. Missing-evidence and access-barrier probabilities were each 0.10, 0.30, or 0.50. Retrieval success was 0.35 or 0.85. Partial staff access increased the uniform review-service scale from 10 to 15 days; complete access retained 10 days. Staff access changed review duration, not evidence.
 
 Keyed `U[0,1)` draws generated binary events and stochastic timings. The model retained the 21-day response deadline and used a 14-day review window. Prespecified settings governed notice, assistance, retrieval, recovery, correction, reassessment, restoration, and the day-650 cutoff. Complete values and provenance receipts are in the frozen configuration.
 
@@ -254,13 +256,13 @@ We report paired differences, 95% normal MCSE intervals, family ranges, and unwe
 
 ### 5.5 Validation, controls, and claim boundary
 
-Freeze 4 repaired coverage, action identity, and earlier metric semantics. Freeze 5 added reporting fields after informal pre-submission feedback. Differential audits paired all 32,400 attempts at each transition and found identical cohorts, event details, order, timestamps, actions, queues, evaluation receipts, and shared outcomes. Hand traces, replay, conservation checks, five negative controls, routing/execution receipts, and 218 automated checks passed. Both Freeze 5 suites reproduced at 30 replications and reconciled without missing or unexpected identifiers.
+Versioned reporting repairs were audited against the prior outputs. Across 32,400 paired attempts, cohorts, event details, order, timestamps, actions, queues, evaluation receipts, and shared outcomes were identical. Hand traces, replay, conservation checks, five negative controls, routing/execution receipts, and 218 automated checks passed. Both suites reproduced at 30 replications and reconciled without missing or unexpected identifiers.
 
 ## 6. Results
 
 ### 6.1 How often the timeout rule activates
 
-Under fail-closed review (U2C), timeout activation rose from 0.143 to 0.498 to 0.788 across nominal loads 0.60, 0.95, and 1.20. Timely completion conditional on a review request moved in the opposite direction: 0.857, 0.502, and 0.212. Across the full grid, 135,766 of 259,200 requested reviews completed on time, a request-weighted rate of 0.524. The mean timeout-activation rate was 0.476 across families, with a family range of 0.042–0.881 and simulation MCSE of 0.0024 for the balanced-grid mean.
+Queue misses became common as more cases arrived within the same service window. Under fail-closed review (U2C), about one in seven initiated cases timed out at nominal load 0.60, one in two at 0.95, and nearly four in five at 1.20; the exact rates were 0.143, 0.498, and 0.788. Timely completion conditional on a review request moved in the opposite direction: 0.857, 0.502, and 0.212. Across the full grid, 135,766 of 259,200 requested reviews completed on time, a request-weighted rate of 0.524. The mean timeout-activation rate was 0.476 across families, with a family range of 0.042–0.881 and simulation MCSE of 0.0024 for the balanced-grid mean.
 
 The paired policies shared cases, draws, review requests, and service; only the timeout consequence changed. Fail closed retained the case, while fail open permitted progression. The 0.476 timeout frequency is therefore also the mean increase in the union outcome. Its exclusive components show what the union hid: 0.105 of initiated cases had sufficient evidence but lacked timely authorization, 0.372 lacked both, and none lacked evidence alone. The evidence-only zero follows from the policy rules: completed review cannot authorize progression while evidence remains unsupported. Thus all fail-open progression lacked required authorization, while 0.372 was also evidentially unsupported. These components partition one activation result; they are not separate policy effects.
 
@@ -268,13 +270,13 @@ Fail-closed review remained gate-safe in every tested family, although blocked c
 
 ### 6.2 Information first changes where unresolved cases accumulate
 
-Information first (U3) and conservative holding (U0) both produced zero unsupported progression. Their decision-state distributions differed. Under U0, 0.234 of initiated cases reached supported progression and 0.766 remained held. Under U3, 0.829 reached supported progression, 0.162 ended with an evidence request after review, and 0.009 remained held. The sole aggregate U3−U0 decision-state contrast was a 0.594 reduction in unresolved non-progression (family range 0.369–0.815; balanced-grid MCSE 0.0009).
+Information first moved cases out of holding by obtaining evidence, not by relaxing the permission rule. It and conservative holding (U0) both produced zero unsupported progression, but their decision states differed. Under U0, 0.234 of initiated cases reached supported progression and 0.766 remained held. Under U3, 0.829 reached supported progression, 0.162 ended with an evidence request after review, and 0.009 remained held. The sole aggregate U3−U0 decision-state contrast was a 0.594 reduction in unresolved non-progression (family range 0.369–0.815; balanced-grid MCSE 0.0009).
 
 U3's sequential accounting locates the bundle's result. Adequate response evidence supported progression for 0.573 of initiated cases. The remaining 0.427 entered retrieval; 0.256 obtained evidence and progressed, while 0.171 remained unresolved and entered review. Timely review placed 0.162 in an evidence-request state, and timeout left 0.009 held. These stages describe a sequence, not independent assistance and retrieval effects. Because no post-request response cycle is modeled, review changes the unresolved-state label rather than the outcome; this rule-implied result explains why faster review has little leverage here.
 
-Relative to U0, U3 added 1.096 interaction events per initiated case (family range 0.860–1.312) and 1.209 agency-workload events (0.749–1.728). These are activity counts, not effort or welfare. Recovery-path entry shifted from mostly no entry under U0 to mostly entry after supported progression under U3, recording process movement rather than harm or resolution.
+Relative to U0, U3 added 1.096 interaction events per initiated case (family range 0.860–1.312) and 1.209 agency-workload events (0.749–1.728). Recovery-path entry shifted from mostly no entry under U0 to mostly entry after supported progression under U3. Both measures record process movement rather than effort, welfare, harm, or resolution.
 
-Doubling retrieval latency left the central pattern unchanged: U3 and U0 still produced zero unsupported progression, while U3's unresolved rate was 0.171 and its stage proportions differed by less than 0.004 from the core values. Full sensitivity estimates appear in the supplement. The simulation contributes timeout activation, its evidence/authorization partition, and the location of unresolved U3 cases—not an overall policy ranking.
+Doubling retrieval latency left the central pattern unchanged: U3 and U0 still produced zero unsupported progression, while U3's unresolved rate was 0.171 and its stage proportions differed by less than 0.004 from the core values. Full sensitivity estimates appear in the supplement. The simulation contributes timeout activation, its evidence/authorization partition, and the location of unresolved U3 cases.
 
 **Figure 3**
 
@@ -282,7 +284,7 @@ Doubling retrieval latency left the central pattern unchanged: U3 and U0 still p
 
 ![Figure 3. Timeout activation, decision states, and information stages.](figures/figure3_simulation_results.svg)
 
-*Note.* The figure reports the frozen core simulation of 108 designed families with 30 paired replications per family. Panel A uses initiated cases for timeout activation and review requests for timely completion. Panel B partitions every initiated U0 and U3 case into one decision state. Panel C follows U3 cases through sequential evidence and review stages; its bars are stage rates, not additive components or independent effects. These are designed scenarios, not historical Robodebt estimates.
+*Note.* The figure reports the frozen core simulation of 108 designed families with 30 paired replications per family. Panel A uses initiated cases for timeout activation and review requests for timely completion. Panel B partitions every initiated U0 and U3 case into one decision state. Panel C follows U3 cases through sequential evidence and review stages; its bars are stage rates, not additive components or independent effects.
 
 Table 3 reports the main quantities, including the exclusive partition of the fail-open progression union.
 
@@ -309,7 +311,7 @@ Taken together, the formal rule identifies what must be inspected, the documente
 
 ### 7.1 What the protocol produces
 
-Begin with one consequential action and trace representation, routing, review, execution, contestability, and restoration. Return separate findings, missing inputs, transitions, interventions, owners, and tradeoffs rather than an overall score. Use documents for structure, a deterministic trace for event order, and simulation for timing or shared resources. If required inputs are unavailable, return `unassessable` and name them. The appendix supplies implementation fields and worksheets; usability remains a design objective rather than an evaluated result.
+The protocol follows a consequential action through the workflow rather than scoring the organization as a whole. Trace representation, routing, review, execution, contestability, and restoration; then return separate findings, missing inputs, transitions, interventions, owners, and tradeoffs. Use documents for structure, a deterministic trace for event order, and simulation for timing or shared resources. If required inputs are unavailable, return `unassessable` and name them. The appendix supplies implementation fields and worksheets; usability remains a design objective rather than an evaluated result.
 
 ### 7.2 Step 1: map transformations and ownership
 
@@ -363,7 +365,7 @@ The formal results are conditional on the proposed standard and declared specifi
 
 Because the framework was developed with knowledge of Robodebt, the application illustrates structural compatibility rather than independently validating the mechanism. The rule-level F1 failure depends on the study's support specification and same-total counterexample; the source packet does not supply a case-level monetary-entitlement oracle, numerical calibration, or legal judgment. Historical quantification would require new data, measurement, and design freeze.
 
-Five measurement limits govern the simulation. Timely review completion is conditional on a request and differs from supported disposition. U3 stages are sequential accounting, not component-causal effects. The model stops after a review-generated evidence request, so it cannot estimate subsequent response, resolution, or delay. Interaction events do not measure effort or welfare. Terminal resolution and complete restoration lack comparable events across policies. MCSE measures finite-run precision, and unweighted cross-family means imply no real-world scenario distribution.
+The simulation measures process movement more reliably than service or welfare. Timely review completion is conditional on a request and differs from supported disposition. U3 stages are sequential accounting, not component-causal effects. The model stops after a review-generated evidence request, so it cannot estimate subsequent response, resolution, or delay. Interaction events do not measure effort or welfare, and terminal resolution and complete restoration lack comparable events across policies. MCSE measures finite-run precision; unweighted cross-family means imply no real-world scenario distribution.
 
 The kernel represents declared rules, finite queues, deadlines, exogenous variation, and correction paths—not reviewer behavior, adaptation, endogenous demand, or organizational learning. With no welfare function or complete terminal consequences, it cannot rank policies overall.
 

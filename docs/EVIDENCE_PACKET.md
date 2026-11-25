@@ -93,7 +93,7 @@ Under the study-authored period-evidence specification, the documented averaging
 
 ## 7. Manuscript and artifact QA
 
-- Markdown count before `References`: 7,648 whitespace-delimited words, leaving 2,352 below the 10,000-word ceiling.
+- Markdown count before `References`: 7,661 whitespace-delimited words, leaving 2,339 below the 10,000-word ceiling.
 - APA Word export: 41 rendered pages, three tables, three figures, and three correctly oriented sections.
 - Full-resolution visual inspection: all 41 pages pass; exhibits are legible and unclipped.
 - ZIP integrity: pass.
