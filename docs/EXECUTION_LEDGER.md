@@ -1288,3 +1288,13 @@ unzip -t docs/ARTICLE_MANUSCRIPT_APA.docx
 Results were `PLAN_VALID`, `SLICE0_VALID`, Slice 3 engineering pass, active Freeze 5 verification over 85 files, 218 passing tests, and `release: true`. The repaired manuscript contains 7,504 whitespace-delimited words before `References`. The implementation package is commit `d1b4224`.
 
 Residual risks are explicit: the designed grid is not a historical calibration; U3 stages do not identify component effects and stop after an evidence request; terminal resolution and overall policy value remain unestimated; rule-level Robodebt failure does not decide an actual case; and the repository is not yet publicly reachable. Public activation and a logged-out URL check require separate project-lead action.
+
+## Post-Freeze 5 Clarification Pass
+
+Status: complete; reporting clarifications only
+
+Date: 2026-11-24
+
+Informal pre-submission feedback prompted a bounded clarification pass. The manuscript now explains that U2C and U2O deliberately route every potential progression through the same modeled review service, including cases with sufficient period evidence, and that their activation rates should not be transferred to an unresolved-only review gate. It identifies the evidence-only fail-open zero as rule-implied rather than estimated, scopes the Robodebt same-total counterexample to employment intervals containing non-benefit fortnights, records that other interval structures require separate action-specific analysis, and adds the missing post-request response-cycle limitation. Wording now describes Freeze 5 as following informal pre-submission feedback. No policy, transition, scenario, parameter, seed, queue, event, stored result, formal definition, or quantitative estimate changed; no new freeze or simulation replay was required.
+
+Table 3 was regenerated with a null MCSE for the rule-implied zero. Its JSON SHA-256 is `d17705e410c5a0dd285a87b2aac8b4bc65fbe897e57ff6321358c4de6b46870f` and internal hash is `6ff5645b9f894bc6a107c890c50e61ee28b41835c9aecbf532566adc9edb26bd`. The manuscript contains 7,648 whitespace-delimited words before `References`, leaving 2,352 below the call ceiling. The regenerated APA copy contains 41 pages, three tables, three figures, and three correctly oriented sections. Changed pages and the final dated availability statement were visually inspected; ZIP integrity and accessibility, image, heading, style, and section audits pass with zero accessibility findings. The repository remained private in a logged-out check on 24 November 2026; activation remains a separate project-lead action.

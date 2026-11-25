@@ -2,7 +2,7 @@
 
 Status: Freeze 5 local reporting-repair package complete; public activation deferred
 
-Updated: 2026-11-22
+Updated: 2026-11-24
 
 Study: *From Incomplete Evidence to Automated Action: A Formal Model and Dynamic Simulation of Review Capacity and Timeout Rules, with a Robodebt Application*
 
@@ -58,16 +58,16 @@ The [machine-readable audit](FREEZE4_FREEZE5_DIFFERENTIAL_AUDIT.json) passes at 
 
 Across all 32,400 paired attempts, Freeze 4 and Freeze 5 have identical cohort hashes, complete event hashes, event counts, evaluation-bridge receipts, event details, order, timestamps, actions, queues, every shared stored-row field, and every pre-existing analysis field. Config and schema identities changed as expected. Freeze 5 therefore adds observability and reporting fields; it does not change generated behavior.
 
-This identity proof does not remove outcome-selection risk. Freeze 4 followed inspection of Freeze 3, and Freeze 5 followed external review. The manuscript discloses both changes and states that the Freeze 4 unresolved-non-progression contrast is the sign-reversed value of the earlier exposure contrast under a corrected label.
+This identity proof does not remove outcome-selection risk. Freeze 4 followed inspection of Freeze 3, and Freeze 5 followed informal pre-submission feedback. The manuscript discloses both changes and states that the Freeze 4 unresolved-non-progression contrast is the sign-reversed value of the earlier exposure contrast under a corrected label.
 
 ## 5. Nonredundant simulation results
 
-Table 3 has internal self-hash `e5efca36c6245fe137ea98eb2ca5ed977f8657971634dfff14c2367cd957f611` and draws directly from the Freeze 5 core analysis.
+Table 3 has internal self-hash `6ff5645b9f894bc6a107c890c50e61ee28b41835c9aecbf532566adc9edb26bd` and draws directly from the Freeze 5 core analysis.
 
 | Quantity | Estimate | Family range | Simulation MCSE | Interpretation boundary |
 | --- | ---: | ---: | ---: | --- |
 | Fail-closed timeout activation per initiated case | 0.476 | 0.042–0.881 | 0.0024 | queue deadline misses; timeout consequences are rule-defined |
-| U2O evidence-only failure | 0.000 | 0.000–0.000 | 0.0000 | exclusive component of the fail-open union |
+| U2O evidence-only failure | 0.000 | 0.000–0.000 | — | rule-implied zero: completed review cannot authorize unsupported progression |
 | U2O authorization-only failure | 0.105 | 0.004–0.368 | 0.0008 | evidence sufficient; timely authorization missing |
 | U2O joint evidence-and-authorization failure | 0.372 | 0.025–0.759 | 0.0020 | both prerequisites missing |
 | U3 minus U0 unresolved non-progression | −0.594 | −0.815 to −0.369 | 0.0009 | sole aggregate U3/U0 decision-state contrast |
@@ -89,11 +89,11 @@ U3 sequential stage rates are 0.573 adequate response evidence, 0.427 retrieval 
 | Dynamic simulation | estimates queue activation, failure composition, and unresolved-case location in a designed grid | historical Robodebt rates or overall policy ranking |
 | Five-step protocol | prospective inspectable workflow test | validated usability or practitioner performance |
 
-Under the study-authored period-evidence specification, the documented averaging rule fails F1 at the rule level: an admissible same-total refinement can place all earnings in non-benefit fortnights, where no debt is supported, while averaging can assign income to benefit fortnights and permit progression. A verdict for an actual historical case remains `unassessable` without its exact action, income timing, benefit record, and applicable support rule. The application illustrates the test; it does not independently validate it.
+Under the study-authored period-evidence specification, the documented averaging rule fails F1 at the rule level when the employment interval includes non-benefit fortnights: an admissible same-total refinement can place all earnings there, where no debt is supported, while averaging can assign income to benefit fortnights and permit progression. Other interval structures require separate action-specific analysis. A verdict for an actual historical case remains `unassessable` without its exact action, income timing, benefit record, and applicable support rule. The application illustrates the test; it does not independently validate it.
 
 ## 7. Manuscript and artifact QA
 
-- Markdown count before `References`: 7,504 whitespace-delimited words, leaving 2,496 below the 10,000-word ceiling.
+- Markdown count before `References`: 7,648 whitespace-delimited words, leaving 2,352 below the 10,000-word ceiling.
 - APA Word export: 41 rendered pages, three tables, three figures, and three correctly oriented sections.
 - Full-resolution visual inspection: all 41 pages pass; exhibits are legible and unclipped.
 - ZIP integrity: pass.

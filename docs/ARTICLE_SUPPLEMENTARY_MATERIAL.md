@@ -109,7 +109,7 @@ Two negative controls delimit the mechanism. When no policy-material alternative
 
 The core U3 conditional-review denominator contains 44,381 requests and 42,098 timely completions. Twenty of 3,240 family-replications generated no request and are treated as not applicable; all 108 families have a positive denominator after aggregation. A completed review of unresolved evidence produces an evidence-request state rather than progression, so completion does not imply resolution or supported service.
 
-The fail-open progression union is 0.476211 of initiated cases. Its exclusive components are 0 evidence-only, 0.104603 authorization-only, and 0.371609 joint evidence-and-authorization failure. The first component shows that no simulated case progressed with missing evidence after receiving required timely authorization; the second prevents authorization failure from being mislabeled as evidentiary failure; and the third identifies cases with both defects. These components partition the timeout-activation result and are not separate policy effects.
+The fail-open progression union is 0.476211 of initiated cases. Its exclusive components are 0 evidence-only, 0.104603 authorization-only, and 0.371609 joint evidence-and-authorization failure. The evidence-only zero is rule-implied rather than estimated: completed review cannot authorize unsupported progression. The authorization-only component prevents authorization failure from being mislabeled as evidentiary failure, while the joint component identifies cases with both defects. These components partition the timeout-activation result and are not separate policy effects.
 
 | U3 sequential stage | Core rate per initiated case | Sensitivity rate |
 | --- | ---: | ---: |

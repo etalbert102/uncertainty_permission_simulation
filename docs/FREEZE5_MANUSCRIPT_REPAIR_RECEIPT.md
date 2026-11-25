@@ -33,12 +33,14 @@ The article now:
 
 ## Artifact identities
 
-- Markdown manuscript SHA-256: `b96f98812e8a244de708b8070e4e5fbb13c29b6eb4109722acd6cb2de74badde`.
-- APA Word SHA-256: `fdfdbcf0b7a12b6731db6360cbeb6479ad23d8da483624a1896d584516811aa6`.
-- Supplement SHA-256: `745e7a5a25cba09f4ebbec00738f967d326becd105d1f60a63afb79698bb09e5`.
+Refreshed after the 24 November 2026 clarification pass:
+
+- Markdown manuscript SHA-256: `e52bada4e7301eed18926cb8c9ba71fc744836e297d613fb5a21639fb900634b`.
+- APA Word SHA-256: `279f88278059657c27409ef35e7fcd1a978b3c6b1b027be0f18e29334b92038d`.
+- Supplement SHA-256: `2fb9b73958ec507c2ba0f3f4588f7ded2d92b08b49485633c77eb810505674e6`.
 - Figure 3 SVG SHA-256: `9cb0c63d40a656496e244fb69168e7d0c71c5acb6d5260427c48abfaf8a6c485`.
-- Table 3 JSON SHA-256: `069ceed4f352f21ce52fc635d75e456326cfa39b93619a7a0d1249801dbb68d6`.
-- Table 3 internal hash: `e5efca36c6245fe137ea98eb2ca5ed977f8657971634dfff14c2367cd957f611`.
+- Table 3 JSON SHA-256: `d17705e410c5a0dd285a87b2aac8b4bc65fbe897e57ff6321358c4de6b46870f`.
+- Table 3 internal hash: `6ff5645b9f894bc6a107c890c50e61ee28b41835c9aecbf532566adc9edb26bd`.
 
 ## Document QA
 

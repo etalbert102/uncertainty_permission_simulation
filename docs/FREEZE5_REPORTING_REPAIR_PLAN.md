@@ -48,7 +48,7 @@ Stage accounting describes the declared sequence. It is not an assistance-versus
 
 ## 5. Deviation disclosure
 
-Freeze 5 is post-result change control, not preregistration. Freeze 4 was itself designed after inspection of Freeze 3 results. The manuscript must state that the Freeze 4 unresolved-non-progression contrast is numerically the sign-reversed Freeze 3 recovery-exposure contrast under a repaired outcome label and that Freeze 5 adds reporting observability after external review. Behavioral identity does not remove outcome-selection risk.
+Freeze 5 is post-result change control, not preregistration. Freeze 4 was itself designed after inspection of Freeze 3 results. The manuscript must state that the Freeze 4 unresolved-non-progression contrast is numerically the sign-reversed Freeze 3 recovery-exposure contrast under a repaired outcome label and that Freeze 5 adds reporting observability after informal pre-submission feedback. Behavioral identity does not remove outcome-selection risk.
 
 ## 6. Slice protocol
 

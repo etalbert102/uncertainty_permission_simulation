@@ -28,7 +28,7 @@ This receipt covers the integrated article, APA Word review copy, optional techn
 
 ## Article and APA review copy
 
-- The source contains 7,504 whitespace-delimited words before `References`, leaving 2,496 below the 10,000-word ceiling.
+- The source contains 7,648 whitespace-delimited words before `References`, leaving 2,352 below the 10,000-word ceiling.
 - The Robodebt application now distinguishes a rule-level F1 failure under the study specification from unassessability of any actual historical case.
 - Table 3 reports the exclusive fail-open failure partition. Figure 3 reports timeout activation, final decision states, and sequential U3 evidence/review stages.
 - `ARTICLE_MANUSCRIPT_APA.docx` contains visible author identity, affiliation, and correspondence address; three tables; three figures with alternative text; and three correctly oriented sections.

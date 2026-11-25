@@ -14,14 +14,14 @@
       "simulation_mcse": 0.002432522415684618
     },
     {
-      "claim_boundary": "exclusive component of the timeout-activated progression union; not a separate policy effect",
+      "claim_boundary": "rule-implied zero: completed review cannot authorize unsupported progression; exclusive union component",
       "estimate": 0.0,
       "family_count": 108,
       "family_maximum": 0.0,
       "family_minimum": 0.0,
       "label": "Fail-open evidence-only progression failure",
       "quantity_id": "U2O_EVIDENCE_ONLY_FAILURE",
-      "simulation_mcse": 0.0
+      "simulation_mcse": null
     },
     {
       "claim_boundary": "sufficient evidence with required timely review authorization missing; exclusive union component",
@@ -87,5 +87,5 @@
   "schema_version": 2,
   "source_hash": "7bf7ee0a3ef39b355bcb9f7ddcf9320787b954e6ebbf9f83faa1e62210b98ba0",
   "status": "frozen_result",
-  "table_hash": "e5efca36c6245fe137ea98eb2ca5ed977f8657971634dfff14c2367cd957f611"
+  "table_hash": "6ff5645b9f894bc6a107c890c50e61ee28b41835c9aecbf532566adc9edb26bd"
 }

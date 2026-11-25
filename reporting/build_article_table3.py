@@ -115,7 +115,8 @@ def build_table(receipt: dict[str, object], *, development: bool = False) -> dic
             "quantity_id": "U2O_EVIDENCE_ONLY_FAILURE",
             "label": "Fail-open evidence-only progression failure",
             **failure_components["evidence_only_failure_rate"],
-            "claim_boundary": "exclusive component of the timeout-activated progression union; not a separate policy effect",
+            "simulation_mcse": None,
+            "claim_boundary": "rule-implied zero: completed review cannot authorize unsupported progression; exclusive union component",
         },
         {
             "quantity_id": "U2O_AUTHORIZATION_ONLY_FAILURE",

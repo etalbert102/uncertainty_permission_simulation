@@ -10,7 +10,7 @@ The policies were conservative holding (U0), impute and progress (U1), review wi
 
 Every initiated case entered exactly one decision state: supported progression, unsupported progression, evidence requested after completed review, unresolved hold, or still open before action. Unresolved non-progression combined the final three states. Unsupported progression was decomposed into exclusive evidence-only, authorization-only, and joint failures. U3 also stored its sequential evidence and review stages. Timely review used review requests as its denominator and was null when no request existed. Timely supported service was not estimated.
 
-Freeze 5 added reporting observability after external review without changing policies, cases, random streams, queues, or events. A differential audit paired all 32,400 Freeze 4 and Freeze 5 attempts and found identical cohorts, complete event streams, evaluation receipts, and shared outcomes. Both Freeze 5 suites reconciled and reproduced deterministically at 30 replications; 218 automated checks passed.
+Freeze 5 added reporting observability after informal pre-submission feedback without changing policies, cases, random streams, queues, or events. A differential audit paired all 32,400 Freeze 4 and Freeze 5 attempts and found identical cohorts, complete event streams, evaluation receipts, and shared outcomes. Both Freeze 5 suites reconciled and reproduced deterministically at 30 replications; 218 automated checks passed.
 
 ## Results summary
 
@@ -33,4 +33,4 @@ Doubling retrieval latency changed every reported U3 stage rate by less than 0.0
 | Sensitivity analysis | `outputs/sensitivity_information_latency_v4/analysis/analysis_r030.json`, hash `3a67f1c898a90296ebde3c0d29bee843edfef840c7f1cd2e0ecd2c0b9fab62a7` |
 | Differential audit | `docs/FREEZE4_FREEZE5_DIFFERENTIAL_AUDIT.json`, hash `edab65cb1e809a5af30f5e855e2aaa402831a00230b8291b5f991c4e8843bce8` |
 | Figure 3 | `docs/figures/figure3_simulation_results.svg` |
-| Table 3 data | `docs/tables/table3_simulation_results.json`, hash `e5efca36c6245fe137ea98eb2ca5ed977f8657971634dfff14c2367cd957f611` |
+| Table 3 data | `docs/tables/table3_simulation_results.json`, hash `6ff5645b9f894bc6a107c890c50e61ee28b41835c9aecbf532566adc9edb26bd` |

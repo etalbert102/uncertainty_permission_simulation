@@ -8,7 +8,7 @@ Correspondence: etalbert102@gmail.com
 
 ## Abstract
 
-AI-generated classifications, summaries, and recommendations can route cases, assign review, trigger deadlines, and permit action. The central question is: when evidence becomes less decision-relevant, what may an automated workflow now do? This article defines robust permission as an operational test: weaker evidence should not newly enable an exact action unless that action remains independently supported across every admissible refinement. Progression awaiting review must be withheld from automatic action; the reviewer must authorize the exact action, and the executing system must revalidate support at execution. The study applies this test to the documented Robodebt process and uses a design-frozen finite-cohort simulation to estimate how often limited capacity activates timeout consequences. Across 108 designed families, the review queue missed its 14-day window in 0.042–0.881 of initiated cases; the mean was 0.476, and fail open turned every miss into progression. Of initiated cases, 0.105 progressed with sufficient evidence but without timely authorization and 0.372 lacked both evidence and authorization. Information-first handling reduced unresolved non-progression by 0.594 relative to conservative holding while adding interaction and workload events. These are designed-scenario results, not historical estimates or an overall policy ranking. A five-step protocol turns the model, case mapping, and simulation into a prospective workflow test.
+AI-generated classifications, summaries, and recommendations can route cases, assign review, trigger deadlines, and permit action. The central question is: when evidence becomes less decision-relevant, what may an automated workflow now do? This article defines robust permission as an operational test: weaker evidence should not newly enable an exact action unless that action remains independently supported across every admissible refinement. Progression awaiting review must be withheld from automatic action; the reviewer must authorize the exact action, and the executing system must revalidate support at execution. The study applies this test to the documented Robodebt process and uses a design-frozen finite-cohort simulation to estimate how often limited capacity activates timeout consequences. Across 108 designed families, the review queue missed its 14-day window in 4–88% of initiated cases; the mean was 0.476, and fail open turned every miss into progression. Of initiated cases, 0.105 progressed with sufficient evidence but without timely authorization and 0.372 lacked both evidence and authorization. Information-first handling reduced unresolved non-progression by 0.594 relative to conservative holding while adding interaction and workload events. These are designed-scenario results, not historical estimates or an overall policy ranking. A five-step protocol turns the model, case mapping, and simulation into a prospective workflow test.
 
 *Keywords:* automated decision-making, human oversight, uncertainty, discrete-event simulation, Robodebt
 
@@ -52,9 +52,9 @@ Figure 1 previews the evidence-to-action chain that serves as the unit of analys
 
 *Note.* The protocol follows one action through representation, permission, review, execution, and restoration while keeping formal authority, independent support, automatic permission, and executed action distinct.
 
-### 1.4 Findings and contributions
+### 1.4 Principal findings
 
-The results separate rule-implied directions from dynamic quantities. Fail-closed holding and fail-open release follow the policy definitions; the simulation estimates how often finite capacity activates them. Fail open converted an average 0.476 queue misses into progression: 0.105 of initiated cases lacked timely authorization alone and 0.372 lacked both evidence and authorization. Information first preserved the permission boundary and reduced unresolved non-progression while adding interaction and agency-workload events. Its sequential accounting shows where cases obtained support and where they remained unresolved; it does not isolate the contribution of each component.
+The results separate rule-implied directions from dynamic quantities. Fail-closed holding and fail-open release follow the policy definitions; the simulation estimates how often finite capacity activates them. Fail open converted queue misses, averaging 0.476 of initiated cases, into progression: 0.105 lacked timely authorization alone and 0.372 lacked both evidence and authorization. Information first preserved the permission boundary and reduced unresolved non-progression while adding interaction and agency-workload events. Its sequential accounting shows where cases obtained support and where they remained unresolved; it does not isolate the contribution of each component.
 
 This paper’s claimed contribution is the joint specification and demonstration of a workflow-level permission rule: loss of decision-relevant information cannot by itself expand automatic progression unless the action remains independently supported, while capacity and timeout rules determine whether unresolved review produces holding or action.
 
@@ -162,7 +162,7 @@ A responding recipient could correct employer, amount, and pay-period informatio
 
 The critical transition is from aggregate evidence to created fortnightly values. After nonresponse, those values could feed calculation and, when the process raised a debt, an actionable notice and recovery. The study maps that coupling of representation, deadline, and permission while distinguishing provisional calculation from commitment and external consequence.
 
-Under the study's period-evidence specification, this averaging rule fails F1 at the rule level. A same-total admissible refinement can place all earnings in fortnights when no benefit was received; the period-specific rule then supports no debt for benefit fortnights, while even averaging can assign income to those fortnights and permit debt progression. This counterexample tests the documented rule under a study-authored support specification. It does not determine the debt or legality of any historical recipient's case.
+Under the study's period-evidence specification, this averaging rule fails F1 at the rule level. When the reported employment interval includes fortnights in which no benefit was received, a same-total admissible refinement can place all earnings in those fortnights; the period-specific rule then supports no debt for benefit fortnights, while even averaging can assign income to those fortnights and permit debt progression. Other interval structures require their own action-specific refinement analysis; the aggregate alone does not establish an amount error. This counterexample tests the documented rule under a study-authored support specification. It does not determine the debt or legality of any historical recipient's case.
 
 The record fixes the 21-day clock, 14-day reminder, averaging transition, debt-notice path, recovery, and reassessment opportunity. Queue capacity, service, engagement, retrieval, correction, and restoration distributions are stylized.
 
@@ -228,9 +228,11 @@ Table 2 compares five specified counterfactual interventions.
 
 U2O−U2C isolated the consequence of review non-completion under otherwise shared review machinery. U3−U0 compared the bundle of assisted engagement, evidence retrieval, and unresolved-case review with conservative holding. U1−U0 was an implementation-validation contrast, not a substantive policy comparison.
 
+U2C and U2O deliberately routed every potential progression to review, including cases with sufficient period evidence. This universal-review design stress-tests whether review remains action-binding under load: supported cases consume the same modeled review service as unresolved cases and can time out without authorization. The resulting activation rates should not be transferred to a gate that reviews only unresolved evidence; no such U2 variant was simulated.
+
 ### 5.3 Frozen scenario design and execution
 
-Before inspecting core results, we froze policies, scenarios, seeds, outcomes, contrasts, and analysis rules. This internal design freeze constrained result-driven tuning but was not an external preregistration. After inspecting Freeze 3, Freeze 4 replaced an invalid exposure label with unresolved non-progression; the reported −0.594 contrast is the sign-reversed value of the earlier +0.594 exposure contrast. After external review, Freeze 5 added the failure partition and evidence-stage fields reported here. Neither repair changed policies, cases, random streams, queues, or events, but behavioral identity does not remove the risk of choosing clearer outcomes after seeing results.
+Before inspecting core results, we froze policies, scenarios, seeds, outcomes, contrasts, and analysis rules. This internal design freeze constrained result-driven tuning but was not an external preregistration. After inspecting Freeze 3, Freeze 4 replaced an invalid exposure label with unresolved non-progression; the reported −0.594 contrast is the sign-reversed value of the earlier +0.594 exposure contrast. After informal pre-submission feedback, Freeze 5 added the failure partition and evidence-stage fields reported here. Neither repair changed policies, cases, random streams, queues, or events, but behavioral identity does not remove the risk of choosing clearer outcomes after seeing results.
 
 The core crossed five designed relationships, none a historical estimate. Nominal initiation load `L` was 0.60, 0.95, or 1.20; with 80 cases, two reviewers, and mean service demand `s/2`, the initiation window was `Ns/(2kL)`. Higher load therefore compressed initiation while realized review demand still depended on routing. Missing-evidence and access-barrier probabilities were each 0.10, 0.30, or 0.50. Retrieval success was 0.35 or 0.85. Partial staff access increased the uniform review-service scale from 10 to 15 days; complete access retained 10 days. Staff access changed review duration, not evidence.
 
@@ -252,7 +254,7 @@ We report paired differences, 95% normal MCSE intervals, family ranges, and unwe
 
 ### 5.5 Validation, controls, and claim boundary
 
-Freeze 4 repaired coverage, action identity, and earlier metric semantics. Freeze 5 added reporting fields after external review. Differential audits paired all 32,400 attempts at each transition and found identical cohorts, event details, order, timestamps, actions, queues, evaluation receipts, and shared outcomes. Hand traces, replay, conservation checks, five negative controls, routing/execution receipts, and 218 automated checks passed. Both Freeze 5 suites reproduced at 30 replications and reconciled without missing or unexpected identifiers.
+Freeze 4 repaired coverage, action identity, and earlier metric semantics. Freeze 5 added reporting fields after informal pre-submission feedback. Differential audits paired all 32,400 attempts at each transition and found identical cohorts, event details, order, timestamps, actions, queues, evaluation receipts, and shared outcomes. Hand traces, replay, conservation checks, five negative controls, routing/execution receipts, and 218 automated checks passed. Both Freeze 5 suites reproduced at 30 replications and reconciled without missing or unexpected identifiers.
 
 ## 6. Results
 
@@ -260,7 +262,7 @@ Freeze 4 repaired coverage, action identity, and earlier metric semantics. Freez
 
 Under fail-closed review (U2C), timeout activation rose from 0.143 to 0.498 to 0.788 across nominal loads 0.60, 0.95, and 1.20. Timely completion conditional on a review request moved in the opposite direction: 0.857, 0.502, and 0.212. Across the full grid, 135,766 of 259,200 requested reviews completed on time, a request-weighted rate of 0.524. The mean timeout-activation rate was 0.476 across families, with a family range of 0.042–0.881 and simulation MCSE of 0.0024 for the balanced-grid mean.
 
-The paired policies shared cases, draws, review requests, and service; only the timeout consequence changed. Fail closed retained the case, while fail open permitted progression. The 0.476 timeout frequency is therefore also the mean increase in the union outcome. Its exclusive components show what the union hid: 0.105 of initiated cases had sufficient evidence but lacked timely authorization, 0.372 lacked both, and none lacked evidence alone. Thus all fail-open progression lacked required authorization, while 0.372 was also evidentially unsupported. These components partition one activation result; they are not separate policy effects.
+The paired policies shared cases, draws, review requests, and service; only the timeout consequence changed. Fail closed retained the case, while fail open permitted progression. The 0.476 timeout frequency is therefore also the mean increase in the union outcome. Its exclusive components show what the union hid: 0.105 of initiated cases had sufficient evidence but lacked timely authorization, 0.372 lacked both, and none lacked evidence alone. The evidence-only zero follows from the policy rules: completed review cannot authorize progression while evidence remains unsupported. Thus all fail-open progression lacked required authorization, while 0.372 was also evidentially unsupported. These components partition one activation result; they are not separate policy effects.
 
 Fail-closed review remained gate-safe in every tested family, although blocked cases could remain unresolved. The three load points sample activation frequency rather than locate a continuous capacity threshold.
 
@@ -291,7 +293,7 @@ Table 3 reports the main quantities, including the exclusive partition of the fa
 | Quantity | Estimate | Family range | Simulation MCSE | Claim boundary |
 | --- | ---: | ---: | ---: | --- |
 | Fail-closed timeout activation per initiated case | 0.476 | 0.042–0.881 | 0.0024 | Queue deadline misses; fail-open progression and fail-closed holding are rule-defined consequences. |
-| U2O evidence-only failure | 0.000 | 0.000–0.000 | 0.0000 | Exclusive component of the 0.476 fail-open progression union. |
+| U2O evidence-only failure | 0.000 | 0.000–0.000 | — | Rule-implied zero: completed review cannot authorize unsupported progression. |
 | U2O authorization-only failure | 0.105 | 0.004–0.368 | 0.0008 | Sufficient evidence, but required timely review authorization was missing. |
 | U2O joint evidence-and-authorization failure | 0.372 | 0.025–0.759 | 0.0020 | Neither evidentiary support nor required timely authorization was present. |
 | U3−U0 unresolved non-progression | −0.594 | −0.815 to −0.369 | 0.0009 | Sole aggregate U3−U0 decision-state contrast. |
@@ -299,7 +301,7 @@ Table 3 reports the main quantities, including the exclusive partition of the fa
 | U3−U0 interaction events per initiated case | +1.096 | 0.860–1.312 | 0.0018 | Event count, not effort, subjective burden, welfare, or cost. |
 | U3−U0 agency-workload events per initiated case | +1.209 | 0.749–1.728 | 0.0017 | Event count, not staffing cost, efficiency, or overall value. |
 
-*Note.* Means and ranges are unweighted across 108 designed families; each family uses 30 paired replications. MCSE measures simulation error for the balanced-grid estimate, not population, historical, or model uncertainty. A dash indicates that the diagnostic is an exact ratio of stored counts rather than a balanced-grid paired estimand.
+*Note.* Means and ranges are unweighted across 108 designed families; each family uses 30 paired replications. MCSE measures simulation error for the balanced-grid estimate, not population, historical, or model uncertainty. A dash marks either a rule-implied value without sampling error or an exact ratio of stored counts rather than a balanced-grid paired estimand.
 
 Taken together, the formal rule identifies what must be inspected, the documented application identifies where it appears in an institutional process, and the simulation shows why review must be tested under capacity and timeout conditions. Section 7 converts those lessons into a five-step protocol.
 
@@ -361,7 +363,7 @@ The formal results are conditional on the proposed standard and declared specifi
 
 Because the framework was developed with knowledge of Robodebt, the application illustrates structural compatibility rather than independently validating the mechanism. The rule-level F1 failure depends on the study's support specification and same-total counterexample; the source packet does not supply a case-level monetary-entitlement oracle, numerical calibration, or legal judgment. Historical quantification would require new data, measurement, and design freeze.
 
-Four measurement limits govern the simulation. Timely review completion is conditional on a request and differs from supported disposition. U3 stages are sequential accounting, not component-causal effects. Interaction events do not measure effort or welfare. Terminal resolution and complete restoration lack comparable events across policies. MCSE measures finite-run precision, and unweighted cross-family means imply no real-world scenario distribution.
+Five measurement limits govern the simulation. Timely review completion is conditional on a request and differs from supported disposition. U3 stages are sequential accounting, not component-causal effects. The model stops after a review-generated evidence request, so it cannot estimate subsequent response, resolution, or delay. Interaction events do not measure effort or welfare. Terminal resolution and complete restoration lack comparable events across policies. MCSE measures finite-run precision, and unweighted cross-family means imply no real-world scenario distribution.
 
 The kernel represents declared rules, finite queues, deadlines, exogenous variation, and correction paths—not reviewer behavior, adaptation, endogenous demand, or organizational learning. With no welfare function or complete terminal consequences, it cannot rank policies overall.
 
@@ -371,7 +373,7 @@ The prospective protocol has no practitioner, usability, adoption, or inter-rate
 
 The central question is what a workflow may newly do when representation suppresses a material distinction or period evidence remains unavailable. Under the declared rules, weaker evidence cannot justify automatic progression unless the exact action survives every admissible refinement. It may instead permit separately evaluated constraint, information-acquisition, or restoration actions.
 
-The representation pair isolates a configured routing and availability change. Robodebt supplies a documented sequence from aggregate income to imputed period values and action after nonresponse. Under the study's specification, the averaging rule fails F1 because a same-total refinement can support no debt where averaging permits progression. Whether an actual historical debt fails remains unassessable without its action, income timing, benefit record, and applicable support rule. A later receipt-and-ignoring guard cannot repair missing upstream period evidence.
+The representation pair isolates a configured routing and availability change. Robodebt supplies a documented sequence from aggregate income to imputed period values and action after nonresponse. Under the study's specification, when an employment interval includes non-benefit fortnights, a same-total refinement can support no debt where averaging permits progression, so the averaging rule fails F1. Other interval structures require separate action-specific analysis. Whether an actual historical debt fails remains unassessable without its action, income timing, benefit record, and applicable support rule. A later receipt-and-ignoring guard cannot repair missing upstream period evidence.
 
 The simulation supplies quantities absent from the rule and documents. Fail-closed review timed out for an average 0.476 of initiated cases; fail open converted every miss into progression. Of initiated cases, 0.105 progressed with evidence but no timely authorization and 0.372 lacked both. Information first reduced unresolved non-progression by 0.594 while adding interaction and agency-workload events. Its stage accounting shows 0.573 supported before retrieval, 0.256 supported through retrieval, and 0.171 still unresolved at review entry. A completed review changed the unresolved-state label, not the evidence.
 
@@ -383,7 +385,7 @@ The process-red-team diagnostic is compact: when evidence weakens, what may the 
 
 ## Data and Code Availability
 
-Code and data are staged at https://github.com/etalbert102/uncertainty_permission_simulation but were not publicly accessible on 22 November 2026; activation and a logged-out check remain required.
+Code and data are staged at https://github.com/etalbert102/uncertainty_permission_simulation but were not publicly accessible on 24 November 2026; activation and a logged-out check remain required.
 
 ## References
 
