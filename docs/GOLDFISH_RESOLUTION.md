@@ -2,14 +2,14 @@
 
 Date: 2026-11-19
 
-Status: all scientific and presentation findings resolved; public activation remains project-lead controlled
+Status: all scientific and presentation findings resolved; public repository access verified
 
 This receipt maps the independent Goldfish findings to the implemented correction or the explicit claim-boundary decision. The original review remains in `goldfish_review_report.md` as the unaltered diagnostic record apart from whitespace normalization.
 
 | Finding | Resolution | Evidence |
 | --- | --- | --- |
 | G-01 executable evaluation bridge | Closed by binding a content-addressed evaluation specification, executing the registered support rule over finite exact refinement certificates at routing and action time, issuing Freeze 2, and rerunning both complete suites. | `configuration.py`, `simulator.py`, 180-test suite, `EVALUATION_SPECIFICATION_CORRECTION.md` |
-| G-02 inactive public links | The manuscript no longer contains inaccessible repository hyperlinks. It states that exact URLs will be inserted and logged-out tested after authorized public activation. Public activation remains the sole external release condition. | Data and Code Availability; `SUBMISSION_READINESS_RECEIPT.md` |
+| G-02 inactive public links | The repository is public, the exact URL appears in the manuscript, and unauthenticated repository and raw-manuscript checks passed on 26 November 2026. | Data and Code Availability; `SUBMISSION_READINESS_RECEIPT.md` |
 | G-03 RQ2 overstatement | RQ2 now asks only about configured gate blocking and timely review completion. Other effective-review conditions are identified as held invariant or structurally demonstrated rather than estimated. | Sections 2.4, 5.4, and 5.5 |
 | G-04 U3 applicability | The methods and results explain conditional review, zero-request replications, legacy zero-denominator encoding, exclusion from the applicable metric set, and the resulting unevaluated review path. | Sections 5.4 and 6.4; Table 3 note |
 | G-05 censoring terminology | The manuscript now distinguishes structural non-absorption from administrative censoring and labels `right_censored_rate` as an immutable legacy aggregate. | Sections 5.1, 5.4, 6.1, 6.5, and 8.1 |
@@ -24,4 +24,4 @@ This receipt maps the independent Goldfish findings to the implemented correctio
 | G-14 caveat removal | Broad caveat deletion was rejected because the limits guard live inferences. Repetition was reduced where it did not protect a distinct claim boundary; the final source remains below 10,000 words. | Integrated manuscript; 9,912-word source count |
 | G-15 affiliation | No affiliation was invented. The title page provides the author's name and correspondence email without asserting organizational endorsement. | Title page; `SUBMISSION_READINESS_RECEIPT.md` |
 
-The correction changed no scenario, policy, parameter, seed, estimand, exclusion, or numerical result. The only unresolved action is external repository activation and insertion of tested public URLs before submission.
+The correction changed no scenario, policy, parameter, seed, estimand, exclusion, or numerical result. The remaining external release condition was closed on 26 November 2026 by public activation and unauthenticated URL checks.

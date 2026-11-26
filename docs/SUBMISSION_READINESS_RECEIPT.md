@@ -2,11 +2,13 @@
 
 Date: 2026-11-22
 
-Status: Freeze 5 bounded reporting repair complete locally; public-repository activation intentionally deferred
+Updated: 2026-11-26
+
+Status: submission package complete; public repository access verified
 
 ## Scope
 
-This receipt covers the integrated article, APA Word review copy, optional technical supplement, evidence packet, Freeze 5 simulation artifacts, and repository verification controls. It certifies the local package only. Publisher acceptance and public repository activation are external actions.
+This receipt covers the integrated article, APA Word review copy, optional technical supplement, evidence packet, Freeze 5 simulation artifacts, repository verification controls, and public-access check. Publisher acceptance remains external.
 
 ## Scientific product
 
@@ -28,7 +30,7 @@ This receipt covers the integrated article, APA Word review copy, optional techn
 
 ## Article and APA review copy
 
-- The source contains 7,661 whitespace-delimited words before `References`, leaving 2,339 below the 10,000-word ceiling.
+- The source contains 7,742 whitespace-delimited words before `References`, leaving 2,258 below the 10,000-word ceiling.
 - The Robodebt application now distinguishes a rule-level F1 failure under the study specification from unassessability of any actual historical case.
 - Table 3 reports the exclusive fail-open failure partition. Figure 3 reports timeout activation, final decision states, and sequential U3 evidence/review stages.
 - `ARTICLE_MANUSCRIPT_APA.docx` contains visible author identity, affiliation, and correspondence address; three tables; three figures with alternative text; and three correctly oriented sections.
@@ -42,8 +44,8 @@ This receipt covers the integrated article, APA Word review copy, optional techn
 - Active Freeze 5 and historical attestations verify independently.
 - The current verification packet binds the Freeze 5 run indexes, reconciliations, analyses, differential receipts, repaired Table 3 and Figure 3, supplement, and frozen scientific inputs.
 
-## Remaining external condition
+## Public-access condition
 
-Make the repository public and confirm the data-and-code URL from a logged-out session before submission. That activation remains under project-lead control.
+The repository is public at https://github.com/etalbert102/uncertainty_permission_simulation. On 26 November 2026, unauthenticated checks returned HTTP 200 for both the repository page and the raw manuscript source.
 
 No external-reader return, formal comprehensibility review, usability study, inter-rater claim, or practitioner-performance claim is required.

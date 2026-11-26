@@ -1,6 +1,6 @@
 # Freeze 5 Reporting Decomposition and Replay Plan
 
-Status: bounded repair complete locally; public activation deferred
+Status: bounded repair complete; public repository access verified 2026-11-26
 
 Date opened: 2026-11-22
 

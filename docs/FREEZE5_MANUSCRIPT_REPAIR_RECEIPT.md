@@ -2,6 +2,8 @@
 
 Date: 2026-11-22
 
+Updated: 2026-11-26
+
 Status: pass
 
 ## Authorized scope
@@ -33,11 +35,11 @@ The article now:
 
 ## Artifact identities
 
-Refreshed after the 24 November 2026 clarification pass:
+Refreshed after the 26 November 2026 public-access update:
 
-- Markdown manuscript SHA-256: `aaeaa6858ad2d9d2a01b0645163bca9bbf543668eb50a83a79f1555658aeeded`.
-- APA Word SHA-256: `be5f9ce37a19872da09e0e973fa9098c42dd4f9de47590a99790081bdc2876b7`.
-- Supplement SHA-256: `2fb9b73958ec507c2ba0f3f4588f7ded2d92b08b49485633c77eb810505674e6`.
+- Markdown manuscript SHA-256: `e80283a75ee6b5f4bbd2ab6e498c4dc600c6a20106675d87dbe41eed8a90c39c`.
+- APA Word SHA-256: `6268db90a525bef3b05c940e243953ff1d894a3ce49885cd5a6938f98124ff38`.
+- Supplement SHA-256: `b67c80a4c80b429519daf119ebb9427f1bb303e06706b7347b613fc2d18b9064`.
 - Figure 3 SVG SHA-256: `9cb0c63d40a656496e244fb69168e7d0c71c5acb6d5260427c48abfaf8a6c485`.
 - Table 3 JSON SHA-256: `d17705e410c5a0dd285a87b2aac8b4bc65fbe897e57ff6321358c4de6b46870f`.
 - Table 3 internal hash: `6ff5645b9f894bc6a107c890c50e61ee28b41835c9aecbf532566adc9edb26bd`.
@@ -48,4 +50,4 @@ The APA export contains 41 pages, three tables, three inline figures, and three 
 
 ## Residual boundaries
 
-The repaired results remain designed-grid quantities rather than historical estimates. U3 does not contain a post-request evidence-response cycle and cannot identify component effects or terminal resolution. The repository remains private pending separate authorization; public activation and a logged-out URL check are the only external submission condition recorded here.
+The repaired results remain designed-grid quantities rather than historical estimates. U3 does not contain a post-request evidence-response cycle and cannot identify component effects or terminal resolution. The repository was made public and verified without authentication on 26 November 2026; no repository-access condition remains open.

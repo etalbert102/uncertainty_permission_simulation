@@ -1,8 +1,8 @@
 # Evidence Packet
 
-Status: Freeze 5 local reporting-repair package complete; public activation deferred
+Status: Freeze 5 reporting-repair package complete; public repository access verified
 
-Updated: 2026-11-24
+Updated: 2026-11-26
 
 Study: *From Incomplete Evidence to Automated Action: Robust Permission, Review Capacity, and Robodebt*
 
@@ -93,7 +93,7 @@ Under the study-authored period-evidence specification, the documented averaging
 
 ## 7. Manuscript and artifact QA
 
-- Markdown count before `References`: 7,661 whitespace-delimited words, leaving 2,339 below the 10,000-word ceiling.
+- Markdown count before `References`: 7,742 whitespace-delimited words, leaving 2,258 below the 10,000-word ceiling.
 - APA Word export: 41 rendered pages, three tables, three figures, and three correctly oriented sections.
 - Full-resolution visual inspection: all 41 pages pass; exhibits are legible and unclipped.
 - ZIP integrity: pass.
@@ -103,7 +103,7 @@ Under the study-authored period-evidence specification, the documented averaging
 - Heading audit: 11 Heading 1 and 37 Heading 2 paragraphs; exhibit labels use their dedicated style.
 - Repository regression: 218 tests pass.
 
-## 8. Reproduction and remaining external action
+## 8. Reproduction and public access
 
 From the repository root with the recorded environment installed:
 
@@ -115,4 +115,4 @@ PYTHONPATH=src .venv/bin/python -m pytest -q
 
 The canonical run, reconcile, and analyze commands and their outputs are recorded in the Freeze 5 plan and execution ledger. The compact result chain is committed; ignored append-only attempt files are deterministically regenerable from frozen inputs.
 
-The bounded reporting repair is locally complete. The remaining external action is repository activation and a logged-out URL check. Publicity remains under project-lead control and is not inferred from this repair.
+The bounded reporting repair is complete. The repository is public at https://github.com/etalbert102/uncertainty_permission_simulation. Unauthenticated checks of the repository page and raw manuscript source both returned HTTP 200 on 26 November 2026.

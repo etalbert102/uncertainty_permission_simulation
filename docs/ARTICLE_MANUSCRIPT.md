@@ -389,7 +389,7 @@ The process-red-team diagnostic reduces to three questions: When evidence weaken
 
 ## Data and Code Availability
 
-Code and data are staged at https://github.com/etalbert102/uncertainty_permission_simulation but were not publicly accessible on 24 November 2026; activation and a logged-out check remain required.
+Code, configuration files, frozen manifests, analysis artifacts, and the evidence packet are publicly available at https://github.com/etalbert102/uncertainty_permission_simulation. Public access was verified without authentication on 26 November 2026.
 
 ## References
 

@@ -1308,3 +1308,23 @@ Date: 2026-11-24
 A cold-read assessment found that the through-line was sound but that early architecture, abstract representation language, internal freeze terminology, repeated claim boundaries, and decimal-first results slowed the reading experience. The revision moves Table 1 until after the principal findings, makes the controlled representation pair imaginable as two otherwise identical case files, frames the literature around the missing organizational link, compresses the post-result repair history, removes repeated boundary statements where adjacent exhibits already carry them, and leads both results subsections with their operational meaning. The protocol and limitations now open with reader-oriented propositions rather than catalogue language.
 
 No formal definition, source mapping, policy, scenario, parameter, seed, event, stored result, quantitative estimate, interpretation boundary, or conclusion changed. The source contains 7,661 whitespace-delimited words before `References`, leaving 2,339 below the call ceiling. The regenerated APA copy remains 41 pages with three tables, three figures, and three correctly oriented sections. Every changed page was visually inspected against the previously approved export; unchanged pages were byte-identical to inspected pages. Markdown and Word hashes are `aaeaa6858ad2d9d2a01b0645163bca9bbf543668eb50a83a79f1555658aeeded` and `be5f9ce37a19872da09e0e973fa9098c42dd4f9de47590a99790081bdc2876b7`.
+
+## Contribution-Hierarchy Pass
+
+Status: complete; editorial hierarchy only
+
+Date: 2026-11-25
+
+The revision makes the article's value hierarchy explicit at the points where readers form and revise expectations. The abstract and introduction now identify the robust-permission test as the primary contribution, Robodebt as the central documented application, the simulation as the operational extension into capacity and timeout dynamics, and the five-step protocol as the practical translation. The Robodebt finding, transition to simulation, protocol opening, and conclusion use the same hierarchy without turning it into a repeated slogan. A follow-up edit removes the defensive “functional rather than historical” frame and states directly how the documented Robodebt sequence supports prospective testing of AI-enabled workflows.
+
+No formal definition, source mapping, policy, scenario, parameter, seed, event, stored result, quantitative estimate, interpretation boundary, or conclusion changed. The source contains 7,739 whitespace-delimited words before `References`, leaving 2,261 below the call ceiling. The regenerated APA copy remains 41 pages with three tables, three figures, and three correctly oriented sections. Pixel comparison identified nine changed pages in the contribution pass and one changed page in the follow-up edit; every changed page was visually inspected, while all other pages were byte-visually identical to previously approved exports. ZIP integrity and accessibility, image, heading, style, and section audits pass. Markdown and Word hashes are `1b0d3be8359642888a1f244a7e7ceb48bfb2980be2ed9bf42cdd05bb83ff4ee6` and `6f566dc84aec3115623d09cab67ee203dc14df0125786d10d1ef7d6752ce4bc9`.
+
+## Public Repository Activation and Submission Availability Update
+
+Status: complete
+
+Date: 2026-11-26
+
+At project-lead instruction, `etalbert102/uncertainty_permission_simulation` changed from private to public. The authenticated repository record reports `PUBLIC`; unauthenticated checks of the repository page and raw manuscript source each returned HTTP 200. The manuscript now gives the exact repository URL and verification date, and the active evidence, readiness, Goldfish-resolution, and reporting-repair records close the former access condition. Dated historical entries remain unchanged as records of the state at those earlier checkpoints.
+
+The update changed no formal definition, source mapping, policy, scenario, parameter, seed, event, stored result, quantitative estimate, interpretation boundary, or conclusion. The source contains 7,742 words before `References`, leaving 2,258 below the 10,000-word ceiling. The regenerated APA copy remains 41 pages with three tables, three figures, and portrait/landscape/portrait sections. Every rendered page was visually inspected. ZIP integrity, accessibility, image, heading, style, and section audits pass; accessibility reports zero findings. Plan, Slice 0, and release verification pass with all 218 tests. Markdown and Word hashes are `e80283a75ee6b5f4bbd2ab6e498c4dc600c6a20106675d87dbe41eed8a90c39c` and `6268db90a525bef3b05c940e243953ff1d894a3ce49885cd5a6938f98124ff38`.

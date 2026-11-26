@@ -451,8 +451,8 @@ Each completion entry must record:
 - **Files intentionally unchanged:** every active and historical freeze file, experiment configuration, simulator and analysis module, result suite, source fixture, differential receipt, scientific-value decision, Figure 1–3 asset, and Table 3 data artifact.
 - **Commands and results:** the adjacent audit pipeline passed all 31 tests; the project passed all 209 tests; `scripts/verify_repo.py --release` returned `release: true`; active Freeze 4 verified 84 files at manifest hash `bd330d56273ae7a85aed872b5e1442400b02b1f6b822c1fa6154ae2de5d62c63`; the final source count was 9,544 words before `References`; and the 47-page APA export passed ZIP, accessibility, image, and section audits with zero accessibility findings.
 - **Fixtures and comparisons:** the repair was checked against the 24-stage manuscript audit, its cumulative decision ledger, the final 74-file verification packet, the immutable worked-trace oracle, all three rendered figures, and the Freeze 4 compact result chain. Every final Word page was inspected; the two orphan spill pages found during review were eliminated before release.
-- **Residual risk:** the repository URL remains inaccessible to a logged-out reader until separately authorized public activation. The article therefore states that activation and a logged-out check remain required.
-- **Deferred items:** public repository activation and logged-out URL verification only. No recovery/restoration endpoint, external-reader return, formal comprehensibility review, usability study, or supplement-eligibility assumption remains a local release requirement.
+- **Residual risk:** closed on 26 November 2026, when the repository was made public and its repository and raw-manuscript URLs passed unauthenticated checks.
+- **Deferred items:** none. No recovery/restoration endpoint, external-reader return, formal comprehensibility review, usability study, or supplement-eligibility assumption remains a release requirement.
 - **Commit SHA:** `d7e193f` removes the unsupported worked-example endpoints and records the audited manuscript package. The adjacent audit-pipeline contract fix is `f4b39e1`.
 
 ## 10. Verification Tiers
@@ -536,4 +536,4 @@ The plan is complete only when:
 - the article remains below 10,000 words; and
 - every reported number traces to a Freeze 4 artifact.
 
-Repository activation remains a separate project-lead decision.
+Repository activation was separately authorized and completed on 26 November 2026.
