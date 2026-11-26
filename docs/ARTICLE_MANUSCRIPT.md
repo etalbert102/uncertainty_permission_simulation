@@ -1,4 +1,4 @@
-# From Incomplete Evidence to Automated Action: A Formal Model and Dynamic Simulation of Review Capacity and Timeout Rules, with a Robodebt Application
+# From Incomplete Evidence to Automated Action: Robust Permission, Review Capacity, and Robodebt
 
 **Eli Talbert**
 

@@ -2,7 +2,7 @@
 
 Status: first publication-facing draft bounded by the controlled representation fixture, formal specification, fixed Robodebt source packet, frozen simulation receipts, and evidence packet
 
-Working title: *From Incomplete Evidence to Automated Action: A Formal Model and Dynamic Simulation of Review Capacity and Timeout Rules, with a Robodebt Application*
+Working title: *From Incomplete Evidence to Automated Action: Robust Permission, Review Capacity, and Robodebt*
 
 The section numbers follow `ARTICLE_OUTLINE.md`. Source keys in the traceability notes are drafting controls; final citation form and bibliography remain subject to the manuscript-wide citation audit.
 

@@ -28,8 +28,8 @@ from docx.shared import Inches, Pt, RGBColor
 FONT = "Times New Roman"
 RUNNING_HEAD = "INCOMPLETE EVIDENCE TO AUTOMATED ACTION"
 TITLE = (
-    "From Incomplete Evidence to Automated Action: A Formal Model and Dynamic "
-    "Simulation of Review Capacity and Timeout Rules, with a Robodebt Application"
+    "From Incomplete Evidence to Automated Action: Robust Permission, Review "
+    "Capacity, and Robodebt"
 )
 AUTHOR = "Eli Talbert"
 AFFILIATION = "Independent researcher"

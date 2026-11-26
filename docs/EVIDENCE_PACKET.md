@@ -4,7 +4,7 @@ Status: Freeze 5 local reporting-repair package complete; public activation defe
 
 Updated: 2026-11-24
 
-Study: *From Incomplete Evidence to Automated Action: A Formal Model and Dynamic Simulation of Review Capacity and Timeout Rules, with a Robodebt Application*
+Study: *From Incomplete Evidence to Automated Action: Robust Permission, Review Capacity, and Robodebt*
 
 ## 1. Claim boundary
 

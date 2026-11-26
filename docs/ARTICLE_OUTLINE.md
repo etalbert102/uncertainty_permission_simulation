@@ -2,7 +2,7 @@
 
 Status: completed results-informed article architecture; design-frozen simulation, evidence packet, integrated manuscript, APA Word review copy, local submission-readiness audit, call-fit editorial pass, high-value clarity pass, simulation-contribution refocus, and targeted venue-fit bridge complete; current word and page counts are recorded in the submission-readiness receipt; detailed protocol machinery and worked-trace receipts retained in an optional online technical appendix while the complete five-step procedure remains in the article; emerging-technology framing, originality, plain-language policy labels, implementation map, review definition, formal-model bridge, Robodebt crosswalk, simulation unit, results interpretation, protocol instructions, and the distinction between rule-implied directions and dynamic quantities strengthened without changing the frozen study; current source anchors audited with no substantive contradiction and bibliographic details corrected; public repository activation remains deferred until authorized; one prespecified service metric excluded after semantic audit; no formal comprehensibility review required
 
-Working title: *From Incomplete Evidence to Automated Action: A Formal Model and Dynamic Simulation of Review Capacity and Timeout Rules, with a Robodebt Application*
+Working title: *From Incomplete Evidence to Automated Action: Robust Permission, Review Capacity, and Robodebt*
 
 Target: a standalone article of no more than 10,000 words for the Stanford CISAC/GTG volume *Emerging Technologies and the Future of Decision-Making*
 

@@ -2,7 +2,7 @@
 
 Status: Slices 0–3 complete; Slice 4 active and blocked from freeze only by the recorded freeze-tooling gap; monetary-oracle claims were deliberately excluded and the matched negative-control receipt was closed before freeze; no confirmatory results exist
 
-Working article title: *When Uncertainty Expands Authority: Formalizing and Stress-Testing Automated Decision Workflows Through Robodebt*
+Working article title: *From Incomplete Evidence to Automated Action: Robust Permission, Review Capacity, and Robodebt*
 
 Target submission: Stanford CISAC/GTG edited volume, *Emerging Technologies and the Future of Decision-Making*
 

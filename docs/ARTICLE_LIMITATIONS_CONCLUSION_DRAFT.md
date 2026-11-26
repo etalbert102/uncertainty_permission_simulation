@@ -2,7 +2,7 @@
 
 Status: first publication-facing draft bounded by the frozen formal specification, analysis receipts, and evidence packet
 
-Working title: *From Incomplete Evidence to Automated Action: A Formal Model and Dynamic Simulation of Review Capacity and Timeout Rules, with a Robodebt Application*
+Working title: *From Incomplete Evidence to Automated Action: Robust Permission, Review Capacity, and Robodebt*
 
 The section number follows `ARTICLE_OUTLINE.md`. Limitations distinguish narrower interpretation of completed evidence from questions that require a new design, measure, source, or evaluation.
 

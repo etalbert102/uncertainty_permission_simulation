@@ -2,7 +2,7 @@
 
 Status: first publication-facing draft from protocol `1.0`, the fixed Robodebt worked trace, and the transfer canary
 
-Working title: *From Incomplete Evidence to Automated Action: A Formal Model and Dynamic Simulation of Review Capacity and Timeout Rules, with a Robodebt Application*
+Working title: *From Incomplete Evidence to Automated Action: Robust Permission, Review Capacity, and Robodebt*
 
 The section number follows `ARTICLE_OUTLINE.md`. Usability is a design objective, not an evaluated outcome, and no formal comprehensibility review is required.
 
