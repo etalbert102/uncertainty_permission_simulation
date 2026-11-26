@@ -1328,3 +1328,13 @@ Date: 2026-11-26
 At project-lead instruction, `etalbert102/uncertainty_permission_simulation` changed from private to public. The authenticated repository record reports `PUBLIC`; unauthenticated checks of the repository page and raw manuscript source each returned HTTP 200. The manuscript now gives the exact repository URL and verification date, and the active evidence, readiness, Goldfish-resolution, and reporting-repair records close the former access condition. Dated historical entries remain unchanged as records of the state at those earlier checkpoints.
 
 The update changed no formal definition, source mapping, policy, scenario, parameter, seed, event, stored result, quantitative estimate, interpretation boundary, or conclusion. The source contains 7,742 words before `References`, leaving 2,258 below the 10,000-word ceiling. The regenerated APA copy remains 41 pages with three tables, three figures, and portrait/landscape/portrait sections. Every rendered page was visually inspected. ZIP integrity, accessibility, image, heading, style, and section audits pass; accessibility reports zero findings. Plan, Slice 0, and release verification pass with all 218 tests. Markdown and Word hashes are `e80283a75ee6b5f4bbd2ab6e498c4dc600c6a20106675d87dbe41eed8a90c39c` and `6268db90a525bef3b05c940e243953ff1d894a3ce49885cd5a6938f98124ff38`.
+
+## Submission Filename Normalization
+
+Status: complete
+
+Date: 2026-11-26
+
+The final Word submission was renamed from `ARTICLE_MANUSCRIPT_APA.docx` to `Talbert_From_Incomplete_Evidence_to_Automated_Action.docx` so the downloaded attachment identifies both its author and subject. Current package links and the submission-readiness receipt use the new name; earlier ledger entries retain the filename used when their commands were executed.
+
+The rename changed no document bytes. The Word file retains SHA-256 `6268db90a525bef3b05c940e243953ff1d894a3ce49885cd5a6938f98124ff38`, so the completed 41-page visual inspection and structural audits remain applicable. ZIP integrity passes, and the release gate passes with all 218 tests.

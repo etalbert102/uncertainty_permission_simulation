@@ -28,7 +28,7 @@ Evidence is interpreted in this order:
 | Core and sensitivity suites | `outputs/confirmatory_v4/`; `outputs/sensitivity_information_latency_v4/` | complete and reconciled |
 | Behavioral continuity | [Freeze 4/5 differential audit](FREEZE4_FREEZE5_DIFFERENTIAL_AUDIT.md) | all 32,400 pairs pass |
 | Full results | analysis JSON, [Figure 3](figures/figure3_simulation_results.svg), [Table 3 data](tables/table3_simulation_results.json) | synchronized |
-| Manuscript package | [article](ARTICLE_MANUSCRIPT.md), [supplement](ARTICLE_SUPPLEMENTARY_MATERIAL.md), [APA Word copy](ARTICLE_MANUSCRIPT_APA.docx) | regenerated and inspected |
+| Manuscript package | [article](ARTICLE_MANUSCRIPT.md), [supplement](ARTICLE_SUPPLEMENTARY_MATERIAL.md), [APA Word copy](Talbert_From_Incomplete_Evidence_to_Automated_Action.docx) | regenerated and inspected |
 | Reporting-repair audit | [Freeze 5 receipt](FREEZE5_MANUSCRIPT_REPAIR_RECEIPT.md) | pass |
 | Repository checks | tests; `scripts/verify_repo.py` | 218 tests and release gate pass |
 

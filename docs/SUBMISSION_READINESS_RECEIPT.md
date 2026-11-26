@@ -33,7 +33,7 @@ This receipt covers the integrated article, APA Word review copy, optional techn
 - The source contains 7,742 whitespace-delimited words before `References`, leaving 2,258 below the 10,000-word ceiling.
 - The Robodebt application now distinguishes a rule-level F1 failure under the study specification from unassessability of any actual historical case.
 - Table 3 reports the exclusive fail-open failure partition. Figure 3 reports timeout activation, final decision states, and sequential U3 evidence/review stages.
-- `ARTICLE_MANUSCRIPT_APA.docx` contains visible author identity, affiliation, and correspondence address; three tables; three figures with alternative text; and three correctly oriented sections.
+- `Talbert_From_Incomplete_Evidence_to_Automated_Action.docx` contains visible author identity, affiliation, and correspondence address; three tables; three figures with alternative text; and three correctly oriented sections.
 - The final export has 41 rendered pages. Every page was inspected at full resolution. All exhibits, equations, references, headers, and section transitions are legible and free of clipping or overlap.
 - ZIP integrity, accessibility, image-placement, heading, and section audits passed. Accessibility reported zero high-, medium-, or low-severity findings.
 
